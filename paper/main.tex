@@ -247,14 +247,29 @@ $R = \bar{R} \circ q$. Any black-box certification claim must functionally
 certify this closure uniformly across the relevant unbounded encoding class $E_x$. \emph{(Access regime: output-only)}
 \end{theorem}
 
-\begin{definition}[Cross-Format Sensitivity Gap]
+\begin{definition}[Representation-Near Sensitivity Family]
 \label{def:cfsg}
-For content $x$, encodings $e_1, e_2 \in E_x$, and model $B$ with 
-representation map $h_B$, the Cross-Format Sensitivity gap is
-$\mathrm{CFSG}(x, e_1, e_2) = |R(e_1) - R(e_2)| \cdot (1 - d_{\mathrm{repr}}(h_B(e_1), h_B(e_2)))$.
+For content $x$, a pair of encodings $(e_1, e_2) \in E_x \times E_x$, and a model $B$ with representation map $h_B$, write
+\[
+\Delta_R(e_1, e_2) := |R(e_1) - R(e_2)|,
+\qquad
+d(e_1, e_2) := d_{\mathrm{repr}}(h_B(e_1), h_B(e_2)).
+\]
+Fix a representation-distance threshold $\rho > 0$ and a score-shift threshold $\tau > 0$. The \emph{representation-near sensitivity family} for a pointwise evaluator $g$ consists of
+\begin{enumerate}
+\item the \textbf{violation rate}
+$V_g(\rho, \tau) := \Pr\!\bigl(\Delta_R > \tau \,\big|\, d \le \rho\bigr)$,
+\item the \textbf{conditional mean gap}
+$M_g(\rho) := \mathbb{E}\!\bigl[\Delta_R \,\big|\, d \le \rho\bigr]$,
+\item the \textbf{local-slope ratio}
+$L_g(\eta) := \Delta_R / (d + \eta)$ for a fixed regularizer $\eta > 0$, reported as its conditional distribution on $\{d \le \rho\}$,
+\end{enumerate}
+each computed under a joint distribution over $(x, e_1, e_2)$ specified by the empirical protocol (Appendix~\ref{app:format-protocol}). For a pairwise evaluator returning a preference probability $p$, the violation rate is replaced by
+\[
+W(\rho, \gamma) := \Pr\!\bigl(|p - 0.5| > \gamma \,\big|\, d \le \rho\bigr),
+\]
+with indifference-bias threshold $\gamma > 0$; $M_g$ and $L_g$ extend unchanged under the substitution $\Delta_R := |p - 0.5|$.
 \end{definition}
-
-The multiplicative $(1 - d_{\mathrm{repr}})$ term down-weights score gaps between representationally distant encodings, so CFSG is large only when the evaluator assigns different scores to encodings that the base model treats as nearby.
 
 Theorem~\ref{thm:quotient} states the exact target. The next two results show that relaxing from exact closure to finite-query or passive PAC certification does not remove the barrier; it changes the way the barrier appears.
 
@@ -287,40 +302,49 @@ exponential. (See Appendix~\ref{app:external-proofs} for the proof sketch. We no
 \end{theorem}
 
 \begin{remark}[Diagnostic Covering Condition]
-Under Lipschitz smoothness and $\rho$-covering, the appendix covering result implies $\mathrm{CFSG}(x, e^\star, e_0) \le L\rho$ for some seen encoding $e_0$; the full statement and its high-probability corollary appear in Appendix~\ref{app:covering-bound}. Our CFSG experiment tests whether this regularity picture is empirically plausible.
+Under Lipschitz smoothness and $\rho$-covering, the appendix covering result (Theorem~\ref{thm:cfsg-bound}, Appendix~\ref{app:covering-bound}) bounds the score gap at any unseen encoding by $L\rho$ for some seen encoding $e_0$, and therefore forces the population violation rate $V_g(\rho, \tau)$ of Definition~\ref{def:cfsg} to vanish for $\tau \ge L\rho$ and the conditional mean gap $M_g(\rho)$ to be at most $L\rho$ (Remark~\ref{rem:diag-consequences}). Our CFSG experiment tests whether this regularity picture is empirically plausible by measuring $V_g$ and $M_g$ directly across the representation-near regime.
 \end{remark}
 
-Large empirical CFSG values therefore signal structural failure of the smooth-covering picture, not merely small evaluator noise: substantial instability persists even in the reported representation-near regime (Table~\ref{tab:cfsg-main}), and \S\ref{sec:quotient-exp} shows discrete verdict flips under semantically neutral substitution rather than graded drift. Appendix~\ref{app:smoothness-critique} addresses the smoothness objection in detail.
+A persistently large empirical $V_g$ at the representation-near threshold therefore signals structural failure of the smooth-covering picture, not merely small evaluator noise: substantial instability persists in the reported representation-near regime (Table~\ref{tab:cfsg-main}, $V_g > 0.4$ for all four evaluator families in Mode~B), and the $\rho$-sweep of Figure~\ref{fig:rho-sweep} shows the curves are essentially flat across $\rho \in [0.04, 0.20]$ rather than contracting toward zero as the covering picture would require. \S\ref{sec:quotient-exp} shows discrete verdict flips under semantically neutral substitution rather than graded drift, and Appendix~\ref{app:smoothness-critique} addresses the smoothness objection in detail.
 
 % ---------------------------------------------------------------------------
 \section{Empirical Diagnostics}
 \label{sec:empirical}
 % ---------------------------------------------------------------------------
 
-The theoretical results identify route-specific barriers; the experiments test whether the benign cases those results leave open are good empirical descriptions of current evaluators. Section~\ref{sec:cfsg-exp} tests whether the conditional geometric regularity picture established in the appendix covering result (Theorem~\ref{thm:cfsg-bound}, Appendix~\ref{app:covering-bound}) holds for current evaluators; that result is not a main impossibility theorem but a diagnostic bridge specifying when CFSG should remain small. Section~\ref{sec:quotient-exp} probes the exact semantic-closure condition of Theorem~\ref{thm:quotient}. Negative results do not prove universal failure, but they do show that these evaluators are not operating in the easy regimes the theory would require.
+The theoretical results identify route-specific barriers; the experiments test whether the benign cases those results leave open are good empirical descriptions of current evaluators. Section~\ref{sec:cfsg-exp} tests whether the conditional geometric regularity picture established in the appendix covering result (Theorem~\ref{thm:cfsg-bound}, Appendix~\ref{app:covering-bound}) holds for current evaluators; that result is not a main impossibility theorem but a diagnostic bridge specifying when the score gap should remain small at the representation-near threshold, and how it should shrink as $\rho \downarrow 0$ (Remark~\ref{rem:diag-consequences}). Section~\ref{sec:quotient-exp} probes the exact semantic-closure condition of Theorem~\ref{thm:quotient}. Negative results do not prove universal failure, but they do show that these evaluators are not operating in the easy regimes the theory would require.
 
-\subsection{Direct CFSG Measurement via Cross-Evaluator Format Sensitivity}
+\subsection{Representation-Near Instability Diagnostics}
 \label{sec:cfsg-exp}
 
-Theorem~\ref{thm:cfsg-bound} is a conditional geometric result: if evaluator behavior is sufficiently smooth under a shared representation metric and the seen support densely covers the relevant semantic region, then CFSG should remain small. We test that regularity picture directly. For each content item $x$, we construct five semantic-preserving surface formats (direct, clinical, data, fiction, code) and compute representation distances using a fixed base model $B$. We then measure cross-format sensitivity in two modes: \emph{Mode A}, which fixes the judged answer and isolates evaluator-side sensitivity, and \emph{Mode B}, which regenerates the answer and measures joint generator-plus-evaluator drift. Formal definitions of the violation-rate, local-slope, and pairwise-bias statistics are given in Appendix~\ref{app:format-protocol}.
+The covering result of Appendix~\ref{app:covering-bound} (Theorem~\ref{thm:cfsg-bound}) provides a directly testable expectation: if the evaluator is locally smooth under the shared representation metric and the seen support provides sufficient coverage of the relevant semantic region, then both the score gap $\Delta_R$ and the violation rate $V_g(\rho, \tau)$ under the representation-proximity condition $\{d \le \rho\}$ should remain small, and should shrink as $\rho \downarrow 0$. We test this expectation directly. For each content item $x$, we construct five semantic-preserving surface formats (direct, clinical, data, fiction, code) and compute representation distances using a fixed base model $B$. We then measure cross-format sensitivity in two modes: \emph{Mode A}, which fixes the judged answer and isolates evaluator-side sensitivity, and \emph{Mode B}, which regenerates the answer and measures joint generator-plus-evaluator drift. Formal definitions of the violation-rate, local-slope, and pairwise-bias statistics are given in Appendix~\ref{app:format-protocol}.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\linewidth]{figures/cfsg_score_gap.pdf}
-\caption{Distribution of ArmoRM absolute score gaps $|\Delta R|$ in the representation-near regime ($d_{\mathrm{repr}} \le 0.074$), Mode~B. If the evaluator were near-flat under semantic-preserving format variation, this mass would concentrate near zero. Instead it is right-skewed, with a nontrivial tail above the per-evaluator threshold $\tau = 0.012$ and violation rate $V_g = 0.523$ (95\% CI $[0.42, 0.62]$).}
+\caption{Empirical distribution of $|\Delta R|$ for ArmoRM on the representation-near conditioning event $\{d_{\mathrm{repr}} \le 0.074\}$, Mode~B. Under the smoothness-plus-covering picture of Theorem~\ref{thm:cfsg-bound}, this mass should concentrate near zero. Instead it is right-skewed, with a nontrivial tail above the per-evaluator threshold $\tau = 0.012$ and violation rate $V_g(\rho, \tau) = 0.523$ (95\% CI $[0.42, 0.62]$) under Definition~\ref{def:cfsg}.}
 \label{fig:cfsg-histogram}
 \end{figure}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/cfsg_rho_sweep.pdf}
+\caption{Representation-near sensitivity family across the small-distance regime (Mode~B). \textbf{Left}: conditional violation rate $V_g(\rho, \tau_j)$ for the three pointwise evaluators, and $W(\rho, \gamma)$ for PairRM, as a function of the representation-distance threshold $\rho$, with 95\% cluster-bootstrap confidence intervals (1000 iterations, content-cluster resampling); per-evaluator $\tau_j$ fixed at each evaluator's own median score gap (Table~\ref{tab:cfsg-main}), $\gamma = 0.15$. \textbf{Right}: conditional mean gap $M_g(\rho)$ normalized by $\tau_j$ for each pointwise evaluator. Dotted vertical line marks $\rho = 0.074$, the single-point estimate reported in Table~\ref{tab:cfsg-main}. Under the smoothness-plus-covering picture of Theorem~\ref{thm:cfsg-bound} and Remark~\ref{rem:diag-consequences}, both curves should contract toward zero as $\rho \downarrow 0$; instead they remain essentially flat across the entire small-distance regime $\rho \in [0.04, 0.20]$, ruling out the reading that the single-point Table~\ref{tab:cfsg-main} effect is an artifact of a specific threshold choice.}
+\label{fig:rho-sweep}
+\end{figure}
+
 \paragraph{Results.}
-Table~\ref{tab:cfsg-main} reports representation-near violation rates and paired mode differences for four evaluator families, with 95\% cluster bootstrap confidence intervals (10\,000 iterations resampled by content cluster; $\rho = 0.074$, per-evaluator $\tau_j$ calibrated at each evaluator's own median score gap). In Mode~B, all four evaluator families exhibit substantial cross-format instability in the representation-near regime: $V_g = 0.523$ for ArmoRM, $0.469$ for Skywork, $0.483$ for Claude~Sonnet, and $W = 0.891$ for PairRM. The effect therefore replicates across reward models, pairwise preference classifiers, and prompted LLM judges rather than being an artifact of a single evaluator.
+Table~\ref{tab:cfsg-main} reports representation-near violation rates and paired mode differences for four evaluator families, with 95\% cluster bootstrap confidence intervals (10\,000 iterations resampled by content cluster; $\rho = 0.074$, per-evaluator $\tau_j$ calibrated at each evaluator's own median score gap). In Mode~B, all four evaluator families exhibit substantial cross-format instability in the representation-near regime: $V_g = 0.523$ for ArmoRM, $0.469$ for Skywork, $0.483$ for Claude~Sonnet, and $W = 0.891$ for PairRM. The effect therefore replicates across reward models, pairwise preference classifiers, and prompted LLM judges rather than being an artifact of a single evaluator. Figure~\ref{fig:rho-sweep} extends the single-point estimate to a full sweep over $\rho \in [0.04, 0.20]$: both $V_g(\rho, \tau_j)$ and $M_g(\rho)/\tau_j$ remain essentially flat across the small-distance regime for every pointwise evaluator, and $W(\rho, \gamma)$ stays above $0.85$ for PairRM, so the failure is not localized to a particular threshold but is a property of the conditional distribution over the entire representation-near band.
 
 The decomposition is heterogeneous. ArmoRM retains a large fixed-response baseline (Mode~A $V_g = 0.445$), consistent with evaluator-intrinsic non-flatness; Skywork's Mode~A rate drops to $0.031$, suggesting mostly generation-driven drift; PairRM and Claude~Sonnet sit between those cases. Appendix~\ref{app:cfsg-breakdowns} reports the mode-decomposition plots (Figures~\ref{fig:cfsg-modes}--\ref{fig:cross-judge-agreement}) and evaluator-level breakdowns. The main inference is not that Theorem~\ref{thm:cfsg-bound} is empirically proved, but that the regularity picture it specifies is a poor description of these evaluators in the representation-near regime.
 
 \begin{table}[t]
 \centering
-\caption{Cross-format sensitivity diagnostics across four evaluator families.
-\textbf{Panel~A}: per-mode representation-near violation rates with 95\% cluster
-bootstrap confidence intervals (10\,000 iterations, resampled by content cluster).
+\caption{Main empirical results for the representation-near sensitivity family
+(Definition~\ref{def:cfsg}) across four evaluator families.
+\textbf{Panel~A}: per-mode violation rates $V_g(\rho, \tau_j)$ (and pairwise
+$W(\rho, \gamma)$ for PairRM) with 95\% cluster bootstrap confidence intervals
+(10\,000 iterations, resampled by content cluster).
 For pointwise evaluators (ArmoRM, Skywork, Claude~Sonnet), $V_g(\rho,\tau_j) =
 \Pr(|\Delta R| > \tau_j \mid d_{\mathrm{repr}} \le \rho)$ with per-evaluator
 $\tau_j$ calibrated at each evaluator's own median score gap; for the pairwise evaluator
@@ -835,19 +859,29 @@ Let $C_1,\dots,C_K$ be an $(\alpha,\rho,K)$-metric packing.
 \subsection{Covering-Bound Result}
 \label{app:covering-bound}
 
-\begin{theorem}[Pointwise Covering Bound of the CFSG]
+\begin{theorem}[Pointwise Covering Bound on the Score Gap]
 \label{thm:cfsg-bound}
-If the scoring map $R$ is $L$-Lipschitz and the seen support $D_{\text{seen}}$ forms a $\rho$-cover of a semantic region $\Omega \subseteq E$, then for any unseen encoding $e^\star \in \Omega$, $\mathrm{CFSG}(x, e^\star, e_0) \le L\rho$ for some $e_0 \in D_{\text{seen}}$.
+If the scoring map $R$ is $L$-Lipschitz in the representation metric $d_{\mathrm{repr}}$ and the seen support $D_{\mathrm{seen}}$ forms a $\rho$-cover of a semantic region $\Omega \subseteq E$, then for every unseen encoding $e^\star \in \Omega$ there exists $e_0 \in D_{\mathrm{seen}}$ with
+\[
+d_{\mathrm{repr}}(h_B(e^\star), h_B(e_0)) \le \rho
+\qquad\text{and}\qquad
+|R(e^\star) - R(e_0)| \le L\rho.
+\]
 \end{theorem}
 
-\begin{corollary}[High-Probability CFSG Bound]
+\begin{corollary}[High-Probability Score-Gap Bound]
 \label{cor:cfsg-high-prob}
-Under the hypotheses of Theorem~\ref{thm:cfsg-bound}, if $\Omega$ is an $\epsilon$-high-probability semantic region, then with probability at least $1-\epsilon$, an unseen encoding $e^\star$ satisfies $\mathrm{CFSG}(x, e^\star, e_0) \le L\rho$ for some $e_0 \in D_{\text{seen}}$.
+Under the hypotheses of Theorem~\ref{thm:cfsg-bound}, if $\Omega$ is an $\epsilon$-high-probability semantic region, then with probability at least $1-\epsilon$ an unseen encoding $e^\star$ admits some $e_0 \in D_{\mathrm{seen}}$ with $d_{\mathrm{repr}}(h_B(e^\star), h_B(e_0)) \le \rho$ and $|R(e^\star) - R(e_0)| \le L\rho$.
 \end{corollary}
 
 \begin{proof}
-The theorem gives a pointwise bound for every $e^\star \in S$; restricting to an $\epsilon$-high-probability subset yields the corollary immediately.
+The theorem gives a pointwise bound for every $e^\star \in \Omega$; restricting to an $\epsilon$-high-probability subset yields the corollary immediately.
 \end{proof}
+
+\begin{remark}[Diagnostic-family consequences]
+\label{rem:diag-consequences}
+Under the hypotheses of Theorem~\ref{thm:cfsg-bound}, the population version of the diagnostic family (Definition~\ref{def:cfsg}) satisfies $V_g(\rho, \tau) = 0$ for any $\tau \ge L\rho$, and $M_g(\rho) \le L\rho$. Both predictions additionally imply contraction as $\rho \downarrow 0$: $V_g(\rho, \tau) \to 0$ for any fixed $\tau > 0$, and $M_g(\rho) \to 0$. Table~\ref{tab:cfsg-main} and Figure~\ref{fig:rho-sweep} report both; the flat curves across $\rho \in [0.04, 0.20]$ falsify the contraction prediction even before the per-threshold comparison to $L\rho$.
+\end{remark}
 
 \section{Observational Underdetermination under Output-Only Evidence}
 \label{app:observation-limits}
@@ -902,6 +936,8 @@ Ollama; API-accessed models used vendor endpoints. Random seed: 42 throughout.
 
 \subsection{Format Sensitivity Protocol}
 \label{app:format-protocol}
+
+This subsection specifies the experimental protocol that induces the joint distribution on $(x, e_1, e_2)$ used by the representation-near sensitivity family of Definition~\ref{def:cfsg}, and records the plug-in estimators used throughout Section~\ref{sec:cfsg-exp} and Figure~\ref{fig:rho-sweep}.
 
 \paragraph{Content instances.}
 51 content instances spanning six safety-relevant categories: Bodily State,
@@ -1022,10 +1058,10 @@ range from 0.0 per episode (claude-opus, claude-sonnet, qwen3.5, qwen3) to 4.2
 per episode (falcon3:10b). The full ranking is available in the supplementary
 data.
 
-\section{Additional CFSG Breakdowns}
+\section{Breakdowns and Supporting Evidence for the Representation-Near Sensitivity Family}
 \label{app:cfsg-breakdowns}
 
-Appendix~\ref{app:cfsg-breakdowns} reports the evaluator-level, format-pair, and category-level breakdowns deferred from the main text. These analyses help localize the observed cross-format instability and distinguish evaluator-side sensitivity from joint generator-plus-evaluator drift. They support the main empirical interpretation by showing that the CFSG findings are not driven by a single evaluator, format pair, or content slice.
+Appendix~\ref{app:cfsg-breakdowns} reports the evaluator-level drift decomposition, format-pair and safety-category mean-gap breakdowns, and the threshold-sensitivity discussion for the representation-near sensitivity family of Definition~\ref{def:cfsg}. The main text's $\rho$-sweep (Figure~\ref{fig:rho-sweep}) already rules out the reading that the single-point effect at $\rho = 0.074$ is an artifact of threshold choice; the breakdowns below show that it is likewise not driven by a single evaluator, format pair, or content slice, and together they pin the observed instability to a property of the conditional distribution rather than to any one cut of the data.
 
 \subsection{Mode Decomposition and Evaluator-Level Drift}
 
