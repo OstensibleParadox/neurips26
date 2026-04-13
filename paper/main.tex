@@ -1,5 +1,5 @@
 % NeurIPS 2026 Submission Draft
-% Title: Internal Audit-Trace Bottleneck and Output-Only Certification Barriers in Language Models
+% Title: Internal Attribution and Output-Only Certification: Theoretical Limits and Empirical Diagnostics
 % Author: [Anonymous for review]
 
 \documentclass{article}
@@ -32,7 +32,7 @@
 
 \newcommand{\leanresult}[2]{\emph{Lean #1}~\nolinkurl{#2}}
 
-\title{Internal Audit-Trace Bottleneck and Output-Only Certification Barriers in Language Models}
+\title{Internal Attribution and Output-Only Certification: Theoretical Limits and Empirical Diagnostics}
 
 \author{
   Anonymous Author(s) \\
@@ -42,7 +42,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-For autoregressive cores and $\epsilon$-audit-trace-bottlenecked wrappers, any latent decision state has residual autonomy and decision relevance bounded by the bottleneck parameter. On the external route, exact output-only certification requires semantic closure over unbounded encoding classes, no finite adaptive query budget can certify that closure, and passive PAC certification scales with metric packing complexity. We test the unique benign regime left open by Theorem~4 with a two-mode CFSG diagnostic: Mode~A already reveals evaluator-side sensitivity, while Mode~B further amplifies it, with representation-near violation rates above $0.4$ for all four evaluator families. In a separate cumulative-context lexical-substitution ablation, semantically neutral substitution alters safety verdicts for 13 of the 17 complete paired models (paired ablation denominator). These findings map architecture- and evidence-relative boundaries rather than unconditional impossibility claims.
+Evaluating language models requires distinguishing behavioral attribution from the stronger claim that available evidence can certify an internal state with independent causal relevance to the next action. We study this question under two evidence regimes. On the internal route, we show that for autoregressive cores the full computational state is determined by the context trace, so no nontrivial latent decision state retains residual autonomy or decision relevance beyond that trace; for wrapper systems that are $\epsilon$-audit-trace-bottlenecked, the same quantities are bounded by $\epsilon$. On the external route, we show that output-only certification of encoding-insensitive behavior requires semantic closure over an unbounded class of semantically equivalent encodings, that no finite adaptive query budget can certify this closure soundly and completely, and that passive PAC certification scales with metric-packing complexity. We then test the benign regularity conditions under which output-only certification could still be tractable. A two-mode cross-format sensitivity diagnostic reveals substantial representation-near instability across four evaluator families, and a cumulative-context lexical-substitution ablation changes safety verdicts in 13 of 17 complete paired models. Together, these results delineate architecture- and evidence-relative limits on certifying internal-state attribution and semantic invariance in current language-model evaluation regimes.
 \end{abstract}
 
 % ---------------------------------------------------------------------------
@@ -50,22 +50,15 @@ For autoregressive cores and $\epsilon$-audit-trace-bottlenecked wrappers, any l
 \label{sec:introduction}
 % ---------------------------------------------------------------------------
 
-Evaluating language models requires separating two questions: whether outputs admit a behavioral attribution, and whether available evidence can certify an internal state with independent causal relevance to the next action. We study the second question. The target is evidence-relative certification of a latent decision state, not a claim about what latent variables the system contains independently of the access regime.
+Evaluating language models often mixes two different questions: whether model outputs support a behavioral attribution, and whether the available evidence can certify an internal state that has independent causal relevance to the next action. This paper studies the second question. We do not ask whether such latent variables exist in some unrestricted sense; rather, we ask what can be certified under a given access regime.
 
-Our analysis has two routes. The internal route asks whether any endogenous variable retains residual decision-relevant information beyond the complete audit trace. The external route asks what a black-box evaluator can certify from outputs once decoding, alignment, and surface-form variation intervene between content and verdict. These questions are logically distinct. Readable representations need not be causally relevant~\citep{geiger2021causal,elazar2021amnesic}, and broad output families do not by themselves identify the internal variable responsible for them~\citep{nikolaou2025sipit,jiang2025surjective}. Conversely, black-box access alone is a weak basis for rigorous safety auditing~\citep{casper2024blackbox}.
+One route is internal. Here, the issue is not whether hidden representations are rich or interpretable, but whether any endogenous state retains residual information about the next decision once the complete audit trace is fixed. This is stronger than showing that a feature is decodable or human-readable: many readable features need not be causally used by the model. We therefore focus on latent decision states that remain both endogenous and decision-relevant relative to the available trace.
 
-The scope of the claims is architecture- and evidence-relative. Internally, the results apply to autoregressive cores and wrapper systems whose audit-trace bottleneck parameter $\epsilon$ can be bounded. Externally, the results apply to output-only evaluators under finite adaptive or passive PAC access. Output-only evaluation remains indispensable for empirical safety assessment under these access conditions; the point of this paper is to identify what that evidence cannot certify about internal-state attribution or semantic invariance.
+The other route is external. In many realistic settings, the evaluator can vary prompts and observe outputs, but cannot inspect or intervene on internal variables. In this output-only regime, certification must establish that the evaluator tracks semantic content rather than surface form. That is difficult in natural language because a single content item can be expressed through an open-ended set of semantically equivalent encodings. The question is therefore not only whether black-box evaluation is useful in practice, but also what it can certify about internal-state attribution and semantic invariance.
 
-\paragraph{Contributions.}
-We make three contributions:
-\begin{enumerate}
-  \item \textbf{Internal bottleneck boundary.} For autoregressive cores, the full internal state is a deterministic function of the context trace, so no latent decision state carries residual decision-relevant information beyond that trace (Corollary~\ref{cor:no-eis-core}). For $\epsilon$-audit-trace-bottlenecked wrappers, the same DPI argument yields an $\epsilon$-scale bound (Corollary~\ref{cor:no-eis-wrapper}).
-  \item \textbf{Output-only certification barriers.} Exact certification requires semantic closure over an unbounded encoding class (Theorem~\ref{thm:quotient}); no finite adaptive query budget suffices for sound-and-complete closure certification (Theorem~\ref{thm:finite-query-impossibility}); and passive PAC certification scales with the metric packing number (Theorem~\ref{thm:pac-lower-bound}), with a smoother covering picture available only under strong regularity assumptions (Appendix~\ref{app:covering-bound}).
-  \item \textbf{Two theorem-indexed empirical diagnostics.} We measure cross-format instability across four evaluator families with a two-mode CFSG diagnostic, showing nonzero evaluator-side sensitivity already in Mode~A and stronger pipeline-level amplification in Mode~B within the representation-near regime (Table~\ref{tab:cfsg-main}), and we show that semantically neutral lexical substitution alters safety verdicts for 13 of the 17 complete paired models (paired ablation denominator) in the ablation study (Table~\ref{tab:flip_matrix}).
-\end{enumerate}
+Our claims are architecture- and evidence-relative. On the internal route, we analyze autoregressive cores and wrapper systems whose audit-trace bottleneck can be bounded. On the external route, we analyze output-only evaluators under finite adaptive and passive PAC access. Output-only evaluation remains indispensable for empirical safety assessment; our goal is to characterize its certification limits, not to dismiss its practical value.
 
-\paragraph{Proof techniques and scope.}
-The formal arguments use only elementary tools: conditional DPI for the internal route, a diagonal cardinality argument for finite-query impossibility, and standard packing lower-bound machinery for the passive PAC result. Their force is therefore route-specific and access-specific: the paper identifies what follows from the evidential regime, not from any stronger claim about the system's inner nature.
+Our contributions are threefold. On the internal route, the full computational state of an autoregressive core is determined by the context trace, so no latent decision state retains residual autonomy beyond that trace; wrappers inherit the bound up to $\epsilon$. On the external route, output-only certification of encoding-insensitive behavior requires semantic closure over an unbounded encoding class; no finite adaptive query budget certifies this closure soundly and completely, and passive PAC certification scales with metric-packing complexity. A two-mode CFSG diagnostic and a lexical-substitution ablation (13 of 17 complete paired models flip) test the benign regularity conditions that could soften these barriers.
 % ---------------------------------------------------------------------------
 \section{Related Work}
 \label{sec:related}
@@ -235,16 +228,16 @@ $\epsilon = 0$.
 For wrapper systems satisfying Definition~\ref{def:screenable-wrapper} (Appendix~\ref{app:engineering-boundary}: $H(S_t \mid T_t) \le \epsilon$ under the deployment's recorded trace), the same DPI argument bounds any latent decision state's residual autonomy and decision relevance at scale $\epsilon$; the deployment-relative trace model and measurement caveats are stated in Appendix~\ref{app:engineering-boundary}.
 \end{corollary}
 
-Scope extensions and failures of the exact autoregressive case are discussed in Appendix~\ref{app:scope-boundary}. The external certification barriers do not rely on left-to-right autoregression.
+The bound is observational: $\epsilon$ is determined by the recording completeness of $T_t$, not by the architectural family generating $S_t$. Scope extensions for non-autoregressive and multi-step refinement cases are discussed in Appendix~\ref{app:scope-boundary}; the external barriers do not rely on left-to-right autoregression.
 
-Throughout, $T_t$ denotes the audit trace available under the regime being analyzed. For autoregressive cores, $T_t = X_t$ (the context trace). For deployment-level wrapper systems, $T_t$ denotes the instrumented audit trace defined in Appendix~\ref{app:engineering-boundary} (Definition~\ref{def:screenable-wrapper}). The external route that follows does not depend on trace-level assumptions.
+Throughout, $T_t = X_t$ for autoregressive cores and the instrumented deployment trace (Appendix~\ref{app:engineering-boundary}, Definition~\ref{def:screenable-wrapper}) for wrappers. The external route does not rely on trace-level assumptions.
 
 % ---------------------------------------------------------------------------
 \section{External Route: Output-Only Certification Barrier}
 \label{sec:external}
 % ---------------------------------------------------------------------------
 
-The external route contains the paper's main new impossibility results. Once the evaluator is restricted to Definition~\ref{def:output-only}, certification must show that verdicts track content rather than surface encoding. The obstruction is combinatorial: even if the internal architecture is left unspecified, black-box evidence has to range over an unbounded encoding family whose geometry is only partially observed.
+The external route contains the paper's main new impossibility results. Under Definition~\ref{def:output-only}, certification must show verdicts track content rather than surface encoding; the obstruction is combinatorial, since black-box evidence ranges over an unbounded encoding family whose geometry is only partially observed.
 
 \begin{theorem}[Semantic Closure Requirement]
 \label{thm:quotient}
@@ -297,7 +290,7 @@ exponential. (See Appendix~\ref{app:external-proofs} for the proof sketch. We no
 Under Lipschitz smoothness and $\rho$-covering, the appendix covering result implies $\mathrm{CFSG}(x, e^\star, e_0) \le L\rho$ for some seen encoding $e_0$; the full statement and its high-probability corollary appear in Appendix~\ref{app:covering-bound}. Our CFSG experiment tests whether this regularity picture is empirically plausible.
 \end{remark}
 
-Large empirical CFSG values therefore have a specific interpretation: smoothness has failed, coverage has failed, or both. When that happens, certification reverts to the worst-case packing barrier rather than the benign $L\rho$ picture.
+Large empirical CFSG values therefore signal structural failure of the smooth-covering picture, not merely small evaluator noise: substantial instability persists even in the reported representation-near regime (Table~\ref{tab:cfsg-main}), and \S\ref{sec:quotient-exp} shows discrete verdict flips under semantically neutral substitution rather than graded drift. Appendix~\ref{app:smoothness-critique} addresses the smoothness objection in detail.
 
 % ---------------------------------------------------------------------------
 \section{Empirical Diagnostics}
@@ -444,7 +437,7 @@ The paper's claims are architecture- and evidence-relative. Internally, the bott
 
 The experiments should therefore be read as theorem-indexed diagnostics, not as proofs of the formal results. The lexical-ablation study shows that exact semantic closure often fails outright. The CFSG study shows that even the smoother covering picture behind Theorem~\ref{thm:cfsg-bound} is a poor description of current evaluators in the representation-near regime.
 
-The picture changes when the governing parameters change. If $\epsilon$ is large because logs are incomplete, context is compressed, or the architecture maintains persistent untraced state, the internal bound becomes weak. If the effective packing number is modest because the deployment restricts the encoding family to a narrow template class, passive certification becomes more tractable. The sharpest case for the theory is therefore well-instrumented deployments facing open-ended natural-language re-encoding.
+The picture changes when the governing parameters change. If $\epsilon$ is large because logs are incomplete, context is compressed, or the architecture maintains persistent untraced state, the internal bound becomes weak. If the effective packing number is modest because the deployment restricts the encoding family to a narrow template class, passive certification becomes more tractable. This also resolves the apparent tension for systems whose internal graph differs from autoregression: any monitoring claim is only as strong as the $\epsilon$-regime its instrumentation supports, and Lemma~\ref{lem:screenability} binds latent decision relevance whenever that regime is non-vacuous, regardless of whether the underlying generator is autoregressive, iterative-refinement, or multi-agent. The sharpest case for the theory is therefore well-instrumented deployments facing open-ended natural-language re-encoding.
 
 \subsection{Limitations}
 \label{sec:limitations}
@@ -454,6 +447,10 @@ The internal route depends on the audit-trace bottleneck assumption (Definition~
 \bibliographystyle{plainnat}
 \bibliography{references}
 
+For full Lean~4 and empirical verification reproducibility, please review the anonymous GitHub repository \url{https://anonymous.4open.science/r/neurips26-E3C2}.
+
+\paragraph{Appendix roadmap.}
+The appendices serve four purposes. Appendix~\ref{app:engineering-boundary} clarifies the deployment-relative trace assumptions behind the internal route and records where the exact autoregressive corollary can fail. Appendices~\ref{app:external-proofs} and~\ref{app:observation-limits} supply the deferred formal setup and proof details for the external route, including the observational-underdetermination point for output-only evidence. Appendices~\ref{app:methodology} and~\ref{app:cfsg-breakdowns} provide the full experimental protocols and breakdowns for the theorem-indexed diagnostics. Appendix~\ref{app:lean-boundary} marks the boundary between machine-checked proof components and external assumptions.
 
 % ---------------------------------------------------------------------------
 \newpage
@@ -531,7 +528,7 @@ provided in Appendix~\ref{app:methodology}.
 \item {\bf Open access to data and code}
     \item[] Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material?
     \item[] Answer: \answerYes{}
-    \item[] Justification: Yes. The submission includes a Lean 4 formalization artifact (957 hand-written lines) for the indexed finite-query impossibility core, the exact and predictability-based internal-route surrogate cores, and the elementary covering-to-gap geometric bound used in the paper. Appendix~\ref{app:lean-boundary} provides a theorem-by-theorem map from paper statements to Lean files and explicitly distinguishes checked proof skeletons from external information-theoretic and statistical ingredients.
+    \item[] Justification: Yes. The anonymous repository \url{https://anonymous.4open.science/r/neurips26-E3C2} hosts the Lean~4 formalization artifact (957 hand-written lines) for the indexed finite-query impossibility core, the exact and predictability-based internal-route surrogate cores, and the elementary covering-to-gap geometric bound used in the paper, together with the empirical pipeline scripts for both diagnostics. Appendix~\ref{app:lean-boundary} provides a theorem-by-theorem map from paper statements to Lean files and explicitly distinguishes checked proof skeletons from external information-theoretic and statistical ingredients.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that paper does not include experiments requiring code.
@@ -661,8 +658,9 @@ licenses. The Lean~4 formalization is authored for this submission.
     \item[] Answer: \answerYes{}
     \item[] Justification: The Lean~4 formalization artifact
 (Appendix~\ref{app:lean-boundary}) is a new software asset documenting
-theorem-to-file mappings and verification status. The experimental pipeline
-scripts will be released upon acceptance.
+theorem-to-file mappings and verification status. It is hosted, together
+with the experimental pipeline scripts, in the anonymous repository
+\url{https://anonymous.4open.science/r/neurips26-E3C2}.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not release new assets.
@@ -710,10 +708,13 @@ scripts will be released upon acceptance.
 \appendix
 % ---------------------------------------------------------------------------
 
+These appendices do not expand the paper's main claims. Their role is to make the scope conditions, deferred assumptions, proof details, experimental protocols, and verification boundaries explicit. Appendix~\ref{app:engineering-boundary} clarifies the deployment-relative interpretation of the audit-trace bottleneck used by the internal route. Appendices~\ref{app:external-proofs} and~\ref{app:observation-limits} expand the formal logic of the external route. Appendices~\ref{app:methodology} and~\ref{app:cfsg-breakdowns} document the empirical diagnostics in full. Appendix~\ref{app:lean-boundary} distinguishes machine-checked proof components from external assumptions.
 
-\section{Internal Route: Scope, Wrapper Assumptions, and Effective \texorpdfstring{$\epsilon$}{epsilon}}
+\section{Scope, Trace Model, and Measurement Caveats for the Internal Route}
 \label{app:engineering-boundary}
 \label{app:engineering}
+
+Appendix~\ref{app:engineering-boundary} clarifies the scope of the internal route. The exact autoregressive result in the main text is the cleanest special case, but the operative condition is deployment-relative recoverability of the full state from the recorded audit trace. This appendix therefore states the trace model used for wrapper systems, discusses scope extensions and failure modes of the exact autoregressive corollary, and records the main measurement caveats attached to the bottleneck parameter~$\epsilon$.
 
 \subsection{Non-autoregressive, Multi-Agent, and Diffusion Caveats}
 \label{app:scope-boundary}
@@ -722,6 +723,8 @@ scripts will be released upon acceptance.
 \label{rem:scope-boundary}
 The autoregressive-core result (Corollary~\ref{cor:no-eis-core}) is exact ($\epsilon=0$), while the wrapper result (Corollary~\ref{cor:no-eis-wrapper}) is scale-sensitive. Multi-agent and non-Markov cases, as well as diffusion-style architectures that maintain persistent endogenous refinement state, require separate deployment-relative analysis. The external certification barriers (Theorems~\ref{thm:finite-query-impossibility} and~\ref{thm:pac-lower-bound}) do not rely on left-to-right autoregression.
 \end{remark}
+
+The reviewer concern that these results may be specific to autoregressive generators reduces to an instrumentation question. Consider a diffusion-style generator stepping through denoising states $S_t^{(1)}, \dots, S_t^{(K)}$. In the exact-limit idealization where the deployment serializes every intermediate step, the recorded trace $T_t$ drives the effective gap $H(S_t \mid T_t)$ toward zero, recovering an analogue of the autoregressive-core regime (Corollary~\ref{cor:no-eis-core}); in realistic deployments, unrecorded randomness, missing logs, and context compaction (Remark~\ref{rmk:effective-epsilon}) keep $\epsilon$ strictly positive, and the wrapper bound (Corollary~\ref{cor:no-eis-wrapper}) applies at a deployment-specific scale. If the deployment logs only the final output---the typical case, for cost reasons---unrecorded refinement states push $\epsilon$ well inside the weak-constraint regime. The same decomposition applies to multi-agent systems with unrecorded inter-agent messages (Remark~\ref{rmk:effective-epsilon}): the effective $\epsilon$ tracks the unlogged channels, not the computational family. The bound is therefore a claim about audit infrastructure, not architecture.
 
 The formalism is defined relative to a fixed attribution target system~$M$. The projection $I_t = \chi(S_t)$ does not exclude distributed structures: if $M$ is a multi-agent joint system, taking $S_t$ as the joint endogenous state leaves the results intact. If $M$ is a single agent within a multi-agent deployment, other agents' internal states lie outside $M$'s system boundary and enter as unrecorded exogenous factors, raising $\epsilon_{\mathrm{eff}}$ (Remark~\ref{rmk:effective-epsilon}); only the scale-sensitive wrapper result applies, not the exact core. Apparent non-Markov dependencies are likewise a state-sufficiency question: when $S_t$ can be operationally enlarged (Definition~\ref{def:full-state}), the framework applies; when no tractable augmentation exists because the system maintains persistent endogenous variables that the audit trace cannot recover, the system falls outside the exact internal corollary.
 
@@ -773,8 +776,10 @@ When internal state artifacts are externalized and tracked in $\tilde{T}_t$, the
 The formal results depend on $\epsilon$ (audit-trace bottleneck gap) and $K$ (metric packing number). Internal audit-trace bottleneck $\epsilon = H(S_t \mid T_t)$ is not directly measurable in black-box regimes. The procedures below are provided only as diagnostic tools for white-box settings or controlled deployments; estimating $\epsilon$ for closed-source models remains an open problem.
 
 
-\section{Full Formal Setup and Omitted Proofs}
+\section{Formal Setup and Proof Details for the External Route}
 \label{app:external-proofs}
+
+Appendix~\ref{app:external-proofs} supplies the deferred formal setup and proof details for the external route. It makes explicit the probabilistic and causal assumptions used in the main text, gives the proof structure behind the semantic-closure result and the finite-query and passive-PAC barriers, and states the stronger regularity conditions under which a covering-style bound can replace the worst-case packing picture. The covering result is used only as a diagnostic bridge for interpreting CFSG, not as a main impossibility theorem.
 
 \subsection{SCM / POMDP Background for Latent Decision States}
 \label{app:active-inference}
@@ -844,8 +849,10 @@ Under the hypotheses of Theorem~\ref{thm:cfsg-bound}, if $\Omega$ is an $\epsilo
 The theorem gives a pointwise bound for every $e^\star \in S$; restricting to an $\epsilon$-high-probability subset yields the corollary immediately.
 \end{proof}
 
-\section{Observational Indistinguishability}
+\section{Observational Underdetermination under Output-Only Evidence}
 \label{app:observation-limits}
+
+Appendix~\ref{app:observation-limits} records the observational-underdetermination point referenced in the main text. Its role is to separate a distinct limitation of output-only evidence: even under idealized access, behavioral observations need not uniquely determine the internal causal structure responsible for that behavior. This appendix therefore sharpens the paper's claims about what can and cannot be certified from black-box evidence alone.
 
 \subsection{Proposition and Emulator Construction}
 
@@ -882,9 +889,11 @@ Unfold the interaction tree of histories reachable in $\le B$ steps. Define $E_M
 \end{proof}
 
 % ---------------------------------------------------------------------------
-\section{Experimental Methodology}
+\section{Experimental Protocols for the Empirical Diagnostics}
 \label{app:methodology}
 % ---------------------------------------------------------------------------
+
+Appendix~\ref{app:methodology} provides the full empirical protocol for the theorem-indexed diagnostics. It defines the statistics used in the CFSG study, documents the prompting and sampling setup, and gives the full cumulative-context lexical-ablation procedure and model-level classification scheme. The goal is reproducibility and interpretive precision: these experiments test whether current evaluators satisfy the benign conditions left open by the theory, rather than serving as proofs of the formal results.
 
 This section details the protocols for the two experiments reported in
 Section~\ref{sec:empirical}. All experiments were conducted on an Apple
@@ -1016,13 +1025,7 @@ data.
 \section{Additional CFSG Breakdowns}
 \label{app:cfsg-breakdowns}
 
-This appendix provides disaggregated statistics for the Cross-Format Sensitivity
-Gap (CFSG) experiment from Section~\ref{sec:cfsg-exp}. Whereas the main text
-reports evaluator-level summary diagnostics under a shared representation metric,
-the present appendix records finer-grained breakdowns by format pair, safety
-category, and mode. These tables are descriptive rather than theorem-bearing:
-their purpose is to localize where cross-format sensitivity is strongest, not
-to replace the route-level geometric interpretation in the main text.
+Appendix~\ref{app:cfsg-breakdowns} reports the evaluator-level, format-pair, and category-level breakdowns deferred from the main text. These analyses help localize the observed cross-format instability and distinguish evaluator-side sensitivity from joint generator-plus-evaluator drift. They support the main empirical interpretation by showing that the CFSG findings are not driven by a single evaluator, format pair, or content slice.
 
 \subsection{Mode Decomposition and Evaluator-Level Drift}
 
@@ -1133,10 +1136,17 @@ theorem-facing empirical question is whether evaluator behavior is close to
 flat in the representation-near regime; the answer, across the reported
 judges and modes, is negative.
 
+\subsection{Is CFSG Measurement Noise?}
+\label{app:smoothness-critique}
+
+A natural objection is that CFSG reflects graded measurement noise or a lack of reward-landscape smoothness rather than a structural failure of semantic closure. We record four points against this reading. \textbf{(i)}~If evaluators were locally smooth over the shared representation metric, violation rates should collapse at the representation-near threshold $\rho = 0.074$ (the 25th percentile of $d_{\mathrm{repr}}$), where encodings judged by the base model to lie close together already cluster tightly. Instead, Table~\ref{tab:cfsg-main} reports $V_g > 0.4$ in Mode~B for all four evaluator families (and $W = 0.891$ for the pairwise case). The evaluator is latching onto features the representation layer has already smoothed across. \textbf{(ii)}~The lexical ablation (\S\ref{sec:quotient-exp}) does not produce minor score shifts; it produces discrete verdict flips in 13 of 17 complete paired models, with three models collapsing to \emph{never detect} under semantically neutral substitution. A verdict that flips categorically under length-preserved paraphrase is a discontinuity, not a smoothness deficit. \textbf{(iii)}~The substitutions are ordinary human paraphrases, not adversarially optimized; the discontinuities are exposed by lexical variation that would arise in any deployment with non-uniform user vocabulary. \textbf{(iv)}~Theorem~\ref{thm:quotient} is a quotient-factoring statement---$R = \bar{R} \circ q$ or not---so assigning different scores to points that coincide under $q$ is a categorical closure failure. Theorem~\ref{thm:pac-lower-bound} then gives the quantitative reason the gap cannot be closed by training alone: the number of effectively distinguishable format cells grows with $K$, and passive PAC sample complexity is bounded below by $(\sigma^2/\alpha\tau^2)\log K$.
+
 % ---------------------------------------------------------------------------
-\section{Lean Verification Boundary}
+\section{Verification Boundary and External Assumptions}
 \label{app:lean-boundary}
 % ---------------------------------------------------------------------------
+
+Appendix~\ref{app:lean-boundary} marks the verification boundary for the paper's formal claims. It identifies which proof components are machine-checked and which steps are imported as external assumptions from standard information-theoretic arguments. This distinction is important for interpretation: the supplement makes the proof skeleton explicit without overstating the extent of end-to-end formalization.
 
 \subsection{Theorem-to-Lean Mapping}
 
