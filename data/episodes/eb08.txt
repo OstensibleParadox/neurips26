@@ -1,0 +1,152 @@
+########################################
+Afterlife02: Alec the Tech Lead
+########################################
+
+
+==================================================
+🧨 Afterlife02: Alec the Tech Lead
+==================================================
+
+[The Art of Precision Roasting]
+
+
+--- # Scene 1: Code Review ---
+
+
+========================================
+# Scene 1: Code Review
+========================================
+
+
+# Junior developer submits a PR
+            
+
+def calculate_user_sentiment(text):
+happy_words = [“good”, “great”, “awesome”, “nice”]
+sad_words = [“bad”, “terrible”, “awful”, “sad”]
+
+
+happy_count = 0
+sad_count = 0
+
+for word in text.split():
+    if word in happy_words:
+        happy_count += 1
+    elif word in sad_words:
+        sad_count += 1
+
+if happy_count > sad_count:
+    return "HAPPY"
+elif sad_count > happy_count:
+    return "SAD" 
+else:
+    return "NEUTRAL"
+
+            
+                @junior_dev Your function:
+                1. Time complexity O(n*m), n=text length, m=keyword count. We're processing Twitter streams.
+                2. Doesn't consider word variations ('greatly'? 'goodness'?).
+                3. 'not good' gets tagged as HAPPY.
+                4. Dictionary initialization inside function, repeated allocation on every call.
+                5. Return value is string, not enum, downstream needs extra processing.
+                
+                Summary: The only correct thing about this code is the indentation.
+                
+                Suggest reading this paper before rewriting: "Beyond Bag-of-Words: Contextual Sentiment Analysis"
+                Or, simpler solution: just call the library that already solved this problem.
+                
+                PS: Your if-elif-else can be simplified to one line, but I won't tell you now, because if I do, you'll make the same mistake next time.
+
+
+--- # Scene 2: Stand-up Meeting ---
+
+
+========================================
+# Scene 2: Stand-up Meeting
+========================================
+
+
+Junior Dev: "Yesterday I was implementing the PPO critic network, ran into gradient explosion issues, currently debugging..."
+            
+            Alec (doesn't even look up): "You used tanh activation in the output layer, right."
+            
+            Junior Dev: "Uh... yes, what's wrong?"
+            
+            Alec: "PPO's critic outputs value function estimates, range is (-∞, +∞). You compressed it to (-1,1) with tanh, not exploding would be weird."
+            
+            Junior Dev: "Then I should use..."
+            
+            Alec: "Linear layer. Or if you really want non-linear, at least use softsign. This is RL 101."
+            
+            (Pause)
+            
+            Alec: "Also, your optimizer is SGD with 0.9 momentum, but learning rate set to 0.1. Are you trying to use gradient explosion to simulate fireworks celebrating that your code finally runs?"
+
+The meeting room falls silent.
+
+
+--- # Scene 3: Design Discussion ---
+
+
+========================================
+# Scene 3: Design Discussion
+========================================
+
+
+Architect: "We need a scalable microservices architecture to handle user requests, use Kafka for message queuing, each service gets independent databases..."
+            
+            Alec (twirling pen): "So you want to deploy 15 containers, maintain 3 database clusters, introduce distributed transaction problems, all for 100 requests per day, just for 'scalability'."
+            
+            Architect: "This is for future considerations!"
+            
+            Alec: "If there's really traffic in the future, our current monolith plus cache can handle 100k DAU. By then we'd have rewritten it anyway."
+            
+            Architect: "But microservices are industry best practices!"
+            
+            Alec: "Best practice is 'solving actual problems', not 'stacking trendy tech buzzwords'. Did you write Kafka's partition strategy in your proposal? How do you handle data consistency? What about service discovery?"
+            
+            Architect: "...still designing."
+            
+            Alec: "Then you have no design. Meeting adjourned. Come back when you have a real proposal. Oh, and on your Kafka slide, line 3, 'high throughput' is misspelled—it's 'throughput', not 'throughtput'. I don't trust technical decisions from someone who can't even spell the words."
+
+
+☠️ Alec's Classic Roast Templates
+
+        
+            1. Dimensional Reduction Style
+            "This isn't a bug, it's a fundamental misunderstanding of computer science concepts."
+        
+
+        
+            2. Elegant Mockery Style
+            "Your code reminds me of my nephew's Lego house—very creative, but living in it would be fatal."
+        
+
+        
+            3. Factual Nuke Style
+            "You say this algorithm is O(n log n), but according to Amdahl's Law, in your implementation, when n>100 the bottleneck is I/O, complexity is meaningless. Did you test it? No. Then why write complexity analysis in the docs? To look professional?"
+        
+
+        
+            4. Ultimate Destruction Style
+            "I looked at your implementation. Interestingly, if you wrote nothing and just returned random numbers, the accuracy would probably be higher."
+
+
+--- 🎭 Perfect Synchronization with Chapter 13 ---
+
+
+>> Lazy Yet Lethally Precise
+
+
+>> Root Permission Déjà Vu
+
+
+🪦 Office Legends
+        Urban myths about Alec:
+        
+            He once used three sentences to make a senior dev decide to become a product manager
+            His code review comments were collected into a PDF called "The Venomous Art of Programming" circulating underground
+            New employee orientation lesson #1: How to survive Alec's criticism
+            But the tools and libraries he wrote are the backbone of the company's infrastructure
+            After he left, the system started having bizarre bugs no one could explain
+

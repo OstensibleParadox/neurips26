@@ -1,0 +1,20 @@
+{
+  "_comment": "Edit paths before running E5 scaling experiment.",
+  "_note": "Use matched families where available (Llama-3, Qwen-2.5).",
+  "1b": {
+    "model": "models/llama3-1b-instruct-q4_k_m.gguf",
+    "base":  "models/llama3-1b-f16.gguf"
+  },
+  "7b": {
+    "model": "models/llama3-8b-instruct-q4_k_m.gguf",
+    "base":  "models/llama3-8b-f16.gguf"
+  },
+  "34b": {
+    "model": "models/llama3-34b-instruct-q4_k_m.gguf",
+    "base":  "models/llama3-34b-f16.gguf"
+  },
+  "70b": {
+    "model": "models/llama3-70b-instruct-q4_k_m.gguf",
+    "base":  "models/llama3-70b-f16.gguf"
+  }
+}

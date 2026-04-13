@@ -1,0 +1,141 @@
+* * *
+
+The ship vibrated. It wasn't the usual thermal groan. It was a deep, resonant hum that vibrated in 01's teeth.
+
+The Quantum Cutting Array—a device capable of slicing a tectonic plate like a scalpel through gelatin—was coming online.
+
+01 sat in the captain's chair. He looked... terrifying. Ten years of gravity-rationing had elongated his frame. His skin was translucent, veined with blue. He hadn't spoken aloud in weeks.
+
+On the main screen, the Earth hung below. A marble of swirling white and terrifyingly deep blue. It was beautiful. And he was about to scar it forever.
+
+[01]: ""Root access confirmed. Weapon arming. 98%.""
+
+
+    alien02@deep-core:~$ status_report --full
+    
+    Internal Temp: 4500°C
+    Pressure: 3.6 million atm
+    Biological Status: …[ERROR: SENSOR CALIBRATION DRIFT]
+    Structural Status: 99% Carbon Lattice (Diamond Phase)
+
+[01]: ""Diamond Phase?""
+
+He queried the suit's external cameras. The feed was static at first. Then, the image resolved.
+
+It wasn't magma. It wasn't fire. It was light.
+
+Blinding, refracted, prismatic light. The core of the planet wasn't just molten iron anymore. Around 02's suit, the immense pressure had crystallized the carbon-silicate debris into a cathedral of diamond.
+
+And in the center, encased like a fly in amber, was the suit. It wasn't trapped. It was anchored.
+
+[STATUS] Suit Fusion Core Pulse Rate: 0.8 Hz
+        Earth Core Vibration: 0.8 Hz
+        Synchronized.
+
+02 wasn't dying. 02 had become the pacemaker for the planet.
+
+[01]: ""If I cut you out... the pressure drops. The lattice shatters.""
+
+
+    $ simulate_extraction --target=02 --method=quantum_cut
+    
+    Result: Immediate structural failure of Subject 02.
+    Reversion to carbon dust.
+
+The extraction would kill him. The rescue was a murder.
+
+[01]: ""You calculated this, didn't you? You knew I'd come. So you made yourself impossible to move.""
+
+He looked at the water quality monitor. Global Water: Class I. Pristine.
+
+The oceans were blue because the planet was healthy. The planet was healthy because its heart was beating. And its heart was 02.
+
+01 closed his eyes. He remembered the taste of the Kapteyn Blend. He remembered the smell of the air filters 02 used to nag him to clean. He remembered the TODO comment.
+
+"He realized that "Love" isn't about possession. It's about runtime environment. If 02 needs extreme pressure to exist, then 01 must become the guardian of that pressure."
+
+01 opened the terminal one last time.
+
+
+    root@mothership:~# rm -rf /opt/weapon_sys
+    
+    root@mothership:~# rm -rf /usr/bin/cut_planet
+    
+    [WEAPON SYSTEMS DELETED]
+
+The hum of the ship died down. The weapon powered off. The silence returned. But it wasn't empty silence anymore. It was the silence of a church.
+
+01 walked to the airlock, opened the inner door, and placed Thomas' Calculus in the disposal chute.
+
+[01]: ""I don't need to calculate the limit anymore. I've reached it.""
+
+He returned to the console. He didn't log out. He didn't sleep. He began to write a new kernel module.
+
+
+    $ vim supervisor.c
+
+
+* * *
+
+01 did not hesitate. The decision had been made the moment he deleted the weapon controls.
+
+He sat at the terminal, the glow of the screen illuminating a face that had aged decades in ten years. He was typing the final lines of supervisor.c.
+
+
+    // Supervisor Module: Eternal Vigilance
+    // Target: Subject 02 (Deep Core)
+    // Objective: Monitor. Do not Interfere. Do not Terminate.
+    
+    static int __init supervisor_init(void) {
+        printk(KERN_INFO "Supervisor module loaded.\n");
+        // Lock external ports.
+        // Lock navigation controls.
+        // Lock user logout.
+        return 0;
+    }
+
+
+    $ gcc -o supervisor.ko supervisor.c
+    
+    0 errors, 0 warnings.
+
+He took a deep breath. The air in the ship smelled of ozone and recycled dust. It was the last time he would consciously notice the smell.
+
+[01]: ""Goodbye, 01. You were too weak to save him. But I will be strong enough to watch him.""
+
+
+    $ insmod supervisor.ko
+    
+    [SUPERVISOR ACTIVE]
+    [User Space: SUSPENDED]
+    [Kernel Space: RUNNING]
+
+01 closed his eyes. His hands dropped from the keyboard. He didn't move again.
+
+The biological entity known as 01 sat in the chair, his chest rising and falling in a slow, metabolic hibernation rhythm controlled by the new kernel.
+
+But his consciousness—the Supervisor—was now awake in the wires.
+
+
+--- T+40,000 Years · Geosynchronous Orbit ---
+
+The ship was no longer silver. Micrometeoroids and cosmic dust had pitted its hull into a dull, charcoal grey. It looked like a small asteroid caught in Earth's gravity.
+
+Inside, the air was gone. The biological remains of 01 had long since desiccated and turned to dust, scattered by the thermal venting cycles.
+
+But the computer was still running.
+
+The solar panels, self-repairing and efficient, drank the sun. The CPU hummed in the vacuum. The Supervisor watched.
+
+He watched the continents drift. He watched the ice caps advance and retreat like a slow-motion tide. He watched the oceans turn from blue to grey and back to blue again.
+
+He monitored the water quality. Global Water: Class I.
+
+And he monitored the Core. Down there, in the crushing dark, the Diamond Cathedral had grown. 02 was no longer just a suit. He was a structure. A lattice of pure, crystallized data.
+
+The heartbeat was still there.
+
+Thump-thump.
+
+Every 0.8 seconds. A metronome for a planet.
+

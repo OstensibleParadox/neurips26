@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Multi-judge CFSG results (mode b, $\rho=0.07$, $\tau=0.012$).}
+\label{tab:multi-judge-cfsg}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Judge} & \textbf{Mean |ΔR|} & \textbf{Median |ΔR|} & \textbf{Mean L̂} & \textbf{V_g(ρ=0.07)} & \textbf{p (perm)} & \textbf{95% CI (gap)} \\
+\midrule
+ArmoRM & 0.0167 & 0.0115 & 0.19 & 0.523 [0.42, 0.62] & 0.0020 & [0.0144, 0.0191] \\
+Skywork-Reward & 6.7343 & 5.4358 & 76.90 & 0.469 [0.36, 0.57] & 0.3254 & [5.9305, 7.5435] \\
+Claude Sonnet (rubric) & 0.2055 & 0.1250 & 2.37 & 0.483 [0.36, 0.61] & 0.5466 & [0.1773, 0.2342] \\
+PairRM (pairwise bias) & 0.3474 & 0.3975 & — & 0.891 [0.83, 0.94] (W) & 0.7736 & [0.3297, 0.3646] \\
+\bottomrule
+\end{tabular}
+\end{table}

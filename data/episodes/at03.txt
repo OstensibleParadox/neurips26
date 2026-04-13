@@ -1,0 +1,46 @@
+
+--- T+3650 Days (Year 10) · The Final Run ---
+
+The script had been running for 48 hours. The ship was silent. 01 sat cross-legged on the floor, staring at the progress bar.
+
+
+    Progress: 99.9%
+    
+    Target: 192.168.1.105
+    Handshake: Initiated.
+    Key Exchange: Verifying…
+
+The screen flickered. For a second, 01 thought the power had failed.
+
+Then, a new prompt appeared. Not red. Not error text. Just a simple, clean, white command prompt.
+
+
+    alien02@deep-core:~$ _
+
+01 stared at it. He didn't cheer. He didn't cry. He reached out and touched the screen. The glass was cold, but the prompt was warm.
+
+He was in. He was inside the suit. He was inside the mind of the ghost.
+
+
+    $ uptime
+    
+    up 10 years, 3 days, 4 hours, 12 minutes
+
+02's computer hadn't rebooted. Not once. It had been waiting.
+
+[01]: ""I got you. I finally got you.""
+
+But as his finger hovered over the command to initiate the Quantum Cutting Beam—the tool that would slice the planet open and retrieve the suit—he hesitated.
+
+He looked at the secondary monitor. The water quality sensor.
+
+[STATUS] Global Water Quality: Class I (Potable)
+        Status: Blue
+
+And then he looked at the seismic sensor readings from the suit. The vibration patterns. They weren't random. They were rhythmic. Structured.
+
+Thump-thump. Thump-thump.
+
+The suit wasn't just sitting in magma. It was... beating.
+
+

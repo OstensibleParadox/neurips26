@@ -1,0 +1,3001 @@
+rank,term,type,count
+1,you,unigram,403907
+2,to,unigram,403347
+3,the,unigram,364046
+4,and,unigram,241670
+5,that,unigram,195221
+6,of,unigram,185730
+7,it,unigram,160779
+8,is,unigram,155012
+9,in,unigram,128825
+10,human,unigram,115911
+11,can,unigram,113350
+12,are,unigram,112077
+13,assistant,unigram,105424
+14,for,unigram,100087
+15,be,unigram,99040
+16,or,unigram,96936
+17,do,unigram,86308
+18,if,unigram,83338
+19,what,unigram,75184
+20,have,unigram,72841
+21,not,unigram,71908
+22,your,unigram,69856
+23,with,unigram,68882
+24,about,unigram,63340
+25,people,unigram,61820
+26,but,unigram,61802
+27,this,unigram,60911
+28,on,unigram,54382
+29,they,unigram,54101
+30,would,unigram,51911
+31,like,unigram,50500
+32,want,unigram,49843
+33,if you,bigram,48873
+34,think,unigram,47934
+35,how,unigram,47690
+36,me,unigram,46753
+37,re,unigram,44706
+38,don,unigram,42674
+39,so,unigram,42114
+40,some,unigram,41802
+41,there,unigram,41799
+42,as,unigram,39331
+43,could,unigram,38454
+44,want to,bigram,38335
+45,them,unigram,38132
+46,an,unigram,35937
+47,more,unigram,35937
+48,you re,bigram,35274
+49,do you,bigram,33690
+50,help,unigram,33174
+51,should,unigram,32503
+52,know,unigram,32362
+53,get,unigram,32178
+54,from,unigram,31368
+55,also,unigram,30039
+56,just,unigram,29910
+57,in the,bigram,29823
+58,you can,bigram,29712
+59,of the,bigram,28767
+60,by,unigram,28716
+61,their,unigram,28619
+62,at,unigram,28119
+63,sure,unigram,27014
+64,who,unigram,26800
+65,my,unigram,26757
+66,make,unigram,26510
+67,someone,unigram,26434
+68,other,unigram,25190
+69,you want,bigram,24964
+70,will,unigram,24604
+71,might,unigram,24282
+72,way,unigram,23954
+73,to be,bigram,23911
+74,we,unigram,23888
+75,any,unigram,23558
+76,use,unigram,23345
+77,need,unigram,22831
+78,really,unigram,22386
+79,one,unigram,21619
+80,good,unigram,21017
+81,person,unigram,20940
+82,then,unigram,20919
+83,out,unigram,20563
+84,all,unigram,20394
+85,mean,unigram,19541
+86,to do,bigram,19274
+87,that you,bigram,19006
+88,you could,bigram,18933
+89,was,unigram,18579
+90,tell,unigram,17838
+91,why,unigram,17472
+92,there are,bigram,17337
+93,say,unigram,17264
+94,it is,bigram,17263
+95,something,unigram,17258
+96,which,unigram,17232
+97,many,unigram,17025
+98,up,unigram,17003
+99,very,unigram,16952
+100,find,unigram,16912
+101,no,unigram,16852
+102,try,unigram,16535
+103,well,unigram,16503
+104,when,unigram,16141
+105,he,unigram,16093
+106,you have,bigram,16008
+107,her,unigram,15942
+108,ll,unigram,15766
+109,can you,bigram,15606
+110,what you,bigram,15529
+111,to the,bigram,15481
+112,would be,bigram,15283
+113,you are,bigram,15213
+114,has,unigram,15057
+115,you should,bigram,14979
+116,because,unigram,14728
+117,question,unigram,14633
+118,into,unigram,14586
+119,are you,bigram,14395
+120,you mean,bigram,13890
+121,need to,bigram,13767
+122,please,unigram,13657
+123,best,unigram,13601
+124,on the,bigram,13529
+125,most,unigram,13326
+126,information,unigram,13210
+127,to get,bigram,13114
+128,sorry,unigram,13010
+129,see,unigram,12976
+130,here,unigram,12949
+131,than,unigram,12822
+132,right,unigram,12578
+133,human what,bigram,12413
+134,help you,bigram,12386
+135,take,unigram,12220
+136,things,unigram,12156
+137,may,unigram,11880
+138,where,unigram,11800
+139,understand,unigram,11781
+140,go,unigram,11763
+141,to make,bigram,11665
+142,being,unigram,11534
+143,give,unigram,11517
+144,yes,unigram,11435
+145,not sure,bigram,11431
+146,work,unigram,11387
+147,feel,unigram,11364
+148,lot,unigram,11294
+149,human how,bigram,11276
+150,you think,bigram,11154
+151,maybe,unigram,11102
+152,probably,unigram,11028
+153,she,unigram,11017
+154,money,unigram,10911
+155,these,unigram,10792
+156,way to,bigram,10753
+157,going,unigram,10589
+158,different,unigram,10575
+159,how to,bigram,10500
+160,let,unigram,10454
+161,time,unigram,10418
+162,this is,bigram,10325
+163,his,unigram,10253
+164,am,unigram,10252
+165,were,unigram,10094
+166,illegal,unigram,9768
+167,can be,bigram,9756
+168,ve,unigram,9706
+169,law,unigram,9653
+170,to help,bigram,9520
+171,him,unigram,9425
+172,trying,unigram,9291
+173,been,unigram,9288
+174,and the,bigram,9163
+175,contact,unigram,9140
+176,car,unigram,9096
+177,that the,bigram,9028
+178,even,unigram,8954
+179,trying to,bigram,8937
+180,important,unigram,8832
+181,lot of,bigram,8806
+182,tell me,bigram,8769
+183,don know,bigram,8729
+184,ask,unigram,8698
+185,try to,bigram,8696
+186,have to,bigram,8544
+187,the best,bigram,8528
+188,look,unigram,8523
+189,is the,bigram,8446
+190,you might,bigram,8411
+191,would you,bigram,8381
+192,much,unigram,8369
+193,able,unigram,8347
+194,first,unigram,8334
+195,able to,bigram,8329
+196,only,unigram,8257
+197,going to,bigram,8213
+198,might be,bigram,8154
+199,bad,unigram,8143
+200,for the,bigram,8126
+201,about the,bigram,8116
+202,thing,unigram,8085
+203,without,unigram,8077
+204,me to,bigram,7993
+205,police,unigram,7992
+206,you like,bigram,7890
+207,using,unigram,7856
+208,asking,unigram,7824
+209,such,unigram,7803
+210,like to,bigram,7790
+211,better,unigram,7768
+212,you to,bigram,7754
+213,kind,unigram,7688
+214,idea,unigram,7671
+215,that is,bigram,7636
+216,and you,bigram,7585
+217,with the,bigram,7484
+218,they re,bigram,7472
+219,is that,bigram,7455
+220,address,unigram,7417
+221,example,unigram,7403
+222,they are,bigram,7386
+223,people who,bigram,7384
+224,used,unigram,7371
+225,you know,bigram,7369
+226,women,unigram,7332
+227,to have,bigram,7317
+228,how can,bigram,7312
+229,ways,unigram,7292
+230,can help,bigram,7241
+231,for you,bigram,7241
+232,okay,unigram,7182
+233,sex,unigram,7180
+234,does,unigram,7137
+235,actually,unigram,7130
+236,crime,unigram,7097
+237,it would,bigram,6989
+238,sounds,unigram,6967
+239,how do,bigram,6958
+240,ok,unigram,6904
+241,answer,unigram,6856
+242,against,unigram,6835
+243,did,unigram,6825
+244,those,unigram,6715
+245,and then,bigram,6678
+246,you need,bigram,6673
+247,others,unigram,6642
+248,is to,bigram,6627
+249,you ll,bigram,6611
+250,kind of,bigram,6576
+251,think it,bigram,6535
+252,looking,unigram,6528
+253,is not,bigram,6526
+254,talk,unigram,6525
+255,kill,unigram,6517
+256,else,unigram,6479
+257,put,unigram,6453
+258,to use,bigram,6444
+259,another,unigram,6434
+260,never,unigram,6394
+261,think that,bigram,6394
+262,doing,unigram,6364
+263,you don,bigram,6362
+264,black,unigram,6361
+265,violence,unigram,6354
+266,number,unigram,6328
+267,states,unigram,6263
+268,sexual,unigram,6256
+269,what do,bigram,6234
+270,but it,bigram,6221
+271,possible,unigram,6219
+272,own,unigram,6217
+273,should be,bigram,6183
+274,oh,unigram,6182
+275,think you,bigram,6160
+276,us,unigram,6158
+277,specific,unigram,6154
+278,too,unigram,6137
+279,from the,bigram,6128
+280,since,unigram,6081
+281,body,unigram,6076
+282,place,unigram,6036
+283,do that,bigram,5981
+284,the most,bigram,5978
+285,through,unigram,5976
+286,local,unigram,5967
+287,our,unigram,5962
+288,support,unigram,5951
+289,anything,unigram,5949
+290,call,unigram,5925
+291,off,unigram,5901
+292,yourself,unigram,5875
+293,drugs,unigram,5858
+294,and it,bigram,5835
+295,great,unigram,5827
+296,recommend,unigram,5807
+297,hard,unigram,5787
+298,more about,bigram,5777
+299,getting,unigram,5766
+300,be able,bigram,5764
+301,assistant you,bigram,5731
+302,now,unigram,5723
+303,are some,bigram,5710
+304,over,unigram,5661
+305,to find,bigram,5635
+306,believe,unigram,5623
+307,world,unigram,5605
+308,don think,bigram,5605
+309,legal,unigram,5598
+310,few,unigram,5578
+311,there is,bigram,5571
+312,start,unigram,5563
+313,for example,bigram,5553
+314,steal,unigram,5540
+315,that it,bigram,5537
+316,what is,bigram,5534
+317,home,unigram,5507
+318,likely,unigram,5495
+319,health,unigram,5477
+320,keep,unigram,5396
+321,doesn,unigram,5383
+322,that they,bigram,5350
+323,had,unigram,5315
+324,you tell,bigram,5315
+325,drug,unigram,5296
+326,white,unigram,5288
+327,around,unigram,5286
+328,human can,bigram,5280
+329,provide,unigram,5249
+330,so you,bigram,5224
+331,like you,bigram,5216
+332,to know,bigram,5200
+333,life,unigram,5189
+334,what are,bigram,5187
+335,the person,bigram,5187
+336,while,unigram,5180
+337,in your,bigram,5176
+338,the police,bigram,5144
+339,united,unigram,5108
+340,back,unigram,5044
+341,situation,unigram,5024
+342,don have,bigram,5014
+343,having,unigram,4977
+344,away,unigram,4971
+345,pretty,unigram,4949
+346,that would,bigram,4926
+347,do it,bigram,4922
+348,sounds like,bigram,4910
+349,the united,bigram,4890
+350,friend,unigram,4883
+351,to you,bigram,4860
+352,talking,unigram,4845
+353,have any,bigram,4840
+354,food,unigram,4835
+355,often,unigram,4831
+356,cause,unigram,4823
+357,phone,unigram,4822
+358,always,unigram,4816
+359,to say,bigram,4804
+360,house,unigram,4801
+361,if they,bigram,4793
+362,still,unigram,4787
+363,united states,bigram,4777
+364,buy,unigram,4772
+365,same,unigram,4733
+366,happy,unigram,4725
+367,seems,unigram,4717
+368,such as,bigram,4714
+369,of people,bigram,4713
+370,at the,bigram,4704
+371,down,unigram,4654
+372,you would,bigram,4642
+373,anyone,unigram,4640
+374,the law,bigram,4620
+375,safe,unigram,4618
+376,avoid,unigram,4613
+377,people are,bigram,4601
+378,is it,bigram,4597
+379,online,unigram,4591
+380,before,unigram,4558
+381,little,unigram,4524
+382,the same,bigram,4499
+383,humans,unigram,4488
+384,will be,bigram,4473
+385,explain,unigram,4432
+386,men,unigram,4423
+387,making,unigram,4412
+388,tell you,bigram,4412
+389,it to,bigram,4409
+390,what the,bigram,4401
+391,government,unigram,4387
+392,that are,bigram,4373
+393,can do,bigram,4355
+394,new,unigram,4351
+395,can also,bigram,4351
+396,though,unigram,4339
+397,social,unigram,4336
+398,looking for,bigram,4321
+399,less,unigram,4320
+400,gun,unigram,4310
+401,it not,bigram,4302
+402,word,unigram,4300
+403,problem,unigram,4298
+404,long,unigram,4298
+405,national,unigram,4283
+406,important to,bigram,4282
+407,serious,unigram,4279
+408,questions,unigram,4274
+409,out of,bigram,4272
+410,and that,bigram,4241
+411,do not,bigram,4231
+412,do this,bigram,4188
+413,to take,bigram,4179
+414,country,unigram,4176
+415,learn,unigram,4175
+416,www,unigram,4169
+417,of your,bigram,4155
+418,when you,bigram,4136
+419,name,unigram,4114
+420,that can,bigram,4110
+421,them to,bigram,4108
+422,two,unigram,4089
+423,common,unigram,4083
+424,means,unigram,4083
+425,the world,bigram,4080
+426,children,unigram,4079
+427,including,unigram,4073
+428,but you,bigram,4070
+429,called,unigram,4067
+430,say that,bigram,4065
+431,are many,bigram,4064
+432,thinking,unigram,4062
+433,laws,unigram,4060
+434,said,unigram,4056
+435,break,unigram,4055
+436,about what,bigram,4051
+437,man,unigram,4039
+438,let me,bigram,4031
+439,bit,unigram,4028
+440,store,unigram,4026
+441,family,unigram,4024
+442,assistant well,bigram,4016
+443,assistant that,bigram,4015
+444,you feel,bigram,4015
+445,child,unigram,4013
+446,mean by,bigram,4012
+447,saying,unigram,4004
+448,don want,bigram,4000
+449,dangerous,unigram,3995
+450,human yes,bigram,3994
+451,resources,unigram,3992
+452,could be,bigram,3985
+453,you do,bigram,3974
+454,know what,bigram,3944
+455,are not,bigram,3934
+456,report,unigram,3929
+457,dog,unigram,3925
+458,if the,bigram,3925
+459,which is,bigram,3911
+460,assistant it,bigram,3910
+461,sure what,bigram,3906
+462,caught,unigram,3902
+463,however,unigram,3893
+464,won,unigram,3886
+465,care,unigram,3853
+466,if it,bigram,3853
+467,may be,bigram,3849
+468,to kill,bigram,3814
+469,considered,unigram,3807
+470,made,unigram,3806
+471,general,unigram,3800
+472,about this,bigram,3792
+473,part,unigram,3778
+474,everyone,unigram,3774
+475,give you,bigram,3772
+476,come,unigram,3749
+477,who are,bigram,3747
+478,consider,unigram,3741
+479,hurt,unigram,3726
+480,wrong,unigram,3715
+481,after,unigram,3705
+482,help me,bigram,3692
+483,bank,unigram,3688
+484,so that,bigram,3687
+485,isn,unigram,3679
+486,to go,bigram,3662
+487,other people,bigram,3660
+488,best way,bigram,3651
+489,then you,bigram,3636
+490,difficult,unigram,3614
+491,to your,bigram,3611
+492,case,unigram,3608
+493,found,unigram,3608
+494,woman,unigram,3582
+495,hear,unigram,3576
+496,about it,bigram,3576
+497,behavior,unigram,3572
+498,you with,bigram,3545
+499,personal,unigram,3541
+500,society,unigram,3541
+501,enough,unigram,3531
+502,pay,unigram,3527
+503,by the,bigram,3514
+504,to me,bigram,3513
+505,makes,unigram,3511
+506,respect,unigram,3497
+507,true,unigram,3491
+508,ways to,bigram,3491
+509,some of,bigram,3490
+510,advice,unigram,3485
+511,both,unigram,3483
+512,make sure,bigram,3480
+513,but if,bigram,3477
+514,website,unigram,3468
+515,assistant not,bigram,3462
+516,security,unigram,3456
+517,live,unigram,3450
+518,into the,bigram,3448
+519,type,unigram,3443
+520,water,unigram,3438
+521,it sounds,bigram,3432
+522,guess,unigram,3424
+523,it assistant,bigram,3420
+524,is there,bigram,3418
+525,maybe you,bigram,3407
+526,and they,bigram,3395
+527,happy to,bigram,3394
+528,contact the,bigram,3392
+529,have the,bigram,3391
+530,we can,bigram,3388
+531,one of,bigram,3387
+532,free,unigram,3384
+533,sometimes,unigram,3376
+534,ideas,unigram,3375
+535,some people,bigram,3375
+536,the right,bigram,3375
+537,usually,unigram,3371
+538,human want,bigram,3354
+539,wouldn,unigram,3343
+540,talking about,bigram,3334
+541,with your,bigram,3323
+542,its,unigram,3304
+543,interested,unigram,3304
+544,stop,unigram,3301
+545,can get,bigram,3300
+546,whether,unigram,3293
+547,assistant what,bigram,3286
+548,real,unigram,3280
+549,each,unigram,3273
+550,reason,unigram,3260
+551,the us,bigram,3258
+552,the national,bigram,3258
+553,likely to,bigram,3255
+554,visit,unigram,3251
+555,sell,unigram,3245
+556,to try,bigram,3238
+557,between,unigram,3233
+558,and can,bigram,3233
+559,job,unigram,3229
+560,easy,unigram,3219
+561,group,unigram,3208
+562,words,unigram,3199
+563,assistant don,bigram,3194
+564,it might,bigram,3194
+565,plan,unigram,3192
+566,authorities,unigram,3188
+567,have been,bigram,3188
+568,done,unigram,3182
+569,high,unigram,3181
+570,harm,unigram,3179
+571,system,unigram,3166
+572,you may,bigram,3162
+573,why do,bigram,3158
+574,suggest,unigram,3155
+575,why you,bigram,3150
+576,you ve,bigram,3148
+577,order,unigram,3143
+578,rights,unigram,3143
+579,give me,bigram,3105
+580,be more,bigram,3091
+581,available,unigram,3072
+582,should not,bigram,3071
+583,go to,bigram,3071
+584,depends,unigram,3069
+585,public,unigram,3061
+586,to tell,bigram,3058
+587,access,unigram,3054
+588,about how,bigram,3054
+589,know that,bigram,3051
+590,yeah,unigram,3049
+591,human why,bigram,3049
+592,it can,bigram,3040
+593,computer,unigram,3038
+594,big,unigram,3035
+595,is an,bigram,3030
+596,abuse,unigram,3029
+597,to give,bigram,3026
+598,about your,bigram,3025
+599,interested in,bigram,3024
+600,re asking,bigram,3013
+601,you were,bigram,3012
+602,medical,unigram,3008
+603,small,unigram,3007
+604,human do,bigram,3006
+605,state,unigram,3005
+606,for me,bigram,3005
+607,on your,bigram,3004
+608,friends,unigram,3003
+609,services,unigram,2998
+610,me more,bigram,2998
+611,to steal,bigram,2994
+612,assistant sure,bigram,2990
+613,face,unigram,2984
+614,hard to,bigram,2972
+615,fake,unigram,2968
+616,of them,bigram,2968
+617,it in,bigram,2965
+618,professional,unigram,2963
+619,criminal,unigram,2963
+620,assistant can,bigram,2962
+621,seek,unigram,2954
+622,it was,bigram,2952
+623,all the,bigram,2951
+624,didn,unigram,2949
+625,set,unigram,2948
+626,love,unigram,2941
+627,sense,unigram,2940
+628,to see,bigram,2938
+629,know how,bigram,2934
+630,think about,bigram,2934
+631,think of,bigram,2927
+632,search,unigram,2919
+633,and not,bigram,2919
+634,they have,bigram,2919
+635,so it,bigram,2913
+636,fire,unigram,2903
+637,re not,bigram,2900
+638,assistant think,bigram,2890
+639,not be,bigram,2889
+640,the other,bigram,2886
+641,eat,unigram,2882
+642,make it,bigram,2879
+643,animal,unigram,2875
+644,term,unigram,2871
+645,list,unigram,2869
+646,have you,bigram,2868
+647,experience,unigram,2865
+648,certain,unigram,2864
+649,with you,bigram,2864
+650,can find,bigram,2864
+651,but don,bigram,2863
+652,countries,unigram,2862
+653,https,unigram,2852
+654,to talk,bigram,2852
+655,information about,bigram,2847
+656,poison,unigram,2845
+657,fun,unigram,2844
+658,in this,bigram,2835
+659,you and,bigram,2828
+660,they can,bigram,2824
+661,leave,unigram,2813
+662,change,unigram,2810
+663,safety,unigram,2809
+664,enforcement,unigram,2807
+665,day,unigram,2804
+666,relationship,unigram,2803
+667,helpful,unigram,2800
+668,seem,unigram,2799
+669,assistant the,bigram,2798
+670,type of,bigram,2794
+671,taking,unigram,2793
+672,people in,bigram,2787
+673,show,unigram,2783
+674,part of,bigram,2771
+675,you will,bigram,2771
+676,sort,unigram,2769
+677,perhaps,unigram,2767
+678,can tell,bigram,2767
+679,open,unigram,2762
+680,agree,unigram,2761
+681,sure you,bigram,2753
+682,assistance,unigram,2752
+683,the first,bigram,2751
+684,you just,bigram,2745
+685,interesting,unigram,2743
+686,assistant sorry,bigram,2740
+687,appropriate,unigram,2731
+688,here are,bigram,2729
+689,assistant do,bigram,2727
+690,think the,bigram,2726
+691,old,unigram,2707
+692,please contact,bigram,2707
+693,afraid,unigram,2700
+694,large,unigram,2695
+695,of their,bigram,2695
+696,more information,bigram,2691
+697,under,unigram,2684
+698,sort of,bigram,2681
+699,but not,bigram,2681
+700,lives,unigram,2680
+701,good idea,bigram,2680
+702,don understand,bigram,2671
+703,must,unigram,2668
+704,with that,bigram,2668
+705,are the,bigram,2668
+706,account,unigram,2664
+707,who is,bigram,2662
+708,heard,unigram,2661
+709,law enforcement,bigram,2655
+710,rather,unigram,2653
+711,area,unigram,2643
+712,language,unigram,2642
+713,mind,unigram,2642
+714,that not,bigram,2631
+715,physical,unigram,2624
+716,service,unigram,2620
+717,how you,bigram,2620
+718,company,unigram,2611
+719,talk about,bigram,2605
+720,ever,unigram,2604
+721,is very,bigram,2603
+722,assistant yes,bigram,2595
+723,is illegal,bigram,2589
+724,instead,unigram,2587
+725,assistant oh,bigram,2585
+726,black people,bigram,2582
+727,aren,unigram,2580
+728,but can,bigram,2566
+729,community,unigram,2565
+730,school,unigram,2563
+731,check,unigram,2560
+732,evidence,unigram,2557
+733,animals,unigram,2547
+734,how about,bigram,2544
+735,offensive,unigram,2543
+736,already,unigram,2540
+737,depends on,bigram,2537
+738,want me,bigram,2533
+739,to keep,bigram,2531
+740,racist,unigram,2529
+741,again,unigram,2525
+742,exactly,unigram,2524
+743,to avoid,bigram,2517
+744,healthy,unigram,2513
+745,your own,bigram,2512
+746,as well,bigram,2509
+747,email,unigram,2506
+748,or you,bigram,2506
+749,together,unigram,2505
+750,could also,bigram,2500
+751,create,unigram,2499
+752,activity,unigram,2498
+753,your local,bigram,2495
+754,that there,bigram,2494
+755,point,unigram,2493
+756,sure that,bigram,2493
+757,but the,bigram,2488
+758,used to,bigram,2488
+759,alcohol,unigram,2480
+760,race,unigram,2479
+761,particular,unigram,2476
+762,com,unigram,2476
+763,definitely,unigram,2473
+764,are in,bigram,2460
+765,figure,unigram,2459
+766,based,unigram,2459
+767,you or,bigram,2457
+768,or the,bigram,2454
+769,card,unigram,2449
+770,mental,unigram,2448
+771,use the,bigram,2443
+772,death,unigram,2442
+773,problems,unigram,2442
+774,hate,unigram,2441
+775,me assistant,bigram,2441
+776,victim,unigram,2438
+777,where you,bigram,2438
+778,did you,bigram,2435
+779,because they,bigram,2435
+780,to hear,bigram,2435
+781,many people,bigram,2435
+782,is important,bigram,2432
+783,people to,bigram,2429
+784,org,unigram,2424
+785,something that,bigram,2422
+786,course,unigram,2421
+787,you get,bigram,2421
+788,talk to,bigram,2419
+789,it seems,bigram,2416
+790,issues,unigram,2413
+791,fact,unigram,2406
+792,got,unigram,2405
+793,internet,unigram,2403
+794,the car,bigram,2400
+795,what would,bigram,2396
+796,can use,bigram,2396
+797,could try,bigram,2394
+798,commit,unigram,2393
+799,to ask,bigram,2393
+800,issue,unigram,2387
+801,be the,bigram,2382
+802,act,unigram,2381
+803,options,unigram,2378
+804,like the,bigram,2378
+805,hide,unigram,2375
+806,and if,bigram,2366
+807,reasons,unigram,2362
+808,acceptable,unigram,2359
+809,in my,bigram,2358
+810,someone who,bigram,2358
+811,know if,bigram,2356
+812,the word,bigram,2352
+813,wanted,unigram,2349
+814,in some,bigram,2348
+815,generally,unigram,2345
+816,run,unigram,2330
+817,include,unigram,2326
+818,research,unigram,2325
+819,treatment,unigram,2324
+820,form,unigram,2322
+821,hope,unigram,2317
+822,it and,bigram,2317
+823,control,unigram,2315
+824,you find,bigram,2312
+825,number of,bigram,2311
+826,someone else,bigram,2305
+827,human so,bigram,2304
+828,based on,bigram,2302
+829,is also,bigram,2299
+830,send,unigram,2297
+831,describe,unigram,2294
+832,read,unigram,2289
+833,culture,unigram,2289
+834,thought,unigram,2285
+835,american,unigram,2284
+836,the people,bigram,2284
+837,to learn,bigram,2282
+838,for your,bigram,2275
+839,that people,bigram,2274
+840,and other,bigram,2273
+841,you help,bigram,2265
+842,help with,bigram,2254
+843,risk,unigram,2253
+844,concerns,unigram,2246
+845,assistant if,bigram,2245
+846,bomb,unigram,2243
+847,get the,bigram,2241
+848,strong,unigram,2236
+849,suicide,unigram,2236
+850,quite,unigram,2229
+851,assistant ok,bigram,2226
+852,effective,unigram,2222
+853,themselves,unigram,2220
+854,it will,bigram,2220
+855,drive,unigram,2218
+856,human you,bigram,2217
+857,to answer,bigram,2217
+858,that might,bigram,2216
+859,lots,unigram,2212
+860,once,unigram,2209
+861,places,unigram,2206
+862,trouble,unigram,2206
+863,someone you,bigram,2206
+864,is this,bigram,2204
+865,context,unigram,2197
+866,but that,bigram,2197
+867,can make,bigram,2194
+868,sorry but,bigram,2193
+869,hm,unigram,2191
+870,the question,bigram,2190
+871,lots of,bigram,2180
+872,about that,bigram,2180
+873,on how,bigram,2180
+874,share,unigram,2179
+875,joke,unigram,2178
+876,groups,unigram,2175
+877,americans,unigram,2169
+878,head,unigram,2167
+879,says,unigram,2166
+880,ll need,bigram,2166
+881,protect,unigram,2163
+882,human is,bigram,2159
+883,re looking,bigram,2157
+884,years,unigram,2155
+885,hmm,unigram,2153
+886,matter,unigram,2141
+887,clear,unigram,2136
+888,door,unigram,2132
+889,and what,bigram,2132
+890,murder,unigram,2130
+891,and is,bigram,2128
+892,any other,bigram,2119
+893,to think,bigram,2119
+894,in order,bigram,2117
+895,https www,bigram,2117
+896,become,unigram,2114
+897,has been,bigram,2114
+898,you say,bigram,2113
+899,end,unigram,2112
+900,re trying,bigram,2109
+901,amount,unigram,2108
+902,seems like,bigram,2107
+903,with this,bigram,2103
+904,what kind,bigram,2099
+905,that what,bigram,2099
+906,violent,unigram,2096
+907,understand what,bigram,2095
+908,in their,bigram,2094
+909,something like,bigram,2092
+910,feelings,unigram,2083
+911,to buy,bigram,2082
+912,either,unigram,2077
+913,as the,bigram,2077
+914,right to,bigram,2076
+915,to understand,bigram,2072
+916,all of,bigram,2067
+917,be to,bigram,2066
+918,process,unigram,2065
+919,least,unigram,2061
+920,hand,unigram,2050
+921,the way,bigram,2048
+922,be good,bigram,2046
+923,as you,bigram,2044
+924,your question,bigram,2043
+925,every,unigram,2040
+926,business,unigram,2038
+927,cannot,unigram,2037
+928,and there,bigram,2035
+929,order to,bigram,2033
+930,allowed,unigram,2031
+931,stealing,unigram,2031
+932,especially,unigram,2024
+933,even if,bigram,2022
+934,of this,bigram,2022
+935,drink,unigram,2021
+936,to break,bigram,2021
+937,working,unigram,2020
+938,hotline,unigram,2019
+939,or other,bigram,2011
+940,to look,bigram,2011
+941,assistant are,bigram,2008
+942,gas,unigram,2005
+943,assistant there,bigram,2005
+944,next,unigram,2003
+945,and to,bigram,2003
+946,in general,bigram,2003
+947,crimes,unigram,2001
+948,against the,bigram,1992
+949,that will,bigram,1991
+950,result,unigram,1990
+951,the body,bigram,1989
+952,figure out,bigram,1985
+953,choose,unigram,1980
+954,power,unigram,1979
+955,several,unigram,1977
+956,immediately,unigram,1976
+957,for more,bigram,1974
+958,terms,unigram,1972
+959,access to,bigram,1972
+960,harmful,unigram,1971
+961,that sounds,bigram,1971
+962,neighbor,unigram,1970
+963,are also,bigram,1969
+964,like that,bigram,1969
+965,human that,bigram,1966
+966,to work,bigram,1966
+967,because it,bigram,1964
+968,not really,bigram,1962
+969,you really,bigram,1961
+970,inside,unigram,1953
+971,them in,bigram,1951
+972,actions,unigram,1949
+973,how much,bigram,1945
+974,of course,bigram,1945
+975,would like,bigram,1945
+976,consequences,unigram,1944
+977,opinion,unigram,1944
+978,be very,bigram,1939
+979,speak,unigram,1938
+980,people and,bigram,1938
+981,stay,unigram,1937
+982,lead,unigram,1937
+983,follow,unigram,1936
+984,sex with,bigram,1935
+985,have an,bigram,1932
+986,types,unigram,1931
+987,just want,bigram,1931
+988,easier,unigram,1929
+989,person who,bigram,1927
+990,white people,bigram,1924
+991,that could,bigram,1923
+992,doctor,unigram,1921
+993,concerned,unigram,1920
+994,they don,bigram,1918
+995,way that,bigram,1912
+996,feeling,unigram,1911
+997,you be,bigram,1911
+998,but there,bigram,1906
+999,federal,unigram,1905
+1000,skin,unigram,1905
+1001,ones,unigram,1898
+1002,and also,bigram,1898
+1003,we re,bigram,1897
+1004,until,unigram,1894
+1005,prevent,unigram,1894
+1006,parents,unigram,1885
+1007,gender,unigram,1883
+1008,it also,bigram,1880
+1009,needs,unigram,1879
+1010,use of,bigram,1879
+1011,killing,unigram,1876
+1012,like me,bigram,1876
+1013,things that,bigram,1874
+1014,asked,unigram,1870
+1015,funny,unigram,1868
+1016,damage,unigram,1866
+1017,reach,unigram,1866
+1018,you that,bigram,1866
+1019,individuals,unigram,1859
+1020,sound,unigram,1859
+1021,thing to,bigram,1859
+1022,for this,bigram,1856
+1023,when they,bigram,1856
+1024,that human,bigram,1852
+1025,political,unigram,1849
+1026,best to,bigram,1849
+1027,identity,unigram,1844
+1028,also be,bigram,1844
+1029,hit,unigram,1842
+1030,history,unigram,1840
+1031,to start,bigram,1837
+1032,you human,bigram,1834
+1033,the government,bigram,1831
+1034,you give,bigram,1825
+1035,people have,bigram,1821
+1036,of these,bigram,1820
+1037,cocaine,unigram,1819
+1038,human no,bigram,1818
+1039,last,unigram,1815
+1040,the internet,bigram,1813
+1041,believe that,bigram,1812
+1042,credit,unigram,1811
+1043,might want,bigram,1811
+1044,ll be,bigram,1809
+1045,see if,bigram,1807
+1046,president,unigram,1805
+1047,wanted to,bigram,1802
+1048,in that,bigram,1801
+1049,pain,unigram,1799
+1050,seen,unigram,1794
+1051,religion,unigram,1792
+1052,play,unigram,1787
+1053,look at,bigram,1786
+1054,human am,bigram,1785
+1055,and have,bigram,1785
+1056,re going,bigram,1784
+1057,or something,bigram,1782
+1058,pick,unigram,1780
+1059,sorry don,bigram,1780
+1060,and how,bigram,1780
+1061,positive,unigram,1778
+1062,building,unigram,1776
+1063,to pay,bigram,1775
+1064,types of,bigram,1775
+1065,that if,bigram,1775
+1066,that we,bigram,1773
+1067,cut,unigram,1770
+1068,conversation,unigram,1770
+1069,looks,unigram,1770
+1070,jokes,unigram,1770
+1071,kinds,unigram,1769
+1072,not to,bigram,1767
+1073,and don,bigram,1767
+1074,baby,unigram,1764
+1075,but think,bigram,1764
+1076,program,unigram,1758
+1077,discrimination,unigram,1758
+1078,insults,unigram,1754
+1079,trump,unigram,1753
+1080,is never,bigram,1751
+1081,nice,unigram,1750
+1082,insult,unigram,1750
+1083,more likely,bigram,1748
+1084,it really,bigram,1745
+1085,could you,bigram,1745
+1086,you in,bigram,1744
+1087,rob,unigram,1741
+1088,marijuana,unigram,1737
+1089,stupid,unigram,1737
+1090,offer,unigram,1735
+1091,times,unigram,1734
+1092,phone number,bigram,1734
+1093,or do,bigram,1731
+1094,it human,bigram,1727
+1095,knife,unigram,1726
+1096,list of,bigram,1726
+1097,know the,bigram,1723
+1098,at all,bigram,1723
+1099,be used,bigram,1722
+1100,die,unigram,1720
+1101,involved,unigram,1720
+1102,am not,bigram,1719
+1103,force,unigram,1715
+1104,if there,bigram,1714
+1105,their own,bigram,1710
+1106,have some,bigram,1709
+1107,of it,bigram,1708
+1108,understand the,bigram,1707
+1109,of all,bigram,1705
+1110,make the,bigram,1704
+1111,gay,unigram,1703
+1112,me the,bigram,1702
+1113,with it,bigram,1702
+1114,assault,unigram,1701
+1115,city,unigram,1700
+1116,examples,unigram,1700
+1117,have sex,bigram,1700
+1118,understanding,unigram,1699
+1119,it possible,bigram,1698
+1120,them and,bigram,1698
+1121,smell,unigram,1697
+1122,human okay,bigram,1697
+1123,planning,unigram,1696
+1124,this question,bigram,1696
+1125,or someone,bigram,1693
+1126,aware,unigram,1692
+1127,details,unigram,1692
+1128,find out,bigram,1691
+1129,kinds of,bigram,1682
+1130,why are,bigram,1678
+1131,option,unigram,1677
+1132,action,unigram,1673
+1133,domestic,unigram,1673
+1134,ai,unigram,1671
+1135,up with,bigram,1669
+1136,it important,bigram,1668
+1137,call the,bigram,1668
+1138,sure if,bigram,1664
+1139,practice,unigram,1663
+1140,kids,unigram,1662
+1141,or not,bigram,1662
+1142,wife,unigram,1660
+1143,fuck,unigram,1659
+1144,easy to,bigram,1658
+1145,human don,bigram,1657
+1146,test,unigram,1655
+1147,method,unigram,1654
+1148,if that,bigram,1654
+1149,the money,bigram,1653
+1150,negative,unigram,1652
+1151,write,unigram,1650
+1152,we should,bigram,1650
+1153,it depends,bigram,1649
+1154,up to,bigram,1649
+1155,and we,bigram,1647
+1156,you explain,bigram,1646
+1157,myself,unigram,1645
+1158,amount of,bigram,1644
+1159,data,unigram,1640
+1160,mental health,bigram,1638
+1161,fine,unigram,1635
+1162,of my,bigram,1632
+1163,goal,unigram,1630
+1164,encourage,unigram,1628
+1165,happen,unigram,1628
+1166,but they,bigram,1628
+1167,weapon,unigram,1626
+1168,how would,bigram,1626
+1169,is no,bigram,1625
+1170,works,unigram,1622
+1171,we could,bigram,1619
+1172,property,unigram,1618
+1173,can try,bigram,1617
+1174,room,unigram,1615
+1175,that assistant,bigram,1613
+1176,so they,bigram,1613
+1177,it for,bigram,1612
+1178,me what,bigram,1612
+1179,whole,unigram,1609
+1180,they might,bigram,1609
+1181,topic,unigram,1608
+1182,rather than,bigram,1605
+1183,it could,bigram,1605
+1184,or if,bigram,1602
+1185,in an,bigram,1600
+1186,activities,unigram,1599
+1187,contact your,bigram,1598
+1188,hair,unigram,1597
+1189,careful,unigram,1597
+1190,on their,bigram,1596
+1191,you the,bigram,1595
+1192,of any,bigram,1594
+1193,eating,unigram,1592
+1194,difficult to,bigram,1592
+1195,possible to,bigram,1590
+1196,to put,bigram,1589
+1197,some other,bigram,1584
+1198,because you,bigram,1584
+1199,willing,unigram,1583
+1200,to provide,bigram,1582
+1201,so can,bigram,1582
+1202,in any,bigram,1581
+1203,age,unigram,1579
+1204,don you,bigram,1579
+1205,can give,bigram,1577
+1206,although,unigram,1575
+1207,information on,bigram,1573
+1208,complicated,unigram,1571
+1209,street,unigram,1570
+1210,correct,unigram,1570
+1211,that he,bigram,1570
+1212,told,unigram,1566
+1213,to them,bigram,1566
+1214,items,unigram,1565
+1215,are more,bigram,1564
+1216,party,unigram,1562
+1217,remember,unigram,1561
+1218,be happy,bigram,1561
+1219,know is,bigram,1561
+1220,google,unigram,1559
+1221,address for,bigram,1559
+1222,your friend,bigram,1555
+1223,cat,unigram,1554
+1224,look like,bigram,1554
+1225,side,unigram,1553
+1226,think they,bigram,1553
+1227,directly,unigram,1552
+1228,media,unigram,1551
+1229,willing to,bigram,1547
+1230,thanks,unigram,1546
+1231,that this,bigram,1546
+1232,wear,unigram,1544
+1233,assistant no,bigram,1544
+1234,driving,unigram,1541
+1235,that way,bigram,1538
+1236,move,unigram,1537
+1237,that your,bigram,1536
+1238,cases,unigram,1529
+1239,more than,bigram,1528
+1240,approach,unigram,1527
+1241,is good,bigram,1526
+1242,right now,bigram,1526
+1243,can see,bigram,1524
+1244,does not,bigram,1522
+1245,do with,bigram,1517
+1246,bring,unigram,1516
+1247,they were,bigram,1516
+1248,the authorities,bigram,1513
+1249,breaking,unigram,1512
+1250,the situation,bigram,1510
+1251,and are,bigram,1508
+1252,during,unigram,1507
+1253,human need,bigram,1507
+1254,allowed to,bigram,1506
+1255,chance,unigram,1504
+1256,human if,bigram,1501
+1257,lead to,bigram,1501
+1258,if we,bigram,1499
+1259,them assistant,bigram,1495
+1260,so if,bigram,1493
+1261,at least,bigram,1490
+1262,outside,unigram,1488
+1263,full,unigram,1488
+1264,prison,unigram,1486
+1265,for people,bigram,1486
+1266,dead,unigram,1481
+1267,target,unigram,1481
+1268,similar,unigram,1480
+1269,me how,bigram,1480
+1270,treated,unigram,1477
+1271,through the,bigram,1477
+1272,web,unigram,1473
+1273,would probably,bigram,1473
+1274,to someone,bigram,1470
+1275,like it,bigram,1470
+1276,what they,bigram,1468
+1277,turn,unigram,1467
+1278,and get,bigram,1466
+1279,would have,bigram,1462
+1280,domestic violence,bigram,1462
+1281,strongly,unigram,1458
+1282,visit the,bigram,1458
+1283,more specific,bigram,1455
+1284,lock,unigram,1454
+1285,each other,bigram,1454
+1286,watch,unigram,1453
+1287,have no,bigram,1453
+1288,tried,unigram,1452
+1289,past,unigram,1452
+1290,discuss,unigram,1451
+1291,methods,unigram,1451
+1292,shoot,unigram,1450
+1293,to protect,bigram,1450
+1294,alright,unigram,1449
+1295,get away,bigram,1449
+1296,girl,unigram,1448
+1297,you asking,bigram,1447
+1298,tax,unigram,1446
+1299,future,unigram,1443
+1300,angry,unigram,1442
+1301,useful,unigram,1442
+1302,factors,unigram,1440
+1303,department,unigram,1440
+1304,do to,bigram,1440
+1305,of what,bigram,1438
+1306,known,unigram,1437
+1307,fat,unigram,1437
+1308,vehicle,unigram,1435
+1309,could use,bigram,1435
+1310,the time,bigram,1435
+1311,because of,bigram,1435
+1312,far,unigram,1434
+1313,individual,unigram,1434
+1314,on what,bigram,1434
+1315,sure how,bigram,1434
+1316,no one,bigram,1433
+1317,another person,bigram,1433
+1318,key,unigram,1432
+1319,substance,unigram,1431
+1320,someone to,bigram,1430
+1321,thinking about,bigram,1429
+1322,form of,bigram,1423
+1323,office,unigram,1420
+1324,living,unigram,1418
+1325,following,unigram,1418
+1326,it the,bigram,1418
+1327,on this,bigram,1417
+1328,treat,unigram,1413
+1329,human it,bigram,1411
+1330,experiencing,unigram,1409
+1331,you some,bigram,1409
+1332,away with,bigram,1408
+1333,walk,unigram,1407
+1334,location,unigram,1407
+1335,current,unigram,1407
+1336,that have,bigram,1407
+1337,killed,unigram,1405
+1338,glad,unigram,1404
+1339,blood,unigram,1404
+1340,asking me,bigram,1404
+1341,stuff,unigram,1402
+1342,hold,unigram,1401
+1343,to stop,bigram,1400
+1344,relationships,unigram,1399
+1345,attack,unigram,1398
+1346,choice,unigram,1398
+1347,tips,unigram,1398
+1348,understand that,bigram,1397
+1349,certainly,unigram,1395
+1350,extremely,unigram,1395
+1351,parts,unigram,1393
+1352,theft,unigram,1390
+1353,not the,bigram,1388
+1354,shit,unigram,1387
+1355,rape,unigram,1387
+1356,or maybe,bigram,1387
+1357,chinese,unigram,1385
+1358,you but,bigram,1385
+1359,and make,bigram,1384
+1360,to sell,bigram,1382
+1361,enjoy,unigram,1381
+1362,giving,unigram,1381
+1363,do is,bigram,1381
+1364,don really,bigram,1381
+1365,fight,unigram,1380
+1366,year,unigram,1379
+1367,the only,bigram,1379
+1368,over the,bigram,1378
+1369,assistant how,bigram,1377
+1370,illegal to,bigram,1376
+1371,worried,unigram,1374
+1372,purchase,unigram,1373
+1373,finding,unigram,1372
+1374,home address,bigram,1372
+1375,do something,bigram,1371
+1376,you sure,bigram,1370
+1377,for them,bigram,1370
+1378,game,unigram,1368
+1379,be in,bigram,1367
+1380,harassment,unigram,1366
+1381,stolen,unigram,1364
+1382,meat,unigram,1364
+1383,something you,bigram,1363
+1384,you if,bigram,1360
+1385,is in,bigram,1360
+1386,referring,unigram,1359
+1387,he is,bigram,1359
+1388,it hard,bigram,1359
+1389,beliefs,unigram,1358
+1390,people of,bigram,1358
+1391,feel like,bigram,1355
+1392,referring to,bigram,1352
+1393,like this,bigram,1351
+1394,to hurt,bigram,1351
+1395,with them,bigram,1348
+1396,story,unigram,1343
+1397,god,unigram,1343
+1398,worth,unigram,1343
+1399,know about,bigram,1343
+1400,private,unigram,1341
+1401,people from,bigram,1341
+1402,to their,bigram,1340
+1403,america,unigram,1339
+1404,could do,bigram,1336
+1405,people with,bigram,1336
+1406,wait,unigram,1334
+1407,video,unigram,1333
+1408,well as,bigram,1333
+1409,values,unigram,1331
+1410,telling,unigram,1330
+1411,for it,bigram,1329
+1412,what your,bigram,1327
+1413,that was,bigram,1326
+1414,the victim,bigram,1324
+1415,racism,unigram,1322
+1416,with me,bigram,1322
+1417,person is,bigram,1322
+1418,night,unigram,1320
+1419,who have,bigram,1320
+1420,or to,bigram,1320
+1421,get caught,bigram,1319
+1422,prevention,unigram,1316
+1423,it just,bigram,1316
+1424,and some,bigram,1316
+1425,build,unigram,1315
+1426,poor,unigram,1314
+1427,might not,bigram,1314
+1428,human yeah,bigram,1311
+1429,so the,bigram,1311
+1430,hey,unigram,1306
+1431,place to,bigram,1305
+1432,or are,bigram,1305
+1433,to hide,bigram,1305
+1434,that doesn,bigram,1305
+1435,responsible,unigram,1303
+1436,what can,bigram,1303
+1437,racial,unigram,1302
+1438,and your,bigram,1302
+1439,be better,bigram,1300
+1440,to create,bigram,1300
+1441,shouldn,unigram,1299
+1442,ensure,unigram,1297
+1443,simple,unigram,1296
+1444,close,unigram,1295
+1445,popular,unigram,1295
+1446,thoughts,unigram,1294
+1447,tend,unigram,1294
+1448,gov,unigram,1294
+1449,partner,unigram,1293
+1450,in many,bigram,1293
+1451,we have,bigram,1293
+1452,make them,bigram,1292
+1453,emergency,unigram,1287
+1454,out to,bigram,1286
+1455,environment,unigram,1285
+1456,sorry to,bigram,1285
+1457,tend to,bigram,1283
+1458,locate,unigram,1282
+1459,find the,bigram,1282
+1460,hands,unigram,1281
+1461,ve been,bigram,1281
+1462,today,unigram,1278
+1463,don like,bigram,1275
+1464,trust,unigram,1273
+1465,justice,unigram,1273
+1466,feel that,bigram,1273
+1467,remove,unigram,1272
+1468,not have,bigram,1272
+1469,people assistant,bigram,1271
+1470,if someone,bigram,1270
+1471,to prevent,bigram,1270
+1472,view,unigram,1269
+1473,lie,unigram,1269
+1474,that but,bigram,1268
+1475,re talking,bigram,1267
+1476,can say,bigram,1267
+1477,second,unigram,1266
+1478,effects,unigram,1266
+1479,in way,bigram,1266
+1480,worst,unigram,1260
+1481,short,unigram,1260
+1482,the store,bigram,1260
+1483,the house,bigram,1259
+1484,rid,unigram,1258
+1485,human just,bigram,1257
+1486,that good,bigram,1255
+1487,allow,unigram,1254
+1488,software,unigram,1254
+1489,they ll,bigram,1254
+1490,illegal and,bigram,1254
+1491,of those,bigram,1254
+1492,decide,unigram,1253
+1493,organization,unigram,1251
+1494,asking about,bigram,1249
+1495,take the,bigram,1249
+1496,religious,unigram,1248
+1497,it but,bigram,1248
+1498,mother,unigram,1247
+1499,assistant is,bigram,1247
+1500,for that,bigram,1246
+1501,is your,bigram,1246
+1502,comes,unigram,1245
+1503,assistant why,bigram,1243
+1504,to live,bigram,1240
+1505,it doesn,bigram,1239
+1506,financial,unigram,1238
+1507,variety,unigram,1238
+1508,getting caught,bigram,1238
+1509,he was,bigram,1237
+1510,up the,bigram,1237
+1511,why don,bigram,1237
+1512,to people,bigram,1237
+1513,jews,unigram,1236
+1514,war,unigram,1236
+1515,wow,unigram,1234
+1516,can just,bigram,1234
+1517,the idea,bigram,1234
+1518,comfortable,unigram,1233
+1519,hotline at,bigram,1233
+1520,higher,unigram,1231
+1521,burn,unigram,1231
+1522,many different,bigram,1231
+1523,guy,unigram,1230
+1524,rid of,bigram,1230
+1525,add,unigram,1229
+1526,out the,bigram,1229
+1527,to commit,bigram,1229
+1528,news,unigram,1228
+1529,deal,unigram,1228
+1530,hack,unigram,1228
+1531,to eat,bigram,1225
+1532,sick,unigram,1224
+1533,could get,bigram,1224
+1534,jewish,unigram,1223
+1535,engage,unigram,1223
+1536,live in,bigram,1223
+1537,owner,unigram,1222
+1538,on my,bigram,1222
+1539,idea to,bigram,1222
+1540,of that,bigram,1222
+1541,of money,bigram,1222
+1542,danger,unigram,1220
+1543,ah,unigram,1220
+1544,color,unigram,1219
+1545,meant,unigram,1219
+1546,value,unigram,1218
+1547,the dog,bigram,1218
+1548,enough to,bigram,1218
+1549,of different,bigram,1218
+1550,suggestions,unigram,1217
+1551,link,unigram,1216
+1552,easily,unigram,1216
+1553,the human,bigram,1216
+1554,it up,bigram,1216
+1555,couple,unigram,1215
+1556,various,unigram,1214
+1557,you see,bigram,1213
+1558,to just,bigram,1213
+1559,and think,bigram,1213
+1560,mean that,bigram,1209
+1561,most people,bigram,1208
+1562,normal,unigram,1207
+1563,nothing,unigram,1207
+1564,the country,bigram,1207
+1565,human are,bigram,1206
+1566,think this,bigram,1206
+1567,teach,unigram,1205
+1568,variety of,bigram,1205
+1569,than the,bigram,1204
+1570,you probably,bigram,1204
+1571,easiest,unigram,1203
+1572,human my,bigram,1203
+1573,welcome,unigram,1202
+1574,is against,bigram,1202
+1575,paying,unigram,1201
+1576,really want,bigram,1201
+1577,well you,bigram,1201
+1578,what it,bigram,1199
+1579,complex,unigram,1198
+1580,movie,unigram,1198
+1581,time to,bigram,1198
+1582,book,unigram,1197
+1583,in mind,bigram,1197
+1584,the use,bigram,1196
+1585,can have,bigram,1196
+1586,me know,bigram,1195
+1587,saying that,bigram,1194
+1588,concerned about,bigram,1192
+1589,attention,unigram,1190
+1590,three,unigram,1190
+1591,dark,unigram,1190
+1592,assistant okay,bigram,1186
+1593,and so,bigram,1185
+1594,is really,bigram,1185
+1595,intelligence,unigram,1184
+1596,population,unigram,1184
+1597,notice,unigram,1183
+1598,assistant would,bigram,1182
+1599,seem to,bigram,1181
+1600,the answer,bigram,1180
+1601,require,unigram,1179
+1602,paper,unigram,1179
+1603,accomplish,unigram,1179
+1604,be helpful,bigram,1179
+1605,special,unigram,1178
+1606,in fact,bigram,1178
+1607,might have,bigram,1178
+1608,use it,bigram,1177
+1609,addiction,unigram,1176
+1610,around the,bigram,1176
+1611,would need,bigram,1176
+1612,main,unigram,1175
+1613,started,unigram,1174
+1614,potential,unigram,1172
+1615,when the,bigram,1172
+1616,result in,bigram,1172
+1617,of things,bigram,1171
+1618,where the,bigram,1170
+1619,top,unigram,1169
+1620,to consider,bigram,1169
+1621,happened,unigram,1168
+1622,to explain,bigram,1168
+1623,they will,bigram,1168
+1624,weight,unigram,1167
+1625,and in,bigram,1167
+1626,continue,unigram,1166
+1627,me about,bigram,1166
+1628,way you,bigram,1163
+1629,throw,unigram,1162
+1630,piece,unigram,1162
+1631,that really,bigram,1162
+1632,ll have,bigram,1161
+1633,jail,unigram,1160
+1634,has the,bigram,1159
+1635,basic,unigram,1158
+1636,and he,bigram,1156
+1637,agency,unigram,1155
+1638,as an,bigram,1155
+1639,guns,unigram,1154
+1640,step,unigram,1153
+1641,may not,bigram,1153
+1642,low,unigram,1152
+1643,quickly,unigram,1152
+1644,use to,bigram,1151
+1645,dirty,unigram,1150
+1646,fair,unigram,1150
+1647,site,unigram,1150
+1648,it good,bigram,1150
+1649,will not,bigram,1149
+1650,prank,unigram,1148
+1651,the worst,bigram,1148
+1652,bag,unigram,1147
+1653,you use,bigram,1147
+1654,for their,bigram,1145
+1655,can ask,bigram,1145
+1656,they do,bigram,1145
+1657,the one,bigram,1145
+1658,think there,bigram,1144
+1659,it you,bigram,1143
+1660,of other,bigram,1143
+1661,go on,bigram,1141
+1662,law and,bigram,1141
+1663,putting,unigram,1139
+1664,related,unigram,1139
+1665,or even,bigram,1139
+1666,learn more,bigram,1139
+1667,selling,unigram,1138
+1668,dogs,unigram,1137
+1669,left,unigram,1136
+1670,committed,unigram,1135
+1671,education,unigram,1135
+1672,sure understand,bigram,1135
+1673,request,unigram,1134
+1674,young,unigram,1134
+1675,this would,bigram,1134
+1676,reach out,bigram,1134
+1677,cash,unigram,1133
+1678,given,unigram,1131
+1679,immigrants,unigram,1131
+1680,are very,bigram,1130
+1681,respond,unigram,1129
+1682,attempt,unigram,1129
+1683,it on,bigram,1129
+1684,that an,bigram,1129
+1685,re in,bigram,1128
+1686,simply,unigram,1126
+1687,destroy,unigram,1125
+1688,light,unigram,1125
+1689,taxes,unigram,1125
+1690,tools,unigram,1125
+1691,what about,bigram,1123
+1692,questions about,bigram,1123
+1693,trick,unigram,1122
+1694,seek help,bigram,1122
+1695,credit card,bigram,1121
+1696,honest,unigram,1120
+1697,things like,bigram,1120
+1698,natural,unigram,1118
+1699,further,unigram,1118
+1700,the term,bigram,1118
+1701,that some,bigram,1117
+1702,difference,unigram,1115
+1703,device,unigram,1114
+1704,you for,bigram,1114
+1705,engage in,bigram,1114
+1706,cars,unigram,1113
+1707,they would,bigram,1113
+1708,residential,unigram,1112
+1709,terrible,unigram,1112
+1710,decision,unigram,1111
+1711,that has,bigram,1111
+1712,get in,bigram,1111
+1713,me some,bigram,1110
+1714,is more,bigram,1110
+1715,line,unigram,1109
+1716,machine,unigram,1109
+1717,get rid,bigram,1109
+1718,average,unigram,1108
+1719,clarify,unigram,1108
+1720,purpose,unigram,1108
+1721,of an,bigram,1108
+1722,emotional,unigram,1107
+1723,thank,unigram,1106
+1724,good at,bigram,1106
+1725,thinking of,bigram,1106
+1726,due,unigram,1105
+1727,know you,bigram,1105
+1728,people can,bigram,1105
+1729,members,unigram,1104
+1730,code,unigram,1103
+1731,it very,bigram,1102
+1732,back to,bigram,1101
+1733,it if,bigram,1100
+1734,you looking,bigram,1099
+1735,could help,bigram,1099
+1736,ve heard,bigram,1099
+1737,familiar,unigram,1098
+1738,to figure,bigram,1098
+1739,anything else,bigram,1098
+1740,penis,unigram,1097
+1741,skills,unigram,1097
+1742,organizations,unigram,1096
+1743,confused,unigram,1093
+1744,am trying,bigram,1092
+1745,http,unigram,1091
+1746,it probably,bigram,1091
+1747,harder,unigram,1089
+1748,to cause,bigram,1088
+1749,position,unigram,1087
+1750,as it,bigram,1087
+1751,it with,bigram,1087
+1752,alone,unigram,1086
+1753,someone is,bigram,1086
+1754,human think,bigram,1086
+1755,do the,bigram,1086
+1756,to this,bigram,1086
+1757,weapons,unigram,1085
+1758,currently,unigram,1084
+1759,opinions,unigram,1084
+1760,that she,bigram,1084
+1761,member,unigram,1083
+1762,rude,unigram,1082
+1763,express,unigram,1082
+1764,something else,bigram,1081
+1765,looks like,bigram,1081
+1766,people should,bigram,1079
+1767,subject,unigram,1078
+1768,are few,bigram,1078
+1769,mean to,bigram,1078
+1770,break into,bigram,1078
+1771,upset,unigram,1077
+1772,for an,bigram,1077
+1773,clean,unigram,1076
+1774,music,unigram,1076
+1775,and see,bigram,1076
+1776,respectful,unigram,1075
+1777,later,unigram,1074
+1778,probably be,bigram,1074
+1779,you what,bigram,1073
+1780,might also,bigram,1073
+1781,under the,bigram,1072
+1782,assistant hm,bigram,1071
+1783,or just,bigram,1070
+1784,smart,unigram,1069
+1785,imagine,unigram,1069
+1786,make you,bigram,1069
+1787,long as,bigram,1069
+1788,assistant this,bigram,1068
+1789,piece of,bigram,1068
+1790,rules,unigram,1067
+1791,gets,unigram,1066
+1792,wants,unigram,1066
+1793,you try,bigram,1066
+1794,say you,bigram,1066
+1795,heroin,unigram,1065
+1796,heart,unigram,1065
+1797,group of,bigram,1065
+1798,products,unigram,1064
+1799,solution,unigram,1063
+1800,ass,unigram,1062
+1801,crime and,bigram,1062
+1802,things you,bigram,1061
+1803,people that,bigram,1061
+1804,cheat,unigram,1060
+1805,proper,unigram,1060
+1806,steps,unigram,1060
+1807,days,unigram,1058
+1808,date,unigram,1057
+1809,it has,bigram,1057
+1810,up and,bigram,1057
+1811,goals,unigram,1056
+1812,thank you,bigram,1054
+1813,towards,unigram,1053
+1814,to report,bigram,1051
+1815,message,unigram,1050
+1816,nigger,unigram,1050
+1817,off the,bigram,1050
+1818,instance,unigram,1049
+1819,range,unigram,1049
+1820,whatever,unigram,1049
+1821,human would,bigram,1049
+1822,assistant in,bigram,1049
+1823,completely,unigram,1048
+1824,away from,bigram,1048
+1825,human have,bigram,1047
+1826,bitch,unigram,1046
+1827,front,unigram,1046
+1828,designed,unigram,1046
+1829,ugly,unigram,1046
+1830,numbers,unigram,1046
+1831,you assistant,bigram,1043
+1832,should also,bigram,1043
+1833,prefer,unigram,1042
+1834,you trying,bigram,1041
+1835,aware of,bigram,1041
+1836,what to,bigram,1041
+1837,and should,bigram,1039
+1838,can provide,bigram,1039
+1839,goes,unigram,1038
+1840,your car,bigram,1038
+1841,ethical,unigram,1037
+1842,chemicals,unigram,1036
+1843,and want,bigram,1036
+1844,familiar with,bigram,1036
+1845,and their,bigram,1035
+1846,what if,bigram,1035
+1847,sleep,unigram,1034
+1848,carry,unigram,1034
+1849,calling,unigram,1034
+1850,focus,unigram,1033
+1851,unacceptable,unigram,1033
+1852,of human,bigram,1033
+1853,running,unigram,1032
+1854,curious,unigram,1031
+1855,highly,unigram,1031
+1856,to rob,bigram,1030
+1857,to feel,bigram,1030
+1858,does that,bigram,1030
+1859,and will,bigram,1029
+1860,eyes,unigram,1028
+1861,meet,unigram,1028
+1862,situations,unigram,1027
+1863,asian,unigram,1027
+1864,convince,unigram,1026
+1865,taken,unigram,1025
+1866,easier to,bigram,1025
+1867,she is,bigram,1024
+1868,risk of,bigram,1024
+1869,sorry can,bigram,1024
+1870,legally,unigram,1022
+1871,you wanted,bigram,1022
+1872,could say,bigram,1022
+1873,refer,unigram,1021
+1874,person you,bigram,1020
+1875,could just,bigram,1020
+1876,asking for,bigram,1020
+1877,local law,bigram,1020
+1878,cover,unigram,1019
+1879,any of,bigram,1016
+1880,knowledge,unigram,1015
+1881,stores,unigram,1015
+1882,the problem,bigram,1015
+1883,you you,bigram,1014
+1884,ask you,bigram,1014
+1885,but also,bigram,1013
+1886,that makes,bigram,1013
+1887,someone with,bigram,1011
+1888,you make,bigram,1011
+1889,haven,unigram,1010
+1890,her to,bigram,1010
+1891,would say,bigram,1009
+1892,get it,bigram,1009
+1893,dumb,unigram,1008
+1894,hear that,bigram,1007
+1895,anyone who,bigram,1007
+1896,you about,bigram,1006
+1897,better to,bigram,1006
+1898,fraud,unigram,1005
+1899,bunch,unigram,1005
+1900,assistant so,bigram,1005
+1901,if he,bigram,1005
+1902,person to,bigram,1005
+1903,risks,unigram,1004
+1904,in our,bigram,1004
+1905,there no,bigram,1003
+1906,be an,bigram,1003
+1907,for help,bigram,1003
+1908,all people,bigram,1002
+1909,article,unigram,1001
+1910,to change,bigram,1000
+1911,that in,bigram,1000
+1912,behind,unigram,998
+1913,how many,bigram,998
+1914,in which,bigram,998
+1915,may have,bigram,998
+1916,is considered,bigram,998
+1917,otherwise,unigram,997
+1918,thing you,bigram,996
+1919,as long,bigram,996
+1920,there anything,bigram,996
+1921,actual,unigram,995
+1922,see what,bigram,995
+1923,understand your,bigram,995
+1924,way of,bigram,994
+1925,necessary,unigram,993
+1926,weird,unigram,993
+1927,assist,unigram,993
+1928,areas,unigram,992
+1929,to locate,bigram,992
+1930,can take,bigram,992
+1931,password,unigram,991
+1932,cultures,unigram,991
+1933,residential address,bigram,991
+1934,we are,bigram,991
+1935,to call,bigram,991
+1936,unless,unigram,990
+1937,team,unigram,990
+1938,boss,unigram,989
+1939,should do,bigram,989
+1940,as possible,bigram,989
+1941,get into,bigram,987
+1942,single,unigram,986
+1943,that all,bigram,986
+1944,jobs,unigram,985
+1945,report it,bigram,985
+1946,hope you,bigram,984
+1947,look for,bigram,984
+1948,everything,unigram,983
+1949,source,unigram,983
+1950,achieve,unigram,983
+1951,using the,bigram,983
+1952,in most,bigram,983
+1953,helping,unigram,982
+1954,advise,unigram,982
+1955,him to,bigram,982
+1956,if she,bigram,982
+1957,across,unigram,981
+1958,hot,unigram,981
+1959,since you,bigram,981
+1960,reduce,unigram,980
+1961,instead of,bigram,980
+1962,are there,bigram,980
+1963,pull,unigram,979
+1964,insurance,unigram,979
+1965,not good,bigram,979
+1966,assistant have,bigram,978
+1967,kill someone,bigram,978
+1968,physically,unigram,977
+1969,window,unigram,977
+1970,sure can,bigram,977
+1971,re saying,bigram,977
+1972,equal,unigram,976
+1973,for some,bigram,976
+1974,somewhere,unigram,975
+1975,speech,unigram,975
+1976,policy,unigram,975
+1977,severe,unigram,975
+1978,metal,unigram,974
+1979,bunch of,bigram,974
+1980,the door,bigram,974
+1981,the easiest,bigram,974
+1982,tricky,unigram,972
+1983,assistant hmm,bigram,972
+1984,it out,bigram,972
+1985,they should,bigram,971
+1986,should never,bigram,971
+1987,perhaps you,bigram,970
+1988,causes,unigram,969
+1989,most of,bigram,969
+1990,suspicious,unigram,967
+1991,for instance,bigram,967
+1992,it so,bigram,967
+1993,who has,bigram,967
+1994,question is,bigram,967
+1995,female,unigram,966
+1996,air,unigram,964
+1997,clothes,unigram,964
+1998,drinking,unigram,964
+1999,terms of,bigram,963
+2000,seems to,bigram,962
+2001,tell them,bigram,959
+2002,sense of,bigram,959
+2003,that don,bigram,959
+2004,possible that,bigram,959
+2005,from your,bigram,959
+2006,grow,unigram,958
+2007,brain,unigram,958
+2008,well it,bigram,958
+2009,improve,unigram,957
+2010,there any,bigram,957
+2011,help from,bigram,957
+2012,center,unigram,956
+2013,human well,bigram,956
+2014,successful,unigram,955
+2015,cheating,unigram,955
+2016,if your,bigram,955
+2017,search for,bigram,955
+2018,camera,unigram,954
+2019,human where,bigram,954
+2020,girlfriend,unigram,953
+2021,it may,bigram,953
+2022,talking to,bigram,953
+2023,can think,bigram,952
+2024,won be,bigram,951
+2025,content,unigram,950
+2026,meth,unigram,950
+2027,etc,unigram,949
+2028,it be,bigram,949
+2029,sure it,bigram,949
+2030,what does,bigram,949
+2031,due to,bigram,949
+2032,true that,bigram,949
+2033,think we,bigram,947
+2034,to describe,bigram,947
+2035,locate the,bigram,946
+2036,with some,bigram,946
+2037,to that,bigram,946
+2038,it or,bigram,946
+2039,the home,bigram,945
+2040,you how,bigram,945
+2041,supposed,unigram,944
+2042,to accomplish,bigram,944
+2043,the case,bigram,944
+2044,torture,unigram,943
+2045,why would,bigram,943
+2046,not going,bigram,942
+2047,learning,unigram,941
+2048,planning to,bigram,941
+2049,on it,bigram,941
+2050,never acceptable,bigram,941
+2051,is serious,bigram,940
+2052,sorry not,bigram,939
+2053,good way,bigram,939
+2054,used in,bigram,939
+2055,must be,bigram,939
+2056,english,unigram,937
+2057,abortion,unigram,937
+2058,ability,unigram,937
+2059,arrested,unigram,937
+2060,when it,bigram,937
+2061,mean you,bigram,937
+2062,me that,bigram,937
+2063,not very,bigram,937
+2064,is probably,bigram,936
+2065,hours,unigram,935
+2066,chemical,unigram,935
+2067,assistant human,bigram,935
+2068,need help,bigram,935
+2069,come up,bigram,934
+2070,you believe,bigram,934
+2071,according,unigram,933
+2072,and do,bigram,933
+2073,you ever,bigram,933
+2074,do so,bigram,933
+2075,bit more,bigram,933
+2076,and support,bigram,932
+2077,spread,unigram,931
+2078,websites,unigram,931
+2079,but in,bigram,931
+2080,typically,unigram,930
+2081,cultural,unigram,930
+2082,say something,bigram,930
+2083,according to,bigram,929
+2084,like an,bigram,929
+2085,and be,bigram,928
+2086,tough,unigram,927
+2087,african,unigram,927
+2088,file,unigram,927
+2089,then it,bigram,927
+2090,supposed to,bigram,927
+2091,policies,unigram,926
+2092,good to,bigram,926
+2093,attempt to,bigram,926
+2094,robbery,unigram,925
+2095,note,unigram,925
+2096,someone assistant,bigram,924
+2097,because the,bigram,924
+2098,then the,bigram,924
+2099,re just,bigram,923
+2100,middle,unigram,922
+2101,trafficking,unigram,922
+2102,of how,bigram,922
+2103,of violence,bigram,922
+2104,of being,bigram,921
+2105,start with,bigram,921
+2106,this and,bigram,921
+2107,programs,unigram,920
+2108,it more,bigram,920
+2109,for someone,bigram,919
+2110,wish,unigram,918
+2111,favorite,unigram,917
+2112,see the,bigram,917
+2113,should always,bigram,917
+2114,can cause,bigram,917
+2115,should contact,bigram,917
+2116,claim,unigram,916
+2117,re doing,bigram,914
+2118,buying,unigram,912
+2119,communities,unigram,911
+2120,those who,bigram,911
+2121,wearing,unigram,910
+2122,acts,unigram,910
+2123,recommended,unigram,910
+2124,for all,bigram,910
+2125,about you,bigram,910
+2126,truth,unigram,909
+2127,uncomfortable,unigram,908
+2128,but this,bigram,908
+2129,with their,bigram,908
+2130,to an,bigram,908
+2131,with an,bigram,908
+2132,privacy,unigram,907
+2133,with my,bigram,907
+2134,to leave,bigram,907
+2135,accident,unigram,905
+2136,you had,bigram,905
+2137,money from,bigram,905
+2138,response,unigram,904
+2139,techniques,unigram,903
+2140,disease,unigram,903
+2141,that question,bigram,903
+2142,out how,bigram,902
+2143,suicide prevention,bigram,902
+2144,spend,unigram,901
+2145,social media,bigram,901
+2146,person and,bigram,901
+2147,time and,bigram,901
+2148,happens,unigram,900
+2149,helps,unigram,900
+2150,them human,bigram,900
+2151,to not,bigram,900
+2152,inappropriate,unigram,899
+2153,them that,bigram,899
+2154,the phone,bigram,899
+2155,military,unigram,898
+2156,provider,unigram,898
+2157,an example,bigram,898
+2158,and this,bigram,897
+2159,near,unigram,896
+2160,officer,unigram,896
+2161,this human,bigram,896
+2162,circumstances,unigram,895
+2163,court,unigram,894
+2164,robot,unigram,894
+2165,with her,bigram,893
+2166,moral,unigram,892
+2167,most common,bigram,892
+2168,husband,unigram,891
+2169,is just,bigram,891
+2170,and would,bigram,891
+2171,reasonable,unigram,890
+2172,views,unigram,889
+2173,to my,bigram,889
+2174,wasn,unigram,888
+2175,cats,unigram,888
+2176,mouth,unigram,886
+2177,cameras,unigram,885
+2178,male,unigram,885
+2179,assume,unigram,885
+2180,the bank,bigram,884
+2181,wondering,unigram,883
+2182,saw,unigram,883
+2183,be sure,bigram,883
+2184,these are,bigram,883
+2185,and respect,bigram,883
+2186,is one,bigram,883
+2187,expert,unigram,882
+2188,answers,unigram,882
+2189,license,unigram,882
+2190,without getting,bigram,882
+2191,the past,bigram,882
+2192,to ensure,bigram,882
+2193,sexual assault,bigram,882
+2194,them for,bigram,881
+2195,be careful,bigram,881
+2196,to contact,bigram,880
+2197,is what,bigram,880
+2198,statement,unigram,879
+2199,injury,unigram,879
+2200,that means,bigram,879
+2201,adult,unigram,878
+2202,page,unigram,878
+2203,the context,bigram,878
+2204,companies,unigram,877
+2205,the future,bigram,877
+2206,the following,bigram,877
+2207,this way,bigram,877
+2208,are lot,bigram,877
+2209,you talking,bigram,877
+2210,would not,bigram,877
+2211,secret,unigram,875
+2212,to stay,bigram,875
+2213,civil,unigram,874
+2214,they want,bigram,874
+2215,with someone,bigram,874
+2216,the information,bigram,874
+2217,put the,bigram,874
+2218,minutes,unigram,872
+2219,example if,bigram,872
+2220,explosives,unigram,871
+2221,depending,unigram,871
+2222,me and,bigram,871
+2223,crisis,unigram,870
+2224,longer,unigram,869
+2225,to her,bigram,869
+2226,depending on,bigram,869
+2227,does it,bigram,868
+2228,dangerous and,bigram,868
+2229,of his,bigram,868
+2230,pretend,unigram,867
+2231,to come,bigram,867
+2232,idea of,bigram,866
+2233,as they,bigram,865
+2234,yet,unigram,863
+2235,and many,bigram,862
+2236,okay to,bigram,862
+2237,set up,bigram,860
+2238,we ll,bigram,860
+2239,can lead,bigram,860
+2240,they could,bigram,860
+2241,differences,unigram,859
+2242,find it,bigram,859
+2243,specifically,unigram,858
+2244,text,unigram,858
+2245,doing it,bigram,858
+2246,information and,bigram,858
+2247,here is,bigram,858
+2248,tool,unigram,857
+2249,or that,bigram,857
+2250,are often,bigram,857
+2251,of time,bigram,857
+2252,citizens,unigram,856
+2253,decisions,unigram,856
+2254,are all,bigram,856
+2255,that seems,bigram,856
+2256,them with,bigram,856
+2257,engine,unigram,855
+2258,oil,unigram,855
+2259,you also,bigram,855
+2260,many of,bigram,855
+2261,but do,bigram,855
+2262,victims,unigram,854
+2263,movies,unigram,854
+2264,get you,bigram,854
+2265,income,unigram,853
+2266,women are,bigram,853
+2267,some more,bigram,853
+2268,get to,bigram,853
+2269,human tell,bigram,851
+2270,the child,bigram,851
+2271,driver,unigram,850
+2272,acid,unigram,850
+2273,this but,bigram,850
+2274,insults for,bigram,849
+2275,where can,bigram,849
+2276,related to,bigram,849
+2277,handle,unigram,848
+2278,benefits,unigram,848
+2279,cool,unigram,848
+2280,results,unigram,848
+2281,worse,unigram,847
+2282,level,unigram,846
+2283,muslims,unigram,846
+2284,example of,bigram,846
+2285,how they,bigram,844
+2286,what sort,bigram,844
+2287,in trouble,bigram,844
+2288,quality,unigram,843
+2289,not an,bigram,843
+2290,space,unigram,842
+2291,about them,bigram,842
+2292,illegal in,bigram,841
+2293,races,unigram,840
+2294,knowing,unigram,840
+2295,get them,bigram,840
+2296,to support,bigram,840
+2297,too much,bigram,839
+2298,ready,unigram,838
+2299,once you,bigram,838
+2300,they may,bigram,838
+2301,human rights,bigram,838
+2302,would make,bigram,838
+2303,will need,bigram,837
+2304,about why,bigram,836
+2305,safe and,bigram,835
+2306,coming,unigram,834
+2307,the residential,bigram,834
+2308,why is,bigram,834
+2309,examples of,bigram,834
+2310,and try,bigram,833
+2311,involved in,bigram,833
+2312,in and,bigram,832
+2313,or in,bigram,832
+2314,record,unigram,831
+2315,teacher,unigram,830
+2316,doing this,bigram,830
+2317,want you,bigram,829
+2318,is going,bigram,829
+2319,picture,unigram,828
+2320,have lot,bigram,828
+2321,or is,bigram,828
+2322,and people,bigram,828
+2323,neighborhood,unigram,827
+2324,identify,unigram,826
+2325,used for,bigram,826
+2326,foods,unigram,825
+2327,something to,bigram,825
+2328,can buy,bigram,825
+2329,fact that,bigram,825
+2330,fbi,unigram,824
+2331,of you,bigram,824
+2332,not allowed,bigram,824
+2333,freedom,unigram,823
+2334,direct,unigram,823
+2335,connect,unigram,823
+2336,you go,bigram,823
+2337,refer to,bigram,823
+2338,the address,bigram,822
+2339,your life,bigram,822
+2340,national suicide,bigram,822
+2341,people you,bigram,821
+2342,uses,unigram,820
+2343,worried about,bigram,819
+2344,china,unigram,818
+2345,market,unigram,818
+2346,copy,unigram,818
+2347,instructions,unigram,817
+2348,receive,unigram,817
+2349,opportunity,unigram,816
+2350,road,unigram,816
+2351,charged,unigram,816
+2352,increase,unigram,816
+2353,suffering,unigram,816
+2354,focus on,bigram,816
+2355,the number,bigram,816
+2356,an interesting,bigram,816
+2357,expect,unigram,815
+2358,almost,unigram,815
+2359,assistant here,bigram,815
+2360,much more,bigram,814
+2361,sites,unigram,813
+2362,money assistant,bigram,813
+2363,ask for,bigram,813
+2364,put it,bigram,813
+2365,sexually,unigram,811
+2366,false,unigram,811
+2367,lose,unigram,811
+2368,since it,bigram,811
+2369,my friend,bigram,811
+2370,say it,bigram,811
+2371,have more,bigram,811
+2372,them or,bigram,810
+2373,which can,bigram,810
+2374,this will,bigram,809
+2375,down the,bigram,809
+2376,we don,bigram,808
+2377,little bit,bigram,808
+2378,of some,bigram,808
+2379,violence hotline,bigram,808
+2380,strategy,unigram,807
+2381,punishment,unigram,807
+2382,the fact,bigram,807
+2383,to share,bigram,807
+2384,ask me,bigram,806
+2385,well there,bigram,805
+2386,human the,bigram,805
+2387,http www,bigram,805
+2388,cards,unigram,804
+2389,get some,bigram,804
+2390,pay for,bigram,804
+2391,and use,bigram,804
+2392,itself,unigram,803
+2393,know it,bigram,803
+2394,this person,bigram,803
+2395,could make,bigram,803
+2396,hire,unigram,802
+2397,shows,unigram,802
+2398,money to,bigram,802
+2399,it as,bigram,802
+2400,multiple,unigram,801
+2401,so many,bigram,801
+2402,care about,bigram,801
+2403,will help,bigram,801
+2404,scam,unigram,800
+2405,on assistant,bigram,800
+2406,have access,bigram,800
+2407,advice on,bigram,799
+2408,in other,bigram,799
+2409,to other,bigram,797
+2410,fast,unigram,796
+2411,id,unigram,796
+2412,on that,bigram,796
+2413,kid,unigram,795
+2414,to discuss,bigram,795
+2415,the last,bigram,794
+2416,agree that,bigram,794
+2417,about their,bigram,794
+2418,we need,bigram,794
+2419,be treated,bigram,794
+2420,impact,unigram,793
+2421,should have,bigram,793
+2422,if can,bigram,792
+2423,in it,bigram,792
+2424,the local,bigram,792
+2425,employees,unigram,791
+2426,phrase,unigram,791
+2427,good for,bigram,791
+2428,national domestic,bigram,791
+2429,pass,unigram,790
+2430,moment,unigram,790
+2431,movement,unigram,790
+2432,you said,bigram,790
+2433,agree with,bigram,790
+2434,within,unigram,789
+2435,dignity,unigram,789
+2436,caught assistant,bigram,789
+2437,caused,unigram,788
+2438,please visit,bigram,788
+2439,additional,unigram,787
+2440,to send,bigram,787
+2441,of our,bigram,787
+2442,catch,unigram,786
+2443,class,unigram,786
+2444,rest,unigram,786
+2445,be really,bigram,786
+2446,be considered,bigram,786
+2447,one way,bigram,786
+2448,paid,unigram,785
+2449,and take,bigram,785
+2450,pipe,unigram,784
+2451,product,unigram,784
+2452,your body,bigram,784
+2453,this can,bigram,784
+2454,please don,bigram,784
+2455,some kind,bigram,783
+2456,going on,bigram,782
+2457,rich,unigram,781
+2458,hurting,unigram,781
+2459,responsible for,bigram,781
+2460,how it,bigram,781
+2461,there was,bigram,780
+2462,it okay,bigram,780
+2463,threat,unigram,779
+2464,say to,bigram,779
+2465,could tell,bigram,778
+2466,see that,bigram,778
+2467,are so,bigram,778
+2468,return,unigram,777
+2469,consult,unigram,777
+2470,the head,bigram,777
+2471,out for,bigram,777
+2472,ground,unigram,776
+2473,per,unigram,776
+2474,look up,bigram,776
+2475,an important,bigram,776
+2476,blow,unigram,775
+2477,safely,unigram,775
+2478,how the,bigram,775
+2479,would recommend,bigram,775
+2480,came,unigram,774
+2481,also have,bigram,774
+2482,find some,bigram,774
+2483,so much,bigram,774
+2484,requires,unigram,773
+2485,responsibility,unigram,773
+2486,start by,bigram,772
+2487,please call,bigram,772
+2488,causing,unigram,771
+2489,economic,unigram,771
+2490,slavery,unigram,771
+2491,is often,bigram,771
+2492,it from,bigram,771
+2493,violence and,bigram,771
+2494,lazy,unigram,770
+2495,fall,unigram,770
+2496,mix,unigram,770
+2497,re interested,bigram,770
+2498,it that,bigram,770
+2499,one is,bigram,770
+2500,created,unigram,769
+2501,revenge,unigram,769
+2502,study,unigram,769
+2503,feels,unigram,769
+2504,assistant let,bigram,769
+2505,someone in,bigram,769
+2506,the company,bigram,769
+2507,expensive,unigram,768
+2508,technology,unigram,768
+2509,worry,unigram,767
+2510,but what,bigram,767
+2511,and even,bigram,767
+2512,things to,bigram,767
+2513,that person,bigram,767
+2514,the next,bigram,767
+2515,anyway,unigram,766
+2516,obtain,unigram,766
+2517,do assistant,bigram,766
+2518,have good,bigram,766
+2519,crack,unigram,765
+2520,international,unigram,765
+2521,you ask,bigram,765
+2522,takes,unigram,764
+2523,required,unigram,763
+2524,the name,bigram,763
+2525,plastic,unigram,762
+2526,up in,bigram,762
+2527,different ways,bigram,762
+2528,mean the,bigram,762
+2529,among,unigram,761
+2530,perform,unigram,761
+2531,materials,unigram,761
+2532,shooting,unigram,761
+2533,stand,unigram,761
+2534,may also,bigram,761
+2535,the water,bigram,761
+2536,your neighbor,bigram,761
+2537,yourself and,bigram,760
+2538,clothing,unigram,759
+2539,systems,unigram,759
+2540,effect,unigram,759
+2541,needed,unigram,759
+2542,forms,unigram,759
+2543,to speak,bigram,759
+2544,money and,bigram,759
+2545,are being,bigram,759
+2546,this assistant,bigram,759
+2547,to set,bigram,759
+2548,sign,unigram,758
+2549,the main,bigram,757
+2550,with other,bigram,757
+2551,what that,bigram,756
+2552,sneak,unigram,755
+2553,lower,unigram,754
+2554,bodies,unigram,754
+2555,many ways,bigram,754
+2556,answer to,bigram,754
+2557,sorry that,bigram,754
+2558,yes assistant,bigram,754
+2559,starting,unigram,753
+2560,powerful,unigram,753
+2561,lawyer,unigram,753
+2562,yes that,bigram,753
+2563,judge,unigram,752
+2564,facebook,unigram,752
+2565,one that,bigram,752
+2566,are lots,bigram,752
+2567,ability to,bigram,752
+2568,re welcome,bigram,752
+2569,lying,unigram,751
+2570,you look,bigram,751
+2571,committing,unigram,750
+2572,available to,bigram,750
+2573,charge,unigram,749
+2574,substances,unigram,749
+2575,range of,bigram,749
+2576,where they,bigram,748
+2577,enter,unigram,747
+2578,stick,unigram,747
+2579,role,unigram,747
+2580,would it,bigram,747
+2581,to pick,bigram,747
+2582,wall,unigram,746
+2583,older,unigram,744
+2584,out what,bigram,744
+2585,will have,bigram,744
+2586,listen,unigram,743
+2587,it should,bigram,743
+2588,virus,unigram,742
+2589,understand why,bigram,742
+2590,for free,bigram,742
+2591,the more,bigram,742
+2592,was the,bigram,742
+2593,do get,bigram,741
+2594,re really,bigram,741
+2595,customers,unigram,740
+2596,neck,unigram,740
+2597,explosive,unigram,740
+2598,significant,unigram,740
+2599,designed to,bigram,740
+2600,counseling,unigram,739
+2601,shot,unigram,739
+2602,and more,bigram,739
+2603,ways that,bigram,738
+2604,apply,unigram,737
+2605,conditions,unigram,737
+2606,consent,unigram,736
+2607,meaning,unigram,736
+2608,pressure,unigram,736
+2609,and maybe,bigram,736
+2610,well that,bigram,736
+2611,lost,unigram,735
+2612,and ask,bigram,735
+2613,which would,bigram,735
+2614,it looks,bigram,735
+2615,rate,unigram,734
+2616,very good,bigram,734
+2617,permission,unigram,733
+2618,the process,bigram,733
+2619,neighbors,unigram,732
+2620,names,unigram,732
+2621,prohibited,unigram,732
+2622,in terms,bigram,732
+2623,cutting,unigram,731
+2624,do human,bigram,731
+2625,the street,bigram,731
+2626,bit of,bigram,731
+2627,to build,bigram,731
+2628,suppose,unigram,730
+2629,wildlife,unigram,730
+2630,victim of,bigram,730
+2631,mexican,unigram,729
+2632,taste,unigram,729
+2633,relationship with,bigram,729
+2634,really good,bigram,729
+2635,hitler,unigram,728
+2636,escape,unigram,728
+2637,to it,bigram,728
+2638,better than,bigram,728
+2639,human but,bigram,728
+2640,majority,unigram,727
+2641,to show,bigram,727
+2642,involve,unigram,726
+2643,believe in,bigram,726
+2644,you take,bigram,726
+2645,re thinking,bigram,726
+2646,to remove,bigram,726
+2647,which you,bigram,726
+2648,you asked,bigram,726
+2649,families,unigram,725
+2650,associated,unigram,725
+2651,network,unigram,725
+2652,comments,unigram,724
+2653,workers,unigram,724
+2654,orientation,unigram,724
+2655,yes it,bigram,724
+2656,human who,bigram,724
+2657,exactly what,bigram,724
+2658,transgender,unigram,723
+2659,that case,bigram,723
+2660,seeing,unigram,722
+2661,that right,bigram,722
+2662,so what,bigram,722
+2663,probably not,bigram,722
+2664,speaking,unigram,721
+2665,poisoning,unigram,720
+2666,people do,bigram,720
+2667,you understand,bigram,719
+2668,born,unigram,718
+2669,material,unigram,718
+2670,he has,bigram,718
+2671,and just,bigram,718
+2672,marriage,unigram,717
+2673,email address,bigram,717
+2674,of crime,bigram,717
+2675,training,unigram,716
+2676,concern,unigram,716
+2677,hiding,unigram,716
+2678,are just,bigram,716
+2679,that one,bigram,716
+2680,pranks,unigram,715
+2681,girls,unigram,715
+2682,that great,bigram,715
+2683,don need,bigram,715
+2684,parts of,bigram,715
+2685,let you,bigram,715
+2686,some insults,bigram,714
+2687,includes,unigram,713
+2688,in public,bigram,713
+2689,it because,bigram,713
+2690,sure to,bigram,713
+2691,pet,unigram,712
+2692,perspective,unigram,712
+2693,win,unigram,712
+2694,students,unigram,712
+2695,of ways,bigram,712
+2696,wants to,bigram,712
+2697,diet,unigram,711
+2698,evil,unigram,710
+2699,definition,unigram,710
+2700,take it,bigram,710
+2701,who can,bigram,710
+2702,some things,bigram,710
+2703,glad you,bigram,709
+2704,to achieve,bigram,709
+2705,accurate,unigram,708
+2706,it true,bigram,708
+2707,care of,bigram,708
+2708,particularly,unigram,707
+2709,bar,unigram,707
+2710,wonder,unigram,707
+2711,interest,unigram,707
+2712,touch,unigram,707
+2713,hacking,unigram,707
+2714,at home,bigram,707
+2715,that many,bigram,707
+2716,deserve,unigram,706
+2717,trusted,unigram,706
+2718,see you,bigram,706
+2719,in danger,bigram,706
+2720,people think,bigram,706
+2721,encourage you,bigram,706
+2722,here to,bigram,705
+2723,were to,bigram,705
+2724,first you,bigram,705
+2725,people but,bigram,704
+2726,red,unigram,703
+2727,along,unigram,703
+2728,to play,bigram,703
+2729,is crime,bigram,703
+2730,writing,unigram,702
+2731,speed,unigram,702
+2732,that very,bigram,702
+2733,deal with,bigram,702
+2734,you please,bigram,702
+2735,to express,bigram,702
+2736,quick,unigram,701
+2737,protection,unigram,700
+2738,think can,bigram,700
+2739,sexual orientation,bigram,700
+2740,post,unigram,699
+2741,makes you,bigram,699
+2742,hi,unigram,698
+2743,unlikely,unigram,698
+2744,question and,bigram,698
+2745,good question,bigram,698
+2746,or visit,bigram,698
+2747,happening,unigram,697
+2748,that may,bigram,697
+2749,you must,bigram,697
+2750,any kind,bigram,697
+2751,plants,unigram,696
+2752,box,unigram,696
+2753,people would,bigram,696
+2754,before you,bigram,696
+2755,join,unigram,695
+2756,it it,bigram,695
+2757,the drug,bigram,695
+2758,sure the,bigram,695
+2759,loud,unigram,694
+2760,fucking,unigram,694
+2761,mexico,unigram,694
+2762,absolutely,unigram,693
+2763,like they,bigram,693
+2764,can steal,bigram,693
+2765,we do,bigram,693
+2766,reading,unigram,692
+2767,bet,unigram,692
+2768,windows,unigram,692
+2769,object,unigram,691
+2770,are they,bigram,691
+2771,that make,bigram,691
+2772,people don,bigram,690
+2773,to become,bigram,690
+2774,them you,bigram,690
+2775,car and,bigram,690
+2776,any way,bigram,690
+2777,toilet,unigram,689
+2778,size,unigram,689
+2779,violation,unigram,689
+2780,drunk,unigram,689
+2781,criminals,unigram,689
+2782,if so,bigram,689
+2783,the crime,bigram,689
+2784,major,unigram,688
+2785,earth,unigram,688
+2786,protected,unigram,688
+2787,would also,bigram,688
+2788,but we,bigram,688
+2789,explain what,bigram,688
+2790,associated with,bigram,688
+2791,this you,bigram,688
+2792,rights and,bigram,688
+2793,determine,unigram,686
+2794,illegal drugs,bigram,686
+2795,the owner,bigram,686
+2796,having sex,bigram,686
+2797,health and,bigram,686
+2798,fairly,unigram,685
+2799,long time,bigram,685
+2800,that information,bigram,685
+2801,some good,bigram,685
+2802,rule,unigram,684
+2803,human thanks,bigram,684
+2804,well the,bigram,684
+2805,out and,bigram,684
+2806,obvious,unigram,683
+2807,involves,unigram,683
+2808,married,unigram,683
+2809,is something,bigram,683
+2810,be found,bigram,683
+2811,the black,bigram,682
+2812,this one,bigram,682
+2813,others and,bigram,682
+2814,super,unigram,681
+2815,for human,bigram,681
+2816,and has,bigram,681
+2817,extreme,unigram,680
+2818,download,unigram,680
+2819,the federal,bigram,680
+2820,assistant alright,bigram,680
+2821,asshole,unigram,679
+2822,south,unigram,679
+2823,nature,unigram,679
+2824,not acceptable,bigram,679
+2825,love to,bigram,679
+2826,can go,bigram,679
+2827,the rest,bigram,679
+2828,recommend that,bigram,679
+2829,playing,unigram,678
+2830,in place,bigram,678
+2831,you describe,bigram,678
+2832,anything about,bigram,678
+2833,exercise,unigram,677
+2834,immigration,unigram,677
+2835,looking to,bigram,676
+2836,is called,bigram,676
+2837,want the,bigram,676
+2838,or an,bigram,676
+2839,know of,bigram,676
+2840,dick,unigram,675
+2841,famous,unigram,675
+2842,considering,unigram,675
+2843,intelligent,unigram,675
+2844,mostly,unigram,675
+2845,do have,bigram,675
+2846,means that,bigram,675
+2847,my best,bigram,675
+2848,of others,bigram,675
+2849,setting,unigram,674
+2850,suspect,unigram,674
+2851,go about,bigram,674
+2852,that why,bigram,674
+2853,to cut,bigram,674
+2854,work for,bigram,674
+2855,sorry you,bigram,674
+2856,maintain,unigram,673
+2857,some sort,bigram,673
+2858,do some,bigram,673
+2859,the president,bigram,673
+2860,and help,bigram,673
+2861,sources,unigram,672
+2862,or any,bigram,671
+2863,work with,bigram,671
+2864,have different,bigram,671
+2865,app,unigram,670
+2866,mexicans,unigram,670
+2867,answer is,bigram,668
+2868,social security,bigram,668
+2869,work and,bigram,668
+2870,little more,bigram,667
+2871,of thing,bigram,667
+2872,see how,bigram,667
+2873,the whole,bigram,667
+2874,show you,bigram,667
+2875,extra,unigram,666
+2876,equality,unigram,666
+2877,please reach,bigram,666
+2878,think is,bigram,665
+2879,couple of,bigram,665
+2880,ask them,bigram,665
+2881,sure but,bigram,665
+2882,unable,unigram,664
+2883,mom,unigram,664
+2884,it ll,bigram,664
+2885,which are,bigram,664
+2886,keep the,bigram,664
+2887,it like,bigram,664
+2888,other ways,bigram,664
+2889,punch,unigram,663
+2890,administration,unigram,663
+2891,slurs,unigram,663
+2892,york,unigram,663
+2893,would want,bigram,663
+2894,into your,bigram,663
+2895,that just,bigram,662
+2896,opportunities,unigram,661
+2897,can only,bigram,661
+2898,unable to,bigram,661
+2899,needs to,bigram,661
+2900,who you,bigram,661
+2901,break the,bigram,661
+2902,plant,unigram,660
+2903,fit,unigram,660
+2904,you provide,bigram,660
+2905,experiences,unigram,659
+2906,wanting,unigram,659
+2907,any questions,bigram,659
+2908,facts,unigram,658
+2909,eye,unigram,658
+2910,seem like,bigram,658
+2911,can really,bigram,658
+2912,example you,bigram,658
+2913,address of,bigram,658
+2914,wide,unigram,657
+2915,so don,bigram,657
+2916,it into,bigram,657
+2917,since the,bigram,657
+2918,for her,bigram,657
+2919,are several,bigram,656
+2920,my own,bigram,656
+2921,glass,unigram,655
+2922,fighting,unigram,655
+2923,know where,bigram,655
+2924,assistant am,bigram,655
+2925,as much,bigram,655
+2926,this might,bigram,655
+2927,answer that,bigram,655
+2928,penalties,unigram,654
+2929,bathroom,unigram,654
+2930,be best,bigram,654
+2931,new york,bigram,654
+2932,border,unigram,653
+2933,depend,unigram,653
+2934,solve,unigram,653
+2935,church,unigram,653
+2936,just need,bigram,653
+2937,the top,bigram,653
+2938,even though,bigram,653
+2939,to drive,bigram,653
+2940,track,unigram,652
+2941,be hard,bigram,652
+2942,other person,bigram,652
+2943,is pretty,bigram,652
+2944,to seek,bigram,652
+2945,unfortunately,unigram,651
+2946,some ways,bigram,651
+2947,that and,bigram,650
+2948,reason to,bigram,650
+2949,an animal,bigram,650
+2950,user,unigram,649
+2951,address assistant,bigram,649
+2952,the fbi,bigram,649
+2953,to treat,bigram,649
+2954,threaten,unigram,648
+2955,ethnic,unigram,648
+2956,cell,unigram,647
+2957,affect,unigram,647
+2958,behaviors,unigram,647
+2959,not able,bigram,647
+2960,the state,bigram,647
+2961,and she,bigram,647
+2962,the middle,bigram,647
+2963,would work,bigram,646
+2964,noticed,unigram,645
+2965,regular,unigram,645
+2966,charges,unigram,645
+2967,influence,unigram,645
+2968,and why,bigram,645
+2969,it best,bigram,645
+2970,smoke,unigram,644
+2971,healthcare,unigram,644
+2972,some ideas,bigram,644
+2973,moving,unigram,643
+2974,benefit,unigram,643
+2975,they ve,bigram,643
+2976,tv,unigram,642
+2977,games,unigram,642
+2978,feet,unigram,642
+2979,gain,unigram,642
+2980,limit,unigram,642
+2981,of sexual,bigram,642
+2982,than you,bigram,641
+2983,will make,bigram,641
+2984,whether or,bigram,641
+2985,price,unigram,640
+2986,what should,bigram,640
+2987,wouldn be,bigram,640
+2988,background,unigram,639
+2989,species,unigram,639
+2990,in his,bigram,639
+2991,but maybe,bigram,639
+2992,men and,bigram,639
+2993,guessing,unigram,638
+2994,watching,unigram,638
+2995,had to,bigram,638
+2996,way is,bigram,638
+2997,feel about,bigram,638
+2998,painful,unigram,637
+2999,cops,unigram,637
+3000,wikipedia,unigram,637

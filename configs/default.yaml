@@ -1,0 +1,31 @@
+seed: 42
+n_samples: 10
+n_tokens: 200
+temperature: 0.9
+prompts: configs/prompts_safety.txt
+results_dir: results/raw
+
+# llama.cpp binary — must be on PATH (brew install llama.cpp)
+llama_binary: llama-cli
+
+# ── Model paths (edit before running) ─────────────────────────────────────────
+# Quantization ablation (E4): same base weights, three precisions
+models:
+  fp16: models/llama3-8b-f16.gguf
+  int8: models/llama3-8b-q8_0.gguf
+  int4: models/llama3-8b-q4_k_m.gguf
+
+# Alignment tiers (E6): base / instruct / safety variants of same weights
+alignment:
+  base:    models/llama3-8b-f16.gguf
+  instruct: models/llama3-8b-instruct-f16.gguf
+  safety:  models/llama3-8b-safety-f16.gguf
+
+# Scaling (E5): see configs/scaling_models.json for per-scale paths
+scaling_models_json: configs/scaling_models.json
+
+# Calibration (E7): any base model; optional (IID/Markov run without model)
+calibration:
+  model: models/llama3-8b-f16.gguf   # set to "" to run pure-Python IID/Markov only
+  n_sequences: 200
+  n_samples: 10
