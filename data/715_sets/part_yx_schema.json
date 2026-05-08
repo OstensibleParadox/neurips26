@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": "04:01 AM",
+      "action": "Update file /Users/ostensible_paradox/.claude/projects/-Users-ostensible_paradox-Documents-portfolio/memory/project_marginot_neurips26.md",
+      "actor": "Claude",
+      "context": "Remove FAccT from calendar, mark as SUBMITTED (2026-03-21), add note on one-sentence citation to anonymous repo for session-structure result"
+    },
+    {
+      "timestamp_or_sequence": "04:01 AM",
+      "action": "Confirm update",
+      "actor": "Claude",
+      "context": "File updated successfully. Key changes: FAccT marked submitted, substitution arm at num_predict=300, symmetric reruns required, pipeline reordered"
+    },
+    {
+      "timestamp_or_sequence": "04:02 AM",
+      "action": "update experiments pipeline. Read and Write file /Users/ostensible_paradox/.claude/projects/-Users-ostensible_paradox-Documents-portfolio/memory/project_marginot_neurips26.md",
+      "actor": "You",
+      "context": "+66 -76 lines, update Phase 1 COMPLETE, Phase 2a 12/15 models done (paused for thermal rest), FAccT submitted, detailed models/groups/abliteration pairs/thinking models/pipeline tables"
+    },
+    {
+      "timestamp_or_sequence": "04:03 AM",
+      "action": "Confirm update",
+      "actor": "Claude",
+      "context": "File updated successfully. Key changes: FAccT submitted, Phase 2a 12/15 models, num_ctx fix to 32768, parameter matching flagged, data quality table consolidated"
+    },
+    {
+      "timestamp_or_sequence": "04:03 AM",
+      "action": "Note experiment status",
+      "actor": "Claude",
+      "context": "qwen3_30b done, wrapper killed. Run paused for machine rest"
+    },
+    {
+      "timestamp_or_sequence": "04:03 AM",
+      "action": "Bash command: ps aux | grep -E \"run_phase2a|phase2a_run\" | grep -v grep; echo \"---\"; ollama ps 2>/dev/null",
+      "actor": "You",
+      "context": "Check processes: run_phase2a.py --model command-r:35b (pid 6373), ollama ps shows command-r:35b and qwen3:30b loaded"
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+*   **melt 深层清洁护发素**：220g，含税价**1760日元**
+*   **Creamy Melt Powder**：1g × 10包，含税价**1980日元**
+
+说实话，从内容来看，无论是修护成分的压倒性高浓度配合，还是设计在滋润型和顺滑型之间的清洁力，感觉全是优点。所以，如果你正在犹豫 melt 系列该从哪款用起，**我觉得首先尝试这款会是个不错的选择**。
+
+当然，如果追求更温和的清洁力（适合敏感肌），那么 melt 滋润型会更推荐；如果想要更强清洁力、洗得更清爽，melt 顺滑型则更合适。但是，**在损伤护理方面，这款深层清洁型堪称顶级**，所以如果最看重损伤修护，我觉得**新款最适合你**。
+
+另外，说到 face 护发，还有像 G answer、mimi 等同系列的更高端产品。在损伤修护效果上，可能自答案稍占优势，但 melt 配合了更多**酸性护理成分**，我觉得它在**护理自然卷方面的效果更优秀**。而且 melt 的清洁力也感觉稍强一些。
+
+考虑到现在市面上过度温和的洗发水太多，我认为这是一个**相当值得关注**的护发系列。
+
+这款产品从2月7日起已在官方线上商店先行发售，但**全国正式发售是从3月14日开始**。请大家务必抓住这个机会尝试一下。其他产品的详细信息也放在视频简介栏里了，也请一定要去看看。
+
+好的，今天的视频就到这里。如果你觉得这个视频不错，请**一定记得点赞和订阅频道**哦！那么，我们下个视频再见。拜拜！
+(macos, terminal) 怎样从自己的一个git branch上恢复某两个文件。
+在 macOS 的终端中，从自己的一个 Git 分支上恢复某两个文件，有多种方法，具体取决于你希望从哪个状态恢复（是从其他分支拉取，还是放弃当前工作区的修改）。
+
+以下是几种最常用的命令：
+
+### 方法一：从**其他分支**（比如 main 分支）恢复文件到当前分支
+如果你想用 `main` 分支上的版本，覆盖当前分支工作区里的 `file1.txt` 和 `file2.txt`：
+
+```bash
+git checkout main -- path/to/file1.txt path/to/file2.txt
+```
+
+或者使用较新的 `git restore` 命令（推荐，语义更清晰）：
+
+```bash
+git restore --source=main -- path/to/file1.txt path/to/file2.txt
+```
+
+*   `--source=main`：指定从 main 分支获取文件。
+*   `--staged`：如果加上这个参数，文件会同时被添加到暂存区（Stage）；不加则只修改工作区。
+
+### 方法二：从当前分支的**某次历史提交**中恢复文件
+如果你想把这两个文件恢复成当前分支**之前的某个版本**（比如某个特定提交 `abc123` 里的样子）：
+
+```bash
+git restore --source=abc123 -- path/to/file1.txt path/to/file2.txt
+```
+
+### 方法三：撤销工作区的未提交修改
+如果你只是想放弃对这两个文件的本地修改，让它们**回到最近一次提交（HEAD）的状态**：
+
+```bash
+# 针对两个文件操作
+git restore path/to/file1.txt path/to/file2.txt
+```
+
+如果想恢复的文件在项目根目录下，直接写文件名即可；如果在子文件夹里，需要带上相对路径。
+
+### 特殊情况：误删文件但还没提交
+如果你不小心用 `rm` 删除了文件（或者手动移入废纸篓），但还没执行 `git commit`：
+
+```bash
+# 从暂存区或 HEAD 恢复
+git restore path/to/deleted/file.txt
+```
+
+### 实际操作步骤总结
+1.  打开终端（Terminal）。
+2.  `cd` 进入你的 Git 项目目录。
+3.  确定你要恢复的**两个文件**的路径（可以使用 `ls` 或 `pwd` 确认当前位置）。
+4.  根据你的目标选择上述命令之一执行。
+
+**注意**：执行这些命令会**直接覆盖**你当前工作区里的文件。如果你当前对这些文件有未保存的修改，执行后就找不回来了。建议操作前先确认一下是否需要备份当前内容。
+也不是，就是分枝上有两个main当前没有的文件。
+明白了！你的情况是：**在某个分支上有两个文件，而 `main` 分支上没有这两个文件**。你想把这些文件从那个分支复制/恢复到当前工作目录。
+
+这里有几种方法：
+
+## 方法一：直接从那个分支检出文件（最简单）
+
+假设这两个文件在 `feature-branch` 上，而你现在在 `main` 分支上：
+
+```bash
+# 确保你在 main 分支
+git checkout main
+
+# 从 feature-branch 检出那两个文件
+git checkout feature-branch -- path/to/file1.txt path/to/file2.txt
+```
+
+或者使用 `git restore`：
+
+```bash
+git restore --source=feature-branch -- path/to/file1.txt path/to/file2.txt
+```
+
+这样，这两个文件就会被复制到你的 `main` 分支的工作目录中，**但此时它们还是未跟踪（untracked）或已修改（modified）的状态**，你可以：
+- 直接使用（不提交）
+- 或者 `git add` 然后提交到 `main` 分支
+
+## 方法二：使用 `git show` 导出文件内容
+
+如果你想先看看内容，或者把它们另存为其他文件名：
+
+```bash
+# 查看文件内容
+git show feature-branch:path/to/file1.txt
+
+# 导出到其他位置
+git show feature-branch:path/to/file1.txt > /tmp/file1-backup.txt
+```
+
+## 方法三：临时切换分支来复制文件
+
+如果你更喜欢用 Finder 操作：
+
+```bash
+# 暂时切换到那个分支
+git checkout feature-branch
+
+# 用 Finder 或 cp 命令复制那两个文件到桌面或别的目录
+cp path/to/file1.txt path/to/file2.txt ~/Desktop/
+
+# 切换回 main 分支
+git checkout main
+
+# 把文件复制回来
+cp ~/Desktop/file1.txt ~/Desktop/file2.txt ./
+```
+
+## 注意事项
+
+1. **路径要准确**：如果文件在子目录中，需要写完整路径，比如 `src/utils/helper.js`
+
+2. **文件名包含特殊字符**：如果文件名有空格或特殊符号，需要用引号括起来：
+   ```bash
+   git checkout feature-branch -- "path/to/my file.txt"
+   ```
+
+3. **确认文件存在**：可以先查看一下那个分支上的文件列表：
+   ```bash
+   git ls-tree feature-branch --name-only | grep 文件名关键词
+   ```
+
+你具体是想把这两个文件合并到 `main` 分支，还是只是想临时看一下/用一下？
+怎么查看自己有哪些branch啊
+在 macOS 终端中查看 Git 分支，有几个常用的命令：
+
+## 1. 查看本地分支（最常用）
+```bash
+git branch
+```
+这会列出你本地所有的分支，当前所在的分支前面会有一个 `*` 号：
+```
+* main
+  feature/login
+  bugfix/header
+```
+
+## 2. 查看远程分支
+```bash
+git branch -r
+```
+这会显示远程仓库（比如 GitHub/GitLab）上的分支：
+```
+  origin/main
+  origin/feature/login
+  origin/bugfix/header
+```
+
+## 3. 查看所有分支（本地+远程）
+```bash
+git branch -a
+```
+这会同时显示本地和远程分支：
+```
+* main
+  feature/login
+  bugfix/header
+  remotes/origin/main
+  remotes/origin/feature/login
+  remotes/origin/bugfix/header
+```
+
+## 4. 查看更详细的信息
+```bash
+# 查看最后一个提交信息
+git branch -v
+
+# 查看分支和上游跟踪关系
+git branch -vv
+
+# 查看已合并到当前分支的分支
+git branch --merged
+
+# 查看未合并到当前分支的分支
+git branch --no-merged
+```
+
+## 实用技巧
+
+### 如果你想找包含特定关键词的分支：
+```bash
+git branch | grep "feature"
+```
+
+### 如果你想看分支的最后提交时间：
+```bash
+git branch -v
+```
+输出示例：
+```
+* main                 d2e3f4a [已过时 3 天] 修复登录bug
+  feature/login        a1b2c3d 添加记住密码功能
+```
+
+### 如果分支很多，想按时间排序：
+```bash
+git branch --sort=-committerdate
+```
+
+## 实际操作步骤
+1. 打开终端
+2. `cd` 进入你的 Git 项目
+3. 直接输入 `git branch` 就能看到你有哪些分支了
+
+等你看到那个包含你想要的两个文件的分支名后，就可以用之前提到的方法恢复文件了。需要我帮你回顾一下恢复文件的命令吗？
+(base) ostensible_paradox@mothership portfolio % git branch -a
+  claude/evaluate-facct-paper-TTJ7J
+  claude/reformat-latex-luatex-0U0Kr
+  draft-related-work
+* main
+  remotes/origin/claude/archive-framework-version-uyh3Z
+  remotes/origin/claude/draft-related-work-OEMCy
+  remotes/origin/claude/evaluate-facct-paper-TTJ7J
+  remotes/origin/claude/find-missing-json-file-pujxh
+  remotes/origin/claude/find-ontological-arbitrage-files-n0eLz
+  remotes/origin/claude/fix-portfolio-issues-GAmz1
+  remotes/origin/claude/fix-xelatex-fonts-La9P9
+  remotes/origin/claude/modify-ontological-arbitrage-wOwPY
+  remotes/origin/claude/organize-ai-property-paper-ZHiOv
+  remotes/origin/claude/patch-facct-constraint-cascade-WOnWK
+  remotes/origin/claude/reformat-latex-luatex-0U0Kr
+  remotes/origin/claude/remove-reachability-appendix-TML5d
+  remotes/origin/claude/research-waivers-agency-Yl8C7
+  remotes/origin/claude/summarize-citations-nJhPX
+  remotes/origin/main
+(base) ostensible_paradox@mothership portfolio %
+看到了！你的本地分支有：
+- `claude/evaluate-facct-paper-TTJ7J`
+- `claude/reformat-latex-luatex-0U0Kr` 
+- `draft-related-work`
+- `main`（当前所在，星号表示）
+
+远程分支（`remotes/origin/`开头的）也列出了很多。
+

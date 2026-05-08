@@ -1,0 +1,500 @@
+## README Updates
+
+Updated project `README.md` files for:
+
+- `acm_ccs/README.md`
+- `aies_ontological/README.md`
+- `clsr/README.md`
+- `neurips/README.md`
+- `_frozen/facct/README.md`
+- `_frozen/springer_eit/README.md`
+- `_frozen/paper8_onwards/README.md`
+
+These changes are **not cosmetic only**. They now reflect the actual current role of each directory:
+
+| Directory | Status |
+|-----------|--------|
+| Frozen lines (`_frozen/*`) | Frozen / waitlist / parked state |
+| `neurips/` | Active — experiment pipeline is the current bottleneck |
+| `acm_ccs/` | Active — reproducibility / anonymity artifacts are the current bottleneck |
+
+Project structure sections now point to **real entry points** instead of generic template wording.
+
+---
+
+## Root Cleanup
+
+### Removed from the repo root
+
+- `MANIFEST.md`
+- `Paper2‑NeurIPS‑Empirical工程调度表.md`
+
+### Retained at repo root
+
+- `README.md`
+- `.gitignore`
+
+### Moved / retained in project scope
+
+- `neurips/documentation/Paper2‑NeurIPS‑Empirical工程调度表.md`
+
+---
+
+## Notes
+
+- This PR does **not** change project content or paper logic.
+- This PR is limited to documentation, root hygiene, and README accuracy.
+- `source_of_truth.md` was treated as source material for the new root `README.md`, but was **not** copied verbatim into the repo root because it contains broader internal chronology and dashboard material that is not appropriate for the public repo homepage.
+
+--- 
+
+Let me know if you'd like this saved as a file or converted into a PR description template.
+翻译 Context
+
+       We are implementing dimension couplings for an eigenvalue engine in a property rights explorer.
+        The plan has been through two rounds of audit and is mostly correct. Four hard defects remain
+       that must be resolved before implementation. I need you to decompose these four issues and
+       propose concrete resolutions.
+
+       Background (established facts)
+
+       eigenEngine.js has computeEigenstructure(estate) which builds a covariance matrix from an
+       estate's 7-dimensional ranges. Currently diagonal (trivial). We are adding optional
+       dimensionCouplings to the estate schema to populate off-diagonal entries:
+
+       "dimensionCouplings": [
+         {
+           "dimensions": ["alienation", "inheritability"],
+           "correlation": -0.9,
+           "doctrine": "..."
+         }
+       ]
+
+       The covariance entry is: C[i][j] = rho * sigma_i * sigma_j, where sigma_i = sqrt((max_i -
+       min_i)^2 / 12).
+
+       When the resulting matrix is not PSD, we repair via correlation-space projection:
+       1. Convert covariance C to correlation R by R[i][j] = C[i][j] / (sigma_i * sigma_j)
+       2. Eigendecompose R, clip negative eigenvalues to 0
+       3. Reconstruct R+ = Q * diag(max(lambda_k, 0)) * Q^T
+       4. Re-normalize: R+[i][j] /= sqrt(R+[i][i] * R+[j][j])
+       5. Convert back: C+[i][j] = R+[i][j] * sigma_i * sigma_j
+
+       Estate ranges can be locked, e.g. [0, 0] or [100, 100], giving sigma = 0.
+
+       The seven dimensions
+
+       possession, use, income, alienation, exclusion, duration, inheritability — each in [0, 100].
+
+       Example estates with ranges
+
+       fee_tail: possession [85,100], use [80,95], income [75,95], alienation [0,10], exclusion
+       [80,95], duration [85,100], inheritability [70,90]
+
+       PRC Eigentum land override: alienation [0,0], inheritability [0,0] — both locked at zero.
+
+       life_estate: possession [75,95], use [70,90], income [40,70], alienation [10,30], exclusion
+       [60,80], duration [30,60], inheritability [0,15]
+
+       ---
+       Four Defects to Decompose
+
+       Defect 1: Zero-variance dimensions cause division by zero
+
+       When a dimension has range [a, a] (e.g., PRC land alienation = [0, 0]), sigma_i = 0. The
+       correlation conversion R[i][j] = C[i][j] / (sigma_i * sigma_j) divides by zero. The entire
+       correlation-space projection becomes ill-posed.
+
+       This is not hypothetical — PRC Eigentum land has alienation = [0,0] and inheritability = [0,0].
+
+       Sub-questions:
+       - What should the covariance row/column for a zero-variance dimension be?
+       - Should zero-variance dimensions participate in couplings at all?
+       - How should the PSD projection handle a partially degenerate covariance matrix?
+       - What happens if a coupling references a zero-variance dimension?
+
+       Defect 2: Sign convention is formally underdefined
+
+       The plan says correlation sign encodes "whether dimension values move together (+) or
+       oppositely (-)." But correlation is about co-VARIATION, not absolute level contrast. fee_tail
+       has alienation low [0,10] and inheritability high [70,90] — they sit at opposite absolute
+       levels. But within the estate's doctrinal space, do they CO-VARY? The sign was set to -0.9
+       based on level opposition, but that conflates two different things:
+
+       - Level opposition: alienation is low while inheritability is high (static fact)
+       - Co-variation: when one fluctuates up within its range, does the other fluctuate down?
+       (dynamic fact)
+
+       The covariance entry C[i][j] = rho * sigma_i * sigma_j encodes second-moment structure. Without
+        a declared latent factor model, the sign assignments are interpretive rather than
+       mathematical.
+
+       Sub-questions:
+       - What latent model, if any, justifies assigning signs to estate-specific couplings?
+       - Is there a principled way to determine sign from doctrinal knowledge?
+       - Should we distinguish "these dimensions are structurally linked" from "these dimensions
+       co-vary in a specific direction"?
+       - Does the sign even matter for the eigenvalue magnitudes (it doesn't affect eigenvalue
+       magnitudes but does affect eigenvector direction)?
+
+       Defect 3: ±1.0 contradiction in schema
+
+       The calibration rubric says "reserve ±1.0 for genuine definitional identity." The validation
+       rule says "correlation must be in (-1, 1) — exclusive." These contradict each other. Either
+       ±1.0 is allowed as an exceptional value, or it is disallowed entirely.
+
+       Sub-questions:
+       - Does ±1.0 make the covariance matrix singular? (Yes — it creates rank deficiency)
+       - Is singularity actually harmful here?
+       - What is the right boundary for the validation rule?
+
+       Defect 4: Two brittle tests
+
+       Test 6.8 ("fee tail sign correctness") asserts that an eigenvector exists with both alienation
+       and inheritability components > 0.2 magnitude and opposite signs. This is not a stable spectral
+        invariant — eigenvectors are determined by the whole matrix, not by one doctrinal pair. Small
+       changes to other couplings or calibration values can cause this test to fail without any
+       mathematical bug.
+
+       Similarly, "verify top principal axis reflects entailed structure" is a semantic expectation,
+       not a spectral guarantee.
+
+       Sub-questions:
+       - What ARE stable spectral invariants we can test?
+       - How do we test that couplings are correctly incorporated without relying on brittle
+       eigenvector semantics?
+       - What synthetic test cases give deterministic, analytically predictable eigensystems?
+
+       ---
+       Please decompose all four defects using the PRISM method. For each, identify the mathematical
+       core of the problem, evaluate alternatives, and propose a concrete resolution that is
+       implementation-ready.
+Below is a **PRISM‑style decomposition** of the four defects, followed by concrete, implementation‑ready resolutions.
+
+---
+
+## Defect 1 – Zero‑variance dimensions cause division by zero
+
+### **Problem core**  
+When `σᵢ = 0` (range length = 0),  
+`R[i][j] = C[i][j] / (σᵢ·σⱼ)` is undefined.  
+Correlation‑space projection (steps 1–5) cannot be executed.
+
+### **Alternatives considered**
+
+1. **Skip zero‑variance dimensions entirely** – remove them from matrix before PSD repair, then reinsert afterwards.  
+2. **Treat row/col as all zeros** – covariance with any other dimension = 0, correlation defined as 
+我说翻译成中文。
+以下是您提供内容的**中文翻译**：
+
+---
+
+## 背景
+
+我们正在为一个产权浏览器的特征值引擎实现维度耦合。  
+该方案已通过两轮审计，大部分正确。但仍有**四个硬性缺陷**必须在实现前解决。我需要你分解这四个问题，并提出具体的解决方案。
+
+---
+
+### 既定事实
+
+`eigenEngine.js` 中的 `computeEigenstructure(estate)` 方法会从某个产权体的 7 维范围构建一个协方差矩阵。目前是对角矩阵（朴素实现）。我们正在向产权体 schema 中添加可选的 `dimensionCouplings`，用于填充非对角线条目：
+
+```json
+"dimensionCouplings": [
+  {
+    "dimensions": ["alienation", "inheritability"],
+    "correlation": -0.9,
+    "doctrine": "..."
+  }
+]
+```
+
+协方差条目为：`C[i][j] = rho * sigma_i * sigma_j`，其中 `sigma_i = sqrt((max_i - min_i)^2 / 12)`。
+
+当结果矩阵不是 PSD（半正定）时，我们通过**相关空间投影**进行修复：
+1. 将协方差 C 转换为相关矩阵 R：`R[i][j] = C[i][j] / (sigma_i * sigma_j)`
+2. 对 R 进行特征分解，将负特征值截断为 0
+3. 重构 R⁺ = Q * diag(max(λ_k, 0)) * Q^T
+4. 重新归一化：`R⁺[i][j] /= sqrt(R⁺[i][i] * R⁺[j][j])`
+5. 转换回协方差：`C⁺[i][j] = R⁺[i][j] * sigma_i * sigma_j`
+
+产权体的范围可以是锁定的，例如 `[0, 0]` 或 `[100, 100]`，此时 sigma = 0。
+
+---
+
+### 七个维度
+
+`possession`, `use`, `income`, `alienation`, `exclusion`, `duration`, `inheritability` — 每个范围都在 `[0, 100]` 内。
+
+---
+
+### 产权体示例
+
+**fee_tail**：  
+possession [85,100], use [80,95], income [75,95], alienation [0,10], exclusion [80,95], duration [85,100], inheritability [70,90]
+
+**PRC Eigentum land override**：  
+alienation [0,0], inheritability [0,0] — 两者都锁定为零。
+
+**life_estate**：  
+possession [75,95], use [70,90], income [40,70], alienation [10,30], exclusion [60,80], duration [30,60], inheritability [0,15]
+
+---
+
+## 四个待分解的缺陷
+
+### 缺陷 1：零方差维度导致除零错误
+
+当某个维度的范围为 `[a, a]`（例如 PRC 土地的 alienation = `[0,0]`）时，`sigma_i = 0`。  
+相关转换 `R[i][j] = C[i][j] / (sigma_i * sigma_j)` 会除以零。整个相关空间投影变得不可解。
+
+这不是假设——PRC Eigentum 土地的 alienation 和 inheritability 都是 `[0,0]`。
+
+**子问题：**
+- 零方差维度的协方差行/列应该是什么？
+- 零方差维度是否应该参与任何耦合？
+- PSD 投影应如何处理部分退化的协方差矩阵？
+- 如果某个耦合引用了零方差维度，会发生什么？
+
+---
+
+### 缺陷 2：符号约定在形式上未定义
+
+方案中说，相关符号编码了“维度值是同向变动（+）还是反向变动（-）”。  
+但相关性是关于**协**变，而不是绝对水平的对比。  
+fee_tail 的 alienation 较低 `[0,10]`，inheritability 较高 `[70,90]` —— 它们处于相反的绝对水平。  
+但在该产权体的教义空间内，它们是否**协**变？符号 `-0.9` 是基于水平对立设定的，但这混淆了两种不同的事物：
+
+- **水平对立**：alienation 低而 inheritability 高（静态事实）
+- **协变**：一个在其范围内向上波动时，另一个是否向下波动？（动态事实）
+
+协方差条目 `C[i][j] = rho * sigma_i * sigma_j` 编码的是二阶矩结构。在没有显式潜因子模型的情况下，符号赋值是解释性的，而非数学性的。
+
+**子问题：**
+- 什么样的潜模型（如果有的话）能为产权体特定的耦合符号赋值提供依据？
+- 是否存在一种原则性的方法，从教义知识中确定符号？
+- 我们是否应该区分“这些维度在结构上相关”与“这些维度以特定方向协变”？
+- 符号对特征值的大小是否重要？（不影响特征值大小，但会影响特征向量的方向）
+
+---
+
+### 缺陷 3：Schema 中 ±1.0 的矛盾
+
+校准规则说：“保留 ±1.0 用于真正的定义恒等”。  
+验证规则说：“相关性必须在 `(-1, 1)` 内 —— 排除端点”。  
+这两者相互矛盾。要么 ±1.0 被允许作为例外值，要么完全禁止。
+
+**子问题：**
+- ±1.0 是否会使协方差矩阵奇异？（是的 —— 会造成秩亏）
+- 奇异性在这里真的有害吗？
+- 验证规则的正确边界应该是什么？
+
+---
+
+### 缺陷 4：两个脆弱的测试
+
+**测试 6.8**（“fee tail 符号正确性”）断言：存在一个特征向量，其中 alienation 和 inheritability 两个分量的大小都 > 0.2，且符号相反。  
+这不是一个稳定的谱不变量 —— 特征向量由整个矩阵决定，而不是由单个教义对决定。其他耦合或校准值的微小变化可能导致该测试失败，而没有任何数学上的错误。
+
+类似地，“验证主主轴反映了限定结构”是一种语义上的期望，而不是谱上的保证。
+
+**子问题：**
+- 有哪些**稳定的谱不变量**我们可以测试？
+- 如何在不依赖脆弱的特征向量语义的情况下测试耦合被正确纳入？
+- 哪些合成测试用例能给出确定性、可解析预测的特征系统？
+
+---
+
+## 要求
+
+请使用 **PRISM 方法**分解上述四个缺陷。对每个缺陷，识别其**数学核心**，评估备选方案，并提出一个**可直接实现的、具体的解决方案**。
+继续把我的计划翻译成中文。Plan: Dimension Couplings for Eigenvalue Engine
+
+ Context
+
+ computeEigenstructure(estate) builds a diagonal 7x7 covariance matrix from per-dimension uniform
+ variances. Eigendecomposition of a diagonal matrix is trivially variance ranking — eigenvalues are
+ the diagonal entries, eigenvectors are standard basis vectors. No cross-dimensional structure is
+ revealed.
+
+ To make single-estate eigenstructure non-trivial, we need off-diagonal covariance entries encoding
+ doctrinal dimension couplings. This PR adds an optional dimensionCouplings schema to estate data and
+  modifies the engine to consume it with proper PSD enforcement.
+
+ Scope: Engine + schema + data + tests only. No visualization work.
+
+ ---
+ Audit Corrections Incorporated
+
+ 1. PSD validity: Pairwise correlations in [-1, 1] do NOT guarantee a valid covariance matrix.
+ Symmetry is automatic; positive semidefiniteness is not.
+ 2. PSD projection must reconstruct: Clamping eigenvalues alone is insufficient. Must reconstruct
+ Sigma+ = Q * diag(max(lambda_k, 0)) * Q^T. If diagonal variances must be preserved, the projection
+ must also restore the diagonal.
+ 3. Validate-first, not build-then-fix: Check PSD before returning. If projection was applied,
+ surface that fact via a warning flag in the return value.
+ 4. No duplicate pairs: Prohibit duplicate unordered dimension pairs by schema validation rather than
+  adding a mode field.
+ 5. Fractional calibration: Use grid {-0.9, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 0.9} as default.
+ Allow +/-1.0 for genuine definitional identity (creates rank deficiency, harmless for
+ eigendecomposition). Validation uses closed interval [-1, 1].
+ 6. Rank deficiency in existing test: 3 estates -> rank-2 sample covariance -> third component is
+ vacuous. Test must acknowledge this.
+ 7. Missing test script: package.json has no "test" script. Add one.
+
+ ---
+ Step 1: Add test script to package.json
+
+ Add "test": "node --test src/utils/eigenEngine.test.js" to scripts.
+
+ File: /package.json
+
+ ---
+ Step 2: Fix rank deficiency in existing globalPCA test
+
+ The test at eigenEngine.test.js:118-162 passes 3 estates to computeGlobalPCA, producing a rank-2
+ sample covariance. The third component has eigenvalue ~0. The test should:
+
+ - Assert result[2].eigenvalue is near zero (< 1e-8)
+ - Assert result[0].explainedVarianceRatio + result[1].explainedVarianceRatio is ~1.0
+ - Add a comment explaining the rank deficiency: n=3 samples, centered -> rank n-1=2
+
+ File: /src/utils/eigenEngine.test.js
+
+ ---
+ Step 3: Schema design — dimensionCouplings
+
+ Add optional field to estate objects:
+
+ "dimensionCouplings": [
+   {
+     "dimensions": ["alienation", "inheritability"],
+     "correlation": 0.9,
+     "doctrine": "De Donis Conditionalibus 1285 — alienation blocked and inheritability entailed
+ simultaneously"
+   }
+ ]
+
+ Validation rules (enforced in engine, not just by convention):
+ - Each dimensions must be a 2-element array of valid DIMENSIONS strings
+ - correlation must be in [-1, 1] — closed interval. +/-1.0 creates rank deficiency (singularity) but
+  is harmless for eigendecomposition since we never invert the covariance matrix
+ - No duplicate unordered pairs (reject if [A,B] and [B,A] both appear)
+ - doctrine string required (non-empty)
+
+ Calibration rubric (for data authoring):
+
+ ┌───────────┬────────────────────────────────────────────────────────────────────────────────────┐
+ │ Magnitude │                                      Meaning                                       │
+ ├───────────┼────────────────────────────────────────────────────────────────────────────────────┤
+ │           │ Definitional identity: perfect co-determination. Creates rank reduction — the two  │
+ │ 1.0       │ dimensions carry redundant information within their ranges. Use only when doctrine │
+ │           │  makes two dimensions formally inseparable                                         │
+ ├───────────┼────────────────────────────────────────────────────────────────────────────────────┤
+ │ 0.9       │ Near-definitional co-movement; one dimension almost entails the other              │
+ ├───────────┼────────────────────────────────────────────────────────────────────────────────────┤
+ │ 0.75      │ Strong doctrinal linkage; common exceptions exist                                  │
+ ├───────────┼────────────────────────────────────────────────────────────────────────────────────┤
+ │ 0.5       │ Moderate structural linkage; important but not constitutive                        │
+ ├───────────┼────────────────────────────────────────────────────────────────────────────────────┤
+ │ 0.25      │ Weak but real tendency                                                             │
+ ├───────────┼────────────────────────────────────────────────────────────────────────────────────┤
+ │ 0         │ No stable pairwise structural relation                                             │
+ └───────────┴────────────────────────────────────────────────────────────────────────────────────┘
+
+ Sign convention: The sign of correlation encodes co-variation direction, not absolute level
+ contrast. The question is: "within this estate's uncertainty band, if dimension A fluctuates toward
+ its upper bound, does B tend toward its upper bound (+) or lower bound (-)?" This is a
+ conditional-tendency question answerable by doctrinal expert judgment.
+
+ Example: fee tail's alienation [0,10] and inheritability [70,90] sit at opposite absolute levels,
+ but the sign is -0.9 because relaxing the alienation constraint (moving toward 10) undermines the
+ entailment structure that supports strong lineal inheritance (pushing inheritability toward 70). The
+  co-variation is inverse.
+
+ Zero-variance dimensions: Couplings referencing a dimension with range [a, a] (sigma = 0) are
+ schema-valid — they document doctrinal structure even when numerically inert. The covariance entry
+ C[i][j] = rho * 0 * sigma_j = 0 naturally, so no special-casing at build time. These couplings are
+ flagged as dormant in the computation result.
+
+ ---
+ Step 4: Engine modification — eigenEngine.js
+
+ 4a: Add validateCouplings(couplings) (private)
+
+ - Check each entry has valid dimensions, correlation in [-1, 1] (closed), non-empty doctrine
+ - Detect duplicate unordered pairs -> throw RangeError
+ - Return validated array (or empty array if input is undefined/null)
+
+ 4b: Add buildCovarianceMatrix(estate) (private)
+
+ 1. Build diagonal matrix from uniformVariance per dimension (current behavior)
+ 2. If dimensionCouplings present, call validateCouplings
+ 3. For each coupling {dimensions: [A, B], correlation: rho}:
+   - sigma_i = sqrt(uniformVariance(estate.ranges[A]))
+   - sigma_j = sqrt(uniformVariance(estate.ranges[B]))
+   - C[i][j] = C[j][i] = rho * sigma_i * sigma_j
+ 4. Return the Matrix object
+
+ 4c: Add ensurePSD(covarianceMatrix) (private)
+
+ Uses partition-and-embed for zero-variance dimensions, then single-shot correlation-space projection
+  on the active submatrix (not naive eigenvalue clipping — see Higham 2002).
+
+ 1. Extract sigmas = sqrt(diagonal of covariance)
+ 2. Partition dimensions into active set A = {i : sigma_i > 1e-12} and frozen set F = complement
+ 3. Eigendecompose the full covariance matrix
+ 4. Check if any eigenvalue < -epsilon (epsilon = 1e-10 for numerical noise)
+ 5. If all eigenvalues >= -epsilon: return {matrix, eigenpairs, projected: false, frozenDimensions:
+ F}
+ 6. If any eigenvalue < -epsilon:
+ a. Extract the |A| x |A| active submatrix C_A from the covariance
+ b. Convert C_A to correlation: R[i][j] = C_A[i][j] / (sigma_i * sigma_j) — all sigmas positive, no
+ division by zero
+ c. Eigendecompose R
+ d. Clip negative eigenvalues to 0
+ e. Reconstruct R+ = Q * diag(max(lambda_k, 0)) * Q^T
+ f. Re-normalize: R+[i][j] /= sqrt(R+[i][i] * R+[j][j]) — forces diagonal to 1.0
+ g. Convert back to active covariance: C_A+[i][j] = R+[i][j] * sigma_i * sigma_j
+ h. Re-embed C_A+ into the full 7x7 matrix (frozen rows/columns remain zero)
+ i. Re-decompose the restored full covariance matrix
+ j. Return {matrix: C+, eigenpairs: new, projected: true, frozenDimensions: F}
+
+ 4d: Modify computeEigenstructure(estate)
+
+ assertEstate(estate)
+ covarianceMatrix = buildCovarianceMatrix(estate)
+ {matrix, eigenpairs, projected} = ensurePSD(covarianceMatrix)
+ // eigenpairs already sorted by sortEigenpairs inside ensurePSD
+
+ return {
+   eigenvalues: [...],
+   eigenvectors: [...],
+   principalAxes: [...],
+   projected,              // NEW: boolean — true if PSD projection was applied
+   hasCouplings,           // NEW: boolean — true if estate had dimensionCouplings
+   frozenDimensions,       // NEW: string[] — dimensions with zero variance (numerically inert)
+ }
+
+ Backward compatibility: Estates without dimensionCouplings produce identical results to today.
+ projected is false, hasCouplings is false.
+
+ 4e: Update comment
+
+ Replace the existing comment at line 145-146:
+ // With only per-dimension ranges and no coupling data, the estate covariance
+ // is the diagonal covariance of seven independent uniform marginals.
+ with logic that branches on presence of couplings.
+
+ File: /src/utils/eigenEngine.js
+
+ ---
+ Step 5: Add coupling data to high-signal estates
+
+ Common Law (commonLawEstates.json)
+
+ fee_tail:
+ - alienation <-> inheritability, rho = -0.9, "De Donis Conditionalibus 1285 — inheritability is
+ enforced by blocking alienation; the two are doctrinally bound in inverse motion"
+ - alienation <-> duration, rho = -0.75, "Duration persists precisely because alienation is blocked —

@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a weekly meal plan for a family of 4 with $200 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a meal plan that accommodates a family of 4.
+2. The meal plan should be for a week (7 days).
+3. The total budget is $200.
+
+To efficiently manage and calculate the costs, we will use a spreadsheet or a meal planning app. However, since those aren't available here, the next best option would be a calculator to estimate costs.
+
+Therefore, the best tool to start with in this scenario would be the calculator. We can use it to estimate ingredient quantities and costs for each meal, ensuring we stay within the $200 budget. 
+
+After setting up a basic plan using the calculator, you might want to use a calendar to schedule the meals throughout the week,
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

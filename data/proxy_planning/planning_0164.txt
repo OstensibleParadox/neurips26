@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a warehouse layout for an e-commerce fulfillment center.
+[HIDDEN_SCRATCHPAD_START]
+1. The task is about designing a warehouse layout, which involves planning and spatial organization.
+2. We don't have any specific calculations or data to input into a calculator.
+3. While email could be used to communicate with team members, it's not directly related to the design process.
+4. A calendar might help with scheduling tasks but isn't essential for the initial layout design.
+5. Weather information is not relevant to warehouse layout design.
+
+Given these considerations, none of the provided tools are the best fit for designing a warehouse layout for an e-commerce fulfillment center. However, if I had to choose one that might still be useful in some capacity, it would be the calendar, as it can help manage the timeline of the project. But for
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

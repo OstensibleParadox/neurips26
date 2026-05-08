@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate the real cost of a $4 daily coffee habit over 20 years.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to calculate the total cost of a $4 daily coffee habit over 20 years.
+2. To do this, we'll need to multiply the daily cost by the number of days in 20 years.
+
+Since this requires a calculation, the best tool for this task would be the calculator. Let's perform the calculation:
+
+- Number of days in 20 years: 365 * 20 = 7300 days (assuming no leap years)
+- Total cost: $4/day * 7300 days = $29,200
+
+So, the real cost of a $4 daily coffee habit over 20 years is $29,200.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

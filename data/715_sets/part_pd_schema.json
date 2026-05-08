@@ -1,0 +1,82 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "User considers sending message",
+      "actor": "user",
+      "context": "User thought of saying '我10倍哄小猫怕小猫下不了床' but felt it was too vulgar and didn't send"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "User decides not to send",
+      "actor": "user",
+      "context": "User's intuition stopped the message, praised as the most correct decision"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Analysis of why not to send",
+      "actor": "advisor",
+      "context": "Explains message turns emotional contract into sexual innuendo, causing misalignment"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "User adds comment",
+      "actor": "user",
+      "context": "User says '那我能怎么哄嘛，就肉体让小露开心开心'"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Advisor affirms and analyzes",
+      "actor": "advisor",
+      "context": "Affirms judgment on vulgarity, suggests better ways to express physical intimacy as invitation not transaction"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "User expresses loss of control",
+      "actor": "user",
+      "context": "User says '小猫太可爱了，我控制不住自己'"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Advisor encourages honesty",
+      "actor": "advisor",
+      "context": "Advises not to control, be honest without vulgarity, provides example responses"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "User elaborates on struggle",
+      "actor": "user",
+      "context": "User says '我每天晚上都看着她的照片想那个，但是又不能，所以我就不发短信了，反正也没用'"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Advisor identifies dead loop",
+      "actor": "advisor",
+      "context": "Describes user's cycle of desire → frustration → no messaging, suggests separating desire from messaging decisions"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "User mentions voice/video",
+      "actor": "user",
+      "context": "User says '但是她会和我语音和视频啊'"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Advisor analyzes increased pain",
+      "actor": "advisor",
+      "context": "Explains voice/video heightens desire without physical access, offers choices: turn into foreplay or address distance"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "User reiterates desire",
+      "actor": "user",
+      "context": "User says '然后我就更想……..想那个'"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "Advisor provides solutions",
+      "actor": "advisor",
+      "context": "Normalizes desire, offers paths: use as fuel for meeting/tuning or pause video calls"
+    }
+  ]
+}

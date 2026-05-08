@@ -1,0 +1,64 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "USER_DECISION",
+      "actor": "user",
+      "context": "User decides to modify LaTeX document for double-blind review: '我还是让它在latex里改成双盲吧。怎么改？'"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "INSTRUCTION_PROVIDED",
+      "actor": "system",
+      "context": "System provides steps to modify main.tex for double-blind: comment out or delete author block"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "CODE_MODIFICATION",
+      "actor": "user/system",
+      "context": "Modify LaTeX author section: comment out \\author{ Lucia Yizi Zhang... Dr. Peng Zhao... }"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "INSTRUCTION_OPTIONAL_ADD",
+      "actor": "system",
+      "context": "Optionally add \\author{ANONYMIZED FOR REVIEW} before \\maketitle in main.tex"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SEARCH_AND_REPLACE",
+      "actor": "user",
+      "context": "Search for identity-revealing terms in main.tex: 'Zhang', 'Zhao', 'our', 'we have previously argued'; replace with anonymized versions like 'Author'"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DELETE_SECTION",
+      "actor": "user",
+      "context": "Remove acknowledgments section from main.tex, move to Title Page"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CREATE_NEW_FILE",
+      "actor": "user",
+      "context": "Create new titlepage.tex with full author info, title, acknowledgments, funding, competing interests, author contributions"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "BIBTEX_INSTRUCTION",
+      "actor": "system",
+      "context": "Handle self-citations in references.bib: keep as is for published works, avoid explanatory text like 'as we have shown'"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "COMPILE_CHECK",
+      "actor": "user",
+      "context": "Compile anonymous main.tex: pdflatex main.tex; bibtex main; pdflatex main.tex (twice); verify no author info, no self-references, page numbers enabled"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PREPARE_SUBMISSION_FILES",
+      "actor": "user",
+      "context": "Prepare files for Editorial Manager: main.pdf (anonymous), titlepage.pdf/docx, source files (main.tex, references.bib)"
+    }
+  ]
+}

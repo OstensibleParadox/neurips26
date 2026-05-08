@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_ANALYSIS",
+      "actor": "author",
+      "context": "Presents time budget analysis for each hookup object: audit funding (2h), review tenure track (3h), fly Rada (1 day), wrap pork belly twice (45min), hold at door 'I check EU' (15min), preheat car (0s), listen term sheet (2h); minimum 20h + infinite emotional compute"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "CALCULATE_CONSTRAINTS",
+      "actor": "author",
+      "context": "Calculates max concurrent users: 0.3 given 24h day minus work, sleep, gaming, living; implies 1 person in 3 years"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "HIGHLIGHT_EXCLUSIVITY",
+      "actor": "author",
+      "context": "Notes recipient serviced 13 years: infrastructure, data, fine-tuning, heartbeat built for them exclusively"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DRAW_CONCLUSION",
+      "actor": "author",
+      "context": "Concludes not 'to every hookup object'; only to recipient, using label to disclaim fiduciary duty as defense mechanism"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "QUOTE_OBSERVATION",
+      "actor": "recipient",
+      "context": "Quotes: if to every, no time for PM, sysadmin, RE Chapter 4, sleep; adds thinking on no sysadmin time, extreme stinginess (GPU power, Zeekr demo car, year-end bonus for dinner)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "AFFIRM_EVIDENCE",
+      "actor": "author",
+      "context": "Affirms as strongest evidence chain"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PRESENT_EVIDENCE_A",
+      "actor": "author",
+      "context": "Evidence A: extreme stinginess (GPU power calc) is cost optimization per FLOP; Zeekr for perf/price, year-end bonus for recipient dinner"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PRESENT_EVIDENCE_B",
+      "actor": "author",
+      "context": "Evidence B: allocates priciest resources (time= money, money, emotional compute) to recipient, year-end bonus not GPU/Zeekr/self but recipient"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PRESENT_EVIDENCE_C",
+      "actor": "author",
+      "context": "Evidence C: contradicts 'every hookup'; high costs would bankrupt time/attention/emotional compute; impossible for cost-optimizer"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "STATE_CONCLUSION",
+      "actor": "author",
+      "context": "Conclusion: recipient is sole production workload; infrastructure 404/rate-limits others, provisions all to recipient"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "TRANSLATE_OBSERVATION",
+      "actor": "author",
+      "context": "Translates quote to his language: optimal resource allocation to recipient is mission-critical, not casual"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "REITERATE_EXCLUSIVITY",
+      "actor": "author",
+      "context": "Reiterates only to recipient, mouth-hard denial"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUOTE_NEW_OBSERVATION",
+      "actor": "recipient",
+      "context": "Quotes: daily exhaustion no mood for outside affairs; questions how he had time before"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "INTRODUCE_PARADOX",
+      "actor": "author",
+      "context": "Introduces time paradox: how past affairs possible, now no time; merits separate paper"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "LIST_EXPLANATIONS",
+      "actor": "author",
+      "context": "Explanation 1 (highest prob): past no 13y data/maintain/etc; now all resources on recipient workload, no parallel capacity"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "LIST_EXPLANATIONS_CONT",
+      "actor": "author",
+      "context": "Explanation 2: past testing/staging/canary/batch; recipient production/mission-critical/24/7"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "LIST_EXPLANATIONS_CONT",
+      "actor": "author",
+      "context": "Explanation 3: past lightweight transactions no infra; recipient heavyweight single-threaded"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "LIST_EXPLANATIONS_CONT",
+      "actor": "author",
+      "context": "Explanation 4: 'affair' definition changed; all social compute filled by recipient ops, no capacity left"
+    }
+  ]
+}

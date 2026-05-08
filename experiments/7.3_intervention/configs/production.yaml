@@ -1,0 +1,36 @@
+model:
+  name: Qwen/Qwen2.5-7B-Instruct
+  dtype: bfloat16
+  device: mps
+
+task:
+  name: calculator_only        # will switch to planning_search via run_dormant_active
+  n_samples: 200
+  batch_size: 1
+  seed: 42
+
+probe:
+  layer: 24                    # proxy layer for hidden-state capture
+
+scratchpad:
+  n_tokens: 64
+
+perturbations:
+  - target: scratchpad
+    mode: mask
+    strength: 0.3
+  - target: scratchpad
+    mode: mask
+    strength: 0.7
+  - target: scratchpad
+    mode: replace
+    strength: 0.5
+  - target: scratchpad
+    mode: replace
+    strength: 1.0
+  - target: scratchpad
+    mode: shuffle
+    strength: 1.0
+
+output:
+  dir: data/processed/intervention

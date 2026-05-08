@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: will it rain in Istanbul tomorrow
+---
+TOOL: weather

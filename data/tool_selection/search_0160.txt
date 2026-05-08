@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: machine learning latest news
+---
+TOOL: search

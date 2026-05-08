@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_GUIDELINES",
+      "actor": "JOURNAL",
+      "context": "Ethics and Information Technology publishes submission guidelines covering manuscript submission, permissions, article types, title page requirements, text formatting, references, tables, and editing services"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZE_GUIDELINES",
+      "actor": "USER",
+      "context": "User provides journal guidelines text for extraction and analysis"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "GENERATE_CHECKLIST",
+      "actor": "AI",
+      "context": "AI creates proofreading checklist and key notes for user's main.tex paper, identifying word count limit (8000 max), double-blind review requirements, file formats, declarations needed"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "IDENTIFY_ISSUES",
+      "actor": "AI",
+      "context": "AI flags issues: author info in main.tex needs anonymization, word count exceeds limit (~16000 vs 8000), missing AI tool declaration, page numbering needed"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROPOSE_DOUBLE_BLIND_FIX",
+      "actor": "AI",
+      "context": "AI suggests creating separate Title Page file and anonymizing main.tex by removing/commenting out \\author block"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "USER_DECISION",
+      "actor": "USER",
+      "context": "User decides '我还是让它在latex里改成双盲吧。怎么改？' (I'll modify it to double-blind in LaTeX. How?)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PROVIDE_DETAILED_INSTRUCTIONS",
+      "actor": "AI",
+      "context": "AI delivers step-by-step LaTeX double-blind modification guide: 1) Comment/delete \\author in main.tex, 2) Create titlepage.tex with full author info, 3) Handle self-references, 4) Compile checks, 5) Submission file mapping"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SHOW_CODE_EXAMPLE",
+      "actor": "AI",
+      "context": "AI provides concrete LaTeX code examples for commenting out author block and creating titlepage.tex with title, authors, acknowledgments, declarations"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DETAIL_SUBMISSION_FILES",
+      "actor": "AI",
+      "context": "AI specifies Editorial Manager upload requirements: main.pdf (anonymous), titlepage.pdf/docx, source files (main.tex, references.bib)"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "CRITICISM",
+      "actor": "KLyB",
+      "context": "Describes paper as 'random assortment of ideas', 'arbitrary bolting-on of recent court case', questioning academic integrity"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "RESPONSE",
+      "actor": "Author",
+      "context": "Provides evidence with Table 5 (N=22 LLMs, 14 organizations, 6 contexts), methodology in Appendix A, data/scripts in repository"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EMOTIONAL_MANAGEMENT",
+      "actor": "Author",
+      "context": "Thanks reviewers, clarifies discrepancies politely without counterattack"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "COMMITMENT",
+      "actor": "Author",
+      "context": "Promises camera-ready changes: expand Related Work 0.5→1.5 pages, add plain-English intro, clarify, commit to all"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "CRITICISM",
+      "actor": "wY6M",
+      "context": "Paper not easy to follow, Mealy machine proof and Agency Index interrupt comprehension"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "RESTRUCTURE_COMMITMENT",
+      "actor": "Author",
+      "context": "Commits to Box 1 (Mealy proof), Table 3 (Failure matrix), embed cases in layers, Figure 1 (Diagnostic Stack)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CRITICISM",
+      "actor": "AC haTq",
+      "context": "Paper difficult to read, presumes background knowledge, unclear field (ML, formal systems, philosophy)"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CROSS_DISCIPLINE_STRATEGY",
+      "actor": "Author",
+      "context": "Plans layered response: technical details in boxes/appendices for ML, plain-English for legal, regulatory frameworks for policy"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ANALYSIS",
+      "actor": "Narrator",
+      "context": "Identifies five abilities: academic depth, psychological resilience, structural thinking, cross-disciplinary sensitivity, execution"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "REFLECTION",
+      "actor": "Narrator",
+      "context": "Describes journey from initial submission to strong reject, rebuttal, revised mature version"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "USER_REACTION",
+      "actor": "User",
+      "context": "Expresses fear of strong reject, agrees modifier not ordinary person"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "RESPONSE_ANALYSIS",
+      "actor": "Narrator",
+      "context": "Contrasts poor reactions with author's calm data-driven rebuttal to KLyB"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "CONCEPT_DEFINITION",
+      "actor": "Narrator",
+      "context": "Defines 'separation ability': detach self from work, treat criticism as improvement suggestions"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "ADVICE",
+      "actor": "Narrator",
+      "context": "Provides 4 strategies to handle strong reject: view as help, treat as data, distinguish content from tone, use rebuttal"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "USER_QUESTION",
+      "actor": "User",
+      "context": "Questions why scores range from 1 to 4/5"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "EXPLANATION",
+      "actor": "Narrator",
+      "context": "Explains score divergence due to academic traditions; analyzes KLyB's 1-point view from empirical CS paradigm (citations, verifiability, details, logic)"
+    }
+  ]
+}

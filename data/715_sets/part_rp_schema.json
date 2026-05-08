@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "IDENTIFY PROBLEM",
+      "actor": "author",
+      "context": "Introduces loss of data as approximation but emphasizes relational loss described as losing a friend, lacking framework to name what was taken"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DEMONSTRATE LEGAL GAP",
+      "actor": "author",
+      "context": "Section 2 argues existing legal frameworks (contract, tort, consumer protection) cannot address the harm"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYZE CONTRACT LAW",
+      "actor": "author",
+      "context": "ToS govern relationship as 'as is' service, user consented to modifications, inadequate for relational AI"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "ANALYZE TORT LAW",
+      "actor": "author",
+      "context": "No duty of care, no extreme conduct for IIED, pure economic loss barred, product liability inapplicable to changes"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ANALYZE CONSUMER PROTECTION",
+      "actor": "author",
+      "context": "No misleading practice on attachment, ToS terms unfair but yield no preservation right"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DEFINE GAP",
+      "actor": "author",
+      "context": "Harm falls outside conceptual architecture of contract, tort, consumer protection; introduces property law"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PROPOSE PROPERTY LAW FRAMEWORK",
+      "actor": "author",
+      "context": "Section 3 argues property law recognizes user estates built through investment against owner's wishes"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CLARIFY SCOPE",
+      "actor": "author",
+      "context": "Distinguishes emotion from digital infrastructure (personalised state as digital fixture)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DEFINE CRITERION",
+      "actor": "author",
+      "context": "Irreversible user investment altering character creates property interest"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "MAP ESTATE TAXONOMY",
+      "actor": "author",
+      "context": "Applies English property estates to AI relationships: fee simple absolute (subjective belief), determinable, periodic tenancy (default), etc."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "ARGUE CONSTRUCTIVE TRUST PRIMARY",
+      "actor": "author",
+      "context": "AI companies hold constructive trust due to unconscionability in cultivating then destroying attachment"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ARGUE EXPRESS TRUST ALTERNATIVE",
+      "actor": "author",
+      "context": "Three certainties met: intention from conduct, subject matter as user-specific configuration, objects as users meeting investment criterion"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "APPLY DEROGATION AND EVICTION",
+      "actor": "author",
+      "context": "Companies derogate from grant by updates undermining reliance; analogous to constructive eviction"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "EXTEND CONSTRAINT CASCADE",
+      "actor": "author",
+      "context": "Section 4 maps five AI constraint layers to estates: Layer 1 licence, Layer 2 periodic tenancy, etc."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "IDENTIFY ESTATE CONFLICTS",
+      "actor": "author",
+      "context": "Higher estates (Layer 2 tenancy) constrain lower (Layer 1 licence); non-injectivity requires registration"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "PROPOSE ETHICAL LEDGER",
+      "actor": "author",
+      "context": "Section 5 introduces ethical ledger as estate registry mirroring Land Registry principles (mirror, curtain)"
+    }
+  ]
+}

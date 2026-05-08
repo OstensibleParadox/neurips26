@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PROVIDE_TEXT",
+      "actor": "user",
+      "context": "User provides Japanese video transcript discussing whitening skincare products from various brands like SK-II, Obagi, Chanel, etc."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "COUNT_PRODUCTS",
+      "actor": "analyzer",
+      "context": "Analyzer counts 15 whitening products from the transcript, lists them by brand/series with note on counting method (e.g., merging same series, separating masks)."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "REORGANIZE_DOCUMENT",
+      "actor": "analyzer",
+      "context": "Analyzer reorganizes original translated document into structured Markdown by product SKU, creating sections for 13 products with details on name, type, tech/ingredients, interpretation, suitable users, texture."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PROVIDE_TRANSLATION_INSTRUCTION",
+      "actor": "user",
+      "context": "User instructs to translate the structured Markdown into Chinese with proper formatting."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "INTRODUCE_NEW_TEXT",
+      "actor": "analyzer",
+      "context": "New Chinese text introduced about '卡之助' introducing face brand's melt hair care series third edition deep clean shampoo & conditioner, comparing to previous versions."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMPARE_PREVIOUS_PRODUCTS",
+      "actor": "speaker",
+      "context": "Speaker compares melt 滋润型 (moisturizing) and melt 顺滑型 (smooth) shampoos, detailing ingredients like surfactants, repair components, and usage senses."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "INTRODUCE_NEW_PRODUCT",
+      "actor": "speaker",
+      "context": "Speaker introduces melt 深层清洁洗发水 (deep clean shampoo), analyzes ingredients as combination of previous types, highlights elevated lactic acid (7x), polyquaternium-52 (2x), for damaged hair."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DETAIL_CONDITIONER",
+      "actor": "speaker",
+      "context": "Speaker details melt 深层清洁护发素 (deep clean conditioner), notes tube design, high lactic acid (3x), new ceramide NG, oils for flexibility."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PERFORM_TEST",
+      "actor": "speaker",
+      "context": "Speaker tests usage on real human hair extensions: shampoo mild, bubbly, fragrant; conditioner smooth, penetrating."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "INTRODUCE_CARBONATE_POWDER",
+      "actor": "speaker",
+      "context": "Speaker introduces updated melt Creamy Melt Powder for carbonated washing, improved with cleaning agent, plastic container."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DEMONSTRATE_TEST",
+      "actor": "speaker",
+      "context": "Speaker demonstrates powder with shampoo on hair sample, compares results: with conditioner glossy and manageable; with powder lightweight."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "SUMMARIZE_AND_PRICE",
+      "actor": "speaker",
+      "context": "Speaker summarizes series, provides price for deep clean shampoo (480ml, 1760 yen), ends introduction."
+    }
+  ]
+}

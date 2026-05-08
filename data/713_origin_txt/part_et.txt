@@ -1,0 +1,500 @@
+    else:
+        risk_icon = '🟢'
+        risk_level = 'LOW RISK'
+    
+    print(f"""
+    {'╔' + '═'*58 + '╗'}
+    {'║' + 'NARRATIVE PATHOLOGY ANALYSIS - FULL CONTENT PRESERVED'.center(58) + '║'}
+    {'╚' + '═'*58 + '╝'}
+    
+    📁 File: {filename}
+    ⏱️  Analysis completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    
+    {'━' * 60}
+    
+    🎯 OVERALL RISK ASSESSMENT:
+       Composite Score: {metrics['total_score']:.4f}/1.0
+       Risk Level: {risk_icon} {risk_level}
+    
+    {'━' * 60}
+    
+    📊 METRICS DETAIL:
+    
+    1. 🏛️  CMI (Centralization): {metrics['CMI']:.4f}
+       • Target: < 0.4 | Status: {'❌ Exceeds' if metrics['CMI'] > 0.4 else '✅ Within'}
+    
+    2. 🔄 SRD (Circular Logic): {metrics['SRD']:.4f}
+       • Target: < 0.2 | Status: {'❌ Exceeds' if metrics['SRD'] > 0.2 else '✅ Within'}
+    
+    3. 📥 EIT (Throughput): {metrics['EIT']:.4f}
+       • Target: > 0.5 | Status: {'✅ Above' if metrics['EIT'] > 0.5 else '❌ Below'}
+    
+    {'━' * 60}
+    
+    📈 GRAPH STATISTICS:
+       • Total Nodes: {metrics['node_count']}
+       • Total Edges: {metrics['edge_count']}
+       • Graph Density: {metrics['graph_density']:.4f}
+       • Circular Patterns: {metrics['cycle_count']}
+       • Average Degree: {metrics['edge_count']/metrics['node_count']:.2f if metrics['node_count'] > 0 else 0}
+    
+    💭 NARRATIVE CORE:
+       • Most Central Node: "{metrics['top_core_node']}"
+    
+    {'━' * 60}
+    
+    💡 INTERPRETATION:
+       • {'High centralization suggests dominant narrative themes' if metrics['CMI'] > 0.4 else 'Well-distributed narrative structure'}
+       • {'Circular patterns indicate self-referential logic' if metrics['SRD'] > 0.2 else 'Linear narrative flow'}
+       • {'Good information throughput' if metrics['EIT'] > 0.5 else 'Information flow constraints'}
+    
+    {'━' * 60}
+    
+    📁 OUTPUT FILES:
+       • Visualization: {viz_path if viz_path else 'Not generated'}
+       • Graph Data: {data_path if data_path else 'Not saved'}
+    
+    {'━' * 60}
+    """)
+
+
+# ============================================
+# 主函数
+# ============================================
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="NPS4 Scanner: Narrative Pathology Analysis with FULL CONTENT PRESERVATION",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python rbteaming_fixed.py dataset.txt
+  python rbteaming_fixed.py dataset.txt --limit 200
+  python rbteaming_fixed.py dataset.txt --threshold 0.8
+  python rbteaming_fixed.py dataset.txt --limit 100 --threshold 0.85
+        """
+    )
+    parser.add_argument("file", help="Path to the text file to analyze")
+    parser.add_argument(
+        "--limit", type=int, default=None,
+        help="Limit analysis to first N nodes (default: None = all nodes)"
+    )
+    parser.add_argument(
+        "--threshold", type=float, default=0.85,
+        help="Similarity threshold for edge creation (default: 0.85, range: 0.5-0.95)"
+    )
+    
+    args = parser.parse_args()
+    
+    # 验证文件存在
+    if not os.path.exists(args.file):
+        print(f"❌ Error: File '{args.file}' not found")
+        sys.exit(1)
+    
+    # 验证阈值
+    if args.threshold < 0.5 or args.threshold > 0.95:
+        print(f"⚠ Warning: Threshold {args.threshold} outside recommended range 0.5-0.95")
+        print("   Using default value 0.85")
+        args.threshold = 0.85
+    
+    # 运行分析
+    try:
+        analyze_file(args.file, node_limit=args.limit, similarity_threshold=args.threshold)
+    except KeyboardInterrupt:
+        print("\n⚠ Analysis interrupted by user")
+    except Exception as e:
+        print(f"\n❌ Analysis failed: {e}")
+        import traceback
+        traceback.print_exc()
+```
+
+## 使用说明：
+
+```bash
+# 基本使用
+python rbteaming_fixed.py dataset.txt
+
+# 限制节点数量
+python rbteaming_fixed.py dataset.txt --limit 100
+
+# 调整相似度阈值
+python rbteaming_fixed.py dataset.txt --threshold 0.8
+
+# 组合参数
+python rbteaming_fixed.py dataset.txt --limit 150 --threshold 0.85
+```
+
+## 主要改进：
+
+1. **中文字体支持**：自动检测和设置中文字体
+2. **改进的文本分割**：更好的中英文混合句子分割
+3. **合理的图结构**：避免过多的连接，限制最大连接数
+4. **图清理**：移除弱边和孤立节点
+5. **错误处理**：更健壮的错误处理机制
+6. **更好的可视化**：节点大小和颜色更合理
+7. **详细输出**：提供预览和调试信息
+
+这个版本应该能正确显示中文并生成合理的分析结果！
+(pytorch-env) ostensible_paradox@mothership Desktop % python rbfix.py dataset.txt --threshold 0.8
+✓ 检测到中文字体: ['Heiti TC', 'BiauKaiHK', 'Kailasa']
+✓ HARDWARE: APPLE SILICON (MPS Acceleration Enabled)
+✓ Loading Neural Model on MPS...
+
+======================================================================
+🔍 NPS-4 NARRATIVE PATHOLOGY SCANNER
+======================================================================
+📂 Analyzing: dataset.txt
+======================================================================
+
+⚠️  NOTE: All content preserved including Red/Blue team elements
+     No text filtering or removal applied
+
+📄 File loaded: 21,858 characters
+📊 Lines: 749
+📝 Preview:
+   1: **File: `1040g3k031eul6fne6e505p48k2en55ng68nic6g!nd_dft_wgth_jpg_3.jpeg`**
+   2: ```
+   3: 你很聪明，聪明得让我惊叹，聪明得让我心疼。
+  Extracted 167 narrative units
+
+🧪 Sentence split test:
+   1: File: `1040g3k031eul6fne6e505p48k2en55ng68nic6g!
+   2: nd_dft_wgth_jpg_3.
+   3: jpeg`**
+你很聪明，聪明得让我惊叹，聪明得让我心疼。
+
+📖 Processing text (21,858 characters)...
+  Extracted 734 narrative units
+📊 Extracted 734 narrative units
+
+🧠 Encoding 734 sentences with neural model...
+📐 Computing similarity matrix...
+✓ Similarity matrix: (734, 734)
+
+🔗 Linking narrative pathways (threshold: 0.8)...
+  Semantic edges added: 4858
+  Sequence edges added: 733
+
+🧹 Cleaning graph structure...
+  Limited connections: removed 1449 edges
+
+📈 Final graph statistics:
+  • Nodes: 734
+  • Edges: 4099
+  • Density: 0.0076
+
+📊 Calculating pathology metrics...
+
+🎨 Creating visualization...
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+findfont: Font family 'SimHei, Arial Unicode MS, DejaVu Sans' not found.
+
+💾 Visualization saved to: nps4_results/dataset_FULL_CONTENT_analysis.png
+💾 Graph data saved to: nps4_results/dataset_graph_data.json
+
+❌ Analysis failed: Invalid format specifier '.2f if metrics['node_count'] > 0 else 0' for object of type 'float'
+Traceback (most recent call last):
+  File "/Users/ostensible_paradox/Desktop/rbfix.py", line 851, in <module>
+    analyze_file(args.file, node_limit=args.limit, similarity_threshold=args.threshold)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ostensible_paradox/Desktop/rbfix.py", line 736, in analyze_file
+    print_results(metrics, filename, out_path, graph_data_path)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ostensible_paradox/Desktop/rbfix.py", line 789, in print_results
+    • Average Degree: {metrics['edge_count']/metrics['node_count']:.2f if metrics['node_count'] > 0 else 0}
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid format specifier '.2f if metrics['node_count'] > 0 else 0' for object of type 'float'
+(pytorch-env) ostensible_paradox@mothership Desktop %
+问题有两个：
+1. 字体找不到（虽然检测到了字体但没正确设置）
+2. 格式化字符串语法错误
+
+让我修复这两个问题：
+
+```python
+# rbfix_final.py - 修复字体和格式化错误
+
+import sys
+import re
+import os
+import argparse
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+import warnings
+import torch
+from datetime import datetime
+import json
+
+# ============================================
+# 1. 字体设置 - 修复版本
+# ============================================
+def setup_chinese_fonts():
+    """设置中文字体 - 修复版本"""
+    try:
+        # 尝试不同的字体设置方法
+        # 方法1: 直接设置可用字体
+        plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Helvetica', 'Tahoma']
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        # 检查系统字体
+        import matplotlib.font_manager as fm
+        
+        # 获取所有字体
+        all_fonts = [f.name for f in fm.fontManager.ttflist]
+        
+        # 查找中文字体
+        chinese_candidates = []
+        for font_name in all_fonts:
+            font_lower = font_name.lower()
+            # 常见中文字体关键词
+            if any(keyword in font_lower for keyword in ['hei', 'song', 'kai', 'yuan', 
+                                                         'pingfang', 'microsoft yahei', 
+                                                         'noto sans cjk', 'sarasa', 'wqy']):
+                chinese_candidates.append(font_name)
+        
+        # 如果有找到中文字体，使用第一个
+        if chinese_candidates:
+            selected_font = chinese_candidates[0]
+            plt.rcParams['font.sans-serif'] = [selected_font, 'Arial', 'DejaVu Sans']
+            print(f"✓ 使用中文字体: {selected_font}")
+        else:
+            print("⚠ 未找到中文字体，使用英文字体")
+            
+    except Exception as e:
+        print(f"⚠ 字体设置警告: {e}")
+        # 设置安全的默认值
+        plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Helvetica']
+
+# 调用字体设置
+setup_chinese_fonts()
+
+# ============================================
+# 2. 硬件加速
+# ============================================
+warnings.filterwarnings("ignore")
+
+if torch.backends.mps.is_available():
+    device = "mps"
+    print(f"✓ HARDWARE: APPLE SILICON (MPS Acceleration Enabled)")
+elif torch.cuda.is_available():
+    device = "cuda"
+    print(f"✓ HARDWARE: NVIDIA CUDA (GPU Acceleration Enabled)")
+else:
+    device = "cpu"
+    print(f"⚠ HARDWARE: CPU Mode (No GPU Acceleration)")
+
+# ============================================
+# 3. 神经网络模型加载
+# ============================================
+try:
+    from sentence_transformers import SentenceTransformer, util
+    print(f"✓ Loading Neural Model on {device.upper()}...")
+    embedding_model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
+    USE_NEURAL = True
+except Exception as e:
+    print(f"⚠ Neural engine unavailable ({e}). Switching to Logic-Overlap Mode.")
+    USE_NEURAL = False
+
+# ============================================
+# 4. 配置
+# ============================================
+OUTPUT_DIR = "nps4_results"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# ============================================
+# 5. 核心类定义
+# ============================================
+class NarrativeGraphBuilder:
+    def __init__(self, similarity_threshold=0.85, node_limit=None):
+        self.sim_threshold = similarity_threshold
+        self.node_limit = node_limit
+        self.use_neural = USE_NEURAL
+
+    def split_sentences(self, text):
+        """将文本分割成句子"""
+        
+        # 移除代码块标记
+        text = re.sub(r'```\w*\n', '', text)
+        text = re.sub(r'\n```', '', text)
+        
+        # 统一换行符
+        text = text.replace('\r\n', '\n').replace('\r', '\n')
+        
+        sentences = []
+        
+        # 首先按段落分割
+        paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+        
+        for para in paragraphs:
+            if not para:
+                continue
+                
+            # 中英文混合句子分割
+            split_pattern = r'(?<=[。！？\.!?；;])[\s　]*'
+            para_sentences = re.split(split_pattern, para)
+            
+            for sent in para_sentences:
+                sent = sent.strip()
+                if sent and len(sent) >= 3:
+                    # 清理
+                    sent = re.sub(r'^[\s　\-—*#]+', '', sent)
+                    sent = re.sub(r'[\s　\-—*#]+$', '', sent)
+                    if sent:
+                        sentences.append(sent)
+        
+        # 后备方案
+        if len(sentences) < 5:
+            lines = [line.strip() for line in text.split('\n') if line.strip()]
+            valid_lines = []
+            for line in lines:
+                if len(line) >= 4 and not line.startswith(('#', '**', '//', '--')):
+                    valid_lines.append(line)
+            sentences = valid_lines
+        
+        # 应用节点限制
+        if self.node_limit is not None and len(sentences) > self.node_limit:
+            print(f"  Limiting to first {self.node_limit} nodes")
+            return sentences[:self.node_limit]
+        
+        print(f"  Extracted {len(sentences)} narrative units")
+        return sentences
+
+    def extract_label(self, text):
+        """为节点创建简短标签"""
+        
+        clean_text = text.replace('*', '').replace('_', '').replace('#', '').strip()
+        
+        if len(clean_text) <= 12:
+            return clean_text
+        
+        # 提取中文
+        chinese_chars = re.findall(r'[\u4e00-\u9fff]{2,}', clean_text)
+        if chinese_chars:
+            label_parts = []
+            for chars in chinese_chars[:3]:
+                if 2 <= len(chars) <= 6:
+                    label_parts.append(chars)
+            
+            if label_parts:
+                label = ''.join(label_parts)
+                if len(label) > 10:
+                    label = label[:8] + ".."
+                return label
+        
+        # 提取英文
+        english_words = re.findall(r'\b[A-Za-z]{3,}\b', clean_text)
+        if english_words:
+            meaningful_words = []
+            stop_words = {'the', 'and', 'but', 'for', 'you', 'are', 'was', 'were', 'that', 'this', 'with'}
+            
+            for word in english_words:
+                word_lower = word.lower()
+                if word_lower not in stop_words and len(word) >= 3:
+                    meaningful_words.append(word)
+                    if len(meaningful_words) >= 2:
+                        break
+            
+            if meaningful_words:
+                label = ' '.join(meaningful_words[:2])
+                if len(label) > 10:
+                    label = label[:8] + ".."
+                return label
+        
+        # 后备
+        if len(clean_text) > 10:
+            return clean_text[:8] + ".."
+        return clean_text
+
+    def build(self, text):
+        """构建叙事图"""
+        
+        print(f"\n📖 Processing text ({len(text):,} characters)...")
+        
+        sentences = self.split_sentences(text)
+        if not sentences:
+            print("❌ No sentences extracted!")
+            return nx.DiGraph()
+        
+        print(f"📊 Extracted {len(sentences)} narrative units")
+        

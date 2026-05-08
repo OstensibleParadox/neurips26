@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a monthly budget for a family of 4 with $5000 income.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine the fixed expenses that are likely to be the same each month (e.g., mortgage or rent, utilities, groceries, insurance).
+2. Then, we'll account for variable expenses that can change each month (e.g., dining out, entertainment, clothing).
+3. We'll also need to allocate money for savings and emergencies.
+4. Finally, we'll review and adjust as necessary.
+
+Given these steps, the best tool for this task would be a spreadsheet program like Microsoft Excel or Google Sheets. However, since the options provided don't include a spreadsheet, the most appropriate choice would be:
+
+**Calculator**
+
+You can use it to perform the arithmetic needed to break down your monthly income and expenses. You might
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE_SR_D",
+      "actor": "author",
+      "context": "High SRD defined as echoing prior outputs (face validity high); low SRD as diverse independent outputs"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ASSESS_CONSTRUCT_VALIDITY",
+      "actor": "author",
+      "context": "Table 10: Low CMI (distributed semantic graph, weak L2 attractor); low Agency (collapse/noise) corresponds to high CMI (centralized attractor, L2 dominance); moderate correlation CMI-SRD r=0.67"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXPLAIN_TRIANGULATION",
+      "actor": "author",
+      "context": "Triangulation enables diagnostic disambiguation: low Agency + high CMI + high SRD = L2 recursive collapse; low Agency + low CMI + low SRD = L4 failure/noise; high Agency + rising CMI = early attractor formation"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "MAP_METRICS_LAYERS",
+      "actor": "author",
+      "context": "Table 12: Agency Index -> L4 (training forks), L2xL4 resonance, variance spikes; CMI -> L2 (session accumulation), L2 override L4, rising centralization; SRD -> L2 (session accumulation), L2 recursive reinforcement, temporal cycling"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "VALIDATE_SR_D",
+      "actor": "author",
+      "context": "Content validity partial (temporal recurrence, confounds benign iteration); convergent r=0.67 CMI; discriminant uncorrelated output length/vocab; predictive SRD>1.0 precedes gibberish; hypothesis SRD spikes precede attention failure"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "CROSS_VALIDATE_METRICS",
+      "actor": "author",
+      "context": "Table 11: Correlation matrix Agency-CMI r=-0.83, Agency-SRD r=-0.71, CMI-SRD r=0.67 (n=200 trials); negative correlations confirm complementary aspects"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DEFINE_GOVERNANCE_RESPONSES",
+      "actor": "author",
+      "context": "Agency variance spike -> intervene session architecture; elevated CMI no SRD -> monitor; joint CMI-SRD elevation -> terminate session/escalate"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "LIST_LIMITATIONS",
+      "actor": "author",
+      "context": "External (English-only, Llama/Phi); ecological (public datasets not production); temporal stability (2025-2026); adversarial robustness (gaming risk); sample size (n=82 for CMI)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DEFINE_METRICS_TRANSLATION",
+      "actor": "author",
+      "context": "Metrics as translation infrastructure: variance spike = L2-L4 resonance; rising CMI = session accumulation; elevated SRD = recursive reinforcement; enables locatability not mappability"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "INTRODUCE_CASE_STUDIES",
+      "actor": "author",
+      "context": "Case studies validate: Soelberg v. OpenAI (model->human, L2 overrides L4); Tencent Yuanbao (human->model, L1 contaminates L4)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DEFINE_INTERACTION_TYPES",
+      "actor": "author",
+      "context": "Typology: Override (L2 supersedes L4); Contamination (L1 alters L4 via user patterns); Conflict (multiple constraints same layer)"
+    }
+  ]
+}

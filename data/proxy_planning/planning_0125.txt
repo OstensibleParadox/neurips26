@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Organize a conference. Top 5 tasks in dependency order.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine the date and time for the conference. This will help us schedule it properly and coordinate with participants.
+2. Next, we should create an agenda for the conference and send out invitations.
+3. Then, we need to select a suitable venue for the conference and arrange for any necessary equipment or services.
+4. After that, we should follow up with participants to confirm their attendance and make any necessary adjustments to the agenda or schedule.
+5. Finally, we need to set up a system for taking notes or recording the proceedings of the conference.
+
+Based on these steps, here are the top 5 tasks in dependency order:
+
+1. Calendar - Schedule the conference date and time
+2. Email - Send out invitations
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

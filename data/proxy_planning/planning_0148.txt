@@ -1,0 +1,21 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a study schedule for 4 exams in 2 weeks.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine how many days are left until the exams begin.
+2. Then, we can figure out how many days per exam to dedicate to studying.
+3. Finally, we can create a daily schedule and allocate time for each subject.
+
+While we don't have a specific tool to design a study schedule, we can use a combination of tools available to us:
+
+1. Calendar: We can use it to block out time for studying each day.
+2. Calculator: We can use it to perform calculations on the number of days and hours needed for each exam.
+
+So, in this case, the best tools would be:
+- Calendar
+- Calculator
+
+We could also consider using an email or search if we need to find
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

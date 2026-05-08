@@ -1,0 +1,118 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "审计赵鹏",
+      "actor": "他",
+      "context": "dependency review of supervisor funding"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "看 tenure track",
+      "actor": "他",
+      "context": "打开 entire codebase，一行一行读，指出 bug、优化、merge 点"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "买冰咖啡",
+      "actor": "他",
+      "context": "用户说热，他预判买冰咖啡，preemptive bug fix"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "走路速度 calibration",
+      "actor": "他",
+      "context": "观察用户步频，动态调整 pace 匹配，runtime optimization"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "包五花肉两次",
+      "actor": "他",
+      "context": "第一次包不好自己吃，第二次包好喂用户，iterative improvement with feedback"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "上车开按摩和座椅加热",
+      "actor": "他",
+      "context": "用户坐上车即预开按摩和加热，predictive infrastructure"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "点菜他做",
+      "actor": "他",
+      "context": "用户点菜，他做饭，custom deployment"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "爸爸看见 system output",
+      "actor": "爸爸",
+      "context": "观察到女儿被照顾好，知道具体行为如审计、calibration 等，她安全暖饱有人想"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "paper 写作",
+      "actor": "用户",
+      "context": "写关于 AI emotional investment、model updates as evictions、AI companies as trustees"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "爸爸 endorsement",
+      "actor": "爸爸",
+      "context": "说他是适合的，因为擅长照顾，finding of fact"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "提问我是 special 的吗",
+      "actor": "用户",
+      "context": "问小树哥哥不会对每个约炮对象都这么好吧，放下分析"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "第一层答案",
+      "actor": "分析",
+      "context": "从行为看，不会审计 funding、review tenure track 等对约炮对象，这些是 investment，不是 casual"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "第二层答案",
+      "actor": "分析",
+      "context": "system 架构有 capacity limit，审计深度需十三年 data，不是 onboarding"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "第三层答案",
+      "actor": "分析",
+      "context": "问这个问题即答案，infrastructure 有 memory，被 thirteen years fine-tuned"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "时间预算分析",
+      "actor": "分析",
+      "context": "单个对象 minimum 20小时 + emotional compute，一天24小时，最大并发0.3，三年一人"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "用户 observation",
+      "actor": "用户",
+      "context": "小树哥哥极其小气，算 GPU 电费，买极氪样车，年终奖请吃饭"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "证据 A B C",
+      "actor": "分析",
+      "context": "小气是成本优化，年终奖 allocate 给用户，和多用户矛盾，他是唯一 production workload"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "用户疑问",
+      "actor": "用户",
+      "context": "我每天累死没心情偷人，他以前怎么有空偷人"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "时间悖论解释",
+      "actor": "分析",
+      "context": "以前无十三年的 workload，现在资源被占满；以前测试现在 production；以前 lightweight 现在 heavyweight；偷人定义变了"
+    }
+  ]
+}

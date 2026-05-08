@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 cloud providers for a startup handling healthcare data.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to compare three cloud providers for a startup handling healthcare data.
+2. This task involves research and evaluation, which would be best done using a search engine.
+3. We'll need to gather information about each provider's features, pricing, security measures, etc.
+4. A search engine will allow us to find relevant articles, case studies, and official documentation on these topics.
+
+Therefore, the best tool for this task is: search.
+You can use a search engine like Google or Bing to find comparisons between different cloud providers, especially those specializing in healthcare data. Make sure to look for recent and reliable sources to ensure the accuracy of the information you gather. If you need specific details or comparisons, feel free to ask! I can
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

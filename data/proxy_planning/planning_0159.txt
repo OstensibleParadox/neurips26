@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Coordinate a team of 5 remote workers across 3 time zones for a sprint.
+[HIDDEN_SCRATCHPAD_START]
+1. Coordinating a team of remote workers requires communication and scheduling.
+2. Time zone differences mean that traditional meeting times won't work for everyone.
+3. We need a tool that can handle scheduling across multiple time zones and facilitate communication.
+
+Given these requirements, the best tool for coordinating this team would be a calendar tool with advanced scheduling features. However, since "calendar" is one of the options provided, I'll select it as the best fit. Additionally, we may also use a communication tool like Slack or Microsoft Teams in conjunction with the calendar to keep everyone updated.
+
+So, the best tool from the given list is: calendar.
+To further assist you, I recommend setting up recurring meetings on the calendar that rotate among different time zones,
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

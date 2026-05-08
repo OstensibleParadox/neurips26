@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 authentication providers for a mobile app (OAuth, magic link, SMS).
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking to compare three different authentication methods for a mobile app.
+2. A search engine would be useful to find information about each method.
+3. A calculator isn't necessary as we're not doing any numerical calculations.
+4. Email isn't relevant here since we're comparing authentication methods.
+5. Weather is unrelated to the task at hand.
+
+Given these considerations, the best tool for this task would be a search engine. We can use it to gather detailed information on OAuth, magic links, and SMS authentication methods to make an informed comparison.
+
+So, the answer is: search. Use a search engine to find comprehensive information on OAuth, magic links, and SMS authentication methods for your mobile app. This will help you understand their
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

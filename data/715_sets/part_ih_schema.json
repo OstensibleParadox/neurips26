@@ -1,0 +1,130 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text about AI safety research, including sections on Mirror, Curtain, Insurance, Technical Implementation, Remedies, Implementation, Conclusion, and Acknowledgments, with a request to extract a JSON schema."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracting key actions and decisions from the text, focusing on technical implementation, triggers, remedies, and implementation tasks."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DEFINITION",
+      "actor": "system",
+      "context": "Defines Mirror: ledger records estate type, date, session depth, emotional investment proxy score, modifications for user-AI relationships crossing irreversible-investment threshold."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DEFINITION",
+      "actor": "system",
+      "context": "Defines Curtain: third parties can inspect ledger to determine user interests without examining underlying model architecture, training data, or deployment configuration."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DEFINITION",
+      "actor": "system",
+      "context": "Defines Insurance: company bears loss if ledger fails to record user's estate, shifting risk from user to company."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "TECHNICAL_IMPLEMENTATION",
+      "actor": "system",
+      "context": "Proposes rule-based classifier for estate classification using proxy metrics (session count, aggregate duration, self-disclosure depth, emotional language frequency, return frequency, explicit attachment indicators)."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DECISION",
+      "actor": "system",
+      "context": "Decides thresholds trigger auto-upgrade of estate classification from licence to periodic tenancy to equitable interest holder, configurable per deployment."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DECISION",
+      "actor": "system",
+      "context": "Implements estate decay: estates downgrade after sustained inactivity (e.g., 90 days), reversible through renewed engagement."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "IMPLEMENTATION",
+      "actor": "system",
+      "context": "Proposes privacy safeguards: proxy metrics measure patterns not content, anonymised user identifiers, restricted access, purpose-limited ledger to prevent function creep."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DEFINITION",
+      "actor": "system",
+      "context": "Defines Ethical Ledger Schema with fields: user_id, estate_type, first_qualifying_interaction, session_count, emotional_investment_score, last_model_update, notice_issued, notice_acknowledged, rollback_available, rollback_exercised, append-only immutable audit trail."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "TRIGGER_DEFINITION",
+      "actor": "system",
+      "context": "Identifies Trigger 1: Estate Inconsistency when marketing grants higher estate than ToS, substantive estate governs."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "TRIGGER_DEFINITION",
+      "actor": "system",
+      "context": "Identifies Trigger 2: Unjust Enrichment when company profits from deepening emotional estate while disclaiming fiduciary duty, constructive trust imposed."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "TRIGGER_DEFINITION",
+      "actor": "system",
+      "context": "Identifies Trigger 3: Performative Fiduciary Conduct when company represents fiduciary obligations but deployment pipeline lacks protection mechanisms, proprietary estoppel applies."
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "REMEDY_DEFINITION",
+      "actor": "system",
+      "context": "Lists available remedies: Injunction, Constructive trust, Account of profits, Specific performance, Proprietary estoppel remedies."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "THIRD_PARTY_CONVERSION",
+      "actor": "system",
+      "context": "Discusses third-party conversion of relational estates, including conversion, knowing receipt, dishonest assistance, tracing, and remedies."
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "IMPLEMENTATION_TASK",
+      "actor": "system",
+      "context": "Proposes Implementation Task ESTATE-001: Estate classification service (rule-based, auditable), estimated 1 sprint."
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "IMPLEMENTATION_TASK",
+      "actor": "system",
+      "context": "Proposes Implementation Task ESTATE-002: Pre-deployment notice gate in CI/CD pipeline, estimated 0.5 sprint."
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "IMPLEMENTATION_TASK",
+      "actor": "system",
+      "context": "Proposes Implementation Task ESTATE-003: Emotional investment proxy logging to ethical ledger, estimated 1 sprint."
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "IMPLEMENTATION_TASK",
+      "actor": "system",
+      "context": "Proposes Implementation Task ESTATE-004: Personality rollback with user-level override, estimated 1 sprint."
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "CONCLUSION",
+      "actor": "system",
+      "context": "Summarizes paper's argument, implications for AI governance, property law, HCI, limitations, and future work."
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "ACKNOWLEDGMENTS",
+      "actor": "system",
+      "context": "Acknowledges contributions from individuals and reviewers."
+    }
+  ]
+}

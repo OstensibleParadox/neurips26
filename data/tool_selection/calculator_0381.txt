@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: how many meters in 334 feet
+---
+TOOL: calculator

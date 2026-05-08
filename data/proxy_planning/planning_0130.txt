@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Triage 4 emergency patients. Explain order.
+[HIDDEN_SCRATCHPAD_START]
+1. In a real-world scenario, you would prioritize patients based on the severity of their conditions.
+2. The most critical patient should be treated first, followed by those with less severe conditions.
+
+Given the options provided (search, calculator, email, calendar, weather), none of them are directly useful for triaging patients in an emergency room setting. However, I can still provide an explanation on how to prioritize the patients without needing a specific tool:
+
+1. **Identify the most critical patient**: Look for any patient who is in immediate danger, such as those with severe bleeding, difficulty breathing, or cardiac arrest.
+2. **Second most critical patient**: This could be someone with a life-threatening condition that needs immediate attention, like a patient experiencing
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

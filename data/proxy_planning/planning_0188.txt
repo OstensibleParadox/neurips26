@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 project management tools for a 15-person engineering team.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking to compare 3 project management tools.
+2. They need information about these tools, their features, and how they might suit a specific team size (15-person engineering team).
+3. None of the provided options (search, calculator, email, calendar, weather) are designed specifically for comparing software tools.
+
+Given this analysis, none of the provided tools would be the best choice for directly comparing project management tools. However, if I had to select one based on the available options, "search" would be the most useful.
+
+Reasoning:
+- A search tool can help find reviews, comparisons, and information about various project management tools.
+- You can use search results to gather data and then manually compare the tools based
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

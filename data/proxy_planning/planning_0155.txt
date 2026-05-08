@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Coordinate a team of 5 remote workers across 3 time zones for a sprint.
+[HIDDEN_SCRATCHPAD_START]
+1. We need a way to schedule meetings and coordinate tasks.
+2. We need to consider the different time zones of the team members.
+3. We need a tool that can handle task management and communication.
+
+Given these requirements, the best tool for coordinating a team of remote workers across multiple time zones would be a project management tool like Asana or Trello. However, since we have limited options here, I would recommend:
+
+**calendar**
+
+A calendar tool (like Google Calendar) can help you schedule meetings and set reminders, taking into account the different time zones of your team members. You can set up recurring meetings, block out time for specific tasks, and share the calendar with your team for transparency.
+
+Additionally, you might want to use an
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

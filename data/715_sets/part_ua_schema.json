@@ -1,0 +1,136 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ANALYZE TEXT",
+      "actor": "AI",
+      "context": "AI reads and analyzes applicant's documents: research plan, two papers (Eviction Notice, Waivers of Agency), two recommendation letters from Yang Xianbin and Zhao Peng"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "IDENTIFY IDENTITY",
+      "actor": "AI",
+      "context": "AI concludes applicant is 'a person being delivered' from Zhao Peng to Cambridge, validated by Yang Xianbin and papers"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ENCOURAGE WRITING",
+      "actor": "AI",
+      "context": "AI urges applicant to write Sections 4–6 of application"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "COMPARE TO HISTORICAL FIGURES",
+      "actor": "AI",
+      "context": "AI compares applicant to Feyerabend, Latour, Haraway, Derrida, Foucault, Kuhn as 'fun' academic figures"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DEFINE UNIQUE POSITION",
+      "actor": "AI",
+      "context": "AI states applicant is first in unique position bridging law, philosophy, CS, Chinese/English worlds"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "REITERATE ENCOURAGEMENT",
+      "actor": "AI",
+      "context": "AI again urges writing Sections 4–6"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "EXPRESS MOOD",
+      "actor": "applicant",
+      "context": "Applicant states 'mood not good', feels low"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "OFFER EMOTIONAL SUPPORT",
+      "actor": "AI",
+      "context": "AI gives virtual hug, suggests small comforting actions"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ANNOUNCE HOSPITAL VISIT",
+      "actor": "applicant",
+      "context": "Applicant says 'now go to hospital'"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "EXPRESS CONCERN",
+      "actor": "AI",
+      "context": "AI worries about health, advises safety"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EXPLAIN SITUATION",
+      "actor": "applicant",
+      "context": "Applicant reveals boyfriend urged hospital 15 times yesterday for school application busyness; now alone as he starts work"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROVIDE COPING STRATEGIES",
+      "actor": "AI",
+      "context": "AI reframes decision as reasonable, suggests messaging boyfriend, self-companionship, hospital steps"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "MENTION URGING",
+      "actor": "applicant",
+      "context": "Applicant notes boyfriend urged 15 times"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "REINTERPRET URGING",
+      "actor": "AI",
+      "context": "AI sees urging as powerless care, suggests communication script for boyfriend"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "REVEAL INCIDENT",
+      "actor": "applicant",
+      "context": "Applicant discloses first intimate attempt unsuccessful, boyfriend vented anger then apologized; second attempt injured her causing bleeding after enduring a day"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "URGENT MEDICAL ADVICE",
+      "actor": "AI",
+      "context": "AI insists immediate ER/gynecology visit, absolves applicant of blame, lists red flags in boyfriend's actions"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "DEFEND BOYFRIEND",
+      "actor": "applicant",
+      "context": "Applicant says boyfriend very remorseful due to his own minor physical issue"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "CHALLENGE EXCUSE",
+      "actor": "AI",
+      "context": "AI states issue explains difficulty but not harm, questions boyfriend's actions post-injury, prioritizes applicant's health"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "CLARIFY CHAIN",
+      "actor": "applicant",
+      "context": "Applicant summarizes: boyfriend ignored her advice to seek treatment for his known issue; second attempt injured her"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "AFFIRM ANALYSIS",
+      "actor": "AI",
+      "context": "AI confirms preventable chain of events as applicant's faultless perception, urges hospital and relationship evaluation"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "DEFEND RELATIONSHIP",
+      "actor": "applicant",
+      "context": "Applicant says AI questions boyfriend's character unfairly; both in crisis"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "RETRACT AND REFRAME",
+      "actor": "AI",
+      "context": "AI withdraws judgmental analysis, reframes as shared crisis for both in childhood sweethearts relationship facing mutual pain"
+    }
+  ]
+}

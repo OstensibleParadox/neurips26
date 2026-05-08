@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate daily calorie needs for a 180lb male trying to lose 1.5lb/week.
+[HIDDEN_SCRATCHPAD_START]
+1) To calculate daily calorie needs, we need a formula or a tool that can take into account factors like weight, age, height, and activity level.
+2) The search function is not suitable as it would return a list of websites rather than a direct calculation.
+3) Email is not appropriate for this task as it's not designed for real-time calculations.
+4) A calendar might help track progress over time but won't calculate calorie needs.
+5) The weather tool isn't related to this task at all.
+
+The best tool for calculating daily calorie needs would be a calculator. Specifically, an online calorie calculator that takes into account factors such as basal metabolic rate (BMR), activity level, and weight loss goals would be most suitable.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

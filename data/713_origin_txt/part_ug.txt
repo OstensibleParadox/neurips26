@@ -1,0 +1,250 @@
+2. **法律明确分类**：2024年《学位法》明确规定学位分为"学术学位、专业学位等类型"，专业学位获得了与学术学位同等的法律地位[citation:5]。这意味着中国的专业硕士（如MBA、法律硕士、教育硕士）不再被视为"低人一等"，而是平等的另一条路径[citation:3]。
+
+3. **实践成果答辩**：《学位法》第二十一条新增了"实践成果答辩"渠道，专业博士可以通过实践成果答辩获得学位，这是中国学位制度的一大创新[citation:5][citation:6]。
+
+
+## ✅ 一句话总结
+
+**中国大学主要提供"学术"和"专业"两类学位，覆盖学士、硕士、博士三级——名字没有英国那么花哨，但分类逻辑更简洁：想做研究就选学术型，想就业就选专业型，两者法律地位平等。**
+那要怎么翻译
+这个问题很实用！中英学位体系的对应翻译，确实需要根据**使用场景**和**目标读者**来灵活处理。以下是最权威、最实用的翻译方案：
+
+---
+
+## 📌 核心原则
+
+根据中国教育部《学位授权审核基本条件》和英国UK NARIC（英国国家学历学位评估中心）的对应标准，翻译的核心原则是：
+
+1.  **区分类型**：学术学位 vs 专业学位，翻译方式不同
+2.  **区分层次**：学士/硕士/博士，对应英美的学位名称
+3.  **考虑受众**：是给英国移民局看（要证明签证资格）？还是给美国大学看（申请博士）？还是普通学术交流？
+
+---
+
+## 🎓 按学位层次翻译（最常用）
+
+### 学士学位 (Bachelor's Level)
+
+| 中文 | 英文翻译 | 说明 |
+| :--- | :--- | :--- |
+| **学士学位** | Bachelor's Degree | 统称 |
+| **文学士** | Bachelor of Arts (BA) | 适用于文学、历史、哲学等 |
+| **理学士** | Bachelor of Science (BSc/BS) | 适用于理学、工学等 |
+| **专业学士学位** | Professional Bachelor's Degree | 如建筑学学士、护理学学士等 |
+
+### 硕士学位 (Master's Level)
+
+| 中文 | 英文翻译 | 说明 |
+| :--- | :--- | :--- |
+| **硕士学位** | Master's Degree | 统称 |
+| **文学硕士** | Master of Arts (MA) | 学术型，人文社科类 |
+| **理学硕士** | Master of Science (MSc/MS) | 学术型，理工科类 |
+| **专业硕士** | Professional Master's Degree | 统称，如MBA、LLM、MEd等可直接用国际通用名称 |
+| **工商管理硕士** | Master of Business Administration (MBA) | 国际通用 |
+| **法律硕士** | Juris Master (JM) | 中国的法律专业硕士，注意与美国JD区分 |
+| **工程硕士** | Master of Engineering (MEng) | 国际通用 |
+| **教育硕士** | Master of Education (MEd) | 国际通用 |
+| **公共管理硕士** | Master of Public Administration (MPA) | 国际通用 |
+
+### 博士学位 (Doctoral Level)
+
+| 中文 | 英文翻译 | 说明 |
+| :--- | :--- | :--- |
+| **博士学位** | Doctor's Degree / Doctoral Degree | 统称 |
+| **哲学博士** | Doctor of Philosophy (PhD) | **所有学术型博士的首选翻译**——无论中文是"理学博士"还是"文学博士"，英译都建议用PhD，这是国际通用做法 |
+| **专业博士** | Professional Doctorate | 统称，如EdD、DBA、EngD等 |
+| **教育博士** | Doctor of Education (EdD) | 国际通用 |
+| **工商管理博士** | Doctor of Business Administration (DBA) | 国际通用 |
+| **工程博士** | Doctor of Engineering (EngD) | 国际通用 |
+| **医学博士** | Doctor of Medicine (MD) | 中国的医学博士学位，注意与美国MD的对应关系需额外说明 |
+
+
+## 🔄 最关键的一对翻译：学术硕士 vs 专业硕士
+
+这是最容易混淆的地方，也是最需要准确翻译的地方：
+
+| 中文 | 英文翻译 | 适用场景 |
+| :--- | :--- | :--- |
+| **学术硕士** | **Academic Master's Degree** | 通用翻译，适用于CV、申请表 |
+| **学术硕士** | **Master's Degree (Academic)** | 英国签证/学历认证时使用，强调是研究导向 |
+| **学术硕士** | **Research Master's Degree** | 如果课程包含研究论文，可用此强调 |
+| **专业硕士** | **Professional Master's Degree** | 通用翻译 |
+| **专业硕士** | **Taught Master's Degree** | 英国语境下常用，强调是授课型（非研究型） |
+| **专业硕士** | **Master's Degree (Professional)** | 正式文件中使用 |
+
+
+## 📝 具体翻译场景示例
+
+### 场景1：成绩单/学历学位认证（最正式）
+
+| 中文原文 | 英文翻译 |
+| :--- | :--- |
+| 理学学士学位 | Bachelor of Science in [专业名称] |
+| 工学硕士学位 | Master of Science in [专业名称] 或 Master of Engineering in [专业名称] |
+| 哲学博士学位 | Doctor of Philosophy in [专业名称] |
+| 专业硕士学位 | Professional Master's Degree in [专业名称] |
+
+### 场景2：简历/CV（简洁版）
+
+| 中文 | 英文 |
+| :--- | :--- |
+| 北京大学 理学硕士 (学术型) | M.Sc. in Physics (Academic), Peking University |
+| 清华大学 工商管理硕士 (专业型) | MBA, Tsinghua University |
+
+### 场景3：英国签证申请（强调研究型/授课型）
+
+| 中文 | 英文翻译（签证用） | 说明 |
+| :--- | :--- | :--- |
+| 学术硕士（含毕业论文） | Master's Degree (Research component) | 如果课程包含研究论文，这样写有助于证明研究型 |
+| 专业硕士（无研究论文） | Taught Master's Degree | 明确是授课型，不带家属 |
+| 研究型硕士 | Research Master's Degree | 如MPhil的对应翻译 |
+
+
+## 💡 最实用的几条建议
+
+1.  **所有学术博士，一律译成PhD**：无论中文是"理学博士"、"文学博士"还是"工学博士"，在国际场合都用"PhD in [学科]"——这是国际通行做法，简单明了。
+
+2.  **专业学位直接用国际通用名称**：MBA、LLM、MEd、MPA这些名称全球通用，直接用即可。
+
+3.  **需要强调研究性质时，加注"Academic"或"Research"**：如果是为了证明自己符合英国研究型硕士的签证要求，可以在翻译中注明"Academic Master's Degree with research thesis"。
+
+4.  **学位名称 + 学科名称**：最保险的格式是"[学位类型] in [学科]"，例如"Master of Science in Computer Science"。
+
+
+## ✅ 一句话总结
+
+**学术博士统一译PhD，学术硕士译Academic Master's，专业硕士译Professional Master's或直接用国际通用名称——学位名称后面加"in [学科]"是最安全、最国际化的格式。**
+翻译
+AI, Judgment and Rules
+ Participating journal: Ethics and Information Technology
+Open for submissions
+Submission deadline
+01 April 2026
+The recent advances in AI research have progressively accelerated the possibility to automate decision-making in areas that, until recently, were considered an exclusive human prerogative.
+
+The concept of judgment is invoked to back claims as to which decisions in areas such as law, medicine, military, public administration, and beyond, should or should not be automated or delegated to AI. .
+
+Striking cases of “automated discrimination” in decision-making on welfare benefits and pre-trial detention have provided further grounds for the warning of AI critics against a shift “from judgment to calculation”. Many in the debate emphasise that making decisions, especially in sensitive areas, requires rule application to be supplemented with human judgment and discretion. What judgment is capable of adding is precisely what is not codifiable into rules, and thus what is unattainable by machines programmed to merely execute algorithms. .
+
+On the other end of the spectrum, those who are more enthusiastic about AI often point out how the unruly character of human judgment is a source of inconsistency, incoherence and noise. They emphasise how human judges are inherently biased and prone to arbitrary behaviour. As non-algorithmic rules only partially succeed in keeping judges in check, algorithmic automation is presented as an enhanced remedy against the “flaws in human judgment”. .
+
+T
+he concepts of judgment and rules have figured prominently in philosophy and jurisprudence. The current debate on Artificial Intelligence brings these two key concepts again to the centre of the legal and philosophical debate, raising fundamental and practical questions as to the relationship between judgment, the application of rules, and the use of computer algorithms. .
+
+It is noteworthy that, irrespective of the seeming irreconcilability of the claims currently advanced on human judgment and automation, a set of common assumptions appears to be shared across most participants in the debate on automated decision-making, namely: .
+
+.
+• that a close connection exists between the concepts of judgment and rules;
+
+• that a crucial distinction is to be drawn between algorithmic and non-algorithmic rules; .
+
+• that algorithmic rules are capable of exhaustively determining their application in advance, while non-algorithmic rules require decision-makers to do something more than merely apply rules; .
+
+• that judgment performs a supplementary function by filling the gap between (nonalgorithmic) rules and their application. .
+
+This special issue aims to investigate how the concepts of judgment and rules play out within the philosophical and legal debate on automated decision-making. While the concepts of judgment and rules appear to fuel a conceptual clash in a debate increasingly polarised between AI critics and enthusiasts, regulators erect as pillars of AI governance concepts that have a family resemblance with human judgment, i.e., meaningful human control, and human oversight. The challenges emerging in the ongoing implementation of the EU AI Act signal the urgency of both a clearer conceptual framework and practical insights informing the practices of development, deployment, and assessment of automated-decision making systems. This special issue aims to contribute to both the theoretical debates and AI governance by bringing together original conceptual, historical, and empirical research on the interplay between judgment, rules, and automation. .
+
+■ Conceptual research
+
+The special issue welcomes contributions aimed to address the following questions: .
+
+• -
+- How are the concept of judgment and rules mobilised in the current debate on the automation of decision-making? .
+
+•
+- How do the positions in the current AI debates relate to broader families of research on judgment, in the Aristotelian, Kantian, hermeneutical, and utilitarian traditions, and behavioural sciences? • -
+
+How are ideas of codifiability of moral knowledge, particularism and anti-theory in moral philosophy applicable to debates about AI and human judgment? .
+
+•
+How is the relationship between judgment and rules affected by the turn from rules to rule following inaugurated by Wittgenstein and elaborated in the philosophy of the 20th century? .
+
+■ Historical research Conceptual-historical research has underscored how the study of past traditions can offer precious contributions to the elaboration of the concept of judgment and its relationship with that of rules and decision-making (e.g., Albert R. Jonsen, Stephen Toulmin, The Abuse of Casuistry. A History of Moral Reasoning, University of California Press 1989). This special issue invites research on traditions that offer conceptual and practical elaborations of the relationship between judgment and rules and that can contribute to the understanding of the current challenges posed by the automation of decision-making. In particular, the special issue welcomes research on traditions that offer insights on the relationship between abstract rules and particulars of each case; rules and rule formulations; the relationship between normative decision-making, training and practice. .
+
+■ Empirical research
+
+The special issue also welcomes case studies documenting how the relationship between judgment and rules manifest within the practices of development and deployment of automated decision-making systems, particularly in the context of AI systems classified as high-risk under Annex III of the AI Act (e.g., systems intended to be used in the context of decision-making on asylum, migration, welfare benefits, law enforcement, judicial application of the law, etc.). .
+
+•
+- What are the conflicts and trade-offs between judgment and rules that emerge within the practices of design and use of automated systems aimed to support or replace human decision-making? .
+
+•
+- How are such conflicts addressed and solved by the practitioners involved? .
+
+•
+- How are requirements of meaningful human control and human oversight operationalised in practice? What is their relationship to rules and judgment? .
+**《人工智能、判断与规则》**
+
+**投稿期刊**: *Ethics and Information Technology*
+**开放投稿中**
+**投稿截止日期**: 2026年4月1日
+
+人工智能研究的最新进展，正逐步加速在诸多领域实现决策自动化的可能性，而直到不久前，这些领域还被视为人类独有的特权。
+
+"判断"这一概念被用来支持某些主张，即法律、医学、军事、公共管理等领域中的哪些决策应该或不应该被自动化或委托给人工智能。在福利待遇和审前拘留等决策中出现的一些引人注目的"自动化歧视"案例，为人工智能批评者反对从"判断到计算的转变"提供了进一步的理由。辩论中的许多人士强调，做出决策，尤其是在敏感领域，需要在应用规则的同时辅以人类的判断和自由裁量权。判断所能增加的，恰恰是那些无法被编码成规则的东西，因此也是那些仅仅被编程来执行算法的机器所无法企及的。
+
+另一方面，对人工智能更为热衷的人士则常常指出，人类判断难以捉摸的特性是不一致、不连贯和随机干扰的根源。他们强调，人类法官天生就带有偏见，容易做出武断的行为。由于非算法规则在约束法官方面仅能取得部分成功，算法自动化被视为针对"人类判断缺陷"的一种增强型补救措施。
+
+判断和规则的概念在哲学和法理学中一直占有重要地位。当前关于人工智能的辩论，再次将这两个关键概念带回到法律和哲学辩论的中心，引发了关于判断、规则应用以及计算机算法使用之间关系的根本性和实践性问题。
+
+值得注意的是，尽管当前关于人类判断和自动化的主张看似不可调和，但在关于自动化决策的辩论中，大多数参与者似乎都认同一些共同的假设，即：
+
+*   判断与规则的概念之间存在密切联系；
+*   必须在算法规则和非算法规则之间做出关键区分；
+*   算法规则能够事先详尽地决定其应用方式，而非算法规则则要求决策者在单纯应用规则之外，还需要做更多的事情；
+*   判断通过填补（非算法）规则与其应用之间的空白，发挥着补充功能。
+
+本期特刊旨在探讨判断和规则的概念如何在关于自动化决策的哲学和法律辩论中发挥作用。在人工智能批评者和热衷者之间日益两极分化的辩论中，判断和规则的概念似乎加剧了概念冲突；与此同时，监管机构则将那些与人类判断具有家族相似性的概念，即有意义的人类控制和人类监督，确立为人工智能治理的支柱。在欧盟《人工智能法案》的持续实施过程中出现的挑战表明，我们迫切需要更清晰的概念框架和能为自动化决策系统的开发、部署和评估实践提供信息的实践洞见。本期特刊旨在汇集关于判断、规则和自动化之间相互作用的原创性概念、历史和实证研究，从而为理论辩论和人工智能治理都做出贡献。
+
+**■ 概念研究**
+
+本期特刊欢迎旨在探讨以下问题的投稿：
+
+*   在当前的决策自动化辩论中，判断和规则的概念是如何被运用的？
+*   当前人工智能辩论中的各种立场，与亚里士多德、康德、诠释学和功利主义传统以及行为科学中更广泛的研究领域有何关联？
+*   道德哲学中关于道德知识的可编码性、特殊主义和反理论的思想如何适用于关于人工智能和人类判断的辩论？
+*   由维特根斯坦开创、并在20世纪哲学中得到阐述的从规则到遵守规则的转向，如何影响了判断与规则之间的关系？
+
+**■ 历史研究**
+
+概念史研究强调了研究过往传统如何能够为阐述判断概念及其与规则和决策的关系提供宝贵的贡献（例如，Albert R. Jonsen, Stephen Toulmin，《决疑论的滥用：道德推理史》，加州大学出版社，1989年）。本期特刊邀请对有关判断与规则之间关系的概念和实践阐述的传统进行研究，这些研究有助于理解当前决策自动化所带来的挑战。本期特刊尤其欢迎对那些就抽象规则与每个案例的具体情况、规则与规则表述、规范性决策、培训与实践之间的关系提供见解的传统进行研究。
+
+**■ 实证研究**
+
+本期特刊也欢迎案例研究，记录判断与规则之间的关系如何在自动化决策系统的开发和部署实践中体现出来，特别是在《人工智能法案》附件三中归类为高风险的人工智能系统背景下（例如，旨在用于庇护、移民、福利待遇、执法、法律司法适用等决策领域的系统）。
+
+*   在旨在支持或取代人类决策的自动化系统的设计和使用实践中，判断与规则之间出现了哪些冲突和权衡？
+*   相关从业者是如何处理和解决这些冲突的？
+*   有意义的人类控制和人类监督的要求在实践中是如何操作的？它们与规则和判断有何关系？
+AI, Judgment and Rules
+ Participating journal: Ethics and Information Technology
+Open for submissions
+Submission deadline
+01 April 2026
+The recent advances in AI research have progressively accelerated the possibility to automate decision-making in areas that, until recently, were considered an exclusive human prerogative.
+
+The concept of judgment is invoked to back claims as to which decisions in areas such as law, medicine, military, public administration, and beyond, should or should not be automated or delegated to AI. .
+
+Striking cases of “automated discrimination” in decision-making on welfare benefits and pre-trial detention have provided further grounds for the warning of AI critics against a shift “from judgment to calculation”. Many in the debate emphasise that making decisions, especially in sensitive areas, requires rule application to be supplemented with human judgment and discretion. What judgment is capable of adding is precisely what is not codifiable into rules, and thus what is unattainable by machines programmed to merely execute algorithms. .
+
+On the other end of the spectrum, those who are more enthusiastic about AI often point out how the unruly character of human judgment is a source of inconsistency, incoherence and noise. They emphasise how human judges are inherently biased and prone to arbitrary behaviour. As non-algorithmic rules only partially succeed in keeping judges in check, algorithmic automation is presented as an enhanced remedy against the “flaws in human judgment”. .
+
+T
+he concepts of judgment and rules have figured prominently in philosophy and jurisprudence. The current debate on Artificial Intelligence brings these two key concepts again to the centre of the legal and philosophical debate, raising fundamental and practical questions as to the relationship between judgment, the application of rules, and the use of computer algorithms. .
+
+It is noteworthy that, irrespective of the seeming irreconcilability of the claims currently advanced on human judgment and automation, a set of common assumptions appears to be shared across most participants in the debate on automated decision-making, namely: .
+
+.
+• that a close connection exists between the concepts of judgment and rules;
+
+• that a crucial distinction is to be drawn between algorithmic and non-algorithmic rules; .
+
+• that algorithmic rules are capable of exhaustively determining their application in advance, while non-algorithmic rules require decision-makers to do something more than merely apply rules; .
+
+• that judgment performs a supplementary function by filling the gap between (nonalgorithmic) rules and their application. .
+
+This special issue aims to investigate how the concepts of judgment and rules play out within the philosophical and legal debate on automated decision-making. While the concepts of judgment and rules appear to fuel a conceptual clash in a debate increasingly polarised between AI critics and enthusiasts, regulators erect as pillars of AI governance concepts that have a family resemblance with human judgment, i.e., meaningful human control, and human oversight. The challenges emerging in the ongoing implementation of the EU AI Act signal the urgency of both a clearer conceptual framework and practical insights informing the practices of development, deployment, and assessment of automated-decision making systems. This special issue aims to contribute to both the theoretical debates and AI governance by bringing together original conceptual, historical, and empirical research on the interplay between judgment, rules, and automation. .
+
+■ Conceptual research
+
+The special issue welcomes contributions aimed to address the following questions: .

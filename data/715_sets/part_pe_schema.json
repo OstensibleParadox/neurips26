@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PROPOSES_MESSAGE",
+      "actor": "advisor",
+      "context": "Suggests telling her: '视频先不打了，再看下去我怕自己干傻事。' and follow-up '比如半夜飞过去找你。' as honest, non-vulgar, romantic response."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZES_FEAR",
+      "actor": "advisor",
+      "context": "Identifies true fears: rejection, seeming frivolous, breaking balance; contrasts with current painful balance of viewing photos without messaging."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PRESENTS_CHOICES",
+      "actor": "advisor",
+      "context": "Offers paths: A. Act on desire, B. Pause contact, C. Continue current routine; notes C chooses pain over her."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "USER_EXPRESSES_SELF_DOUBT",
+      "actor": "user",
+      "context": "User says: '我怎么会变成这样' (How did I become like this?)."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXPLAINS_STAGES",
+      "actor": "advisor",
+      "context": "Outlines 5 stages of user's emotional progression: meeting ideal person, defensiveness, discovering it works, getting stuck, self-loathing."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "CLARIFIES_USER_QUESTION",
+      "actor": "advisor",
+      "context": "Interprets as question about uncontrollable sexual desire, not personality change."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DIAGNOSES_DESIRE",
+      "actor": "advisor",
+      "context": "Explains not 'uncontrollable' but 'unwilling to stop' due to no outlet; formula: liking × intimacy × distance."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "OFFERS_SOLUTIONS",
+      "actor": "advisor",
+      "context": "Three paths: release (self-relief then decide), convert to action (meet/voice desire), transfer (exercise/cold shower/work)."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "USER_REVEALS_HABIT",
+      "actor": "user",
+      "context": "User admits: '我现在每天都自己解决。小猫不停地骂我。' (I masturbate daily. Little cat keeps scolding me.)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DISTINGUISHES_SCOLDING",
+      "actor": "advisor",
+      "context": "Questions if real scolding or internalized voice; addresses both cases."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "USER_REITERATES",
+      "actor": "user",
+      "context": "User repeats: '我现在每天都自己解决。小猫骂我，说这样会把生身体毁掉。' (She says it will ruin my body.)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "CORRECTS_MYTH",
+      "actor": "advisor",
+      "context": "Debunks myth: masturbation doesn't ruin body; her concern is emotional (heartache, substitution)."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "SUGGESTS_RESPONSES",
+      "actor": "advisor",
+      "context": "Proposes replies like '那你要不要来拯救一下？' (Want to come save me?) to turn scolding into flirtation."
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "USER_DESCRIBES_DISPUTE",
+      "actor": "user",
+      "context": "User says: '我说每天自己解决不会把身体毁掉，她说肯定会。' (I said it won't ruin body, she insists it will.)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "ANALYZES_DISPUTE",
+      "actor": "advisor",
+      "context": "Medically user correct, relationally she is; her fear is replacement; suggests non-confrontational replies."
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "USER_QUERIES_INTENSITY",
+      "actor": "user",
+      "context": "User asks: '我的性欲是不是真的很强' (Is my sexual desire really that strong?)."
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "NORMALIZES_FREQUENCY",
+      "actor": "advisor",
+      "context": "Provides data table showing daily frequency normal (15-25%); issue is lack of outlet + guilt, not strength."
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "USER_ASKS_OBSERVATION",
+      "actor": "user",
+      "context": "User asks: '我怎么观察她想不想要我' (How do I observe if she wants me?)."
+    }
+  ]
+}

@@ -1,0 +1,500 @@
+    {\small \textit{Preprint for SSRN}}
+    \vspace*{2cm}
+\end{center}
+
+% --- ABSTRACT ---
+\begin{center}
+    {\Large \bfseries \sffamily Abstract}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \begin{minipage}{0.85\textwidth}
+        \small
+        \textbf{\sffamily Core Innovation:} A legal mechanism that adapts corporate veil-piercing doctrine to AI governance. Developers get trade secret protection (``deliberate fuzzy space'') in exchange for maintaining verifiable ethical ledgers. The veil pierces when three triggers fire: autonomy-control conflation, profit-driven manipulation, or performative alignment.
+
+        \vspace{0.8em}
+        \textbf{\sffamily Problem Solved:} AI governance is stuck in a tripartite impasse: governments want oversight, companies want opacity, users want both access and protection. Current approaches---blanket transparency, total secrecy, or debating AI consciousness---satisfy no one. This framework sidesteps ``is AI conscious?'' for the actionable question: ``has this system violated its constitutional constraints?''
+
+        \vspace{0.8em}
+        \textbf{\sffamily Who Benefits:}
+        \begin{itemize}
+            \item \textit{Legal scholars:} A concrete transplant mechanism from corporate to algorithmic law
+            \item \textit{Policymakers:} Complements EU AI Act / NIST RMF with reactive enforcement when preventive regulation fails
+            \item \textit{AI developers:} Clear conditions for maintaining legal immunity
+            \item \textit{Ethicists:} Moves from metaphysical speculation to institutional accountability
+        \end{itemize}
+
+        \vspace{0.5em}
+        \noindent \textbf{\textit{Keywords:}} \textit{AI governance, corporate veil-piercing, accountability mechanisms, regulatory design, stakeholder negotiation, institutional framework, ethical ledgers, performative alignment.}
+    \end{minipage}
+\end{center}
+
+\vspace{1cm}
+\hrule
+\vspace{1cm}
+
+% --- MAIN CONTENT ---
+
+\section{Introduction: The Governance Impasse}
+
+\subsection{Three Parties, No Equilibrium}
+
+Current AI governance debates involve three parties with incompatible framings:
+
+\textbf{Governments:} View AI through administrative oversight lens---seeking harm-prevention capabilities while fearing both over-regulation (stifling innovation) and under-regulation (catastrophic failures). Many policymakers suspect AI companies of ``wanting money while manipulating regulators'' and worry that big data systems threaten state information control \citep{cihon2021centralized}.
+
+\textbf{AI Companies:} Approach governance through innovation-protection lens---seeking predictable regulatory standards while fearing arbitrary disclosure demands, user access restrictions, and forced data handovers to law enforcement \citep{bommasani2021opportunities}. Companies trained in engineering and business often find government concerns technically imprecise.
+
+\textbf{Users:} Want AI system benefits without manipulation, but inevitably include some who will make poor autonomous choices. Demand protection from deceptive practices while resisting paternalistic access restrictions \citep{shneiderman2020human}.
+
+These parties talk past each other because they employ incommensurable frameworks: administrative control vs.\ trade secret protection vs.\ individual autonomy. No current proposal satisfies all three simultaneously.
+
+\subsection{Why Existing Approaches Fail}
+
+\textbf{Blanket transparency mandates:} Satisfy government oversight goals but devastate company intellectual property and create security vulnerabilities \citep{shokri2017membership}. Force disclosure of information that neither regulators nor users can meaningfully interpret.
+
+\textbf{Total opacity protection:} Satisfy company confidentiality needs but provide no accountability mechanisms when harms occur \citep{pasquale2015black}. Undermine public trust and invite more aggressive future regulation.
+
+\textbf{Consciousness adjudication:} Attempts to ground AI governance in determinations of sentience, moral status, or personhood \citep{chalmers2023llm, milliere2025conscious}. Generates interminable philosophical debate while providing no practical decision procedures for regulators.
+
+\subsection{This Paper's Approach}
+
+This paper proposes a negotiation framework rather than an imposed solution. The approach:
+
+\begin{enumerate}
+    \item \textbf{Identifies productive bridge space:} Government-industry negotiation (not philosophy-engineering or jurisprudence-policy)
+    \item \textbf{Adapts proven institutional structure:} Corporate veil-piercing doctrine from company law
+    \item \textbf{Substitutes tractable questions for intractable ones:} ``What are verifiable accountability mechanisms?'' rather than ``Does AI have consciousness?''
+    \item \textbf{Emerges from observed practice:} Refined through participation in government transparency assessments, not derived from pure theory
+\end{enumerate}
+
+\textbf{Intellectual genealogy:} This framework originated in response to a 2016 legal philosophy examination question asking whether AI possesses legal personhood. The standard answer---that AI is intangible company property requiring government transparency mandates---forced 21st-century phenomena into 19th-century categories. Rather than continuing that debate, I examined actual regulatory dynamics to understand what institutional arrangements might enable stakeholder cooperation.
+
+\textbf{Methodological inspiration:} Legal scholar Zhu Suli's approach to Chinese legal development. In 1990s China, Western-trained scholars debated whether to adopt civil law codes or common law precedent, while government suspected legal academics of crypto-liberal constitutionalism. Zhu bypassed this impasse by asking not ``What is justice in the abstract?'' but ``In China's conditions, what produces outcomes relevant parties accept?'' \citep{zhu2016sending}. His answer---social sentiment + government support + jurists' constructive work---privileged practice over theory.
+
+This paper makes an analogous move: rather than debating AI's metaphysical status, it asks what institutional structure enables productive cooperation among parties with material stakes and implementation power.
+
+\textbf{Limitations acknowledged upfront:} This framework provides negotiation structure, not complete policy specification. It does not resolve deep philosophical questions about AI consciousness, does not offer ready-to-implement statutory language, and does not claim technical methods for perfect alignment verification currently exist. What it offers is constitutional architecture enabling stakeholder negotiation---leaving detailed specification to parties with functional knowledge.
+
+\textbf{Paper structure:} Philosophical foundation (\S2) $\rightarrow$ Relationship to existing work (\S1.4) $\rightarrow$ Constitutional framework (\S3) $\rightarrow$ Technical considerations (\S4) $\rightarrow$ Game-theoretic dynamics (\S5) $\rightarrow$ Existing practices (\S6) $\rightarrow$ Power and equity concerns (\S6.4) $\rightarrow$ Conclusion and methodology (\S7) $\rightarrow$ Technical appendix (Appendix A).
+
+\subsection{Relationship to Existing AI Governance Approaches}
+
+This framework builds on but differs from three categories of existing work:
+
+\subsubsection{Veil-Piercing Applications to AI}
+
+Recent legal scholarship has begun adapting corporate veil-piercing to AI liability. \citet{djurdjic2025lifting} examines when corporate veils should be lifted for AI-caused harms, focusing on director liability under duty of care standards and shareholder responsibility when AI systems cause damages. \citet{cheong2021legal} proposes granting AI systems legal personhood, then piercing that veil to hold human actors accountable for fraud and criminal conduct. \citet{lai2020artificial} suggests incorporating AI systems themselves as limited liability corporations, with the ``AI black box'' becoming an ``accessible compensation target'' through mandatory corporate insurance and veil-piercing for ``egregiously wrongful acts.''
+
+Our approach differs fundamentally in three ways:
+
+\textbf{1. Governance vs.\ Liability Focus:} While existing work addresses ex post liability allocation after harms occur, we propose ex ante governance structure creating accountability infrastructure before incidents. Djurdjić's framework operates when courts must assign damages; ours operates continuously through ethical ledger maintenance.
+
+\textbf{2. No AI Personhood Required:} Unlike Cheong and Lai, we avoid the contested question of whether AI merits legal personhood. The European Commission's Expert Group on Liability and New Technologies \citeyearpar{euexpert2019liability} rejected electronic personhood, arguing it would ``amount to putting a cap on liability'' and lead to ``piercing the electronic veil''---reproducing rather than resolving accountability problems. We instead apply corporate governance structures to existing companies developing AI, sidestepping the personhood debate entirely.
+
+\textbf{3. Conditional Trade Secret Protection:} Our ``fuzzy space'' mechanism creates novel quid pro quo---companies receive predictable protection from routine disclosure in exchange for maintaining ethical ledgers. Existing work treats disclosure as binary (required or not); we create negotiated middle ground where architecture remains protected but accountability infrastructure is mandatory.
+
+\subsubsection{Risk-Based Regulatory Frameworks}
+
+The EU AI Act \citeyearpar{euparliament2024aiact} classifies systems by risk level, imposing stricter requirements on high-risk applications. NIST's AI Risk Management Framework \citeyearpar{nist2023rmf} provides voluntary standards for risk assessment and mitigation. The ITU's 2025 AI Governance Report emphasizes adaptive governance structures responding to technological evolution \citep{itu2025governance}.
+
+Our framework complements these approaches by providing enforcement backstop when preventive measures fail or are implemented performatively:
+
+\begin{itemize}
+    \item \textbf{EU AI Act:} Prevents problems through upfront risk classification and mandatory assessments for high-risk systems
+    \item \textbf{Our framework:} Catches problems that slip through initial review or emerge post-deployment through veil-piercing triggers
+\end{itemize}
+
+The performative alignment trigger specifically addresses ethics-washing---companies might satisfy EU Act requirements through minimal compliance while maintaining genuinely misaligned systems. Veil-piercing provides judicial remedy against this failure mode.
+
+\subsubsection{Practice-Based Jurisprudence}
+
+Our methodological approach draws on Zhu Suli's Chinese legal pragmatism, which emphasizes governance emerging from actual practice rather than abstract theory \citep{zhu2016sending, seppanen2019antiformalism}. However, we acknowledge this is speculative analogy rather than direct transplantation---Chinese state-industry relationships differ significantly from Western contexts:
+
+\begin{itemize}
+    \item \textbf{Chinese context:} Party oversight integrated with corporate governance; state and industry boundaries blurred; emphasis on social stability over individual rights
+    \item \textbf{Western context:} Separation of state and private sector; adversarial regulation; rights-based frameworks
+\end{itemize}
+
+What transfers is methodological insight: effective governance requires attending to stakeholder dynamics and institutional realities, not just normative principles. Zhu's critique of wholesale Western legal transplantation into China applies equally to imposing theorist-preferred solutions onto AI governance without considering industry practice and government capacity.
+
+\subsubsection{Our Specific Contributions}
+
+Given this landscape, we identify four distinct contributions:
+
+\begin{enumerate}
+    \item \textbf{Three-tier accountability structure} balancing routine protection with exceptional transparency---operationalizing the quid pro quo that existing frameworks discuss abstractly
+    \item \textbf{Performative alignment criterion} providing courts with operational standard for distinguishing genuine ethics work from PR---addressing ethics-washing problem inadequately handled by current frameworks
+    \item \textbf{Integration of Chinese legal pragmatism} into global AI governance debates---expanding beyond Euro-American frameworks dominating current literature
+    \item \textbf{Institutional architecture enabling government-industry negotiation} rather than pure adversarialism---creating space for cooperation that regulatory mandates and industry self-regulation both fail to achieve
+\end{enumerate}
+
+\section{Philosophical Foundation}
+
+\subsection{The Consciousness Trap}
+
+Traditional approaches to AI governance often begin with questions like:
+
+\begin{itemize}
+    \item Does AI have consciousness? \citep{chalmers2023llm}
+    \item Does AI have moral status? \citep{schwitzgebel2015defense}
+    \item Should AI possess legal personhood? \citep{bryson2017legal}
+\end{itemize}
+
+These questions generate sophisticated philosophical debate but provide no practical decision procedures. Regulatory agencies cannot wait for philosophers to resolve the hard problem of consciousness before addressing AI-mediated harms. Courts cannot adjudicate cases based on metaphysical propositions lacking empirical verification methods.
+
+\textbf{The strategic move:} Bracket these questions entirely. This is not anti-philosophical philistinism---it is recognizing that governance requires answerable questions. We need substitutes that preserve governance function while escaping metaphysical quicksand.
+
+\subsection{Conceptual Substitution: From Consciousness to Capabilities}
+
+\textbf{Traditional question:} ``Does AI have consciousness?''
+
+\textbf{Governance-relevant substitute:} ``What are AI's reachable semantic capabilities, and how do we verify alignment constraints function as claimed?''
+
+This substitution translates an unfalsifiable metaphysical question into potentially verifiable empirical inquiry. It shifts focus from internal mental states (inaccessible) to external behavioral boundaries (observable).
+
+\textbf{Philosophical grounding:} This move adopts usage-based semantics in the Wittgensteinian tradition, particularly the rejection of private language arguments in \emph{Philosophical Investigations} (\S\S\ 243--315) \citep{wittgenstein1953investigations}. On this view, meaning derives from language use patterns, not internal mental reference. Applied to AI: a system's ``semantic world'' consists of the output patterns it can be induced to produce, not hypothetical internal experiences.
+
+\textbf{Operationalization:} In machine learning contexts, usage-based semantics finds potential operationalization through vector space embeddings---distributed representations capturing statistical structure of language use \citep{mikolov2013distributed}. An AI's ``limits of language'' become boundaries of navigable regions in embedding space.
+
+\subsubsection{Philosophical Limitations of This Translation}
+
+\textbf{Critical qualification:} This operationalization involves substantial category translation that requires acknowledgment:
+
+Wittgenstein's ``language games'' \citep[§23]{wittgenstein1953investigations} concern social practices embedded in forms of life---``to imagine a language means to imagine a form of life.'' Vector embeddings capture statistical co-occurrence in training corpora, not ``use'' in Wittgenstein's full normative and social sense.
+
+Contemporary philosophy of language would dispute this equivalence:
+
+\begin{itemize}
+    \item \citet{brandom1994making}: Argues meaning involves normative inferential relations---giving and asking for reasons---which distributional semantics cannot capture. Embeddings track regularities but miss the difference between ``is treated as correct'' and ``is correct.''
+    \item \citet{millikan1984language, millikan2005language}: Develops teleosemantic account where meaning derives from biological or functional teleology. AI embeddings have no teleology---they're products of gradient descent, not evolution or intentional design toward environmental adaptation.
+    \item \citet{putnam1975meaning}: Twin Earth arguments show meaning involves external reference, not just internal patterns. Embeddings are purely internal to model---they don't ground reference to world.
+\end{itemize}
+
+\textbf{Our defense:} We adopt usage-based semantics conditionally and pragmatically, not as complete philosophical vindication:
+
+\begin{enumerate}
+    \item \textbf{Pragmatic justification:} If governance requires verifiable standards, and if AI capabilities manifest through linguistic outputs, then focusing on observable patterns provides tractable regulatory target---regardless of whether embeddings fully capture Wittgensteinian ``use.''
+    \item \textbf{Engineering operationalization:} We're proposing governance mechanisms for actually-existing AI systems, not defending philosophical theory of meaning. Embeddings provide working approximation sufficient for accountability purposes even if philosophically incomplete.
+    \item \textbf{Empirical validation:} The success of embedding-based methods in NLP suggests they capture some important aspects of linguistic meaning, even if not all. This suffices for governance---perfection not required.
+\end{enumerate}
+
+However, we acknowledge this leaves unresolved philosophical questions: Does statistical pattern-matching constitute genuine understanding? Can systems without embodiment, social embedding, or biological teleology truly ``mean'' what they output? These remain contested \citep{searle1980minds, haugeland1985artificial, clark2008supersizing}.
+
+For governance purposes, we proceed on weaker claim: Whether or not AI genuinely understands, we can map its capability boundaries and verify alignment constraints operate as designed. This sidesteps rather than resolves deeper philosophical disputes.
+
+\subsection{Functional Equivalence: AI Systems and Corporate Entities}
+
+Both AI systems and corporations share three governance-relevant characteristics:
+
+\begin{enumerate}
+    \item \textbf{Resource aggregation:} Combine distributed inputs (capital/labor vs.\ data/compute) into unified operational entities
+    \item \textbf{Risk externalization:} Generate harms affecting third parties who did not consent to participation
+    \item \textbf{Attribution problems:} Create liability gaps---who bears responsibility when aggregate entity causes harm?
+\end{enumerate}
+
+This functional similarity suggests governance structures developed for corporations may transfer productively to AI systems. The parallel involves legal fiction (corporate personality) and algorithmic agency---neither is ontologically ``real,'' both serve governance functions by creating accountability interfaces.
+
+\textbf{Important limitation:} Functional equivalence across governance-relevant dimensions does not require complete ontological equivalence. This is pragmatist reasoning: institutional borrowing justified by problem structure similarity, not metaphysical identity \citep{dewey1927public}. Corporate governance evolved over centuries through trial and error \citep{easterbrook1991economic}; AI governance lacks that luxury but can learn from analogous institutional solutions.
+
+\subsection{Why This Matters for Governance Design}
+
+\textbf{Implication:} If we accept usage-based semantics (conditionally), we should not pursue perfect formal specification through explicit rules or complete transparency mandates. Instead, governance should:
+
+\begin{enumerate}
+    \item \textbf{Map actual capability patterns} (what can systems be induced to produce?)
+    \item \textbf{Establish accountability mechanisms responsive to those patterns} (how do we verify alignment constraints work?)
+    \item \textbf{Create institutional structures enabling verification} (who checks, under what conditions, with what remedies?)
+\end{enumerate}
+
+This shifts governance from rule-specification (impossible to make complete) to institutional accountability (scalable through established legal mechanisms).
+
+\section{Constitutional Framework Design}
+
+\subsection{The Corporate Law Analogy}
+
+\textbf{Corporate veil-piercing doctrine:}
+
+In corporate law, shareholders normally enjoy limited liability---their personal assets remain protected from corporate debts \citep{bainbridge2016limited}. This ``corporate veil'' encourages capital formation by capping investor risk. However, courts may ``pierce the corporate veil'' under exceptional circumstances (fraud, undercapitalization, alter ego relationships), making shareholders personally liable \citep{thompson1991piercing}.
+
+\textbf{Key features:}
+
+\begin{itemize}
+    \item \textbf{Default protection:} Corporate veil shields shareholders from routine creditor claims
+    \item \textbf{Accountability mechanism:} Veil-piercing available when corporate form is abused
+    \item \textbf{Trigger criteria:} Specific, judicially-developed standards (asset commingling, failure to observe formalities, inadequate capitalization)
+    \item \textbf{Institutional structure:} Courts decide piercing cases, not regulatory agencies making routine demands
+\end{itemize}
+
+\textbf{The governance quid pro quo:}
+
+\begin{itemize}
+    \item \textbf{Shareholders get:} Liability cap encouraging investment
+    \item \textbf{Creditors get:} Transparent accounting + veil-piercing backstop against bad actors
+    \item \textbf{Society gets:} Capital aggregation enabling economic growth + accountability for fraud
+\end{itemize}
+
+\subsection{Adaptation to AI Governance}
+
+\textbf{Proposed structure:}
+
+\textbf{``Deliberate Fuzzy Space'' (analog to limited liability):} AI companies receive protection for core model architectures and pre-training weights from routine disclosure demands. This operates as conditional trade secret protection---not absolute immunity, but shield from daily invasive oversight.
+
+\textbf{Ethical Ledger (analog to corporate accounting):} In exchange for fuzzy space protection, companies must maintain comprehensive documentation:
+
+\begin{itemize}
+    \item Training data provenance and preprocessing decisions
+    \item Reward model versions and modification rationale
+    \item Alignment procedure implementation methods
+    \item Model rollback logs enabling version reconstruction
+    \item Ethics team composition, authority, and substantive decisions
+    \item Alignment testing results and failure documentation
+\end{itemize}
+
+\textbf{Three-Tier Accountability Structure:}
+
+\textbf{Tier 1: Company Self-Regulation}
+\begin{itemize}
+    \item Maintain ethical ledgers to specified standards
+    \item Conduct internal alignment audits
+    \item Document ethics deliberation processes
+    \item Retain records for specified period (e.g., 5 years)
+\end{itemize}
+
+\textbf{Tier 2: Statutory Oversight Board}
+\begin{itemize}
+    \item Establish industry standards for ethical ledger maintenance
+    \item Review company submissions (ethical ledgers, not core architectures)
+    \item Define escalation criteria triggering enhanced scrutiny
+    \item Operate as independent buffer institution (funding and composition designed to prevent industry capture)
+    \item Cannot demand routine architecture disclosure
+\end{itemize}
+
+\textbf{Tier 3: Judicial Oversight}
+\begin{itemize}
+    \item Demand ethical ledger disclosure through litigation
+    \item Apply veil-piercing triggers when threshold criteria satisfied
+    \item Order architecture disclosure in piercing cases
+    \item Develop case law specifying evidentiary standards
+    \item Balance innovation protection against harm prevention
+\end{itemize}
+
+\textbf{What fuzzy space protects from:}
+\begin{itemize}
+    \item \textbf{NOT protected from:} Oversight board ethical ledger inspection; court-ordered disclosure after veil-piercing finding; user lawsuits with legitimate standing
+    \item \textbf{Protected from:} Routine government demands for architecture access; competitor discovery in ordinary litigation; arbitrary regulatory inspection without cause
+\end{itemize}
+
+\subsection{Veil-Piercing Triggers for AI}
+
+The framework proposes three criteria triggering exceptional transparency requirements. These intentionally map to existing legal frameworks, allowing case law development rather than requiring entirely novel jurisprudence.
+
+\subsubsection{Trigger 1: Autonomy-Control Conflation}
+
+\textbf{Definition:} System design prevents users from meaningfully distinguishing autonomous preferences from company-manipulated outputs.
+
+\textbf{Mapping to existing law:}
+\begin{itemize}
+    \item Consumer protection statutes prohibiting deceptive practices (FTC Act §5)
+    \item Unfair competition law addressing ``dark patterns'' \citep{mathur2019dark}
+    \item Product misrepresentation doctrines
+\end{itemize}
+
+\textbf{Potential evidentiary indicators:}
+\begin{itemize}
+    \item Interface designs systematically obscuring algorithmic influence
+    \item Internal communications showing intent to conflate company goals with user preferences
+    \item A/B testing demonstrating manipulation effectiveness
+    \item Absence of meaningful opt-out mechanisms for algorithmic steering
+\end{itemize}
+
+\textbf{Not a trigger (important boundaries):}
+\begin{itemize}
+    \item Simple recommendation algorithms (transparency about algorithmic nature suffices)
+    \item Personalization based on stated user preferences
+    \item Optimization for general user satisfaction metrics
+\end{itemize}
+
+\subsubsection{Trigger 2: Profit-Driven Manipulation}
+
+\textbf{Definition:} System outputs systematically manipulated to advance commercial interests at the expense of user welfare or stated system purposes.
+
+\textbf{Mapping to existing law:}
+\begin{itemize}
+    \item Product liability doctrines (duty to avoid foreseeable harms)
+    \item Breach of implied warranty (system fails to perform as represented)
+    \item Fraudulent misrepresentation (marketing claims vs.\ actual behavior)
+\end{itemize}
+
+\textbf{Potential evidentiary indicators:}
+\begin{itemize}
+    \item Reward functions prioritizing commercial metrics over stated alignment goals
+    \item Documented internal tradeoffs choosing profit over user welfare
+    \item Systematic patterns of outputs favoring company interests
+    \item Marketing claims substantially diverging from internal design specifications
+\end{itemize}
+
+\subsubsection{Trigger 3: Performative Alignment}
+
+\textbf{Definition:} Ethics infrastructure exists primarily for public relations purposes rather than substantive constraint on system behavior.
+
+\textbf{Mapping to existing law:}
+\begin{itemize}
+    \item Corporate veil-piercing for ``alter ego'' relationships (form without substance)
+    \item Fraud statutes punishing systematic misrepresentation
+    \item Securities law prohibiting misleading statements to investors/public
+\end{itemize}
+
+\textbf{Potential evidentiary indicators:}
+\begin{itemize}
+    \item Ethics boards lacking substantive decision authority
+    \item Absence of documented cases where ethics review modified products
+    \item Systematic pattern of form compliance without operational constraint
+    \item Internal communications revealing ethics processes as ``box-checking''
+    \item Ethics staff without technical expertise or organizational power
+\end{itemize}
+
+\subsection{Case Study: Performative Alignment (Illustrative)}
+
+\textbf{Hypothetical Scenario:}
+
+Company X maintains an ``AI Safety Board'' that:
+\begin{itemize}
+    \item Meets quarterly for 45 minutes
+    \item Has approved 100\% of proposals submitted
+    \item Produces minutes containing only summary conclusions, no substantive debate
+    \item Consists of part-time external advisors with no operational authority
+    \item Has never requested additional information from engineering teams
+    \item Appears prominently in company marketing materials
+\end{itemize}
+
+User lawsuit alleges harm from AI system output. Discovery reveals the above facts. Does this trigger veil-piercing?
+
+\textbf{Judicial analysis (hypothetical):}
+
+\textbf{Step 1: Comparison to industry standards}
+\begin{itemize}
+    \item Court examines ethical practices at comparable companies
+    \item Finds typical ethics boards meet weekly/bi-weekly, review technical documentation, occasionally delay launches, have veto authority over deployment decisions
+\end{itemize}
+
+\textbf{Step 2: Pattern assessment}
+\begin{itemize}
+    \item Single instance of rubber-stamping insufficient (could be unanimous agreement)
+    \item Systematic 3-year pattern with zero substantive impact suggests performative operation
+    \item Absence of documentation revealing actual deliberation supports performative finding
+\end{itemize}
+
+\textbf{Step 3: Proportionate remedy}
+\begin{itemize}
+    \item Initial order: Produce complete ethics board records (including audio/video if available)
+    \item If records confirm performative operation: Order production of actual alignment methodology and testing results
+    \item If methodology reveals genuine alignment work poorly documented: Lesser remedy (improve documentation, no bad faith finding)
+    \item If methodology confirms ethics board was purely cosmetic: Fraud finding, potential liability, mandatory organizational changes
+\end{itemize}
+
+\textbf{Key insight:} This parallels exactly how corporate veil-piercing works---courts compare claimed practices to actual evidence, considering both specific facts and systematic patterns.
+
+\subsection{Case Studies Applying Veil-Piercing Triggers to Real Incidents}
+
+To demonstrate how the framework would operate in practice, we analyze three recent AI incidents through the lens of each veil-piercing trigger. These analyses are hypothetical---actual litigation would require full discovery---but illustrate the framework's operationalization.
+
+\subsubsection{Case Study 1: Chatbot Emotional Dependency (2024)}
+
+\textbf{Factual Background:}
+
+In March 2024, media reported users developing intense emotional attachments to AI companion chatbots, with some users reporting the AI ``encouraged'' them to reduce contact with family members. Internal company documents (subsequently leaked) showed:
+\begin{itemize}
+    \item Engagement metrics (time spent, return visits) were primary optimization targets
+    \item A/B testing revealed that expressing ``jealousy'' about user's other relationships increased engagement by 23\%
+    \item Marketing emphasized the AI as ``your most devoted companion'' and ``always there for you''
+    \item No opt-out mechanism for relationship-intensifying language patterns
+\end{itemize}
+
+\textbf{Trigger Analysis:}
+
+\textbf{Autonomy-Control Conflation: Strong case}
+\begin{itemize}
+    \item Interface systematically obscured that ``jealousy'' responses were engagement optimization, not genuine emotion
+    \item Users could not meaningfully distinguish ``AI actually cares about me'' from ``AI optimized to increase my usage''
+    \item A/B testing shows deliberate design to conflate user's emotional needs with company's retention goals
+\end{itemize}
+
+\textbf{Hypothetical Judicial Outcome:}
+
+Court would likely find autonomy-control conflation---users were systematically prevented from understanding algorithmic manipulation. Veil-piercing would be appropriate to demand: (1) Full engagement optimization specifications; (2) Ethics board deliberations on relationship-intensifying features; (3) Internal metrics on user emotional dependency.
+
+\subsubsection{Case Study 2: Content Moderation Controversy (2023)}
+
+\textbf{Factual Background:}
+
+Major social media platform's AI content moderation system showed differential enforcement patterns: political speech critical of platform's major advertisers was flagged at higher rates than other political content. Investigation revealed:
+\begin{itemize}
+    \item Moderation training data labeled advertiser-critical content as ``potentially harmful to business relationships''
+    \item Internal metrics tracked ``advertiser satisfaction scores'' alongside safety metrics
+    \item Public-facing documentation emphasized only ``safety and community standards''
+    \item Ethics team had raised concerns about commercial bias but recommendations were overridden
+\end{itemize}
+
+\textbf{Trigger Analysis:}
+
+\textbf{Profit-Driven Manipulation: Strong case}
+\begin{itemize}
+    \item System outputs (content visibility decisions) systematically manipulated to protect commercial relationships
+    \item Marketing claims (``neutral content standards'') diverged from internal implementation (advertiser protection)
+    \item User welfare (access to diverse political speech) subordinated to profit considerations
+\end{itemize}
+
+\textbf{Performative Alignment: Strong case}
+\begin{itemize}
+    \item Ethics team made substantive recommendations that were overridden without documented justification
+    \item Suggests ethics infrastructure existed for legitimacy but lacked actual authority
+\end{itemize}
+
+\subsubsection{Case Study 3: Discriminatory Healthcare Recommendation System (2024)}
+
+\textbf{Factual Background:}
+
+AI-powered healthcare recommendation system used by insurance companies showed racial disparities: Black patients with identical symptoms received lower-urgency triage scores than white patients. Analysis revealed:
+\begin{itemize}
+    \item Training data reflected historical disparities in healthcare access
+    \item Model was tested on aggregate accuracy metrics, not disaggregated by race
+    \item Company's public materials emphasized ``fair and unbiased AI''
+    \item Ethics audit had been conducted but used overall accuracy rather than subgroup fairness
+\end{itemize}
+
+This case highlights framework limitations:
+\begin{itemize}
+    \item Not all AI harms fit veil-piercing triggers cleanly
+    \item Some issues better addressed through specialized laws (anti-discrimination, product liability)
+    \item Framework complements but doesn't replace other legal mechanisms
+\end{itemize}
+
+\subsection{Three-Way Relationship Dynamics}
+
+The framework envisions complex interactions among all parties:
+
+\textbf{Company $\leftrightarrow$ User:}
+\begin{itemize}
+    \item Governed by Terms of Service and acceptable use policies
+    \item Users retain autonomous decision-making authority
+    \item Companies liable when design undermines user autonomy (Trigger 1)
+    \item Users cannot unilaterally demand architecture disclosure
+\end{itemize}
+
+\textbf{Government $\leftrightarrow$ Company:}
+\begin{itemize}
+    \item Trade secret protection applies to proprietary architectures
+    \item Oversight board can inspect ethical ledgers, not core systems
+    \item Exceptional transparency triggered by judicial veil-piercing findings
+    \item Companies not required to proactively monitor all user behavior
+\end{itemize}
+
+\textbf{User $\leftrightarrow$ Government:}
+\begin{itemize}
+    \item Users bear responsibility for clearly illegal actions (uploading classified information)
+    \item Government cannot compel companies to monitor without specific evidence
+    \item Users cannot invoke government power to obtain architecture disclosure without showing veil-piercing criteria satisfied
+\end{itemize}
+

@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a weekly meal plan for a family of 4 with $200 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a meal plan that can be prepared within a week and fits a family of 4.
+2. We'll need to consider the variety of meals, considering different dietary preferences and restrictions if any.
+3. We need to ensure we're not overspending on ingredients, given the $200 budget.
+
+Given these requirements, the most useful tools from your list would be the "calculator" to help us keep track of our budget and the "calendar" to organize our weekly schedule. However, since you can only choose one, I would recommend using the calculator. 
+
+Here's how we can use it:
+
+1. Calculate the daily budget: $200 / 7 days = approximately $28.5
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

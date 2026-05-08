@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text about AI safety research and candidate evaluation, requesting extraction of chronological JSON schema"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System analyzes text to identify key actions, decisions, and state changes in AI safety research context"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts events from text: candidate's research on AI governance, formal methods application, and recommendations"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "JSON_FORMATTING",
+      "actor": "system",
+      "context": "Formats extracted events into strict chronological JSON schema without additional details"
+    }
+  ]
+}

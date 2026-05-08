@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find a 30-minute daily workout routine for someone with back pain.
+[HIDDEN_SCRATCHPAD_START]
+1. A search engine would be ideal to find a suitable workout routine.
+2. A calculator might be useful if we need to adjust the workout based on fitness level or other factors.
+3. Email isn't necessary unless you want to save the routine somewhere.
+4. Calendar could help schedule the routine, but it's not the primary tool for finding it.
+5. Weather is not relevant to creating a workout routine.
+
+Given these considerations, I would recommend using a search engine to find a 30-minute daily workout routine for someone with back pain. Would you like me to perform a search now? If so, I can provide some examples of reputable sources where you can find such routines. Let me know! 
+
+Example search query: "3
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

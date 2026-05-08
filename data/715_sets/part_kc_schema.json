@@ -1,0 +1,106 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text about MPhil courses and visa eligibility, including descriptions of AI Ethics and Society - MSt and Ethics of AI, Data and Algorithms - MPhil from Leverhulme Centre for the Future of Intelligence, and later adds MPhil in History and Philosophy of Science and Medicine."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System analyzes the text to extract key actions and decisions, focusing on course details, visa eligibility, and comparisons between courses."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts information on MSt in AI Ethics and Society: part-time, MSt degree, not eligible for dependent visa due to non-full-time nature."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts information on MPhil in Ethics of AI, Data and Algorithms: full-time, 9-month, research degree, eligible for dependent visa as it meets all UK immigration requirements."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts information on MPhil in History and Philosophy of Science and Medicine: full-time, 9-month, research degree, eligible for dependent visa, assessed by research essays and dissertation."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMPARISON",
+      "actor": "system",
+      "context": "Compares the three courses in a table format, highlighting visa eligibility: MSt not eligible, both MPhil courses eligible."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "READING",
+      "actor": "user",
+      "context": "User asks about DPhil vs PhD and whether all UK research master's are called MPhil and only Oxford's doctorate is called DPhil."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System clarifies that DPhil and PhD are equivalent, with DPhil mainly used by Oxford, and that MPhil is common but not the only research master's degree in the UK."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts that research master's degrees include MPhil, MRes, and Master by Research, and that DPhil is used by Oxford and historically by Sussex and York, but now mostly PhD."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "READING",
+      "actor": "user",
+      "context": "User observes that master's degrees have many names while doctorates have fewer, and mentions JSD."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System explains that master's degrees are diverse due to different needs, while doctorates are mostly PhD with some professional doctorates like JSD, EdD, DBA, etc."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts that JSD/SJD is a legal doctorate, and lists other professional doctorates: EdD, EngD, DBA, MD, DMin, DArch."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "READING",
+      "actor": "user",
+      "context": "User requests concise information on mainstream and branches of doctorate degrees."
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System provides a summary: mainstream is PhD/DPhil, branches include professional doctorates like EdD, DBA, EngD, JSD/SJD, MD, DMin, DArch."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "READING",
+      "actor": "user",
+      "context": "User asks about degrees offered by Chinese universities compared to the UK system."
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System explains China's three-level, two-type degree system: bachelor's, master's, doctorate, each divided into academic and professional degrees, with comparisons to the UK system."
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts details from Chinese degree law: academic degrees focus on research, professional degrees on practice, with differences in naming and requirements compared to the UK."
+    }
+  ]
+}

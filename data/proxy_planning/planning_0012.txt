@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare flight prices for Tokyo to Seoul next weekend.
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to compare flight prices for a specific route and time period.
+2. A search engine can be used to find relevant information on flights.
+3. However, we need to compare multiple options, which might involve looking at different websites or services.
+4. There isn't a built-in tool provided that specializes in comparing flight prices directly.
+
+Given these considerations, the best tool available from the list provided would be the "search" option. You can use a search engine to find and compare flight prices across various travel websites or booking platforms. 
+
+However, for a more streamlined experience, you might want to look into dedicated flight comparison websites or apps, but those aren't included in the given options. 
+
+So, my recommendation is to
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

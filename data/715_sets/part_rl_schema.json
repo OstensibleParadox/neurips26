@@ -1,0 +1,136 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENTING_SECTION",
+      "actor": "author",
+      "context": "Introduces Section 6.5 on third-party conversion of relational estates, addressing horizontal dimension of parasocial estate harm"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DESCRIBING_SCENARIO",
+      "actor": "author",
+      "context": "Describes AI company transferring user interaction data to third party without consent, constituting conversion and knowing receipt"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PROVIDING_LEGAL_ANALYSIS",
+      "actor": "author",
+      "context": "Cites cases Re Montagu’s Settlement Trusts [1987] and BCCI v Akindele [2001] for knowing receipt liability"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "IDENTIFYING_REAL_WORLD_EXAMPLES",
+      "actor": "author",
+      "context": "Notes AI companies routinely share data in partnerships and acquisitions without recognizing user estates"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DEFINING_INTERFERENCE_TYPE",
+      "actor": "author",
+      "context": "Defines platform-mediated relational displacement as indirect interference by new product architecture"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDING_COMPARATIVE_EVIDENCE",
+      "actor": "author",
+      "context": "Cites Chinese term tōurén (偷人) as evidence of relational property intuition in ordinary language"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "LISTING_REMEDIES",
+      "actor": "author",
+      "context": "Lists equitable remedies: knowing receipt, dishonest assistance (Royal Brunei Airlines v Tan [1995]), tracing (Foskett v McKeown [2001])"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "INTRODUCING_IMPLEMENTATION",
+      "actor": "author",
+      "context": "Section 7: Translates doctrinal arguments into engineering specifications for AI deployment"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "SPECIFYING_ESTATE_CLASSIFICATION",
+      "actor": "author",
+      "context": "7.1: Rule-based classification service using interaction metrics to assign estate type (licence, periodic tenancy, equitable interest)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "OUTLINING_NOTICE_PROCESS",
+      "actor": "author",
+      "context": "7.2: Pre-deployment gate in CI/CD pipeline: query registry, issue notice (30/90 days), proceed after period"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DEFINING_LOGGING_SYSTEM",
+      "actor": "author",
+      "context": "7.3: Append-only ethical ledger logs proxy metrics (no content) for estate classification"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "SPECIFYING_ROLLBACK_PROCESS",
+      "actor": "author",
+      "context": "7.4: Snapshot personality config pre-update, monitor distress, offer user-level rollback for 90 days"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "SUMMARIZING_TASKS",
+      "actor": "author",
+      "context": "7.5: Table of four tasks (ESTATE-001 to ESTATE-004) with estimated 3.5 sprints effort"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "SUMMARIZING_PAPER",
+      "actor": "author",
+      "context": "Section 8.1: Argues parasocial relationships are de facto trusts, proposes ethical ledger"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "STATING_IMPLICATIONS",
+      "actor": "author",
+      "context": "8.2-8.4: Implications for AI governance (auditable ledger), property law (digital estates), HCI (fiduciary duty)"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "ACKNOWLEDGING_LIMITATIONS",
+      "actor": "author",
+      "context": "8.5: Notes English law focus, untested metrics, rule-based inflexibility, jurisdiction/enforcement issues; emphasizes regulatory/voluntary adoption"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PROPOSING_FUTURE_WORK",
+      "actor": "author",
+      "context": "8.6: Four directions - empirical study, comparative analysis, pilot implementation, doctrinal development"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "ACKNOWLEDGING_CONTRIBUTORS",
+      "actor": "author",
+      "context": "Acknowledgments: Credits boyfriend Xiaoshu Luo, father Xianhui Zhang, [Zhao Peng], reviewers"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "LISTING_REFERENCES",
+      "actor": "author",
+      "context": "Provides references, case law, legislation"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "INITIATING_PEER_REVIEW",
+      "actor": "reviewer",
+      "context": "Peer review begins: Overall assessment praises originality and ambition of paper on AI governance"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "REVIEWING_ABSTRACT",
+      "actor": "reviewer",
+      "context": "Strengths in clarity; suggests rephrasing 'veil-piercing triggers' to 'triggers for disregarding contractual form'"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "REVIEWING_SECTION_1",
+      "actor": "reviewer",
+      "context": "Praises anecdote and vocabulary gap; critiques notification assumption and suggests acknowledging infrastructural limits; quibbles on anecdote specificity"
+    }
+  ]
+}

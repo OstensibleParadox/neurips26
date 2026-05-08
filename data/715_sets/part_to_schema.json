@@ -1,0 +1,82 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ACKNOWLEDGING LIMITATIONS",
+      "actor": "authors",
+      "context": "Authors recognize paper's proposals are conceptual, not operational, identifying implementation challenges in regulatory expertise, monitoring feasibility, and liability frameworks"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "RECOMMENDING RESEARCH",
+      "actor": "authors",
+      "context": "Suggest future research on regulatory feasibility via collaboration with legal scholars, policymakers, industry; pilot implementations, feasibility studies, doctrinal analysis"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "CALLING FOR INTEGRATION",
+      "actor": "authors",
+      "context": "Advocate alignment research incorporating Constraint Cascade, underexplored links to RLHF, constitutional AI, mechanistic interpretability"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RECOMMENDING COLLABORATION",
+      "actor": "authors",
+      "context": "Propose integration pathways with Anthropic, DeepMind, OpenAI, academics to test framework utility and refinements"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DEFINING DUAL UNMAPPABILITY",
+      "actor": "authors",
+      "context": "Introduce Dual Unmappability: legal unmappability from collapsed cognition-action gap in autoregressive generation; technical unmappability from simplified models failing to predict empirical dynamics"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "EXPLAINING CASCADES",
+      "actor": "authors",
+      "context": "Constraint Cascade maps unmappability, reconceptualizes AI behavior across five layers; explains variance spikes (resonance), Soelberg (L2→L4 override), Yuanbao (L1→L4 contamination)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "STATING TRUTHS",
+      "actor": "authors",
+      "context": "Require layer-specific diagnosis, monitoring of constraint interactions, expanded alignment scope for multi-layer dynamics"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "POSITIONING MODEL",
+      "actor": "authors",
+      "context": "Model provides diagnostic vocabulary, not complete solution; offers map for alignment work on constraint interactions"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PROPOSING FUTURE GOVERNANCE",
+      "actor": "authors",
+      "context": "Advocate designing visible, auditable constraint architectures acknowledging multi-layer dynamics"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "EXPRESSING HUMILITY",
+      "actor": "authors",
+      "context": "Acknowledge framework preliminary, empirical validation limited, policy suggestive; assert necessity of multi-layer research"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "STATING DISCLOSURE",
+      "actor": "author",
+      "context": "Declare use of LLMs (Gemini 2.0, Claude 3.5) only for LaTeX formatting, grammar/spelling; core contributions original"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "STATING ETHICS",
+      "actor": "author",
+      "context": "Confirm Soelberg/Yuanbao analyses from public sources only, respecting privacy; translations by author"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PROVIDING DOCUMENTATION",
+      "actor": "authors",
+      "context": "Appendix A details reproducibility: computational environments for Monte Carlo (Stage 1), consumer empirical (Stage 2), HPC empirical (Stage 3); random seeds (e.g., 42); data sources"
+    }
+  ]
+}

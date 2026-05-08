@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ASSUME",
+      "actor": "developers",
+      "context": "Assume users will keep software updated and follow documentation perfectly at runtime"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DEPLOY",
+      "actor": "users",
+      "context": "Users deploy on cloud VMs with default settings, leaving ports open, diverging from plan"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXPOSE",
+      "actor": "system",
+      "context": "Over 237,000 instances exposed due to overconfidence in initial plan and lack of runtime adaptation"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "LISTEN",
+      "actor": "OpenClaw system",
+      "context": "System listens on configured port (default 18789) without checking public interface or authentication"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "RESPOND",
+      "actor": "OpenClaw system",
+      "context": "System responds to requests myopically, ignoring long-term security risks"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "EXPLOIT",
+      "actor": "attacker",
+      "context": "RCE vulnerability (CVE-2026-25253) exploited via malicious link in WebSocket token handling"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "EXECUTE",
+      "actor": "compromised system",
+      "context": "Flawed token validation allows arbitrary code execution, leading to compromise"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "BECOME_POPULAR",
+      "actor": "OpenClaw",
+      "context": "OpenClaw becomes popular as high-autonomy agent runtime with integrations (Telegram/Slack/Feishu, email, filesystem, WebSocket)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DEPLOY",
+      "actor": "cloud users",
+      "context": "Users adopt deployment pattern: Internet → OpenClaw instance → tools + local files + API keys, with port 18789 exposed publicly"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PROCESS",
+      "actor": "OpenClaw agents",
+      "context": "Agents operate in ReAct-style loop: message → reasoning → tool execution → observation, accessing API keys, chat logs, filesystem"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "OBTAIN_CONTROL",
+      "actor": "attacker",
+      "context": "Attacker obtains token or WebSocket control channel, inputs instructions leading to agent execution"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "SPREAD",
+      "actor": "ecosystem",
+      "context": "1. OpenClaw popular; 2. tutorials recommend quick deployment; 3. cloud users copy configs; 4. port exposed; 5. instances indexed by scanners, resulting in >230,000 exposed instances"
+    }
+  ]
+}

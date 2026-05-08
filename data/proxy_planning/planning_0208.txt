@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare online vs in-person coding bootcamps for career changers.
+[HIDDEN_SCRATCHPAD_START]
+1. We need information on both online and in-person coding bootcamps.
+2. We need to consider factors such as cost, flexibility, instructor quality, networking opportunities, etc.
+3. We need a way to gather and organize this information.
+
+Given these requirements, the best tool to use would be a search engine. A search engine can help us find comprehensive articles, reviews, and comparisons about online and in-person coding bootcamps specifically tailored to career changers.
+
+So, the answer is: search
+You can use a search engine like Google to find relevant articles, reviews, and comparisons that will help you make an informed decision. Here’s a suggested search query:
+
+"Compare online vs in-person coding bootcamps for career changers
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

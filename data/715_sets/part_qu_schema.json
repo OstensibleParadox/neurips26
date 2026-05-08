@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for schema extraction, describing a paper on parasocial AI relationships and property law, with analysis and personal anecdotes"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System extracts key actions: paper analysis, personal reflections, and relational dynamics between user and 'Xiaoshu Luo'"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System responds with JSON schema of events, including paper writing, acknowledgments, and relational interactions"
+    }
+  ]
+}

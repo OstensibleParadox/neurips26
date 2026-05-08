@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: if a product costs $18 and is 20% off, what is the final price
+---
+TOOL: calculator

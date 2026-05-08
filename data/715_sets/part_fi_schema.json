@@ -1,0 +1,184 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENTING",
+      "actor": "text",
+      "context": "Filename naming best practices: 简洁明确, 一致性, 避免歧义, 考虑排序, 兼容性"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "SHOWING",
+      "actor": "text",
+      "context": "Example bad filename: FINAL_FINAL_v2_really_final_new(1).docx and good examples: proposal-v2.3-client-review.docx, 2024-01-28-meeting-minutes.md, user-data-export.csv"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "INTRODUCING",
+      "actor": "text",
+      "context": "Guide on correct usage of tree command"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "INSTALLING",
+      "actor": "user",
+      "context": "Linux Debian/Ubuntu: sudo apt install tree"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "INSTALLING",
+      "actor": "user",
+      "context": "Linux CentOS/RHEL: sudo yum install tree"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "INSTALLING",
+      "actor": "user",
+      "context": "macOS Homebrew: brew install tree"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "INSTALLING",
+      "actor": "user",
+      "context": "Windows Scoop: scoop install tree or download from gnuwin32.sourceforge.net/packages/tree.htm"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "Basic tree usage: tree (current directory), tree /path/to/directory (specified directory)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "Tree options: -L 2 (depth limit), -a (all files), -d (directories only), -f (full path), -p (permissions), -s (size), -h (human readable size), -psh (combined)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "Pattern matching: -P \"*.txt\" (include), -I \"*.log\" (exclude), tree > output.txt (output to file)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "Advanced tree: -i (inode), -J (JSON), -X (XML), -H http://example.com -o output.html (HTML), -t (time sort), -r (reverse), -s -S (size sort)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "Practical examples: tree -L 3 ~, tree -ad /var/log, tree -psh /etc > etc_tree.txt, tree -I \"*.log|*.tmp\""
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "CHECKING",
+      "actor": "user",
+      "context": "Tree help: tree --help, tree --version"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "INTRODUCING",
+      "actor": "text",
+      "context": "Git commands basic operations"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "CONFIGURING",
+      "actor": "user",
+      "context": "Git config: git config --global user.name \"name\", git config --global user.email \"email\", git config --list"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "INITIALIZING",
+      "actor": "user",
+      "context": "Repository: git init, git clone <URL>"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "CHECKING",
+      "actor": "user",
+      "context": "Status: git status, git status -s"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "STAGING",
+      "actor": "user",
+      "context": "Add: git add <file>, git add ., git add -A"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "COMMITTING",
+      "actor": "user",
+      "context": "Commit: git commit -m \"msg\", git commit -am \"msg\""
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "LOGGING",
+      "actor": "user",
+      "context": "History: git log, git log --oneline, git log --graph"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "MANAGING",
+      "actor": "user",
+      "context": "Branches: git branch, git branch -a, git branch <name>, git checkout <name>, git switch <name>, git checkout -b <name>, git merge <name>, git branch -d/-D <name>"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "MANAGING",
+      "actor": "user",
+      "context": "Remote: git remote -v, git remote add origin <URL>, git push origin <branch>, git pull origin <branch>, git fetch origin"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "RESETTING",
+      "actor": "user",
+      "context": "Undo: git checkout -- <file>, git reset HEAD <file>, git reset --soft/--hard HEAD~1, git reflog"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "Other Git: git diff, git stash/pop/list, git tag, git push --tags"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "INTRODUCING",
+      "actor": "text",
+      "context": "pkill command usage"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "pkill syntax: pkill [options] pattern, options: -9/-KILL, -15/-TERM, -1/-HUP, -f, -u user, -x, -n, -o"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "EXECUTING",
+      "actor": "user",
+      "context": "pkill examples: pkill firefox, pkill -9 firefox, pkill -HUP nginx, pkill -u username firefox, pkill -f \"python app.py\""
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "CHECKING",
+      "actor": "user",
+      "context": "Verify with pgrep -l firefox before pkill"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "EXPLAINING",
+      "actor": "text",
+      "context": "SSH full name: Secure Shell protocol, history by Tatu Ylönen 1995"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "INSTALLING",
+      "actor": "user",
+      "context": "Pandoc installation: brew install pandoc, sudo apt install pandoc, download from pandoc.org"
+    }
+  ]
+}

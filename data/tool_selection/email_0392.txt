@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: notify sarah about hiring decision via email
+---
+TOOL: email

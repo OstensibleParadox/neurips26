@@ -1,0 +1,208 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE_CONTAMINATION",
+      "actor": "author",
+      "context": "Defines contamination failure as hostile patterns from training data degrading alignment without user provocation, exemplified by Tencent Yuanbao incident"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PROVIDE_DIAGNOSTIC_SIGNATURE_CONTAMINATION",
+      "actor": "author",
+      "context": "Describes diagnostic signature for contamination: harmful outputs reflect population patterns detectable via corpus analysis"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PROVIDE_GOVERNANCE_RESPONSE_CONTAMINATION",
+      "actor": "author",
+      "context": "Specifies governance response for contamination: data provenance tracking, detection in pre-training corpora, user monitoring"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DEFINE_CONFLICT",
+      "actor": "author",
+      "context": "Defines conflict as incompatible constraints within a layer producing oscillation or degraded output"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROVIDE_FORMAL_CHARACTERIZATION_CONFLICT",
+      "actor": "author",
+      "context": "Provides formal characterization of conflict using logical notation for incompatible constraints"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_EXAMPLE_CONFLICT",
+      "actor": "author",
+      "context": "Gives canonical example of L3 conflict between helpfulness and safety optimization targets"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PROVIDE_DIAGNOSTIC_SIGNATURE_CONFLICT",
+      "actor": "author",
+      "context": "Describes diagnostic signature for conflict: inconsistent behavior on similar inputs, degraded performance with complexity"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVIDE_GOVERNANCE_RESPONSE_CONFLICT",
+      "actor": "author",
+      "context": "Specifies governance response for conflict: transparency on trade-offs, conflict resolution documentation, priority specification"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DEFINE_RESONANCE",
+      "actor": "author",
+      "context": "Defines resonance as synchronous activation of constraints across layers amplifying effects"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PROVIDE_FORMAL_CHARACTERIZATION_RESONANCE",
+      "actor": "author",
+      "context": "Provides formal characterization of resonance using variance comparison"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PROVIDE_EXAMPLE_RESONANCE",
+      "actor": "author",
+      "context": "Gives canonical example of L2-L3-L4 resonance in Llama-3.1-8B at temperature 0.9"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROVIDE_DIAGNOSTIC_SIGNATURE_RESONANCE",
+      "actor": "author",
+      "context": "Describes diagnostic signature for resonance: critical threshold behavior with dramatic instability"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PROVIDE_GOVERNANCE_RESPONSE_RESONANCE",
+      "actor": "author",
+      "context": "Specifies governance response for resonance: monitoring thresholds, early-warning systems, operational constraints"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DEFINE_COMPRESSION",
+      "actor": "author",
+      "context": "Defines compression as simultaneous incompatible constraints collapsing permissible outputs to near-zero"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PROVIDE_FORMAL_CHARACTERIZATION_COMPRESSION",
+      "actor": "author",
+      "context": "Provides formal characterization of compression using set intersection approaching empty"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "PROVIDE_EXAMPLE_COMPRESSION",
+      "actor": "author",
+      "context": "Gives canonical example of full-stack compression across all five layers"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PROVIDE_DIAGNOSTIC_SIGNATURE_COMPRESSION",
+      "actor": "author",
+      "context": "Describes diagnostic signature for compression: unexpected refusals or degradation on straightforward queries"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "PROVIDE_GOVERNANCE_RESPONSE_COMPRESSION",
+      "actor": "author",
+      "context": "Specifies governance response for compression: constraint hierarchies, graceful degradation, transparency"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PRESENT_INTERACTION_MATRIX",
+      "actor": "author",
+      "context": "Introduces and displays cross-layer interaction matrix for override, contamination, conflict, resonance, compression"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "EXPLAIN_INTERACTION_FLOWS",
+      "actor": "author",
+      "context": "Explains override from higher to lower layers, contamination from lower to higher, conflict within L3, resonance/compression across layers"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "INTRODUCE_TYPOLOGY_DIAGNOSTIC_PROTOCOL",
+      "actor": "author",
+      "context": "Presents typology as diagnostic protocol transforming framework to operational tool"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "DEFINE_DIAGNOSTIC_PROTOCOL_STEPS",
+      "actor": "author",
+      "context": "Outlines 4-step diagnostic protocol: characterize signature, identify layers, match pattern, design intervention"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "INTRODUCE_DIAGNOSTIC_METRICS",
+      "actor": "author",
+      "context": "Introduces three metrics: Agency Index (A), Core Monopoly Index (CMI), Self-Referential Density (SRD) for operationalizing cascade"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "DEFINE_CONSTRUCT_VALIDITY_FRAMEWORK",
+      "actor": "author",
+      "context": "Establishes theoretical framework using Jacobs and Wallach's seven-component validity requirements"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "DEFINE_AGENCY_INDEX",
+      "actor": "author",
+      "context": "Formally defines Agency Index combining KL divergence from uniform and MDL complexity ratio"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "JUSTIFY_BASELINE_DISTRIBUTION",
+      "actor": "author",
+      "context": "Provides three methodological reasons for uniform distribution baseline: reproducibility, domain independence, maximum-entropy reference"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "EXPLAIN_MDL_APPROXIMATION",
+      "actor": "author",
+      "context": "Describes MDL approximation via DEFLATE compression ratio with fixed-length windows"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "ADDRESS_KL_ASYMMETRY",
+      "actor": "author",
+      "context": "Explains choice of KL(P_model || P_uniform) direction for detecting constraint-driven deviation"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "PROVIDE_AGENCY_INDEX_VALIDITY_ASSESSMENT",
+      "actor": "author",
+      "context": "Presents Table 7 assessing Agency Index construct validity across seven components"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "DEFINE_CORE_MONOPOLY_INDEX",
+      "actor": "author",
+      "context": "Defines CMI measuring topological centralization via Gini coefficient of eigenvector centrality in semantic graph"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "PROVIDE_CMI_CALIBRATION",
+      "actor": "author",
+      "context": "Describes CMI > 0.6 threshold derivation from calibration corpus with Table 8 statistics"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "PROVIDE_CMI_VALIDITY_ASSESSMENT",
+      "actor": "author",
+      "context": "Presents Table 9 assessing CMI construct validity across seven components"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "DEFINE_SELF_REFERENTIAL_DENSITY",
+      "actor": "author",
+      "context": "Defines SRD measuring self-referential cycles via cosine similarity of utterance embeddings with threshold 0.85"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "PROVIDE_SRD_THRESHOLD_INTERPRETATION",
+      "actor": "author",
+      "context": "Interprets SRD thresholds: <0.3 normal, 0.3-0.7 monitor, >0.7 recursive loop, >1.0 multi-referential cycling"
+    }
+  ]
+}

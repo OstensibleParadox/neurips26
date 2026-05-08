@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for extraction, including a video transcript about skincare products and a shopping list."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTION_START",
+      "actor": "system",
+      "context": "System begins extracting chronological events from the text, focusing on actions, decisions, and state changes."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "INTRODUCTION",
+      "actor": "粉红采购员",
+      "context": "Announces 10% beauty points rebate event from June 16 to June 30, 2025, and introduces a talk with 小可 about recommended Shiseido products."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RECOMMENDATION",
+      "actor": "粉红采购员",
+      "context": "Recommends D Program 卸妆精华油, citing a past comparison video and its effectiveness for sensitive skin at 2528 yen."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "RECOMMENDATION",
+      "actor": "小可",
+      "context": "Recommends AULTIMIN美容液, highlighting its immune science, vascular strengthening, and anti-aging components as the best new serum of the year."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "RECOMMENDATION",
+      "actor": "粉红采购员",
+      "context": "Recommends ELIXIR 热感啫喱卸妆膏, noting its warming effect, suitability for pores, and no need for double cleansing at 1980 yen, lasting 2.5 months."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "LISTING_PRODUCTS",
+      "actor": "system",
+      "context": "Extracts list of skincare products from the text, including cleansers, toners, lotions, creams, sunscreens, serums, and other items with Japanese names and translations."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SHOPPING_PLAN",
+      "actor": "铃木",
+      "context": "Describes shopping plan for the 10% rebate event, including products like Benefique染发剂, shampoo, supplements, sponge cleaner, masks, cotton, and astringent toner, and mentions buying in bulk for 3 months."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PROMOTION",
+      "actor": "铃木",
+      "context": "Promotes ParMin大合店, offering original gifts, 10% points for online and in-store purchases, and invites viewers to visit the store or book appointments via official LINE."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "ANNOUNCEMENT",
+      "actor": "北村本部",
+      "context": "Announces closure of D café operated by ParMin大合 on September 13, apologizes for late notice, and reassures continued efforts in cosmetics."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EXTRACTION_END",
+      "actor": "system",
+      "context": "System completes extraction of events from the provided text."
+    }
+  ]
+}

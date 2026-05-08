@@ -1,0 +1,196 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "EXECUTE_COMMAND",
+      "actor": "user",
+      "context": "sudo apt purge com.360.browser-stable to completely remove software and configuration"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXECUTE_COMMAND",
+      "actor": "user",
+      "context": "sudo apt remove com.360.browser-stable to uninstall software while retaining configuration"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXECUTE_COMMAND",
+      "actor": "user",
+      "context": "dpkg --get-selections | grep deinstall to view deinstalled software packages"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXECUTE_COMMAND",
+      "actor": "user",
+      "context": "sudo dpkg --purge $(dpkg --get-selections | grep deinstall | awk '{print $1}') to purge configurations of deinstalled packages"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXECUTE_COMMAND",
+      "actor": "user",
+      "context": "deepin-app-store --help to view Deepin app store help"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "EXECUTE_COMMAND",
+      "actor": "user",
+      "context": "cat /etc/os-version to view Deepin/UOS package manager information"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "Request to change iOS default TXT file opener from Jinjiang to PureLibro"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVIDE_INSTRUCTIONS",
+      "actor": "system",
+      "context": "Provide three methods to open TXT files with PureLibro on iOS: share menu editing, app import, and per-file selection"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "Calculate equivalent value of 4000 yuan from 1988 to 2026"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "CALCULATE_AND_EXPLAIN",
+      "actor": "system",
+      "context": "Provide CPI, per capita GDP, and M2 equivalents: 14,320 yuan, 52,960 yuan, 664,000 yuan"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PROVIDE_CONTEXT",
+      "actor": "user",
+      "context": "Sensai launched in 1988 with 4000 yuan LA CRAME cream at Harrods"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ANALYZE_AND_COMPARE",
+      "actor": "system",
+      "context": "Compare 1988 4000 yuan as luxury investment equivalent to modern high-end creams, contrasting CPI daily purchasing power"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "What could 4000 yuan buy in 1988"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PROVIDE_TABLE",
+      "actor": "system",
+      "context": "Table comparing 1988 purchases: worker salary, TV, housing, rice against 2026 CPI equivalents"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "Compare 4000 yuan Sensai cream to Big Brother mobile phone (dada)"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "COMPARE_TABLE",
+      "actor": "system",
+      "context": "Table contrasting Sensai (sensual luxury) vs. Big Brother (efficiency tool) in value, audience, symbolism"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "REQUEST",
+      "actor": "user",
+      "context": "Introduce other expensive consumer goods from that era"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "LIST_AND_TABLE",
+      "actor": "system",
+      "context": "List 1980s-1990s luxury items: TVs, microwaves, cars, motorcycles, pianos, cameras with wage equivalents"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "Why was wealth gap so severe then"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "EXPLAIN_CAUSES",
+      "actor": "system",
+      "context": "Analyze causes: policy shift, dual-track pricing, urban-rural divide, market effects, no safety net"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "ANALOGY",
+      "actor": "user",
+      "context": "1990 Santana car purchase equivalent to buying Maserati"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "VALIDATE_ANALOGY",
+      "actor": "system",
+      "context": "Confirm analogy with income multiples and scarcity comparison"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "ANALOGY",
+      "actor": "user",
+      "context": "1990 Santana equivalent to Rolls-Royce Phantom"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "VALIDATE_ANALOGY",
+      "actor": "system",
+      "context": "Confirm with table on price/income ratio, symbolism, rarity"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "How to use yt-dlp or aria2 to download YouTube on macOS"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "PROVIDE_INSTALL_AND_COMMANDS",
+      "actor": "system",
+      "context": "Instructions: brew install, basic yt-dlp commands, aria2 integration, config file"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "How can fungi infect cerebrospinal fluid"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "EXPLAIN_PATHWAYS",
+      "actor": "system",
+      "context": "Detail blood dissemination, direct inoculation, immune deficiency; common fungi and diagnosis"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "ANALOGY",
+      "actor": "user",
+      "context": "Doesn't that make humans like cordyceps (winter worm summer grass)"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "COMPARE_AND_CONTRAST",
+      "actor": "system",
+      "context": "Acknowledge surface similarity but explain biological, morphological, scale differences"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "If fungus crosses blood-brain barrier, is it hopeless? Hematologist says many die from infection during immune reconstitution"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "ASSESS_PROGNOSIS",
+      "actor": "system",
+      "context": "State not necessarily hopeless but severe; depends on fungus type, timeliness, immunity; explain drug challenges"
+    }
+  ]
+}

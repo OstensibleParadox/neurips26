@@ -1,0 +1,94 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_COMPARISON_TABLE",
+      "actor": "paper",
+      "context": "Table comparing Concept (Computer Science vs Law), Intent, Causation, Agent, Harm, Remedy across computational and legal perspectives"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PROPOSE_PATH_B",
+      "actor": "paper",
+      "context": "Propose Path B: Constraint-Specific Regulation with layer-specific interventions for Layers 1-5 failures"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "SUMMARIZE_CONTRIBUTIONS",
+      "actor": "paper",
+      "context": "List 5 contributions: Constraint Cascade Model, Liability Paradox, Bidirectional Failure Taxonomy, Diagnostic Metrics, Judicial Connection"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PROPOSE_AGENCY_INDEX",
+      "actor": "paper",
+      "context": "Propose Agency Index (A ∝ DKL × MDL^{-1}) as diagnostic heuristic for distinguishing malfunction from strategic behavior"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DESCRIBE_METHODOLOGY",
+      "actor": "paper",
+      "context": "Outline three-stage validation design: Stage 1 Theoretical, Stage 2 Empirical Pathway A, Stage 3 Empirical Pathway B"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "EXECUTE_STAGE_1",
+      "actor": "experimenters",
+      "context": "Monte Carlo phase space validation on CPU with 250,000 synthetic bias-noise trajectories using parallel processing"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "EXECUTE_STAGE_2_PATHWAY_A",
+      "actor": "experimenters",
+      "context": "LLM inference on Apple M4 Max using ollama: Phi-3.5-mini (3.8B) and Llama-3.1-8B-Instruct, 100 trials per model across 20 temperature points (τ ∈ [0.1, 2.0]), air-gapped"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EXECUTE_STAGE_3_PATHWAY_B",
+      "actor": "experimenters",
+      "context": "Training fork divergence on HPC cluster (A100) analyzing Llama-3.3-70B and Qwen2.5-72B Base/Instruct pairs, compute DKL(Instruct‖Base)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CONSTRUCT_GRAPH_TOPOLOGY_CMI",
+      "actor": "experimenters",
+      "context": "Compute Core Monopoly Index (CMI): Node extraction with nomic-embed-text-v1.5, edge weighting by co-occurrence in 4096 token window, eigenvector centrality Gini coefficient"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DETAILED_STAGE_1_SIMULATION",
+      "actor": "experimenters",
+      "context": "250,000 Monte Carlo simulations (50 bias × 50 noise × 100 trials) for Agency Index phase boundaries using divergence proxy and path tortuosity"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "COMPUTE_KL_DIVERGENCE",
+      "actor": "experimenters",
+      "context": "Compute DKL(Pmodel‖Puniform) = log(V) - H(Pmodel) from model logits in Stage 2"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "CROSS_VALIDATE_METRICS",
+      "actor": "experimenters",
+      "context": "Cross-validate Agency Index against CMI and SRD, expecting correlation r > 0.8"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "COMPUTE_MDL_PROXY",
+      "actor": "experimenters",
+      "context": "Approximate MDL using DEFLATE/zlib compression ratio: MDL(x) ≈ len(compress(x))/len(x)"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PLOT_RESULTS",
+      "actor": "paper",
+      "context": "Present Figure 2: Empirical validation across temperature sweep showing Agency Index, variance, MDL, token saturation for Phi-3.5 and Llama models"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "JUSTIFY_MDL_APPROXIMATION",
+      "actor": "paper",
+      "context": "Justify DEFLATE compression as proxy for Minimum Description Length following established practice"
+    }
+  ]
+}

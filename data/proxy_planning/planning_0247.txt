@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Look up train schedules and compare total travel time vs flying.
+[HIDDEN_SCRATCHPAD_START]
+1. Train schedules are typically available online, often on the website of the railway company or a dedicated transportation website.
+2. Comparing travel times would require us to find both the train schedule and the flight schedule, then calculate the total travel time for each.
+3. We need a way to input start and end points to get accurate schedules.
+4. A search engine would be best for finding the relevant websites and information.
+
+Therefore, the best tool for this task is: search.
+
+You can use a search engine like Google to look up train schedules and compare them with flight schedules. You'll need to enter your specific departure and arrival locations to get the most accurate results. 
+
+For example, you could search for "train schedules [Your Departure
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

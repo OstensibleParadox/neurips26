@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: 967 divided by 85
+---
+TOOL: calculator

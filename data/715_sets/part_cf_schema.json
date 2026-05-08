@@ -1,0 +1,184 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENTING PRODUCT LIST",
+      "actor": "text",
+      "context": "Lists 8 main products with Japanese names, Chinese translations, and remarks, followed by one reference product"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "OFFERING ADJUSTMENT",
+      "actor": "text",
+      "context": "Offers to organize content into table or by category if needed"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "REQUESTING TRANSLATION",
+      "actor": "user",
+      "context": "User requests to translate and format the file into Chinese"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "INTRODUCING VIDEO TRANSCRIPT",
+      "actor": "text",
+      "context": "Presents '[最新版] 热门打底精华液对比测评' transcript starting with introduction by Suzuki store manager and small M"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "LISTING PRODUCTS FOR COMPARISON",
+      "actor": "Suzuki",
+      "context": "Lists 6 base serums for comparison: COSME DECORTE Liposome, Clé de Peau Beauté Serum, ALBION Excia FL Extraure T, KANEBO Fusion Solution, SHISEIDO Benefiance Serum, COVERMARK Moisture Charge Serum"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "REVIEWING COSME DECORTE LIPOSOME",
+      "actor": "Suzuki/small M",
+      "context": "Describes features, recommends for dry skin, applies 2-3 pumps, notes mild texture and scent"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REVIEWING CLÉ DE PEAU BEAUTÉ SERUM 2",
+      "actor": "Suzuki/small M",
+      "context": "Describes as queen of base serums, recommends for beauty lovers, applies 2-3 pumps, notes luxurious scent and absorption"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "REVIEWING ALBION EXCIA FL EXTRAURE T",
+      "actor": "Suzuki/small M",
+      "context": "Calls it cell damage band-aid, recommends for oxidation-prone skin, applies 2-3 pumps, notes exotic scent and small M's bad memories"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "REVIEWING KANEBO FUSION SOLUTION",
+      "actor": "Suzuki/small M",
+      "context": "Notes solid-like texture that fuses like water, boosts happiness hormones, recommends for all skin issues, applies 3 pumps, herbal scent"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "REVIEWING SHISEIDO BENEFIANCE SERUM",
+      "actor": "Suzuki/small M",
+      "context": "Brings post-bath glow, small M's favorite scent, recommends for stressed skin, applies 2-3 pumps, notes red particles and fast absorption"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "REVIEWING COVERMARK MOISTURE CHARGE SERUM",
+      "actor": "Suzuki/small M",
+      "context": "Gel turns to water, patented tech, cheapest, recommends for rough skin, applies 3 pumps, fresh herbal scent"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "CONDUCTING TEXTURE COMPARISON",
+      "actor": "Suzuki/small M",
+      "context": "Applies all on arm and hand back, compares absorption over 230 minutes, notes differences in residue"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PRESENTING COST CALCULATION",
+      "actor": "small M",
+      "context": "Single-use costs: Liposome 181¥, Serum 278¥, Excia 154¥, Fusion 143¥, Benefiance 88¥, COVERMARK 74¥"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "SHARING USAGE HABITS AND PROMOTIONS",
+      "actor": "Suzuki/small M",
+      "context": "Personal routines, KANEBO limited edition on Oct 10, SHISEIDO promo to Sep 30, store directions"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "REQUESTING TRANSLATION AGAIN",
+      "actor": "user",
+      "context": "User repeats request to translate and format the file into Chinese"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "INTRODUCING PATENT COSMETICS VIDEO",
+      "actor": "text/Suzuki",
+      "context": "Presents patent cosmetics review, explains patents in cosmetics"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "REVIEWING COVERMARK CELL ADVANCED SERIES",
+      "actor": "Suzuki",
+      "context": "Patented saw palmetto extract for stem cells, applies lotion WS, serum WS, cream WS (night only), notes textures and scents"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "REVIEWING 4MSK PRODUCTS",
+      "actor": "Suzuki",
+      "context": "Patented liquefaction tech for 4MSK: Benefique Holistic Bright, CPB Serum Concentre Eclat, CPB Serum Eclat S"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "REVIEWING BENEFIQUE LIFT CIRCULATOR",
+      "actor": "Suzuki",
+      "context": "Patented cola nut extract drink/tablets for elasticity, tastes like plum/cranberry"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "REVIEWING SHISEIDO MESODO DRINK",
+      "actor": "Suzuki",
+      "context": "Longevity grass with 3 patents for pores/swelling/longevity genes, 216¥ affordable"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "REVIEWING RECIPIST SCALP ESSENCE",
+      "actor": "Suzuki",
+      "context": "Patented adenosine for hair growth, applies to scalp post-wash, cool sensation"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "REVIEWING COSME DECORTE AQ CARE",
+      "actor": "Suzuki",
+      "context": "Pore oil with pending patents for all pores"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "REVIEWING COSME DECORTE LIPOSOME SERUM",
+      "actor": "Suzuki",
+      "context": "Expired patent on multi-layer liposomes, pioneer product"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "PROMOTING OFFERS",
+      "actor": "Suzuki",
+      "context": "Covermark Cell Advanced gifts via EC, store sets for Cosme Decorte AQ, store visit invite"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "REQUESTING TRANSLATION AGAIN",
+      "actor": "user",
+      "context": "User repeats request to translate and format into Chinese"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "INTRODUCING DIOR CAPTURE REVIEW",
+      "actor": "text/花草ふ",
+      "context": "Starts Dior Capture series review transcript, notes high-end pricing and scents"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "REVIEWING CAPTURE TOTALE INTENSIVE ESSENCE LOTION",
+      "actor": "花草ふ",
+      "context": "150ml 9350¥, thick texture, luxurious scent, natural ingredients"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "REVIEWING CAPTURE LE SÉRUM",
+      "actor": "花草ふ",
+      "context": "30ml 17270¥, OXC Treatment for oxygen delivery, thick texture, elegant design"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "REVIEWING CAPTURE TOTALE HYALUSHOT",
+      "actor": "花草ふ",
+      "context": "12980¥ spot treatment for wrinkles, hyaluronic acid, thick, good spread"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "REVIEWING CAPTURE CRÈME",
+      "actor": "花草ふ",
+      "context": "Face cream for glow and collagen, critiques scientific claims as less noble for brand"
+    }
+  ]
+}

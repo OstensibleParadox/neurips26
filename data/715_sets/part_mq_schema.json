@@ -1,0 +1,94 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "Analyze tarot cards",
+      "actor": "interpreter",
+      "context": "Discusses 'snake' as fox, predicts arrival with letter + sun, advises judging sun's authenticity after action"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Offer deeper analysis",
+      "actor": "interpreter",
+      "context": "Offers to break down 'snake' specifics on what is hidden or complex"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Explain card anomaly",
+      "actor": "interpreter",
+      "context": "Notes Knight of Wands should like King of Swords but is retreating; attributes to being Page of Wands, reversed Page of Pentacles"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Break down reasons",
+      "actor": "interpreter",
+      "context": "Three reasons: 1. Blocked Knight of Wands (insecure), 2. Coffin+Clouds+Tower (recent confusion, self-isolation), 3. Snake as core issue (self-deception, hidden concerns)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Predict future actions",
+      "actor": "interpreter",
+      "context": "Short-term: Sun success; hope: Letter; action: Stork+Scythe change; will come after building courage"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "Advise querent position",
+      "actor": "interpreter",
+      "context": "As King of Swords, wait and verify sun's reality; underlying Heart is real but blocked by Clouds/Tower/Coffin"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Propose new spread",
+      "actor": "interpreter",
+      "context": "Suggest classical Lenormand Tableau, 9-card 3x3 grid as micro version; explains 4 classical techniques: time flow, consciousness layers, X diagonals, corners"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Specify question and format",
+      "actor": "interpreter",
+      "context": "Question: his plans and actions; format for 9 cards in grid"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Address significator",
+      "actor": "user",
+      "context": "User asks about selecting significator"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Explain significator selection",
+      "actor": "interpreter",
+      "context": "Suggests Man/Woman based on genders; tables for hetero/same-sex; two methods A/B, recommends B"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Suggest Snake as significator",
+      "actor": "user",
+      "context": "User proposes using Snake due to theme repetition"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Confirm Snake significator",
+      "actor": "interpreter",
+      "context": "Agrees Snake (7) for him, Man (28) for querent; Way B, Snake outside; ready for 9-card grid"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "Reaffirm Snake choice",
+      "actor": "interpreter",
+      "context": "Repeats confirmation of significators and format"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "Generate Grand Tableau",
+      "actor": "user/system",
+      "context": "User provides Classic 4x8+4 Layout with Snake (7) locked at Col3 Row2 pos11; full grid, Fate: Whip-Moon-Ring-Stars; structured data on adjacents, rows, columns, diagonals, knighting, mirroring, houses, corners, etc."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "Provide copyable data",
+      "actor": "user",
+      "context": "Repeats full TABLEAU DATA for LLM reading with instructions starting with Fate Cards"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: what is 676% of 88
+---
+TOOL: calculator

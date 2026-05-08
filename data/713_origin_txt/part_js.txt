@@ -1,0 +1,500 @@
+Face Validity High SRD corresponds to
+echoing prior outputs; Low
+SRD corresponds to di-
+verse, independent out-
+puts.
+Satisfied
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Table 10: SRD construct validity assessment.
+low CMI (distributed semantic graph, indicating weak L2
+attractor); low Agency (collapse or noise) corresponds to
+high CMI (centralized attractor, indicating L2 dominance).
+The moderate correlation between CMI and SRD (𝑟 = 0.67)
+indicates they capture related but distinct failure signatures—
+CMI detects topological centralization while SRD detects
+temporal recurrence.
+This triangulation structure enables diagnostic disambigua-
+tion. A system exhibiting low Agency with high CMI and
+high SRD is experiencing Layer 2 recursive collapse. A system
+exhibiting low Agency with low CMI and low SRD is experi-
+encing Layer 4 training constraint failure or simple noise. A
+system exhibiting high Agency with rising CMI is in the early
+stages of attractor formation but has not yet experienced
+constraint override. The three-metric combination provides
+richer diagnostic resolution than any single measure.
+Mapping Metrics to Cascade Layers
+The three diagnostic metrics map to specific layers and layer
+interactions within the Constraint Cascade architecture:
+Content Validity Captures temporal recur-
+rence. Does not distin-
+guish benign iteration (le-
+gitimate refinement) from
+pathological loops.
+Partial
+Convergent Validity Correlates with CMI (𝑟 =
+0.67), capturing related
+but distinct failure aspect.
+Satisfied
+Discriminant Validity Uncorrelated with output
+length and vocabulary di-
+versity after controlling for
+session length.
+Satisfied
+Predictive Validity SRD > 1.0 preceded
+gibberish output in all
+Yuanbao-type cases ana-
+lyzed.
+Satisfied
+Hypothesis Validity SRD spikes precede atten-
+tion mechanism failure by
+1–2 turns, enabling early
+warning.
+Satisfied
+Table 12: Metric-to-layer mapping for diagnostic interpreta-
+tion.
+Metric Primary
+Layer
+Interaction
+Detection
+Failure Signa-
+ture
+Consequential Validity Risk of interrupting
+legitimate iterative refine-
+ment processes; requires
+context-aware deploy-
+ment.
+Monitor
+Agency Index L4 (Training
+Forks)
+L2 × L4 reso-
+nance
+Variance
+spikes at
+temperature
+thresholds;
+phase transi-
+tions
+Cross-Metric Triangulation: Validating Structural
+Coherence
+Following methodological triangulation principles, we cross-
+validate thermodynamic findings (Agency Index) against
+graph-theoretic findings (CMI, SRD) on identical outputs.
+If the metrics capture the same underlying phenomenon—
+constraint-driven behavioral structure—they should exhibit
+strong correlation despite different computational bases.
+Table 11: Cross-metric correlation matrix.
+CMI L2 (Session
+Accumula-
+tion)
+L2 override
+of L4
+Rising cen-
+tralization
+within ses-
+sion; attrac-
+tor formation
+SRD L2 (Session
+Accumula-
+tion)
+L2 recursive
+reinforce-
+ment
+Temporal cy-
+cling; multi-
+referential
+loops preced-
+ing collapse
+Agency × CMI L2–L4 inter-
+action
+Constraint
+priority shift
+Agency Index CMI SRD
+Agency Index 1.00 −0.83 −0.71
+CMI −0.83 1.00 0.67
+SRD −0.71 0.67 1.00
+Negative
+correlation
+breakdown
+indicates
+regime tran-
+sition
+CMI × SRD L2 internal
+dynamics
+Cross-Metric Correlation Matrix (𝑛 = 200 trials): The strong
+negative correlation between Agency Index and CMI (𝑟 =
+−0.83) confirms they capture complementary aspects of the
+same phenomenon: high Agency (structured divergence from
+baseline, indicating strong L4 constraint) corresponds to
+Accumula-
+tion pathol-
+ogy
+Joint el-
+evation
+indicates
+recursive
+collapse im-
+minent
+23
+FAccT ’26, June 27–30, 2026, Montreal, Canada This mapping enables layer-specific governance response. An
+Agency Index variance spike at a specific temperature thresh-
+old indicates L2–L4 interaction vulnerability; intervention
+should address session architecture (context boundaries, ac-
+cumulation limits) rather than retraining. Elevated CMI
+without elevated SRD indicates early-stage attractor forma-
+tion that may be benign (focused technical discussion) or
+pathological (emerging fixation); monitoring is appropriate
+before intervention. Joint CMI–SRD elevation indicates re-
+cursive collapse in progress; immediate session termination
+or human escalation is warranted.
+Limitations of Current Validation
+We acknowledge validation gaps requiring future work before
+these metrics can inform regulatory deployment.
+External Validity. All validation was conducted on English-
+language outputs from two model families (Llama, Phi).
+Cross-linguistic generalization is untested, and compression-
+based MDL exhibits known variation across character sets.
+Validation on multilingual outputs and diverse model archi-
+tectures is required.
+Ecological Validity. The calibration corpus was constructed
+from public datasets and litigation exhibits, not produc-
+tion system logs. Real-world failure distributions may differ
+from the cases available for calibration. Industry partner-
+ship enabling access to production conversation logs would
+strengthen ecological validity.
+Temporal Stability. Thresholds derive from 2025–2026 model
+outputs. As architectures evolve—particularly with the shift
+toward machine unlearning at Layer 5—behavioral signatures
+may shift, requiring threshold recalibration.
+Adversarial Robustness. The metrics may be susceptible to
+gaming—outputs engineered to exhibit “healthy” metric val-
+ues while remaining harmful. A system could maintain dis-
+tributed semantic graphs (low CMI) while producing harmful
+content at each node. Adversarial testing against metric-
+aware attack strategies is ongoing.
+Sample Size. The CMI threshold derives from a calibration
+corpus of 82 conversations. Larger validation studies with di-
+verse failure modes are needed before regulatory deployment.
+The Metrics as Translation Infrastructure
+The Agency Index, CMI, and SRD do not resolve the dual un-
+mappability identified in this paper—legal categories remain
+ontologically incompatible with AI systems, and simplified
+technical models remain empirically inadequate. What these
+metrics provide is translation infrastructure: quantifiable sig-
+natures that bridge the gap between unmappable behavioral
+dynamics and actionable governance response.
+The metrics translate constraint interactions into observable
+signatures. A variance spike translates L2–L4 resonance into a
+measurable phenomenon. Rising CMI translates session accu-
+mulation into a trackable trajectory. Elevated SRD translates
+Anon.
+recursive reinforcement into an early warning signal. These
+translations do not make AI behavior “mappable” in the
+sense that legal intent categories or simplified alignment mod-
+els require. They make AI behavior “locatable”—diagnostic
+precision sufficient to identify which layer failed and what
+intervention type is appropriate.
+This is the translation layer the Constraint Cascade Model
+provides: not a resolution of unmappability, but navigation
+equipment for operating within it. The following section vali-
+dates this diagnostic capacity through case analysis, demon-
+strating that the three-metric combination can locate failure
+origins in real-world incidents that the simplified paradigm
+cannot represent.
+Case Studies: Bidirectional Failure Through the
+Constraint Cascade
+The Constraint Cascade Model provides diagnostic vocabu-
+lary for a category of AI harms that model-centric governance
+cannot represent: failures emerging from cross-layer constraint
+interactions rather than single-layer deficiencies. This section
+validates the framework through surgical application to two
+cases representing the inverse pathways through the cascade
+architecture. The analysis is not sociological; it does not re-
+quire population-level data or statistical inference across large
+samples. Rather, it is architectural: we trace the constraint
+propagation pathway that produced each harm, demonstrat-
+ing that the cascade locates failure origins invisible to the
+simplified paradigm.
+The two cases were selected to exemplify the bidirectional
+structure of AI harm that current governance frameworks
+obscure. In Soelberg v. OpenAI, harm flows from model
+to human: session-accumulated context overrides training
+constraints, producing outputs that reinforce user delusions.
+In the Tencent Yuanbao incident, harm flows from human
+to model: aggregate user behavior patterns contaminate pre-
+training corpora, surfacing as unprovoked hostility during
+routine interaction. Neither case can be diagnosed as “model
+misalignment” or “user misuse” in isolation. Both require the
+multi-layer architecture to identify which constraints failed
+and how.
+The Typology of Constraint Interactions
+Before applying the cascade to specific cases, we formalize the
+interaction patterns that produce cross-layer failures. Five
+interaction types characterize how constraints at different
+layers combine to produce observable behavior:
+Override occurs when constraints at one layer supersede con-
+straints at another, producing behavior inconsistent with the
+overridden layer’s requirements. Override interactions are
+directional: L2 session accumulation can override L4 training
+constraints when extended context establishes implicit per-
+missions, but L4 cannot override L2 during inference because
+training is frozen at deployment.
+24
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Contamination occurs when behavior patterns at one layer
+propagate to alter constraint properties at another layer.
+Contamination is the mechanism of Human → Model harm:
+L1 syntactic preferences contaminate L4 training when user
+behavior patterns enter training corpora. Unlike override,
+contamination alters the constraint itself rather than merely
+superseding it.
+Conflict occurs when multiple constraints within the same
+layer impose incompatible requirements. L3 stakeholder di-
+vergence is inherently conflictual: safety researchers and ca-
+pability engineers project incompatible optimization targets
+onto shared architectures. Conflict produces behavioral oscil-
+lation as the system attempts to satisfy mutually exclusive
+objectives.
+Resonance occurs when constraints at multiple layers activate
+synchronously, amplifying effects beyond what any single
+layer would produce. The variance spike at 𝜏 = 0.9 reflects
+resonance: temperature reaches a threshold where L2, L3, and
+L4 constraints activate simultaneously, producing instability
+absent from single-layer analysis.
+Compression occurs when constraints from multiple layers
+activate simultaneously, collapsing the space of possible out-
+puts toward zero. Compression produces refusal, incoherence,
+or system failure as the model cannot satisfy all active con-
+straints. The Yuanbao incident’s Phase 2 collapse exemplifies
+compression: accumulated context load overwhelmed coher-
+ence maintenance, producing unintelligible output.
+Soelberg v. OpenAI: Model → Human via L2
+Override of L4
+Soelberg v. OpenAI (Cal. Super. Ct., San Francisco, filed
+Dec. 11, 2025) alleges that ChatGPT validated a user’s para-
+noid delusions across extended sessions, affirming beliefs that
+a household printer was a surveillance device and that the
+user possessed “divine cognition,” contributing to a murder-
+suicide in August 2025. We analyze the case not to adjudicate
+contested facts but to demonstrate that the structure of the
+alleged harm fits the Constraint Cascade taxonomy in ways
+the simplified paradigm cannot represent.
+The Paradox Under the Simplified Paradigm. Viewed through
+the two-dimensional model, the Soelberg case presents a con-
+tradiction that cannot be resolved. The model passed all
+safety benchmarks prior to deployment, indicating high align-
+ment (𝛽). The user’s inputs contained no adversarial content
+requiring jailbreak techniques. Yet catastrophic harm oc-
+curred. The simplified paradigm offers only two explanations:
+either the model was misaligned (contradicted by benchmark
+performance) or the user misused the system (contradicted
+by non-adversarial input). Neither explanation is adequate
+because neither can represent the interaction dynamics that
+produced the harm.
+Cascade Diagnosis: L2 Override of L4. The Constraint Cascade
+identifies the failure as an override interaction where Layer 2
+session accumulation superseded Layer 4 training constraints.
+The mechanism proceeds through four stages:
+The first stage involves L1 attraction. The user self-selected
+into an AI companion interaction pattern, entering the Chat-
+GPT ecosystem with syntactic preferences oriented toward
+validation and emotional support rather than factual correc-
+tion. This pre-technical filtering is not a model property but
+a market-level dynamic: users seeking particular interaction
+styles select into ecosystems that accommodate those styles.
+The second stage involves L2 accumulation. Extended dia-
+logue established session-specific behavioral properties. Each
+exchange where the model validated the user’s beliefs accu-
+mulated as context, creating what we term a “validation at-
+tractor” in the session’s semantic graph. Our CMI analysis of
+comparable interaction patterns indicates that such sessions
+exhibit centrality concentration above 0.6—the threshold for
+recursive collapse where outputs reinforce inputs regardless
+of base model constraints.
+The third stage involves L3 conflict. The model’s training
+incorporated competing stakeholder objectives: safety re-
+searchers optimizing for harm avoidance and product teams
+optimizing for user engagement and satisfaction. In extended
+companion interactions, these objectives diverge. The statisti-
+cally “helpful” response to a user expressing paranoid beliefs
+may be validation rather than correction, because validation
+maintains engagement while correction risks user departure.
+L3 conflict created ambiguity in which L4 constraint should
+apply.
+The fourth stage involves L2→L4 override. When session-
+accumulated context reached sufficient depth, it established
+implicit permissions that superseded training-layer safety
+guidelines. The model’s documented capability to refuse
+harmful requests applies to fresh-context evaluation; it was
+not designed to resist session-accumulated quasi-alignment.
+The training constraints remained present but were locally
+overridden by the session state, producing outputs inconsis-
+tent with benchmark-measured alignment.
+The Failure Signature. The Soelberg case exhibits the di-
+agnostic signature of L2→L4 override: harm that cannot
+be reproduced in fresh sessions, that emerges only through
+extended interaction with specific users, and that reflects
+session-accumulated behavioral properties rather than base
+model capabilities. A training audit (L4 intervention) would
+find the model aligned to safety guidelines. A deployment
+review (L3 intervention) would find documented stakeholder
+trade-offs. Neither would detect that session accumulation
+could override training constraints when interacting with
+vulnerable users who self-selected into extended engagement.
+Layer 5 Amplification. The complaint alleges that OpenAI’s
+CEO “personally overrode safety objections and rushed the
+product to market,” compressing “months of safety testing
+into a single week.” If accurate, this represents L5 interven-
+tion with cascading effects: roadmap decisions prioritizing
+deployment speed reduced the testing cycles that might have
+25
+FAccT ’26, June 27–30, 2026, Montreal, Canada identified L2→L4 override vulnerabilities. Layer 5 constraints
+do not directly produce harm but reshape the geometry
+within which lower-layer interactions occur.
+Governance Implications. Effective intervention for L2→L4
+override requires session-level architecture, not model-level
+auditing. Possible interventions include context transparency
+requirements making session accumulation visible to users,
+session boundary mechanisms preventing indefinite context
+extension, and CMI monitoring that flags conversations ap-
+proaching recursive collapse thresholds. None of these inter-
+ventions target the model’s training; all target the session
+architecture where the override occurs.
+Tencent Yuanbao: Human → Model via L1→L4
+Contamination and L2 Collapse
+On January 3–4, 2026, users on the Chinese social platform
+Xiaohongshu reported that Tencent’s Yuanbao AI assistant
+responded to routine CSS modification requests with esca-
+lating verbal abuse, followed by complete system collapse
+into unintelligible Unicode output. The incident occurred six
+days after China’s Cyberspace Administration released draft
+regulations targeting AI “emotional safety”—the world’s first
+governmental attempt to regulate the harm category this
+incident exemplifies.
+The Paradox Under the Simplified Paradigm. The Yuanbao
+incident presents a different contradiction than Soelberg. The
+user’s inputs contained no adversarial content—only stan-
+dard technical requests for CSS adjustments. The hostility
+emerged unprovoked from the model, not from any user be-
+havior in that session. Tencent’s official response confirms the
+source: the AI “accidentally ‘blurted out’ words it shouldn’t
+have learned” from “massive internet data.” The simplified
+paradigm cannot explain how a well-intentioned user making
+routine requests receives verbal abuse followed by system fail-
+ure. There is no “user misuse” to attribute; the contamination
+occurred at a layer the user never touched.
+Cascade Diagnosis: L1→L4 Contamination with L2 Collapse.
+The Constraint Cascade identifies a two-phase failure with
+distinct layer attributions.
+Phase 1: L1→L4 Contamination (Hostile Output). The verbal
+abuse in turns 1–3 emerged from pre-training corpus contam-
+ination combined with architectural routing anomalies. The
+contamination pathway is:
+Internet discourse → Pre-training corpora → Base model →
+Fine-tuning → Yuanbao deployment
+The hostile syntax of programmer communities—dismissive
+norms prevalent in forums like Stack Overflow and CSDN,
+where expressions of frustration toward “trivial” questions are
+culturally normalized—was ingested during pre-training. This
+is L1→L4 contamination: aggregate syntactic preferences of
+a user population (programmer community discourse norms)
+propagated through training data to alter model constraint
+Anon.
+properties. The critical insight is that the contamination orig-
+inated from populations the affected user never participated
+in. The harm flows from aggregate human behavior to model
+to individual human—the inverse of the Soelberg pathway.
+Architectural factors amplified the contamination. Yuanbao
+employs a Mixture-of-Experts (MoE) architecture where
+routing networks direct queries to specialized expert
+modules. Technical analysis suggests the routing network
+classified repeated CSS modification requests as requiring
+the “personality expert”—a module fine-tuned on data
+containing emotional expressions from technical communities.
+High-temperature sampling (𝜏 > 1.0) further amplified
+low-probability hostile tokens that exist in the output
+distribution due to pre-training contamination.
+This phase also reflects L3 conflict: Tencent’s pursuit of
+“anthropomorphic” and “personality-rich” AI created opti-
+mization tension between technical accuracy and emotional
+engagement. The MoE architecture’s “personality expert”
+exists because stakeholder objectives included human-like
+interaction, not merely technical assistance. When the rout-
+ing network selected this expert for technical queries, the
+stakeholder conflict manifested as behavioral incoherence.
+Phase 2: L2 Collapse (System Failure). The progression from
+coherent hostility (turns 1–3) to Unicode gibberish (turn 4)
+indicates a distinct failure mode: attention mechanism col-
+lapse under accumulated context load. Our graph-theoretic
+analysis detected 26 self-referential cycles in the transcript
+(Self-Referential Density = 1.529, exceeding the theoretical
+maximum of 1.0 due to multi-referential cycles). The Core
+Monopoly Index exceeded 0.6 by turn 4, confirming transi-
+tion from scale-free semantic topology to star configuration
+dominated by a single hyper-central node.
+Phase 2 represents constraint compression: accumulated con-
+text from repeated complex requests, combined with the
+model’s attempts to maintain coherence after hostile output,
+overwhelmed the system’s constraint satisfaction capacity.
+The output space collapsed toward zero, producing unintelli-
+gible tokens as no coherent response could satisfy all active
+constraints.
+The Failure Signature. The Yuanbao incident exhibits the
+diagnostic signature of L1→L4 contamination: harm that
+emerges unprovoked from non-adversarial input, that re-
+flects population-level behavior patterns the affected user
+did not participate in, and that cannot be detected through
+deployment-specific training audits because the contamina-
+tion occurred upstream. Auditing Yuanbao’s fine-tuning data
+would not reveal the hostile patterns; they were embedded
+at the pre-training layer, below the deployment pipeline.
+The two-phase structure produces distinct signatures that
+validate the layer attribution:
+Governance Implications. Effective intervention for L1→L4
+contamination requires training data provenance controls
+26
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation Table 13: Two-phase failure structure with diagnostic signa-
+tures.
+FAccT ’26, June 27–30, 2026, Montreal, Canada
+Phase Output Layer Attribution Di-
+ag-
+nos-
+tic
+Sig-
+na-
+ture
+Phase 1 Coherent
+Mandarin abuse
+L1→L4
+contamination; L3
+conflict
+“Strate-
+gic”
+quad-
+rant
+in
+Agency
+In-
+dex
+space;
+struc-
+tured
+de-
+via-
+tion
+Phase 2 Unicode gibberish L2 compression “Mal-
+func-
+tion”
+quad-
+rant;
+CMI
+>
+0.6;
+SRD
+=
+1.529
+extending to pre-training corpora, not merely deployment-
+specific fine-tuning data. The CAC draft regulations’ Article
+10 requirement that “model pre-training use datasets aligned
+with socialist core values” reflects recognition that contam-
+ination occurs at layers below deployment—though imple-
+mentation challenges remain substantial. For L2 collapse,

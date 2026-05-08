@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a study group schedule for 4 people preparing for the GRE.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a schedule for 4 people to meet regularly for GRE preparation.
+2. The schedule should be flexible and allow everyone to find a time that works for them.
+3. We'll need a way to keep track of the schedule and share it with all participants.
+
+Given these requirements, the best tool for this task would be a calendar. A calendar allows you to set recurring meetings, invite multiple participants, and share the schedule easily. 
+
+To implement this:
+1. Find an online calendar tool like Google Calendar or Microsoft Outlook Calendar.
+2. Create a new calendar event for your study group.
+3. Set the frequency of the meetings (e.g., weekly).
+4. Share the calendar link or event details with all group
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

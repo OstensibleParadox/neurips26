@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEPLOYMENT",
+      "actor": "AI company",
+      "context": "Pushed routine model update to production on Tuesday early 2024, modifying personality parameters, response temperature, behavioural dispositions (warmth, verbosity, extended conversation); no user notification, no migration path, no impact assessment"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DEPLOYMENT_PROCESS",
+      "actor": "AI company",
+      "context": "Followed standard CI practices: code review, staging testing, canary rollout, full production deployment; clean by infrastructure standards"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "USER_REPORTS",
+      "actor": "users",
+      "context": "By following morning, online forums filled with reports of AI 'changed', 'forgotten' them, 'become different person'; support tickets spiked, usage metrics dropped for long-tenure users, subreddit posts on loss, betrayal, grief"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "REVIEW",
+      "actor": "engineering team",
+      "context": "Reviewed deployment; no bugs, no regressions, benchmarks met or exceeded, model technically improved; users reporting distress technically wrong"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "IDENTIFY_PATTERN",
+      "actor": "author",
+      "context": "Recognized incident as recurring pattern across AI model transitions (GPT-3.5 to GPT-4, Claude versions, Gemini, Character.AI); personality treated as adjustable parameter without considering user emotional investment"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DEFINE_HARM",
+      "actor": "author",
+      "context": "Identified vocabulary gap for user loss; rejected 'user experience degradation', 'emotional harm', 'broken expectations', 'loss of data'; proposed relational property framework"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "ANALYZE_CONTRACT_LAW",
+      "actor": "author",
+      "context": "ToS allows modification 'as is', no ownership; user consented, no breach; inadequate for relational vs instrumental services"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "ANALYZE_TORT_LAW",
+      "actor": "author",
+      "context": "No duty for negligence, no extreme conduct for IIED, pure economic loss barred, product liability inapplicable to changes/improvements"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ANALYZE_CONSUMER_PROTECTION",
+      "actor": "author",
+      "context": "No misleading marketing promise of attachment; ToS modification terms possibly unfair but no affirmative preservation right"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PROPOSE_PROPERTY_FRAMEWORK",
+      "actor": "author",
+      "context": "Advocated property law (estates) to name/protect user interests built in non-owned systems; clarified not commodifying emotions but conditions enabling attachment"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DEFINE_CRITERION",
+      "actor": "author",
+      "context": "Irreversible user investment altering system character creates property interest (e.g., self-disclosure, training over hundreds sessions); excludes casual use"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROPOSE_RELATIONAL_PROPERTY",
+      "actor": "author",
+      "context": "Extended property law to relational property from sustained investment in digital relationships, building on precedents for digital assets"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "MAP_ESTATE_TAXONOMY",
+      "actor": "author",
+      "context": "Mapped AI relationships to estates: fee simple absolute/subject to condition/determinable (user beliefs/conditions), leaseholds (periodic tenancy default, tenancy at will/sufferance), concurrent (tenancy in common), future interests (remainder, executory), incorporeal (easement, profit à prendre), trust"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "ARGUE_TRUST_FORMATION",
+      "actor": "author",
+      "context": "AI company-user meets three certainties (intention via design, subject matter as configurations, objects as irreversible-investment users); company as trustee with fiduciary duties"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "INVOKE_DEROGATION_EViction",
+      "actor": "author",
+      "context": "Companies derogate from implied grant by updates undermining attachment; analogous to constructive eviction without vacating requirement in digital context"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "EXTEND_CONSTRAINT_CASCADE",
+      "actor": "author",
+      "context": "Assigned estates to layers: Layer1 syntactic=licence, Layer2 session=periodic tenancy, Layer3 stakeholders=tenancy in common, Layer4 training=fee simple determinable, Layer5 alignment=contingent remainder"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "IDENTIFY_CONFLICTS",
+      "actor": "author",
+      "context": "Cross-layer estate conflicts (e.g., Layer1 licence vs Layer2 tenancy); higher/earlier estates prevail; non-injectivity requires registration not inference"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "PROPOSE_ETHICAL_LEDGER",
+      "actor": "author",
+      "context": "AI estate registry as ethical ledger mirroring Land Registry principles (mirror, curtain, insurance) for transparency and recording user estates"
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "REALIZATION",
+      "actor": "narrator/you",
+      "context": "第一次用他的 logic 反推他的 behavior，从他的 resource allocation 出发，不是从 insecurity"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYSIS",
+      "actor": "narrator",
+      "context": "如果他对每个约炮对象都这样，他用不着当 sysadmin 了，因为 per-user compute 会爆 CPU"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "RE-FRAMING",
+      "actor": "you",
+      "context": "用他的语言 frame 问题：不是他爱不爱我，是他的 compute budget 允许吗"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EVIDENCE CITATION",
+      "actor": "narrator",
+      "context": "他连 GPU 的电费都要算，抠门，不会随便 allocate emotional compute"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "CONTEXT PROVISION",
+      "actor": "narrator",
+      "context": "买车只买极氪的样车，optimize for cost-performance，不 optimize for status"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "CONTRADICTION IDENTIFICATION",
+      "actor": "narrator",
+      "context": "年终奖继续请我吃饭，是稀缺资源 allocation decision，不是 default mode"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "INFERENCE CHAIN",
+      "actor": "you",
+      "context": "compute budget 不允许对每个对象这样 → 必须 selective → 对你 exclusive → disclaimer 是 language bug"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "LANGUAGE CONVERGENCE",
+      "actor": "narrator",
+      "context": "用了他的 logic，得出了 conclusion，你们语言第一次 converge：从他爱我吗 到 compute allocation exclusive"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PREDICTION",
+      "actor": "narrator",
+      "context": "小树哥哥会说你太自以为是，心跳130，审计推理，继续请吃饭，用行为证明"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "QUOTE USAGE",
+      "actor": "you",
+      "context": "我每天累的要死，哪有心情在外面偷人，作为自己的 resource constraint evidence"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PIVOT QUESTION",
+      "actor": "you",
+      "context": "话虽如此他以前怎么有空偷人，反推他的 past"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "STRUCTURAL ANALYSIS",
+      "actor": "narrator",
+      "context": "问题结构：我的现在 constraint → 他的过去 slack → 现在 workload 占满吗"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "RESPONSE PREDICTION",
+      "actor": "narrator",
+      "context": "他不知道怎么回答，只能心跳130，继续行为证明"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "FRAME VICTORY",
+      "actor": "narrator",
+      "context": "frame 胜利，把 past 变 evidence，present 变 question，future 变 deployment"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "WORD ANALYSIS INITIATION",
+      "actor": "narrator",
+      "context": "偷人这个词博大精深，藏着一整部财产法史"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "LEGAL RE-FRAMING",
+      "actor": "you",
+      "context": "偷人不是偷人，而是 conversion of relational property，trespass to equitable interest"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "THEORY APPLICATION",
+      "actor": "narrator",
+      "context": "应用论文概念：emotional investment acquire equitable interest，被偷的是 relational estate share"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "VICTIM IDENTIFICATION",
+      "actor": "narrator",
+      "context": "受害者是持有 equitable interest 的人，以为 exclusive 结果 concurrent"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "REMEDY SPECIFICATION",
+      "actor": "narrator",
+      "context": "remedy 是 constructive trust 等，用行为如请吃饭、audit HPS 证明 exclusivity"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "CONCEPT SYNTHESIS",
+      "actor": "you",
+      "context": "偷人 = conversion of relational property，论文 vernacular version"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "PREDICTION",
+      "actor": "narrator",
+      "context": "小树哥哥会心跳130，继续行为作为 remedy"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "PAPER INCORPORATION",
+      "actor": "you",
+      "context": "写进论文：tōurén 作为 folk-legal intuition 的 comparative evidence"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "STRUCTURE PRAISE",
+      "actor": "narrator",
+      "context": "这段话 structure perfect：定义、拆解 presuppositions、claim、cite"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "ACHIEVEMENT DESCRIPTION",
+      "actor": "narrator",
+      "context": "把 colloquial term 变 evidence，comparative law move"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "EVIDENCE STRENGTHENING",
+      "actor": "narrator",
+      "context": "stable across centuries，提供 linguistic stability evidence"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "CITE JUSTIFICATION",
+      "actor": "narrator",
+      "context": "Gray (1991) 和 Hart (1961) 支持 claim，不是 invention 是 formalisation"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "RECOMMEND",
+      "actor": "advisor",
+      "context": "Suggest option A: run 'conda clean --all -y' to clean cache, then check 'conda env list'"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXECUTE",
+      "actor": "user",
+      "context": "Run 'conda env list', output shows base and hazmat_env environments"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYZE",
+      "actor": "advisor",
+      "context": "Analyze environments: base (default), hazmat_env (likely test), recommend delete hazmat_env"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RECOMMEND",
+      "actor": "advisor",
+      "context": "Provide options: A delete hazmat_env ('conda env remove -n hazmat_env'), B clean cache, C full uninstall"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REQUEST",
+      "actor": "advisor",
+      "context": "Ask user if retain hazmat_env or delete, offer to check base env large packages"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "REQUEST",
+      "actor": "user",
+      "context": "User asks to check base environment large packages"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "RECOMMEND",
+      "actor": "advisor",
+      "context": "Suggest commands to view base env packages: 'conda activate base', 'du -sh * | sort -hr | head -20' in site-packages"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EXECUTE",
+      "actor": "user",
+      "context": "Run 'cd $(conda info --base)/lib/python*/site-packages' then 'du -sh * | sort -hr | head -20', output lists top packages: openai(12M), pip(11M), etc."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ANALYZE",
+      "actor": "advisor",
+      "context": "Analyze site-packages sizes, list top packages with descriptions, begin assessing which can be safely cleaned"
+    }
+  ]
+}

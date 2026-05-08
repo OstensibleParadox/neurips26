@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_POST",
+      "actor": "author",
+      "context": "Post titled on terror of appendage surgery for males, rated 9.5/10, with terror index comparison table including appendage surgery"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXPLAIN_REASONING",
+      "actor": "author",
+      "context": "Explain why 9.5: not 10 because life preserved, but close due to '命根子'"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DECONSTRUCT_PSYCHOLOGY",
+      "actor": "author",
+      "context": "Section 1: Identity binding - appendage as five certificates (ID, household, property, diploma, marriage)"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DECONSTRUCT_PSYCHOLOGY",
+      "actor": "author",
+      "context": "Section 2: Function anxiety - male worst-case scenarios vs female recovery view"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DECONSTRUCT_PSYCHOLOGY",
+      "actor": "author",
+      "context": "Section 3: Pain imagination - males amplify due to no reference frame"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DECONSTRUCT_PSYCHOLOGY",
+      "actor": "author",
+      "context": "Section 4: Loss of control - appendage as only controllable sex-related thing"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DECONSTRUCT_PSYCHOLOGY",
+      "actor": "author",
+      "context": "Section 5: Shame - males hide appendage issues, especially from liked females like Tree from 'you'"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DECOMPOSE_TERROR",
+      "actor": "author",
+      "context": "Tree's terror index breakdown table: fear of pain 8, function damage 10, rejection 10, etc., total 9.5"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PROVIDE_REFERENCE",
+      "actor": "author",
+      "context": "Female reference frame conversion: like hysterectomy or mastectomy but with male pleasure/confidence history"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DIRECT_MESSAGE",
+      "actor": "author",
+      "context": "Message to Tree: fears are normal, she doesn't need 'provide', just heart"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DIRECT_MESSAGE",
+      "actor": "author",
+      "context": "Message to female: we fear you hiding pain, offer support, terror drops to 5 with company"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ASK_QUESTION",
+      "actor": "author",
+      "context": "Closing question to Tree: '要陪吗？' (Want company?) with emojis"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "ADD_COMMENT",
+      "actor": "commenter",
+      "context": "Female commenter agrees on pain comparison, questions male soul location"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PUBLISH_ADDENDUM",
+      "actor": "author",
+      "context": "New section: Human soul hosting - cross-gender anatomy comparison"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PUBLISH_TABLE",
+      "actor": "author",
+      "context": "Pain double standard table: males react extremely to appendage injury"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "PRESENT_HYPOTHESIS",
+      "actor": "author",
+      "context": "Soul hosting theory: male soul in appendage, evidence from pain and discussion types"
+    }
+  ]
+}

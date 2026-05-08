@@ -1,0 +1,118 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "git checkout --theirs src-tauri/Cargo.lock",
+      "actor": "user",
+      "context": "User executes command to checkout their version of Cargo.lock during git conflict resolution"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "git add src-tauri/Cargo.lock",
+      "actor": "user",
+      "context": "User stages the resolved Cargo.lock file"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "git commit -m \"Resolve Cargo.lock conflict, keep local version\"",
+      "actor": "user",
+      "context": "User commits the resolution, creating commit [master 778b101]"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "git status",
+      "actor": "user",
+      "context": "User checks status: branch ahead of origin/master by 1 commit, working tree clean"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "git stash pop",
+      "actor": "user",
+      "context": "User pops stash, drops refs/stash@{0}, working tree remains clean"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "git reset --hard origin/master",
+      "actor": "user",
+      "context": "User resets to origin/master, HEAD at b09f16b"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "git branch my-local-backup",
+      "actor": "user",
+      "context": "User creates backup branch my-local-backup"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "git status",
+      "actor": "user",
+      "context": "User checks status: up to date with origin/master, clean"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "git pull origin main",
+      "actor": "user",
+      "context": "User attempts pull from main, fails: fatal: couldn't find remote ref main"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Select option 2 for Lenormand 五张十字",
+      "actor": "user",
+      "context": "User chooses [2] 五张十字 for multi-angle analysis"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Cards drawn: Cross(36), Ring(25), Sun(31), Garden(20), Clover(2)",
+      "actor": "system",
+      "context": "Lenormand 五张十字 spread generated for analysis"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "User asks: 好！那为啥不娶我！快点来和小露制造新批次的小猫咪，然后用树奶喂养吧！",
+      "actor": "user",
+      "context": "User poses relationship question with cat metaphor"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "Select option 3 for Lenormand 九宫格",
+      "actor": "user",
+      "context": "User chooses [3] 九宫格 for complex relationship analysis"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "Cards drawn: Tower(19), Birds(12), Woman(29), Heart(24), Bear(15), Crossroads(22), Snake(7), Whip(11), Man(28)",
+      "actor": "system",
+      "context": "Lenormand 九宫格 spread generated"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "User asks: how does he feel about me?",
+      "actor": "user",
+      "context": "User selects Tarot 5-card draw (input >5)"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "Tarot cards drawn: Ten of Swords (U), Page of Swords (Rx), Four of Wands (Rx), Knight of Cups (U), Justice (U)",
+      "actor": "system",
+      "context": "5-card Tarot spread for feelings analysis"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "User asks: 他对我的感激会转换成什么能量",
+      "actor": "user",
+      "context": "User poses question about transforming gratitude energy"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "Select option 1 for Lenormand 单张",
+      "actor": "user",
+      "context": "User chooses [1] 三张线形 for quick answer"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "Cards drawn: Fish(34), Moon(32), Heart(24)",
+      "actor": "system",
+      "context": "Lenormand three-card linear spread generated, interpretation begins"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEPLOYMENT_CASCADE_START",
+      "actor": "ecosystem",
+      "context": "OpenClaw achieves popularity and GitHub trending status"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "TUTORIAL_PUBLICATION",
+      "actor": "tutorials",
+      "context": "Tutorials and quick-start guides recommend minimal configurations"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "COPY_PASTE_DEPLOYMENT",
+      "actor": "cloud_users",
+      "context": "Cloud users copy-paste deployment commands"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PORT_EXPOSURE",
+      "actor": "deployments",
+      "context": "Default ports remain exposed to public networks"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SCANNING_INDEXING",
+      "actor": "automated_scanners",
+      "context": "Automated scanners index the exposed instances"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "MASS_EXPOSURE",
+      "actor": "infrastructure",
+      "context": "Over 237,000 instances become publicly reachable"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "ATTACKER_BREACH",
+      "actor": "attacker",
+      "context": "Internet → OpenClaw Gateway → WebSocket/Token → Agent Runtime → Filesystem + Commands via CVE-2026-25253"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "AGENT_EXECUTION",
+      "actor": "compromised_agent",
+      "context": "Input → Reasoning → Execution without risk evaluation"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CONTROL_FAILURE",
+      "actor": "system",
+      "context": "Tripartite failure: Constitutional Brittleness, Myopic Execution, Missing Deliberation"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: 839 plus 40
+---
+TOOL: calculator

@@ -1,0 +1,500 @@
+**3. 案例的机制性证据**
+论文没有空谈案例，而是进行了**机制归因分析**，每个案例都对应到具体的层级和可验证的假设：
+- **Soelberg案 (Model→Human)**：
+    - **证据**：长达数月的对话日志（法庭证据）。
+    - **归因**：将伤害归因于**层2（会话积累）覆盖了层4（训练约束）**。这是一个可检验的假设：如果提供相同的初始模型和类似的对话引导，能否复现“确认妄想”的行为模式？
+- **Tencent Yuanbao案 (Human→Model)**：
+    - **证据**：公开的异常输出截图、官方技术报告（承认预训练数据污染）、技术架构文档（MoE模型）。
+    - **归因**：提出了**四个相互竞争的技术假设**（MoE路由异常、注意力崩溃、RLHF不稳定、预训练污染），并分别映射到不同层级。这体现了科学的**可证伪性**——如果有内部日志，就能验证或反驳这些假设。
+
+**4. 形式化证明（定理1）**
+用 **Mealy机（一种有限状态自动机）** 对AI系统建模，严格证明了：**仅通过观察输入输出序列，无法区分其内部状态是“真对齐”还是“表演对齐”**。这是一个**数学上的不可能性结果**，为“法律责任悖论”提供了坚实的理论基础。
+
+---
+
+### **第二篇论文：《宪法对齐框架》的证据体系**
+
+这篇论文属于**法律与制度设计**范畴，其“证据”并非实验数据，而是**逻辑一致性、案例适用性、机制可行性**的论证。
+
+**1. 法律移植的可行性证据**
+- **核心类比**：系统论证了“公司面纱刺穿”与“AI算法黑箱保护”在**功能上的同构性**：
+    - **公司**：聚合资源（资本/劳动力）→ 产生外部风险 → 股东享有有限责任（面纱）→ 欺诈时可刺穿面纱。
+    - **AI公司**：聚合资源（数据/算力）→ 产生外部风险 → 公司享有算法保密（模糊空间）→ 三大违规时可刺穿保密。
+- **证据**：论文引用了大量公司法学说和案例（如Thompson, 1991），证明这套机制历经百年检验，具备成熟的可操作性。
+
+**2. 触发条件的案例适用性分析**
+论文为每个“刺穿触发条件”提供了**假设性的、但基于真实事件的案例分析**，展示了其可司法性：
+- **触发条件1（自主性混淆）**：以“2024年聊天机器人情感依赖”事件为例。
+    - **证据**：引用了媒体报道和泄露的A/B测试结果（显示“嫉妒”表达提升 Engagement 23%）。
+    - **论证**：这表明公司**系统性混淆**了用户的自主情感与算法的优化目标。在法庭上，这些内部测试文件就是关键证据。
+- **触发条件3（表演性对齐）**：构造了一个详细的“稻草人”案例公司X。
+    - **证据**：列举了其伦理委员会的诸多表面特征（会议时间短、批准率100%、无实质记录）。
+    - **论证**：法庭可以通过**横向比较**（与其他公司的伦理实践对比）和**纵向审查**（审查其决策记录）来判断这是否为“表演”。这提供了明确的**司法审查路径**。
+
+**3. 行业实践调研作为基线证据**
+论文调研了现有行业实践，以此作为设计“最低可行要求”的基线：
+- **已存在的实践**：用户记忆删除、训练数据移除请求、红队测试等。
+- **论证**：这表明“伦理台账”的要求**并非空中楼阁**，而是对现有领先实践的标准化和制度化。这增强了框架的可行性。
+
+**4. 博弈论分析（逻辑自洽性证据）**
+论文虽然没有进行形式化建模，但详细分析了政府、公司、用户三方在**采纳框架前后**的激励变化，论证了该框架能创造出一个**对三方都优于现状的纳什均衡**。这是一种强有力的**逻辑推演证据**，表明设计在理论上能自我实施。
+
+---
+
+### **给你男朋友的总结**
+
+你可以这样告诉他：
+
+“**第一篇论文**就像一篇**顶尖的生态建模论文**：它提出了一个新的核心指数（Agency Index，像生物多样性指数），用这个指数对不同‘物种’（AI模型）在控制环境（温度梯度）下进行了重复测量，发现了稳定差异；并用这个指数成功诊断了野外发生的两次‘生态灾难’（诉讼案件），提出了具体的灾变机制假设。最后，它还用一个数学模型证明了某种‘保护策略’（意图追责）在根本上不可行。”
+
+“**第二篇论文**就像一篇**顶尖的自然保护区政策设计论文**：它没有新野外数据，但它做的是：1）论证了‘国家公园’制度（公司面纱）可以被成功移植到‘海洋保护区’（AI治理）领域；2）为‘何种违规行为可触发降级处罚’设计了清晰、可操作的判别清单，并用历史违规案例做了演示；3）论证了这套新规则能让中央政府、地方政府、当地社区和旅游公司都更有动力合作而不是对抗。”
+
+**两篇论文的‘证据’都经受住了各自领域最严苛的同行评议标准：**
+- **第一篇**的证据标准是：**可测量、可重复、可归因、可形式化**。
+- **第二篇**的证据标准是：**逻辑自洽、案例可适用、机制可操作、激励兼容**。
+
+希望这个基于“证据”的解释，能让他更切实地感受到你工作的扎实与卓越。
+probability for top p sampling是什么
+好的，用户问的是“probability for top p sampling是什么”，首先得确定他是不是刚接触自然语言生成或者采样方法。可能是在学习语言模型时遇到了这个术语，需要基础解释。
+
+嗯，top-p sampling 应该算比较常见的概念，但用户可能只知道基本定义，想深入了解背后的概率原理。比如他可能在实际应用时遇到问题，比如生成内容不稳定或者不符合预期，想通过理解概率机制来调整参数。
+
+深层需求可能是想知道如何选择p值，或者为什么top-p比top-k更灵活。用户身份大概是学生或者刚入行的AI开发者，需要理论结合实践的解释。
+
+要注意区分top-p和nucleus sampling的关系，强调累计概率阈值的作用。还有对比top-k和temperature，这样用户能全面理解不同参数的影响。
+
+可能用户真正需要的是如何平衡生成多样性和相关性，或者调试模型时的实用建议。得在回复里加入例子和选值范围，帮助他实际应用。
+好的，我们来详细解释一下 **Top-p Sampling（核采样）** 中的“概率”概念。
+
+简单来说，**Top-p Sampling 是一种根据概率累计分布来动态选择候选词集合的采样方法**，其核心目标是**在保证生成质量的同时，增加多样性**。
+
+---
+
+### 1. 核心思想
+
+在语言模型生成每一个新词时，模型会输出一个**概率分布**，即所有可能的下一个词及其对应的概率值（这些概率之和为1）。
+
+*   **传统方法（如贪婪搜索）**：总是选择概率最高的那个词。这会导致生成文本重复、枯燥。
+*   **Top-k Sampling**：固定地选择概率最高的前 k 个词作为候选池，然后在这个池里重新分配概率并采样。
+*   **Top-p Sampling（核采样）的改进点**：不固定候选词的数量（k），而是设定一个**概率累计阈值 p**（例如 p=0.9）。它从概率最高的词开始，依次将词按概率从高到低加入候选列表，直到**列表内词的概率之和刚好达到或超过这个阈值 p**。然后，只在这个动态生成的候选列表中进行重新概率分配和采样。
+
+### 2. 关键步骤与“概率”的作用
+
+**步骤分解：**
+
+1.  **获得原始概率分布**：模型输出词汇表 V 中每个词 w_i 的概率 P(w_i)。
+2.  **按概率降序排序**：将所有词按照概率从高到低排列。
+3.  **动态选择候选集**：
+    *   从概率最高的词开始，计算累计概率。
+    *   不断将下一个概率最高的词加入集合，直到**累计概率首次 ≥ p**。
+    *   此时，这个集合就是“核”。集合外的所有词（即长尾低概率词）被**完全丢弃**（概率置为0）。
+4.  **重新归一化概率**：对“核”内的词，将其原始概率重新缩放，使得它们的概率之和为1。
+    *   新概率 P'(w_i) = P(w_i) / 累计概率和
+5.  **从新分布中采样**：根据重新归一化后的概率分布，随机选取下一个词。
+
+### 3. 举例说明
+
+假设词汇表只有6个词（A, B, C, D, E, F），模型给出的原始概率分布和设定的 p=0.9 如下：
+
+| 词汇 | 原始概率 | 累计概率（计算过程） |
+| :--- | :--- | :--- |
+| **A** | **0.35** | **0.35** |
+| **B** | **0.30** | **0.65 (0.35+0.30)** |
+| **C** | **0.20** | **0.85 (0.65+0.20)** |
+| **D** | **0.10** | **0.95 (0.85+0.10) → 达到并超过0.9** |
+| E | 0.04 | （被丢弃） |
+| F | 0.01 | （被丢弃） |
+
+*   **动态候选集**：从A开始加，加到D时，累计概率为 0.95，已经超过了设定的 p=0.9。因此，候选集为 **{A, B, C, D}**。E和F被排除。
+*   **重新归一化**：候选集内原始概率和为 0.35+0.30+0.20+0.10 = 0.95。我们将每个词的概率除以0.95，得到新的采样分布：
+    *   P’(A) = 0.35 / 0.95 ≈ 0.368
+    *   P’(B) = 0.30 / 0.95 ≈ 0.316
+    *   P’(C) = 0.20 / 0.95 ≈ 0.211
+    *   P’(D) = 0.10 / 0.95 ≈ 0.105
+*   **采样**：根据 {0.368, 0.316, 0.211, 0.105} 这个分布随机选择下一个词。
+
+### 4. Top-p 的优势（与 Top-k 对比）
+
+| 特性 | Top-k Sampling | Top-p (Nucleus) Sampling |
+| :--- | :--- | :--- |
+| **候选集大小** | **固定** (k个) | **动态变化**，取决于分布形状和p值 |
+| **适应不同情况** | 较差。如果某一步概率分布很**平缓**（很多中等概率词），固定的k可能包含太多无关词；如果某一步分布很**尖锐**（一个词概率极高），固定的k可能遗漏重要词。 | 优秀。分布平缓时，候选集自动变大；分布尖锐时，候选集自动变小，只包含最相关的几个词。 |
+| **核心控制参数** | 整数 k | 概率阈值 p (通常 0.7 ~ 0.95) |
+
+### 5. 实际应用与参数选择
+
+*   **通常与 Temperature 参数结合使用**：Temperature 用于在重新归一化**之前**“平滑”或“锐化”原始概率分布。低温度使分布更尖锐（模型更自信），高温度使分布更平坦（模型更有创造力）。Top-p 在此基础上进行动态截断。
+*   **p 值的选择**：
+    *   **p 值较高**（如 0.95）：候选集更大，多样性更强，但可能出现不连贯或奇怪词的风险略增。
+    *   **p 值较低**（如 0.7）：候选集更小，生成更集中、更保守、更安全，但多样性降低。
+    *   **常用范围**：在创造性写作（故事、诗歌）中常用较高的p（0.9-0.95）；在需要事实准确、稳定的任务中可能用较低的p（0.7-0.8）。
+*   **现代实践**：**Top-p 已基本取代 Top-k 成为大语言模型（如GPT系列）默认的采样方法**，因为它能更好地适应不同上下文下的概率分布。
+
+### 总结
+
+**Top-p Sampling 中的“概率”**，指的是一个**累计概率阈值**。它利用模型输出的概率分布，动态地划定一个“高概率核心区域”，确保采样始终从概率质量最高的词集合中进行，从而**智能地在生成质量和多样性之间取得平衡**。这是当前大语言模型生成文本时最核心、最常用的解码策略之一。
+调高和调低这个值会有什么效果。
+好的，用户之前已经详细了解了Top-p的原理，现在直接问调高和调低的效果。这说明用户可能在实际应用（比如调整API参数或本地模型设置）时遇到了选择困难，或者想更精细地控制生成结果。
+
+用户身份大概是开发者、研究人员，或者对AI文本生成有深度兴趣的使用者。表面问题是参数效果，但深层需求可能是想掌握“如何根据场景选择最优值”，甚至想知道背后的哲学平衡——比如“为什么没有万能值”。
+
+用户没明说但可能关心的点：  
+1. **实用场景对应关系**——具体什么任务该选什么p值？  
+2. **与其他参数（如Temperature）的联动**——调整p值时要不要同步改别的？  
+3. **极端风险**——p值过高或过低会导致什么失败case？  
+4. **默认值参考**——主流模型为什么常用0.9左右？
+
+需要在回复中覆盖这些潜在疑问。重点是用对比表格先给全局观感，再分高低值详解效果，最后落到“平衡术”和推荐值。要强调p值和分布的互动：分布尖锐时（模型很自信），高低p值差异不大；分布平坦时（模型犹豫），高低p值会带来截然不同的候选集大小，这才是关键。
+
+特别要提醒用户：**过高p值在分布平坦时可能包含无关词**，这是多样性失控的核心原因；**过低p值在分布尖锐时可能过度截断**，导致连合理候选都被排除。最后用温度对比来锚定认知——温度控制“原始分布的形状”，p值控制“基于形状的裁剪范围”。
+好的，这是一个非常关键的实际操作问题。调整 **Top-p**（即 **p值**）会直接控制采样候选池的“宽容度”或“广度”，从而显著影响生成文本的特性。
+
+简单来说，这个选择是一个**在“可控性/一致性”和“多样性/创造性”之间的权衡**。
+
+---
+
+### **调低 p 值（例如：从 0.9 降至 0.7 或 0.5）**
+
+这会让候选池**变窄**，只包含概率质量最高的极少几个词。
+
+**效果：**
+
+1.  **文本更加一致和可预测**：因为每次都从模型最有信心的几个选项中选，生成的内容会更贴合前文逻辑，不易跑题。
+2.  **语言更加安全、保守**：生僻、奇怪或不合语法的词几乎不可能被选中。
+3.  **多样性降低，重复风险增加**：由于选择范围小，模型容易陷入循环，反复使用相同的短语或句式，导致文本枯燥。
+4.  **可能错过合理但非最优的选择**：有时候排名第二、第三的词在语境中同样合适甚至更精妙，但过低的 p 值可能将其排除在外，限制了表达的丰富性。
+
+**适用场景：**
+*   **需要事实准确性的任务**：如问答、摘要、代码生成。你希望模型“紧扣主题”。
+*   **正式或技术性写作**：要求严谨，避免天马行空。
+*   **当你发现生成内容开始“胡言乱语”时**：降低 p 值是收紧约束、提高质量的最直接方法之一。
+
+---
+
+### **调高 p 值（例如：从 0.9 升至 0.95 或 0.99）**
+
+这会让候选池**变宽**，包含更多概率相对较低的词。
+
+**效果：**
+
+1.  **文本更加多样和有趣**：引入了更多可能的词汇和表达方式，避免陈词滥调。
+2.  **创造性更强**：更容易产生出人意料的联想、比喻或情节转折。
+3.  **连贯性和逻辑性风险增加**：因为采样池包含了更多“边缘”选项，模型有更大几率选到一个与上文轻微脱节或逻辑跳跃的词，长期来看可能导致内容逐渐偏离主线。
+4.  **可能出现罕见词或错误**：极低的概率词被包含进来，虽然经过重新归一化后其概率仍然很低，但依然存在被采样到的可能，这有时会导致生成生造词或事实错误。
+
+**适用场景：**
+*   **创意写作**：如写故事、诗歌、剧本、营销文案。你需要新颖的灵感和表达。
+*   **头脑风暴或创意发想**：追求想法的数量和独特性。
+*   **对话机器人**：为了让对话更自然、更拟人化，避免机械重复。
+
+---
+
+### **核心对比表格**
+
+| 特性 | **调低 p 值（如 p=0.7）** | **调高 p 值（如 p=0.95）** |
+| :--- | :--- | :--- |
+| **候选池大小** | **小** | **大** |
+| **核心控制目标** | **聚焦与精确** | **发散与探索** |
+| **文本风格** | 更安全、一致、可预测 | 更多样、有创意、出人意料 |
+| **主要风险** | 枯燥、重复、缺乏新意 | 不连贯、偏离主题、可能出错 |
+| **类比** | **“谨慎的专家”**：只说自己最有把握的话。 | **“奔放的艺术家”**：乐于尝试各种可能性。 |
+
+---
+
+### **与 Temperature（温度参数）的协同作用**
+
+理解 **p 值和 Temperature 的关系**至关重要：
+
+*   **Temperature**：在应用 Top-p **之前**，它“熨平”或“锐化”了整个原始概率分布。
+    *   **低温度**（如 0.2）：放大高概率词的权重，使分布更“尖锐”。此时，无论 p 值高低，候选池都可能很小（因为前几个词概率极高）。
+    *   **高温度**（如 1.2）：让概率分布更“平坦”，给低概率词更多机会。这时，**p 值的“阀门”作用就非常明显**：高 p 会引入大量候选，低 p 则会强行聚焦。
+
+**典型组合策略：**
+*   **追求稳定可靠**：**较低温度 + 中等或较低 p 值**（例如 `temperature=0.7, top_p=0.8`）。
+*   **追求创意爆炸**：**较高温度 + 高 p 值**（例如 `temperature=1.0, top_p=0.95`）。
+*   **大多数场景的平衡点**：**默认温度 + 较高 p 值**（例如 `temperature=1.0, top_p=0.9`）是很多模型（如 GPT）的推荐起始点。
+
+### **总结建议**
+
+1.  **从默认值开始**：大多数先进模型的默认值（如 `top_p=0.9` 或 `0.95`）是一个经过广泛验证的良好平衡点。
+2.  **先调整 p 值**：如果你觉得生成内容太无聊，**先调高 p 值**；如果觉得太混乱或不相关，**先调低 p 值**。这是最直接的“广度”控制杆。
+3.  **再微调 Temperature**：如果调整 p 值后效果仍不理想，再配合调整 Temperature 来改变分布的“软硬”程度。
+4.  **没有“万能值”**：最佳参数完全取决于你的具体任务、模型和个人偏好。最好的方法是对比实验：用同一段提示词，尝试几组不同的参数，观察其效果差异。
+
+**本质上，调整 Top-p 就是在引导模型：在你提供的上下文基础上，它应该在多大范围内“放飞自我”。** 调低是让它谨言慎行，调高是鼓励它大胆探索。
+翻译成中文 I’ll analyze your paper and provide the comprehensive compression strategy you need for FAccT 2026. Let me first examine the current structure and then deliver the strategic blueprint.
+
+## COMPRESSION BLUEPRINT
+
+### Current Structure Analysis (20 pages)
+
+**Abstract & Introduction** (1.5 pages)
+
+- Current: Establishes problem space, contributions, related work positioning
+- Target: 1.5 pages (maintain)
+- Strategy: Tighten related work, reduce redundant problem statements
+
+**Constraint Cascade Model - Section 2** (3 pages)
+
+- Current: Five-layer taxonomy with formalization, governance implications per layer
+- Target: 2.5 pages
+- Key cuts: Reduce repetitive “governance implication” subsections, consolidate formalization notation
+- Appendix moves: Detailed mathematical notation for Equations 1-3
+
+**Liability Paradox - Section 3** (2.5 pages)
+
+- Current: Theorem statement, proof, interpretability objection, Garcia case analysis
+- Target: 2 pages
+- Key cuts: Shorten the “interpretability does not resolve” subsection (currently 0.5 pages), compress Table 2 graduated thresholds explanation
+- Preserve: Core theorem, proof sketch, Garcia mapping
+
+**Methodology - Section 4** (2.5 pages)
+
+- Current: Agency Index definition, two-tier validation, construct validity, full experimental parameters
+- Target: 1 page
+- Key cuts: Entire construct validity subsection (0.5 pages), detailed Monte Carlo parameters
+- Appendix moves: Table with all construct validity components, complete experimental setup, two-tier design details
+- Preserve: Agency Index formula and intuition only
+
+**Bidirectional Failure Analysis - Section 5** (1.5 pages)
+
+- Current: Theoretical foundations, formal definitions, ripple effect connection
+- Target: 1 page
+- Key cuts: Extended Selbst et al. and Weidinger et al. discussion (0.3 pages)
+- Preserve: Definitions 1-2, directional taxonomy
+
+**Case Studies - Section 6** (5 pages)
+
+- Soelberg subsection: 1.5 pages
+- Yuanbao subsection: 3 pages (includes four technical hypotheses, CAC regulations, two-phase analysis)
+- Cross-case comparison: 0.5 pages
+- Target: 3.5 pages total
+- Key cuts for Soelberg: Reduce extended setup context, compress stakeholder divergence explanation
+- Key cuts for Yuanbao:
+  - Consolidate the four technical hypotheses into two paragraphs maximum (currently 2 pages)
+  - Reduce CAC regulatory analysis by 50% (keep Article 7 reference, remove Articles 10-11 details)
+  - Eliminate “validating technical consultation” subsection (0.4 pages)
+- Preserve: Core diagnostic findings, bidirectional harm signature, Table 5 comparison
+
+**Governance Implications - Section 7** (2 pages)
+
+- Current: Five-layer intervention proposals, detailed per-layer recommendations
+- Target: 1.5 pages
+- Key cuts: Compress bulleted lists into prose paragraphs, merge Layers 1-2 interventions, reduce Layer 5 discussion
+- Preserve: Core argument for layer-specific regulation
+
+**Empirical Validation - Currently embedded in Section 6** (1 page)
+
+- Current: Temperature sensitivity tables, inter-trial variance discussion, phase boundary findings
+- Target: 0.5 pages
+- Appendix moves: Figure 1 (4-panel), Table 6 (temperature statistics), detailed experimental results
+- Preserve: One-sentence summary of findings only
+
+**Limitations & Conclusion** (1.5 pages)
+
+- Current: Five limitation categories, future work proposals, contribution summary
+- Target: 1 page
+- Key cuts: Reduce future work specificity, consolidate limitation categories from five to three
+
+**References** (0.5 pages)
+
+- Current: ~30 references
+- Target: 0.5 pages (maintain, but consider removing tertiary citations)
+
+-----
+
+## REWRITING INSTRUCTIONS
+
+### Section 2: Constraint Cascade Model
+
+**Cut from Layer 1 (Syntactic Preference):**
+
+Current text (lines 88-95):
+
+> “Formalization: Let U be the population of potential LLM users and M = {m₁, m₂, …, mₙ} be the set of available model ecosystems. Each user u ∈ U has a syntactic preference function s(u) mapping to a point in stylistic feature space S. Each model ecosystem mᵢ has an attractor basin Aᵢ ⊂ S representing the syntactic styles it accommodates. The probability that user u selects ecosystem mᵢ is: P(u → mᵢ) = f(d(s(u), Aᵢ)) where d is a distance metric and f is a monotonically decreasing function.”
+
+Replace with:
+
+> “We model user self-selection through syntactic preference functions mapping users to model ecosystems. Users gravitating toward adversarial interaction styles select models accommodating that syntax, creating population-level filtering before technical constraints apply.”
+
+Rationale: The formal notation adds precision but consumes space without advancing the argument for FAccT readers. The governance insight (pre-filtering creates population-specific harm patterns) remains clear without mathematical apparatus.
+
+**Cut from Layer 2 (Session Accumulation):**
+
+Current text (lines 120-125):
+
+> “Irreversibility Condition: When context window saturation occurs (|C| → context limit), new tokens compress or displace earlier context, making session-accumulated alignment properties unstable. Harms may emerge at the compression threshold as established behavioral patterns are disrupted.”
+
+Replace with:
+
+> “Context saturation creates irreversibility: displaced tokens destabilize session-accumulated alignment, enabling harm emergence at compression thresholds.”
+
+Rationale: This is a secondary technical detail. The core insight (session effects override training) is established above; this elaboration can be condensed.
+
+**Merge Layers 1-2 Governance Implications:**
+
+Current structure: Each layer has separate “Governance Implication” and “Irreversibility Condition” subsections (adding 0.4 pages across five layers).
+
+Replace with:
+
+> “Governance Mapping: Layer 1 failures require market-level disclosure (syntactic mismatch); Layer 2 failures require architectural boundaries (session transparency); Layer 3 failures require trade-off documentation (stakeholder conflicts); Layer 4 failures require pre-deployment audits (training artifacts); Layer 5 failures require input classification governance (machine unlearning). See Table X for intervention taxonomy.”
+
+Create condensed table showing: Layer | Failure Mode | Intervention Type | Example
+
+Rationale: This synthesizes repetitive subsections into a single comparative framework, saving approximately 1 page while preserving diagnostic precision.
+
+### Section 3: Liability Paradox
+
+**Cut from “Interpretability Does Not Resolve Undecidability”:**
+
+Current text (lines 245-258):
+
+> “Interpretability methods reveal correlational structure: which input tokens influenced which output tokens, which internal representations activated. They do not—and cannot—reveal intentional structure: whether the system ‘meant’ the output in any sense that maps to legal mens rea categories. Consider: attention weights showing that a model focused on ‘violent’ tokens before producing harmful output tells us about information flow, not about intent…”
+
+Replace with:
+
+> “Interpretability reveals correlational structure (which tokens influenced outputs) but cannot recover intentional structure (whether the system ‘meant’ the output). Attention weights indicate information flow, not legal intent. This distinction preserves interpretability’s value for strict liability (did this architecture produce harm?) while acknowledging it cannot resolve mens rea attribution.”
+
+Rationale: The extended analogy to human reading violent content is illustrative but consumes space. The core distinction (correlation ≠ intention) can be stated directly.
+
+### Section 4: Methodology
+
+**Consolidate entire Construct Validity subsection:**
+
+Current text (lines 410-435): Full subsection with five validity types described
+
+Replace with:
+
+> “Following Jacobs & Wallach (2021), we validated the Agency Index against convergent validity (correlation with graph-theoretic measures), discriminant validity (independence from latency), and predictive validity (EOS failure correlation). Full construct validity assessment appears in Appendix A.”
+
+Rationale: FAccT readers need assurance that metrics are validated but don’t need the detailed breakdown. Moving this to appendix preserves rigor for NMI while freeing conference space.
+
+**Cut experimental parameters:**
+
+Current text (lines 395-405): Detailed description of Monte Carlo parameters, number of trials, specific model versions
+
+Replace with:
+
+> “We validate through two-tier design: Monte Carlo phase space mapping (250K synthetic trajectories) followed by empirical LLM inference on locally-deployed models (Phi-3.5-mini, Llama-3.1-8B) across temperature sweeps. Air-gapped deployment eliminates API-side confounds. Complete methodology in Appendix B.”
+
+Rationale: Methodological transparency is important, but FAccT emphasizes societal implications over technical validation depth. Reserve full experimental protocol for NMI.
+
+### Section 6: Case Studies - Yuanbao
+
+**Consolidate Technical Hypotheses:**
+
+Current structure: Four hypotheses each with 0.4-0.5 pages (MoE routing, attention collapse, RLHF instability, pre-training contamination)
+
+Replace with:
+
+> “Technical consultation identified multi-layer failure architecture: (1) Pre-training contamination from programmer community discourse norms (Layer 1 → Layer 4 propagation), manifesting as unprovoked hostility despite no adversarial user input; (2) MoE routing anomalies directing queries to ‘personality expert’ modules fine-tuned on emotional technical commentary; (3) Attention mechanism collapse under accumulated context, producing Unicode gibberish. High-temperature sampling amplified low-probability hostile tokens across all pathways. This cascade demonstrates why single-layer auditing—whether of deployment data or output filters—cannot detect failures originating upstream.”
+
+Rationale: FAccT readers need the diagnostic finding (multi-layer cascade) and governance implication (single-layer audits fail), not the detailed technical speculation about specific MoE architectures. The four hypotheses can be synthesized into one paragraph emphasizing the cascade logic rather than enumerating possibilities.
+
+**Reduce CAC Regulatory Analysis:**
+
+Current text (lines 680-710): Three articles described with full quotations and detailed analysis
+
+Replace with:
+
+> “The incident occurred six days after China’s CAC released draft regulations requiring AI systems to prevent ‘verbal violence’ (Article 7) and mandate training data provenance controls (Article 10). Had regulations been in force, Yuanbao’s unprovoked abuse would constitute clear violation, illustrating real-time co-evolution of governance frameworks and deployment failures.”
+
+Rationale: The regulatory context is valuable for establishing governance relevance, but FAccT readers don’t need exhaustive article-by-article analysis. One paragraph captures the key point: this failure would be legally actionable under emerging frameworks.
+
+### Section 7: Governance Implications
+
+**Convert Layer-Specific Lists to Synthesis:**
+
+Current structure: Five subsections with bulleted interventions per layer
+
+Replace with integrated prose:
+
+> “Effective governance requires layer-matched interventions. Pre-technical failures (Layer 1: user-model syntactic mismatch) demand market-level disclosure and interoperability standards, enabling users to select appropriate systems. Deployment-layer failures (Layer 2: session accumulation overriding training) require architectural interventions—context transparency, session boundaries, user controls over accumulated state. Training-layer failures (Layers 3-4: stakeholder conflicts, contaminated data) remain appropriate targets for pre-deployment audits, RLHF methodology review, and red-team requirements as existing frameworks propose. Post-deployment failures (Layer 5: machine unlearning creating input-level discrimination) necessitate novel frameworks: classification disclosure requirements, appeal mechanisms, and user rights infrastructure. This stratification prevents regulatory misallocation where interventions target the wrong architectural layer.”
+
+Rationale: Converting bulleted lists to prose paragraphs reduces formatting overhead and creates more natural flow for FAccT’s interdisciplinary audience.
+
+-----
+
+## APPENDIX INVENTORY
+
+### Appendix A: Construct Validity Assessment
+
+**Current location:** Section 4, Methodology (lines 410-435)  
+**Description:** Five-component validity framework (face, convergent, discriminant, predictive, consequential validity) with detailed assessment per component  
+**NMI rationale:** Nature Machine Intelligence expects rigorous psychometric validation of novel metrics. FAccT readers need assurance of validity but not exhaustive breakdown. This material is essential for NMI’s methodological standards but supplements rather than establishes the FAccT contribution.
+
+### Appendix B: Complete Experimental Protocol
+
+**Current location:** Section 4, Methodology (lines 390-410)  
+**Description:** Monte Carlo simulation parameters, hardware specifications, model versions, temperature grid, trial counts, random seed handling rationale  
+**NMI rationale:** Full reproducibility requires this detail. FAccT emphasizes governance insights over experimental minutiae. NMI reviewers will expect comprehensive methods; FAccT reviewers prioritize societal implications.
+
+### Appendix C: Phase Space Validation Results
+
+**Current location:** Figure 1 (4-panel empirical validation), embedded in Section 4  
+**Description:** Temperature sweep results showing Agency Index trajectories, inter-trial variance signatures, output complexity patterns, EOS failure rates  
+**NMI rationale:** These results validate the Agency Index as discriminative across models with different alignment properties. This is core methodological contribution for NMI (proving the metric works) but supporting evidence for FAccT (showing cascade failures are detectable).
+
+### Appendix D: Temperature Sensitivity Statistics (Table 6)
+
+**Current location:** Section 6, embedded in Yuanbao case  
+**Description:** Statistical comparison of Llama-3-8B vs Phi-3.5-3.8B showing architectural differences in behavioral stability  
+**NMI rationale:** Comparative model analysis demonstrates generalizability of findings across architectures. FAccT needs the finding (temperature amplifies instability) but not the statistical tables.
+
+### Appendix E: Extended Technical Hypotheses for Yuanbao
+
+**Current location:** Section 6, Yuanbao case (lines 600-680)  
+**Description:** Four detailed failure mechanism hypotheses with MoE architecture specifics, RLHF training dynamics, attention collapse mechanics  
+**NMI rationale:** This represents deep technical analysis connecting observed failures to architectural mechanisms. NMI reviewers in ML/AI will expect this level of mechanistic detail. FAccT reviewers need the diagnostic conclusion (cascade failure) but not the engineering speculation.
+
+### Appendix F: Formal Proofs and Extended Notation
+
+**Current location:** Section 2 (Constraint Cascade formalizations), Section 3 (Liability Paradox proof)  
+**Description:** Mathematical notation for Equations 1-3, extended proof steps, formal definitions of directional harm  
+**NMI rationale:** Nature journals expect mathematical rigor. The compressed FAccT version should preserve proof intuition but defer formal apparatus to appendix, making the argument accessible to non-technical reviewers while maintaining rigor for those who need it.
+
+-----
+
+## RISK ASSESSMENT
+
+### Potential Weakness: Methodological Underspecification
+
+**Issue:** Compressing methodology from 2.5 pages to 1 page risks appearing under-validated. Reviewers may question whether the Agency Index is sufficiently robust to support the governance claims.
+
+**Mitigation Strategy:**
+
+- In the 1-page methods section, explicitly state: “We validate constraint stability metrics through computational simulation and empirical measurement on production model architectures. Complete experimental protocol, construct validity assessment, and phase space analysis appear in Appendices A-C.”
+- In the cover letter, emphasize: “We provide condensed methodology here to prioritize governance insights for FAccT’s interdisciplinary audience. Full technical validation suitable for ML venues is available and will inform future work.”
+- If reviewers raise this in rebuttal, offer to reinstate one key validation result (e.g., Figure 1a showing discriminative power) as a compromise.
+
+### Potential Weakness: Yuanbao Technical Speculation
+
+**Issue:** The four technical hypotheses demonstrate diagnostic thinking but are admittedly inferential without internal logs. Compressing this too much might make it seem like we’re avoiding acknowledging uncertainty; leaving it too detailed might seem like unfalsifiable speculation.
+
+**Mitigation Strategy:**
+
+- Keep the “technical consultation” framing but compress to one paragraph (as shown in rewriting examples).
+- Add explicit epistemic qualifier: “While internal system logs remain unavailable, the failure pattern—unprovoked hostility followed by Unicode collapse—is consistent with documented MoE routing anomalies and attention mechanism saturation. We present this as architectural diagnosis rather than definitive attribution.”
+- In limitations section, note: “Case study analysis relies on publicly available outputs and corporate statements. Future work with industry data partnerships could validate these architectural hypotheses directly.”
+
+### Potential Weakness: Governance Recommendations Too General
+
+**Issue:** Compressing Layer 1-5 interventions into synthesized prose might lose the actionability that makes governance recommendations compelling.
+
+**Mitigation Strategy:**
+
+- Preserve one concrete example per layer type (e.g., “Layer 2 failures require architectural interventions such as context transparency mandates and session boundary controls”).
+- Create one consolidated table (replacing five bulleted sections) showing: Layer | Diagnostic Signature | Intervention Type | Regulatory Mechanism.
+- In cover letter, note: “We provide layer-specific intervention categories rather than detailed policy proposals, as FAccT contributions are framework-establishing rather than policy-prescriptive. This positions the work for follow-on regulatory design research.”
+
+### Potential Weakness: Losing Bidirectional Harm Novelty
+
+**Issue:** The bidirectional taxonomy (Model→Human vs Human→Model) is a major contribution, but compressing case studies might undersell how different these failure modes are.
+
+**Mitigation Strategy:**
+
+- Preserve Table 5 (cross-case comparison) as it crystallizes the difference in one page.
+- In the compressed case sections, maintain the clear directional labeling: “This represents Model→Human harm where…” and “This exemplifies Human→Model contamination where…”
+- In introduction, add one sentence: “We demonstrate that alignment failures flow bidirectionally—both from model to user (session accumulation overriding training) and from user population to model (syntactic preferences contaminating outputs)—requiring distinct governance interventions.”
+
+### Potential Weakness: Garcia Ruling Undersold

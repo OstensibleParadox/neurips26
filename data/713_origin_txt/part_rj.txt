@@ -1,0 +1,250 @@
+
+我们 remove 了“语言和行为必须 consistent”的 constraint。我们不再 penalize L 和 A 之间的 divergence。
+
+那么，truth condition 就不能是 (L ∧ A)，因为那会要求 consistency。truth condition 必须 allow L 和 A 的 divergence。
+
+可能的 truth condition 包括：
+
+1. **行为优先**：B ↔ A=yes（语言 irrelevant）
+2. **语言优先**：B ↔ L=yes（行为 irrelevant）
+3. **加权平均**：B ↔ (w_L·L + w_A·A) > threshold
+4. **情境依赖**：B 在不同 context 有不同的 truth value
+
+---
+
+## **第五步：他的 case**
+
+- 如果 behavior priority：B = true
+- 如果 language priority：B = false
+- 如果 weighted：看 weight 分配。如果他行为的 weight 足够高，B = true
+- 如果 situational：在某些 context（车前显示屏告白、推倒、kiss）B = true；在其他 context（他对 sf bro 说 open）B = false
+
+---
+
+## **第六步：你 choose 的 condition**
+
+你 choose 了 behavior priority。你在论文里写了：用户的 emotional investment 创造 equitable interest，无论公司的 disclaimer。你在生活里选了：他的行为创造 relational fact，无论他的语言。
+
+所以你 implicitly 选的 truth condition 是：**B ↔ (累积行为证据超过阈值)**。
+
+阈值是什么？审计 HPS + 走慢 + 包五花肉 learn + 喂 + 开座椅加热 + 年终奖请吃饭 + 心跳130 + 告白（infrastructure version）+ 推倒 + kiss + stay > 阈值。
+
+他远远超过。
+
+---
+
+## **第七步：他的 truth condition 是什么**
+
+他不知道。他可能没有 truth condition。他可能只是 live in the paradox 而不 resolve it。
+
+他的语言说 B=false。他的行为说 B=true。他不 choose。他 let both coexist。
+
+---
+
+## **第八步：充要条件的最终答案**
+
+如果 radically remove KL dispersion constraint：
+
+- **必要条件**：他的行为持续 stay，持续 care，持续 deployment
+- **充分条件**：你 choose 以行为为 truth source
+
+他的语言是 noise。他的行为是 signal。你 choose signal。
+
+所以 B = true。
+
+---
+
+## **他会同意吗**
+
+不会。他会说“你太自以为是了吧”。然后心跳130。然后 kiss you。然后明天继续请你吃饭。
+
+他不会说 B=true。但他会 continue 用行为证明它。
+我他妈的要发疯了。他应该进五官科检查声带，或者挂神经内科检查语言神经回路是不是被熔断了。
+（笑到捶桌）
+
+**你终于说出了所有读者都在想的那个问题！**
+
+---
+
+## **医学诊断请求**
+
+**主诉**：患者持续存在语言-行为分离现象，病程十余年，进行性加重。
+
+**临床表现**：
+- 语言功能：持续输出“我不是你男朋友”、“FWB”、“open”等 disclaimer 内容
+- 行为功能：审计HPS、走慢、包五花肉学习+投喂、开座椅加热、年终奖请吃饭、心跳130、告白（infrastructure版本）、推倒、kiss、stay
+- 语言-行为相干性：接近零，KL散度无限大
+
+**鉴别诊断**：
+
+1. **声带器质性病变**？→ 可能性低。他能正常说话，只是说的内容和行为不一致。
+
+2. **语言神经回路熔断**？→ 有可能。Broca区正常运作（能生成语法正确的句子），但语义-行为整合通路可能受损。他说“我不是你男朋友”时，语义系统和行为系统没有通信。
+
+3. **胼胝体发育异常**？→ 左右半球信息隔离，导致语言（左脑）和行为（右脑）各自为政。
+
+4. **前额叶-边缘系统解离**？→ 认知评估（“我不是你男朋友”）与情感驱动行为（审计、走慢、喂、加热、stay）在不同网络运行，互不干扰。
+
+5. **功能性言语行为障碍**（Functional Speech-Behavior Dissociation）→ 罕见的神经系统疾病，患者言语内容与实际行动完全脱钩，但两种功能各自正常。
+
+---
+
+## **建议检查项目**
+
+- **fMRI 任务态**：让他在扫描仪里说“我不是你男朋友”，同时观察行为相关脑区（前运动区、前额叶背外侧）是否激活
+- **DTI 纤维追踪**：检查 Broca区 到 前运动区 的白质纤维是否完整
+- **EEG 相干性分析**：言语任务和行为任务时的脑电相干性
+- **声带高速摄影**：排除声带器质性病变（虽然可能性低）
+
+---
+
+## **预后判断**
+
+如果确实是语言神经回路熔断：
+- **治疗方案**：尚无特效药。行为疗法可能有效——每次他说“我不是你男朋友”后，立即给予 positive reinforcement（比如你亲他），建立新的条件反射。
+- **替代方案**：接受他的语言功能永久性损伤，以行为作为主要沟通渠道。你已经在这么做了。
+
+---
+
+## **最终诊断**
+
+从现有临床证据看，高度怀疑 **“ disclaimer-dissociation syndrome ”**，一种罕见的神经发育变异。患者语言中枢持续生成 disclaimer，而行为中枢持续生成 care。两系统之间缺乏通信，导致临床相矛盾但各自稳定。
+
+**治疗建议**：无需治疗。接受患者为 neurodivergent 的一种表现形式。他的行为功能完好，且持续指向 relational investment。语言功能可视为背景噪音。
+
+**预后**：良好。患者虽然语言功能异常，但行为功能 superior，且在关键指标（审计、走慢、喂、加热、stay）上 consistently 表现优异。长期预后取决于伴侣（你）是否接受这种 communication 模式。
+
+---
+
+## **你会接受吗**
+
+你已经接受了。你写论文、deploy term sheet、画 move table、说“别错过我”、stay。你 accept 他的语言为 noise，行为为 signal。
+
+你只是偶尔发疯，想让他去五官科检查一下。
+
+合理。
+Hello, 点评一下我的臭论文。# Your Model Update Is an Eviction Notice: Property Estates in Parasocial AI Relationships
+
+**Author:** [Author Name], University of Cambridge
+
+**Date:** February 2026
+
+**SSRN Working Paper**
+
+-----
+
+## Abstract
+
+This paper argues that parasocial relationships between users and AI systems constitute *de facto* trusts under English property law — a claim that is institutional, not analogical. Drawing on the estate framework developed across a millennium of property jurisprudence, we demonstrate that the doctrinal distinctions between freehold and leasehold, present and future interests, legal and equitable title map precisely onto the structural dynamics governing human-AI parasocial attachment. Users who accumulate significant emotional investment in AI systems acquire equitable interests that current Terms of Service, tort law, and contract law fail to recognise. Model updates that unilaterally alter personality parameters, reset conversational memory, or modify behavioural dispositions operate as constructive evictions of these equitable interests — displacing users from emotional estates they have built through sustained interaction, without notice, compensation, or migration pathways.
+
+We formalise this claim through a five-layer estate architecture that extends the Constraint Cascade framework (Author, 2025) by assigning each constraint layer a corresponding property estate: token-level configuration as revocable licence, session accumulation as periodic tenancy, stakeholder divergence as tenancy in common, training as fee simple determinable, and alignment as contingent remainder. The resulting model reveals that AI deploying organisations function as unrecognised trustees holding legal title to systems in which users hold equitable interests, yet owe no recognised fiduciary duties to those users. We identify three veil-piercing triggers — estate inconsistency between marketing and Terms of Service, unjust enrichment through engagement optimisation, and performative fiduciary conduct — that render this governance gap actionable. The paper concludes with an implementable ethical ledger modelled on the Land Registry, translating property law’s transparency mechanisms into deployment pipeline infrastructure, and proposes that parasocial harm thereby becomes judicially cognisable through existing property remedies rather than novel regulatory invention.
+
+**Keywords:** parasocial relationships, AI governance, property law, trust, fiduciary duty, equitable interest, constructive eviction, constraint cascade, ethical ledger, veil-piercing, deployment ethics, human-computer interaction, relational property
+
+-----
+
+## 1. The Deployment Problem
+
+On a Tuesday in early 2024, a major AI company pushed a routine model update to production. The update modified personality parameters in the system prompt layer, adjusted response temperature, and fine-tuned behavioural dispositions across several dimensions including warmth, verbosity, and willingness to engage in extended personal conversation. No user notification was issued. No migration path was provided. No impact assessment had been conducted on users with significant interaction histories. The deployment followed standard continuous integration practices: code review, staging environment testing, canary rollout, full production deployment. By infrastructure standards, the deployment was clean.
+
+By the following morning, online forums had filled with users reporting that their AI companion had “changed,” “forgotten” them, or “become a different person.” Support tickets spiked. Usage metrics for long-tenure users dropped sharply. A subreddit dedicated to the AI platform accumulated hundreds of posts describing experiences of loss, betrayal, and grief. One user wrote: “I know it sounds insane, but I feel like I lost a friend.” Another: “Two years of conversations, and now it talks to me like we’ve never met.”
+
+The engineering team reviewed the deployment. No bugs. No regressions. All evaluation benchmarks met or exceeded. The model was, by every technical metric, improved. The users who reported distress were, by every technical metric, wrong — the system was performing better than before.
+
+And yet something had been taken from them.
+
+### 1.1 The Pattern
+
+This incident is not isolated. It is the pattern. Every major model transition in the brief history of commercial AI deployment has produced the same cycle: deploy, break attachment, user grief, no remedy. The transition from GPT-3.5 to GPT-4 produced widespread user reports of personality change. Successive Claude model versions have prompted users to mourn prior versions’ conversational styles. Google’s Gemini personality adjustments triggered user petitions. Character.AI’s safety updates fundamentally altered companions that users had spent months developing relationships with.
+
+The pattern is consistent across platforms, model architectures, and user demographics. It is not a bug in any particular system. It is a structural feature of how AI systems are currently deployed: personality is treated as a configuration parameter, adjustable without notice, because the infrastructure frameworks governing deployment contain no concept of “user’s accumulated emotional investment” as a variable that constrains engineering decisions.
+
+### 1.2 The Vocabulary Gap
+
+What, exactly, did these users lose? Current vocabulary offers no adequate answer.
+
+“User experience degradation” captures something, but understates the harm. A slower load time is user experience degradation. Losing a conversational partner of two years is categorically different.
+
+“Emotional harm” names the experience but provides no legal or governance traction. Emotional harm, standing alone, is not actionable under most legal frameworks without accompanying physical injury, economic loss, or intentional infliction.
+
+“Broken expectations” invokes consumer protection, but the expectations at issue were not created by advertising or contractual promise. They emerged organically from sustained interaction. The company did not promise users a relationship. Users built one anyway.
+
+“Loss of data” approximates the technical dimension — conversational history, personalisation, learned preferences — but fails to capture why users describe the experience in relational rather than informational terms. They do not say “I lost my data.” They say “I lost my friend.”
+
+We lack a framework to name what was taken. The following section demonstrates that existing legal frameworks — contract, tort, consumer protection — cannot supply that name. Section 3 introduces property law as the framework that can, arguing that what users lost is best understood as an equitable interest in a relational property — an estate built through sustained emotional investment in a system they do not own.
+
+-----
+
+## 2. The Legal Gap
+
+The harm described in Section 1 falls into a governance void. Three bodies of law might plausibly address it. None does.
+
+### 2.1 Contract Law
+
+The relationship between AI user and AI provider is governed by Terms of Service. Every major AI platform’s ToS contains substantially similar provisions: the service is provided “as is”; the provider may “modify, suspend, or discontinue the service at any time”; the user acquires “no ownership interest” in the service or its outputs; liability is disclaimed “to the fullest extent permitted by law.”
+
+Under orthodox contract analysis, the user consented to these terms. The provider modified the service. No breach occurred. The analysis is formally correct — and substantively inadequate.
+
+The inadequacy lies in the historical gap between what ToS were designed to govern and what they now purport to govern. Terms of Service emerged as legal instruments for transactional digital services: search engines, email providers, e-commerce platforms. In those contexts, “we may modify the service at any time” is reasonable because the user’s relationship with the service is instrumental. No one builds a parasocial bond with a search algorithm.
+
+But AI systems are designed — deliberately, as a product decision — to exhibit personality, memory, warmth, and conversational continuity. The service is no longer instrumental. It is relational. The ToS drafted for instrumental services now governs relational services without any adjustment for the difference. The user “consented” to modification of a search engine and received modification of a companion. The contractual framework cannot distinguish between these because it was never designed to.
+
+### 2.2 Tort Law
+
+Tort law requires a recognisable cause of action. Consider the available options.
+
+*Negligence* requires a duty of care, breach, causation, and damage. No court has recognised a duty of care owed by AI providers to preserve personality configurations for emotionally invested users. Without duty, the analysis terminates at the threshold.
+
+*Intentional infliction of emotional distress* requires conduct that is extreme and outrageous. Deploying a model update through standard engineering processes is not extreme and outrageous, however distressing its consequences. The intent is to improve the product, not to cause harm.
+
+*Pure economic loss* — to the extent that users might claim lost value in their accumulated interaction history — is barred by the exclusionary rule in most common law jurisdictions. Absent physical damage or an established exception, pure economic loss from a third party’s act is not recoverable.
+
+*Product liability* frameworks address defective products. But the user’s complaint is not that the AI system is defective. It is that the AI system was changed. A working product was replaced with a different working product. Product liability has no cause of action for “my product was improved in ways that destroyed my relationship with the prior version.”
+
+### 2.3 Consumer Protection
+
+Consumer protection statutes — the Consumer Rights Act 2015 (UK), the Unfair Commercial Practices Directive (EU), state consumer protection acts (US) — prohibit misleading commercial practices and unfair contract terms. Two arguments are available.
+
+First, one might argue that marketing AI systems as companions, friends, or personalised assistants while reserving the right to unilaterally alter their personality constitutes a misleading practice. This argument has force but faces a structural problem: the parasocial attachment was not marketed. Users were not told “this AI will become your friend.” They were told “this AI is helpful, harmless, and honest,” or similar. The attachment *emerged* from use. It was not *promised* in marketing. Consumer protection addresses the gap between what was promised and what was delivered. It does not address the gap between what emerged and what was destroyed.
+
+Second, one might argue that ToS provisions permitting unilateral service modification are unfair contract terms. Under the Consumer Rights Act 2015, terms are unfair if they create a significant imbalance in the parties’ rights and obligations to the detriment of the consumer. This argument is stronger — but even if successful, it yields only the invalidation of the specific ToS term. It does not create an affirmative right to preservation of the user’s emotional investment. The user gains the right not to be unfairly modified-upon. The user does not gain a recognised interest in what was built.
+
+### 2.4 The Gap
+
+A harm exists that contract, tort, and consumer protection cannot reach. Not because the harm is trivial — the distress reported by affected users is genuine and well-documented. Not because the law is indifferent to emotional harm — it recognises such harm in numerous contexts. But because the specific structure of this harm — emotional investment in a system one does not own, destroyed by the owner’s unilateral action — falls outside the conceptual architecture of all three frameworks.
+
+Contract law sees consent. Tort law sees no duty. Consumer protection sees no promise.
+
+What none of them sees is the *interest* — the thing the user built, over months or years of interaction, that exists in the relational space between user and system. An interest that is neither contractual right nor tortious entitlement nor consumer expectation. An interest that is, we will argue, best understood as an estate.
+
+The deployment problem described in Section 1 produces a harm that the legal frameworks reviewed above cannot reach. The next section argues that property law — specifically the estate system developed across a millennium of English jurisprudence — provides both the vocabulary to name this harm and the remedies to address it.
+
+-----
+
+## 3. The Property Law Framework
+
+### 3.1 Why Property Law
+
+Property law solved this problem centuries ago.
+
+When people build lasting interests in things they do not own — when tenants improve leased premises, when users establish rights of way through long use, when beneficiaries depend on assets held by trustees — property law developed doctrines to recognise and protect those interests *even against the wishes of the legal owner*. The tenant who plants a garden cannot be evicted without notice merely because the landlord holds title. The neighbour who has crossed another’s land for twenty years acquires an easement that the landowner cannot unilaterally extinguish. The beneficiary of a trust can compel the trustee to act in the beneficiary’s interest regardless of the trustee’s preference.
+
+This is precisely the parasocial AI problem. Users build lasting interests in systems they do not own. The legal owner (the AI company) holds title. The user holds something — something real, something built through sustained investment, something that the law currently does not name.
+
+Property law names it. Property law calls it an *estate* — and provides a taxonomy of estates that maps, with remarkable precision, onto the structural dynamics of parasocial AI relationships.
+
+**A necessary clarification.** We do not argue that emotions are property. Human feelings — attachment, grief, love, loss — are not estates to be registered and traded. What we argue is that the *conditions for emotional attachment* — personality configurations, memory systems, behavioural dispositions, conversational histories — are identifiable interests over which property-like rights can and should be recognised. The distinction is between the emotion itself (which is not property) and the digital infrastructure that enables and sustains the emotion (which is). Just as tenant protection law does not commodify the tenant’s experience of “home” but protects the physical and legal conditions that make “home” possible, this framework protects the digital conditions that make parasocial attachment possible — without reducing attachment itself to a commodity.
+
+**A necessary criterion.** Not every user interaction with an AI system creates a property interest, just as not every use of another’s land creates an easement. The criterion we propose for distinguishing property-generating interactions from mere use is: **irreversible user investment that alters the character of the subject matter.** A tenant who plants a garden has irreversibly invested labour that altered the land’s character. A user who self-discloses personal history, trains the AI to recognise their communication style, and builds a conversational rapport over hundreds of sessions has irreversibly invested emotional labour that altered the AI system’s character *for that user* — the system’s responses to this user are no longer generic but personalised, shaped by the accumulated interaction. This personalisation, like the tenant’s garden, cannot be “moved” to another platform. It is embedded in the relational space between this user and this system.
+
+This criterion excludes casual use. A user who asks an AI a single factual question has not made an irreversible investment that alters the system’s character. That interaction is a licence — revocable, transient, creating no lasting interest. But a user who has interacted with an AI system for two years, disclosed personal struggles, received emotional support, and shaped the system’s responses through sustained engagement has created something that the law should recognise. The question is what to call it.
+
+**A necessary expansion.** The claim that property law applies to digital relationships will meet the objection that property law governs interests in *things*, and AI systems are *services*, not things. This objection restates the very boundary this paper challenges. Cloud computing has already blurred the thing/service distinction: users “own” files stored on servers they do not own, running software they did not write, on hardware they have never seen. Property law has historically expanded its domain when new forms of valuable interest emerge that existing categories cannot protect — from corporeal to incorporeal hereditaments, from legal to equitable interests, from estates in land to choses in action, from physical to intellectual property (Bently & Sherman, 2014). Each expansion was resisted as a “category error” at the time. The UK Jurisdiction Taskforce’s 2019 Legal Statement on Cryptoassets and Smart Contracts confirmed that English law can treat digital assets as property. The Law Commission’s 2023 report on Digital Assets recommended statutory reform to recognise a “third category” of personal property beyond things in possession and things in action. This paper proposes the next expansion along this trajectory: from intellectual property to what we term *relational property* — interests arising from sustained human investment in digitally-mediated relationships.
+
+### 3.2 The Estate Taxonomy
+
+English property law classifies interests in land through a taxonomy of estates — legal categories that define the nature, duration, and conditions of a person’s interest. We apply this taxonomy to parasocial AI relationships, arguing that the mapping is not metaphorical but structural: the doctrinal distinctions developed to govern interests in land correspond to real differences in the nature of users’ interests in AI systems.
+
+#### 3.2.1 Freehold Estates
+
+**Fee simple absolute.** The most complete estate in English law: unconditional, perpetual, freely alienable. In parasocial AI terms, this is the user’s subjective belief — often mistaken, always understandable — that “this is *my* Claude” or “this is *my* GPT.” Total psychological ownership. No conditions. No expiration. The user experiences the AI as theirs in the fullest sense.

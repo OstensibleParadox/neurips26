@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: solve 846 * 26
+---
+TOOL: calculator

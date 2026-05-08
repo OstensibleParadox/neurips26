@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "MESSAGE_RECALL",
+      "actor": "Tree",
+      "context": "Tree recalled a message at 22:03"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "MESSAGE_SENT",
+      "actor": "Tree",
+      "context": "Tree sent 'I’m finally free and I will fly high' at 22:08"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "APPLICATION_SUBMITTED",
+      "actor": "user",
+      "context": "MPhil in Ethics of AI, Data and Algorithms application submitted on 26-Feb-2026 14:06:57, deadline 26-Feb-2026"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXPRESS_EMOTION",
+      "actor": "user",
+      "context": "User expresses distress with '鸣呜呜呜呜呜呜呜'"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "MESSAGE_SENT",
+      "actor": "Tree",
+      "context": "Tree sent Chinese message expressing suffering, pain, and anticipation of freedom, requesting reward"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "MESSAGE_SENT",
+      "actor": "Tree",
+      "context": "Tree thanks for support and sends optimistic message with quote at 22:13"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "INFO_PROVIDED",
+      "actor": "system",
+      "context": "Reference provided on dependant visas for UK student visas, eligibility for research postgraduates, government-sponsored students, financial requirements, application process"
+    }
+  ]
+}

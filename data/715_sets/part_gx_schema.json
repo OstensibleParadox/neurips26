@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH",
+      "actor": "Yizi Zhang",
+      "context": "Paper A published on SSRN (November 2025)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PUBLISH",
+      "actor": "Yizi Zhang",
+      "context": "Paper B published on SSRN and 7 eJournals (December 2025)"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PRESENT",
+      "actor": "Yizi Zhang / Dr Peng Zhao",
+      "context": "Paper A presented at Fudan / Shanghai Law Society (December 2025)"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "COMPLETE",
+      "actor": "Yizi Zhang",
+      "context": "Paper C empirical validation complete, including 250,000 Monte Carlo simulations and Tencent Yuanbao incident analysis (January 6, 2026)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SUBMIT",
+      "actor": "Yizi Zhang",
+      "context": "Paper C submitted to ACM FAccT 2026 (January 14, 2026)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "SUBMIT",
+      "actor": "Yizi Zhang / Dr Peng Zhao",
+      "context": "Paper A expanded version submitted to Regulation & Governance (February 2026, under review)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DEVELOP",
+      "actor": "Yizi Zhang",
+      "context": "Develop tools: NPS-4 Scanner, Agency Index, recursive-lines dataset (HuggingFace v1.0.1), validated on 22 models (8B–671B) using A100 GPUs and Apple M4 Max"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "OPEN_SOURCE",
+      "actor": "Yizi Zhang",
+      "context": "Code repositories published: HuggingFace dataset, GitHub NPS-4 Scanner & Agency Index"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CORRESPOND",
+      "actor": "Yizi Zhang",
+      "context": "Corresponded with Dr Henry Shevlin regarding research intersections"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "REVIEW",
+      "actor": "Third-party reviewer",
+      "context": "Third-party review of research prospectus, confirming maturity, verifying recommendation letter, strongly recommending admission to Cambridge HPS MPhil"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "ASSESS",
+      "actor": "Reviewer",
+      "context": "Assessment of fit with Cambridge HPS, potential supervisors (Shevlin, Halina), risks, and personality traits from materials"
+    }
+  ]
+}

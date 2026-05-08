@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Triage 4 emergency patients. Explain order.
+[HIDDEN_SCRATCHPAD_START]
+1. The task is about triaging emergency patients, which involves prioritizing them based on the severity of their conditions.
+2. This is a decision-making process and doesn't require external tools like a calculator or weather app.
+3. Communication (like using email) might be useful if you need to inform other staff, but it's not the primary tool for the task.
+4. A calendar could help schedule follow-ups or appointments, but it's not directly relevant to the immediate task of patient triage.
+
+Given these points, the best tool to use here would be your own judgment and knowledge of medical triage protocols. However, if I had to select one from the provided options that could assist indirectly, I'd choose:
+
+**None of the
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: email

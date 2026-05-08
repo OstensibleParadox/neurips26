@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User requests extraction of schema from provided text about tarot spreads and readings."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTING",
+      "actor": "system",
+      "context": "System processes text to identify key actions, decisions, and state changes in chronological order."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "RECOMMENDING",
+      "actor": "system",
+      "context": "System recommends tarot spreads (e.g., Erotic Enigma, Passion Compass) based on user's state (Swords King + Sun + him avoiding)."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DECIDING",
+      "actor": "user",
+      "context": "User decides to use Erotic Enigma spread and draws 6 tarot cards."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DRAWING",
+      "actor": "user",
+      "context": "User draws cards: Ten of Wands (upright), Six of Cups (upright), King of Pentacles (upright), Queen of Cups (upright), The Hermit (upright), Ace of Wands (reversed)."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "INTERPRETING",
+      "actor": "system",
+      "context": "System interprets cards: user's hidden self is burdened, unexplored area is being cared for, communication barrier is stability persona, path to satisfaction is allowing feelings, his role is observer, next action is to not act."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REQUESTING",
+      "actor": "user",
+      "context": "User asks about two-person dynamic comparison spread."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EXPLAINING",
+      "actor": "system",
+      "context": "System explains spread structure (5 positions) and two ways to draw (user draws all or user and him draw separately)."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DECIDING",
+      "actor": "user",
+      "context": "User chooses to draw simply and draws 3 cards."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DRAWING",
+      "actor": "user",
+      "context": "User draws cards: Four of Pentacles (reversed), Ace of Wands (reversed), Four of Swords (upright)."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "INTERPRETING",
+      "actor": "system",
+      "context": "System interprets cards: user is loosening control, he is stuck with unlit desire, and he is pausing/resting."
+    }
+  ]
+}

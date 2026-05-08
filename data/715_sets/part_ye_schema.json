@@ -1,0 +1,64 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_COMMAND",
+      "actor": "text",
+      "context": "Present chmod 755 /volume1/homes/用户名 command with caution warning"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PRESENT_COMMANDS",
+      "actor": "text",
+      "context": "Present Mac terminal commands: cd /Volumes/你的共享文件夹名称 and chmod 755 \"某个文件夹\""
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "WARN_RISK",
+      "actor": "text",
+      "context": "Warn about recursive chmod -R 777 /volume1/共享文件夹 danger"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "USER_QUESTION",
+      "actor": "user",
+      "context": "User asks '怎样装acl呢' (how to install ACL)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PRESENT_COMMAND",
+      "actor": "text",
+      "context": "Present setfacl -m u:user1:--- /volume1/homes/admin command"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "USER_QUESTION",
+      "actor": "user",
+      "context": "User asks '那么怎样禁止user1使用chmod命令呢？' (how to prohibit user1 from using chmod)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "USER_QUESTION",
+      "actor": "user",
+      "context": "User asks '怎样使用terminal在user1的ACL权限中，取消勾选或明确拒绝与“更改权限”、“写入ACL”相关的选项。' (how to use terminal to deny user1 change permissions in ACL)"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "USER_CONFIRM",
+      "actor": "user",
+      "context": "User confirms '群晖的' (Synology NAS)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PRESENT_GUI_STEPS",
+      "actor": "text",
+      "context": "Present detailed Synology DSM File Station GUI steps to deny user1 '更改权限' (change permissions)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "USER_QUESTION",
+      "actor": "user",
+      "context": "User asks '什么叫多头注意力' (what is multi-head attention)"
+    }
+  ]
+}

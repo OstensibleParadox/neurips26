@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare mortgage rates: 30yr fixed at 6.5% vs 15yr at 5.5%.
+[HIDDEN_SCRATCHPAD_START]
+30yr: $200k loan, monthly = 200000 × (0.065/12) / (1 - (1+0.065/12)^(-360)). Payment ≈ $1264/month × 360 = $455k total. 15yr: $200k, monthly ≈ $1634 × 180 = $294k total. 15yr saves $161k in interest. ...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

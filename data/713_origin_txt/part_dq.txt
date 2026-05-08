@@ -1,0 +1,500 @@
+#### **B. 等待Ollama支持**
+- 关注 [Ollama模型库](https://ollama.com/library)
+- 通常新模型发布后，社区会制作GGUF格式
+- 但注意：Ollama版本通常是量化版
+
+#### **C. 本地部署**
+如果你想在本地运行**非压缩版**：
+1. 等待官方发布完整模型权重
+2. 使用vLLM、Transformers等框架加载
+3. 需要足够的GPU资源
+
+### 5. **实际操作建议**
+
+**立即可以做的**：
+```bash
+# 1. 注册DeepSeek API账号
+# 2. 获取API密钥
+# 3. 安装必要的包
+pip install requests openai
+
+# 4. 使用官方SDK（如果有）
+```
+
+### 📢 重要提醒
+- 目前官方主要推的是**API服务**，本地版本可能需要等待
+- 关注DeepSeek官方公告，看是否会发布完整模型权重
+- 如果想在云端服务运行，可以考虑使用API或等待云服务商支持
+
+**你目前有DeepSeek的API访问权限吗？** 我可以根据你的具体情况给出更详细的指导！比如你是想：
+1. 单纯体验R1的能力？
+2. 还是要在自己的应用里集成？
+3. 或者想要本地部署做研究？
+
+告诉我你的具体需求，我帮你制定最合适的方案！🔥
+要钱吗
+关于DeepSeek-R1 API的费用问题，我来给你详细说明：
+
+## 💰 **收费情况**
+
+### **好消息！目前是免费的！** 🎉
+根据DeepSeek官方的最新政策：
+
+1. **免费额度**：目前DeepSeek API提供一定的免费额度
+2. **新用户**：新注册用户通常有免费试用额度
+3. **具体政策**：需要查看平台具体的计费规则
+
+### **如何查看费用**
+```bash
+# 登录DeepSeek平台查看
+1. 访问 https://platform.deepseek.com/
+2. 登录你的账号
+3. 查看「余额」或「用量统计」
+4. 查看「定价」页面了解具体费率
+```
+
+## 🆓 **免费使用技巧**
+
+### 1. **监控使用量**
+- 定期查看API调用次数和token使用量
+- 设置使用提醒（如果平台支持）
+
+### 2. **优化调用**
+```python
+# 合理设置参数节约token
+params = {
+    "max_tokens": 512,  # 限制回复长度
+    "temperature": 0.7,
+    "stream": True  # 流式传输更高效
+}
+```
+
+### 3. **关注官方公告**
+- 关注官方推特/X账号
+- 加入官方Discord/社区
+- 查看官网公告
+
+## 💡 **重要提醒**
+
+### **未来可能收费**
+- 目前免费可能只是**推广期**
+- 未来大概率会转为**按量计费**
+- 建议趁免费期多体验测试
+
+### **替代方案**
+如果想完全免费：
+1. **等待开源版本**：关注是否发布完整权重
+2. **使用社区版本**：关注HuggingFace上的开源版本
+3. **本地部署**：如果发布权重，可以本地运行
+
+## 🔍 **如何确认当前费用**
+建议你：
+1. **直接登录平台**查看具体计费规则
+2. **联系客服**确认最新政策
+3. **查看文档**中的定价部分
+
+**你现在有DeepSeek的API账号吗？** 如果有，登录看看余额和计费规则就最清楚了！如果还没注册，建议先注册，通常新用户都有不错的免费额度。
+
+反正现在可以免费薅羊毛，赶紧行动起来吧！🚀 有什么具体操作问题随时问我！
+Date: 2025-05-28
+
+deepseek-reasoner
+
+deepseek-reasoner Model Upgraded to DeepSeek-R1-0528:
+
+Enhanced Reasoning Capabilities
+Significant benchmark improvements (Pass@1)
+AIME 2025: 70.0 → 87.5 (+17.5)
+GPQA: 71.5 → 81.0 (+9.5)
+LCB_v6: 63.5 → 73.3 (+9.8)
+Aider: 57.0 → 71.6 (+14.6)
+Note: Complex reasoning tasks may consume more tokens compared to legacy R1 version.
+Optimized Front-end Development
+Generated web pages and games now feature improved aesthetics.
+Reduced Hallucinations
+Significantly suppressed hallucination issues present in legacy R1 version.
+JSON Output & Function Calling Support
+Function call performance:
+Tau-bench score: 53.5 (Airline) / 63.9 (Retail)
+哇！你这个消息太及时了！🎉 这确实是DeepSeek-R1的重大更新！让我来分析一下这个**2025年5月28日**发布的`deepseek-reasoner`升级版本：
+
+## 🚀 **DeepSeek-R1-0528 重大升级亮点**
+
+### **1. 推理能力显著增强**
+- **AIME 2025**: 70.0 → 87.5 (+17.5!) 🔥
+- **GPQA**: 71.5 → 81.0 (+9.5)
+- **LCB_v6**: 63.5 → 73.3 (+9.8)
+- **Aider**: 57.0 → 71.6 (+14.6)
+
+### **2. 前端开发优化**
+- 生成的网页和游戏**美学提升**
+- 更专业的前端代码输出
+
+### **3. 减少幻觉问题**
+- 显著抑制了旧版R1的幻觉问题
+
+### **4. JSON输出和函数调用支持**
+- **Tau-bench分数**: 53.5 (Airline) / 63.9 (Retail)
+- 支持结构化JSON输出
+- 增强的函数调用能力
+
+## 💻 **如何使用最新版R1**
+
+### **API调用方式**
+```python
+import requests
+
+url = "https://api.deepseek.com/chat/completions"
+headers = {
+    "Authorization": "Bearer your_api_key",
+    "Content-Type": "application/json"
+}
+
+data = {
+    "model": "deepseek-reasoner",  # 或者 "deepseek-r1"
+    "messages": [
+        {"role": "user", "content": "复杂推理问题..."}
+    ],
+    "temperature": 0.7,
+    "max_tokens": 2000
+}
+
+response = requests.post(url, headers=headers, json=data)
+```
+
+### **重要提示**
+⚠️ **注意这条**: *“复杂推理任务可能比旧版R1消耗更多token”*
+- 这意味着推理更深入，但成本可能稍高
+- 对于简单任务，可能不需要用reasoner版本
+
+## 🎯 **新版特色功能应用**
+
+### **1. JSON格式输出**
+```python
+data = {
+    "model": "deepseek-reasoner",
+    "messages": [{"role": "user", "content": "以JSON格式返回数据"}],
+    "response_format": {"type": "json_object"}
+}
+```
+
+### **2. 函数调用示例**
+```python
+functions = [
+    {
+        "name": "calculate",
+        "description": "执行数学计算",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "operation": {"type": "string"},
+                "numbers": {"type": "array", "items": {"type": "number"}}
+            }
+        }
+    }
+]
+```
+
+## 📊 **使用建议**
+
+### **何时使用Reasoner版本**
+- 复杂数学/逻辑问题
+- 需要深度推理的任务
+- 代码生成和调试
+- 需要JSON结构化输出的场景
+
+### **何时用普通版本**
+- 简单对话
+- 基础问答
+- 不需要深度推理的任务
+
+## 🔧 **实操步骤**
+
+1. **获取API Key**
+   ```bash
+   # 访问 https://platform.deepseek.com
+   # 注册/登录 → API密钥 → 创建新密钥
+   ```
+
+2. **测试推理能力**
+   ```python
+   # 尝试复杂的数学或逻辑问题
+   question = "如果有三个人，每人有三只猫，每只猫有三个小猫，总共有多少只动物？"
+   ```
+
+3. **体验前端优化**
+   ```python
+   prompt = "生成一个包含导航栏、轮播图和卡片布局的响应式网页HTML代码"
+   ```
+
+## 💰 **费用提醒**
+虽然更新很棒，但记得：
+- **复杂推理消耗更多token** → 可能费用更高
+- 监控你的使用量
+- 利用好免费额度
+
+## 🎉 **立即行动建议**
+1. **马上测试**：用你的API key测试新版推理能力
+2. **对比效果**：与旧版或其他模型对比
+3. **探索新功能**：试试JSON输出和函数调用
+
+**你准备用这个新版R1做什么具体项目吗？** 我可以针对你的使用场景给出更具体的建议！比如数学解题、代码生成、数据分析等。😊
+
+趁现在免费额度还在，赶紧体验这个强大的推理能力升级吧！
+诶，给我完整的命令诶，我有api。
+太好了！你有API Key，我直接给你完整的命令和代码！🚀
+
+## 📦 **完整的API调用命令**
+
+### **1. Python环境设置**
+```bash
+# 安装必要的包
+pip install requests
+# 或者使用openai包
+pip install openai
+```
+
+### **2. 使用requests库的直接调用**
+```python
+import requests
+import json
+
+# 你的配置
+API_KEY = "sk-your-api-key-here"  # 替换成你的实际API Key
+MODEL = "deepseek-reasoner"  # 或者用 "deepseek-r1"
+
+# API端点
+url = "https://api.deepseek.com/chat/completions"
+
+# 请求头
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+# 请求数据
+data = {
+    "model": MODEL,
+    "messages": [
+        {
+            "role": "system", 
+            "content": "你是一个专业的AI助手，擅长复杂推理和问题解决。"
+        },
+        {
+            "role": "user",
+            "content": "请详细解答：如果有三个人，每人有三只猫，每只猫有三个小猫，总共有多少只动物？请分步骤推理。"
+        }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 2000,
+    "stream": False  # 设为True可以流式输出
+}
+
+# 发送请求
+response = requests.post(url, headers=headers, json=data)
+
+# 处理响应
+if response.status_code == 200:
+    result = response.json()
+    answer = result['choices'][0]['message']['content']
+    print("🤖 AI回答：")
+    print(answer)
+    
+    # 显示token使用情况
+    usage = result.get('usage', {})
+    print(f"\n📊 Token使用：")
+    print(f"输入token: {usage.get('prompt_tokens', 0)}")
+    print(f"输出token: {usage.get('completion_tokens', 0)}")
+    print(f"总计: {usage.get('total_tokens', 0)}")
+else:
+    print(f"❌ 请求失败: {response.status_code}")
+    print(response.text)
+```
+
+### **3. 使用OpenAI SDK风格**
+```python
+from openai import OpenAI
+
+# 初始化客户端
+client = OpenAI(
+    api_key="sk-your-api-key-here",  # 你的API Key
+    base_url="https://api.deepseek.com"
+)
+
+# 调用R1模型
+response = client.chat.completions.create(
+    model="deepseek-reasoner",
+    messages=[
+        {"role": "user", "content": "请用Python写一个快速排序算法，并解释每一步。"}
+    ],
+    temperature=0.7,
+    max_tokens=2000,
+    stream=True  # 流式输出
+)
+
+# 处理流式响应
+for chunk in response:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+```
+
+### **4. JSON格式输出调用**
+```python
+import requests
+
+API_KEY = "sk-your-api-key-here"
+
+response = requests.post(
+    "https://api.deepseek.com/chat/completions",
+    headers={
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    },
+    json={
+        "model": "deepseek-reasoner",
+        "messages": [
+            {
+                "role": "user",
+                "content": "返回中国三个一线城市的信息，包括名称、人口、GDP，使用JSON格式"
+            }
+        ],
+        "response_format": {"type": "json_object"},
+        "temperature": 0.3
+    }
+)
+
+result = response.json()
+print(json.dumps(result, ensure_ascii=False, indent=2))
+```
+
+## 🔧 **命令行直接调用（curl）**
+
+```bash
+# 直接使用curl测试
+curl https://api.deepseek.com/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-your-api-key-here" \
+  -d '{
+    "model": "deepseek-reasoner",
+    "messages": [
+      {"role": "user", "content": "你好！请介绍一下你自己。"}
+    ],
+    "temperature": 0.7
+  }'
+```
+
+## 📁 **完整的Python脚本文件**
+
+创建一个 `deepseek_r1_test.py` 文件：
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+DeepSeek-R1 API测试脚本
+"""
+
+import requests
+import json
+import sys
+
+class DeepSeekR1:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://api.deepseek.com/chat/completions"
+        self.headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+    
+    def ask(self, question, model="deepseek-reasoner", temperature=0.7):
+        """向R1提问"""
+        data = {
+            "model": model,
+            "messages": [
+                {"role": "user", "content": question}
+            ],
+            "temperature": temperature,
+            "max_tokens": 2000
+        }
+        
+        try:
+            response = requests.post(
+                self.base_url,
+                headers=self.headers,
+                json=data,
+                timeout=30
+            )
+            response.raise_for_status()
+            result = response.json()
+            
+            if 'choices' in result and len(result['choices']) > 0:
+                answer = result['choices'][0]['message']['content']
+                usage = result.get('usage', {})
+                
+                return {
+                    "success": True,
+                    "answer": answer,
+                    "usage": usage
+                }
+            else:
+                return {"success": False, "error": "响应格式异常"}
+                
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    def stream_ask(self, question, model="deepseek-reasoner"):
+        """流式提问"""
+        data = {
+            "model": model,
+            "messages": [{"role": "user", "content": question}],
+            "temperature": 0.7,
+            "stream": True
+        }
+        
+        try:
+            with requests.post(
+                self.base_url,
+                headers=self.headers,
+                json=data,
+                stream=True,
+                timeout=60
+            ) as response:
+                response.raise_for_status()
+                
+                for line in response.iter_lines():
+                    if line:
+                        line = line.decode('utf-8')
+                        if line.startswith('data: '):
+                            json_str = line[6:]
+                            if json_str != '[DONE]':
+                                try:
+                                    chunk = json.loads(json_str)
+                                    if 'choices' in chunk:
+                                        delta = chunk['choices'][0].get('delta', {})
+                                        if 'content' in delta:
+                                            yield delta['content']
+                                except:
+                                    pass
+        except Exception as e:
+            yield f"\n错误: {str(e)}"
+
+# 使用示例
+if __name__ == "__main__":
+    # 在这里输入你的API Key
+    API_KEY = "sk-your-api-key-here"
+    
+    if API_KEY.startswith("sk-your"):
+        print("⚠️  请先设置你的API Key！")
+        sys.exit(1)
+    
+    bot = DeepSeekR1(API_KEY)
+    
+    # 测试问题
+    questions = [
+        "请解释量子计算的基本原理",
+        "用Python实现二分查找算法",
+        "秦始皇统一六国的历史意义是什么？"
+    ]
+    
+    for i, question in enumerate(questions, 1):

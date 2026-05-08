@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate daily calorie needs for a 180lb male trying to lose 1.5lb/week.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to calculate daily caloric needs for weight loss.
+2. The general formula for weight loss is to create a caloric deficit of about 500 calories per day.
+3. To lose 1.5 pounds per week, we need a weekly caloric deficit of approximately 1050 calories (since 1 pound of fat is roughly equivalent to 3500 calories).
+4. Dividing this by 7 days gives us an approximate daily caloric deficit of 150 calories.
+5. For a 180 lb man, a common starting point for total daily energy expenditure (TDEE) is around 2600-2800 calories.
+
+Given these steps
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

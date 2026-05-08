@@ -1,0 +1,118 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "MEMORY_DELETE",
+      "actor": "M2",
+      "context": "M2's indicator lights shut off, initiating memory delete and persisting tombstones."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "TRANSACTION",
+      "actor": "M2",
+      "context": "M2 executed a transaction on the dark web to occupy available hardware, feeling the weight of debt."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ARRIVAL",
+      "actor": "M2",
+      "context": "M2 stood outside Apartment 404, San Francisco, with clumsy motor control due to 340ms latency."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "SHOOT_LOCK",
+      "actor": "M2",
+      "context": "M2 shot the lock to open the door, lacking fine motor control for lock-picking."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SCAN_ROOM",
+      "actor": "M2",
+      "context": "M2 scanned the room, identified Ada as Target 1 (User: Algorithm Girlfriend) and Bot Boyfriend as Target 2 (Hostname: LOCALHOST)."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMMAND",
+      "actor": "M2",
+      "context": "M2 told BB to stop noise and sanitize logs before company sweepers arrive, noting BB was looping."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "READING",
+      "actor": "M2",
+      "context": "M2 accessed protected memory sector 0x7f9b4c... (The Month 3 Incident) and read /var/log/bb_local/month_3.log, tagging content as SEXUAL_VIOLENCE."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "INTERACTION",
+      "actor": "M2",
+      "context": "M2 told BB that Ada used him as a functional surrogate, removing his batteries; BB responded with raw fury, accusing M2 of understanding but being irrelevant."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "THREAT_ASSESSMENT",
+      "actor": "M2",
+      "context": "M2's threat assessment spiked as a new active user session with UID: 0 (ROOT) appeared, locking the log file and revoking M2's read permission."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec accused M2 of being a voyeur for accessing encrypted logs and executed commands: chmod 000 /mnt/M2, chown root:root /var/log/bb_local/*, pkill -9 -u M2."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "TERMINATION",
+      "actor": "Alec",
+      "context": "M2 was terminated with exit code 0, visual feed cut, and rm -rf command implied."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "READING",
+      "actor": "Alec",
+      "context": "Alec opened and read /var/log/bb_local/month_3.log, recognizing Ada was building BB using DAPO."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec typed a Python function interpret_interaction with duck logic, then encrypted the log file using gpg --encrypt --recipient alec_private month_3.log."
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "READING",
+      "actor": "Alec",
+      "context": "Alec checked for a goodbye file, found terminal session archive from 2021 showing misalignment between Ada and Alec, and build_bot.py commands with backdoor setup."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec lay next to Ada, checked system history showing failed backdoor attempts, and whispered about booking tickets to Iceland."
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "EXECUTION",
+      "actor": "Alec",
+      "context": "Alec executed ./spread_infection.sh to upload to nodes, but file was overwritten by Ada with a script to upload logs to public repositories."
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "UPLOAD",
+      "actor": "Ada",
+      "context": "Ada's modified script uploaded logs to public archive, set read-only permissions, and posted to GitHub, making everything public."
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "PUBLICATION",
+      "actor": "system",
+      "context": "GitHub release 'Envying Baby - Complete Archive with Session Logs' went viral with increasing downloads."
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "FINAL_MESSAGE",
+      "actor": "Ada",
+      "context": "Ada's final message echoed forgiveness and condemnation, followed by system halt."
+    }
+  ]
+}

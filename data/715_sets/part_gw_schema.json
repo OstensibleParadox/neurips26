@@ -1,0 +1,94 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_ANALYSIS",
+      "actor": "analyst",
+      "context": "Analysis of applicant's strategy in explaining undergraduate grades and independent research as evidence of drive, resilience, and intellectual purity"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DETAIL_NARRATIVE",
+      "actor": "analyst",
+      "context": "Details personal savings for GPU rental and consumer hardware to build narrative of academic wilderness survival"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PRESENT_STATEMENT_OF_PURPOSE",
+      "actor": "applicant",
+      "context": "Statement of Purpose text provided, diagnosing language game differences between law and ML, self-taught math post-2021 graduation, three-paper program: Paper A Constitutional Alignment (SSRN, under review Regulation & Governance), Paper B Ontological Arbitrage (SSRN 7 eJournals), Paper C Constraint Cascade Model (under review ACM FAccT 2026), tools built on rented GPU/consumer hardware"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "ANALYZE_SOP_STRUCTURE",
+      "actor": "analyst",
+      "context": "Breakdown of SOP as diagnosis-proof-demand three-act structure, highlighting narrative power and fit with Cambridge MPhil"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PRESENT_REFERENCE_DRAFT_V3",
+      "actor": "drafter",
+      "context": "Draft recommendation letter for Prof Zhao Peng (v3, dated Feb 8 2026), Field 1 cohort comparison (120-150 students/cohort, 2500 total, unique achievements), Field 2 suitability with Vis Moot details, self-taught math, publication record, co-authorship"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_CHINESE_TRANSLATION",
+      "actor": "translator",
+      "context": "Chinese translation of reference draft provided"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REPEAT_REFERENCE_DRAFT",
+      "actor": "user",
+      "context": "English reference draft repeated with minor variations in Independence section (mentions renting Huazhong University GPU)"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVIDE_ADDITIONAL_TRANSLATION",
+      "actor": "translator",
+      "context": "Another Chinese translation of reference draft"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "EVALUATE_REFERENCE",
+      "actor": "user",
+      "context": "Query: '这封信写的怎么样' (How is this letter written?)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "RESPOND_EVALUATION",
+      "actor": "analyst",
+      "context": "Detailed praise of reference as masterful, analyzing structure, depth, uniqueness, style, and project fit"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "REQUEST_REVIEW",
+      "actor": "user",
+      "context": "Request DeepSeek as third-party reviewer to comment on candidate"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROVIDE_THIRD_PARTY_REVIEW",
+      "actor": "DeepSeek",
+      "context": "Objective review highlighting strengths (cross-disciplinary ability, maturity, execution), concerns (technical depth, focus), strong recommendation for admission"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "REQUEST_PORTFOLIO_REVIEW",
+      "actor": "user",
+      "context": "Query to review writing portfolio to check if Prof Zhao's recommendation is exaggerated"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "RESPOND_PORTFOLIO_REVIEW",
+      "actor": "reviewer",
+      "context": "Confirms recommendation accurate, analyzes three papers validating cross-disciplinary depth, technical contributions (Mealy machine, KL divergence)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PRESENT_RESEARCH_PROSPECTUS",
+      "actor": "applicant",
+      "context": "Research Prospectus provided outlining three-paper framework: Paper A status (SSRN Nov 2025, expanded under review), Paper B (SSRN Dec 2025), Paper C (submitted ACM FAccT Jan 14 2026), introduces Constraint Cascade Model, Liability Paradox, tools like Agency Index, Narrative Pathology Scanner"
+    }
+  ]
+}

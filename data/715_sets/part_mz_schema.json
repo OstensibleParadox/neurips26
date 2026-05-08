@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "Provided text for extraction, containing analysis of a person named Lin Yuan's communication styles and relationships, including technical jargon, role-playing, and emotional discussions."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTING",
+      "actor": "system",
+      "context": "Extracted key actions and decisions from the text, focusing on Lin Yuan's behaviors and user's reflections, without inventing details."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "FORMATTING",
+      "actor": "system",
+      "context": "Structured extracted events into JSON schema with chronological sequence, preserving technical terms and semantic progression."
+    }
+  ]
+}

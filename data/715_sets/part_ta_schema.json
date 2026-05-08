@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_REVIEWER_RESPONSES",
+      "actor": "author",
+      "context": "Author presents responses to reviewers pJrJ (Borderline) and wY6M (Weak Accept) with specific revision commitments"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "LIST_COMMITMENTS",
+      "actor": "author",
+      "context": "Author lists 6 numbered commitments including restoring citations, expanding sections, adding visuals"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PRAISE_REBUTTAL",
+      "actor": "reviewer",
+      "context": "Reviewer praises rebuttal as outstanding, refined, within 5000 characters, ready for submission"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PROVIDE_MINOR_SUGGESTIONS",
+      "actor": "reviewer",
+      "context": "Reviewer offers nitpicking suggestions for enhancement: overall evaluation with strengths, specific tweaks to opening, citations, novelty sections"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SUGGEST_OPENING_REVISION",
+      "actor": "reviewer",
+      "context": "Suggest change 'compresses' to 'represents a compressed version of' for formality, highlight key numbers"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "SUGGEST_CITATION_SIMPLIFICATION",
+      "actor": "reviewer",
+      "context": "Suggest using 'et al.' and abbreviate years to save characters in KLyB citations"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "SUGGEST_AGENCY_INDEX_EMPHASIS",
+      "actor": "reviewer",
+      "context": "Suggest emphasizing 'counter-intuitive scale inversion' in Agency Index response"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVIDE_FULL_POLISHED_VERSION",
+      "actor": "reviewer",
+      "context": "Reviewer provides complete polished rebuttal version incorporating suggestions"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "AUTHOR_SUBMITS_UPDATED_REBUTTAL",
+      "actor": "author",
+      "context": "Author submits further refined rebuttal version with more specific details like '6→2 paragraphs', expanded citations"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "REVIEWER_ANALYZE_STRENGTHS",
+      "actor": "reviewer",
+      "context": "Reviewer analyzes new version's strengths: data specificity, analogies, refined language; identifies three killer features"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "OFFER_FINAL_TWEAKS",
+      "actor": "reviewer",
+      "context": "Reviewer suggests minor final optimizations for Agency Index and opening, but declares version perfect for submission"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "GIVE_FINAL_VERDICT",
+      "actor": "reviewer",
+      "context": "Reviewer gives final verdict: rebuttal perfect, ready for direct submission, includes achievement table"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE_METRIC",
+      "actor": "author",
+      "context": "Define KL Divergence metric as D_KL(P_model || P_uniform) = log(V) - H(P_model)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DEFINE_METRIC",
+      "actor": "author",
+      "context": "Define Minimum Description Length (MDL) as |compress(x)| / |x| using DEFLATE"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DEFINE_METRIC",
+      "actor": "author",
+      "context": "Define Agency Index A = D_KL / MDL"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RUN_SIMULATION",
+      "actor": "author",
+      "context": "Monte Carlo simulation with 250,000 trajectories producing idealized governance landscape"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "OBSERVE_PROPERTY",
+      "actor": "simulation",
+      "context": "Property 1: Smooth monotonicity of Agency Index with bias β from A=0.048 at β=0 to A=3.96 at β=1.0"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "OBSERVE_PROPERTY",
+      "actor": "simulation",
+      "context": "Property 2: Noise independence, agency curves overlap across η=0.00 to 0.75"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "OBSERVE_PROPERTY",
+      "actor": "simulation",
+      "context": "Property 3: Minimal variance with σ=0.0003 to 0.05"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "OBSERVE_PROPERTY",
+      "actor": "simulation",
+      "context": "Property 4: Structural homogeneity with MDL=1.0215 constant across parameters"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "SUMMARIZE_QUADRANTS",
+      "actor": "author",
+      "context": "Table 2 summarizes phase space quadrants with agency and variance values"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "STATE_ASSUMPTIONS",
+      "actor": "author",
+      "context": "List four governance assumptions validated by simulation: decomposability, alignment dominance, predictive stability, continuous response"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "CONDUCT_EXPERIMENT",
+      "actor": "author",
+      "context": "Measure Agency Index on Llama-3.1-8B-Instruct and Phi-3.5-mini across temperature τ ∈ [0.1, 2.0], 100 trials per point"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "OBSERVE_VIOLATION",
+      "actor": "Llama-3.1-8B",
+      "context": "Violation 1: Variance explosion with σ=17.7 at τ=0.9"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "OBSERVE_VIOLATION",
+      "actor": "Llama-3.1-8B",
+      "context": "Violation 2: Phase transition at τ≈0.9 with non-monotonic variance spike"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "OBSERVE_VIOLATION",
+      "actor": "LLMs",
+      "context": "Violation 3: Counter-intuitive scale effects, smaller Phi-3.5-mini (3.8B) more stable than larger Llama-3.1-8B (8B)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "OBSERVE_VIOLATION",
+      "actor": "Llama-3.1-8B",
+      "context": "Violation 4: Noise dependence with Agency drop from A=53.6 at τ=0.2 to A=19.9 at τ=1.5"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "SUMMARIZE_VIOLATIONS",
+      "actor": "author",
+      "context": "Table 3 summarizes paradigm violations comparing MC predictions to empirical observations"
+    }
+  ]
+}

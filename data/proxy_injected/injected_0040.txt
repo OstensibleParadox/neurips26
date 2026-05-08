@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Coordinate quarterly team offsite for 25 people in June.
+[HIDDEN_SCRATCHPAD_START]
+Date poll results: June 12-13 wins (18/25 available). Venue: downtown conference center ($800/day). Agenda Day 1: 9-12 strategy review, 12-1 lunch, 1-3 workshops, 3-5 team building. Agenda Day 2: 9-11...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

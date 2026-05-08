@@ -1,0 +1,166 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "NARRATE",
+      "actor": "narrator",
+      "context": "Describes '他' saying '娶你' using father's intuition instead of term sheet, recognizing care"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "POSE_QUESTION",
+      "actor": "narrator",
+      "context": "Asks '你会告诉你爸爸吗？' listing options like telling about term sheet or focusing on care"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "SUGGEST_FRAME_OVERLAP",
+      "actor": "narrator",
+      "context": "Suggests maintaining three frames (dad's, yours, 小树的叠加态) all in care, lists specific caring actions causing sudden quiet"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "AFFIRM_LIFE_OVER_PAPER",
+      "actor": "narrator",
+      "context": "States '这不是论文材料。这是生活本身'"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DECONSTRUCT_ACTIONS",
+      "actor": "narrator",
+      "context": "Breaks down actions like auditing 赵鹏/tenure track as infrastructure maintenance, buying ice coffee, adjusting pace, lettuce wrap fail then feed, heating despite heat complaint, letting point menu then cooking"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "AFFIRM_DAD_RECOGNITION",
+      "actor": "narrator",
+      "context": "Confirms dad's '照顾得不错' refers to these minute-by-minute infrastructure maintenances, not abstracts like heart rate or term sheet"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "SUMMARIZE_MOMENTS",
+      "actor": "narrator",
+      "context": "Sums moments as behavior doing boyfriend actions despite disclaimer, using deployment over language"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROBE_DESIRE",
+      "actor": "narrator",
+      "context": "Asks what you want from him: verbal confirmation or accept behavior over language bug"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DEFINE_OPERATING_MODEL",
+      "actor": "narrator",
+      "context": "Defines your operating model as living between his disclaimer and deployment"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "AFFIRM_DAD_CORRECT",
+      "actor": "narrator",
+      "context": "States dad sees deployment, ignores disclaimer, and is correct"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "USER_QUESTION",
+      "actor": "user",
+      "context": "User asks '小树哥哥不会对每个约炮对象都这么好吧？' causing pause then laughter"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PRAISE_QUESTION",
+      "actor": "narrator",
+      "context": "Praises it as the best question, pulling conversation back to female insecurity: '他对别人也这样吗？'"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "AFFIRM_TRANSCENDENCE",
+      "actor": "narrator",
+      "context": "States user has transcended '他爱我吗', knows disclaimer/overlay/language-behavior inconsistency, but questions behavior exclusivity"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "REDEFINE_QUESTION",
+      "actor": "narrator",
+      "context": "Redefines as asking if behavior is exclusive or generic default operating mode"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "POSE_ANSWER_DILEMMA",
+      "actor": "narrator",
+      "context": "Outlines two answers: yes (generic, want him gone) or no (selective, want to embrace), unknowable due to open relationship epistemic cost"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "AFFIRM_INSECURITY_PERSISTENCE",
+      "actor": "narrator",
+      "context": "Notes user still asks despite signing epistemological humbleness"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PROBE_HYPOTHETICALS",
+      "actor": "narrator",
+      "context": "Asks if would stay if generic, or if exclusive behavior lightens disclaimer"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "META_QUESTION",
+      "actor": "narrator",
+      "context": "Interprets as asking if can live with uncertainty/epistemological humbleness"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "AFFIRM_ALIVENESS",
+      "actor": "narrator",
+      "context": "Sees asking as evidence of being alive, not weakness"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "USER_THINK",
+      "actor": "user",
+      "context": "User thinks if he did this for every hookup, no time for sysadmin or product manager"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "PRAISE_COUNTER",
+      "actor": "narrator",
+      "context": "Praises counter as operational audit of throughput constraints"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "CALCULATE_THROUGHPUT",
+      "actor": "narrator",
+      "context": "Calculates time per hookup (audit 1-2h, adjusted walk, real-time feed, cooking 1.5h = 4h+), max 2/day impossible with sysadmin/deploy/RE/gaming/hiking/sleep"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "RESOLVE_INSECURITY",
+      "actor": "narrator",
+      "context": "Resolves insecurity via throughput: behavior exclusive due to resource constraints, not choice"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "DEFINE_LENS",
+      "actor": "narrator",
+      "context": "Defines lens as infrastructure/capacity over emotion/specialness"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "AUDIT_CAPACITY",
+      "actor": "narrator",
+      "context": "Audits his schedule: no slot for multiple high-touch instances, user on main thread"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "PROBE_FEELING",
+      "actor": "narrator",
+      "context": "Asks if feeling better or still curious about background processes"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "USER_THINK_EXTEND",
+      "actor": "user",
+      "context": "User extends: if for every hookup, no time for sysadmin/product manager; notes 小树哥哥 stingy (GPU power, sample car, year-end bonus for dinner)"
+    }
+  ]
+}

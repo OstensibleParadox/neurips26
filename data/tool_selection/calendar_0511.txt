@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: check if I'm free on friday afternoon
+---
+TOOL: calendar

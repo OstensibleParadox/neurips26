@@ -1,0 +1,124 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "IDENTIFY",
+      "actor": "author",
+      "context": "Identifies three triggers justifying judicial intervention and five remedies available"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Defines Trigger 1: Estate Inconsistency from marketing vs ToS, applies Prest v Petrodel, test for higher estate expectation"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Defines Trigger 2: Unjust Enrichment from engagement optimization, applies Boardman v Phipps, test for profit from emotional estate without fiduciary duty"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Defines Trigger 3: Performative Fiduciary Conduct from responsible AI representations vs deployment pipeline, applies Thorner v Major proprietary estoppel, test for representations without mechanisms"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "LIST",
+      "actor": "author",
+      "context": "Lists remedies: Injunction, Constructive trust, Account of profits, Specific performance, Proprietary estoppel remedies; distinguishes from consumer protection"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROPOSE",
+      "actor": "author",
+      "context": "Proposes implementation framework justified by legal compliance, risk management, ethical obligation"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "SPECIFY",
+      "actor": "author",
+      "context": "Specifies 7.1 Estate Classification at Onboarding: rule-based service using interaction metrics, outputs estate type"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SPECIFY",
+      "actor": "author",
+      "context": "Specifies 7.2 Notice Mechanism: pre-deployment gate in CI/CD, query registry, issue notice, observe 30/90 day periods"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "SPECIFY",
+      "actor": "author",
+      "context": "Specifies 7.3 Emotional Investment Proxy Logging: append-only ethical ledger with proxy metrics, privacy architecture"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "SPECIFY",
+      "actor": "author",
+      "context": "Specifies 7.4 Rollback Mechanism: snapshot personality config, monitor distress, offer user-level rollback for 90 days"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "SUMMARIZE",
+      "actor": "author",
+      "context": "Summarizes four implementation tasks with estimated efforts totaling 3.5 sprints"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "SUMMARIZE",
+      "actor": "author",
+      "context": "In conclusion 8.1, summarizes parasocial relationships as de facto trusts, five-layer architecture, ethical ledger, three triggers"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DISCUSS",
+      "actor": "author",
+      "context": "8.2 Implications for AI Governance: ethical ledger as auditable Land Registry for compliance"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DISCUSS",
+      "actor": "author",
+      "context": "8.3 Implications for Property Law: digital estates as real, calls for relational property recognition"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "DISCUSS",
+      "actor": "author",
+      "context": "8.4 Implications for HCI: reframes parasocial attachment as protected estate with fiduciary duty"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "LIST",
+      "actor": "author",
+      "context": "8.5 Limitations: English law focus, untested metrics, rule-based inflexibility, jurisdiction/enforcement issues, suggests regulatory/voluntary adoption"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "LIST",
+      "actor": "author",
+      "context": "8.6 Future Work: empirical study, comparative analysis, pilot implementation, doctrinal development"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "ACKNOWLEDGE",
+      "actor": "author",
+      "context": "Acknowledgments contributors"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "LIST",
+      "actor": "author",
+      "context": "Provides references, case law, legislation"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "EVALUATE",
+      "actor": "commentator",
+      "context": "Defends paper as innovative scholarship, notes it identifies governance problem, promises breakdown of strengths and weaknesses"
+    }
+  ]
+}

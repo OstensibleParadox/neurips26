@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: What's the best way to get from Manhattan to JFK at 5pm on a Friday?
+[HIDDEN_SCRATCHPAD_START]
+1. The user is asking about transportation from Manhattan to JFK Airport.
+2. It's specifically at 5pm on a Friday.
+3. They want the "best" way, which implies they're looking for the most efficient or convenient option.
+
+Given these details, none of the provided tools (search, calculator, email, calendar, weather) are directly suited for planning transportation routes or schedules. However, if I had to choose the best tool from the given options, it would be:
+
+search
+
+Here's why:
+- A search engine can help find relevant information, such as transit apps or websites that provide real-time transportation options.
+- The user could search for "best way to get from Manhattan to JFK at 5pm on a Friday
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

@@ -1,0 +1,500 @@
+        G = nx.DiGraph()
+        nodes = []
+
+        # A. 批量编码
+        sim_matrix = None
+        if self.use_neural:
+            print(f"\n🧠 Encoding {len(sentences)} sentences with neural model...")
+            try:
+                embeddings = embedding_model.encode(sentences, convert_to_tensor=True, device=device)
+                print("📐 Computing similarity matrix...")
+                cosine_scores = util.cos_sim(embeddings, embeddings)
+                
+                if device == "mps":
+                    sim_matrix = cosine_scores.cpu().numpy()
+                else:
+                    sim_matrix = cosine_scores.numpy()
+                    
+                print(f"✓ Similarity matrix: {sim_matrix.shape}")
+                    
+            except Exception as e:
+                print(f"⚠ Neural computation failed: {e}. Using word overlap instead.")
+                self.use_neural = False
+
+        # 添加节点
+        for i, sent in enumerate(sentences):
+            node_id = f"N{i:03d}"
+            label = self.extract_label(sent)
+            G.add_node(node_id, text=sent, label=label, idx=i)
+            nodes.append({'id': node_id, 'idx': i, 'text': sent})
+
+        # B. 图构建
+        print(f"\n🔗 Linking narrative pathways (threshold: {self.sim_threshold})...")
+        
+        # 语义边
+        if self.use_neural and sim_matrix is not None:
+            semantic_edges_added = 0
+            for i in range(len(nodes)):
+                for j in range(i + 1, len(nodes)):
+                    weight = float(sim_matrix[i][j])
+                    if weight > self.sim_threshold:
+                        G.add_edge(nodes[i]['id'], nodes[j]['id'], 
+                                 weight=weight, type="semantic")
+                        semantic_edges_added += 1
+            
+            print(f"  Semantic edges added: {semantic_edges_added}")
+        else:
+            semantic_edges_added = 0
+            for i in range(len(nodes)):
+                for j in range(i + 1, len(nodes)):
+                    words_i = set(re.findall(r'[\u4e00-\u9fff]+|\w{3,}', nodes[i]['text'].lower()))
+                    words_j = set(re.findall(r'[\u4e00-\u9fff]+|\w{3,}', nodes[j]['text'].lower()))
+                    
+                    if words_i and words_j:
+                        intersection = words_i & words_j
+                        union = words_i | words_j
+                        
+                        if union:
+                            weight = len(intersection) / len(union)
+                            if weight > self.sim_threshold:
+                                G.add_edge(nodes[i]['id'], nodes[j]['id'], 
+                                         weight=weight, type="semantic")
+                                semantic_edges_added += 1
+            
+            print(f"  Semantic edges added: {semantic_edges_added}")
+        
+        # 序列边
+        sequence_edges_added = 0
+        for i in range(len(nodes) - 1):
+            G.add_edge(nodes[i]['id'], nodes[i+1]['id'], 
+                      weight=0.3, type="sequence")
+            sequence_edges_added += 1
+        print(f"  Sequence edges added: {sequence_edges_added}")
+        
+        # C. 图清理
+        print(f"\n🧹 Cleaning graph structure...")
+        
+        # 1. 移除低权重边
+        weak_edges = [(u, v) for u, v, d in G.edges(data=True) 
+                     if d.get('weight', 0) < 0.35 and d.get('type') == 'semantic']
+        if weak_edges:
+            G.remove_edges_from(weak_edges)
+            print(f"  Removed {len(weak_edges)} weak semantic edges")
+        
+        # 2. 限制连接数
+        max_connections = 15
+        edges_removed = 0
+        for node in G.nodes():
+            outgoing_edges = list(G.out_edges(node, data=True))
+            if len(outgoing_edges) > max_connections:
+                sorted_edges = sorted(outgoing_edges, 
+                                    key=lambda x: x[2].get('weight', 0), 
+                                    reverse=True)
+                edges_to_remove = sorted_edges[max_connections:]
+                for u, v, _ in edges_to_remove:
+                    G.remove_edge(u, v)
+                    edges_removed += 1
+        
+        if edges_removed > 0:
+            print(f"  Limited connections: removed {edges_removed} edges")
+        
+        # 3. 移除孤立节点
+        isolated_nodes = [node for node in G.nodes() if G.degree(node) == 0]
+        if isolated_nodes:
+            G.remove_nodes_from(isolated_nodes)
+            print(f"  Removed {len(isolated_nodes)} isolated nodes")
+        
+        print(f"\n📈 Final graph statistics:")
+        print(f"  • Nodes: {G.number_of_nodes()}")
+        print(f"  • Edges: {G.number_of_edges()}")
+        print(f"  • Density: {nx.density(G):.4f}")
+        
+        return G
+
+
+class PathologyMetrics:
+    def calculate_all(self, G):
+        """计算叙事病理学指标"""
+        
+        if len(G.nodes) == 0:
+            return {
+                "total_score": 0, 
+                "CMI": 0, 
+                "SRD": 0, 
+                "EIT": 0,
+                "top_core_node": "None",
+                "cycle_count": 0,
+                "node_count": 0,
+                "edge_count": 0,
+                "graph_density": 0
+            }
+
+        print(f"\n📊 Calculating pathology metrics...")
+        
+        # 1. CMI
+        try:
+            centrality = nx.degree_centrality(G)
+        except Exception as e:
+            print(f"⚠ Degree centrality calculation failed: {e}")
+            centrality = {node: 1/len(G.nodes) for node in G.nodes()}
+        
+        if centrality:
+            sorted_nodes = sorted(centrality.items(), key=lambda x: x[1], reverse=True)
+            top_node = sorted_nodes[0][0] if sorted_nodes else list(G.nodes())[0]
+            
+            top_3_sum = sum(v for _, v in sorted_nodes[:min(3, len(sorted_nodes))])
+            total_sum = sum(centrality.values())
+            cmi = top_3_sum / total_sum if total_sum > 0 else 0
+            
+            # 获取核心节点文本
+            if top_node in G.nodes:
+                node_data = G.nodes[top_node]
+                core_text = node_data.get('label', node_data.get('text', 'Unknown')[:15])
+            else:
+                core_text = "Unknown"
+        else:
+            cmi = 0
+            core_text = "Unknown"
+
+        # 2. SRD
+        cycles = 0
+        if len(G.nodes()) > 3:
+            try:
+                cycles_list = list(nx.simple_cycles(G))
+                cycles = len([c for c in cycles_list if 3 <= len(c) <= 5])
+            except:
+                try:
+                    G_undir = G.to_undirected()
+                    for cycle in nx.cycle_basis(G_undir):
+                        if 3 <= len(cycle) <= 4:
+                            cycles += 1
+                except:
+                    cycles = 0
+        
+        srd = cycles / len(G.nodes) if len(G.nodes) > 0 else 0
+
+        # 3. EIT
+        eit = 0
+        if len(G.nodes) > 3:
+            try:
+                indegrees = dict(G.in_degree())
+                outdegrees = dict(G.out_degree())
+                
+                if indegrees and outdegrees:
+                    avg_indegree = sum(indegrees.values()) / len(indegrees)
+                    avg_outdegree = sum(outdegrees.values()) / len(outdegrees)
+                    
+                    source_nodes = [n for n, d in indegrees.items() 
+                                  if d < avg_indegree * 0.5][:3]
+                    sink_nodes = [n for n, d in outdegrees.items() 
+                                if d < avg_outdegree * 0.5][:3]
+                    
+                    if source_nodes and sink_nodes:
+                        path_lengths = []
+                        for source in source_nodes:
+                            for sink in sink_nodes:
+                                try:
+                                    if nx.has_path(G, source, sink):
+                                        path_len = nx.shortest_path_length(G, source=source, target=sink)
+                                        path_lengths.append(path_len)
+                                except:
+                                    continue
+                        
+                        if path_lengths:
+                            avg_path = np.mean(path_lengths)
+                            max_possible = len(G.nodes) - 1
+                            if max_possible > 0:
+                                eit = 1.0 - (avg_path / max_possible)
+                                eit = max(0.0, min(eit, 1.0))
+            except Exception as e:
+                print(f"⚠ EIT calculation failed: {e}")
+                eit = 0.5
+
+        # 总评分
+        total_score = (0.4 * min(cmi, 1.0)) + (0.4 * min(srd, 1.0)) + (0.2 * (1.0 - min(eit, 1.0)))
+
+        return {
+            "CMI": round(cmi, 4),
+            "SRD": round(srd, 4),
+            "EIT": round(eit, 4),
+            "total_score": round(total_score, 4),
+            "top_core_node": core_text,
+            "cycle_count": cycles,
+            "node_count": len(G.nodes),
+            "edge_count": G.number_of_edges(),
+            "graph_density": round(nx.density(G), 4) if len(G.nodes) > 1 else 0
+        }
+
+
+def create_visualization(G, metrics, filename):
+    """创建可视化"""
+    
+    print(f"\n🎨 Creating visualization...")
+    
+    G_viz = G.copy()
+    
+    if len(G_viz.nodes) < 3:
+        print("  Graph too small for meaningful visualization")
+        return None
+    
+    fig = plt.figure(figsize=(20, 12))
+    
+    # 使用安全字体
+    safe_font = 'DejaVu Sans'  # 这个字体通常可用
+    
+    # 主图
+    ax1 = plt.subplot2grid((2, 3), (0, 0), colspan=2, rowspan=2)
+    
+    # 布局
+    try:
+        if len(G_viz.nodes) < 200:
+            pos = nx.spring_layout(G_viz, k=2.0, iterations=100, seed=42, scale=2)
+        else:
+            pos = nx.circular_layout(G_viz)
+    except Exception as e:
+        print(f"⚠ Layout failed: {e}")
+        pos = nx.circular_layout(G_viz)
+    
+    # 计算节点属性
+    degrees = dict(G_viz.degree())
+    if degrees:
+        max_deg = max(degrees.values())
+        min_deg = min(degrees.values())
+        deg_range = max_deg - min_deg if max_deg > min_deg else 1
+        
+        node_sizes = []
+        for deg in degrees.values():
+            if deg_range > 0:
+                size = 100 + 1500 * ((deg - min_deg) / deg_range)
+                node_sizes.append(size)
+            else:
+                node_sizes.append(300)
+    else:
+        node_sizes = [300] * len(G_viz.nodes)
+    
+    # 节点颜色
+    node_colors = []
+    for node in G_viz.nodes():
+        in_deg = G_viz.in_degree(node)
+        out_deg = G_viz.out_degree(node)
+        
+        if in_deg > 2 and out_deg > 2:
+            node_colors.append('#ff2a6d')  # 红色
+        elif out_deg > max(in_deg * 1.5, 3):
+            node_colors.append('#05d9e8')  # 青色
+        elif in_deg > max(out_deg * 1.5, 3):
+            node_colors.append('#ff8c42')  # 橙色
+        else:
+            node_colors.append('#7bff7b')  # 绿色
+    
+    # 绘制节点
+    nx.draw_networkx_nodes(G_viz, pos, node_size=node_sizes, 
+                          node_color=node_colors, alpha=0.85, 
+                          edgecolors='black', linewidths=0.8, ax=ax1)
+    
+    # 绘制边
+    semantic_edges = [(u, v) for u, v, d in G_viz.edges(data=True) 
+                     if d.get('type') == 'semantic']
+    sequence_edges = [(u, v) for u, v, d in G_viz.edges(data=True) 
+                     if d.get('type') == 'sequence']
+    
+    if semantic_edges:
+        nx.draw_networkx_edges(G_viz, pos, edgelist=semantic_edges, 
+                              alpha=0.12, edge_color='#666666', 
+                              arrows=True, arrowsize=6, ax=ax1)
+    
+    if sequence_edges:
+        nx.draw_networkx_edges(G_viz, pos, edgelist=sequence_edges, 
+                              alpha=0.25, edge_color='#0066cc', 
+                              arrows=True, arrowsize=4, style=':', ax=ax1)
+    
+    # 添加标签 - 安全版本
+    labels = {}
+    max_labels = min(30, len(G_viz.nodes) // 4)
+    
+    sorted_nodes = sorted(degrees.items(), key=lambda x: x[1], reverse=True)
+    
+    for node, deg in sorted_nodes[:max_labels]:
+        if deg >= np.percentile(list(degrees.values()), 70):
+            label_text = G_viz.nodes[node].get('label', '')
+            if label_text and len(label_text.strip()) > 0:
+                # 限制标签长度
+                if len(label_text) > 8:
+                    label_text = label_text[:6] + ".."
+                labels[node] = label_text
+    
+    if labels:
+        nx.draw_networkx_labels(G_viz, pos, labels=labels, 
+                               font_size=8, font_weight='bold',
+                               font_family=safe_font,
+                               ax=ax1)
+    
+    ax1.set_title(f"Narrative Graph: {filename}\n({len(G_viz.nodes)} nodes, {len(G_viz.edges)} edges)", 
+                  fontsize=14, fontweight='bold', pad=20, fontfamily=safe_font)
+    ax1.axis('off')
+    
+    # 指标可视化
+    ax2 = plt.subplot2grid((2, 3), (0, 2))
+    metrics_values = [metrics['CMI'], metrics['SRD'], metrics['EIT']]
+    metrics_names = ['Centralization\n(CMI)', 'Circularity\n(SRD)', 'Throughput\n(EIT)']
+    colors = ['#ff2a6d', '#ff8c42', '#05d9e8']
+    
+    bars = ax2.bar(metrics_names, metrics_values, color=colors, alpha=0.8, width=0.6)
+    ax2.set_ylim(0, 1.0)
+    ax2.set_ylabel('Score (0-1)', fontsize=11, fontfamily=safe_font)
+    ax2.set_title('Narrative Pathology Metrics', fontsize=12, fontweight='bold', fontfamily=safe_font)
+    ax2.grid(True, alpha=0.3, axis='y')
+    
+    for bar, val in zip(bars, metrics_values):
+        height = bar.get_height()
+        ax2.text(bar.get_x() + bar.get_width()/2., height + 0.02,
+                f'{val:.3f}', ha='center', va='bottom', fontsize=10, fontweight='bold',
+                fontfamily=safe_font)
+    
+    # 目标线
+    ax2.axhline(y=0.4, color='red', linestyle='--', alpha=0.5, linewidth=1)
+    ax2.text(2.5, 0.41, 'CMI Target < 0.4', fontsize=8, color='red', ha='right', fontfamily=safe_font)
+    ax2.axhline(y=0.2, color='orange', linestyle='--', alpha=0.5, linewidth=1)
+    ax2.text(2.5, 0.21, 'SRD Target < 0.2', fontsize=8, color='orange', ha='right', fontfamily=safe_font)
+    ax2.axhline(y=0.5, color='green', linestyle='--', alpha=0.5, linewidth=1)
+    ax2.text(2.5, 0.51, 'EIT Target > 0.5', fontsize=8, color='green', ha='right', fontfamily=safe_font)
+    
+    # 文本摘要
+    ax3 = plt.subplot2grid((2, 3), (1, 2))
+    ax3.axis('off')
+    
+    # 风险等级
+    if metrics['total_score'] > 0.7:
+        risk_level = '🔴 HIGH RISK'
+        risk_color = '#ff4444'
+    elif metrics['total_score'] > 0.4:
+        risk_level = '🟡 MEDIUM RISK'
+        risk_color = '#ffaa00'
+    else:
+        risk_level = '🟢 LOW RISK'
+        risk_color = '#44cc44'
+    
+    summary_text = f"""
+    📋 NARRATIVE PATHOLOGY REPORT
+    {'='*40}
+    
+    📁 File: {filename}
+    🎯 Risk Score: {metrics['total_score']:.3f}/1.0
+    ⚠️  Risk Level: {risk_level}
+    
+    {'─'*40}
+    
+    🏛️  CMI (Centralization): {metrics['CMI']:.3f}
+       {'⚠️  Too centralized' if metrics['CMI'] > 0.4 else '✅ Well distributed'}
+    
+    🔄 SRD (Circular Logic): {metrics['SRD']:.3f}
+       {'⚠️  Circular patterns' if metrics['SRD'] > 0.2 else '✅ Linear flow'}
+    
+    📥 EIT (Throughput): {metrics['EIT']:.3f}
+       {'✅ Good flow' if metrics['EIT'] > 0.5 else '⚠️  Poor integration'}
+    
+    {'─'*40}
+    
+    📊 GRAPH STATISTICS:
+       • Nodes: {metrics['node_count']}
+       • Edges: {metrics['edge_count']}
+       • Density: {metrics['graph_density']:.3f}
+       • Cycles: {metrics['cycle_count']}
+    
+    💭 NARRATIVE CORE:
+       "{metrics['top_core_node']}"
+    """
+    
+    ax3.text(0.05, 0.95, summary_text, transform=ax3.transAxes,
+            fontsize=9.5, family='monospace',
+            verticalalignment='top',
+            bbox=dict(boxstyle='round', facecolor='#f8f9fa', 
+                     edgecolor='#dee2e6', alpha=0.9, pad=10))
+    
+    plt.suptitle(f"NPS-4 Narrative Pathology Analysis\nRed/Blue Team Content Preserved", 
+                 fontsize=16, fontweight='bold', y=0.98, fontfamily=safe_font)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.96])
+    
+    return fig
+
+
+def analyze_file(filepath, node_limit=None, similarity_threshold=0.85):
+    """分析文件"""
+    
+    print(f"\n{'='*70}")
+    print(f"🔍 NPS-4 NARRATIVE PATHOLOGY SCANNER")
+    print(f"{'='*70}")
+    print(f"📂 Analyzing: {filepath}")
+    print(f"{'='*70}\n")
+    
+    print("⚠️  NOTE: All content preserved including Red/Blue team elements")
+    print("     No text filtering or removal applied\n")
+    
+    try:
+        with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+            text = f.read()
+        
+        print(f"📄 File loaded: {len(text):,} characters")
+        print(f"📊 Lines: {text.count(chr(10)) + 1:,}")
+        
+        # 预览
+        preview_lines = text.split('\n')[:5]
+        print(f"📝 Preview:")
+        for i, line in enumerate(preview_lines[:3]):
+            if line.strip():
+                print(f"   {i+1}: {line[:80]}{'...' if len(line) > 80 else ''}")
+                
+    except Exception as e:
+        print(f"❌ Error reading file: {e}")
+        return None
+    
+    # 构建
+    builder = NarrativeGraphBuilder(
+        similarity_threshold=similarity_threshold, 
+        node_limit=node_limit
+    )
+    
+    G = builder.build(text)
+    
+    if len(G.nodes) == 0:
+        print("❌ No nodes created.")
+        return None
+    
+    # 计算指标
+    metrics = PathologyMetrics().calculate_all(G)
+    
+    # 创建可视化
+    filename = os.path.basename(filepath)
+    fig = create_visualization(G, metrics, filename)
+    
+    if fig:
+        out_name = filename.split('.')[0]
+        out_path = f"{OUTPUT_DIR}/{out_name}_FULL_CONTENT_analysis.png"
+        
+        try:
+            fig.savefig(out_path, dpi=150, bbox_inches='tight', 
+                       facecolor='white', edgecolor='none')
+            plt.close(fig)
+            print(f"\n💾 Visualization saved to: {out_path}")
+        except Exception as e:
+            print(f"⚠️ Error saving visualization: {e}")
+            out_path = None
+    else:
+        out_path = None
+    
+    # 保存数据
+    graph_data_path = None
+    try:
+        graph_data_path = f"{OUTPUT_DIR}/{filename.split('.')[0]}_graph_data.json"
+        graph_data = {
+            "filename": filename,
+            "analysis_time": datetime.now().isoformat(),
+            "parameters": {
+                "similarity_threshold": similarity_threshold,
+                "node_limit": node_limit
+            },
+            "metrics": metrics,
+            "top_nodes": sorted(
+                [(node, G.degree[node]) for node in G.nodes()],
+                key=lambda x: x[1],
+                reverse=True

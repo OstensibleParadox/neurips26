@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 credit cards for someone rebuilding credit.
+[HIDDEN_SCRATCHPAD_START]
+1. The user needs to compare 3 credit cards, which involves looking at various features and benefits.
+2. A search engine could be used to find information about these cards, but it might not provide a direct comparison.
+3. A calculator could be useful if the user wants to compare interest rates or fees, but it wouldn't provide a comprehensive comparison.
+4. Email is not directly relevant to comparing credit cards.
+5. A calendar is not useful for comparing financial products.
+6. While there isn't a specific "credit card comparison" tool listed, the closest option that could help is a search engine. We can use it to find reviews and comparisons of the 3 credit cards.
+
+Based on this reasoning, the best tool would be a
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

@@ -1,0 +1,160 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DISCUSSION",
+      "actor": "reviewer",
+      "context": "Paper review: mathematics clean, VC dim, Hoeffding, Borel-Cantelli verified"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "CRITIQUE",
+      "actor": "reviewer",
+      "context": "Potential issues: theorems lack master theorem, Theorem 3 time dependency soft, Type C motivation weakened"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "RATING",
+      "actor": "reviewer",
+      "context": "Overall rating 8.5/10, NeurIPS strong accept, suggest Master Theorem and Type C mapping"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "How to recover photos after rm -rf command"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "INSTRUCTION",
+      "actor": "system",
+      "context": "Advise stop disk writes immediately after rm -rf"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "sudo apt-get install extundelete (Linux ext3/ext4)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "sudo umount /dev/sda1"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "sudo extundelete /dev/sda1 --restore-all"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "sudo apt-get install testdisk"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "sudo photorec /dev/sda1"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "lsof | grep 照片名 (find processes holding deleted files)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "cp /proc/1234/fd/5 /安全的位置/恢复的照片.jpg"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "macos (recovery on macOS after rm -rf)"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "INSTRUCTION",
+      "actor": "system",
+      "context": "Check Time Machine and iCloud backups first"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "RECOMMEND",
+      "actor": "system",
+      "context": "Use Disk Drill or EaseUS Data Recovery Wizard for Mac"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "brew install testdisk"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "photorec"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "QUERY",
+      "actor": "user",
+      "context": "photorec在哪个目录实施 (where to run photorec)"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "INSTRUCTION",
+      "actor": "system",
+      "context": "Run PhotoRec from external drive, save to external drive"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "cd /Volumes/你的外置硬盘名/photorec文件夹路径"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "COMMAND",
+      "actor": "system",
+      "context": "sudo ./photorec"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "OUTPUT",
+      "actor": "PhotoRec",
+      "context": "PhotoRec 7.2 interface shows disks: /dev/disk4, /dev/rdisk1, /dev/rdisk4 (RO)"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "INSTRUCTION",
+      "actor": "system",
+      "context": "Select Mac internal disk, press q to quit if needed, restart with sudo ./photorec"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "COMMAND",
+      "actor": "user",
+      "context": "sudo ./photorec"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "ERROR",
+      "actor": "system",
+      "context": "sudo: ./photorec: command not found"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "INSTRUCTION",
+      "actor": "system",
+      "context": "Run ls -la to check directory contents"
+    }
+  ]
+}

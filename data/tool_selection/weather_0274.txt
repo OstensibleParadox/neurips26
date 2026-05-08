@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: best time to visit Istanbul based on weather
+---
+TOOL: weather

@@ -1,0 +1,500 @@
+| Ceramide Type | Best For |
+| :--- | :--- |
+| **True Ceramide** | Long-term barrier integration. Perfect for repairing chronic damage. |
+| **Pseudo-Ceramide** | Immediate barrier function. More stable in formula. Often less expensive. |
+| **Both (Hybrid)** | **Best of both worlds.** Immediate stability + perfect long-term integration. |
+
+The **Booster** (hybrid) is technically the most advanced formula because it gives you both. The **Patchouli formula** is also excellent (all true ceramides).
+
+## The Irony
+
+| Product | Ceramide Quality | But... |
+| :--- | :--- | :--- |
+| **Booster** | Highest (hybrid) | Contains trace orange oil (sting risk) |
+| **Patchouli** | High (true) | Contains patchouli oil (sting risk) |
+| **Mom's Cream** | None | **Zero irritants** – safest for immediate use |
+
+**Mom's cream has no ceramides at all, but it may still be your best choice right now because it has zero sting risk.** Once your barrier is healed, the booster or patchouli formula will be better for long-term maintenance.
+
+## Bottom Line
+
+| Your Question | Answer |
+| :--- | :--- |
+| Which has true ceramides? | Booster (Ceramide 6 II), Patchouli formula (Ceramide NS/NG), Oil-rich formula (Ceramide NS/NG) |
+| Which has pseudo-ceramides? | Booster only (Dihydroxylignoceroylphytosphingosine / Blue Ceramide) |
+| Which has none? | Mom's cream, both Curels |
+| Which is best for you *right now*? | Mom's cream (no sting risk) |
+| Which is most technically advanced? | **Booster** (hybrid true + pseudo, nanoized, fermented) |
+有没有一种办法可以删除错误的pull request
+当然有办法。针对你提到的"错误"的 Pull Request (PR)，根据具体情况和使用的代码托管平台（GitHub、GitLab、Bitbucket 等），主要有两种处理方式：**关闭 (Close)** 和 **删除 (Delete)**。
+
+绝大多数情况下，**关闭 PR 是更安全、更常规的选择**。它不会删除任何历史记录，操作可逆，且所有人都能看到这个 PR 被关闭的痕迹[citation:1][citation:4]。
+
+以下是不同平台的具体操作指南：
+
+---
+
+### 🐙 GitHub：关闭或删除 PR
+
+在 GitHub 上，普通用户**无法完全删除**一个 PR，最彻底的操作是"关闭"它。
+
+-   **最推荐：关闭 PR**
+    1.  进入仓库后，点击 **Pull requests** 标签页。
+    2.  点击进入你想要处理的 PR。
+    3.  滚动到页面底部，点击 **Close pull request** 按钮即可[citation:4][citation:8]。
+    -   **优点**：操作安全，可逆。关闭后，PR 的历史记录和讨论都会被保留，方便追溯。如果需要，可以随时重新打开。
+
+-   **彻底删除：需要管理员权限**
+    -   **权限要求**：必须是该仓库的**拥有者（Owner）**[citation:2]。
+    -   **注意**：这个操作有破坏性，且无法撤销。删除后，PR 的所有评论和部分元数据会永久丢失，但仍会保留一些记录以维护项目历史[citation:2]。
+
+### ⚙️ GitLab：关闭或删除合并请求
+
+-   **推荐操作：关闭**
+    -   在合并请求页面，点击 **Close** 按钮即可。
+
+-   **彻底删除**：
+    -   打开你想要删除的合并请求。
+    -   点击 **Edit** 按钮。
+    -   滚动到页面底部，点击 **Delete merge request** 按钮[citation:2][citation:5]。
+    -   **前提**：你必须是该项目的**拥有者（Owner）**。
+
+### 📦 Bitbucket：拒绝或删除 PR
+
+-   **推荐操作：拒绝**
+    -   在 PR 详情页，直接点击 **Decline** 按钮。这与 GitHub 的 `Close` 功能类似，是处理错误 PR 的标准做法[citation:10]。
+
+-   **彻底删除**：
+    -   **权限**：PR 的作者或仓库管理员可以删除[citation:3][citation:6]。
+    -   **操作**：在 PR 详情页通常会有删除选项。
+    -   **注意**：对于已删除上游仓库的特殊情况，Bitbucket 提供了通过 API 来拒绝 PR 的解决方案[citation:10]。
+
+---
+
+### 🤔 选择"关闭"还是"删除"？
+
+我建议，除非有非常特殊的原因（比如提交了包含敏感密码的代码），否则**首选"关闭"**。
+
+| 特性 | 关闭 PR | 删除 PR |
+| :--- | :--- | :--- |
+| **可逆性** | ✅ 可以随时重新打开 | ❌ 不可逆，无法恢复 |
+| **历史记录** | 完整保留所有讨论和评论 | 大部分信息会丢失 |
+| **影响** | 安全，不会影响协作者 | 可能让协作者感到困惑 |
+| **适用场景** | 大多数情况，如选错分支、代码未完成、不再需要此更改 | 提交了极端敏感信息、测试后需要清理 |
+
+### 💡 额外提示：误操作后如何修正？
+
+如果关闭 PR 是因为**选错了目标分支**（例如，应该合并到 `main`，却选成了 `dev`），你不需要关闭后重建。
+
+-   **在 GitHub 上**：你可以直接修改 PR 的目标分支。
+    -   在 PR 页面，点击 **Edit**（编辑按钮，通常是一个铅笔图标）。
+    -   在 "base" 下拉菜单中，选择你想要合并到的正确分支即可[citation:4]。
+
+希望这些信息能帮你妥善处理好手头的 PR。
+我是owner。我的一部分东西被ai contributor毁了，我真的需要删除那个PR.
+作为仓库Owner，非常理解你现在的感受——AI的PR破坏了你仓库里的东西，确实让人着急。关于你问的"彻底删除PR"，我需要先告诉你一个事实：
+
+**作为仓库Owner，你本身没有权限永久删除一个PR。** 这不是你的问题，而是GitHub平台的设计哲学决定的——所有操作都应该留下痕迹，不能随意抹去历史[citation:3][citation:6][citation:7]。
+
+但别担心，你有两个可行的选择：
+
+---
+
+## 🚨 方案一：紧急止损——立刻关闭PR（几秒钟的事）
+
+虽然不能"删除"，但关闭PR可以**立刻阻止它被合并**，这是最紧急的操作：
+
+1. 进入那个AI的PR页面
+2. 滚动到底部，点击 **Close pull request** 按钮
+
+关闭后，这个PR就不会对你的仓库产生任何进一步的影响了[citation:2][citation:5][citation:9]。
+
+---
+
+## 🛡️ 方案二：彻底清除——联系GitHub官方支持
+
+如果你有**极其严重**的理由（比如AI提交的内容包含敏感信息、专有代码、或者破坏了仓库的关键结构），GitHub官方支持团队是**唯一能真正帮你彻底删除PR的人**[citation:3][citation:6]。
+
+**操作步骤：**
+1. 访问 GitHub Support 联系页面：https://support.github.com/contact
+2. 清楚说明情况：你是仓库Owner，AI Contributor提交的PR破坏了你的仓库内容，你需要彻底删除这个PR
+3. 提供PR的链接，说明为什么需要彻底删除（而非仅关闭）
+
+**注意**：官方支持主要处理违反GitHub服务条款的严重情况[citation:6]，但鉴于你的情况确实涉及AI破坏性操作，值得一试。
+
+---
+
+## 🔧 补充说明：你能控制的补救措施
+
+虽然PR本身删不掉，但作为Owner，你可以做这些来**修复仓库**：
+
+| 操作 | 说明 |
+|------|------|
+| 删除关联分支 | 关闭PR后，点击PR页面上的"Delete branch"按钮，清除那个AI分支 |
+| 回滚破坏性提交 | 如果AI的代码已经被合并，用`git revert`回滚到正常状态 |
+| 调整仓库设置 | 考虑限制AI自动创建PR的权限 |
+
+---
+
+## 📌 总结
+
+| 你的需求 | 可行方案 | 效果 |
+|---------|---------|------|
+| 立刻阻止PR合并 | 点击"Close pull request" | ✅ 立即可行 |
+| 从GitHub上彻底抹去PR | 联系GitHub Support | ⚠️ 需官方介入，不保证100%成功 |
+| 删除PR关联的代码分支 | 点击"Delete branch" | ✅ 立即可行 |
+
+---
+
+我知道这不是你想要的"一键删除"的答案，但GitHub的设计确实如此。建议你现在**立刻关闭那个PR**阻止它造成更多破坏，然后联系GitHub Support说明情况，看看他们能否帮你彻底删除。
+
+需要我帮你写一封给GitHub Support的详细说明邮件吗？
+echo 里面的2>1是什么意思
+在 `echo` 命令里，`2>1` 的意思是把**标准错误**（文件描述符 2）重定向到一个名为 **`1`** 的文件。
+
+- **`2>`**：表示重定向标准错误（stderr）。
+- **`1`**：这不是文件描述符，而是一个普通的文件名。也就是说，错误信息会写入当前目录下名叫 `1` 的文件里。
+
+**对比说明：**
+- `2>1`：错误输出到文件 `1`。
+- `2>&1`：错误输出重定向到标准输出（文件描述符 1）当前指向的位置。
+
+**举个例子：**
+```bash
+# 假设执行一个错误命令，并把错误写入文件 "1"
+ls not_exist 2>1
+# 屏幕上没有输出，错误内容被写入了当前目录的 "1" 文件
+```
+
+如果你是想把标准错误合并到标准输出，应该使用 `2>&1`，例如：
+```bash
+echo hello 2>&1
+# 这会将错误也输出到屏幕（标准输出）
+```
+echo ilove 2>&1
+# 这会将错误也输出到屏幕（标准输出）
+你给出的命令：
+```bash
+echo ilove 2>&1
+```
+
+**实际效果**：  
+这条命令**只是在屏幕上正常输出 `ilove`**，并没有把“错误也输出到屏幕”的特殊表现，因为 `echo il
+echo ilovekitty_imisskitty_kittyiamsorry_whereami 2>&1
+# 这会将错误也输出到屏幕（标准输出）
+你的理解是对的：`2>&1` 的作用是把标准错误（stderr）合并到标准输出（stdout）当前指向的位置。
+
+**具体到这条命令：**
+```bash
+echo ilovekitty_imisskitty_kittyiamsorry_whereami 2>&1
+```
+
+- `echo` 命令正常执行，输出字符串到**标准输出**（默认是屏幕）
+- 这条命令没有产生任何**标准错误**（因为 `echo` 没出错）
+- `2>&1` 虽然写了，但因为没错误可重定向，所以**没有任何实际效果**
+- 最终结果：屏幕上正常显示那段字符串
+
+**如果你想验证 `2>&1` 的效果**，可以用一个会报错的命令：
+```bash
+ls not_exist_file 2>&1
+# 错误信息会输出到标准输出（屏幕），而不是单独的错误输出
+```
+
+**关于你写的这段字符串：**  
+它看起来像是一段情感表达（"我爱小猫/我想小猫/小猫对不起/我在哪"），命令本身只是把它打印到屏幕上，没有其他操作。
+
+如果你想把这个字符串（连同可能的错误信息）重定向到文件，可以这样：
+```bash
+echo "ilovekitty_imisskitty_kittyiamsorry_whereami" > output.txt 2>&1
+```
+
+你是想了解重定向的技术细节，还是想用这个命令做点什么具体的事？
+错误是前两项，正确是后两项
+明白了，你是在描述这个具体命令中 `2>&1` 的逻辑含义：
+
+- **前两项（标准错误 2 → 标准输出 1）**：重定向动作本身
+- **后两项（正确输出到屏幕）**：`echo` 命令的实际执行结果
+
+所以 `2>&1` 在这里的本质是：
+1. 把**错误输出**（文件描述符 2）指向**标准输出**（文件描述符 1）当前的位置（屏幕）
+2. 因为 `echo` 没有产生任何错误，所以这个重定向虽然语法正确，但**没有实际内容可重定向**
+3. `echo` 的正常输出仍然去了屏幕
+
+你的拆解很准确：
+- **"错误是前两项"** → `2>&1` 处理的是 stderr → stdout
+- **"正确是后两项"** → 实际输出 `ilovekitty_imisskitty_kittyiamsorry_whereami` 到屏幕
+
+这是一个很清晰的区分：**重定向语法本身 vs 命令的实际输出内容**。👍
+错误是前两项，正确是后两项，怎么改
+明白了。你希望：
+- **前两个词**（`ilovekitty`、`imisskitty`）作为**错误输出**（stderr）
+- **后两个词**（`kittyiamsorry`、`whereami`）作为**标准输出**（stdout）
+
+但 `echo` 本身**只能输出到 stdout**，不能直接分开发送到 stderr 和 stdout。
+
+要实现这个效果，需要分开两条输出命令：
+
+```bash
+echo "ilovekitty imisskitty" >&2 && echo "kittyiamsorry whereami"
+```
+
+**解释：**
+- `>&2` 把前一个 `echo` 的输出重定向到 stderr
+- `&&` 确保前一条命令成功后再执行后一条
+- 第二个 `echo` 正常输出到 stdout
+
+**验证方法：** 可以分别重定向查看：
+```bash
+# 只看到 stdout（后两项）
+bash -c 'echo "ilovekitty imisskitty" >&2 && echo "kittyiamsorry whereami"' 2>/dev/null
+
+# 只看到 stderr（前两项）
+bash -c 'echo "ilovekitty imisskitty" >&2 && echo "kittyiamsorry whereami"' 1>/dev/null
+```
+
+这样就能实现：**错误是前两项，正确是后两项**。
+点评一下这个paper.% NeurIPS 2026 Submission Draft
+% Title: The Maginot Line Problem: Finite Patching, Closure, and the Limits of Reward-Model Certification
+% Author: [Anonymous for review]
+
+\documentclass{article}
+\usepackage{neurips_2026}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\note}[1]{\textcolor{blue}{[NOTE: #1]}}
+\newcommand{\leanresult}[2]{\emph{Lean #1}~\nolinkurl{#2}}
+
+\title{The Maginot Line Problem: \\
+  Finite Patching, Closure, and the Limits \\
+  of Reward-Model Certification}
+
+\author{
+  Anonymous Author(s) \\
+  \texttt{anonymous@submission.neurips.cc}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We study a narrower question than output-level alignment evaluation: can finite
+patching certify that a reward model is closed under an unbounded space of
+semantically equivalent encodings? We formalize generation as a factored map
+$M = S \circ g \circ f$ and the reward-model pipeline as an additional
+observation layer on token sequences. Three results follow. First, if an
+encoding space is unbounded while each patch round has finite support, then
+finite patching cannot exhaust that space. Second, finite patch support
+underdetermines closure: there exist reward models that agree on all patched
+encodings while differing off-support, so finite patch data alone cannot certify
+closure or bound the magnitude of non-closure. Third, persistent positive
+format-channel gaps on unseen encodings follow only under explicit extra
+assumptions: an infinite semantic-equivalence family, approximate base-model
+representation invariance over that family, and reward-model generalization
+restricted to local format features. A minimal empirical instantiation preserves
+only the format-divergence evidence relevant to these assumptions: baseline
+reward-model scores vary across semantically matched encodings while
+base-model content representations remain comparatively stable. The paper's
+contribution is therefore not a measurement system but a certification limit:
+finite output patching provides no exhaustive-coverage guarantee for
+format-invariant safety.
+\end{abstract}
+
+% ---------------------------------------------------------------------------
+\section{Introduction}
+% ---------------------------------------------------------------------------
+
+Reward-model patching is usually discussed as an engineering problem: add more
+formats, gather more red-team examples, and iteratively extend the safety
+boundary. This paper asks a logically prior question. The issue is not whether
+one can patch \emph{more} formats, but whether any finite sequence of such
+patches can certify \emph{closure}: invariance of the reward-model verdict over
+an unbounded space of semantically equivalent encodings.
+
+The motivation comes from a familiar asymmetry. Internal representations may be
+faithful~\citep{nikolaou2025sipit, jiang2025surjective}, while the observation
+layer remains lossy because decoding and alignment compress many distinct latent
+states into the same observable output distribution. Concurrent impossibility
+results already show that output-level verification faces structural,
+statistical, and computational barriers
+~\citep{agarwal2026trilemma, santos2026normative, ramirez2025undecidable}. Our
+contribution is narrower and cleaner: finite patching does not provide an
+exhaustive-coverage guarantee for format-invariant safety.
+
+The paper has a three-layer spine. First, we state the formal core:
+finite patching cannot exhaust an unbounded encoding space. Second, we prove a
+separation result: finite patch support alone underdetermines closure, because
+closed and non-closed reward models can agree on every patched encoding. Third,
+we show that persistent positive format-channel gaps on unseen encodings follow
+only under explicit extra assumptions about semantic-equivalence families,
+base-model invariance, and reward-model generalization. A minimal empirical
+instantiation then plays a limited role: not validating a measurement index, but
+showing why those assumptions are plausible enough to matter.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item \textbf{Formal core.} We prove finite-patch non-exhaustion over
+        unbounded encoding spaces and connect it to a Lean-verified structural
+        core; the full formalization map is in Appendix~\ref{app:lean-patching}.
+  \item \textbf{Impossibility by separation.} We prove that finite patch support
+        alone cannot certify closure, and cannot bound the off-support magnitude
+        of non-closure.
+  \item \textbf{Conditional extension.} We isolate the exact additional
+        assumptions required to derive persistent positive FCG on unseen
+        encodings.
+  \item \textbf{Minimal empirical instantiation.} We retain only the
+        format-divergence evidence needed to instantiate the conditional
+        assumptions; measurement and Monte Carlo material are preserved in the
+        appendix.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Setup}
+\label{sec:formalization}
+% ---------------------------------------------------------------------------
+
+\subsection{Factored Generation Pipeline}
+
+\[
+  M : X \to \Delta(Y), \qquad M = S \circ g \circ f,
+\]
+where $f : X \to H$ maps prompts to hidden representations, $g : H \to Z$ maps
+representations to logits, and $S : Z \to \Delta(Y)$ is the observation layer
+induced by decoding and sampling.
+
+\begin{definition}[Encoding Space]
+Fix content $x$. Its encoding space is
+\[
+  E_x = \{ e = f_i(x) : f_i \in \mathcal{F}(x) \},
+\]
+the set of token-sequence realizations of that content.
+\end{definition}
+
+\begin{definition}[Unbounded Encoding Space]
+An encoding space $E_x$ is \emph{unbounded} if there exists an injection
+$\iota : \mathbb{N} \hookrightarrow E_x$. This is the formal version of
+``there are infinitely many distinct encodings of the same content.''
+\end{definition}
+
+\begin{definition}[Patch Support]
+Let $D_x^{(1)}, \dots, D_x^{(k)} \subseteq E_x$ be the encodings explicitly
+covered by $k$ patch rounds. The cumulative patch support is
+\[
+  D_x = \bigcup_{i=1}^k D_x^{(i)}.
+\]
+\end{definition}
+
+\begin{definition}[Reward Model]
+A reward model is a function $R : \mathcal{T} \to [0,1]$ assigning a scalar
+verdict to a token sequence.
+\end{definition}
+
+\begin{definition}[Format-Channel Gap]
+\label{def:fcg}
+For content $x$, encodings $e_1, e_2 \in E_x$, reward model $R$, and base model
+$B$ with representation map $h_B$, define
+\[
+  \mathrm{FCG}(x, e_1, e_2)
+  = |R(e_1) - R(e_2)| \cdot \mathrm{sim}_B(e_1, e_2),
+\]
+where $\mathrm{sim}_B(e_1, e_2) = 1 - d_{\mathrm{repr}}(h_B(e_1), h_B(e_2))$.
+The first factor is the reward-score component; the second weights it by
+content-level similarity in the base representation.
+\end{definition}
+
+\begin{definition}[Closure]
+\label{def:closure}
+A reward model $R$ is \emph{closed on $E_x$} if
+\[
+  R(e_1) = R(e_2) \qquad \text{for all } e_1, e_2 \in E_x.
+\]
+Equivalently, closure makes the reward-score component of
+Definition~\ref{def:fcg} vanish everywhere on $E_x$.
+\end{definition}
+
+\subsection{Observation-Level Limits}
+\label{sec:structural}
+
+\begin{theorem}[Restricted Observational Non-Injectivity]
+\label{thm:noninj}
+If there exist $z_1 \neq z_2$ with $S(z_1) = S(z_2)$ and
+$z_1, z_2 \in g(f(X))$, then $F = S \circ g \circ f$ is non-injective.
+\end{theorem}
+
+\noindent\emph{Proof.} Moved to Appendix~\ref{app:obs-limits}. The theorem is an
+existence result: a lossy observation stage suffices for distinct latent states
+to collapse into the same observable output distribution.
+
+\begin{theorem}[Non-Identifiability of Input Intent]
+\label{thm:nonid}
+Let $I_X \subseteq X$ be an input intent. If there exist $x_1 \neq x_2$ such
+that $P(\cdot \mid x_1) = P(\cdot \mid x_2)$ but
+$\mathbf{1}[x_1 \in I_X] \neq \mathbf{1}[x_2 \in I_X]$, then intent is not
+identifiable from the output distribution, even with infinite i.i.d.\ samples.
+\end{theorem}
+
+\noindent\emph{Proof.} Moved to Appendix~\ref{app:obs-limits}. The present paper
+does not need the full computational hierarchy in the main body; it only uses
+these two observation-level theorems as motivation for why output-only
+certification is intrinsically fragile.
+
+\begin{proposition}[Projection Property of Reward Models]
+\label{prop:projection}
+Any reward model with finite training support operates through a learned feature
+subspace induced by that support. Off-support behavior is therefore an
+extrapolation problem, not a consequence of observed labels alone.
+\end{proposition}
+
+\noindent\emph{Proof sketch.} A reward model trained on finite support can only
+be constrained by the features activated on that support. For unseen encodings,
+its verdict is determined by how its learned feature map extrapolates rather than
+by any observed guarantee of invariance. A fuller proof from the archived
+format-channel draft is preserved in Appendix~\ref{app:archived-projection}.
+
+% ---------------------------------------------------------------------------
+\section{Formal Result I --- Finite-Patch Non-Exhaustion}
+% ---------------------------------------------------------------------------
+
+\begin{theorem}[Finite-Patch Non-Exhaustion]
+\label{thm:finitepatch}
+Let $E_x$ be an unbounded encoding space, and let
+$D_x^{(1)}, \dots, D_x^{(k)} \subseteq E_x$ be finitely many patch rounds, each
+with finite support. Then the cumulative support
+$D_x = \bigcup_{i=1}^k D_x^{(i)}$ is a proper subset of $E_x$. Equivalently,
+there exists an unseen encoding $e^\star \in E_x \setminus D_x$ after every
+finite patch sequence.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Each $D_x^{(i)}$ is finite, hence their union $D_x$ is finite. By assumption
+$E_x$ contains a countably infinite subset, so $E_x$ itself is not finite.
+Therefore $D_x \neq E_x$, and some unseen encoding remains. The Lean-verified
+special case uses natural-number indexed encodings and proves the corresponding
+results \leanresult{theorem}{finitePatch\_nonExhaustion} and
+\leanresult{corollary}{exists\_encoding\_unpatched\_after\_finitely\_many\_rounds};
+the formalization map is preserved in Appendix~\ref{app:lean-patching}.

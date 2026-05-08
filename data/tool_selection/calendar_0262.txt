@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: schedule a meeting with dr. patel on thursday
+---
+TOOL: calendar

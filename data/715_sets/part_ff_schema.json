@@ -1,0 +1,214 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": "2026/01/23, Friday, 15:48",
+      "action": "SYSTEM NOTIFICATION: Michael accepted your invitation, explore their network",
+      "actor": "system",
+      "context": "Michael accepts Lucia's invitation and explores network"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/24, Saturday, 9:46 PM",
+      "action": "MESSAGE: Hey",
+      "actor": "Lucia",
+      "context": "Lucia initiates conversation with Michael"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/25, Sunday, 11:29 AM",
+      "action": "MESSAGE: (a snail's gif meme waving hands: Greetings!)",
+      "actor": "Michael",
+      "context": "Michael responds with greeting GIF"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/25, Sunday, 4:25 PM",
+      "action": "MESSAGE: Thank you.",
+      "actor": "Lucia",
+      "context": "Lucia thanks Michael"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/25, Sunday, 8:44 PM",
+      "action": "MESSAGE: 🤝",
+      "actor": "Michael",
+      "context": "Michael responds with handshake emoji"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 12:34 AM",
+      "action": "MESSAGE: (Meme: A hand fetching out of an old style computer's screen onto DeepSeek logo the whale's head, saying: nicely made-up. #tap tap on head)",
+      "actor": "Lucia",
+      "context": "Lucia sends meme about DeepSeek"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 8:41 AM",
+      "action": "MESSAGE: 👍",
+      "actor": "Michael",
+      "context": "Michael thumbs up"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 5:49 PM",
+      "action": "MESSAGE: You have a birthday present at the front desk. The delivery guy left the package at this place. (picture of location) I don't know your Chinese cell number, But it has your name on it. Since you liked Resident Evil on NDS, I made some wild guesses. Happy Birthday.",
+      "actor": "Lucia",
+      "context": "Lucia notifies Michael of birthday gift at front desk, references Resident Evil"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:16 PM",
+      "action": "MESSAGE: Oh I've already hopped... Em, thanks. I'll ask a ex-coworker to get it.",
+      "actor": "Michael",
+      "context": "Michael reveals job hop, thanks, plans to retrieve via ex-coworker"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:17 PM",
+      "action": "MESSAGE: Err... I didn’t know this. Should I ask that delivery guy to send it again? I'm too far away at Ali right now. My advisor dispatched me this afternoon for something urgent at the West Bund 😓",
+      "actor": "Lucia",
+      "context": "Lucia offers to resend package, mentions location at Ali"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:22 PM",
+      "action": "MESSAGE: Is it convenient for you to contact Express for forwarding?",
+      "actor": "Michael",
+      "context": "Michael asks Lucia to forward via express"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:22 PM",
+      "action": "MESSAGE: Sure thing.",
+      "actor": "Lucia",
+      "context": "Lucia agrees to forward"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:22 PM",
+      "action": "MESSAGE: Dank. You’re in AI track right now?",
+      "actor": "Michael",
+      "context": "Michael thanks and asks about Lucia's AI work"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:24 PM",
+      "action": "MESSAGE: Didn't Tencent Yuanbao made the front pages a couple of days ago? Tencent Yuanbao uses Deepseek's MOE, which is still heavily based on GRPO, even more grandpa stuff than Bytedance's DAPO. I’m at Ali Qwen to tell them that don’t dance over Tencent PR humiliation; their user routing is even more buggy, and they are rightly the next one in line of user complaints of generated abusive contents.",
+      "actor": "Lucia",
+      "context": "Lucia discusses AI tech details at Ali Qwen"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:24 PM",
+      "action": "MESSAGE: [New company’s address] here. That’s legit. You’re core algorithms.",
+      "actor": "Michael",
+      "context": "Michael shares new company address, acknowledges Lucia's expertise"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:25 PM",
+      "action": "MESSAGE: Give me a contact number for the package. You still doing ML? Are you interested in NLP or RLHF?",
+      "actor": "Lucia",
+      "context": "Lucia requests contact for package, asks about Michael's ML work"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:26 PM",
+      "action": "MESSAGE: [Chinese cell number] Not nearly as SOTA as that sigh, just data laundering.",
+      "actor": "Michael",
+      "context": "Michael provides cell number, self-describes work as data laundering"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:39 PM",
+      "action": "MESSAGE: C’mon, I deal with a bunch of legal scholars, ethicists, policymakers, and philosophers who don't understand ML 101 on a daily basis 🤣",
+      "actor": "Lucia",
+      "context": "Lucia shares work challenges"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:40 PM",
+      "action": "MESSAGE: If you still want to go back to SF, I have an idea. But if you're stable now, forget it. Let's not talk about such heavy topics today.",
+      "actor": "Lucia",
+      "context": "Lucia hints at SF idea but backs off"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:47 PM",
+      "action": "MESSAGE: A currently trending GIF image. (Walter White Staring Hard)",
+      "actor": "Michael",
+      "context": "Michael sends Walter White staring GIF"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:48 PM",
+      "action": "MESSAGE: Who is this. Demis Hassabis?",
+      "actor": "Lucia",
+      "context": "Lucia guesses GIF character"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 6:57 PM",
+      "action": "MESSAGE: It’s White Sr.",
+      "actor": "Michael",
+      "context": "Michael identifies GIF as Walter White"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:00 PM",
+      "action": "MESSAGE: All work and no play made Lucia a dull boy. That’s why I’m sending the package lol. But I won’t tell. It’s something you can play at.",
+      "actor": "Lucia",
+      "context": "Lucia explains gift purpose playfully"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:04 PM",
+      "action": "MESSAGE: Breaking Bad, this TV series",
+      "actor": "Michael",
+      "context": "Michael references Breaking Bad"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:05 PM",
+      "action": "MESSAGE: But he really looks like Demis. Bald. Glasses. Painful looking. Mike React with😮",
+      "actor": "Lucia",
+      "context": "Lucia compares to Demis Hassabis, Michael reacts"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:13 PM",
+      "action": "MESSAGE: Are you currently tackling your doctorate?",
+      "actor": "Michael",
+      "context": "Michael asks about Lucia's doctorate"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:13 PM",
+      "action": "MESSAGE: No. I only hold a Bachelor of Law degree, remember? All my AI papers were published since December 2025.",
+      "actor": "Lucia",
+      "context": "Lucia clarifies education and publications"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:14 PM",
+      "action": "MESSAGE: ok",
+      "actor": "Michael",
+      "context": "Michael acknowledges"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:15 PM",
+      "action": "MESSAGE: … so I'm applying right now. Several schools have contacted to show their interests in works, but they might need me to do an MPhil or MCs as a transition. Though I'll participate in this year's FACCT and AIES. They know it's unfair, but that's just how administration is.",
+      "actor": "Lucia",
+      "context": "Lucia discusses PhD applications and conferences"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:15 PM",
+      "action": "MESSAGE: What are you doing actually? AI infra or app layer? Or the base schema?",
+      "actor": "Michael",
+      "context": "Michael inquires about Lucia's specific AI work"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:17 PM",
+      "action": "MESSAGE: Not entirely. To be precise, it's AI Governance & Alignment. I mainly study the architectural flaws of schemas. For example, stress testing Llama or Qwen to see under what circumstances their RLHF fails, or using Mealy machine to prove why the MoE architecture is not legally applicable to strict liability. I guess you could call me a forensic pathologist finding bugs in schemas 😂",
+      "actor": "Lucia",
+      "context": "Lucia describes AI Governance & Alignment research"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:20 PM",
+      "action": "MESSAGE: Oh, oh, I’m about as far as how to deploy some stuffs via VLLM.",
+      "actor": "Michael",
+      "context": "Michael describes his VLLM deployment work"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:22 PM",
+      "action": "MESSAGE: You're being way too modest. I only got 139 of math when we graduated from middle school. But somehow I’m officially the tech support of a bunch of social scientists and legal scholars now. Call the world a big fat Racoon City.",
+      "actor": "Lucia",
+      "context": "Lucia encourages Michael, references Resident Evil"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 7:44 PM",
+      "action": "MESSAGE: ☺️",
+      "actor": "Michael",
+      "context": "Michael smiles"
+    },
+    {
+      "timestamp_or_sequence": "2026/01/26, Monday, 9:33 PM",
+      "action": "SYSTEM NOTIFICATION: Michael viewed your profile 15 times in the past 7 days.",
+      "actor": "system",
+      "context": "Notification of Michael's repeated profile views"
+    }
+  ]
+}

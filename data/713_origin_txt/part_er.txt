@@ -1,0 +1,500 @@
+    sentences = []
+    
+    # 首先按段落分割
+    paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+    
+    for para in paragraphs:
+        if not para:
+            continue
+            
+        # 改进的中文句子分割模式
+        # 中文标点: 。！？； 英文标点: .!?;
+        split_pattern = r'(?<=[。！？\.!?；;])[\s　]*'
+        para_sentences = re.split(split_pattern, para)
+        
+        for sent in para_sentences:
+            sent = sent.strip()
+            # 确保句子有足够的内容
+            if sent and len(sent) >= 2:
+                # 清理句子开头和结尾的空白和标点
+                sent = re.sub(r'^[\s　\-—*#]+', '', sent)
+                sent = re.sub(r'[\s　\-—*#]+$', '', sent)
+                if sent:
+                    sentences.append(sent)
+    
+    # 如果分割不够好，使用基于行的后备方案
+    if len(sentences) < 10:  # 如果句子太少
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        valid_lines = []
+        for line in lines:
+            # 跳过太短或可能是标记的行
+            if len(line) >= 4 and not line.startswith('#'):
+                valid_lines.append(line)
+        sentences = valid_lines
+    
+    if self.node_limit is not None and len(sentences) > self.node_limit:
+        print(f"Limiting scan to first {self.node_limit} nodes.")
+        return sentences[:self.node_limit]
+    else:
+        print(f"Full scan: {len(sentences)} sentences/nodes detected.")
+        return sentences
+
+def extract_label(self, text):
+    """Create a short label for a node - 改进中文标签提取"""
+    
+    # 清理文本
+    clean_text = text.replace('*', '').replace('_', '').replace('#', '').strip()
+    
+    # 如果文本已经很短，直接使用
+    if len(clean_text) <= 15:
+        return clean_text
+    
+    # 提取中文部分
+    chinese_chars = re.findall(r'[\u4e00-\u9fff]{2,}', clean_text)
+    if chinese_chars:
+        # 使用前3个有意义的中文词
+        label = ''.join(chinese_chars[:3])
+        if len(label) > 12:
+            # 确保不超过12个字符
+            label = label[:10] + ".."
+        return label
+    
+    # 提取英文单词
+    english_words = re.findall(r'\b[A-Za-z]{3,}\b', clean_text)
+    if english_words:
+        meaningful_words = []
+        stop_words = ['the', 'and', 'but', 'for', 'you', 'are', 'was', 'were', 'that', 'this']
+        for word in english_words:
+            if word.lower() not in stop_words and len(word) >= 3:
+                meaningful_words.append(word)
+                if len(meaningful_words) >= 2:
+                    break
+        
+        if meaningful_words:
+            label = ' '.join(meaningful_words[:2])
+            if len(label) > 12:
+                label = label[:10] + ".."
+            return label
+    
+    # 后备方案：使用开头部分
+    if len(clean_text) > 12:
+        return clean_text[:10] + ".."
+    return clean_text
+
+# 在 create_visualization 函数中修改标签绘制
+def create_visualization(G, metrics, filename):
+    """Create visualization with proper Chinese font support"""
+    
+    print(f"\n🎨 Creating visualization...")
+    
+    G_viz = G.copy()
+    
+    if len(G_viz.nodes) < 3:
+        print("  Graph too small for meaningful visualization")
+        return None
+    
+    fig = plt.figure(figsize=(20, 12))
+    
+    # 确保使用中文字体
+    font_properties = {
+        'fontsize': 8,
+        'fontweight': 'bold',
+        'fontfamily': 'SimHei, Arial Unicode MS, DejaVu Sans'
+    }
+    
+    # 主图
+    ax1 = plt.subplot2grid((2, 3), (0, 0), colspan=2, rowspan=2)
+    
+    # 布局
+    try:
+        if len(G_viz.nodes) < 150:
+            pos = nx.spring_layout(G_viz, k=2.0, iterations=100, seed=42)
+        else:
+            pos = nx.circular_layout(G_viz)
+    except:
+        pos = nx.circular_layout(G_viz)
+    
+    # 计算节点属性
+    degrees = dict(G_viz.degree())
+    if degrees:
+        max_deg = max(degrees.values())
+        min_deg = min(degrees.values())
+        deg_range = max_deg - min_deg if max_deg > min_deg else 1
+        node_sizes = [200 + 1000 * ((deg - min_deg) / deg_range) for deg in degrees.values()]
+    else:
+        node_sizes = [300] * len(G_viz.nodes)
+    
+    # 节点颜色
+    node_colors = []
+    for node in G_viz.nodes():
+        in_deg = G_viz.in_degree(node)
+        out_deg = G_viz.out_degree(node)
+        
+        if in_deg > 2 and out_deg > 2:
+            node_colors.append('#ff2a6d')  # 红色代表中心节点
+        elif out_deg > in_deg * 1.5:
+            node_colors.append('#05d9e8')  # 青色代表源节点
+        elif in_deg > out_deg * 1.5:
+            node_colors.append('#ff8c42')  # 橙色代表汇节点
+        else:
+            node_colors.append('#7bff7b')  # 绿色代表平衡节点
+    
+    # 绘制节点和边
+    nx.draw_networkx_nodes(G_viz, pos, node_size=node_sizes, 
+                          node_color=node_colors, alpha=0.85, 
+                          edgecolors='black', linewidths=0.8, ax=ax1)
+    
+    # 边分类
+    semantic_edges = [(u, v) for u, v, d in G_viz.edges(data=True) 
+                     if d.get('type') == 'semantic']
+    sequence_edges = [(u, v) for u, v, d in G_viz.edges(data=True) 
+                     if d.get('type') == 'sequence']
+    
+    if semantic_edges:
+        nx.draw_networkx_edges(G_viz, pos, edgelist=semantic_edges, 
+                              alpha=0.15, edge_color='#666666', 
+                              arrows=True, arrowsize=6, ax=ax1)
+    
+    if sequence_edges:
+        nx.draw_networkx_edges(G_viz, pos, edgelist=sequence_edges, 
+                              alpha=0.25, edge_color='#0066cc', 
+                              arrows=True, arrowsize=4, style=':', ax=ax1)
+    
+    # 添加标签 - 只显示重要节点
+    labels_to_show = {}
+    max_labels = min(25, len(G_viz.nodes) // 4)  # 减少标签数量
+    
+    # 按度数排序
+    sorted_nodes = sorted(degrees.items(), key=lambda x: x[1], reverse=True)
+    
+    for node, deg in sorted_nodes[:max_labels]:
+        if deg >= np.percentile(list(degrees.values()), 70):  # 只显示前30%
+            label = G_viz.nodes[node].get('label', '')
+            if label and len(label.strip()) > 0:
+                # 确保标签长度合适
+                if len(label) > 10:
+                    label = label[:8] + ".."
+                labels_to_show[node] = label
+    
+    if labels_to_show:
+        nx.draw_networkx_labels(G_viz, pos, labels=labels_to_show, 
+                               font_size=8, font_weight='bold',
+                               font_family='SimHei',  # 明确指定中文字体
+                               ax=ax1)
+    
+    ax1.set_title(f"Narrative Graph: {filename}\n({len(G_viz.nodes)} nodes, {len(G_viz.edges)} edges)", 
+                  fontsize=14, fontweight='bold', pad=20, fontfamily='SimHei')
+    ax1.axis('off')
+    
+    # 其余部分保持不变...
+```
+
+## 或者，更简单的临时修复：
+
+在你的代码开头添加：
+
+```python
+import matplotlib.pyplot as plt
+import matplotlib
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 使用黑体
+plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
+
+# 如果SimHei不可用，尝试其他字体
+try:
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+except:
+    try:
+        plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    except:
+        plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
+```
+
+## 运行前检查：
+
+```bash
+# 检查系统可用的中文字体
+python -c "import matplotlib.font_manager as fm; fonts = [f.name for f in fm.fontManager.ttflist if any(char in f.name.lower() for char in ['hei', 'song', 'kai', 'yuan'])]; print('可用中文字体:', fonts[:10])"
+```
+
+## 如果还是显示方块，尝试：
+
+1. **下载中文字体**：
+```bash
+# macOS
+brew install fontconfig
+fc-list :lang=zh
+
+# 或手动添加字体
+```
+
+2. **使用绝对字体路径**：
+```python
+import matplotlib.font_manager as fm
+
+# 添加中文字体
+zh_font_path = "/System/Library/Fonts/PingFang.ttc"  # macOS
+# 或 zh_font_path = "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc"  # Linux
+
+if os.path.exists(zh_font_path):
+    fm.fontManager.addfont(zh_font_path)
+    font_name = fm.FontProperties(fname=zh_font_path).get_name()
+    plt.rcParams['font.sans-serif'] = [font_name]
+```
+
+这样应该能解决中文显示为方块的问题！
+integrate into one full script. using your project 1.
+我将创建一个完整的、修复了所有问题的脚本。这是一个集成了所有修复的完整版本：
+
+```python
+# rbteaming_fixed.py - NPS4 Narrative Pathology Scanner (完整修复版)
+
+import sys
+import re
+import os
+import argparse
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+import warnings
+import torch
+from datetime import datetime
+import json
+
+# ============================================
+# 1. 字体设置 - 解决中文显示问题
+# ============================================
+try:
+    # 尝试加载中文字体
+    matplotlib.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'Arial Unicode MS', 'DejaVu Sans', 'WenQuanYi Micro Hei']
+    matplotlib.rcParams['axes.unicode_minus'] = False
+    
+    # 检查系统字体
+    import matplotlib.font_manager as fm
+    chinese_fonts = []
+    for font in fm.fontManager.ttflist:
+        font_name = font.name.lower()
+        # 检查常见中文字体
+        if any(keyword in font_name for keyword in ['hei', 'song', 'kai', 'yuan', 'yahei', 'pingfang']):
+            chinese_fonts.append(font.name)
+    
+    if chinese_fonts:
+        print(f"✓ 检测到中文字体: {chinese_fonts[:3]}")
+    else:
+        print("⚠ 未检测到中文字体，英文显示正常但中文可能显示为方块")
+except Exception as e:
+    print(f"⚠ 字体设置警告: {e}")
+
+# ============================================
+# 2. 硬件加速
+# ============================================
+warnings.filterwarnings("ignore")
+
+if torch.backends.mps.is_available():
+    device = "mps"
+    print(f"✓ HARDWARE: APPLE SILICON (MPS Acceleration Enabled)")
+elif torch.cuda.is_available():
+    device = "cuda"
+    print(f"✓ HARDWARE: NVIDIA CUDA (GPU Acceleration Enabled)")
+else:
+    device = "cpu"
+    print(f"⚠ HARDWARE: CPU Mode (No GPU Acceleration)")
+
+# ============================================
+# 3. 神经网络模型加载
+# ============================================
+try:
+    from sentence_transformers import SentenceTransformer, util
+    print(f"✓ Loading Neural Model on {device.upper()}...")
+    embedding_model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
+    USE_NEURAL = True
+except Exception as e:
+    print(f"⚠ Neural engine unavailable ({e}). Switching to Logic-Overlap Mode.")
+    USE_NEURAL = False
+
+# ============================================
+# 4. 配置
+# ============================================
+OUTPUT_DIR = "nps4_results"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# ============================================
+# 5. 核心类定义
+# ============================================
+class NarrativeGraphBuilder:
+    def __init__(self, similarity_threshold=0.85, node_limit=None):
+        """初始化叙事图构建器
+        
+        Args:
+            similarity_threshold: 相似度阈值 (默认0.85，避免过多连接)
+            node_limit: 节点数量限制
+        """
+        self.sim_threshold = similarity_threshold
+        self.node_limit = node_limit
+        self.use_neural = USE_NEURAL
+
+    def split_sentences(self, text):
+        """将文本分割成句子 - 改进的中英文混合支持"""
+        
+        # 移除代码块标记但保留内容
+        text = re.sub(r'```\w*\n', '', text)
+        text = re.sub(r'\n```', '', text)
+        
+        # 统一换行符
+        text = text.replace('\r\n', '\n').replace('\r', '\n')
+        
+        sentences = []
+        
+        # 首先按段落分割
+        paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+        
+        for para in paragraphs:
+            if not para:
+                continue
+                
+            # 改进的中文句子分割模式
+            # 中文标点: 。！？； 英文标点: .!?;
+            split_pattern = r'(?<=[。！？\.!?；;])[\s　]*'
+            para_sentences = re.split(split_pattern, para)
+            
+            for sent in para_sentences:
+                sent = sent.strip()
+                # 确保句子有足够内容
+                if sent and len(sent) >= 3:
+                    # 清理句子开头和结尾
+                    sent = re.sub(r'^[\s　\-—*#]+', '', sent)
+                    sent = re.sub(r'[\s　\-—*#]+$', '', sent)
+                    if sent:
+                        sentences.append(sent)
+        
+        # 如果分割不够好，使用后备方案
+        if len(sentences) < 5:
+            lines = [line.strip() for line in text.split('\n') if line.strip()]
+            valid_lines = []
+            for line in lines:
+                # 跳过太短或可能是标记的行
+                if len(line) >= 4 and not line.startswith(('#', '**', '//', '--')):
+                    valid_lines.append(line)
+            sentences = valid_lines
+        
+        # 应用节点限制
+        if self.node_limit is not None and len(sentences) > self.node_limit:
+            print(f"  Limiting to first {self.node_limit} nodes")
+            return sentences[:self.node_limit]
+        
+        print(f"  Extracted {len(sentences)} narrative units")
+        return sentences
+
+    def extract_label(self, text):
+        """为节点创建简短标签 - 改进的中文支持"""
+        
+        # 清理文本
+        clean_text = text.replace('*', '').replace('_', '').replace('#', '').strip()
+        
+        # 如果文本已经很短，直接使用
+        if len(clean_text) <= 12:
+            return clean_text
+        
+        # 优先提取中文
+        chinese_chars = re.findall(r'[\u4e00-\u9fff]{2,}', clean_text)
+        if chinese_chars:
+            # 使用前2-3个有意义的中文词
+            label_parts = []
+            for chars in chinese_chars[:3]:
+                if 2 <= len(chars) <= 6:
+                    label_parts.append(chars)
+            
+            if label_parts:
+                label = ''.join(label_parts)
+                if len(label) > 10:
+                    label = label[:8] + ".."
+                return label
+        
+        # 提取英文关键词
+        english_words = re.findall(r'\b[A-Za-z]{3,}\b', clean_text)
+        if english_words:
+            meaningful_words = []
+            stop_words = {'the', 'and', 'but', 'for', 'you', 'are', 'was', 'were', 'that', 'this', 'with'}
+            
+            for word in english_words:
+                word_lower = word.lower()
+                if word_lower not in stop_words and len(word) >= 3:
+                    meaningful_words.append(word)
+                    if len(meaningful_words) >= 2:
+                        break
+            
+            if meaningful_words:
+                label = ' '.join(meaningful_words[:2])
+                if len(label) > 10:
+                    label = label[:8] + ".."
+                return label
+        
+        # 后备：使用开头部分
+        if len(clean_text) > 10:
+            return clean_text[:8] + ".."
+        return clean_text
+
+    def build(self, text):
+        """构建叙事图"""
+        
+        print(f"\n📖 Processing text ({len(text):,} characters)...")
+        
+        sentences = self.split_sentences(text)
+        if not sentences:
+            print("❌ No sentences extracted!")
+            return nx.DiGraph()
+        
+        print(f"📊 Extracted {len(sentences)} narrative units")
+        
+        G = nx.DiGraph()
+        nodes = []
+
+        # A. 批量编码
+        sim_matrix = None
+        if self.use_neural:
+            print(f"\n🧠 Encoding {len(sentences)} sentences with neural model...")
+            try:
+                embeddings = embedding_model.encode(sentences, convert_to_tensor=True, device=device)
+                print("📐 Computing similarity matrix...")
+                cosine_scores = util.cos_sim(embeddings, embeddings)
+                
+                if device == "mps":
+                    sim_matrix = cosine_scores.cpu().numpy()
+                else:
+                    sim_matrix = cosine_scores.numpy()
+                    
+                print(f"✓ Similarity matrix: {sim_matrix.shape}")
+                    
+            except Exception as e:
+                print(f"⚠ Neural computation failed: {e}. Using word overlap instead.")
+                self.use_neural = False
+
+        # 添加所有节点
+        for i, sent in enumerate(sentences):
+            node_id = f"N{i:03d}"
+            label = self.extract_label(sent)
+            G.add_node(node_id, text=sent, label=label, idx=i)
+            nodes.append({'id': node_id, 'idx': i, 'text': sent})
+
+        # B. 图构建
+        print(f"\n🔗 Linking narrative pathways (threshold: {self.sim_threshold})...")
+        
+        # 添加语义边（基于相似度）
+        if self.use_neural and sim_matrix is not None:
+            semantic_edges_added = 0
+            for i in range(len(nodes)):
+                for j in range(i + 1, len(nodes)):
+                    weight = float(sim_matrix[i][j])
+                    if weight > self.sim_threshold:
+                        G.add_edge(nodes[i]['id'], nodes[j]['id'], 
+                                 weight=weight, type="semantic")
+                        semantic_edges_added += 1
+            
+            print(f"  Semantic edges added: {semantic_edges_added}")
+        else:
+            semantic_edges_added = 0
+            for i in range(len(nodes)):
+                for j in range(i + 1, len(nodes)):
+                    # 改进的词重叠计算

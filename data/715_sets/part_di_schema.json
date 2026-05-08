@@ -1,0 +1,124 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DISPLAY YAML FRONTMATTER TEMPLATE",
+      "actor": "document",
+      "context": "Initial template with due_date, priority, status placeholders"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PRESENT YAML TEMPLATES SECTION",
+      "actor": "document",
+      "context": "Section III introduces project, meeting, personal notes YAML templates with Templater syntax"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "SHOW DATAVIEW QUERY EXAMPLE",
+      "actor": "document",
+      "context": "Dataview table query for projects with status '进行中' sorted by due_date"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DISPLAY TEMPLATER JAVASCRIPT SCRIPT",
+      "actor": "document",
+      "context": "Templater script generates UUID, default tags based on folder, timestamps, and YAML fields"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "LIST OBSIDIAN LINTER FUNCTIONS",
+      "actor": "document",
+      "context": "Linter plugin standardizes YAML, adds missing fields, cleans invalid fields"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PRESENT YAML DESIGN PRINCIPLES",
+      "actor": "document",
+      "context": "Required vs optional fields, consistent field order recommendations"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "OUTLINE TEMPLATE WORKFLOW",
+      "actor": "document",
+      "context": "Steps: create Templates folder, set QuickAdd shortcuts, folder templates, Dataview review"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "RECOMMEND PLUGINS",
+      "actor": "document",
+      "context": "Templater, Linter, Dataview, Metadata Menu for YAML management"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "SHOW YAML VALIDATION SCRIPT",
+      "actor": "document",
+      "context": "Templater script prompts for required fields if missing"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "USER QUERY FOLDER NAMING",
+      "actor": "user",
+      "context": "Asks for folder name for storing received files"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PROVIDE FOLDER NAMING RECOMMENDATIONS",
+      "actor": "ai",
+      "context": "Detailed suggestions: Inbox, Downloads, time-based, project-based, with substructures"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "EXECUTE GIT STATUS",
+      "actor": "user/system",
+      "context": "git status shows 'nothing to commit, working tree clean'"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "EXECUTE GIT MERGE",
+      "actor": "user",
+      "context": "git merge origin main opens Vim editor for merge commit message on branch claude/debug-hpc-latex-ZZmLq"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "USER QUERY VIM COMMANDS",
+      "actor": "user",
+      "context": "MacBook user asks 'how to type :wq?' in Vim"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PROVIDE VIM INSTRUCTIONS",
+      "actor": "ai",
+      "context": "Step-by-step Esc :wq Enter, alternatives to abort, git config editor changes"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "USER CHALLENGE AI",
+      "actor": "user",
+      "context": "Tests AI with 'slightly controversial question'"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "AI ACCEPTS CHALLENGE",
+      "actor": "ai",
+      "context": "Agrees to handle controversial topics thoughtfully"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "USER ASKS PROGRAMMER TEMPERAMENT",
+      "actor": "user",
+      "context": "Prompt: 'are programmers patient or cranky?'"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "AI INTERNAL ANALYSIS",
+      "actor": "ai",
+      "context": "Plans nuanced response acknowledging both patient and cranky stereotypes with breakdowns"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "AI RESPOND ON PROGRAMMERS",
+      "actor": "ai",
+      "context": "Balanced answer: both patient (debugging) and cranky (tools, interruptions), with sections"
+    }
+  ]
+}

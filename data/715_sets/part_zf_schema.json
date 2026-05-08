@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "解读雷诺曼牌阵逐张",
+      "actor": "占卜师",
+      "context": "解读树(5)作为意识层目标：健康、自然生长、耐心；鱼(34)过去：金钱、流动；塔(19)核心：权威、隔离；鹳(17)未来：变化、转变；镰刀(10)潜意识：切割、决断"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "解读雷诺曼组合",
+      "actor": "占卜师",
+      "context": "树+塔：表面不急实际困住；鱼→塔→鹳：自由到隔离到变动；鹳+镰刀：果断变动；镰刀+树：耐心有期限"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "串联塔罗牌",
+      "actor": "占卜师",
+      "context": "整合塔罗九杯、隐士、骑士杯、愚人、命运之轮与雷诺曼，预测他/她主动出手、改变状态、带着决断心态"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "解读对用户的含义",
+      "actor": "占卜师",
+      "context": "用户作为宝剑国王需看清局势，等待他/她行动，评估稳定性"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "提供22张牌阵布局",
+      "actor": "占卜师",
+      "context": "列出位置1-22牌：蛇、心事核心；镰刀、问题；老鼠等至花束最终信息"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "拆分左翼牌阵（用户）",
+      "actor": "占卜师",
+      "context": "基础老鼠焦虑；钥匙近过去看清；骑士想法主动；熊短期守住；船选择离开；锚当前稳住；狐狸学识破伪装；男人希望"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "拆分右翼牌阵（他/她）",
+      "actor": "占卜师",
+      "context": "基础心有感情；鱼选择流动；云近过去混乱；月亮当前幻想；棺材想法了断；十字学责任；太阳短期成功；信希望消息"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "解读关键对位",
+      "actor": "占卜师",
+      "context": "想法：用户犹豫、他决绝；短期未来：用户守、他成功；希望对齐；该学：用户识破、他承担"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "解读核心问题",
+      "actor": "占卜师",
+      "context": "蛇核心欺骗/复杂；镰刀阻碍决绝；老鼠基础消耗"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "解读结果位",
+      "actor": "占卜师",
+      "context": "狗长期忠诚；书秘密；房子最终稳定；花束美好姿态"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "整合全部预测",
+      "actor": "占卜师",
+      "context": "他/她短期主动联系、表态、邀约，明朗成功，但有蛇复杂性"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "给出建议",
+      "actor": "占卜师",
+      "context": "用户不需要主动，守住阵地"
+    }
+  ]
+}

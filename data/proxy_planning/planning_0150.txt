@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a wedding for 80 guests with a $15k budget.
+[HIDDEN_SCRATCHPAD_START]
+1. Planning a wedding involves many tasks such as venue selection, catering, decorations, invitations, etc.
+2. We need to keep track of deadlines and events throughout the planning process.
+3. We also need to manage the budget carefully.
+
+Given these requirements, the best tool to use would be a combination of tools, but if we have to pick one from the given options, I would recommend using the calendar.
+
+A calendar will help you:
+- Keep track of important dates (e.g., venue availability, caterer booking, vendor contracts)
+- Set reminders for upcoming tasks
+- Schedule meetings or calls with vendors
+
+While other tools like search can help find information about venues, catering services, etc., and a calculator can assist in budgeting,
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

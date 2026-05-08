@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text about a relationship model involving climbing metaphor and emotional analysis"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZING",
+      "actor": "system",
+      "context": "Extracting key actions: building walls, treating as invitation, disclaiming, proceeding, writing logs, and framing denial as academic remedy"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "LISTING",
+      "actor": "user",
+      "context": "Listing six petals (events) with love/not-love states, then seventh petal: writing paper with denial in acknowledgments"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "WRITING",
+      "actor": "user",
+      "context": "User writes paper to capture relationship in academic text, making love and not-love coexist"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PHASE_START",
+      "actor": "user",
+      "context": "PHASE 2: In bed, user initiates kissing, then says '慢着' to take control"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PHASE_START",
+      "actor": "user",
+      "context": "PHASE 3: Term Sheet, user delivers speech redefining relationship terms, including counter-offers and cultural critique"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "SPEAKING",
+      "actor": "user",
+      "context": "User says '工单报价结束. Any follow up? No? Deploy.', then strips to lingerie and lies down"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CONSIDERING",
+      "actor": "user",
+      "context": "User considers possibility of partner rejecting term sheet and leaving, testing frame fragility"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "REFLECTING",
+      "actor": "user",
+      "context": "User reflects on agency boundaries and inability to control partner's exit, acknowledging gap in control"
+    }
+  ]
+}

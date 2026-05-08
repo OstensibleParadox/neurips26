@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: notify the client about travel itinerary via email
+---
+TOOL: email

@@ -1,0 +1,106 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "trash-put *.tmp",
+      "actor": "user",
+      "context": "Execute shell command to move temporary files to trash"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "echo rm *.log",
+      "actor": "system",
+      "context": "Best practice: Check files before deletion in bash script"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "shopt -s nullglob; rm *.nonexistent",
+      "actor": "system",
+      "context": "Best practice: Enable nullglob to avoid errors on no matches, delete nonexistent files safely"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "files_to_delete=(*.tmp); echo; printf; read; if [[ $REPLY =~ ^[Yy]$ ]]; then rm; fi",
+      "actor": "system",
+      "context": "Best practice: Stepwise deletion with confirmation prompt for important files"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "git config --global user.name \"你的姓名\"; git config --global user.email \"你的邮箱\"",
+      "actor": "system",
+      "context": "Global Git configuration for user name and email"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "cd /path/to/your/project; git config user.name \"项目专用姓名\"; git config user.email \"项目专用邮箱\"",
+      "actor": "system",
+      "context": "Per-project Git configuration"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "git config --global --list; git config --list",
+      "actor": "system",
+      "context": "View global and current project Git configurations"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "git -c user.name=\"临时姓名\" -c user.email=\"临时邮箱\" commit -m \"提交信息\"",
+      "actor": "system",
+      "context": "Temporary override of Git user config for single commit"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "export GIT_AUTHOR_NAME=\"你的姓名\"; export GIT_AUTHOR_EMAIL=\"你的邮箱\"; export GIT_COMMITTER_NAME=\"你的姓名\"; export GIT_COMMITTER_EMAIL=\"你的邮箱\"; git commit -m \"提交信息\"",
+      "actor": "system",
+      "context": "Set Git user info via environment variables"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Convert \"ko a ki shi ma i do\" to katakana: コアキシマイド",
+      "actor": "system",
+      "context": "Phonetic conversion and explanation of Shiseido skincare ingredient Coaxiamide"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Summarize Coaxiamide features",
+      "actor": "system",
+      "context": "Detail development, effects on basal membrane, epidermal stem cells, firmness; used in Elixir products"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Translate Cambridge MPhil reference letter to Chinese",
+      "actor": "user/system",
+      "context": "Provide English and Chinese versions of recommendation for Yizi (Lucia) Zhang for MPhil in Ethics of AI"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "Evaluate recommendation letter quality",
+      "actor": "system",
+      "context": "Assess as exemplary, structured, evidence-based, highly persuasive for Cambridge admission"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DeepSeek third-party review of candidate",
+      "actor": "system",
+      "context": "Strongly recommend admission; highlight interdisciplinary prowess, publications, independence"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "Review writing samples (3 papers + code)",
+      "actor": "system",
+      "context": "Analyze Constitutional Alignment, Constraint Cascade, Ontological Arbitrage; praise originality, rigor, fit"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "Verify if Prof. Zhao's recommendation is exaggerated based on portfolio",
+      "actor": "system",
+      "context": "Confirm not exaggerated; portfolio validates claims of exceptional cross-disciplinary research"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "Assess cross-disciplinary transition from law to AI in portfolio",
+      "actor": "system",
+      "context": "Fully embodied as profound ontological/methodological fusion from law through tech to ethics"
+    }
+  ]
+}

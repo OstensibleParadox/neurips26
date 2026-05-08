@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: add 949 and 76
+---
+TOOL: calculator

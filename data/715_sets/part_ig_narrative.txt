@@ -1,0 +1,3 @@
+{
+  "narrative": "I, the user, began by reading the provided text, which included legal acts and a research paper abstract and sections, to prepare for extraction. Then, the system processed the text to extract key actions, decisions, and state changes as per the JSON schema. Finally, the system outputted JSON with events based on the provided text, including legal references and paper content."
+}

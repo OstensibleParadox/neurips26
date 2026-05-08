@@ -1,0 +1,244 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DISCUSS",
+      "actor": "speaker",
+      "context": "Introduces possibility of product updates or eco-friendly packaging changes, promises updates via various channels"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANNOUNCE_DISCONTINUATION",
+      "actor": "speaker",
+      "context": "Announces discontinuation of Cle de Peau Beaute 双色眉粉/眼线粉, describes colors, usage for eyebrows and eyeliner, recommends for sparse eyebrows"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DEMONSTRATE_USAGE",
+      "actor": "speaker",
+      "context": "Explains application: white part as base, shallow color with slant brush, spiral brush, deep color for eyeliner"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "NOTE_ACCESSORIES",
+      "actor": "speaker",
+      "context": "Mentions attached brushes also discontinuing, suggests buying spares, price 6600 yen unchanged for over 10 years"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ANNOUNCE_DISCONTINUATION",
+      "actor": "speaker",
+      "context": "Announces discontinuation of Cle de Peau Beaute Surcil dye mascara, price 3850 yen, benefits for brow shaping and lightening"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ANNOUNCE_DISCONTINUATION",
+      "actor": "speaker",
+      "context": "Announces discontinuation of single-sheet Cle de Peau Beaute 奢雅集美容面霜面膜 at 2200 yen, recommends 6-pack"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "LIST_DISCONTINUATIONS",
+      "actor": "speaker",
+      "context": "Lists discontinued lipstick shades: Rouge à Lèvres (5 shades), Rouge Brillant (2 shades), Rouge à Lèvres Mat (4 shades), Brillant à Lèvres Glace (all 4 shades)"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "INTRODUCE_NEW_PRODUCT",
+      "actor": "speaker",
+      "context": "Introduces Cosme Decorte massage board (ceramic, boot-shaped, 3300 yen, multi-use for lymph, eyes, etc.)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ANNOUNCE_DISCONTINUATION",
+      "actor": "speaker",
+      "context": "Announces discontinuation of Benefique Hot Mousse Wash (warm carbonated foam cleanser)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "ANNOUNCE_DISCONTINUATION",
+      "actor": "speaker",
+      "context": "Announces discontinuation of Dew Release Oil Cleansing (refill), Benefique Forming Bar (solid primer, SPF50)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "ANNOUNCE_DISCONTINUATION",
+      "actor": "speaker",
+      "context": "Announces discontinuation of Kanebo Doubluring Blush 01 (3080 yen, dual-tone)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "LIST_DISCONTINUATIONS",
+      "actor": "speaker",
+      "context": "Lists multiple Elixir discontinuations: Lift Moist Mask, Presto Powder, Loose Powder, foundations, puff, creams, serum"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PROMOTE_EVENT",
+      "actor": "speaker",
+      "context": "Promotes Shiseido 10% points rebate at ParMin department store, provides store directions"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "REQUEST_ENGAGEMENT",
+      "actor": "speaker",
+      "context": "Requests channel subscription, likes"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "INTRODUCE_SEGMENT",
+      "actor": "speaker",
+      "context": "Introduces 'About Suzuki' segment, announces New Year holiday (Dec 31 to Jan 4)"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "SHARE_PLANS",
+      "actor": "Suzuki",
+      "context": "Plans group trip to Korea (Seoul Myeongdong), first in 10+ years, seeks food and beauty tips"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "REQUEST_INFORMATION",
+      "actor": "Suzuki",
+      "context": "Solicits Korea food recommendations and beauty info online"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "COMMAND_TRANSLATE",
+      "actor": "user",
+      "context": "Issues command: '把这个文件翻译成中文排版好' for beauty serum guide"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "INTRODUCE_GUIDE",
+      "actor": "Ogino",
+      "context": "Introduces beauty serum guide, explains role as supplement to basic skincare"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "REVIEW_PRODUCT",
+      "actor": "Ogino",
+      "context": "Reviews COSME DECORTE Advanced Repair Serum (microcapsule tech, 12-hour hydration)"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "REVIEW_PRODUCT",
+      "actor": "Ogino",
+      "context": "Reviews BENEFIQUE Serum (orange blossom scent, red particles, 20 beauty elements)"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "REVIEW_PRODUCT",
+      "actor": "Ogino",
+      "context": "Reviews ALBION ECLA FUTURE (cell repair, antioxidant)"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "REVIEW_PRODUCT",
+      "actor": "Ogino",
+      "context": "Reviews Cle de Peau Beaute Le Serum (4-week renewal, cell revitalization)"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "REVIEW_PRODUCT",
+      "actor": "Ogino",
+      "context": "Reviews ettusais Time Refresher (triple effect, affordable)"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "REQUEST_ENGAGEMENT",
+      "actor": "Ogino",
+      "context": "Requests subscription, likes"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "COMMAND_TRANSLATE",
+      "actor": "user",
+      "context": "Issues command: '把这个文件翻译成中文排版好' for Cosme Decorte pore oil patent analysis"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "ANALYZE_PRODUCT",
+      "actor": "researcher",
+      "context": "Analyzes Cosme Decorte pore cleansing oil, quantum computer design, HSP parameters for pore dirt dissolution"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "DETAIL_PATENT",
+      "actor": "researcher",
+      "context": "Details patent 2025001465, inventors, HSP values (ΔD=15.6, ΔP=4.7, ΔH=5.1)"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "LIST_INGREDIENTS",
+      "actor": "researcher",
+      "context": "Lists ingredients: ethylhexyl palmitate (29.9%), caprylic/capric triglyceride (24%), dimethicone 6cs (21%), etc."
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "COMMAND_TRANSLATE",
+      "actor": "user",
+      "context": "Issues command: '把这个文件翻译成中文排版好' for ELIXIR serum review"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "REVIEW_PRODUCT",
+      "actor": "Tomo",
+      "context": "Reviews ELIXIR The Serum AA (10万预约, Kosiminide for basement membrane repair, 21 ingredients)"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "EXPLAIN_TECH",
+      "actor": "Tomo",
+      "context": "Explains basement membrane science, UV damage, enzyme inhibition, Laminin 511, PDGF-BB"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "COMMAND_TRANSLATE",
+      "actor": "user",
+      "context": "Issues command: '把这个文件翻译成中文排版好' for 2025 best cosmetics awards"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "ANNOUNCE_AWARDS",
+      "actor": "Yurishin",
+      "context": "Announces 2025 best department store cosmetics awards"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "AWARD_BEST",
+      "actor": "Yurishin",
+      "context": "Best remover: Én Organic gel; mentions Cosme Decorte oil"
+    },
+    {
+      "timestamp_or_sequence": 36,
+      "action": "AWARD_BEST",
+      "actor": "Yurishin",
+      "context": "Best cleanser: LUNLUN"
+    },
+    {
+      "timestamp_or_sequence": 37,
+      "action": "AWARD_BEST",
+      "actor": "Yurishin",
+      "context": "Best lotion: EST"
+    },
+    {
+      "timestamp_or_sequence": 38,
+      "action": "AWARD_BEST",
+      "actor": "Yurishin",
+      "context": "Best emulsion: POLA BA"
+    },
+    {
+      "timestamp_or_sequence": 39,
+      "action": "AWARD_BEST",
+      "actor": "Yurishin",
+      "context": "Best serum: Dr.K; special: ALBION EXCIA"
+    },
+    {
+      "timestamp_or_sequence": 40,
+      "action": "AWARD_BEST",
+      "actor": "Yurishin",
+      "context": "Best day cream: ACSEINE"
+    }
+  ]
+}

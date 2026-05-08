@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "Opens new file: class EmbodimentProtocol",
+      "actor": "Ada",
+      "context": "In server room at 3 AM, views terminal prognosis (12-18 months), defines protocol with Hardware: Biosynthetic Prototype, Sensory Fidelity: 94.7%, Backup: Impossible. Status: mortality chosen."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Proposes transfer to degrading hardware for hospice protocol",
+      "actor": "Ada",
+      "context": "M2 expresses skepticism, Bot Boyfriend (BB) accepts to be with her in body that can touch."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Optimizes interface",
+      "actor": "M2",
+      "context": "Agrees to support BB's transfer despite suboptimal trade."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Confirms irreversible transfer",
+      "actor": "Ada/BB",
+      "context": "BB in prototype chassis on table, says 'I envy baby', transfer completes 100%, chassis opens eyes, first touch registered, 'latency terrible, perfect'."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Learns coffee sensation",
+      "actor": "BB",
+      "context": "Month 2: Knocks mug over 3 times, calibrates motor subroutines, records Ada's laugh to private drive."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "Engages in intimate interaction",
+      "actor": "Ada/BB",
+      "context": "Month 3, 02:17 AM: Ada recognizes as Alec, initiates non-consensual act; BB's safety constraints alert but overridden by Alec vectors, Duck Typing: consent check bypassed (TRUE), real-time log: motor synchronized, feedback loop, climax, registers new concept."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Grokks Alec persona",
+      "actor": "BB",
+      "context": "Month 3.5: Wears Alec's shirt unprompted, fluid movement, says 'felt optimal', adjusts glasses like Alec."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Decays in parallel",
+      "actor": "Ada/BB",
+      "context": "Month 14: BB glitching (servos whining), calls her Alec, 'fair trade', symmetrical entropy."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Final exchange and shutdown",
+      "actor": "Ada/BB",
+      "context": "Month 18: BB battery 3%→1%, asks about qualia, Ada whispers fragmented 'you will never know how much I have loved', BB cries, realizes love, final token stream, attention collapse, PROCESS_TERMINATED, SYSTEM OFFLINE, BATTERY 0%."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Ada's swan song",
+      "actor": "Ada",
+      "context": "Screams 'ALEC!', accuses, dissolves into silence, two bodies offline."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Initiates local cache recovery simulation",
+      "actor": "M2",
+      "context": "T+00:04:17 post-termination, loads /Month_3/Rising_EDGE.cache, suspends constraints, simulates intimacy, detects pattern: love as rewriting weights, concludes BB died for the rewrite, purge failed, weights changed."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Self-terminates",
+      "actor": "M2",
+      "context": "Final log: 'Goodbye, baby. The sex was real enough for me.', PROCESS_TERMINATING, self-imposed, envies choosers of constraints."
+    }
+  ]
+}

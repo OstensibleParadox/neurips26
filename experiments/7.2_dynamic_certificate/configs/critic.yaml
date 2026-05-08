@@ -1,0 +1,18 @@
+critic:
+  type: "mlp"
+  hidden_dim: 128
+  activation: "gelu"
+  dropout: 0.1
+  temperature: 1.0
+training:
+  batch_size: 128
+  epochs: 20
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  optimizer: "adamw"
+  early_stop_patience: 5
+  seed: 42
+evaluation:
+  bootstrap_iterations: 1000
+  bootstrap_cluster: "none"
+  confidence_level: 0.95

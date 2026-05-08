@@ -1,0 +1,500 @@
+            # 先按主要标点分割
+            rough_sentences = re.split(split_pattern, para)
+            
+            for sent in rough_sentences:
+                sent = sent.strip()
+                if not sent or len(sent) < 2:
+                    continue
+                
+                # 清理开头结尾的特殊字符
+                sent = re.sub(r'^[\s　\-—*#「」【】《》「」]+', '', sent)
+                sent = re.sub(r'[\s　\-—*#「」【】《》「」]+$', '', sent)
+                
+                if len(sent) >= 2:  # 至少2个字符
+                    sentences.append(sent)
+        
+        # 如果没有分割出句子，尝试按行分割
+        if len(sentences) < 3:
+            lines = [line.strip() for line in text.split('\n') if line.strip()]
+            sentences = [line for line in lines if len(line) >= 3]
+        
+        return sentences
+    
+    @staticmethod
+    def extract_label(text, max_length=15):
+        """提取中文标签"""
+        if not text:
+            return ""
+        
+        # 清理文本
+        clean_text = re.sub(r'[#*_`\[\]]', '', text).strip()
+        
+        # 如果文本很短，直接返回
+        if len(clean_text) <= max_length:
+            return clean_text
+        
+        # 提取中文内容
+        chinese_pattern = r'[\u4e00-\u9fff]+'
+        chinese_matches = re.findall(chinese_pattern, clean_text)
+        
+        if chinese_matches:
+            # 合并所有中文部分
+            chinese_text = ''.join(chinese_matches)
+            if len(chinese_text) > max_length:
+                return chinese_text[:max_length-2] + ".."
+            return chinese_text
+        
+        # 如果没有中文，提取英文内容
+        english_words = re.findall(r'\b[A-Za-z]{2,}\b', clean_text)
+        if english_words:
+            # 移除常见停用词
+            stop_words = {'the', 'and', 'but', 'for', 'you', 'are', 'was', 
+                         'were', 'that', 'this', 'with', 'your', 'have', 'has'}
+            meaningful_words = [w for w in english_words 
+                              if w.lower() not in stop_words]
+            
+            if meaningful_words:
+                label = ' '.join(meaningful_words[:3])
+                if len(label) > max_length:
+                    return label[:max_length-2] + ".."
+                return label
+        
+        # 后备方案：截断文本
+        return clean_text[:max_length-2] + ".."
+    
+    @staticmethod
+    def calculate_text_similarity(text1, text2):
+        """计算中文文本相似度"""
+        if not text1 or not text2:
+            return 0.0
+        
+        # 提取中文词汇
+        def extract_words(text):
+            # 中文词汇模式（至少2个中文字符）
+            chinese_words = re.findall(r'[\u4e00-\u9fff]{2,}', text.lower())
+            # 英文词汇模式（至少3个字母）
+            english_words = re.findall(r'\b[a-z]{3,}\b', text.lower())
+            return set(chinese_words + english_words)
+        
+        words1 = extract_words(text1)
+        words2 = extract_words(text2)
+        
+        if not words1 or not words2:
+            return 0.0
+        
+        intersection = words1 & words2
+        union = words1 | words2
+        
+        return len(intersection) / len(union) if union else 0.0
+
+# ============================================
+# 6. 核心类定义
+# ============================================
+class NarrativeGraphBuilder:
+    def __init__(self, similarity_threshold=0.8, node_limit=None):
+        self.sim_threshold = similarity_threshold
+        self.node_limit = node_limit
+        self.use_neural = USE_NEURAL
+        self.text_processor = ChineseTextProcessor()
+
+    def build(self, text):
+        """构建叙事图"""
+        print(f"\n📖 Processing text ({len(text):,} characters)...")
+        
+        # 分割句子
+        sentences = self.text_processor.split_sentences(text)
+        if not sentences:
+            print("❌ No sentences extracted!")
+            return nx.DiGraph()
+        
+        print(f"📊 Extracted {len(sentences)} narrative units")
+        
+        # 应用节点限制
+        if self.node_limit is not None and len(sentences) > self.node_limit:
+            print(f"  Limiting to first {self.node_limit} nodes")
+            sentences = sentences[:self.node_limit]
+        
+        G = nx.DiGraph()
+        
+        # 批量编码（如果使用神经网络）
+        embeddings = None
+        sim_matrix = None
+        
+        if self.use_neural and len(sentences) > 1:
+            print(f"\n🧠 Encoding {len(sentences)} sentences with neural model...")
+            try:
+                # 使用多语言模型
+                embeddings = embedding_model.encode(sentences, 
+                                                   convert_to_tensor=True, 
+                                                   device=device,
+                                                   show_progress_bar=False)
+                
+                print("📐 Computing similarity matrix...")
+                cosine_scores = util.cos_sim(embeddings, embeddings)
+                
+                if device == "mps":
+                    sim_matrix = cosine_scores.cpu().numpy()
+                else:
+                    sim_matrix = cosine_scores.numpy()
+                    
+                print(f"✓ Similarity matrix: {sim_matrix.shape}")
+                    
+            except Exception as e:
+                print(f"⚠ Neural computation failed: {e}. Using word overlap instead.")
+                self.use_neural = False
+        
+        # 添加节点
+        print("\n📝 Adding nodes...")
+        for i, sent in enumerate(sentences):
+            node_id = f"N{i}"
+            label = self.text_processor.extract_label(sent)
+            G.add_node(node_id, 
+                      text=sent, 
+                      label=label, 
+                      idx=i,
+                      length=len(sent))
+        
+        # 构建边
+        print(f"\n🔗 Linking narrative pathways (threshold: {self.sim_threshold})...")
+        
+        nodes_list = list(G.nodes(data=True))
+        semantic_edges_added = 0
+        sequence_edges_added = 0
+        
+        # 添加语义边
+        if self.use_neural and sim_matrix is not None:
+            for i in range(len(nodes_list)):
+                node_i = nodes_list[i][0]
+                for j in range(i + 1, len(nodes_list)):
+                    node_j = nodes_list[j][0]
+                    weight = float(sim_matrix[i][j])
+                    
+                    if weight > self.sim_threshold:
+                        G.add_edge(node_i, node_j, 
+                                 weight=weight, 
+                                 type="semantic")
+                        semantic_edges_added += 1
+        else:
+            # 使用词汇重叠
+            for i in range(len(nodes_list)):
+                node_i = nodes_list[i][0]
+                text_i = nodes_list[i][1]['text']
+                
+                for j in range(i + 1, len(nodes_list)):
+                    node_j = nodes_list[j][0]
+                    text_j = nodes_list[j][1]['text']
+                    
+                    weight = self.text_processor.calculate_text_similarity(text_i, text_j)
+                    
+                    if weight > self.sim_threshold:
+                        G.add_edge(node_i, node_j, 
+                                 weight=weight, 
+                                 type="semantic")
+                        semantic_edges_added += 1
+        
+        # 添加序列边
+        for i in range(len(sentences) - 1):
+            node_i = f"N{i}"
+            node_j = f"N{i+1}"
+            G.add_edge(node_i, node_j, 
+                      weight=0.5, 
+                      type="sequence")
+            sequence_edges_added += 1
+        
+        print(f"  Semantic edges added: {semantic_edges_added}")
+        print(f"  Sequence edges added: {sequence_edges_added}")
+        
+        # 图清理
+        print(f"\n🧹 Cleaning graph structure...")
+        
+        # 移除孤立节点
+        isolated_nodes = [node for node in G.nodes() if G.degree(node) == 0]
+        if isolated_nodes:
+            G.remove_nodes_from(isolated_nodes)
+            print(f"  Removed {len(isolated_nodes)} isolated nodes")
+        
+        # 限制最大连接数
+        max_connections = 20
+        edges_removed = 0
+        
+        for node in G.nodes():
+            out_edges = list(G.out_edges(node, data=True))
+            if len(out_edges) > max_connections:
+                # 按权重排序，保留权重最高的边
+                sorted_edges = sorted(out_edges, 
+                                    key=lambda x: x[2].get('weight', 0), 
+                                    reverse=True)
+                
+                for u, v, _ in sorted_edges[max_connections:]:
+                    G.remove_edge(u, v)
+                    edges_removed += 1
+        
+        if edges_removed > 0:
+            print(f"  Limited connections: removed {edges_removed} edges")
+        
+        # 统计信息
+        print(f"\n📈 Final graph statistics:")
+        print(f"  • Nodes: {G.number_of_nodes()}")
+        print(f"  • Edges: {G.number_of_edges()}")
+        
+        if G.number_of_nodes() > 1:
+            density = nx.density(G)
+            print(f"  • Density: {density:.4f}")
+        else:
+            print(f"  • Density: 0.0")
+        
+        return G
+
+
+class PathologyMetrics:
+    def calculate_all(self, G):
+        """计算叙事病理学指标"""
+        if len(G.nodes()) == 0:
+            return {
+                "total_score": 0, 
+                "CMI": 0, 
+                "SRD": 0, 
+                "EIT": 0,
+                "top_core_node": "None",
+                "cycle_count": 0,
+                "node_count": 0,
+                "edge_count": 0,
+                "graph_density": 0
+            }
+
+        print(f"\n📊 Calculating pathology metrics...")
+        
+        node_count = len(G.nodes())
+        edge_count = G.number_of_edges()
+        
+        # 1. CMI (Centralization Metric)
+        try:
+            centrality = nx.degree_centrality(G)
+            if centrality:
+                sorted_centrality = sorted(centrality.items(), 
+                                         key=lambda x: x[1], 
+                                         reverse=True)
+                
+                # 取前3个节点的中心度之和
+                top_3_sum = sum(v for _, v in sorted_centrality[:min(3, len(sorted_centrality))])
+                total_sum = sum(centrality.values())
+                cmi = top_3_sum / total_sum if total_sum > 0 else 0
+                
+                # 获取核心节点
+                if sorted_centrality:
+                    top_node = sorted_centrality[0][0]
+                    if top_node in G.nodes():
+                        node_data = G.nodes[top_node]
+                        core_text = node_data.get('label', node_data.get('text', 'Unknown'))
+                        # 截断核心文本
+                        if len(core_text) > 30:
+                            core_text = core_text[:27] + "..."
+                    else:
+                        core_text = "Unknown"
+                else:
+                    core_text = "Unknown"
+            else:
+                cmi = 0
+                core_text = "Unknown"
+                
+        except Exception as e:
+            print(f"⚠ CMI calculation failed: {e}")
+            cmi = 0
+            core_text = "Unknown"
+        
+        # 2. SRD (Self-Referential Density)
+        cycles = 0
+        try:
+            if node_count > 3:
+                # 查找简单环
+                cycles_list = list(nx.simple_cycles(G))
+                # 只计算3-5个节点的环
+                cycles = len([c for c in cycles_list if 3 <= len(c) <= 5])
+        except:
+            cycles = 0
+        
+        srd = cycles / node_count if node_count > 0 else 0
+        
+        # 3. EIT (Efficiency of Information Throughput)
+        eit = 0
+        try:
+            if node_count > 3:
+                # 计算入度和出度
+                in_degrees = dict(G.in_degree())
+                out_degrees = dict(G.out_degree())
+                
+                if in_degrees and out_degrees:
+                    avg_in = sum(in_degrees.values()) / len(in_degrees)
+                    avg_out = sum(out_degrees.values()) / len(out_degrees)
+                    
+                    # 寻找源节点（入度低）和汇节点（出度低）
+                    source_nodes = [n for n, d in in_degrees.items() 
+                                  if d < avg_in * 0.6][:5]
+                    sink_nodes = [n for n, d in out_degrees.items() 
+                                if d < avg_out * 0.6][:5]
+                    
+                    if source_nodes and sink_nodes:
+                        path_lengths = []
+                        for source in source_nodes[:3]:  # 限制源节点数量
+                            for sink in sink_nodes[:3]:  # 限制汇节点数量
+                                try:
+                                    if nx.has_path(G, source, sink):
+                                        path_len = nx.shortest_path_length(G, 
+                                                                          source=source, 
+                                                                          target=sink)
+                                        path_lengths.append(path_len)
+                                except:
+                                    continue
+                        
+                        if path_lengths:
+                            avg_path = np.mean(path_lengths)
+                            max_possible = node_count - 1
+                            if max_possible > 0:
+                                # EIT越高表示信息流通效率越高
+                                eit = 1.0 - (avg_path / max_possible)
+                                eit = max(0.0, min(eit, 1.0))
+        except Exception as e:
+            print(f"⚠ EIT calculation failed: {e}")
+            eit = 0.5
+        
+        # 计算总风险分数
+        # CMI和SRD越低越好，EIT越高越好
+        total_score = (0.4 * min(cmi, 1.0)) + (0.4 * min(srd, 1.0)) + (0.2 * (1.0 - min(eit, 1.0)))
+        
+        # 计算图密度
+        graph_density = nx.density(G) if node_count > 1 else 0
+        
+        return {
+            "CMI": round(cmi, 4),
+            "SRD": round(srd, 4),
+            "EIT": round(eit, 4),
+            "total_score": round(total_score, 4),
+            "top_core_node": core_text,
+            "cycle_count": cycles,
+            "node_count": node_count,
+            "edge_count": edge_count,
+            "graph_density": round(graph_density, 4)
+        }
+
+
+def create_visualization(G, metrics, filename):
+    """创建可视化"""
+    print(f"\n🎨 Creating visualization...")
+    
+    if len(G.nodes()) < 3:
+        print("  Graph too small for meaningful visualization")
+        return None
+    
+    # 创建图形
+    fig = plt.figure(figsize=(20, 12))
+    
+    # 使用安全字体
+    safe_fonts = ['DejaVu Sans', 'Arial', 'sans-serif']
+    
+    # 主图 - 叙事图
+    ax1 = plt.subplot2grid((2, 3), (0, 0), colspan=2, rowspan=2)
+    
+    # 计算布局
+    try:
+        if len(G.nodes()) < 100:
+            pos = nx.spring_layout(G, k=1.5, iterations=100, seed=42)
+        elif len(G.nodes()) < 300:
+            pos = nx.kamada_kawai_layout(G)
+        else:
+            pos = nx.circular_layout(G)
+    except:
+        pos = nx.circular_layout(G)
+    
+    # 计算节点大小（基于度数）
+    degrees = dict(G.degree())
+    if degrees:
+        max_deg = max(degrees.values())
+        min_deg = min(degrees.values())
+        deg_range = max_deg - min_deg if max_deg > min_deg else 1
+        
+        node_sizes = []
+        for deg in degrees.values():
+            size = 100 + 1200 * ((deg - min_deg) / deg_range)
+            node_sizes.append(size)
+    else:
+        node_sizes = [300] * len(G.nodes())
+    
+    # 节点颜色（基于节点类型/度数）
+    node_colors = []
+    for node in G.nodes():
+        in_deg = G.in_degree(node)
+        out_deg = G.out_degree(node)
+        
+        # 根据度数决定颜色
+        if in_deg > 3 and out_deg > 3:
+            node_colors.append('#ff2a6d')  # 高连接度 - 红色
+        elif out_deg > in_deg * 1.5:
+            node_colors.append('#05d9e8')  # 主要输出 - 青色
+        elif in_deg > out_deg * 1.5:
+            node_colors.append('#ff8c42')  # 主要输入 - 橙色
+        else:
+            node_colors.append('#7bff7b')  # 平衡节点 - 绿色
+    
+    # 绘制节点
+    nx.draw_networkx_nodes(G, pos, 
+                          node_size=node_sizes, 
+                          node_color=node_colors, 
+                          alpha=0.85,
+                          edgecolors='black', 
+                          linewidths=0.8, 
+                          ax=ax1)
+    
+    # 绘制边
+    semantic_edges = [(u, v) for u, v, d in G.edges(data=True) 
+                     if d.get('type') == 'semantic']
+    sequence_edges = [(u, v) for u, v, d in G.edges(data=True) 
+                     if d.get('type') == 'sequence']
+    
+    if semantic_edges:
+        nx.draw_networkx_edges(G, pos, 
+                              edgelist=semantic_edges,
+                              alpha=0.15, 
+                              edge_color='#666666',
+                              arrows=True, 
+                              arrowsize=8,
+                              ax=ax1)
+    
+    if sequence_edges:
+        nx.draw_networkx_edges(G, pos, 
+                              edgelist=sequence_edges,
+                              alpha=0.25, 
+                              edge_color='#0066cc',
+                              arrows=True, 
+                              arrowsize=6,
+                              style=':', 
+                              ax=ax1)
+    
+    # 添加重要节点标签
+    labels = {}
+    if degrees:
+        # 选择度数最高的节点显示标签
+        sorted_nodes = sorted(degrees.items(), key=lambda x: x[1], reverse=True)
+        top_nodes = sorted_nodes[:min(20, len(sorted_nodes) // 3)]
+        
+        for node, deg in top_nodes:
+            if deg >= np.percentile(list(degrees.values()), 60):
+                label = G.nodes[node].get('label', '')
+                if label and len(label.strip()) > 0:
+                    # 限制标签长度
+                    if len(label) > 10:
+                        label = label[:8] + ".."
+                    labels[node] = label
+    
+    if labels:
+        nx.draw_networkx_labels(G, pos, 
+                               labels=labels,
+                               font_size=9, 
+                               font_weight='bold',
+                               font_family=safe_fonts[0],
+                               ax=ax1)
+    
+    ax1.set_title(f"Narrative Graph: {filename}\n({len(G.nodes())} nodes, {len(G.edges())} edges)", 
+                  fontsize=14, fontweight='bold', pad=20, fontfamily=safe_fonts[0])
+    ax1.axis('off')
+    
+    # 指标可视化

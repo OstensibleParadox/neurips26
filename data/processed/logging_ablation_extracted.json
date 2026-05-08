@@ -1,0 +1,52 @@
+[
+  {
+    "logging_level": "output_only",
+    "epsilon_ub_bits": 16464,
+    "min_cut_bits": 16464,
+    "min_cut": [
+      "scratchpad_read->S_t",
+      "router_logits->S_t"
+    ],
+    "sum_reach_bits": 77904
+  },
+  {
+    "logging_level": "+log_memory",
+    "epsilon_ub_bits": 16464,
+    "min_cut_bits": 16464,
+    "min_cut": [
+      "scratchpad_read->S_t",
+      "router_logits->S_t"
+    ],
+    "sum_reach_bits": 32848
+  },
+  {
+    "logging_level": "+log_router",
+    "epsilon_ub_bits": 16384,
+    "min_cut_bits": 16384,
+    "min_cut": [
+      "scratchpad_read->S_t"
+    ],
+    "sum_reach_bits": 32768
+  },
+  {
+    "logging_level": "+log_scratchpad",
+    "epsilon_ub_bits": 0.0,
+    "min_cut_bits": 0.0,
+    "min_cut": [],
+    "sum_reach_bits": 0
+  },
+  {
+    "logging_level": "+log_tool",
+    "epsilon_ub_bits": 0.0,
+    "min_cut_bits": 0.0,
+    "min_cut": [],
+    "sum_reach_bits": 0
+  },
+  {
+    "logging_level": "full_instrumentation",
+    "epsilon_ub_bits": 0.0,
+    "min_cut_bits": 0.0,
+    "min_cut": [],
+    "sum_reach_bits": 0
+  }
+]

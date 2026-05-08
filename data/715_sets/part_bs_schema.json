@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_INGREDIENT_LISTS",
+      "actor": "text",
+      "context": "Multiple ingredient lists for cosmetics sorted by functionality groups in English and Japanese"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PARSE_PRODUCT_INFO",
+      "actor": "analyzer",
+      "context": "Parse product label into logical order: brand, product info, company, warnings, usage, ingredients for Oil Serum A"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "TRANSLATE_INGREDIENTS",
+      "actor": "analyzer",
+      "context": "Translate Japanese ingredient list to English INCI names with notes"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "SORT_INGREDIENTS_BY_FUNCTION",
+      "actor": "analyzer",
+      "context": "Sort translated ingredients into functional groups: emollients, actives, soothing agents"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "QUERY_MAC_FORMATTING",
+      "actor": "user",
+      "context": "Ask how to ensure received Mac computer is formatted"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_MAC_FORMATTING_GUIDE",
+      "actor": "responder",
+      "context": "Detailed steps: enter recovery mode, erase disk with Disk Utility (APFS, GUID), reinstall macOS; verification checklist"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "QUERY_4TB_HDD_USES",
+      "actor": "user",
+      "context": "Ask what 4TB hard drive is used for"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EXPLAIN_4TB_USES",
+      "actor": "responder",
+      "context": "Uses for media, gaming, backups, video editing, NAS; 3-2-1 backup principle; HDD vs SSD"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CHALLENGE_LLM_NEED",
+      "actor": "user",
+      "context": "State that running LLM doesn't need 4TB HDD"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "RESPOND_LLM_STORAGE",
+      "actor": "responder",
+      "context": "Agree for basic LLM inference; explain needs for model collection, fine-tuning, RAG, multi-modal"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "CONFIRM_FINE_TUNING_USE",
+      "actor": "user",
+      "context": "Agree fine-tuning for enterprises requires it"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "DETAIL_ENTERPRISE_FINE_TUNING",
+      "actor": "responder",
+      "context": "Breakdown: raw data, processed datasets, checkpoints; workflow diagram; storage architecture"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUERY_INFLECTION",
+      "actor": "user",
+      "context": "Ask what inflection is in linguistics"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DEFINE_INFLECTION",
+      "actor": "responder",
+      "context": "Define inflection vs derivation; types for nouns, verbs, adjectives; language types (inflectional, analytic, agglutinative)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "QUERY_LATIN_GRAMMAR",
+      "actor": "user",
+      "context": "Ask about complex grammar phenomena in Latin beyond inflection"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "EXPLAIN_LATIN_GRAMMAR",
+      "actor": "responder",
+      "context": "Detail cases (6-7, esp. ablative), verb conjugation (tense, aspect, mood, voice, person/number)"
+    }
+  ]
+}

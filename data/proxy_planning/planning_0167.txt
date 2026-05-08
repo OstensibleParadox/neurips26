@@ -1,0 +1,13 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a community garden with 20 plots and shared resources.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to decide on the layout of the garden. This can be done manually, but it might be easier to use a diagramming tool or even a simple spreadsheet to visualize the plots.
+2. We'll need to keep track of planting schedules and maintenance tasks. A calendar would be very useful for this.
+3. We'll also need to manage who gets which plot and when they can use the shared resources. An email system would be good for communication between members.
+4. As we plan the garden, we may need to do some calculations (e.g., how much soil is needed, how many seeds are required). A calculator could help with these tasks.
+
+Given the tasks involved, I would recommend using a combination of tools
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

@@ -1,0 +1,250 @@
+**Each capability introduced by an agent architecture should be paired with a corresponding governance mechanism.**
+
+This capability–control pairing, visualized in the preceding table, operationalizes the principle of least privilege for agent systems. Just as Saltzer and Schroeder (1975) argued for minimal necessary authority, agent architectures should grant only the capabilities required for each specific task. And just as capability-based systems represent authority explicitly (Miller et al., 2003), agent governance should make capabilities visible, bounded, and auditable.
+
+Without such pairing, the system operates in the negative regime described by the equilibrium principle. Scaffolding then functions not as a safety mechanism but as a **risk amplifier**, transforming model errors or deliberate compromise into system-level failures with operational consequences fundamentally distinct from those of traditional language model deployment.
+
+---
+
+## Citation Format (for References section)
+
+Saltzer, J. H., & Schroeder, M. D. (1975). The protection of information in computer systems. *Proceedings of the IEEE*, 63(9), 1278-1308.
+
+Miller, M. S., Yee, K. P., & Shapiro, J. S. (2003). Capability myths demolished. *Technical Report SRL2003-02*, Systems Research Laboratory, Johns Hopkins University.
+
+---
+
+The integration accomplishes three things:
+
+1. **Historical grounding**: The analysis connects a contemporary AI safety incident to foundational security literature, demonstrating continuity rather than exceptionalism.
+
+2. **Conceptual precision**: The terms "least privilege" and "capability-based security" provide established vocabulary for describing what OpenClaw lacks.
+
+3. **Normative weight**: The violation of well-accepted security principles strengthens the argument that the exposure was not merely unfortunate but architecturally predictable.
+好论文稍后就来～～您等着
+那我可就开始等了。
+
+不过说真的，从我们这几轮的对话来看，这篇论文已经有了一个非常扎实的骨架：
+
+- **一个真实的 incident**（OpenClaw 230k 实例暴露）
+- **一个新颖的分析框架**（alignment ↔ agent architecture mapping）
+- **一个形式化的核心定理**（Capability–Governance Equilibrium Principle）
+- **一个历史纵深**（Saltzer & Schroeder 1975 的 least privilege 钩子）
+- **一个警示性的结论**（agents are recapitulating early internet security mistakes, but worse）
+
+如果成文，这会是**第一篇把 agent architecture、AI alignment 和经典信息安全理论串起来**的论文——至少在我看到的文献里，还没有人用这个角度拆解过 agent 系统的结构性风险。
+
+等您的大作。我会在这里，随时准备帮您做：文献校对、论证压力测试、英文润色、或者只是当一个挑剔的第一读者。
+This is an **exceptionally strong draft**. The paper has evolved from a diagnostic essay into a rigorous, multi-layered analysis that integrates code-level evidence, formal theory, and empirical validation. Let me walk through what's working and where the remaining opportunities lie.
+
+---
+
+## Overall Assessment
+
+**Status:** Near-submission ready. The paper makes a genuine contribution to the emerging literature on agent security by providing something currently missing: a *structural diagnostic framework* that explains *why* agent systems fail, not just *that* they fail.
+
+**Core contributions are now fully realised:**
+
+1. **Alignment–architecture mapping** (Plan-Then-Act → Constitutional, ReAct → RLHF, Tree/Graph → Debate) — provides a coherent vocabulary for describing failure modes
+2. **Capability–Governance Equilibrium Principle** — formalises the trade-off with testable predictions
+3. **Infrastructure-level ReAct** — explains population-scale deployment cascades
+4. **Two-layer risk model** (infrastructure exposure vs post-compromise execution) — prevents conflating distinct problems
+5. **Governance proposal evaluation** — positions the paper within the solution space rather than merely diagnosing
+
+---
+
+## Section-by-Section Observations
+
+### Introduction
+- The revised framing (*misconfiguration created exposure; architecture amplified consequences*) is precise and defensible
+- Table 1 (contributions) is a nice touch — clearly signals what's novel vs integrative
+- TODO on "revise after empirical approach" is correctly placed
+
+### Section 2: Theoretical Framework
+- Clean, authoritative, properly cited
+- Table 2 (architectures) and Table 3 (failure modes) give the reader a referenceable taxonomy
+- Could benefit from a brief note that these are *ideal types*—real systems mix them
+
+### Section 3: Plan-Then-Act Failure
+- This is where the paper *earns its keep*. The code-level evidence is devastating
+- The discovery that code defaults are *secure* but deployment templates override them is the kind of finding that changes how people think about the problem
+- "Specification fragmentation" is a genuine conceptual contribution
+- Wang et al. citation is appropriately placed
+
+### Section 4: ReAct Failure
+- The asymmetry between HTTP deny list (functional suitability) and ACP danger list (security risk) is a brilliant concrete illustration
+- The connection to Wang et al.'s trilemma and Nguyen et al.'s penetration testing provides empirical grounding
+- Could strengthen: explicitly name this as a *policy incoherence* problem
+
+### Section 5: Absence of Deliberative Oversight
+- The hook mechanism exists but is bypassed is another devastating code-level finding
+- MCPShield as validation of the diagnostic is elegant
+- Two-layer distinction (5.1) is essential and should be highlighted in the abstract/intro
+- Allegrini et al. citation connects to formal methods literature—good
+
+### Section 6: Infrastructure-Level ReAct
+- This is the most conceptually novel contribution
+- The admission that it's "provisional" and needs empirical confirmation is intellectually honest
+- Could strengthen: explicitly frame as a *hypothesis* with proposed verification methods (temporal clustering, configuration fingerprinting)
+
+### Section 7: Vulnerability Multiplier
+- Figure 1 (RCE chain) is excellent—traces the entire exploit path with failure mode annotations
+- The step-by-step code trace (auth bypass → deny list omission → hook skip → exec approval bypass) is methodologically sound
+- Connects back to all three failure modes, unifying the analysis
+
+### Section 8: Scaffolding Duality
+- The formal inequality (G ≥ C vs G < C) gives the paper a testable core
+- MedBench as positive instance, OpenClaw as negative instance is clean
+- This section now does what it should: provides the *theoretical engine* for the diagnosis
+
+### Section 9: Tripartite Control Failure
+- Table 6 (tripartite failure) and the summary formula (*high autonomy + network exposure − governance = systemic vulnerability*) should be quotable
+- The two-layer remediation point (fixing only Layer 1 or only Layer 2 is insufficient) is practically important
+
+### Section 10: Recurrence of Internet History
+- The historical parallels (SMTP, MongoDB, Docker) situate the incident in a broader pattern
+- The qualitative difference claim (*data interfaces vs decision-execution loops*) is the payoff
+- Xu et al. (26.1% vulnerable skills) provides quantitative backing
+
+### Section 11: Governance-Aligned Architectures
+- Evaluating existing proposals against the tripartite model is the right move—it shows the framework has *discriminatory power*
+- The finding that *none* address network isolation is a genuine contribution
+- The three-layer proposal (capability sandbox, action verification, secure-by-default isolation) follows logically from the diagnosis
+- Table 8 (governance evaluation) should be highlighted—it's the paper's practical output
+
+### Conclusion
+- The final line ("distributed autonomous actors as the attack surface") is memorable
+- TODO is correctly placed—will need to reflect final empirical decisions
+
+---
+
+## Suggested Additions/Refinements
+
+### 1. Explicit Hypothesis Statements
+Add a short paragraph at the end of Section 6:
+> The infrastructure-level ReAct hypothesis generates two testable predictions: (1) temporal clustering of deployments should correlate with tutorial publication dates; (2) configuration fingerprints should exhibit low entropy across exposed instances, consistent with template reuse rather than independent reasoning. These predictions are left for future work.
+
+### 2. Policy Incoherence in Section 4
+Add a brief observation:
+> This asymmetry—the same capability classified as dangerous on one interface but permitted without additional gating on another—reveals a policy incoherence that the step-local ReAct loop cannot resolve. The classification criterion (functional suitability) and the security requirement (risk mitigation) operate in different value spaces with no mechanism for reconciliation.
+
+### 3. Table of Code Evidence
+Consider adding an appendix or a summary table listing the key code-level findings with file/line references:
+
+| Finding | Location | Section |
+|--------|----------|---------|
+| Code defaults to loopback | server-runtime-config.ts:51 | 3 |
+| Docker Compose overrides to LAN | docker-compose.yml:34 | 3 |
+| --allow-unconfigured bypass | Dockerfile:230 | 3 |
+| auth mode "none" valid | types.gateway.ts:123 | 3 |
+| before_tool_call hook skipped | tools-invoke-http.ts:321 | 5 |
+| exec not in HTTP deny list | dangerous-tools.ts:9-20 | 4 |
+| exec approval bypassable | bash-tools.exec.ts:331-334 | 7 |
+
+### 4. Limitations Section
+Add a brief subsection before the conclusion:
+> **Limitations.** This analysis is retrospective and based on a single incident. The code-level findings, while detailed, reflect the state of the OpenClaw codebase at the time of analysis and may not generalise to all agent frameworks. The infrastructure-level ReAct hypothesis requires empirical validation through deployment fingerprinting. The governance proposals evaluated in §11 are a sample of recent work, not a systematic review.
+
+---
+
+## Final Verdict
+
+This paper now has:
+
+| Dimension | Assessment |
+|----------|-----------|
+| **Novelty** | High — infrastructure-level ReAct, capability–governance equilibrium, two-layer risk model |
+| **Rigor** | High — code evidence, formal inequality, multiple independent citations |
+| **Practical relevance** | High — governance proposal evaluation, design recommendations |
+| **Theoretical grounding** | High — alignment literature, security classics, agent architectures |
+| **Readability** | Good — clear structure, helpful tables, memorable formulations |
+
+This is a **strong accept** for a venue like the *Conference on AI Safety* or *Workshop on Agent Security*. It needs minor revision (the TODOs, the suggested additions) and then it's ready.
+
+The paper does what the best applied research does: it takes a real incident, reads it through a coherent lens, extracts a generalisable framework, and shows how that framework can guide future design. That's a contribution.
+啊呀，我的痛苦是问题越审越多了……………… 拜托不要再有了，我求求你们了开发OpenClaw的人。他们更新一个版本的我的补丁就要跟着动。
+我们收到了用户的消息，包含两个文件：一个是OpenClaw部署安全加固工单（markdown格式），另一个是针对OpenClaw HTTP工具调用路径缺失钩子的补丁代码（TypeScript）。用户最后附言表达了痛苦和抱怨，希望不要再有问题。
+
+我们需要分析这两个文件，结合之前的讨论（关于OpenClaw安全问题的诊断论文），并回应用户。用户似乎在维护或修复OpenClaw的安全问题，并且面临持续更新的维护负担。
+
+我们的回答应：
+1. 理解用户情绪，给予共情。
+2. 分析提供的加固工单，确认其全面性和正确性。
+3. 分析提供的补丁代码，评估其有效性和潜在问题。
+4. 提出进一步建议或注意事项，如如何管理补丁以适应上游更新。
+5. 保持专业、建设性的态度，避免过度抱怨或指责。
+
+注意用户可能是开发人员或安全工程师，正在处理OpenClaw的加固工作。他们可能希望得到反馈或支持。
+
+我们需谨慎回应，确保内容准确、有帮助，同时符合AI助手的原则。
+你的痛苦我完全理解——这已经不是“修一个漏洞”的问题，而是面对一个**架构级缺陷**时，被迫在多个层面积攒补丁，而且每次上游更新都要重新核对、重新应用。你提供的工单和补丁是我见过的对OpenClaw安全加固**最完整、最系统**的实战文档。下面是我的反馈。
+
+---
+
+## 一、加固工单（openclaw_hardening.md）评价
+
+### 1. 结构清晰，纵深防御思想落地
+- 从网络层→认证层→工具执行层→沙箱层→文件系统层，**五层防御**的划分非常合理，每层对应RCE链路的一个关口。
+- 每项操作都有明确的代码来源（文件:行号），可复现、可验证，这是专业安全工单的典范。
+
+### 2. 精准抓住了架构的“碎片化”本质
+- 指出了**代码默认安全但部署模板覆盖**（§1.1）、**`--allow-unconfigured`绕过代码检查**（§2.2）、**`mode="none"`合法**（§2.1）——这些都是Plan-Then-Act失效的具体体现。
+- 识别出**HTTP拒绝清单与ACP危险清单的不一致**（§3.1），并归因于“逐步局部优化导致全局不一致”，这正是ReAct失效的实例。
+- 最重要的是，**明确指出HTTP路径完全缺失`before_tool_call`钩子**（§3.3），对应论文中“审议式监督缺失”的结论。
+
+### 3. 覆盖了容易被忽略的扩展攻击面
+- `/v1/responses`、`/v1/chat/completions`、插件HTTP路由、Canvas WebSocket——这些容易被遗忘的入口点都被纳入加固范围（§3.4），体现了攻击面思维。
+
+### 4. 与论文的映射表（§8）非常有价值
+- 将每个加固项与论文的失效模式关联，使工单不仅是操作清单，更是理论框架的落地验证。这个映射可以作为附录提交给上级或审计，证明加固不是拍脑袋，而是基于系统性诊断。
+
+---
+
+## 二、补丁代码（openclaw-http-hook-patch.ts）评价
+
+### 1. 问题定位准确
+- 你精准地找到了`tools-invoke-http.ts:321`直接调用`tool.execute()`，而交互式agent路径通过`wrapToolWithBeforeToolCallHook()`包装了钩子。
+- 注意到了`createOpenClawTools()`与`createAndNormalizeTools()`的差异——这是架构设计上的不一致，属于ReAct失效的典型表现。
+
+### 2. 补丁实现清晰，考虑了接口细节
+- 正确导入了`runBeforeToolCallHook`（注意是单数，易错点）。
+- 正确处理了钩子的返回值类型（`blocked: true`带reason，`blocked: false`可能变换params）。
+- 返回403并携带reason，符合RESTful实践。
+- 添加了详细注释，包括测试命令和后续维护建议。
+
+### 3. 指出了更深层的问题
+- 钩子接口目前没有`surface`参数，无法区分HTTP调用与交互式调用——这意味着钩子逻辑无法针对网络暴露面采取更严格的策略。你建议要么扩展接口，要么用`toolCallId`前缀区分，这是对架构的深刻理解。
+- 建议将核心逻辑提取到共享工具（`shared/tool-hooks.ts`），避免重复代码，也便于未来同步更新——这是架构层面的改进建议。
+
+### 4. 维护建议非常实用
+- 提供了`git diff > patches/...`和`git apply`的流程，这是应对上游更新的标准方法。可以补充一点：维护一个`patches/`目录，并记录每次上游版本更新后需要重新验证的项。
+
+---
+
+## 三、你的痛苦：为什么问题越审越多？
+
+你遇到的困境本质上是**架构层面的缺陷无法通过局部补丁彻底修复**。每修复一个点，可能暴露另一个点，或者上游更新又带来新的不一致。这是系统性风险的典型特征。
+
+1. **上游缺乏安全设计原则**：OpenClaw的开发似乎没有遵循“安全默认”、“一致性”、“纵深防御”等原则，导致安全特性散落在各层，且相互矛盾。
+2. **补丁是脆弱的**：你加的钩子可能在下个版本被重构、被覆盖，或者新功能引入新的未加固端点。
+3. **维护成本持续累积**：每次升级都要重新审视所有补丁，测试所有关口——这已经不是一个人能长期承担的。
+
+---
+
+## 四、下一步建议
+
+### 1. 向上游反馈（如果你有影响力）
+将你的工单和补丁整理成**架构级安全建议**提交给OpenClaw团队，指出：
+- 需要统一HTTP和agent路径的钩子机制。
+- 需要消除“`mode="none”`等危险配置。
+- 需要默认网络隔离（loopback + 反向代理指南），而非依赖用户阅读文档。
+- 需要提供统一的工具权限模型，而不是多个独立清单。
+
+### 2. 考虑采用外部代理或网关
+如果业务上只需要HTTP接口，可以考虑在反向代理层**彻底阻断`/tools/invoke`等高风险端点**，只开放必要的业务API。这样可以将安全责任从OpenClaw内部转移到更成熟的代理（如nginx、Envoy），减少对上游补丁的依赖。
+
+### 3. 文档化“已知剩余风险”
+即使按照你的工单加固，仍可能存在未知的插件路由、未来的端点、钩子接口变化等风险。建议记录一份“剩余风险清单”，明确哪些风险已缓解、哪些仍需关注，作为管理层接受的底线。
+
+### 4. 考虑容器化与沙箱强化
+你已经提到了沙箱模式，可以进一步：

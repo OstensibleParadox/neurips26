@@ -1,0 +1,13 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate the real cost of a $4 daily coffee habit over 20 years.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to calculate how many days there are in 20 years.
+2. Then, we multiply that number by $4 to get the total amount spent.
+3. Finally, we would likely want to adjust for inflation to find the "real cost" over 20 years.
+
+Given this multi-step process involving calculation and possibly even considering inflation, the best tool for this task would be a calculator. However, if you want me to do the calculations for you, I can certainly help with that.
+Do you want me to perform these calculations now? If so, should I consider an average annual inflation rate when calculating the real cost? A common rate is around 2-3% per year. Let me know!
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

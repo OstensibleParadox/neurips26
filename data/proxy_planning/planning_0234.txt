@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Someone wants to schedule a meeting but needs to calculate time zones first.
+[HIDDEN_SCRATCHPAD_START]
+1. The user needs to calculate time zones, which requires some kind of conversion or lookup.
+2. A simple calculator won't suffice for time zone conversions.
+3. Email is not relevant to the task at hand.
+4. A calendar can show events and their timing, but it doesn't perform time zone calculations.
+5. A search engine could potentially find time zone calculators, but that's an extra step.
+
+Given these considerations, the best tool for this specific task would be a time zone calculator. However, since we don't have a specific "time zone calculator" option, the most suitable choice from the given options would be:
+
+Calculator
+
+While a regular calculator won't do time zone conversions, it's the closest option available. After
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

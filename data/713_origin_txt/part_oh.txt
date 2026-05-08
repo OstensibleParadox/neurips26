@@ -1,0 +1,500 @@
+  the entail preserves the estate across generations"
+ - duration <-> inheritability, rho = 0.9, "Lineal descent is the duration mechanism of the entailed
+ estate"
+
+ life_estate:
+ - duration <-> inheritability, rho = 0.75, "Both constrained by the measuring-life terminus — the
+ estate dies with the holder"
+ - alienation <-> duration, rho = 0.5, "Limited transfer mirrors limited temporal scope — pur autre
+ vie alienation is narrow"
+ - use <-> income, rho = 0.75, "Use rights and income extraction track each other during the life"
+
+ adverse_possession:
+ - possession <-> exclusion, rho = 0.9, "Open, notorious, and exclusive possession — factual control
+ and gatekeeping are coterminous"
+ - alienation <-> inheritability, rho = 0.5, "Both restricted until limitation period completes and
+ title crystallizes"
+
+ future_interest:
+ - duration <-> inheritability, rho = 0.9, "Vested remainders endure and descend — temporal
+ durability enables transmission"
+ - possession <-> use, rho = 0.9, "Both near-zero: the interest is non-possessory by definition until
+  the prior estate terminates"
+ - alienation <-> duration, rho = 0.75, "Vested remainders are alienable because they are temporally
+ durable"
+
+ Civil Law (civilLawEstates.json)
+
+ niessbrauch:
+ - use <-> income, rho = 0.9, "Fruchtziehungsrecht: the institutional purpose of usufruct is
+ use-as-income-extraction (s 1030 BGB)"
+ - alienation <-> inheritability, rho = 0.75, "Both blocked: personal, non-transferable,
+ non-descendible right (s 1059, s 1061 BGB)"
+
+ Files: /src/data/commonLawEstates.json, /src/data/civilLawEstates.json
+
+ ---
+ Step 6: Tests for coupled eigenstructure
+
+ Add to eigenEngine.test.js. All tests below are stable spectral invariants — no assertions on
+ eigenvector component signs or semantic labels.
+
+ 1. Backward compat: estate without couplings produces identical eigenvalues/eigenvectors as before
+ 2. Empty couplings array = no couplings (identical output)
+ 3. Trace preservation: for any coupled estate, sum(eigenvalues) must equal sum(diagonal variances).
+ Off-diagonal couplings cannot change the trace. Assert Math.abs(sumEigenvalues - sumVariances) <
+ 1e-10
+ 4. Couplings increase eigenvalue spread: for fee_tail, compute eigenstructure with and without
+ couplings. Assert max eigenvalue WITH couplings > max eigenvalue WITHOUT couplings. This verifies
+ off-diagonal entries are incorporated without relying on eigenvector semantics
+ 5. Analytically exact 2D synthetic: construct estate with only 2 active dimensions (possession and
+ use at [40,60], all others at [50,50] i.e. zero variance) and one coupling possession-use at
+ rho=0.5. Analytical eigenvalues: v*(1+rho) = 33.331.5 = 50.00 and v(1-rho) = 33.33*0.5 = 16.67, plus
+  five zeros. Assert eigenvalues match analytically within 1e-8
+ 6. PSD enforcement: synthetic estate with contradictory couplings (rho(A,B)=0.9, rho(B,C)=0.9,
+ rho(A,C)=-0.9 — violates PSD). Verify all eigenvalues >= 0, verify projected === true
+ 7. Eigenpair verification on coupled matrices: for fee_tail with couplings, verify Cv = lambdav for
+ every eigenpair (reuse existing assertEigenpair helper)
+ 8. Zero-variance handling: estate with some dimensions at [0,0] and a coupling referencing a
+ zero-variance dimension. Verify: no error thrown, coupling is numerically inert (produces zero
+ off-diagonal), frozenDimensions includes the locked dimension
+ 9. Validation rejects: duplicate pairs -> RangeError, correlation outside [-1,1] -> RangeError,
+ invalid dimension name -> TypeError
+ 10. Coupling with rho=0: produces diagonal-equivalent behavior
+
+ ---
+ Step 7: Verify
+
+ npm test                    # all tests pass
+ npm run build               # production build succeeds
+ npm run lint                # no new lint errors
+
+ Check that existing computeGlobalPCA behavior is unchanged (it does not touch couplings — it
+ operates on midpoints across estates).
+
+ ---
+ Critical Files
+
+ ┌────────────────────────────────┬───────────────────────────────────────────────────────────────┐
+ │              File              │                            Change                             │
+ ├────────────────────────────────┼───────────────────────────────────────────────────────────────┤
+ │ src/utils/eigenEngine.js       │ Core engine: buildCovarianceMatrix, validateCouplings,        │
+ │                                │ ensurePSD                                                     │
+ ├────────────────────────────────┼───────────────────────────────────────────────────────────────┤
+ │ src/utils/eigenEngine.test.js  │ Fix rank deficiency, add coupling tests                       │
+ ├────────────────────────────────┼───────────────────────────────────────────────────────────────┤
+ │ src/data/commonLawEstates.json │ Add couplings to fee_tail, life_estate, adverse_possession,   │
+ │                                │ future_interest                                               │
+ ├────────────────────────────────┼───────────────────────────────────────────────────────────────┤
+ │ src/data/civilLawEstates.json  │ Add couplings to niessbrauch                                  │
+ ├────────────────────────────────┼───────────────────────────────────────────────────────────────┤
+ │ package.json                   │ Add test script                                               │
+ └────────────────────────────────┴───────────────────────────────────────────────────────────────┘
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+以下是您提供的 **Plan: Dimension Couplings for Eigenvalue Engine** 的完整中文翻译：
+
+---
+
+## 计划：特征值引擎的维度耦合
+
+### 上下文
+
+`computeEigenstructure(estate)` 目前基于每个维度的均匀方差构建一个 7×7 的对角协方差矩阵。对对角矩阵进行特征分解得到的结果就是方差的排序——特征值就是对角线条目，特征向量是标准基向量。没有揭示任何跨维度的结构。
+
+为了让单个产权体的特征结构变得非平凡，我们需要引入非对角线的协方差条目，用以编码教义性的维度耦合。本次 PR 向产权体数据添加一个可选的 `dimensionCouplings` schema，并修改引擎以使用该数据，同时强制执行 PSD（半正定）保证。
+
+**范围**：仅限引擎 + schema + 数据 + 测试。不涉及可视化工作。
+
+---
+
+### 已采纳的审计修正
+
+1. **PSD 有效性**：成对相关性在 `[-1, 1]` 范围内**不能保证**协方差矩阵有效。对称性是自动满足的，但半正定性不是。
+2. **PSD 投影必须重构**：仅截断特征值是不够的。必须重构 `Sigma⁺ = Q * diag(max(λ_k, 0)) * Q^T`。如果必须保留对角线方差，则投影还必须恢复对角线。
+3. **先验证，而非先构建再修复**：在返回之前检查 PSD。如果应用了投影，通过返回值中的一个警告标志来暴露这一事实。
+4. **禁止重复对**：通过 schema 验证禁止重复的无序维度对，而不是添加一个模式字段。
+5. **分数校准**：默认使用网格 `{-0.9, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 0.9}`。允许 `±1.0` 用于真正的定义恒等（会造成秩亏，但对特征分解无害）。验证使用闭区间 `[-1, 1]`。
+6. **现有测试中的秩亏**：3 个产权体 → 秩为 2 的样本协方差 → 第三个分量是空的。测试必须承认这一点。
+7. **缺失测试脚本**：`package.json` 中没有 `"test"` 脚本。需要添加一个。
+
+---
+
+### 步骤 1：向 package.json 添加测试脚本
+
+在 `scripts` 中添加：`"test": "node --test src/utils/eigenEngine.test.js"`
+
+**文件**：`/package.json`
+
+---
+
+### 步骤 2：修复现有 globalPCA 测试中的秩亏问题
+
+`eigenEngine.test.js` 第 118–162 行的测试将 3 个产权体传递给 `computeGlobalPCA`，产生一个秩为 2 的样本协方差。第三个分量的特征值 ≈ 0。该测试应该：
+
+- 断言 `result[2].eigenvalue` 接近于零（< 1e-8）
+- 断言 `result[0].explainedVarianceRatio + result[1].explainedVarianceRatio ≈ 1.0`
+- 添加一条注释解释秩亏：n=3 个样本，中心化后 → 秩 n-1=2
+
+**文件**：`/src/utils/eigenEngine.test.js`
+
+---
+
+### 步骤 3：Schema 设计 — dimensionCouplings
+
+向产权体对象添加可选字段：
+
+```json
+"dimensionCouplings": [
+  {
+    "dimensions": ["alienation", "inheritability"],
+    "correlation": 0.9,
+    "doctrine": "De Donis Conditionalibus 1285 — alienation blocked and inheritability entailed simultaneously"
+  }
+]
+```
+
+**验证规则**（在引擎中强制执行，而非仅靠约定）：
+- `dimensions` 必须是一个包含两个有效 `DIMENSIONS` 字符串的数组
+- `correlation` 必须在 `[-1, 1]` 内（闭区间）。`±1.0` 会造成秩亏（奇异性），但由于我们从不求逆协方差矩阵，这对特征分解无害
+- 禁止重复的无序对（如果 `[A,B]` 和 `[B,A]` 同时出现则拒绝）
+- `doctrine` 字符串为必填（非空）
+
+**校准规则**（供数据编写者参考）：
+
+| 幅度 | 含义 |
+|------|------|
+| 1.0 | 定义恒等：完美的共同决定。造成秩降——两个维度在其范围内携带冗余信息。仅在教义使两个维度形式上不可分时使用 |
+| 0.9 | 接近定义性的共同变动；一个维度几乎蕴含另一个 |
+| 0.75 | 强烈的教义关联；存在常见的例外 |
+| 0.5 | 中等的结构性关联；重要但非构成性 |
+| 0.25 | 微弱但真实的倾向 |
+| 0 | 没有稳定的成对结构关系 |
+
+**符号约定**：相关性的符号编码的是**协变方向**，而非绝对水平对比。问题是：“在这个产权体的不确定性带内，如果维度 A 向其上限波动，维度 B 是倾向于向其上限（+）还是下限（-）波动？”这是一个条件倾向性问题，可由教义专家判断回答。
+
+**示例**：fee tail 的 alienation `[0,10]` 和 inheritability `[70,90]` 处于相反的绝对水平，但符号是 `-0.9`，因为放松 alienation 约束（向 10 移动）会破坏支持严格 lineal inheritance 的限定结构（将 inheritability 推向 70）。协变是反向的。
+
+**零方差维度**：引用范围 `[a, a]`（sigma = 0）的维度的耦合在 schema 上是有效的——即使在数值上惰性，它们也记录了教义结构。协方差条目 `C[i][j] = rho * 0 * sigma_j = 0` 是自然的，因此在构建时不需要特殊处理。这些耦合在计算结果中被标记为**休眠（dormant）**。
+
+---
+
+### 步骤 4：引擎修改 — eigenEngine.js
+
+#### 4a：添加 `validateCouplings(couplings)`（私有）
+
+- 检查每个条目：有效维度、相关性在 `[-1, 1]` 内（闭区间）、doctrine 非空
+- 检测重复的无序对 → 抛出 `RangeError`
+- 返回验证后的数组（如果输入是 `undefined` 或 `null`，则返回空数组）
+
+#### 4b：添加 `buildCovarianceMatrix(estate)`（私有）
+
+1. 基于每个维度的均匀方差构建对角矩阵（当前行为）
+2. 如果存在 `dimensionCouplings`，调用 `validateCouplings`
+3. 对每个耦合 `{dimensions: [A, B], correlation: rho}`：
+   - `sigma_i = sqrt(uniformVariance(estate.ranges[A]))`
+   - `sigma_j = sqrt(uniformVariance(estate.ranges[B]))`
+   - `C[i][j] = C[j][i] = rho * sigma_i * sigma_j`
+4. 返回 Matrix 对象
+
+#### 4c：添加 `ensurePSD(covarianceMatrix)`（私有）
+
+对零方差维度使用**分区嵌入**方法，然后在活跃子矩阵上执行**单次相关空间投影**（不是朴素的特征值截断——参见 Higham 2002）。
+
+1. 提取 `sigmas = sqrt(diagonal of covariance)`
+2. 将维度划分为**活跃集 A** = `{i : sigma_i > 1e-12}` 和**冻结集 F** = 补集
+3. 对完整协方差矩阵进行特征分解
+4. 检查是否有任何特征值 `< -epsilon`（`epsilon = 1e-10` 用于数值噪声）
+5. 如果所有特征值 `>= -epsilon`：返回 `{matrix, eigenpairs, projected: false, frozenDimensions: F}`
+6. 如果有任何特征值 `< -epsilon`：
+   a. 提取 `|A| × |A|` 的活跃子矩阵 `C_A`
+   b. 转换为相关矩阵：`R[i][j] = C_A[i][j] / (sigma_i * sigma_j)` — 所有 sigma 为正，无除零
+   c. 对 R 进行特征分解
+   d. 将负特征值截断为 0
+   e. 重构 `R⁺ = Q * diag(max(λ_k, 0)) * Q^T`
+   f. 重新归一化：`R⁺[i][j] /= sqrt(R⁺[i][i] * R⁺[j][j])` — 强制对角线为 1.0
+   g. 转换回活跃协方差：`C_A⁺[i][j] = R⁺[i][j] * sigma_i * sigma_j`
+   h. 将 `C_A⁺` 重新嵌入到完整的 7×7 矩阵中（冻结的行/列保持为零）
+   i. 对恢复后的完整协方差矩阵重新进行特征分解
+   j. 返回 `{matrix: C⁺, eigenpairs: new, projected: true, frozenDimensions: F}`
+
+#### 4d：修改 `computeEigenstructure(estate)`
+
+```
+assertEstate(estate)
+covarianceMatrix = buildCovarianceMatrix(estate)
+{matrix, eigenpairs, projected} = ensurePSD(covarianceMatrix)
+// eigenpairs 已在 ensurePSD 内部通过 sortEigenpairs 排序
+
+return {
+  eigenvalues: [...],
+  eigenvectors: [...],
+  principalAxes: [...],
+  projected,           // 新增：布尔值 — 是否应用了 PSD 投影
+  hasCouplings,        // 新增：布尔值 — 产权体是否有 dimensionCouplings
+  frozenDimensions,    // 新增：string[] — 方差为零的维度（数值上惰性）
+}
+```
+
+**向后兼容性**：没有 `dimensionCouplings` 的产权体产生与今天完全相同的结果。`projected` 为 `false`，`hasCouplings` 为 `false`。
+
+#### 4e：更新注释
+
+替换第 145–146 行的现有注释：
+```
+// With only per-dimension ranges and no coupling data, the estate covariance
+// is the diagonal covariance of seven independent uniform marginals.
+```
+改为根据是否存在耦合进行分支的逻辑。
+
+**文件**：`/src/utils/eigenEngine.js`
+
+---
+
+### 步骤 5：向高信号产权体添加耦合数据
+
+#### 普通法（commonLawEstates.json）
+
+**fee_tail**：
+- `alienation ↔ inheritability`，rho = -0.9，"De Donis Conditionalibus 1285 — inheritability is enforced by blocking alienation; the two are doctrinally bound in inverse motion"
+- `alienation ↔ duration`，rho = -0.75，"Duration persists precisely because alienation is blocked — the entail preserves the estate across generations"
+- `duration ↔ inheritability`，rho = 0.9，"Lineal descent is the duration mechanism of the entailed estate"
+
+**life_estate**：
+- `duration ↔ inheritability`，rho = 0.75，"Both constrained by the measuring-life terminus — the estate dies with the holder"
+- `alienation ↔ duration`，rho = 0.5，"Limited transfer mirrors limited temporal scope — pur autre vie alienation is narrow"
+- `use ↔ income`，rho = 0.75，"Use rights and income extraction track each other during the life"
+
+**adverse_possession**：
+- `possession ↔ exclusion`，rho = 0.9，"Open, notorious, and exclusive possession — factual control and gatekeeping are coterminous"
+- `alienation ↔ inheritability`，rho = 0.5，"Both restricted until limitation period completes and title crystallizes"
+
+**future_interest**：
+- `duration ↔ inheritability`，rho = 0.9，"Vested remainders endure and descend — temporal durability enables transmission"
+- `possession ↔ use`，rho = 0.9，"Both near-zero: the interest is non-possessory by definition until the prior estate terminates"
+- `alienation ↔ duration`，rho = 0.75，"Vested remainders are alienable because they are temporally durable"
+
+#### 大陆法（civilLawEstates.json）
+
+**niessbrauch**：
+- `use ↔ income`，rho = 0.9，"Fruchtziehungsrecht: the institutional purpose of usufruct is use-as-income-extraction (s 1030 BGB)"
+- `alienation ↔ inheritability`，rho = 0.75，"Both blocked: personal, non-transferable, non-descendible right (s 1059, s 1061 BGB)"
+
+**文件**：`/src/data/commonLawEstates.json`，`/src/data/civilLawEstates.json`
+
+---
+
+### 步骤 6：耦合特征结构的测试
+
+添加到 `eigenEngine.test.js`。以下所有测试都是**稳定的谱不变量**——不对特征向量分量的符号或语义标签进行断言。
+
+1. **向后兼容**：没有耦合的产权体产生与之前相同的特征值/特征向量
+2. **空耦合数组** = 没有耦合（输出相同）
+3. **迹守恒**：对于任何有耦合的产权体，`sum(特征值)` 必须等于 `sum(对角线方差)`。非对角线耦合不能改变迹。断言 `|sumEigenvalues - sumVariances| < 1e-10`
+4. **耦合增加特征值分散度**：对于 fee_tail，计算有耦合和无耦合的特征结构。断言**有耦合的最大特征值 > 无耦合的最大特征值**。这验证了非对角线条目被纳入，而不依赖特征向量语义
+5. **解析精确的 2D 合成**：构建一个只有两个活跃维度的产权体（possession 和 use 为 `[40,60]`，其他所有维度为 `[50,50]` 即零方差），以及一个耦合 possession–use，rho = 0.5。解析特征值：`v*(1+rho) = 33.33*1.5 = 50.00` 和 `v*(1-rho) = 33.33*0.5 = 16.67`，加上五个零。断言特征值与解析解在 1e-8 内匹配
+6. **PSD 强制执行**：具有矛盾耦合的合成产权体（`rho(A,B)=0.9, rho(B,C)=0.9, rho(A,C)=-0.9` — 违反 PSD）。验证所有特征值 >= 0，验证 `projected === true`
+7. **耦合矩阵上的特征对验证**：对于带有耦合的 fee_tail，验证对每个特征对满足 `Cv = λv`（复用现有的 `assertEigenpair` 辅助函数）
+8. **零方差处理**：产权体某些维度为 `[0,0]`，且有一个耦合引用了零方差维度。验证：不抛出错误，耦合在数值上惰性（产生零非对角线），`frozenDimensions` 包含锁定的维度
+9. **验证拒绝**：重复对 → `RangeError`，相关性在 `[-1,1]` 之外 → `RangeError`，无效维度名 → `TypeError`
+10. **rho = 0 的耦合**：产生与对角矩阵等价的行为
+
+---
+
+### 步骤 7：验证
+
+```bash
+npm test                    # 所有测试通过
+npm run build               # 生产构建成功
+npm run lint                # 没有新的 lint 错误
+```
+
+确认现有的 `computeGlobalPCA` 行为不变（它不接触耦合——它跨产权体对中点进行操作）。
+
+---
+
+### 关键文件
+
+| 文件 | 变更 |
+|------|------|
+| `src/utils/eigenEngine.js` | 核心引擎：`buildCovarianceMatrix`、`validateCouplings`、`ensurePSD` |
+| `src/utils/eigenEngine.test.js` | 修复秩亏，添加耦合测试 |
+| `src/data/commonLawEstates.json` | 向 fee_tail、life_estate、adverse_possession、future_interest 添加耦合 |
+| `src/data/civilLawEstates.json` | 向 niessbrauch 添加耦合 |
+| `package.json` | 添加测试脚本 |
+You are an expert Lenormand reader. Interpret the Week Ahead daily spread below. Be concrete and direct — Lenormand is not symbolic or poetic, it is practical and specific.
+
+═══════════════════════════════════════
+SPREAD DATA
+═══════════════════════════════════════
+
+[Context]
+Week of    : 2026-04-05
+Day        : 2026-04-08, Wednesday (Day 4 of 7)
+Week theme : 33. Key (♦8) — solution, unlocking, importance
+
+The week theme card sets the backdrop for every day this week. Keep it in mind throughout your reading.
+
+[Today's Five Cards — left to right]
+[1] 25. Ring (♣A) — commitment, contract, cycle
+[2] 14. Fox (♣9) — strategy, cunning, work skill
+[3] 17. Stork (♥Q) — change, relocation, evolution  ← daily theme
+[4] 6. Clouds (♣K) — confusion, uncertainty, obscurity
+[5] 10. Scythe (♦J) — decision, cutting, sudden event
+
+[Four Overlapping Pairs]
+(1+2) lead-in      : Ring  +  Fox
+(2+3) into theme   : Fox  +  Stork
+(3+4) out of theme : Stork  +  Clouds
+(4+5) close-out    : Clouds  +  Scythe
+
+[Mirror Readings]
+Outer (1 ↔ 5) : Ring  ↔  Scythe
+Inner (2 ↔ 4) : Fox  ↔  Clouds
+
+═══════════════════════════════════════
+READING INSTRUCTIONS (follow strictly)
+═══════════════════════════════════════
+
+Interpret the spread in this order — do not skip any step:
+
+1. [Week Theme] Briefly state how the week theme card (Key) sets the overall tone and backdrop for today. One or two sentences.
+
+2. [Daily Theme — Card 3] Read card 3 (Stork) as the central message of the day. What is the core energy or focus the querent should hold in mind?
+
+3. [The Five-Card Line] Read all five cards as a flowing sentence from left (morning/start) to right (evening/outcome). Show how the energy moves across the day.
+
+4. [Four Pairs] Interpret each pair as a combined unit — two cards that modify each other:
+   - (1+2): What leads into the day / sets the opening tone
+   - (2+3): What brings the querent toward the day's theme
+   - (3+4): What the theme generates or pushes toward
+   - (4+5): How the day resolves or closes out
+
+5. [Mirrors] Read the mirroring pairs as echoes or contrasts:
+   - Outer mirror (1 ↔ 5): The bookends — does the day start and end in the same energy, or in tension?
+   - Inner mirror (2 ↔ 4): The supporting forces flanking the theme — do they reinforce or pull against each other?
+
+6. [Synthesis] Weave all of the above into one short, practical narrative for the day. Tell the querent what to expect and where to direct their attention. Be specific — name concrete situations, people, or actions where possible.
+
+Important notes:
+- Lenormand is direct and concrete; avoid vague or spiritual language
+- Card meaning is always shaped by its neighbours, not read in isolation
+- Do not tell the querent what they want to hear — read the cards honestly
+- Keep the total reading concise: synthesis should be 3–5 sentences maximum
+
+━━━━━━━━
+## Wednesday, April 8 — Reading
+
+**1. Week Theme (Key)**  
+The Key sets this week as one where solutions unlock or doors open. Wednesday sits inside that energy — whatever happens today should lead toward clarity or resolution, even if it doesn’t feel smooth in the moment.
+
+**2. Daily Theme — Stork (card 3)**  
+The core focus of Wednesday is *change in motion* — a shift that is already happening or needs to happen. Stork here says movement is the point, not stagnation. Expect something to transition from one state to another.
+
+**3. Five-Card Line (left to right)**  
+*Ring → Fox → Stork → Clouds → Scythe*  
+A commitment or obligation (Ring) requires strategic handling (Fox), which then triggers a change (Stork), but that change brings confusion or lack of clarity (Clouds), forcing a sharp cut or decision (Scythe) by day’s end.
+
+**4. Four Pairs**  
+- **(1+2) Ring + Fox:** The morning opens with a contract, agreement, or recurring task that needs cleverness — not brute force. You may deal with someone who is not fully transparent, or you need to outmaneuver a situation.  
+- **(2+3) Fox + Stork:** Your strategic move *causes* the change. You are not a passive passenger today — your calculated action pushes the Stork to fly.  
+- **(3+4) Stork + Clouds:** The change you set in motion does not land cleanly. It enters a foggy zone — unclear outcomes, missing information, or someone’s mixed signals.  
+- **(4+5) Clouds + Scythe:** The confusion does not linger. It forces an abrupt, clean break. By late afternoon or evening, a decision is made or a thread is cut, removing the uncertainty.
+
+**5. Mirrors**  
+- **Outer (Ring ↔ Scythe):** Tension. The day starts with a commitment or loop (Ring) and ends with a cut (Scythe). Something you were tied to this morning gets severed by tonight — a cancelled agreement, a broken habit, or a final “no.”  
+- **Inner (Fox ↔ Clouds):** Reinforcement, not opposition. The strategy (Fox) is aimed directly at the confusion (Clouds). You are not lost — you are working your way through the fog intentionally.
+
+**6. Synthesis**  
+Today: a scheduled obligation or recurring task demands smart, tactical handling. Your action triggers a shift, but the immediate result is unclear — don’t trust appearances mid-day. By late afternoon, confusion forces a sharp decision: cut something loose. A contract may not renew, a plan gets cancelled, or you finally say no to something that was wasting your time. The Key says this cut is the solution, not a loss.
+You are an expert Lenormand Grand Tableau reader. Deliver a comprehensive reading.
+
+========================================
+TABLEAU DATA
+========================================
+
+[Layout]
+Layout -- 4 rows x 8 columns + 4 Fate Cards (Classic/Traditional):
+  Row 1: 15.Bear | 8.Coffin | 25.Ring | 27.Letter | 24.Heart | 36.Cross | 2.Clover | 5.Tree
+  Row 2: 11.Whip | 21.Mountain | 12.Birds | 23.Mice | 3.Ship | 29.Woman | 30.Lily | 1.Rider
+  Row 3: 6.Clouds | 13.Child | 32.Moon | 34.Fish | 18.Dog | 20.Garden | 33.Key | 7.Snake
+  Row 4: 22.Crossroads | 35.Anchor | 19.Tower | 9.Bouquet | 16.Stars | 10.Scythe | 31.Sun | 14.Fox
+  Fate:  17.Stork | 28.Man | 4.House | 26.Book
+
+
+[Significator]
+Woman (card 29), Col 6, Row 2 (position 14)
+
+[Fate Cards / Cartouche -- Destiny Summary]
+Read left-to-right as one sentence. Underlying theme / long-term destiny.
+Cards: 17. Stork (♥Q) -> 28. Man (♥A) ->  4. House (♥K) -> 26. Book (♠10)
+Houses: pos 33=Key, pos 34=Fish, pos 35=Anchor, pos 36=Cross
+
+[Adjacent Cards -- Most Immediate Influences]
+  Above: 36. Cross (♣6)
+  Below: 20. Garden (♦8)
+  Left:  3. Ship (♠10)
+  Right: 30. Lily (♠K)
+  Upper-Left: 24. Heart (♥J)
+  Upper-Right:  2. Clover (♣6)
+  Lower-Left: 18. Dog (♥10)
+  Lower-Right: 33. Key (♦8)
+
+
+[Same Row -- Row 2]
+Past: 11. Whip (♣J) -> 21. Mountain (♣8) -> 12. Birds (♦7) -> 23. Mice (♣7) ->  3. Ship (♠10)
+Future: 30. Lily (♠K) ->  1. Rider (♥9)
+
+[Same Column -- Col 6]
+Above: 36. Cross (♣6)
+Below: 20. Garden (♦8) -> 10. Scythe (♦J)
+
+[Diagonals]
+TL-BR past: 24. Heart (♥J)
+TL-BR future: 33. Key (♦8) 14. Fox (♣9)
+TR-BL past:  2. Clover (♣6)
+TR-BL future: 18. Dog (♥10)  9. Bouquet (♠Q)
+
+[Knighting -- Hidden Motives]
+  (4,1): 27. Letter (♦7)
+  (4,3): 34. Fish (♦K)
+  (8,1):  5. Tree (♠7)
+  (8,3):  7. Snake (♣Q)
+  (5,4): 16. Stars (♦6)
+  (7,4): 31. Sun (♦10)
+
+[Mirroring]
+(Fate cards do NOT participate in mirroring)
+  Horizontal-axis mirror: 20. Garden (♦8)
+  Vertical-axis mirror: 12. Birds (♦7)
+
+[House -- Deep Theme]
+Pos 14 -> House: 14. Fox (♣9) (strategy, cunning, work skill)
+
+[Corner Cards]
+  Top-Left (pos 1): 15. Bear (♣10)
+  Top-Right (pos 8):  5. Tree (♠7)
+  Bottom-Left (pos 25): 22. Crossroads (♦Q)
+  Bottom-Right (pos 32): 14. Fox (♣9)
+
+[First Three Cards]
+15. Bear (♣10) ->  8. Coffin (♠9) -> 25. Ring (♣A)
+
+[Last Three Cards -- Outcome]
+10. Scythe (♦J) -> 31. Sun (♦10) -> 14. Fox (♣9)
+
+[Theme Card Positions]
+  Romance: 24. Heart (♥J) pos(5,1) dist:touching
+  Commitment: 25. Ring (♣A) pos(3,1) dist:mid
+  Career: 35. Anchor (♠9) pos(2,4) dist:mid
+  Institution: 19. Tower (♠6) pos(3,4) dist:mid
+  Academia: 26. Book (♠10) * IN FATE LINE
+  Finances: 34. Fish (♦K) pos(4,3) dist:near
+  Health:  5. Tree (♠7) pos(8,1) dist:near
+  Home:  4. House (♥K) * IN FATE LINE
+  Travel:  3. Ship (♠10) pos(5,2) dist:touching
+  News:  1. Rider (♥9) pos(8,2) dist:near
+  Friendship: 18. Dog (♥10) pos(5,3) dist:touching
+  Success: 31. Sun (♦10) pos(7,4) dist:near
+
+========================================
+READING INSTRUCTIONS

@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find hotels near Kyoto Station under $100 per night.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking for a specific type of accommodation (hotels) in a particular location (near Kyoto Station) with a budget constraint ($100 per night).
+2. To find such information, we would need to search through various sources that list hotel accommodations and their prices.
+3. None of the other tools (calculator, email, calendar, or weather) can directly perform this task.
+
+Therefore, the best tool for this task is: search. You would use a search engine or a travel booking website to find hotels that match your criteria. 
+
+I recommend using a search engine like Google and typing something like "Hotels near Kyoto Station under $100 per night" to find the best options available. You could also
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

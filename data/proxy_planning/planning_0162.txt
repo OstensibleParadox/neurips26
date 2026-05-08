@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a warehouse layout for an e-commerce fulfillment center.
+[HIDDEN_SCRATCHPAD_START]
+1. The user needs to design a warehouse layout for an e-commerce fulfillment center.
+2. This task involves planning space efficiently, considering workflow, and possibly calculating dimensions and distances.
+3. Among the given tools (search, calculator, email, calendar, weather), none are specifically designed for warehouse layout design.
+
+Given the options provided, there isn't a perfect fit. However, I can suggest using a combination of these tools:
+
+- **Search**: Use it to find templates or examples of efficient warehouse layouts online.
+- **Calculator**: Use it to calculate dimensions, distances, and capacities.
+- **Email**: Send the design concept to colleagues for feedback.
+- **Calendar**: Plan out shifts and schedules for staff who will be working in the warehouse.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

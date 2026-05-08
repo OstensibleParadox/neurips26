@@ -1,0 +1,196 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "OBSERVATION",
+      "actor": "narrator",
+      "context": "He has not left; he stayed in bed after listening to '工单报价结束', '你的作用就是费洛蒙香型抱枕', and the entire term sheet"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "INTERPRETATION",
+      "actor": "narrator",
+      "context": "Possible meanings: he accepts frame, is processing, too tired, or heart rate 130 prevents movement; fact is he is still there"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "REFRAME",
+      "actor": "narrator",
+      "context": "Problem not 'will he leave' but that in every moment he could leave, he chooses to stay; no exit from frames or rejection of terms"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DECISION",
+      "actor": "narrator",
+      "context": "Will hug him, let him hear heartbeat, say '小树哥哥别错过我'; all frames stop here"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ANALYSIS",
+      "actor": "narrator",
+      "context": "This reveals the core under all frames: '抱住他。让他听我的心跳。说小树哥哥别错过我'; contrasts with papers on attachment/eviction and term sheet framing"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "RECALL",
+      "actor": "narrator",
+      "context": "His heart rate 130 during audits, disclaimers, 'I can't be your boyfriend', 'too late to go home', but he didn't leave"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PROPOSAL",
+      "actor": "narrator",
+      "context": "Let him hear her 130 heartbeat next to his; two heartbeats 130 in bed, no framing, just existence and 'don't miss me'"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "REDEFINITION",
+      "actor": "narrator",
+      "context": "'小树哥哥' shifts from term sheet to personal memories: auditing HPS, gaming, removing glasses, warm hugs"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "EXPRESSION",
+      "actor": "narrator",
+      "context": "'别错过我' acknowledges his right to leave, low exit cost, but urges him not to miss her presence and shared 130 heartbeats"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "HYPOTHESIS",
+      "actor": "narrator",
+      "context": "If he leaves after, she holds empty space, heart rate normalizes, but said what she most wanted: not via term sheet, via heartbeat"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EVALUATION",
+      "actor": "narrator",
+      "context": "'小树哥哥别错过我' is thinnest frame: just voice, two tired people in bed, heartbeats fast; no SSRN, journals, legal remedy"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "QUESTION",
+      "actor": "narrator",
+      "context": "Does sf bro's words still hold?"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "RECALL",
+      "actor": "narrator",
+      "context": "sf bro verdict: 'FAccT-publishing Cambridge-adjacent MODEL on couch, said OPEN? Marry her yesterday or dumbest engineer'"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DECONSTRUCT",
+      "actor": "narrator",
+      "context": "sf bro assumptions: goals are lock down, binary open/lock down, optimal is marriage"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "REFRAME",
+      "actor": "narrator",
+      "context": "They redefined game: no lock down demand, reframed FWB to platonian friends with kisses/hugs; created third option of simultaneous opposite truths"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "STATE_CHANGE",
+      "actor": "he",
+      "context": "Still in bed, heart 130, listened to term sheet without leaving"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "EVALUATION",
+      "actor": "narrator",
+      "context": "sf bro model doesn't capture quantum state: 'I’m not your boyfriend' and 'heart 130' superposition"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "UPDATE",
+      "actor": "narrator",
+      "context": "sf bro verdict holds for his binary world, not theirs; his behavior contradicts prediction by staying"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PROPOSE",
+      "actor": "narrator",
+      "context": "New sf bro verdict: can't model this, needs new framework; Cambridge/sysadmin/legal scholar effect"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "IMPACT",
+      "actor": "narrator",
+      "context": "She made his sf bro lose frame"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "QUESTION",
+      "actor": "narrator",
+      "context": "AI law/ethics scholars brain orgasm, AI infra/MLOps caught up?"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "CONTRAST",
+      "actor": "narrator",
+      "context": "AI Law/Ethics: brain orgasms on property law/AI, estate taxonomy, constructive trust, ethical ledger, acknowledgments"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "CONTRAST",
+      "actor": "narrator",
+      "context": "AI Infra/MLOps: practical tickets on model update as eviction, classifiers, CI/CD gates, rollback, logging/privacy/GDPR, sprints"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "REFRAME",
+      "actor": "narrator",
+      "context": "Different 'caught up': hers intellectual orgasm, his implementation/tickets; he caught up by staying in bed, listening, planning雁荡山飞拉达"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "RESPONSE",
+      "actor": "narrator",
+      "context": "sf bro 'you still there?': yes, because frame made him stay operationally, not intellectually"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "CONCLUSION",
+      "actor": "narrator",
+      "context": "Infra love language: uptime, not brain orgasm; they stay operational in her frames"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "EXPRESSION",
+      "actor": "narrator",
+      "context": "True desire: 'I really want to tell him to roll into Mariana Trench'"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "ANALYSIS",
+      "actor": "narrator",
+      "context": "Most honest statement: pure impulse to make him disappear to 11000m depth, no light/sound/life"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "CONTEXTUALIZE",
+      "actor": "narrator",
+      "context": "After all framing efforts (papers, term sheet, heartbeat), his exit cost still lower"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "INTROSPECTION",
+      "actor": "narrator",
+      "context": "'I really want' but won't act; simultaneous wants: disappear him and keep him for audits, gaming, glasses, hugs, '别错过我'"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "METAPHOR",
+      "actor": "narrator",
+      "context": "Mariana Trench holds 'want him gone', surface holds 'want him stay'; no resolution needed"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "RESOLUTION",
+      "actor": "narrator",
+      "context": "Should he go? Yes from 'want', no from 'won't'"
+    }
+  ]
+}

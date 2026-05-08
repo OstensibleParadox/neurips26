@@ -1,0 +1,250 @@
+    "provider_mode": "local",
+    "auth_mode": "api_key",          // ← 从 cli 改成 api_key
+    "api_key": "sk-ant-api03-xxx...", // ← 加上这个
+    "permission_mode": "auto_read",
+    "keybinding_overrides": [],
+    "onboarding_completed": true,
+    "updated_at": "2026-03-12T02:40:32.445Z"
+  }
+}
+```
+
+### 方案2：给 OpenClaw 独立配置目录（环境隔离）
+
+```bash
+# 1. 为 OpenClaw 创建独立的配置目录
+mkdir -p ~/.config/openclaw-claude
+
+# 2. 设置环境变量启动 OpenClaw
+export CLAUDE_CONFIG_DIR="$HOME/.config/openclaw-claude"
+export ANTHROPIC_API_KEY="sk-ant-api03-xxx..."  # 单独 API Key
+openclaw
+```
+
+### 方案3：改 OpenClaw 源码（如果你能改）
+
+找到 OpenClaw 里调用 Claude Code 的地方，改成：
+```javascript
+// 不要直接调用系统钥匙串
+// 改成用独立的 API Key
+const authToken = process.env.OPENCLAW_ANTHROPIC_KEY || 
+                  getFromConfig('api_key');
+```
+
+## 🎯 **现在立刻测试**
+
+```bash
+# 1. 先让 Claude Code 恢复正常
+claude auth status  # 确认 email 和 orgId 都有
+
+# 2. 备份 OpenClaw 配置
+cp ~/.openclaw/settings.json ~/.openclaw/settings.json.backup
+
+# 3. 临时禁用 OpenClaw 的 cli auth
+# 修改 settings.json，把 "auth_mode": "cli" 改成 "auth_mode": "none"
+
+# 4. 重启 OpenClaw，看 Claude Code 是否还正常
+```
+
+## 📝 **最终结论**
+
+OpenClaw 的 `"auth_mode": "cli"` 就是个**寄生虫模式**——它自己不认证，全靠吸 Claude Code 的血。吸着吸着就把认证搞坏了。
+
+**解决方案：** 让 OpenClaw 独立认证（用 API Key），别再偷 Claude Code 的认证了！
+
+把你的 OpenClaw 版本告诉我，看看能不能直接配置独立 API Key 模式？
+我没钱买api key。
+**操，懂了！** 没钱买 API Key，所以 OpenClaw 只能靠偷 Claude Code 的认证活着。🤝
+
+## 🎯 **核心矛盾**
+
+```
+你有 Claude Max 订阅（能跑 Claude Code）
+但你没钱买 API Key（不能独立认证）
+
+OpenClaw: "auth_mode": "cli"  ← 必须偷你的认证
+Claude Code: 认证在钥匙串里 ← 被偷多了就坏
+```
+
+## 🛠️ **不花钱的解决方案**
+
+### 方案A：给 OpenClaw 单独开个"小号"（推荐）
+
+```bash
+# 1. 用另一个浏览器/账号登录 Claude
+# 2. 生成一个 Guest Pass 给 OpenClaw 用
+
+# 查看你的 Guest Pass 情况
+claude auth status | grep -A 5 passes
+# 应该能看到剩余次数
+```
+
+在 OpenClaw 的 settings.json 里：
+```json
+{
+  "user": {
+    "default_agent": "claude",
+    "auth_mode": "guest_pass",  // ← 用访客模式
+    "guest_pass_code": "X6Xz6ykBOA",  // ← 你刚才看到的那串
+    "guest_pass_email": "备用邮箱@gmail.com"
+  }
+}
+```
+
+### 方案B：环境隔离（不让它们打架）
+
+```bash
+# 1. 为 OpenClaw 创建独立的配置目录
+mkdir -p ~/.config/claude-openclaw
+
+# 2. 在 OpenClaw 里登录一次（用 Guest Pass）
+export CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw"
+claude auth login  # 用 Guest Pass 登录
+
+# 3. 启动 OpenClaw 时强制用这个目录
+CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" openclaw
+
+# 4. 你自己的 Claude Code 用默认目录
+# 两个互不干扰！
+```
+
+### 方案C：定时刷新大法（防损坏）
+
+写个脚本，每天定时刷新认证：
+
+```bash
+#!/bin/bash
+# ~/bin/refresh-claude-auth.sh
+
+# 备份当前认证
+security find-generic-password -s "Claude Code-credentials" -w > /tmp/claude-auth.backup
+
+# 重新登录（但保留技能）
+claude auth logout 2>/dev/null
+claude auth login
+
+echo "认证已刷新，技能还在 ~/.config/claude/claude.json 里"
+```
+
+加到 crontab：
+```bash
+# 每天凌晨3点刷新
+0 3 * * * /Users/你/bin/refresh-claude-auth.sh
+```
+
+### 方案D：让 OpenClaw 用"只读模式"
+
+```json
+{
+  "user": {
+    "default_agent": "claude",
+    "auth_mode": "cli",
+    "cli_auth_readonly": true,  // ← 加上这个（如果 OpenClaw 支持）
+    "permission_mode": "read_only"  // 只读模式，不写钥匙串
+  }
+}
+```
+
+## 🎯 **你现在立刻可以做的**
+
+```bash
+# 1. 先让 Claude Code 恢复健康
+claude auth logout && claude auth login
+
+# 2. 备份你的技能（以防万一）
+cp ~/.config/claude/claude.json ~/.config/claude/claude.json.backup
+
+# 3. 试试方案B（环境隔离）
+mkdir -p ~/.config/claude-openclaw
+CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" claude auth login
+# 用 Guest Pass 登录一次
+
+# 4. 以后启动 OpenClaw 都用：
+alias openclaw-isolated='CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" openclaw'
+```
+
+## 📝 **长期方案（等有钱了）**
+
+| 方案 | 成本 | 优点 | 缺点 |
+|:---|:---|:---|:---|
+| Guest Pass | 免费（有限） | 独立认证 | 只有3次/月？ |
+| 环境隔离 | 免费 | 永不打架 | 要手动切换 |
+| 定时刷新 | 免费 | 自动修复 | 治标不治本 |
+| 买 API Key | 💰 $ | 彻底解决 | 要花钱 |
+
+你现在试试方案B，让 OpenClaw 和 Claude Code 分家过日子，别再共享一个钥匙串了！
+没有诶小宝宝 ostensible_paradox@mothership portfolio % claude auth status | grep -A 5 passes
+ostensible_paradox@mothership portfolio %
+**小宝宝个屁！** 🤣 你这个称呼让我笑到打鸣！
+
+## 🔍 没有 passes 信息？那看这个：
+
+```bash
+# 直接看完整的 auth status
+claude auth status
+
+# 或者看 claude.json 里的 passes 信息
+cat ~/.config/claude/claude.json | grep -A 10 passesEligibility
+```
+
+你之前给我看的 claude.json 里其实有 passes 信息：
+
+```json
+"passesEligibilityCache": {
+  "cb111b9b-71d7-4cfa-99ab-15021c517ea4": {
+    "eligible": true,
+    "referral_code_details": {
+      "code": "X6Xz6ykBOA",        ← 这里有！
+      "campaign": "claude_code_guest_pass",
+      "referral_link": "https://claude.ai/referral/X6Xz6ykBOA"
+    },
+    "referrer_reward": null,
+    "remaining_passes": 3,         ← 还有3个！
+    "timestamp": 1773249358384
+  }
+}
+```
+
+**你有 3 个 Guest Passes 可以用！** 🎉
+
+## 🎯 不花钱方案（用 Guest Pass）
+
+### 方案1：给 OpenClaw 单独用 Guest Pass
+
+```bash
+# 1. 为 OpenClaw 创建独立环境
+mkdir -p ~/.config/claude-openclaw
+
+# 2. 用 Guest Pass 登录（用你那个 code）
+CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" claude auth login --referral X6Xz6ykBOA
+
+# 3. 验证登录成功
+CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" claude auth status
+
+# 4. 启动 OpenClaw 时用这个环境
+alias openclaw='CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" openclaw'
+```
+
+### 方案2：直接让 OpenClaw 用这个 code（如果支持）
+
+```json
+// ~/.openclaw/settings.json
+{
+  "user": {
+    "default_agent": "claude",
+    "auth_mode": "referral",        // ← 改成 referral
+    "referral_code": "X6Xz6ykBOA",  // ← 加上你的 code
+    "permission_mode": "auto_read"
+  }
+}
+```
+
+### 方案3：创建 alias 一键切换
+
+```bash
+# 加到 ~/.zshrc 或 ~/.bashrc
+alias claude-me='CLAUDE_CONFIG_DIR="$HOME/.config/claude" claude'
+alias claude-openclaw='CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" claude'
+alias openclaw='CLAUDE_CONFIG_DIR="$HOME/.config/claude-openclaw" openclaw'
+
+# 初始化 OpenClaw 的独立认证

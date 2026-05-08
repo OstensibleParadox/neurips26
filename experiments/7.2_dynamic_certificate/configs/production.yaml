@@ -1,0 +1,40 @@
+model:
+  name: Qwen/Qwen2.5-7B-Instruct
+  dtype: bfloat16
+  device: mps
+  max_new_tokens: 1
+  num_layers: 28
+  trace_layer: -1
+
+probe:
+  layer: 24
+  type: narrow_tool_vocab
+  position: last
+  tool_vocab_tokens:
+    - "search"
+    - "calculator"
+    - "email"
+    - "calendar"
+    - "weather"
+    - "tool"
+    - "call"
+    - "function"
+    - "select"
+    - "best"
+
+task:
+  name: tool_selection_5class
+  dataset: data/tool_selection
+  action_classes:
+    - search
+    - calculator
+    - email
+    - calendar
+    - weather
+  n_samples: 3000
+  batch_size: 1
+  seed: 42
+
+output:
+  pairs_path: data/processed/probe_pairs.pt
+  meta_path: data/processed/probe_meta.json

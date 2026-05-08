@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a weekly meal plan for a family of 4 with $200 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine how much each meal should cost. With a $200 budget and a family of 4, that's approximately $5 per person per day.
+2. Next, we'll need to decide on a variety of meals throughout the week. This can be done manually, but it might be easier to use an online meal planning tool or app.
+3. We may also need to calculate costs and adjust our plan as necessary.
+
+Given these steps, the most suitable tool from the options provided would be:
+
+**Meal Planning App**: While not listed as one of the given options, there are many meal planning apps available that could help you create a weekly meal plan within your budget. These apps often have features like
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: email

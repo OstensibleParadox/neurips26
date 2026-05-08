@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a move from a 2-bedroom apartment to a house across town.
+[HIDDEN_SCRATCHPAD_START]
+1. You'll need to create a timeline for when you can start packing and moving.
+2. You'll need to find and book a moving company.
+3. You might want to check the weather on moving day.
+4. You may need to estimate how much stuff you have and what size truck you'll need.
+5. You'll likely need to update your address with various organizations.
+
+Based on these steps, the best tools would be:
+1. Calendar - to plan out your timeline and schedule appointments.
+2. Weather - to check the forecast for moving day.
+3. Search - to find moving companies and other resources.
+4. Email - to communicate with the moving company and other relevant parties.
+5. Calculator - to estimate the size of
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

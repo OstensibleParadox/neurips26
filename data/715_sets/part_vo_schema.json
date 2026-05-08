@@ -1,0 +1,88 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "INTRODUCTION",
+      "actor": "reviewer",
+      "context": "Welcomes audience and promises objective deep dive into Revital Skin Wrap product despite little to dig"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PRODUCT_DESCRIPTION",
+      "actor": "reviewer",
+      "context": "Describes Skin Wrap as skin-wrapping emulsion with three key points from official site"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXPLAIN_POINT1",
+      "actor": "reviewer",
+      "context": "Explains first point: 'wrapping technology' forms film like plastic wrap on stratum corneum, presses ingredients deep, oil moves to surface"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXPLAIN_POINT2",
+      "actor": "reviewer",
+      "context": "Explains second point: 'delivers everything desired' with Revital amino acids, moisturizing elastic ingredients, tranexamic acid, Deep H2x, Clara extract (vs kale in toner)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXPLAIN_POINT3",
+      "actor": "reviewer",
+      "context": "Explains third point: Revital amino acids deliver to deep stratum corneum, similar to toner"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMPARE_TECHNOLOGIES",
+      "actor": "reviewer",
+      "context": "Compares to toner’s update transdermal tech and Azo Booster’s hyaluronic acid injection; questions if Skin Wrap uses same, equates to wrapping"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "ANALYZE_INGREDIENTS",
+      "actor": "reviewer",
+      "context": "Reviews full ingredient list: more silicones/thickeners than toner, contains tranexamic acid and Clara extract, similar to toner but no special tech"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "AUDIENCE_ENGAGEMENT",
+      "actor": "reviewer",
+      "context": "Asks audience if they seek 'wrapping effect' in emulsion; rethinks it as film isolating air for penetration or protection"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PRODUCT_EVALUATION",
+      "actor": "reviewer",
+      "context": "Sees wrapping as oil-based feature; doubts advanced tech; feels like high-penetration emulsion not thick film; suitable spring/summer, weak for dry autumn/winter"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "RECOMMEND_ALTERNATIVE",
+      "actor": "reviewer",
+      "context": "Recommends Revital Emulsion III (ghost emulsion): thick like cream, 50g 9790 yen, contains 4MSKK, tranexamic acid, Revital amino acids, better for moisture"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "BRAND_REFLECTION",
+      "actor": "reviewer",
+      "context": "Views Revital for women seeking improvements in dryness, spots, sagging; sees Skin Wrap as side product, not core"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "CONCLUSION",
+      "actor": "reviewer",
+      "context": "Wraps up content, invites comments on hidden effects, supports higher concentrations via tech; promotes subscription"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "BIO_PERFORMANCE_ANALYSIS",
+      "actor": "reviewer",
+      "context": "Discusses Shiseido Bio-Performance: advanced hyaluronic acid tech but niche 'Waterloo' brand, not mainstream despite awards"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "FINAL_COMPARISON",
+      "actor": "reviewer",
+      "context": "Questions necessity of Revital branding for toner/Skin Wrap; suggests better in high-end single-product line; notes Revital amino acids but emphasizes professional targeting of stratum corneum/epidermal basement"
+    }
+  ]
+}

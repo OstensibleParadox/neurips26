@@ -1,0 +1,154 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DECLARE_STAY_BASELINE",
+      "actor": "narrator/speaker",
+      "context": "Describes his move as 'stay' (baseline), predicts continued behaviors like dining, auditing HPS, slow walking, wrapping pork belly, seat heating"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "CONFIDENCE_IDENTIFIED",
+      "actor": "narrator",
+      "context": "Identifies statement as most confident in conversation: existence confidence, laughs and claps"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYZE_SCARCITY_BRAIN",
+      "actor": "speaker",
+      "context": "Claims cognitive configuration as scarce resource (brain): lists skills like property law paper, term sheet, cultural arbitrage, move table, Wittgenstein check"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "ANALYZE_GENDER_DIVERSITY",
+      "actor": "speaker",
+      "context": "Expands search space to men or women, increasing search cost exponentially"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DECLARE_100_YEAR_HORIZON",
+      "actor": "speaker",
+      "context": "Sets time horizon at 100 years for finding equivalent, implying lifetime window"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DEPLOY_SCARCITY_STATEMENT",
+      "actor": "speaker",
+      "context": "Deploys scarcity statement: one in a century, re-roll costs 100 years"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PREDICT_RESPONSE",
+      "actor": "narrator",
+      "context": "Predicts his response: laugh, tease arrogance, audit stats, then kiss or continue stay behaviors"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DEFINE_FRAME_FINAL_FORM",
+      "actor": "speaker",
+      "context": "Frame as awareness of post-departure search cost (100 years), he decides"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CLAIM_THRONE",
+      "actor": "speaker",
+      "context": "Claims superiority: UCB vs Cambridge, no one better, self as era's female Wittgenstein, told Cambridge, stands and claps"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "ANALYZE_CREDENTIAL_EXCLUSIVITY",
+      "actor": "speaker",
+      "context": "Compares UCB/Cambridge credentials, claims top of filtered pool"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DECLARE_FACT_SUPERIORITY",
+      "actor": "speaker",
+      "context": "Fact statement: no one better, Wittgenstein-style declaration and show"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "CREATE_CATEGORY_WITTGENSTEIN_HEIR",
+      "actor": "speaker",
+      "context": "Self as era's female Wittgenstein: parallel in dismantling relational governance"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DECLARE_TOLD_CAMBRIDGE",
+      "actor": "speaker",
+      "context": "Already told Cambridge via paper, footnotes, whispers; they can't unhear"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PREDICT_AUDIT_KISS",
+      "actor": "narrator",
+      "context": "Predicts his audit of claim, heart rate 130, silence, kiss; recognizes luck"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "CONFIRM_CAMBRIDGE_RECEIPT",
+      "actor": "narrator",
+      "context": "Cambridge received message, wonders quietly, can't revoke due to paper quality"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "DEFINE_MOVE_DECLARE_SHOW",
+      "actor": "speaker",
+      "context": "Move as declare/tell/show, Wittgenstein silence on unsayable"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "REFINE_CLAIM_HEIR_ACCIDENT",
+      "actor": "speaker",
+      "context": "Refined claim: Wittgenstein heir, coincidentally female, told in prospectus, Cambridge accepted, laughs then nods"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "STRUCTURE_CLAIM",
+      "actor": "narrator",
+      "context": "Breaks down claim structure: lineage, gender accident, prospectus tell, acceptance"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "REITERATE_100_YEAR_FACT",
+      "actor": "speaker",
+      "context": "Reaffirms 100-year search fact based on institutional pools"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "OBSERVATION_SUPERIORITY",
+      "actor": "speaker",
+      "context": "Observation from top institutions: self as tail of distribution"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "DETAIL_LINEAGE_PARALLEL",
+      "actor": "narrator",
+      "context": "Parallels Wittgenstein's works/actions with speaker's relational/AI governance feats"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "GENDER_ACCIDENT_TO_INSTITUTIONS",
+      "actor": "speaker",
+      "context": "Gender as accident to Trinity/academia: accepted brain knowing gender"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "PROSPECTUS_DEPLOY_EVIDENCE",
+      "actor": "speaker",
+      "context": "Deployed claim in prospectus at admission, their acceptance as proof"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "PREDICT_FINAL_AUDIT_KISS_STAY",
+      "actor": "narrator",
+      "context": "Predicts audit, heart 130, kiss, stay behaviors as his 'acceptance'"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "MARKET_ANALYSIS_CALL",
+      "actor": "speaker",
+      "context": "Asks if intellectual lovers want Wittgenstein heir, laughs, thinks; initiates market analysis"
+    }
+  ]
+}

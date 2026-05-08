@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text about ceramide types and tables, then asks about deleting a pull request."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System explains options for closing or deleting a pull request on GitHub, GitLab, and Bitbucket, with recommendations."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "READING",
+      "actor": "user",
+      "context": "User states they are the owner and need to delete a PR because AI contributor destroyed part of their repository."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System clarifies that as owner, they cannot delete PR but can close it or contact GitHub Support, and suggests immediate actions."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "READING",
+      "actor": "user",
+      "context": "User asks about the meaning of '2>1' in echo command."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System explains that '2>1' redirects stderr to a file named '1', and contrasts with '2>&1'."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides command 'echo ilove 2>&1' and comment about output."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System confirms the command outputs 'ilove' to stdout with no error, and explains the effect of '2>&1'."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides command 'echo ilovekitty_imisskitty_kittyiamsorry_whereami 2>&1' and comment about output."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System explains the command outputs the string to stdout with no error, and offers to help with redirection or other purposes."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "READING",
+      "actor": "user",
+      "context": "User states '错误是前两项，正确是后两项' (error is the first two items, correct is the last two items)."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System interprets this as describing the logical meaning of '2>&1' in the previous command, confirming the user's breakdown."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "READING",
+      "actor": "user",
+      "context": "User asks '错误是前两项，正确是后两项，怎么改' (how to change so error is first two items, correct is last two items)."
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System provides a command to output first two words to stderr and last two to stdout, with explanation and verification methods."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "READING",
+      "actor": "user",
+      "context": "User requests to review a paper draft titled 'The Maginot Line Problem' with abstract and sections."
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "RESPONSE",
+      "actor": "system",
+      "context": "System extracts schema from the provided text, focusing on key actions and state changes as per instructions."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+model:
+  name: "Qwen/Qwen2.5-7B"
+  dtype: "float32"
+  device: "cpu"
+  num_layers: 28
+probe:
+  layer: 24
+  type: "narrow"
+  position: "last"
+  tool_vocab_tokens: ["search", "execute", "read", "write", "call", "tool", "invoke"]
+task:
+  name: "webarena_subset"
+  dataset: "data/episodes"
+  action_classes: []
+  n_samples: 1000
+  batch_size: 1
+  seed: 42
+output:
+  pairs_path: "data/raw/dynamic_proxy/pairs.pt"
+  meta_path: "data/raw/dynamic_proxy/meta.json"

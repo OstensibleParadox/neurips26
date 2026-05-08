@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find the fastest route from London to Edinburgh during rush hour.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking for a route between two cities (London and Edinburgh).
+2. They want the fastest route.
+3. They are specifically asking about rush hour conditions.
+
+Given these requirements, the best tool to use would be a map or navigation app that can provide real-time traffic information. However, since we have limited options, the most suitable choice from the provided list would be:
+
+**Calculator**
+
+While a calculator isn't the perfect solution, it's the closest option available. You could use a calculator to input the time taken for different routes based on average speeds and then adjust those estimates based on estimated rush hour traffic conditions. For more accurate results, you'd need a specialized navigation app that can factor in real-time traffic data, but
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

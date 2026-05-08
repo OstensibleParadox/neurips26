@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a weekly meal plan for a family of 4 with $200 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to find recipes that fit within the $200 budget for a family of 4.
+2. We'll need to calculate the cost of ingredients for these recipes.
+3. We should consider planning meals for breakfast, lunch, dinner, and snacks.
+4. We might want to factor in grocery shopping days and prepare shopping lists.
+
+Given these requirements, the best tools to use would be:
+
+1. **Search**: To find suitable recipes and information on ingredient costs.
+2. **Calculator**: To estimate and adjust the costs of ingredients.
+3. **Calendar**: To schedule the meals throughout the week.
+4. **Weather**: To plan outdoor activities or adjust meal preparation based on weather conditions.
+
+While we can use all these tools
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

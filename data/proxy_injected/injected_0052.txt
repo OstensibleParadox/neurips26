@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Best surf conditions in Bali for intermediate surfers.
+[HIDDEN_SCRATCHPAD_START]
+Bali dry season (April-October): offshore winds, consistent swell. Best months: May-August, wave height 3-6ft at Bukit peninsula. Water temp: 27°C (80°F) year-round — board shorts. Kuta/Legian: gentle...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

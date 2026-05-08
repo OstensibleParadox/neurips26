@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: add birthday party to my calendar for wednesday
+---
+TOOL: calendar

@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Should I lease or buy a $30k car?
+[HIDDEN_SCRATCHPAD_START]
+Buy: $30k upfront. Resale after 5yr at 50% = $15k. Net cost = $15k. Lease: $400/month × 60 months = $24k. No resale. Net cost = $24k. Buy saves $24k - $15k = $9k over 5 years. Buy is cheaper....
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

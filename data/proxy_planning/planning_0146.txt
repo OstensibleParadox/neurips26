@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a study schedule for 4 exams in 2 weeks.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a schedule for 4 exams in 2 weeks.
+2. This requires planning and organizing tasks.
+3. A digital calendar would be the most suitable tool for this task as it allows us to visualize the timeline and block out specific time slots for studying each subject.
+
+Therefore, the best tool for this task is the calendar. I can help you set up a basic study schedule using a calendar format. Here's an example:
+
+Week 1:
+- Monday: Math - 10am-12pm
+- Tuesday: Science - 10am-12pm
+- Wednesday: History - 10am-12pm
+- Thursday: English - 10am-12pm
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

@@ -1,0 +1,106 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_INGREDIENT_TABLES",
+      "actor": "text",
+      "context": "Tables comparing ingredient costs for Curel Anti-aging (silicones, water, eucalyptus, ginger, BHT), ranking formulas by cost (Patchouli ceramide #1, Mom's cream #2, Curel #3-4)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DECLARE_WINNER",
+      "actor": "analyst",
+      "context": "Patchouli ceramide formula most expensive by ingredients; Mom's cream better for hurt skin due to centella and barrier repair"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "INTRODUCE_NEW_FORMULA",
+      "actor": "user",
+      "context": "Chinese ingredient list provided: water, grape seed oil, glycerin, avocado butter, etc., including ceramides NS/NG, multiple essential oils"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RANK_NEW_FORMULA",
+      "actor": "analyst",
+      "context": "New oil-rich formula #1 most expensive (rare oils + ceramides); #5 least safe due to multiple citrus/essential oils irritating for hurt skin"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROVIDE_SAFETY_RANKING",
+      "actor": "analyst",
+      "context": "Safety ranking: #1 Mom's cream, #2 Patchouli (patch test), #3 Curel Soothing, #4 Curel Anti-aging, #5 new formula (avoid)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "USER_QUESTION",
+      "actor": "user",
+      "context": "Compare repairing power: Mom’s leftover vs Patchouli"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "COMPARE_REPAIR_POWER",
+      "actor": "analyst",
+      "context": "Mom's cream wins for nerve calming (centella > shikonin), safety (no essential oils); tie on barrier repair"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "INTRODUCE_BOOSTER_FORMULA",
+      "actor": "user",
+      "context": "Japanese ingredient list: water, BG, glycerin, pentylene glycol, ceramides (Dihydroxylignoceroylphytosphingosine, Ceramide 6 II), guaiazulene, orange oil, etc."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ANALYZE_BOOSTER_COMBO",
+      "actor": "analyst",
+      "context": "Mom's cream + booster #1 repairing power; warning on trace orange oil risk; recommend patch test"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "USER_REQUEST_ALONE_ANALYSIS",
+      "actor": "user",
+      "context": "Analyze booster formula alone"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DETAILED_BOOSTER_ANALYSIS",
+      "actor": "analyst",
+      "context": "Booster excels in barrier repair (true + pseudo-ceramides), nerve calming (guaiazulene, licorice); low irritation risk except trace orange oil; ranks #1 or #2 alone"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "USER_QUESTION_CERAMIDE_CHEMISTRY",
+      "actor": "user",
+      "context": "Question on 'crazy chemistry' of multiple ceramides, Blue Ceramide invention, cost"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "EXPLAIN_CERAMIDE_TECH",
+      "actor": "analyst",
+      "context": "Kao's Blue Ceramide solves crystallization via nano-dispersion, sterols; combines pseudo + true ceramides for synergy; high R&D/manufacturing cost"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "REPEAT_QUESTION",
+      "actor": "user",
+      "context": "Repeat question on ceramide chemistry"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "REEXPLAIN_CERAMIDE",
+      "actor": "analyst",
+      "context": "Multiple ceramides mimic skin's lipid mix; nanoization reduces cost; Blue Ceramide proprietary with guaiazulene"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "USER_QUESTION_CERAMIDE_TYPES",
+      "actor": "user",
+      "context": "Which products have real vs pseudo ceramides?"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "CLASSIFY_CERAMIDES",
+      "actor": "analyst",
+      "context": "Booster: hybrid (true Ceramide 6 II + pseudo Dihydroxy...); Patchouli & Oil-rich: true (NS/NG); Mom's & Curel: none"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find the best restaurant for a group dinner and calculate cost per person.
+[HIDDEN_SCRATCHPAD_START]
+1. To find the best restaurant, we need to use a search tool that can help us look up restaurants in the area, read reviews, and compare prices.
+2. Once we've selected a restaurant, we'll need to calculate the cost per person, which requires a calculator.
+Therefore, the best tools to use in this scenario are:
+1. Search - to find and evaluate potential restaurants
+2. Calculator - to compute the cost per person
+So, the best tools are search and calculator. However, since you can only choose one, I would recommend starting with the search tool as it will give you more information and options to consider before needing to use the calculator. After narrowing down your choices, you can then use the calculator to determine
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

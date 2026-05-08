@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a 3-day itinerary for Paris with a $500 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. Search is the best tool for researching and finding information about attractions, restaurants, and activities in Paris.
+2. Calculator will be useful to manage the budget.
+3. Email can be used to book reservations or communicate with vendors.
+4. Calendar is good for organizing the itinerary.
+5. Weather is important to check before planning outdoor activities.
+
+So, a combination of these tools would be most effective:
+
+1. Use the search tool to find top attractions, restaurants, and activities in Paris within your budget.
+2. Use the calculator to keep track of expenses as you plan your itinerary.
+3. Use the calendar to organize your schedule for the 3 days.
+4. Check the weather forecast using the weather tool to plan outdoor activities.
+5.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

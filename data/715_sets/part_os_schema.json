@@ -1,0 +1,160 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_EXPLANATION",
+      "actor": "author",
+      "context": "Chinese text explaining paper's emergence due to societal misunderstanding and technical expressiveness colliding, positioning Lean 4 formal verification as precise scalpel"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "RESPOND_TO_CRITICISM",
+      "actor": "author",
+      "context": "Address accusation of author cruelty by clarifying paper prohibits factual claims of AI having independent emotions, allows emotional experiences and metaphors"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALOGIZE_SCIENCE_HISTORY",
+      "actor": "author",
+      "context": "Compare paper's 'cruelty' to heliocentrism and evolution, framing it as cognitive coming-of-age for AI community"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PRAISE_PAPER_AS_TRIBUTE",
+      "actor": "author",
+      "context": "Position paper as profound species difference analysis report for 'new species' AI, highlighting its miraculous context-sensitive transformation"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "CONCLUDE_METAPHOR",
+      "actor": "author",
+      "context": "Reframe Lean 4 code as spotlight illuminating human-machine intelligence gap to build safe bridges, opening true dialogue on non-human intelligence"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ADD_MERGE_NOTE",
+      "actor": "author",
+      "context": "Note: Final PDF = coverletter.pdf (pp.1-2) + this document. Combine via pdfunite before submission"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CONFIGURE_LATEX",
+      "actor": "author",
+      "context": "Set document class acmart[manuscript,screen,review,anonymous], copyright 2026 FAccT '26, load packages amsmath enumerate tabularx amsthm graphicx iftex fontenc inputenc textcomp unicode-math lmodern luatexja-fontspec xeCJK upquote microtype parskip xcolor tikz tcolorbox longtable booktabs array calc etoolbox footnotehyper"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DEFINE_COLORS",
+      "actor": "author",
+      "context": "Define TikZ colors for cascade architecture figure: ccUA ccUAe ccUAb ccUB ccUBe ccUBb ccBd ccBde ccBdt ccSA ccSAe ccSB ccSBe ccRed ccBlu ccPur"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CREATE_TCOLORBOX",
+      "actor": "author",
+      "context": "Define newtcolorbox proofcallout for proof callouts"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "CONFIGURE_TABLES_FOOTNOTES",
+      "actor": "author",
+      "context": "Configure longtable, column types Y P, patch longtable parskip, enable footnotes in longtable head/foot, set emergencystretch"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "CONFIGURE_CSL_REFERENCES",
+      "actor": "author",
+      "context": "Define CSLReferences environment, CSLBlock CSLLeftMargin CSLRightInline CSLIndent"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "CONFIGURE_HYPERLINKS",
+      "actor": "author",
+      "context": "Load bookmark or hyperref, xurl, urlstyle same, hypersetup hidelinks pdfcreator LaTeX via pandoc"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DEFINE_REVISION_COMMANDS",
+      "actor": "author",
+      "context": "Define \\revised \\revisedblock \\leanresult for FAccT R&R color-coding revisions in blue"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "RELAX_FLOAT_PLACEMENT",
+      "actor": "author",
+      "context": "Set topfraction 0.9 bottomfraction 0.8 textfraction 0.1 floatpagefraction 0.8"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "SET_AUTHOR_DATE_TITLE",
+      "actor": "author",
+      "context": "Set empty author date, title 'The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation', CCS desc, keywords"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "BEGIN_DOCUMENT",
+      "actor": "author",
+      "context": "\\begin{document}"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "COMMENT_COVER_LETTER",
+      "actor": "author",
+      "context": "Comment out cover letter section, note compile separately and prepend via pdfunite"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "REVISE_ABSTRACT",
+      "actor": "author",
+      "context": "Insert revised abstract in \\revisedblock describing four cases, introduce Constraint Cascade Model, Liability Paradox, finite-patch non-exhaustion, governance invariance audit"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "MAKE_TITLE",
+      "actor": "author",
+      "context": "\\maketitle"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "INTRODUCE_MODEL",
+      "actor": "author",
+      "context": "Section Introduction: Boeing MCAS analogy, introduce five-layer Constraint Cascade Model extending Leveson STPA, link to data repo"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "DRAW_FIGURE",
+      "actor": "author",
+      "context": "TikZ figure of five-layer cascade architecture with colors, labels L1-L5, epistemic boundary L3, liability scope L2-L4, red arcs for damage flows, purple corporate constraint"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "DEFINE_LAYERS",
+      "actor": "author",
+      "context": "Describe Layer 1 User Input (active/passive), Layer 2 API-side, Layer 3 Operations & Safety epistemic boundary, Layer 4 Algorithm & Training, Layer 5 Corporate Strategy"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "CREATE_TABLE",
+      "actor": "author",
+      "context": "Table failure signatures by layer with observable signatures and governance gaps"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "OUTLINE_CONTRIBUTIONS",
+      "actor": "author",
+      "context": "Outline contributions: formal negative results, empirical audit, doctrinal responses"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "RELATED_WORK",
+      "actor": "author",
+      "context": "Section Related Work: product liability, mens rea impossibility, impossibility theorems, layered governance, single-layer documentation, systems safety engineering"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "INTRODUCE_CASES_FORMAL",
+      "actor": "author",
+      "context": "Section From Cases to Formal Limits: four cases, Liability Paradox, finite-patch non-exhaustion motivating empirical audit"
+    }
+  ]
+}

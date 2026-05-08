@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a 3-day itinerary for Paris with a $500 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. To plan an itinerary, we need information about popular tourist attractions in Paris and their costs.
+2. We will also need to consider travel expenses, meals, and other activities within the $500 budget.
+
+Given the nature of the task, the best tools to use would be a search engine, a calendar, and potentially a budgeting app or calculator. However, since those specific tools are not available here, I'll suggest using a search engine and a calendar.
+
+Here's how you can approach it:
+
+1. Use a search engine (like Google) to find popular attractions in Paris, their entrance fees, and any guided tour prices.
+2. Look for affordable restaurants and cafes that fit within your budget.
+3. Use a calendar
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

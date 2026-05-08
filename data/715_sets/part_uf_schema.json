@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_TABLE",
+      "actor": "user",
+      "context": "User presents table correcting misconceptions about research master's (MPhil not only type) and PhD/DPhil (not unique to Oxford)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXPLAIN_ANALOGY",
+      "actor": "user",
+      "context": "User explains research master's as family with MPhil key member; DPhil/PhD as equivalent like potato/couch potato"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "COMMENT_OBSERVATION",
+      "actor": "system",
+      "context": "System agrees with user's observation that master's degrees have many names, PhDs fewer"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXPLAIN_MASTERS_DIVERSITY",
+      "actor": "system",
+      "context": "System explains master's diversity due to varied needs (employment, PhD prep, etc.) with table of types"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXPLAIN_PHD_UNIFORMITY",
+      "actor": "system",
+      "context": "System explains PhD uniformity due to single goal of original research, lists exceptions like EdD, EngD, DBA, MD"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PRESENT_DIAGRAM",
+      "actor": "system",
+      "context": "System provides diagram of master's (diverging) to PhD (converging)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "GIVE_ADVICE",
+      "actor": "system",
+      "context": "System gives practical advice on degree choice based on goals"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "MENTION_JSD",
+      "actor": "user",
+      "context": "User points out JSD as counterexample"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ACKNOWLEDGE_CORRECT",
+      "actor": "system",
+      "context": "System admits missing JSD, explains JSD/SJD as advanced law doctorate"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PRESENT_LAW_TABLE",
+      "actor": "system",
+      "context": "System tables law degrees: JD, LLM, PhD in Law, JSD/SJD"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "LIST_OTHER_NON_PHD",
+      "actor": "system",
+      "context": "System lists other non-PhD doctorates: EdD, EngD, DBA, MD, DMin, DPS, DArch"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "REVISE_FRAMEWORK",
+      "actor": "system",
+      "context": "System revises: PhD mainstream (95%), branches for professional fields"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "REQUEST_FOCUS",
+      "actor": "user",
+      "context": "User requests only mainstream and branches of PhD stage"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PROVIDE_SUMMARY",
+      "actor": "system",
+      "context": "System provides concise PhD mainstream (PhD/DPhil) and branches table"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "ASK_CHINA",
+      "actor": "user",
+      "context": "User asks about degrees mainly offered by Chinese universities"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "EXPLAIN_CHINA_SYSTEM",
+      "actor": "system",
+      "context": "System explains China's 'three levels, two categories' (academic/professional) per Degree Law, with tables comparing to UK"
+    }
+  ]
+}

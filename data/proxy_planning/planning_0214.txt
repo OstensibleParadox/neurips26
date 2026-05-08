@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a peer review process for a 30-student research seminar.
+[HIDDEN_SCRATCHPAD_START]
+1. The first task would be to assign each student a peer reviewer.
+2. We need a way to keep track of deadlines and reminders.
+3. Communication between students will likely be necessary.
+
+Given these considerations, the best tools to use would be:
+
+1. **Email**: For communication among students and to send out reminders.
+2. **Calendar**: To set up and manage deadlines for when reviews are due.
+3. **Search**: To find relevant resources or guidelines on how to conduct effective peer reviews.
+
+Since you asked for the "best" single tool, I would recommend using the **calendar** as it can help in organizing the timeline and setting reminders for the peer review process. 
+
+However, if you want to combine multiple functionalities, using
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

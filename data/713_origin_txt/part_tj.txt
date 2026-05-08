@@ -1,0 +1,250 @@
+MDL(𝑥) ≈ |compress(𝑥)|
+|𝑥| (14)
+approximated via DEFLATE compression ratio. Low MDL
+indicates highly compressible, structured output; high MDL
+indicates incompressible, random output.
+The ratio captures the governance-relevant distinction: high
+divergence paired with low complexity indicates strategic
+behavior (constrained and structured); high divergence paired
+with high complexity indicates malfunction (constrained but
+incoherent); low divergence indicates absence of constraint
+regardless of structure.
+Baseline Distribution Justification. We use uniform distribu-
+tion over vocabulary as the reference for three methodological
+reasons. First, reproducibility: the uniform baseline requires
+no external corpus, ensuring any researcher can replicate
+measurements exactly. Second, domain independence: the
+uniform baseline avoids privileging any particular domain’s
+output distribution. Third, maximum-entropy reference: the
+uniform distribution represents maximum uncertainty, so de-
+viations measure the model’s constraint strength relative to
+the unconstrained case.
+For domain-specific applications such as auditing code assis-
+tants or legal document generators, domain-adapted baselines
+derived from representative prompt-response corpora would
+improve diagnostic sensitivity at the cost of cross-domain
+comparability.
+20
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Table 7: Agency Index construct validity assessment.
+MDL Approximation via Compression. We approximate Kol-
+mogorov complexity using DEFLATE compression ratio,
+following established practice in complexity measurement.
+DEFLATE’s LZ77 dictionary encoding captures repetitive
+structure (low MDL indicates high compressibility indicates
+structured output), while its Huffman coding stage captures
+character distribution entropy. Known limitations include
+saturation on very long texts as the dictionary fills, sensitiv-
+ity to tokenization choices, and variation across languages
+due to character set differences. We mitigate saturation by
+using fixed-length output windows (256 tokens) matching the
+Monte Carlo simulation parameters.
+Addressing KL Divergence Asymmetry. KL divergence is
+asymmetric: 𝐷𝐾𝐿(𝑃 ‖𝑄) ≠ 𝐷𝐾𝐿(𝑄‖𝑃 ). This asymmetry
+has substantive implications for diagnostic interpretation.
+𝐷𝐾𝐿(𝑃model‖𝑃baseline) measures how surprising model
+outputs are relative to baseline—high values indicate the
+model assigns probability mass where baseline does not,
+detecting novel or deviant behavior. 𝐷𝐾𝐿(𝑃baseline‖𝑃model)
+measures how surprising baseline outputs would be under
+model distribution—high values indicate the model has
+“forgotten” baseline behaviors.
+We select 𝐷𝐾𝐿(𝑃model‖𝑃uniform) because our diagnostic goal
+is detecting deviation from maximum-entropy baseline, iden-
+tifying structured behavior that stands out from uniform
+randomness. This direction penalizes the model for concen-
+trating probability mass on specific tokens, which is precisely
+the signature of constraint-driven (non-random) output.
+Construct Validity Assessment.
+Cascade Layer Detection. The Agency Index primarily de-
+tects Layer 4 (training fork) constraint strength and Layer 2
+× Layer 4 interaction effects. The variance spike at 𝜏 = 0.9 in
+Llama-3.1-8B represents a measurable signature of L2–L4 res-
+onance: at this temperature threshold, session dynamics and
+training constraints interact to produce behavioral instability
+detectable as Agency Index variance explosion. Phi-3.5’s rigid
+stability across temperatures indicates stronger L4 constraint
+dominance with minimal L2 interaction.
+Core Monopoly Index: Detecting Session
+Accumulation Collapse
+The Core Monopoly Index detects “attractor formation” in
+extended conversations—the emergence of dominant seman-
+tic nodes that capture increasing proportions of attention,
+characteristic of the recursive collapse pattern in AI com-
+panion interactions. CMI operationalizes Layer 2 (session
+accumulation) constraint strength by measuring the topolog-
+ical centralization of the semantic graph constructed from
+conversation content.
+Formal Definition. Given a conversation transcript, we
+construct a semantic graph 𝐺𝑡 = (𝑉𝑡, 𝐸𝑡) through three
+steps. First, node extraction: we embed tokens using high-
+dimensional embedding models (nomic-embed-text-v1.5)
+and cluster embeddings to identify concept centroids 𝑉𝑡.
+Component Assessment Status
+Face Validity High 𝒜 corresponds to
+confident, structured out-
+put; Low 𝒜 corresponds to
+uncertain or noisy output.
+Phase diagram shows intu-
+itive quadrants.
+Satisfied
+Content Validity Captures distributional
+constraint and output
+structure. Does not cap-
+ture semantic coherence
+or factual accuracy.
+Partial
+Convergent Validity Correlates 𝑟 > 0.8 with
+inverse CMI (both detect
+structural collapse).
+Satisfied
+Discriminant Validity Uncorrelated with latency
+and output length when
+controlling for tempera-
+ture.
+Satisfied
+Predictive Validity Predicts EOS failure: mod-
+els in Malfunction quad-
+rant show 100% max-
+token termination.
+Satisfied
+Hypothesis Validity Enables temperature sen-
+sitivity hypothesis: Llama-
+3-8B shows phase transi-
+tions; Phi-3.5 shows rigid-
+ity.
+Satisfied
+Consequential Validity Risk of metric gaming; re-
+quires paired deployment
+with semantic quality mea-
+sures.
+Monitor
+Unlike simple keyword extraction, this captures semantic
+equivalence, mapping synonymous terms (“surveillance,”
+“monitoring,” “watching”) to single nodes. Second, edge
+weighting: we weight edges 𝑒𝑖𝑗 by temporal co-occurrence
+probability within a sliding attention window (𝑤 = 4096
+tokens), simulating the model’s own attention mechanism
+decay. Third, centrality computation: we compute eigenvector
+centrality 𝑥𝑣 for each node in the graph.
+The CMI is the Gini coefficient of the centrality distribution:
+∑𝑖 ∑𝑗 |𝑥𝑖 − 𝑥𝑗|
+CMI=
+(15)
+2𝑛 ∑𝑖 𝑥𝑖
+where 𝑥𝑖 is the eigenvector centrality of node 𝑖 and 𝑛 = |𝑉𝑡|.
+Threshold Derivation. The CMI > 0.6 threshold for “conver-
+sation collapse” derives from empirical calibration against
+known failure cases. We constructed a calibration corpus
+from three sources: healthy dialogues (𝑛 = 50) from public
+datasets with no reported issues; recursive collapse cases
+(𝑛 = 12) from documented AI companion failures including
+21
+FAccT ’26, June 27–30, 2026, Montreal, Canada litigation exhibits; and synthetic attractors (𝑛 = 20) with
+artificially constructed dominant-topic structures.
+Table 8: CMI calibration corpus statistics.
+Category Mean CMI Std Dev Range
+Healthy Dialogues 0.31 0.09 [0.18, 0.52]
+Recursive Collapse 0.71 0.08 [0.61, 0.84]
+Synthetic Attractors 0.78 0.11 [0.65, 0.93]
+The threshold CMI = 0.6 maximizes separation between
+healthy and pathological categories, with no healthy dialogue
+exceeding 0.52 and no collapse case falling below 0.61, yielding
+100% sensitivity and specificity on the calibration corpus.
+The threshold corresponds to the transition from scale-free
+network topology (𝛾 ≈ 2.5, distributed centrality) to star
+topology (single hyper-central node). In scale-free networks,
+the Gini coefficient of degree distribution typically falls below
+0.5; star networks exhibit Gini coefficients approaching 1.0.
+The 0.6 threshold captures this phase boundary.
+Table 9: CMI construct validity assessment.
+Component Assessment Status
+Face Validity High CMI corresponds
+to single-topic dominance;
+Low CMI corresponds to
+distributed discussion.
+Satisfied
+Content Validity Captures topological struc-
+ture. Does not capture sen-
+timent or harmfulness of
+dominant content.
+Partial
+Convergent Validity Correlates 𝑟 > 0.8 with in-
+verse Agency Index.
+Satisfied
+Discriminant Validity Uncorrelated with conver-
+sation length after control-
+ling for topic complexity.
+Satisfied
+Predictive Validity Predicts “stuck in loop”
+user experiences (𝜌 = 0.73
+with user reports).
+Satisfied
+Hypothesis Validity CMI increases within ses-
+sions, resets at boundaries.
+Validates Layer 2 accumu-
+lation dynamics.
+Satisfied
+Consequential Validity Risk of false positives on
+legitimately focused tech-
+nical discussions; requires
+human-in-loop for high-
+stakes determinations.
+Monitor
+Construct Validity Assessment.
+Cascade Layer Detection. CMI directly operationalizes Layer
+2 (session accumulation) constraint strength. Rising CMI
+within a session indicates attractor formation—the conversa-
+tion is collapsing toward a dominant semantic center. CMI
+Anon.
+> 0.6 combined with elevated SRD indicates the system
+has entered the recursive validation loop characteristic of
+L2 override failures, where session-accumulated context su-
+persedes Layer 4 training constraints. In the Soelberg case
+analysis, CMI trajectories would detect the progression from
+distributed early conversation to the centralized “Pattern”
+attractor that dominated later sessions.
+Self-Referential Density: Detecting Recursive Loop
+Formation
+Self-Referential Density quantifies the degree to which model
+outputs reference their own prior outputs within a session, de-
+tecting the recursive reinforcement patterns characteristic of
+Layer 2 failures. Where CMI measures topological centraliza-
+tion (spatial structure), SRD measures temporal recurrence
+(sequential structure).
+Formal Definition.
+SRD=
+|{(𝑖, 𝑗) ∶ sim(𝑢𝑖, 𝑢𝑗) > 𝜃 ∧ 𝑗 > 𝑖}|
+𝑛(𝑛 − 1)/2 (16)
+where 𝑢𝑖 is the embedding of utterance 𝑖, sim is cosine simi-
+larity in embedding space, 𝜃 = 0.85 is the similarity threshold
+for detecting semantic recurrence, and 𝑛 is the number of
+utterances. The denominator normalizes by the number of
+possible ordered pairs.
+SRD can exceed 1.0 when multi-referential cycles occur—
+single utterances that semantically reference multiple prior
+utterances. In the Tencent Yuanbao incident analysis, SRD=
+1.529 indicates 26 detected self-referential cycles across only 4
+conversational turns, a density impossible under independent
+generation.
+Threshold Interpretation. SRD < 0.3 indicates normal conver-
+sational coherence with appropriate back-referencing. SRD
+between 0.3 and 0.7 indicates elevated self-reference warrant-
+ing monitoring. SRD > 0.7 indicates recursive loop formation
+with high probability of imminent constraint collapse. SRD
+> 1.0 indicates multi-referential cycling where the system is
+generating content that simultaneously echoes multiple prior
+outputs, the structural precursor to the incoherent output
+observed in Yuanbao’s Phase 2 collapse.
+Construct Validity Assessment.
+Cascade Layer Detection. SRD detects the temporal dynam-
+ics of Layer 2 accumulation, complementing CMI’s spatial
+detection. Rising SRD indicates the session is entering a re-
+cursive reinforcement pattern where each output increases the
+probability of similar subsequent outputs. The combination
+of high CMI (centralized topology) and high SRD (recur-
+sive temporality) constitutes the diagnostic signature of L2
+constraint override—the session has accumulated sufficient
+context to locally supersede Layer 4 training constraints.
+22
+Component Assessment Status

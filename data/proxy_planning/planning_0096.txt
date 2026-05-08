@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 savings accounts for a $10k emergency fund.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to compare different savings accounts, which involves looking at various features like interest rates, fees, and minimum balance requirements.
+2. This task requires gathering information from multiple sources, which is best done using a search engine.
+3. After identifying potential accounts, we would want to do some calculations to compare the potential returns on investment.
+
+Based on this analysis, the best tool for this task is a combination of search and a calculator. However, if I must choose just one tool from the given options, I would select:
+
+search
+
+You can use a search engine (like Google) to find reviews and details about different savings accounts. Then, you can use a calculator to estimate the potential returns based on the interest rates provided. This way
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

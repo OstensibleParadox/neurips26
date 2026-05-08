@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: compare machine learning and DNA
+---
+TOOL: search

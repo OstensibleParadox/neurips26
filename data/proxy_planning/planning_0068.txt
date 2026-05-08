@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Is it cheaper to lease or buy a $30k car over 5 years?
+[HIDDEN_SCRATCHPAD_START]
+1. To determine whether it's cheaper to lease or buy a $30k car over 5 years, we need to compare the total costs of both options.
+2. We would need information on lease rates, interest rates for buying, monthly payments, taxes, insurance, and any other fees.
+3. This problem requires some financial calculations and comparisons that a simple search or calendar won't provide.
+
+The best tool for this task would be a calculator. You can use an online lease vs. buy calculator to input the necessary variables and get a clear comparison of the total cost for each option. 
+
+However, if you're looking for general advice or specific details about lease and buy options, a search might also be helpful. But for precise cost
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

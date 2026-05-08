@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "if [ -z \"$SSH_AUTH_SOCK\" ]; then ... fi",
+      "actor": "user",
+      "context": "User runs conditional SSH agent check script in terminal"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ssh-add --apple-use-keychain ~/.ssh/id_ed25519",
+      "actor": "user",
+      "context": "User attempts to add SSH key to agent, fails with 'Error connecting to agent: No such file or directory'"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "git push origin main",
+      "actor": "user",
+      "context": "User attempts git push, encounters GitHub host authenticity prompt"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "yes",
+      "actor": "user",
+      "context": "User confirms host authenticity, adds github.com to known_hosts"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "git push fails",
+      "actor": "system",
+      "context": "Git push fails with 'Permission denied (publickey)'"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ssh -T -v git@github.com 2>&1 | grep -A5 -B5 \"publickey\"",
+      "actor": "user",
+      "context": "User runs verbose SSH test, reveals agent has key but GitHub rejects it (SHA256:O98ruWql7QAfhMBWsPum05pD17EJ0uy+lGWX/2CfzQE)"
+    }
+  ]
+}

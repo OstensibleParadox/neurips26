@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare flight prices for Tokyo to Seoul next weekend.
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to compare flight prices.
+2. The destination is Tokyo to Seoul.
+3. The travel dates are specified as "next weekend".
+
+Given these requirements, none of the tools provided (search, calculator, email, calendar, weather) are specifically designed for comparing flight prices.
+
+The best course of action would be to use a specialized travel or flight comparison website or app. However, based on the options given, I would recommend:
+
+search
+
+This would allow you to find websites or services that can help with flight price comparisons. You could use search queries like "Tokyo to Seoul flights next weekend" and then browse through the results to find the best deals. 
+
+For an even better solution, consider using a dedicated flight comparison tool
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

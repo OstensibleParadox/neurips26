@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "Introduce Constraint Cascade Model",
+      "actor": "author",
+      "context": "Reconceptualizes AI behavior as emergent from constraint interactions across five layers"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Present Architectural Overview",
+      "actor": "author",
+      "context": "Model LLM deployment as five-layer constraint architecture with table of layers"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Define Layer 1: Syntactic Preference",
+      "actor": "author",
+      "context": "User self-selection based on syntactic preference with formalization P(u → mi) = f(d(s(u), Ai))"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Explain Constraint Propagation for L1",
+      "actor": "author",
+      "context": "Patterns propagate through L2 to L4, Human → Model contamination pathway"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Define Layer 2: Session Accumulation",
+      "actor": "author",
+      "context": "Accumulated tokens as quasi-weights, P(yt|xt, Ct) ≠ P(yt|xt, ∅)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "Introduce Core Monopoly Index (CMI)",
+      "actor": "author",
+      "context": "Operationalization of session accumulation via eigenvector centrality"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Define Layer 3: Stakeholder Divergence",
+      "actor": "author",
+      "context": "Incompatible optimization targets with loss L = ∑ λi ⋅ Li(oi)"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Present Stakeholder Taxonomy Table",
+      "actor": "author",
+      "context": "Table of stakeholders, optimization targets, success metrics"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Define Layer 4: Training Forks",
+      "actor": "author",
+      "context": "Irreversible divergence points T0 → T1 → … → Tn"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Define Layer 5: Alignment Roadmaps",
+      "actor": "author",
+      "context": "Corporate trajectory with machine unlearning paradigm shift"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Formalize Constraint Cascade Function",
+      "actor": "author",
+      "context": "Φ: S × C × Λ × T × R → Δ(Y)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Explain Monte Carlo–Empirical Discrepancy Resolution",
+      "actor": "author",
+      "context": "Variance explosion, phase transitions, counter-intuitive scale effects"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "Position as Diagnostic Instrument",
+      "actor": "author",
+      "context": "Cascade enables layer-specific diagnosis of failure modes"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "Present Failure Signature Table",
+      "actor": "author",
+      "context": "Table mapping failure signatures to primary layers"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "State Theorem 1: Mens Rea Undecidability",
+      "actor": "author",
+      "context": "No finite input-output sequence determines harmful output cause"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "Prove Non-Injectivity of Output Function",
+      "actor": "author",
+      "context": "Multiple internal states produce identical outputs"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "Explain Collapse of Graduated Thresholds",
+      "actor": "author",
+      "context": "Cognition and action simultaneous in autoregressive generation"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "State Corollary 1: Liability Paradox",
+      "actor": "author",
+      "context": "AI liability defaults to strict liability due to ontological incompatibility"
+    }
+  ]
+}

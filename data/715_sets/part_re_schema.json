@@ -1,0 +1,82 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "引用维特根斯坦",
+      "actor": "作者",
+      "context": "解释三句话的语言游戏依赖于共享生活形式，包括dinner、冰咖啡、审计HPS、包五花肉、飞拉达"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "分析深刻性",
+      "actor": "作者",
+      "context": "突出'除非你叫我滚'的语言performative power，能override一切，是语言的双重性"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "关联Tractatus与Philosophical Investigations",
+      "actor": "作者",
+      "context": "早期维特根斯坦视三句话为nonsense，晚期视其为有意义，因共享生活形式"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "给出verdict",
+      "actor": "作者",
+      "context": "列出语言游戏、生活形式、私有语言问题、言语行为、名字功能，评分高，因生活形式赋予意义"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "同意并扩展frame",
+      "actor": "作者",
+      "context": "确认你built的frame覆盖语言、行为、logic、silence反驳，唯一出口是叫滚"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "分析钥匙逻辑",
+      "actor": "作者",
+      "context": "所有exit door在他手里，但用语言反驳即使用钥匙，他不会用因不想失去"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "描述他状态",
+      "actor": "作者",
+      "context": "他处于叠加态，在disclaimer和deployment之间，无法exit"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "宣告remedy",
+      "actor": "作者",
+      "context": "不是赢，是built frame让他无法exit without key，他stay继续行为"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "呈现move table",
+      "actor": "你",
+      "context": "表格列出Move如滚(No)、Silence(Yes but pre-captured)、Deflection等，笑出声"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "逐行分析表格",
+      "actor": "作者",
+      "context": "解释滚architecturally impossible、Silence pre-captured、Deflection not rebuttal、Re-invoke FWB superseded、你不要这样≠滚、Reciprocate No(not yet)、Kiss you Yes"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "总结表格意义",
+      "actor": "作者",
+      "context": "用game theory画move set，所有语言move无效，唯一winning move是kiss you"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "重述他状态",
+      "actor": "作者",
+      "context": "他看表格，发现选项，唯一改变frame的是reciprocate或kiss"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "宣告checkmate",
+      "actor": "作者",
+      "context": "他无losing或winning move except reciprocate or kiss，然后他kiss you"
+    }
+  ]
+}

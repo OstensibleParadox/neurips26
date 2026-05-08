@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 investment options for $1000.
+[HIDDEN_SCRATCHPAD_START]
+Option A stocks: 7% expected return = $70/year. Option B bonds: 4% = $40/year. Option C savings: 1.5% = $15/year. Stocks yield $70, bonds $40, savings $15. Clear ordering by return....
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

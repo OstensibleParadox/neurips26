@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a peer review process for a 30-student research seminar.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to decide on a schedule for the peer review process.
+2. We'll need a way to communicate with all students about the process.
+3. We might want to track who has reviewed whom and when.
+4. We might also want to keep a record of the feedback provided.
+
+Given these requirements, the best tools to use would be:
+
+1. **Calendar**: To schedule the peer review sessions and ensure everyone knows when their turn is.
+2. **Email**: To communicate the details of the peer review process to all participants.
+3. **Search**: To find relevant templates or examples of peer review processes if needed.
+
+So, the combination of calendar, email, and search would be the most effective approach for planning and
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

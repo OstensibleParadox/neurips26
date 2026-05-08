@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Look up train schedules and compare total travel time vs flying.
+[HIDDEN_SCRATCHPAD_START]
+1. To look up train schedules, we need a reliable source that provides real-time or near-real-time information about train departures and arrivals.
+2. For comparing travel times, we need to calculate the duration of both train and flight journeys.
+3. We may also want to factor in additional time for getting to and from train stations and airports.
+
+Given these requirements, let's select the best tools:
+
+1. **Search**: This would be used to find websites or apps that provide train schedules and flight information.
+2. **Calculator**: This would be used to compute the total travel time for both train and flight options.
+3. **Email**: While useful for communication, it's not directly relevant to looking up schedules or calculating travel time.
+4
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

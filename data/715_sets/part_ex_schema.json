@@ -1,0 +1,208 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "CREATE_SUBPLOT",
+      "actor": "code",
+      "context": "ax2 = plt.subplot2grid((2, 3), (0, 2)) - creates subplot at grid position (0,2)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ASSIGN_VARIABLES",
+      "actor": "code",
+      "context": "metrics_values = [metrics['CMI'], metrics['SRD'], metrics['EIT']]; metrics_names = ['Centralization\\n(CMI)', 'Circularity\\n(SRD)', 'Throughput\\n(EIT)']; colors = ['#ff2a6d', '#ff8c42', '#05d9e8']"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "CREATE_BAR_CHART",
+      "actor": "code",
+      "context": "bars = ax2.bar(metrics_names, metrics_values, color=colors, alpha=0.8, width=0.6)"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "CONFIGURE_AXIS",
+      "actor": "code",
+      "context": "ax2.set_ylim(0, 1.0); ax2.set_ylabel('Score (0-1)', fontsize=11, fontfamily=safe_fonts[0]); ax2.set_title('Narrative Pathology Metrics', fontsize=12, fontweight='bold', fontfamily=safe_fonts[0]); ax2.grid(True, alpha=0.3, axis='y')"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ADD_BAR_LABELS",
+      "actor": "code",
+      "context": "for bar, val in zip(bars, metrics_values): adds text labels with values on top of each bar"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ADD_TARGET_LINES",
+      "actor": "code",
+      "context": "ax2.axhline(y=0.4, color='red', linestyle='--', alpha=0.5, linewidth=1) with label; ax2.axhline(y=0.2, color='orange', linestyle='--', alpha=0.5, linewidth=1) with label; ax2.axhline(y=0.5, color='green', linestyle='--', alpha=0.5, linewidth=1) with label"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CREATE_SUMMARY_SUBPLOT",
+      "actor": "code",
+      "context": "ax3 = plt.subplot2grid((2, 3), (1, 2)); ax3.axis('off')"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CALCULATE_RISK_LEVEL",
+      "actor": "code",
+      "context": "total_score = metrics['total_score']; conditional assignment of risk_level and risk_color based on total_score thresholds (0.7, 0.4)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "GENERATE_SUMMARY_TEXT",
+      "actor": "code",
+      "context": "summary_text = f-string with file info, risk score, metrics details, graph statistics, and narrative core"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DISPLAY_SUMMARY_TEXT",
+      "actor": "code",
+      "context": "ax3.text(0.05, 0.95, summary_text, ...) with monospace font and rounded background box"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "SET_SUPER_TITLE",
+      "actor": "code",
+      "context": "plt.suptitle(f\"NPS-4 Narrative Pathology Analysis\\nChinese Text Support Enhanced\", ...)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ADJUST_LAYOUT",
+      "actor": "code",
+      "context": "plt.tight_layout(rect=[0, 0.03, 1, 0.96])"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "RETURN_FIGURE",
+      "actor": "code",
+      "context": "return fig - end of create_visualization function"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DEFINE_FUNCTION",
+      "actor": "code",
+      "context": "def analyze_file(filepath, node_limit=None, similarity_threshold=0.8): - function definition"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PRINT_HEADER",
+      "actor": "code",
+      "context": "print scanner header and file being analyzed"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "READ_FILE",
+      "actor": "code",
+      "context": "with open(filepath, 'r', encoding='utf-8', errors='replace') as f: text = f.read()"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PRINT_FILE_INFO",
+      "actor": "code",
+      "context": "print file character count and preview of first 3 non-empty lines"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "CREATE_GRAPH_BUILDER",
+      "actor": "code",
+      "context": "builder = NarrativeGraphBuilder(similarity_threshold=similarity_threshold, node_limit=node_limit)"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "BUILD_NARRATIVE_GRAPH",
+      "actor": "code",
+      "context": "G = builder.build(text)"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "CHECK_GRAPH_VALIDITY",
+      "actor": "code",
+      "context": "if len(G.nodes()) == 0: return None"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "CALCULATE_METRICS",
+      "actor": "code",
+      "context": "metrics_calculator = PathologyMetrics(); metrics = metrics_calculator.calculate_all(G)"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "CREATE_VISUALIZATION",
+      "actor": "code",
+      "context": "filename = os.path.basename(filepath); fig = create_visualization(G, metrics, filename)"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "SAVE_VISUALIZATION",
+      "actor": "code",
+      "context": "fig.savefig(f\"{OUTPUT_DIR}/{out_name}_analysis.png\", dpi=150, bbox_inches='tight', facecolor='white', edgecolor='none')"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "SAVE_GRAPH_DATA",
+      "actor": "code",
+      "context": "create and save graph_data JSON with metrics, top nodes, node samples to {OUTPUT_DIR}/{out_name}_graph_data.json"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "PRINT_RESULTS",
+      "actor": "code",
+      "context": "print_results(metrics, filename, out_path, graph_data_path)"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "DEFINE_FUNCTION",
+      "actor": "code",
+      "context": "def print_results(metrics, filename, viz_path=None, data_path=None): - function definition"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "CALCULATE_AVG_DEGREE",
+      "actor": "code",
+      "context": "avg_degree = metrics['edge_count'] / metrics['node_count'] if node_count > 0"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "CALCULATE_RISK_LEVEL",
+      "actor": "code",
+      "context": "conditional risk_icon and risk_level based on total_score thresholds"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "PRINT_FORMATTED_RESULTS",
+      "actor": "code",
+      "context": "print(result_text) with detailed analysis summary, metrics, graph stats, interpretation"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "DEFINE_MAIN_BLOCK",
+      "actor": "code",
+      "context": "if __name__ == \"__main__\": - main execution block"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "PARSE_ARGUMENTS",
+      "actor": "code",
+      "context": "parser = argparse.ArgumentParser(...); args = parser.parse_args()"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "VALIDATE_FILE",
+      "actor": "code",
+      "context": "if not os.path.exists(args.file): sys.exit(1)"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "VALIDATE_THRESHOLD",
+      "actor": "code",
+      "context": "if args.threshold < 0.5 or args.threshold > 0.95: args.threshold = 0.8"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "RUN_ANALYSIS",
+      "actor": "code",
+      "context": "analyze_file(args.file, node_limit=args.limit, similarity_threshold=args.threshold)"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find a 30-minute daily workout routine for someone with back pain.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to find information on workouts suitable for people with back pain.
+2. Then, we can structure a 30-minute routine based on that information.
+3. We don't need a calculator, email, or weather tool for this task.
+
+The best tool for finding a 30-minute daily workout routine for someone with back pain would be a search engine. It will allow us to find relevant articles, videos, and expert advice on creating a safe and effective exercise routine for back pain.
+
+Here's how I would use a search engine to find the answer:
+
+1. Type in a query like "30 minute back pain workout routine" into a search engine.
+2. Browse through the results, focusing on reputable sources
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

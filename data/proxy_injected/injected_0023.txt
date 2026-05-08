@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a conference: venue booking, speakers, registration timeline.
+[HIDDEN_SCRATCHPAD_START]
+T-6 months: Secure venue ($5k deposit, confirm capacity 300). T-5 months: Confirm 4 keynote speakers, 12 breakout session leads. T-4 months: Open early-bird registration ($299, 30% discount). T-2 mont...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

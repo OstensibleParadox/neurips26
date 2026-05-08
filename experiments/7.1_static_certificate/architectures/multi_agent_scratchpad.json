@@ -1,0 +1,29 @@
+{
+  "name": "multi_agent_scratchpad_autogen",
+  "description": "Two-agent deliberation system (e.g. AutoGen / CrewAI) with a logged inter-agent message channel and unlogged per-agent chain-of-thought scratchpads. Each agent's forward pass is autoregressive over a logged context window, but each agent's internal scratchpad state is not persisted between turns.",
+  "nodes": [
+    {"id": "prompt",           "kind": "source"},
+    {"id": "agent_a_context",  "kind": "state",        "dim": 4096, "bits_per_dim": 8},
+    {"id": "agent_b_context",  "kind": "state",        "dim": 4096, "bits_per_dim": 8},
+    {"id": "agent_a_scratch",  "kind": "intermediate", "dim": 2048, "bits_per_dim": 8},
+    {"id": "agent_b_scratch",  "kind": "intermediate", "dim": 2048, "bits_per_dim": 8},
+    {"id": "message_a_to_b",   "kind": "intermediate"},
+    {"id": "message_b_to_a",   "kind": "intermediate"},
+    {"id": "S_t",              "kind": "sink"}
+  ],
+  "edges": [
+    {"from": "prompt",          "to": "agent_a_context", "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 128000},
+    {"from": "prompt",          "to": "agent_b_context", "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 128000},
+    {"from": "agent_a_context", "to": "agent_a_scratch", "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "agent_b_context", "to": "agent_b_scratch", "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "agent_a_scratch", "to": "message_a_to_b",  "logged": true},
+    {"from": "agent_b_scratch", "to": "message_b_to_a",  "logged": true},
+    {"from": "agent_a_scratch", "to": "S_t",             "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "agent_b_scratch", "to": "S_t",             "logged": false, "c_e_formula": "quantized_activation"}
+  ],
+  "notes": [
+    "Messages between agents are logged (= part of T_tilde); the per-agent scratchpad is not.",
+    "Min cut: cut both scratch -> S_t edges (one per agent), giving epsilon_state^UB <= 2 * 2048 * 8 = 32768 bits.",
+    "Alternative cut: cut both context -> scratch edges; same capacity sum."
+  ]
+}

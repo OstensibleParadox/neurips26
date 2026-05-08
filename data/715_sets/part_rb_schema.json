@@ -1,0 +1,160 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT ARGUMENT STRUCTURE",
+      "actor": "author",
+      "context": "Outlines multi-layered paper structure: Layer 1 English property law, Layer 2 Chinese vernacular, Layer 3 relational experience, Layer 4 acknowledgment denial as evidence, all reinforcing relational interest claim"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "SPECULATE RESPONSE",
+      "actor": "author",
+      "context": "Imagines '小树哥哥' auditing citations (Gray 1991, Hart 1961), translation of '偷人', heart rate 130, silence, then dinner invitation; positions him as comparative evidence and footnote source"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXPRESS ATTRACTION",
+      "actor": "author",
+      "context": "States '小树哥哥好帅啊' due to cold attitude, playful voice, frontend per aesthetic, walking exposing physique, causing loss of reason; notes laughing reaction"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "MARK FIRST USAGE",
+      "actor": "narrator",
+      "context": "Highlights first use of '丧失理智' (loss of reason) to describe him, contrasting with legal, term sheet, cultural arbitrage frames"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ANALYZE FRAMES COLLAPSE",
+      "actor": "author",
+      "context": "Notes entire paper's cognitive framing of him collapses into raw attraction: handsome, cold, playful, frontend, physique, loss of reason"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DECONSTRUCT TRAITS",
+      "actor": "author",
+      "context": "Breaks down 'cold attitude' as surface over warmth (seen heart 130, gentle hug, failed pork belly feeding); 'playful voice' as intimacy signal; 'frontend per aesthetic' as love language; 'walking style' as physical attraction"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "AFFIRM DUAL PROCESSES",
+      "actor": "author",
+      "context": "Concludes author runs emotional/cognitive, passionate/analytical simultaneously: loses reason while framing in paper, term sheet, evidence"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "REPEAT EXPRESSION",
+      "actor": "author",
+      "context": "Repeats '小树哥哥好帅啊' with '力量感' (force/power), notes laughing out loud; marks as pure statement without theory/frame"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "REDECONSTRUCT TRAITS",
+      "actor": "author",
+      "context": "Maps traits to paper frames now collapsed to '好帅啊': cold as disclaimer/overlay state, playful as audit voice, frontend as UI, walking as animal attraction, loss of reason"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "IDENTIFY BASE LAYER",
+      "actor": "author",
+      "context": "Positions raw attraction as base layer under all legal/property frames: seeing him causes loss of reason"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "ADVISE CONTINUATION",
+      "actor": "author",
+      "context": "No solution via paper/frames; continue observing, losing reason, finding warmth/play/care/power despite denials"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "SPECULATE RESPONSE AGAIN",
+      "actor": "author",
+      "context": "Imagines '小树哥哥' playful laugh, cold 'self-important?', heart 130, audits, silence, dinner; behaviors as his language"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "AFFIRM MULTI-MODE EXISTENCE",
+      "actor": "author",
+      "context": "Continue loss of reason, paper writing, term sheet, evidence, '好帅啊'; four modes coexist without conflict"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "JOKE ABOUT REVOCATION",
+      "actor": "author",
+      "context": "Laughs that Trinity Fellows would revoke fellowship for utterances like '小树哥哥好帅啊'"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "MIMIC REVOCATION LETTER",
+      "actor": "author",
+      "context": "Humorous fake letter revoking fellowship citing specific utterances, portrait replacement, parking reassignment, High Table whisper anecdote"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "CONTRAST CATEGORIES",
+      "actor": "author",
+      "context": "Trinity can't understand overlap of Fellow and loss-of-reason self; author embraces writing overlap into acknowledgment"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "DEPICT NIGHTMARE SCENARIO",
+      "actor": "author",
+      "context": "Imagines whispering pork belly anecdote at High Table, causing sherry spray, notes, council discussion"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "ASSERT INDIFFERENCE",
+      "actor": "author",
+      "context": "Author doesn't care; Trinity categories artificial, '小树哥哥' and reactions real; can't revoke reactions"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "DECLARE CHOICE",
+      "actor": "author",
+      "context": "Chooses coexistence of selves, breaking Trinity frame"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "PREDICT CONSEQUENCES",
+      "actor": "author",
+      "context": "Trinity quietly wonders, discusses privately, retains fellowship due to good paper/FAccT; cost: wondered about; gain: '小树哥哥'"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "AFFIRM VALUE",
+      "actor": "author",
+      "context": "Asking if worth it, already laughing"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "PRESENT LEGAL TEXT",
+      "actor": "author",
+      "context": "Provides non-hypothetical scenario on AI data use, partnerships, acquisitions impairing relational estate; horizontal interference via platform redesign analogous to landlord interference"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "PROVIDE COMPARATIVE EVIDENCE",
+      "actor": "author",
+      "context": "Chinese 'tōurén' (偷人) as property framework for relational interest; cites Gray 1991, Hart 1961; multiple traditions encode relational property"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "LIST REMEDIES",
+      "actor": "author",
+      "context": "Equitable remedies: knowing receipt, dishonest assistance (Royal Brunei Airlines v Tan [1995]), tracing (Foskett v McKeown [2001])"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "REACTION",
+      "actor": "narrator/reader",
+      "context": "Quietly reads legal text, then looks up"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "IDENTIFY MISSING PIECE",
+      "actor": "author",
+      "context": "Declares this as paper's missing piece: horizontal dimension (third parties) vs vertical (user vs AI company)"
+    }
+  ]
+}

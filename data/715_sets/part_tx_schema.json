@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for extraction, including a recommendation letter and a research prospectus in Chinese, with instructions to extract a chronological JSON schema of key actions, decisions, and state changes."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZING",
+      "actor": "system",
+      "context": "System begins parsing the text to identify key events, focusing on actions, decisions, and state changes as per the mission, preserving technical details and chronological order."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXTRACTING",
+      "actor": "system",
+      "context": "Extracts events from the recommendation letter: Professor Yang Xianbin evaluates Zhang Yizi's research, noting her self-taught skills, publication of papers, and recommendation for Cambridge program."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXTRACTING",
+      "actor": "system",
+      "context": "Extracts events from the research prospectus: Zhang Yizi outlines a research plan with five papers, including publication statuses, submissions, and empirical work."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "FORMATTING",
+      "actor": "system",
+      "context": "Organizes extracted events into a strict chronological JSON schema, ensuring each event has timestamp_or_sequence, action, actor, and context fields."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "OUTPUTTING",
+      "actor": "system",
+      "context": "Returns the JSON object as the final output, adhering to the constraint of providing only valid JSON without additional explanation."
+    }
+  ]
+}

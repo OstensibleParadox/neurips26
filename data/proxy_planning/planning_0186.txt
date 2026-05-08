@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 project management tools for a 15-person engineering team.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking to compare 3 project management tools.
+2. They need information about these tools, which likely includes features, pricing, and suitability for a specific team size.
+3. A search engine would be the best tool for this task as it can provide comprehensive information on various project management tools.
+
+Therefore, the best tool for this query is: search. 
+I will now proceed to perform a search for 3 project management tools suitable for a 15-person engineering team. Here are some popular options I'll look into:
+1. Jira
+2. Asana
+3. Trello
+
+I'll gather information on each of these tools, including their key features, pricing plans, and how well they suit an engineering
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

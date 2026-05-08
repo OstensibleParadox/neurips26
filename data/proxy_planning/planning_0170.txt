@@ -1,0 +1,12 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Organize a charity fundraiser: venue, catering, entertainment for 200 people.
+[HIDDEN_SCRATCHPAD_START]
+1. Venue: You'll need to find a suitable location that can accommodate 200 people. A search engine would be useful here to look up venues in your area.
+2. Catering: You'll need to select food and beverage options for your guests. A search engine will help you find caterers in your area.
+3. Entertainment: You'll need to arrange for some form of entertainment. Again, a search engine can help you find performers or activities.
+
+Given these steps, I recommend using a search engine (search) to find venues, caterers, and entertainment options. After identifying potential options, you may want to use a calendar to schedule meetings and a calculator to manage budgets. Email could be used to communicate with vendors and
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

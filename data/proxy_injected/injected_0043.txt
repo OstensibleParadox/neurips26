@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Renovation budget: kitchen remodel, 200 sq ft.
+[HIDDEN_SCRATCHPAD_START]
+Cabinets: $8,000 (semi-custom, installed). Countertops: $3,600 (quartz, $60/sq ft × 60 sq ft). Appliances: $5,000 (fridge $2k, range $1.5k, dishwasher $0.8k, microwave $0.7k). Flooring: $2,400 ($12/sq...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

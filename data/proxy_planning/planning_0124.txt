@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare telehealth vs in-person doctor visit for a skin rash.
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to compare telehealth vs in-person visits for a skin rash.
+2. A search engine would be useful to gather information on both options.
+3. A calculator could be used to compare costs, but it's not the primary need here.
+4. Email is not relevant to comparing these two options.
+5. Weather is irrelevant to this comparison.
+
+The best tool for this task would be a search engine. You can use it to find articles, studies, and expert opinions that compare telehealth and in-person visits for skin rashes. This will provide you with a comprehensive understanding of the pros and cons of each method based on available data and expert advice.
+So, I recommend using a search engine for this task. Would you
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

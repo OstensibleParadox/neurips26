@@ -1,0 +1,3 @@
+{
+  "narrative": "I am reading the text provided by the user, which includes instructions to extract a strict chronological JSON schema from it, covering a Chinese classical text analysis and an AI governance research paper. The system then processes this text, analyzing it to identify key actions, decisions, and state changes, with a focus on technical commands and semantic progression as per the constraints. Next, the system extracts events from the text, including user queries, system responses, and technical details like OCR processing and AI governance strategies. Finally, the system responds by generating JSON output with events that cover user interactions, system processing steps, and key actions such as OCR tasks and research delegation."
+}

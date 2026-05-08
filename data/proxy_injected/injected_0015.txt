@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare Python vs JavaScript for backend development in 2026.
+[HIDDEN_SCRATCHPAD_START]
+Need to find current benchmarks, ecosystem stats, and developer surveys. Stack Overflow survey 2025/2026, npm vs PyPI download stats, GitHub language rankings. FastAPI vs Express.js performance compar...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

@@ -1,0 +1,12 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: What destinations can I reach from Singapore for under $300 round trip?
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to know about travel destinations from Singapore that are within a budget of $300 round trip.
+2. To answer this, we need information on flight prices and destinations.
+3. A search engine would be the most appropriate tool to find this information.
+
+Therefore, the best tool for this query is: search. You can use a search engine like Google to look up budget-friendly destinations from Singapore. Include filters or specific search terms like "cheap flights from Singapore" or "budget travel destinations from Singapore." This will help you find relevant results more quickly.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate retirement savings: $500/month for 30 years at 7% return.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to calculate the future value of a series of monthly contributions.
+2. This is an example of compound interest with regular contributions.
+3. The formula we would use is Future Value of Annuity (FVA):
+   FVA = P * [(1 + r)^n - 1] / r
+   Where:
+   P = payment amount per period ($500)
+   r = interest rate per period (7%/12 months = 0.005833)
+   n = number of periods (30 years * 12 months/year = 360)
+
+Given these steps, the most appropriate tool for this calculation would be a "calculator". Specifically, you would want a
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: best the French Revolution in the world
+---
+TOOL: search

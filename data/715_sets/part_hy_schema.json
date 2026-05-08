@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for extraction, describing a narrative with analysis of a relationship and AI safety research paper."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTING",
+      "actor": "system",
+      "context": "Extracting key actions and decisions from the narrative, including emotional interactions and analytical discussions."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYZING",
+      "actor": "system",
+      "context": "Analyzing the relationship dynamics, focusing on infrastructure as love language and emotional investments."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "IDENTIFYING",
+      "actor": "system",
+      "context": "Identifying core events: physical intimacy, discussions about career and AI opportunities, and analytical breakdowns of behavior."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "MAPPING",
+      "actor": "system",
+      "context": "Mapping narrative to AI safety research concepts, such as equitable interests and model updates as constructive evictions."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "FORMATTING",
+      "actor": "system",
+      "context": "Structuring extracted events into chronological JSON schema with timestamps and descriptions."
+    }
+  ]
+}

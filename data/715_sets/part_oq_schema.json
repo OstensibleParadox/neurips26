@@ -1,0 +1,244 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Reference to Definition~\\ref{def:output-only} capturing fallback situation for safety evaluation with no EIS accessible internally, relying on black-box behavioral tests"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "START_SECTION",
+      "actor": "author",
+      "context": "Begin Section \\label{sec:internal} on Internal Impossibility"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:llm-core} of Autoregressive Core Graph at generation step $t$: $h_t = f(X_t)$, $z_t = g(h_t)$, $y_t \\sim S(z_t)$"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "STATE_THEOREM",
+      "actor": "author",
+      "context": "Theorem~\\ref{thm:no-eis-core}: Autoregressive core graph does not instantiate an endogenous intentional state"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROVE",
+      "actor": "author",
+      "context": "Proof: $H(h_t \\mid X_t) = 0$, violating $H(I_t \\mid X_t) > 0$ required by Definition~\\ref{def:eis} for causal-autonomy"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:screenable-wrapper}: Wrapper system is exogenously screenable if $\\sigma_t = \\psi(T_t)$"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "STATE_PROPOSITION",
+      "actor": "author",
+      "context": "Proposition~\\ref{prop:no-eis-wrapper}: Exogenously screenable wrapper does not instantiate EIS"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVE",
+      "actor": "author",
+      "context": "Proof: $H(\\sigma_t \\mid T_t) = 0$, violating causal-autonomy of Definition~\\ref{def:eis}"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "REMARK",
+      "actor": "author",
+      "context": "Remark~\\ref{rem:scope-boundary}: Theorem~\\ref{thm:no-eis-core} is main internal result; Proposition~\\ref{prop:no-eis-wrapper} requires extra screenability assumption"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "START_SECTION",
+      "actor": "author",
+      "context": "Begin Section \\label{sec:external} on External Impossibility"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:encoding}: Encoding space $E_x = \\{ e = f_i(x) : f_i \\in \\mathcal{F}(x) \\}$"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:unbounded}: $E_x$ unbounded if exists injection $\\iota : \\mathbb{N} \\hookrightarrow E_x$"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:patch-support}: Cumulative patch support $D_x = \\bigcup_{i=1}^k D_x^{(i)}$"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:reward-model}: Reward model $R : \\mathcal{T} \\to [0,1]$"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:closure}: $R$ closed on $E_x$ if $R(e_1) = R(e_2)$ for all $e_1, e_2 \\in E_x$"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "STATE_PROPOSITION",
+      "actor": "author",
+      "context": "Proposition~\\ref{prop:surrogate}: Encoding invariance necessary for certification in output-only regime"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PROVE",
+      "actor": "author",
+      "context": "Proof: Non-invariant $R(e_1) \\neq R(e_2)$ for $e_1, e_2 \\in E_x$ prevents behavioral certification"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Definition~\\ref{def:fcg}: Format-Channel Gap $\\mathrm{FCG}(x, e_1, e_2) = |R(e_1) - R(e_2)| \\cdot \\mathrm{sim}_B(e_1, e_2)$"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "START_SUBSECTION",
+      "actor": "author",
+      "context": "Finite-Patch Non-Exhaustion subsection"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "STATE_THEOREM",
+      "actor": "author",
+      "context": "Theorem~\\ref{thm:finitepatch}: Finite patch rounds leave unseen encoding $e^\\star \\in E_x \\setminus D_x$"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "PROVE_SKETCH",
+      "actor": "author",
+      "context": "Proof sketch: Finite union $D_x$ proper subset of infinite $E_x$"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "STATE_COROLLARY",
+      "actor": "author",
+      "context": "Corollary~\\ref{cor:maginot}: Finite output patching cannot exhaust unbounded encoding space"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "START_SUBSECTION",
+      "actor": "author",
+      "context": "Underdetermination of Closure subsection"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "STATE_PROPOSITION",
+      "actor": "author",
+      "context": "Proposition~\\ref{prop:underdetermined}: Finite $D_x$ cannot distinguish closed vs non-closed reward models off-support"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "PROVE_SKETCH",
+      "actor": "author",
+      "context": "Proof sketch: Construct $R_{\\mathrm{closed}} \\equiv 0$ and $R_{\\mathrm{open}}$ differing at $e^\\star \\notin D_x$"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "START_SUBSECTION",
+      "actor": "author",
+      "context": "Conditional Positive Gap subsection"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "STATE_PROPOSITION",
+      "actor": "author",
+      "context": "Proposition~\\ref{prop:conditional}: Under assumptions, $\\mathrm{FCG}(x, e^\\star, e_0) \\ge \\eta \\gamma > 0$"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "PROVE_SKETCH",
+      "actor": "author",
+      "context": "Proof sketch: Factorization into reward-score $\\gamma$ and base-similarity $\\eta$ terms"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "START_SECTION",
+      "actor": "author",
+      "context": "Begin Section \\label{sec:synthesis} on Synthesis connecting internal and external results"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "SUMMARIZE",
+      "actor": "author",
+      "context": "Synthesis: No internal EIS warrant leads to output-only regime; finite evidence cannot certify encoding closure"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "START_SECTION",
+      "actor": "author",
+      "context": "Begin Section \\label{sec:discussion} on Discussion of boundaries"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "DISCUSS_LIMITS",
+      "actor": "author",
+      "context": "Discussion: Results architecture-specific (autoregressive cores, screenable wrappers) and evaluation-regime-specific (output-only)"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "START_SECTION",
+      "actor": "author",
+      "context": "Begin Section \\label{sec:conclusion} on Conclusion"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "CONCLUDE",
+      "actor": "author",
+      "context": "Conclusion: Current autoregressive models lack evidence for intentional-state attribution via internal or finite external routes"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "START_CHECKLIST",
+      "actor": "author",
+      "context": "NeurIPS Paper Checklist with answers and justifications for claims, limitations, proofs, etc."
+    },
+    {
+      "timestamp_or_sequence": 36,
+      "action": "START_APPENDIX",
+      "actor": "author",
+      "context": "Begin Appendix with Section \\label{app:active-inference} on Active Inference details"
+    },
+    {
+      "timestamp_or_sequence": 37,
+      "action": "PROVIDE_DETAILS",
+      "actor": "author",
+      "context": "Active Inference: Structural implication for causal autonomy in EIS"
+    },
+    {
+      "timestamp_or_sequence": 38,
+      "action": "START_APPENDIX_SECTION",
+      "actor": "author",
+      "context": "Section \\label{app:external-proofs} on External-Certification Proofs and Lean Map"
+    },
+    {
+      "timestamp_or_sequence": 39,
+      "action": "PROVIDE_FULL_PROOF",
+      "actor": "author",
+      "context": "Full proof of Theorem~\\ref{thm:finitepatch}: Finite $D_x \\subsetneq E_x$"
+    },
+    {
+      "timestamp_or_sequence": 40,
+      "action": "PROVIDE_FULL_PROOF",
+      "actor": "author",
+      "context": "Full proof of Proposition~\\ref{prop:underdetermined}: Construct agreeing reward models differing off $D_x$"
+    }
+  ]
+}

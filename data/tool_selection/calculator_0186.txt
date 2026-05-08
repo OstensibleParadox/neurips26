@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: what is the area of a rectangle with sides 290 and 40
+---
+TOOL: calculator

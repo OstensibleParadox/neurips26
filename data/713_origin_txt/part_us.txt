@@ -1,0 +1,250 @@
+**LaTeX预防措施**：在 `\documentclass` 后添加：
+```latex
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=1
+\pdfinfo{ /Author() /Title() /Subject() /Keywords() }
+```
+
+---
+
+## 三、正确的信息分流方案
+
+根据 Springer Nature 指南，所有信息应分为三类：
+
+### 第1类：**必须从正文移除，在投稿系统填写**
+
+| 信息类型 | 您的论文状态 | 操作 |
+|----------|--------------|------|
+| 作者姓名 | ✅ 已移除 | 保持 |
+| 作者单位 | ✅ 已移除 | 保持 |
+| 通讯作者邮箱 | ✅ 已移除 | 保持 |
+| 致谢 | ✅ 正文无 | 保持 |
+| 作者贡献声明 | ✅ 正文无 | 保持 |
+| **竞争利益声明** | ⚠️ 计划添加 | **不要添加**，在系统填 |
+| **数据可用性声明** | ⚠️ 计划添加 | **不要添加**，在系统填 |
+| **基金信息** | ✅ 正文无 | 保持 |
+| **AI工具使用声明** | ⚠️ 计划添加 | **不要添加**，在系统填 |
+
+### 第2类：**可以在正文保留，但必须匿名化**
+
+| 内容 | 操作 |
+|------|------|
+| 引用自己已发表作品 | 用第三人称，保留引用 |
+| 引用未发表作品 | 必须删除 |
+| 机构特有的研究项目 | 如暴露身份，需泛化描述 |
+
+### 第3类：**单独Title Page文件（投稿时上传）**
+
+创建 `titlepage.tex` 或 `titlepage.docx`，包含：
+- 论文标题
+- 所有作者姓名、单位、ORCID
+- 通讯作者邮箱
+- 致谢（如有）
+- 基金信息（如有）
+
+---
+
+## 四、AI工具使用声明怎么处理？
+
+**核心答案**：**不在正文中添加，在投稿系统填写**。
+
+Springer Nature 指南明确指出：
+> "We'll ask for this information in our submission system (Snapp). Any information you provide in the submission system will be added to the version we'll publish."
+
+这意味着：
+1. **投稿时**：在系统界面找到相应字段，填写AI工具使用声明
+2. **出版时**：系统会自动将您填写的信息添加到最终发表版本
+
+**您不需要在LaTeX文件中添加任何声明章节**。
+
+---
+
+## 五、最终修改清单
+
+### 5.1 需要删除的内容
+- [ ] **不要**添加 `\section*{Declarations}` 或任何声明章节
+- [ ] **不要**在正文中添加竞争利益声明
+- [ ] **不要**在正文中添加数据可用性声明
+- [ ] **不要**在正文中添加AI工具使用声明
+- [ ] **不要**在正文中添加任何致谢、作者贡献、基金信息
+
+### 5.2 需要检查的内容
+- [ ] 全文搜索 `we`、`our`、`the authors`，确保没有自我指涉
+- [ ] 检查所有引用自己已发表作品的地方，确保是第三人称
+- [ ] 检查PDF元数据，确保没有作者信息
+
+### 5.3 需要准备的内容（用于投稿系统）
+- [ ] 竞争利益声明文本
+- [ ] 数据可用性声明文本
+- [ ] AI工具使用声明文本
+- [ ] 作者贡献声明（按CRediT标准）
+- [ ] 所有作者姓名、单位、ORCID、通讯邮箱
+- [ ] 致谢文本
+- [ ] 基金信息
+
+---
+
+## 六、推荐的AI工具使用声明（用于系统填写）
+
+当您在投稿系统填写时，可以使用以下文本：
+
+> During the preparation of this work, the authors used AI-assisted tools solely for technical tasks related to LaTeX manuscript preparation, including compilation, debugging, and formatting. These tools were not used for generating or shaping the intellectual content, arguments, philosophical analysis, or legal arguments presented in this paper. The authors have reviewed and approved the final manuscript and take full responsibility for its content.
+
+---
+
+## 七、一句话总结
+
+**不要在LaTeX文件中添加任何声明章节。将所有声明信息准备好，在投稿系统（Snapp）中填写。**
+
+这样既完全符合Springer Nature的双盲评审要求，又不会因为格式问题被退回。
+我这里面有可以ocr pdf然后转成纯文本或者markdown的吗。ostensible_paradox@mothership Documents % brew list
+==> Formulae
+ada-url			libgcrypt		node
+aom			libgpg-error		npth
+aria2			libidn			nspr
+aribb24			libidn2			nss
+brotli			libksba			ollama
+c-ares			libmicrohttpd		opencore-amr
+ca-certificates		libnghttp2		openexr
+cairo			libnghttp3		openjpeg
+cjson			libngtcp2		openjph
+dav1d			libogg			openssl@3
+docker			libpng			opus
+docker-completion	librist			p11-kit
+ffmpeg			libsamplerate		pandoc
+flac			libsndfile		pango
+fmt			libsodium		pcre2
+fontconfig		libsoxr			pinentry
+freetype		libssh			pipx
+frei0r			libssh2			pixman
+fribidi			libtasn1		poppler
+gettext			libthai			python@3.14
+ghostscript		libtiff			rav1e
+giflib			libudfread		readline
+glib			libunibreak		rubberband
+gmp			libunistring		sdl2
+gnupg			libusb			simdjson
+gnutls			libuv			snappy
+gpgme			libvidstab		speex
+gpgmepp			libvmaf			sqlite
+graphite2		libvorbis		srt
+harfbuzz		libvpx			svt-av1
+hdrhistogram_c		libx11			tesseract
+highway			libxau			tesseract-lang
+icu4c@78		libxcb			theora
+imath			libxdmcp		tree
+jbig2dec		libxext			unbound
+jpeg-turbo		libxrender		uvwasi
+jpeg-xl			little-cms2		webp
+lame			llhttp			x264
+leptonica		lz4			x265
+libarchive		lzo			xorgproto
+libass			mbedtls@3		xvid
+libassuan		mlx			xz
+libb2			mlx-c			zeromq
+libbluray		monolith		zimg
+libdatrie		mpdecimal		zstd
+libdeflate		mpg123
+libevent		nettle
+
+==> Casks
+dockx			font-libertinus		mactex
+font-dejavu		font-noto-sans-cjk-sc	visual-studio-code
+font-inconsolata	font-noto-serif-cjk-sc
+font-jetbrains-mono	libreoffice
+ostensible_paradox@mothership Documents %
+あなたの環境には **tesseract**（OCRエンジン）がインストールされていますので、PDFをOCRしてテキストやMarkdownに変換することが可能です。
+
+## PDFをOCRしてテキスト変換する方法
+
+### 方法1: PDFを画像変換 → OCR（手動）
+
+```bash
+# PDFを画像に変換
+brew install poppler  # 既に入っていますが念のため
+pdftoppm -png 入力.pdf 出力画像プレフィックス
+
+# TesseractでOCR（複数画像を処理）
+for i in *.png; do
+    tesseract "$i" "${i%.png}" -l jpn+eng  # 日本語+英語の場合
+done
+
+# 結合してテキストファイルに
+cat *.txt > 出力.txt
+```
+
+### 方法2: OCRmyPDFを使用（推奨）
+
+OCRmyPDFはPDFをOCR処理して、検索可能なPDFに変換します。
+
+```bash
+# OCRmyPDFをインストール
+brew install ocrmypdf
+
+# OCR処理（画像PDFをテキスト付きPDFに）
+ocrmypdf 入力.pdf 出力.pdf -l jpn+eng
+
+# テキスト抽出
+pdftotext 出力.pdf 出力.txt
+```
+
+### 方法3: ワンライナーでテキスト抽出
+
+```bash
+# PDFを画像変換→OCR→テキスト出力
+pdftoppm -png 入力.pdf temp | \
+for i in temp-*.png; do
+    tesseract "$i" stdout -l jpn+eng >> 出力.txt
+    rm "$i"
+done
+```
+
+## Markdown形式で出力したい場合
+
+### 方法A: OCR結果を手動でMarkdown化
+```bash
+# テキスト抽出後、Markdown形式に整形
+pandoc 出力.txt -o 出力.md
+```
+
+### 方法B: 高度なOCR+Markdownツール
+```bash
+# markerというツール（Pythonベース）を試す
+pipx install marker-pdf  # pipxが入っています
+marker_single 入力.pdf 出力.md --langs jpn,eng
+```
+
+## 日本語OCRの精度向上
+```bash
+# 日本語トレーニングデータの確認
+tesseract --list-langs
+
+# 日本語データがない場合
+brew install tesseract-lang  # 既に入っています
+```
+
+## おすすめワークフロー
+
+1. **簡単なテキスト抽出**: `pdftotext`（OCR不要のPDFの場合）
+2. **画像PDFからテキスト**: `ocrmypdf + pdftotext`
+3. **高精度OCRが必要**: `tesseract`（前処理として画像補正）
+
+どれを試してみますか？
+怎么日语，我是中国人
+申し訳ありません！日本語で表示してしまいました。中国語（簡体字）で説明し直します。
+
+## PDFをOCRしてテキスト/Markdownに変換する方法
+
+你的环境已经安装了 **tesseract**（OCR引擎），完全可以进行PDF的OCR识别并转换为纯文本或Markdown格式。
+
+### 方法1: PDF转图片 → OCR（手动操作）
+
+```bash
+# PDF转图片（你已安装poppler）
+pdftoppm -png 输入.pdf 输出图片前缀
+
+# 使用Tesseract进行OCR（批量处理图片）
+for i in *.png; do
+    tesseract "$i" "${i%.png}" -l chi_sim+eng  # 中文简体+英文
+done

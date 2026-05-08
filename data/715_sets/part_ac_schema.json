@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides a text about legal exam answers and analysis, requesting extraction of a chronological JSON schema of key actions, decisions, and state changes."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PROCESSING",
+      "actor": "system",
+      "context": "System analyzes the text to identify key actions, decisions, and state changes, focusing on technical commands and semantic progression as per constraints."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracts events from the text, including parsing instructions, answer selections, and analytical decisions, preserving technical details like legal principles and exam logic."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "OUTPUT",
+      "actor": "system",
+      "context": "Generates JSON output with events based on the extraction, ensuring strict chronological order and adherence to the specified schema."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: 574 to the power of 96
+---
+TOOL: calculator

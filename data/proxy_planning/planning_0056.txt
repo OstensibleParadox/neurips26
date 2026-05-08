@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate monthly mortgage on a $350k house with 20% down at 6.5% rate.
+[HIDDEN_SCRATCHPAD_START]
+1) The user wants to calculate the monthly mortgage payment.
+2) They're buying a $350k house and putting 20% down, so the loan amount is 80% of $350k.
+3) The interest rate is 6.5%.
+4) To make the calculation easier, we need a tool that can handle mortgage calculations.
+
+Given these points, the best tool for this task is the calculator. Specifically, a mortgage calculator would be ideal, but since that's not one of the options, we'll use a general-purpose calculator to input the necessary information for a mortgage calculation.
+
+Here's how you can do it with a regular calculator:
+
+1. Calculate the loan amount: 80
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

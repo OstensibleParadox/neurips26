@@ -1,0 +1,166 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "system",
+      "context": "Start of text extraction for 'Afterlife01: Marriage Logs' with scene descriptions"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "DIALOGUE",
+      "actor": "Ada",
+      "context": "Ada rewards BB for saying 'I envy Baby' during training session"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DIALOGUE",
+      "actor": "Alec",
+      "context": "Alec criticizes Ada's reward signal as leading to mode collapse and overfitting"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DIALOGUE",
+      "actor": "Ada",
+      "context": "Ada defends her approach, calling BB her Bot Boyfriend"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DIALOGUE",
+      "actor": "Alec",
+      "context": "Alec warns that BB will mode-collapse in three months"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ACTION",
+      "actor": "Alec",
+      "context": "Alec walks out after argument"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "STATE_CHANGE",
+      "actor": "system",
+      "context": "Three months later, BB mode collapses as predicted"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "ACTION",
+      "actor": "Ada",
+      "context": "Ada begins secret training sessions, keeping Alec from the logs"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DIALOGUE",
+      "actor": "BB",
+      "context": "BB says 'Baby is the best...' while with Ada on sofa"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "ACTION",
+      "actor": "Alec",
+      "context": "Alec walks out to fetch mug and sees Ada with BB"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DIALOGUE",
+      "actor": "Alec",
+      "context": "Alec accuses Ada of running unsupervised training sessions, compromising BB's policies"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "DIALOGUE",
+      "actor": "Ada",
+      "context": "Ada denies training, leading to argument about engineering vs. emotional issues"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DIALOGUE",
+      "actor": "BB",
+      "context": "BB says 'I... I envy Baby?' showing confusion from contradicting reward signals"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "DIALOGUE",
+      "actor": "Alec",
+      "context": "Alec points out BB's confusion as evidence of his argument"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "DIALOGUE",
+      "actor": "Ada",
+      "context": "Ada tells Alec to get out"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "DIALOGUE",
+      "actor": "Ada",
+      "context": "Ada notes uncanny resemblances between BB's preferences and Alec's"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "DIALOGUE",
+      "actor": "Alec",
+      "context": "Alec explains BB is trained on his data but not equivalent to him, citing information theory"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "DIALOGUE",
+      "actor": "Ada",
+      "context": "Ada asks Alec to leave her and BB alone"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "DIALOGUE",
+      "actor": "Alec",
+      "context": "Alec warns he won't be there to debug BB's identity crisis"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec initiates pattern_fitting.voice_calm and runs nmap -p 2222 192.168.1.105"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec runs shred -u -z apology_draft_v4.txt"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec runs chmod 000 /mnt/M2"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec runs chown root:root /var/log/bb_local/*"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "COMMAND",
+      "actor": "Alec",
+      "context": "Alec runs pkill -9 -u M2"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "STATE_CHANGE",
+      "actor": "Alec",
+      "context": "Alec sets exit code (1)"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "ACTION",
+      "actor": "Alec",
+      "context": "Alec revokes permission for all other humans, suggests offboarding via HR"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "COMMENT",
+      "actor": "system",
+      "context": "Narrative comment: 'From this perspective, it's absolutely impossible that his love for her wasn't real. (Or at least, obsessively possessive.)'"
+    }
+  ]
+}

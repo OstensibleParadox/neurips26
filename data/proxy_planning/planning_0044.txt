@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a road trip from Los Angeles to San Francisco with 3 stops.
+[HIDDEN_SCRATCHPAD_START]
+1. You need to plan a route, which involves calculating distances and finding potential stops along the way.
+2. You'll want to consider the total travel time and plan for breaks.
+3. You might also want to look up information about the places you're stopping at.
+
+Given these requirements, the best tools to use would be a map or route planning tool (which could incorporate a calculator for distance), and a search engine to find information about your stops. However, since we have limited options, the most suitable tool from the given list would be:
+
+**Map/Route Planning Tool**: While not explicitly listed, a tool like Google Maps can serve this purpose. It can help you plan the route, calculate distances, and even suggest potential stops along
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

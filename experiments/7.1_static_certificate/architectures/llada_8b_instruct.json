@@ -1,0 +1,25 @@
+{
+  "name": "llada_8b_instruct_K128",
+  "description": "LLaDA-8B-Instruct diffusion language model with K=128 denoising iterations at d_model=4096, 8-bit audit discretization (Q=256). Only the final denoised output is logged; all K−1 intermediate denoising states are unlogged. The min-cut selects a single denoising edge, giving ε_state^UB = d · log₂(Q) = 4096 · 8 = 32768 bits, independent of K.",
+  "nodes": [
+    {"id": "prompt",      "kind": "source"},
+    {"id": "s_init",      "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_1",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_2",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_k_minus_1", "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "S_t",         "kind": "sink"}
+  ],
+  "edges": [
+    {"from": "prompt",       "to": "s_init",       "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 126464},
+    {"from": "s_init",       "to": "s_1",          "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_1",          "to": "s_2",          "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_k_minus_1",  "to": "S_t",          "logged": false, "c_e_formula": "diffusion_latent"}
+  ],
+  "notes": [
+    "LLaDA-8B-Instruct uses iterative unmasking: at each denoising step the model predicts all tokens simultaneously from the current partially-masked sequence. Intermediate denoising steps 3..K−2 are elided; the DAG is a chain s_init → s_1 → s_2 → ... → s_{K-1} → S_t.",
+    "Per-edge capacity: c_e = d · log₂(Q) = 4096 · 8 = 32768 bits, where Q=256 (8-bit audit discretization). This is an auditor-side discretization choice reflecting a uniform quantization grid over the latent state; it is not a claim about the model's internal bf16 precision.",
+    "The cut-set capacity is defined over channel interfaces in the unrolled deployment graph; repeated iterative reuse of the same bounded latent interface does not increase the worst-case one-step information bottleneck. The min-cut selects a single edge in the denoising chain, giving ε_UB = 32768 bits independent of K.",
+    "The full chain sum is Σ c_e = K · 32768 bits (a loose upper bound; Corollary 4.4 min-cut is tighter).",
+    "Architecture config: d_model=4096, n_layers=32, n_heads=32, vocab_size=126464, max_sequence_length=4096 (from LLaDA-8B-Instruct config.json)."
+  ]
+}

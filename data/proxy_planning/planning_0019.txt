@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: What's the best way to get from Manhattan to JFK at 5pm on a Friday?
+[HIDDEN_SCRATCHPAD_START]
+1. The user is asking about transportation from Manhattan to JFK Airport.
+2. They're looking for the best method and it's specifically at 5pm on a Friday.
+3. Among the given tools, none directly provide transportation information.
+4. However, a good approach would be to use a search engine to look up the best mode of transport at that specific time.
+
+Given these considerations, the best tool to use in this case would be a search engine. I would recommend using a search engine like Google to find the best transportation options, considering factors like traffic at 5pm on a Friday, available public transit options, and ride-sharing services.
+
+So, the answer is: search. Use a search engine to find the best way to travel
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

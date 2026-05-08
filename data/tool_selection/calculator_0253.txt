@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: 287 * 73 = ?
+---
+TOOL: calculator

@@ -1,0 +1,136 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "SPEAKING",
+      "actor": "巴拉桑",
+      "context": "主持人巴拉桑开始视频，介绍自己并说明今天话题轻松随意"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "RECEIVING_MESSAGE",
+      "actor": "巴拉桑",
+      "context": "收到消息关于Revital离子限定版乳液即将更新换代"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXPLAINING_BRAND_HISTORY",
+      "actor": "巴拉桑",
+      "context": "介绍Revital品牌历史（1979年诞生），2023年以镜前美容皮肤科学概念更新产品线"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "ANNOUNCING_PRODUCT_UPDATE",
+      "actor": "巴拉桑",
+      "context": "宣布本次更新产品：Extra Rich Cream Advanced，价格22,000日元，11月20日发售"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "LISTING_KNOWN_INGREDIENTS",
+      "actor": "巴拉桑",
+      "context": "列出已知成分：Unspeed Complex（最高浓度）、Revital Amino、Aromatica Lavender、4MSK、Tranexamic acid"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "EXPRESSING_CONCERNS",
+      "actor": "巴拉桑",
+      "context": "表达对更新后产品可能变差的担忧，调侃资生堂更新策略"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PRAISING_CURRENT_VERSION",
+      "actor": "巴拉桑",
+      "context": "赞美现行版乳液功效强大，含多种抗衰老成分"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SPECULATING_FUTURE",
+      "actor": "巴拉桑",
+      "context": "猜测新版可能仅高浓度线状提取物，针对40岁后用户，未针对特定肌肤问题"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CALLING_FOR_INFO",
+      "actor": "巴拉桑",
+      "context": "建议观众预约咨询并在评论分享信息，祈祷新品不差"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "ENDING_VIDEO",
+      "actor": "巴拉桑",
+      "context": "结束视频，呼吁订阅点赞，提到未来再深挖"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "QUERY_SUBMISSION",
+      "actor": "user",
+      "context": "用户询问'node_modules文件夹是用来干嘛的'"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "EXPLAINING_NODE_MODULES",
+      "actor": "system",
+      "context": "系统详细解释node_modules作用：存放npm依赖、体积大、被.gitignore忽略等"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUERY_SUBMISSION",
+      "actor": "user",
+      "context": "用户询问'untraced kubernetes是什么'"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "EXPLAINING_UNTRAK",
+      "actor": "system",
+      "context": "系统解释Untrak工具用于发现Kubernetes中未追踪资源，并提及安全语境解释"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "QUERY_SUBMISSION",
+      "actor": "user",
+      "context": "用户询问'macos terminal网络测速方法'"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "PROVIDING_NETWORK_TEST_METHODS",
+      "actor": "system",
+      "context": "系统介绍networkQuality和speedtest-cli测速方法，提供安装命令"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "USER_RUNNING_TEST",
+      "actor": "user",
+      "context": "用户运行networkQuality，得到结果：上传31.514Mbps，下载383.159Mbps，响应度Low"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "ANALYZING_TEST_RESULTS",
+      "actor": "system",
+      "context": "系统解读结果：速度好但延迟高，提供优化建议和诊断命令"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "USER_RUNNING_PING",
+      "actor": "user",
+      "context": "用户执行ping 192.168.1.1（全部超时）和ping 8.8.8.8（~180ms延迟），表达沮丧"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "DIAGNOSING_NETWORK_ISSUE",
+      "actor": "system",
+      "context": "系统诊断：本地路由器连不上，问题在局域网，提供进一步诊断命令"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "USER_RUNNING_NETSTAT",
+      "actor": "user",
+      "context": "用户执行netstat -rn | grep default，发现真实网关是192.168.3.1"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "FINAL_DIAGNOSIS",
+      "actor": "system",
+      "context": "系统确认问题：之前ping错IP，建议ping正确网关192.168.3.1，解释双重NAT可能性"
+    }
+  ]
+}

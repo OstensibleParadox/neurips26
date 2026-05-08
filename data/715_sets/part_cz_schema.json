@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides a detailed research proposal text about AI safety and ethics, focusing on 'AI boyfriend' practices and a proto-paradigm for social AI, with instructions to extract a chronological JSON schema."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "System processes the text to identify key actions, decisions, and state changes, preserving technical commands and semantic progression as per constraints."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "OUTPUT",
+      "actor": "system",
+      "context": "System generates JSON output with events based on the extraction, focusing on the core actions like reading, extraction, and output without inventing details."
+    }
+  ]
+}

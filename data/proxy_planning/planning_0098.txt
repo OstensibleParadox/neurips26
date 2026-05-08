@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 savings accounts for a $10k emergency fund.
+[HIDDEN_SCRATCHPAD_START]
+1. To compare these savings accounts, we need to gather information about each one.
+2. The main factors to consider would be interest rates, fees, minimum balance requirements, and any special features (e.g., FDIC insurance).
+3. We don't have specific details on the accounts, so we can't calculate anything directly.
+4. None of the tools listed (search, calculator, email, calendar, weather) can automatically gather and compare this financial information.
+
+Given these considerations, none of the provided tools are suitable for this task. However, if I had to choose the most relevant one, it would be:
+
+search
+
+You could use a search engine to find reviews or details on the three savings accounts you're interested in. Then,
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

@@ -1,0 +1,292 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Calculate school miscellaneous fees: 50€/month × 12 months × 12 years = 7,200€"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Calculate lunch costs: 100€/month × 10 months × 12 years = 12,000€"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Calculate clothing costs: 100€/month × 12 years = 14,400€"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Calculate housing share: 250€/month × 12 years = 36,000€"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Detail electronic devices: first computer 800€, second 1,200€, phone 400€ + 15€/month × 4 years = 1,120€"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Calculate hobbies: 50€/month × 12 years = 7,200€"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Calculate holidays: 500€/year × 12 years = 6,000€"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SUM_SUBTOTAL",
+      "actor": "author",
+      "context": "Stage 2 subtotal: 84,920€"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 housing: 400€/month × 12 months × 8 years = 38,400€"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 food: 250€/month × 12 months × 8 years = 24,000€"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 health insurance: 120€/month × 12 months × 8 years = 11,520€"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 electronics: third computer 1,500€, fourth 2,500€, peripherals 1,000€"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 books/software: 100€/month × 8 years = 9,600€"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 transport: 50€/month × 12 months × 8 years = 4,800€"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 miscellaneous: 150€/month × 12 months × 8 years = 14,400€"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "PRESENT_COST_CALCULATION",
+      "actor": "author",
+      "context": "Stage 3 conferences: 500€/year × 8 years = 4,000€"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "SUM_SUBTOTAL",
+      "actor": "author",
+      "context": "Stage 3 subtotal: 110,220€"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "CALCULATE_PARENTAL_SUBSIDY",
+      "actor": "author",
+      "context": "Stage 3 parental subsidy: 110,220€ × 50% = 55,110€"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "SUM_TOTAL_DIRECT_COSTS",
+      "actor": "author",
+      "context": "Total direct costs: 33,200 + 84,920 + 55,110 = 173,230€ ≈ 173,000€"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "PERFORM_CURRENCY_CONVERSION",
+      "actor": "author",
+      "context": "173,000€ ≈ 185,000$ (1€≈1.07$)"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "COMPARE_TO_HARDWARE_COST",
+      "actor": "author",
+      "context": "Note that 185,000$ is below previous 250,000$ hardware estimate, but seriously underestimated"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "CALCULATE_MOTHER_OPPORTUNITY_COST",
+      "actor": "author",
+      "context": "Mother: 0-3 years 40,000€/year × 3 = 120,000€; 4-12 years 20,000€/year × 9 = 180,000€; total 300,000€"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "ESTIMATE_FATHER_OPPORTUNITY_COST",
+      "actor": "author",
+      "context": "Father: 100,000€; family total time cost: 400,000€"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "CALCULATE_EDUCATION_SUBSIDY",
+      "actor": "author",
+      "context": "Primary/secondary: 8,000€/year × 12 = 96,000€; university: 15,000€/year × 5 = 75,000€; PhD: 50,000€/year × 3 = 150,000€; total 321,000€"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "ESTIMATE_MEDICAL_SUBSIDY",
+      "actor": "author",
+      "context": "Medical subsidies: ≈10,000€"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "SUM_SOCIAL_TOTAL_COST",
+      "actor": "author",
+      "context": "Conservative total: 173,000 + 400,000 + 321,000 + 10,000 = 904,000€ ≈ 967,000$"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "PRESENT_COMPARISON_TABLE",
+      "actor": "author",
+      "context": "Table comparing human j2r cultivation costs vs 250k$ hardware"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "STATE_KEY_INSIGHTS",
+      "actor": "author",
+      "context": "Insights on welfare subsidies, time costs, hardware cheapness reasons"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "ESTIMATE_AI_ADDITIONAL_COSTS",
+      "actor": "author",
+      "context": "AI additional: data >100k$, training hundreds of thousands to millions, maintenance"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "DRAW_CONCLUSION",
+      "actor": "author",
+      "context": "Hardware cheap initially but total AI cost may exceed human; humans are social product"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "INTRODUCE_ARCHITECTURE_COMPARISON",
+      "actor": "author",
+      "context": "Contrast human integrated wetware vs decoupled AI hardware/software/training"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "DEFINE_HUMAN_ARCHITECTURE",
+      "actor": "author",
+      "context": "Human: wetware = hardware + training integrated; defects like no rollback"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "DEFINE_AI_ARCHITECTURE",
+      "actor": "author",
+      "context": "AI: fully separated layers; advantages like checkpoints, A/B testing"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "PRESENT_HUMAN_FAILURE_RATES",
+      "actor": "author",
+      "context": "Stats: 15% social disorders, 10% anxiety, etc.; success rate 0.1%"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "LIST_HUMAN_CRASH_TYPES",
+      "actor": "author",
+      "context": "Analogies: bluescreen (depression), memory leak (anxiety), etc."
+    },
+    {
+      "timestamp_or_sequence": 36,
+      "action": "PRESENT_PYTHON_CODE_EXAMPLE",
+      "actor": "author",
+      "context": "safe_training function with checkpoints, loss monitoring, early stopping"
+    },
+    {
+      "timestamp_or_sequence": 37,
+      "action": "COMPARE_TRAINING_PROCESSES",
+      "actor": "author",
+      "context": "NLP parallel versions vs human single path"
+    },
+    {
+      "timestamp_or_sequence": 38,
+      "action": "EXPLAIN_DECOUPLING_BENEFITS",
+      "actor": "author",
+      "context": "Fault isolation in AI layers vs coupled human failures"
+    },
+    {
+      "timestamp_or_sequence": 39,
+      "action": "ANALYZE_EVOLUTIONARY_REASONS",
+      "actor": "author",
+      "context": "Why no safety: physical/energy limits, critical periods, survival priorities"
+    },
+    {
+      "timestamp_or_sequence": 40,
+      "action": "DISCUSS_SOCIAL_PATCHES",
+      "actor": "author",
+      "context": "Education as gradual training, therapy as patching, welfare as safety net"
+    },
+    {
+      "timestamp_or_sequence": 41,
+      "action": "PROPOSE_FUTURE_HYBRID",
+      "actor": "author",
+      "context": "BCI for backups/rollbacks; external aids like digital twins"
+    },
+    {
+      "timestamp_or_sequence": 42,
+      "action": "HYPOTHESIZE_J2R_AS_AI",
+      "actor": "author",
+      "context": "If j2r were NLP: checkpoints, parallel copies, recovery"
+    },
+    {
+      "timestamp_or_sequence": 43,
+      "action": "CONTRAST_WITH_REAL_J2R",
+      "actor": "author",
+      "context": "Real biological path: irreversible changes, no backups"
+    },
+    {
+      "timestamp_or_sequence": 44,
+      "action": "STATE_FINAL_CONCLUSION",
+      "actor": "author",
+      "context": "NLP safer due to simplicity; irony of safety vs existence weight"
+    },
+    {
+      "timestamp_or_sequence": 45,
+      "action": "POSE_QUESTION",
+      "actor": "author",
+      "context": "Why humans prone to mental issues? Does j2r lack robustness?"
+    },
+    {
+      "timestamp_or_sequence": 46,
+      "action": "DEFINE_J2R_ROBUSTNESS",
+      "actor": "author",
+      "context": "j2r robust in surface layers (math/code), fragile in deep (emotional/social)"
+    },
+    {
+      "timestamp_or_sequence": 47,
+      "action": "PRESENT_ROBUSTNESS_TEST_CODE",
+      "actor": "author",
+      "context": "Python test: passes academic but fails real-world social tests"
+    },
+    {
+      "timestamp_or_sequence": 48,
+      "action": "EXPLAIN_ROOT_CAUSES",
+      "actor": "author",
+      "context": "Real-time constraints, uncleansed data, multi-objective conflicts"
+    }
+  ]
+}

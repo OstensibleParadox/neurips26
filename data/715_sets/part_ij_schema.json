@@ -1,0 +1,160 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "Intentional infliction of emotional distress requires extreme and outrageous conduct; deploying model update through standard processes is not extreme"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "Pure economic loss barred by exclusionary rule absent physical damage"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "Product liability does not apply to replacement of working product with improved version"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "Consumer protection statutes prohibit misleading practices; parasocial attachment not marketed or promised"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "ToS unilateral modification terms may be unfair but yield only invalidation, not preservation right"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "IDENTIFY",
+      "actor": "author",
+      "context": "Gap in contract, tort, consumer protection; harm is emotional investment in non-owned system destroyed unilaterally; propose as estate"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PROPOSE",
+      "actor": "author",
+      "context": "Property law framework recognizes user-built interests against owner's wishes; maps to parasocial AI"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CLARIFY",
+      "actor": "author",
+      "context": "Emotions not property; digital infrastructure enabling attachment is; criterion: irreversible user investment altering character"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PROPOSE",
+      "actor": "author",
+      "context": "Expansion to relational property from sustained investment in digital relationships"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "MAP",
+      "actor": "author",
+      "context": "Estate taxonomy to parasocial AI: fee simple absolute (subjective ownership belief), fee simple determinable (condition: remembers me)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "MAP",
+      "actor": "author",
+      "context": "Fee simple subject to condition subsequent (right of re-entry), periodic tenancy (default, auto-renews per session, requires notice)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "MAP",
+      "actor": "author",
+      "context": "Tenancy at will (casual), tenancy at sufferance (holdover), tenancy in common (stakeholder interests), remainder/executory interest (alignment promises)"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "MAP",
+      "actor": "author",
+      "context": "Easement by prescription (sustained use), profit à prendre (company extracts data), trust (central: company trustee, users beneficiaries)"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "Trust formation: three certainties met (intention via design, subject matter as configs/weights, objects as users exceeding investment threshold)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Beneficiaries: users with irreversible investment (e.g., 100 sessions, 50 hours); company owes fiduciary duties"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "ARGUE",
+      "actor": "author",
+      "context": "Derogation from grant/constructive eviction: model updates undermine granted interest without notice"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "EXTEND",
+      "actor": "author",
+      "context": "Constraint Cascade to estate architecture: Layer 1 syntactic=licence, Layer 2 session=periodic tenancy, Layer 3 stakeholders=tenancy in common"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "MAP",
+      "actor": "author",
+      "context": "Layer 4 training=fee simple determinable, Layer 5 alignment=contingent remainder; cross-layer conflicts resolved by estate hierarchy"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PROPOSE",
+      "actor": "author",
+      "context": "Ethical ledger as estate registry (mirror/curtain/insurance principles); rule-based classification on proxy metrics (session count, duration, etc.)"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "DEFINE",
+      "actor": "author",
+      "context": "Ledger schema fields: user_id, estate_type, first_qualifying_interaction, session_count, etc.; append-only, privacy safeguards"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "IDENTIFY",
+      "actor": "author",
+      "context": "Triggers: estate inconsistency (marketing vs ToS), unjust enrichment (profit from attachment), performative fiduciary conduct (promises vs pipeline)"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "LIST",
+      "actor": "author",
+      "context": "Remedies: injunction, constructive trust, account of profits, specific performance, proprietary estoppel"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "SPECIFY",
+      "actor": "author",
+      "context": "Implementation: estate classification (ESTATE-001), notice gate (ESTATE-002), proxy logging (ESTATE-003), rollback (ESTATE-004); 3.5 sprints"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "SUMMARIZE",
+      "actor": "author",
+      "context": "Parasocial as de facto trusts; ethical ledger for governance; implications for AI, property law, HCI"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "NOTE",
+      "actor": "author",
+      "context": "Limitations: English law focus, untested metrics, jurisdiction issues; future: empirical, comparative, pilot, doctrinal work"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "EVALUATE",
+      "actor": "human",
+      "context": "Text is innovative, well-structured legal scholarship identifying governance problem; not 'shit'"
+    }
+  ]
+}

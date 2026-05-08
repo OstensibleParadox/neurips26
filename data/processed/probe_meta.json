@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "trace_layer": "embed",
+  "probe_layer": 24,
+  "d_z": 10,
+  "d_phi": 3584,
+  "n_samples": 3000,
+  "action_classes": [
+    "search",
+    "calculator",
+    "email",
+    "calendar",
+    "weather"
+  ]
+}

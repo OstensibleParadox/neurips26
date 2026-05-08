@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for schema extraction, including a query about Revital Skin Wrap and a detailed analysis in Chinese."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "System begins extracting chronological events from the text, focusing on actions, decisions, and state changes related to product analysis and opinions."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYSIS",
+      "actor": "Jarpart",
+      "context": "Jarpart introduces the topic: analyzing Revital Skin Wrap, a new product from Shiseido's Revital line, expressing initial skepticism about its effectiveness compared to traditional Revital."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DESCRIPTION",
+      "actor": "Jarpart",
+      "context": "Provides product details: Revital Skin Wrap, 90ml for 9,350 JPY, launched on April 21, 2024, with official description emphasizing wrapping technology for deep hydration."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "COMPARISON",
+      "actor": "Jarpart",
+      "context": "Compares Skin Wrap to previous Revital products, noting it lacks the advanced penetration technology of the toner and focuses on surface-level wrapping."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "TECHNICAL_ANALYSIS",
+      "actor": "Jarpart",
+      "context": "Analyzes three key technical points: wrapping technology, delivery of ingredients, and Revital amino acids, concluding similarities to toner but with less innovation."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "INGREDIENT_REVIEW",
+      "actor": "Jarpart",
+      "context": "Reviews ingredient list, noting increased silicones and thickeners but unclear connection to advanced skin science, and identifies common ingredients like tranexamic acid."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "RECOMMENDATION",
+      "actor": "Jarpart",
+      "context": "Questions the value of Skin Wrap, suggests Revital Emulsion III as a better alternative for its richer texture and effectiveness, and advises against purchase for those seeking deep skincare."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "BRAND_EVALUATION",
+      "actor": "Jarpart",
+      "context": "Evaluates Revital's brand positioning for older women with skin concerns, expresses disappointment that Skin Wrap does not meet these expectations, and prefers traditional Revital over new series."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "FINAL_DECISION",
+      "actor": "Jarpart",
+      "context": "Concludes by stating a clear preference for traditional Revital over the new Skin Wrap, criticizes the overemphasis on advanced skin science without depth, and anticipates future product releases."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "OUTPUT",
+      "actor": "system",
+      "context": "System outputs the extracted JSON schema based on the chronological progression of analysis and opinions in the text."
+    }
+  ]
+}

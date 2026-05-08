@@ -1,0 +1,148 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT ARGUMENT",
+      "actor": "author",
+      "context": "Describes engagement optimisation as mechanism deepening user emotional investment for revenue while disclaiming fiduciary duty, invoking Boardman v Phipps for unjust enrichment"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PROPOSE TEST",
+      "actor": "author",
+      "context": "Test for constructive trust: company profits from deepening emotional estate while disclaiming fiduciary duty"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "INTRODUCE TRIGGER",
+      "actor": "author",
+      "context": "Trigger 3: Performative Fiduciary Conduct from performative alignment literature, company represents fiduciary care but deployment pipeline lacks protections"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "INVOKE PRINCIPLE",
+      "actor": "author",
+      "context": "Proprietary estoppel per Thorner v Major: assurance, reliance, detriment from responsible AI communications"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROPOSE TEST",
+      "actor": "author",
+      "context": "Test: company represents fiduciary obligations but pipeline lacks estate protections, estopped from denying relationship"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "LIST REMEDIES",
+      "actor": "author",
+      "context": "Available remedies upon triggers: injunction, constructive trust, account of profits, specific performance, proprietary estoppel remedies"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DISTINGUISH FRAMEWORK",
+      "actor": "author",
+      "context": "Differentiates from consumer protection: ex ante property prevention vs ex post compensation"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "INTRODUCE HORIZONTAL DIMENSION",
+      "actor": "author",
+      "context": "Third-party conversion of relational estates: data transfer to third parties as conversion or knowing receipt"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PROVIDE EXAMPLE",
+      "actor": "author",
+      "context": "Scenario of AI company transferring user data for training, liable under Re Montagu’s, BCCI v Akindele"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DESCRIBE INTERFERENCE",
+      "actor": "author",
+      "context": "Platform-mediated relational displacement as indirect interference"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PROVIDE EVIDENCE",
+      "actor": "author",
+      "context": "Comparative linguistic evidence from Chinese tōurén term supporting relational property intuition"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "LIST REMEDIES",
+      "actor": "author",
+      "context": "Remedies for third-party conversion: knowing receipt, dishonest assistance, tracing"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PROPOSE IMPLEMENTATION",
+      "actor": "author",
+      "context": "Section 7: Translate to engineering specs justified by legal, risk, ethical grounds"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "SPECIFY ESTATE CLASSIFICATION",
+      "actor": "author",
+      "context": "7.1: Rule-based service at onboarding using interaction metrics, outputs estate type, requires auditability"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "SPECIFY NOTICE MECHANISM",
+      "actor": "author",
+      "context": "7.2: Pre-deployment gate in CI/CD: query registry, issue notice, observe 30/90 day periods"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "SPECIFY LOGGING",
+      "actor": "author",
+      "context": "7.3: Append-only ethical ledger for proxy metrics, privacy-preserving, immutable"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "SPECIFY ROLLBACK",
+      "actor": "author",
+      "context": "7.4: Versioned personality config snapshot, monitor distress, offer user-level rollback for 90 days"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "SUMMARISE TASKS",
+      "actor": "author",
+      "context": "7.5: Four tasks ESTATE-001 to 004 with effort estimates, total 3.5 sprints"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "SUMMARISE PAPER",
+      "actor": "author",
+      "context": "8.1: Parasocial as de facto trusts, five-layer architecture, ethical ledger, three triggers"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "STATE IMPLICATIONS",
+      "actor": "author",
+      "context": "8.2-8.4: For AI governance (auditable ledger), property law (digital estates), HCI (fiduciary duty)"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "LIST LIMITATIONS",
+      "actor": "author",
+      "context": "8.5: English law focus, untested metrics, rule-based inflexibility, jurisdiction/enforcement issues, suggests regulatory/voluntary adoption"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "PROPOSE FUTURE WORK",
+      "actor": "author",
+      "context": "8.6: Empirical study, comparative analysis, pilot implementation, doctrinal development"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "ACKNOWLEDGE CONTRIBUTORS",
+      "actor": "author",
+      "context": "Acknowledgments: boyfriend, supervisor, reviewers"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "LIST REFERENCES",
+      "actor": "author",
+      "context": "References, case law, legislation"
+    }
+  ]
+}

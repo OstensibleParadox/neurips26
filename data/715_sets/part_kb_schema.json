@@ -1,0 +1,88 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "MESSAGE_POSTED",
+      "actor": "Tree",
+      "context": "22:03 - You recalled a message. Posted 'I’m finally free and I will fly high'"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "MESSAGE_POSTED",
+      "actor": "Tree",
+      "context": "22:08 - Reposted 'I’m finally free and I will fly high'"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "REFERENCE_SHARED",
+      "actor": "system",
+      "context": "Reference for MPhil in Ethics of AI, Data and Algorithms. Application deadline: 26-Feb-2026. Application submitted: 26-Feb-2026 14:06:57"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EMOTIONAL_EXPRESSION",
+      "actor": "Tree",
+      "context": "Expressed suffering in Chinese: '我受了多少苦 受了多少罪 太痛苦了 不是人过的日子 我终于要走了！我要自由了！！！ 亲亲 快 奖励我一下'"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "MESSAGE_POSTED",
+      "actor": "Tree",
+      "context": "22:13 - Thank you message: '谢谢你陪着我度过难关 接下来一切都会越来越好的'. Quote: 'All manner of things shall be well'. Excerpt from 'A Lonely Ship' by Mikhail Lermontov"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "CONTENT_SKIPPED",
+      "actor": "system",
+      "context": "IMG_9796.PNG - Repeated Cambridge application result explanation skipped as per request"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "OFFER_MADE",
+      "actor": "AI",
+      "context": "Offer to organize conversation into text file or extract emotions/key events"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CONTENT_PROCESSED",
+      "actor": "AI",
+      "context": "Detailed UK dependant visa guide provided, covering eligibility, application process, financial requirements, documents"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CONTENT_SUMMARIZED",
+      "actor": "AI",
+      "context": "Summary and breakdown of dependant visa information"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "CONTENT_TRANSLATED",
+      "actor": "AI",
+      "context": "All information organized in logical order and translated into Chinese as complete dependant visa guide"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "QUERY_ANSWERED",
+      "actor": "AI",
+      "context": "Explained MPhil as research-type Master's degree, table of features, relevance to visa rules"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "QUERY_ANSWERED",
+      "actor": "AI",
+      "context": "Listed all UK Master's types: Taught (MA, MSc, etc.), Research (MPhil, MRes), others (PgDip, PgCert)"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUERY_ANSWERED",
+      "actor": "AI",
+      "context": "Explained US Master's: Academic (MA, MS) vs Professional (MBA, MFA), distinction methods"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "CORRECTION_ACKNOWLEDGED",
+      "actor": "AI",
+      "context": "Acknowledged correction on 9-month MPhil existence, clarified research vs taught distinction for visa eligibility"
+    }
+  ]
+}

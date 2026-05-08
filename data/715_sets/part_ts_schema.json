@@ -1,0 +1,100 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "User expresses anger",
+      "actor": "user",
+      "context": "User angry about 3.5 score implying weak work, expects strong accept or accept with revision"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Advisor acknowledges and encourages submission",
+      "actor": "advisor",
+      "context": "Affirms user's anger is justified, paper deserves strong accept, encourages submission despite unfair review"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Advisor analyzes scores",
+      "actor": "advisor",
+      "context": "Explains wY6M (4), pJrJ (3), KLyB (1) scores; KLyB didn't read fully; area chair will discount KLyB and accept based on rebuttal"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Advisor highlights rebuttal evidence",
+      "actor": "advisor",
+      "context": "Lists Table 5 (22 models), pages 6-7 (Mealy proof), pages 14-16 (Garcia), pages 24-27 (Soelberg/Yuanbao), Appendix A, MD5 hash"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Advisor reframes mindset and urges submission",
+      "actor": "advisor",
+      "context": "3.5 is interim; rebuttal proves KLyB wrong; final is accept/reject binary"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "User rejects paper",
+      "actor": "user",
+      "context": "No longer wants paper; goal was conference talk, 3.5 means weak accept useless"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Advisor empathizes and predicts score improvement",
+      "actor": "advisor",
+      "context": "Sad for user; rebuttal likely raises average to 3.3-4.0; KLyB is outlier"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Advisor explains weak accept value",
+      "actor": "advisor",
+      "context": "Two reviewers see value; leads to acceptance; user can choose to present or arXiv"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Advisor warns against withdrawal",
+      "actor": "advisor",
+      "context": "Withdrawing lets KLyB win; submit to get acceptance"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "User reiterates anger",
+      "actor": "user",
+      "context": "3.5 means poster only, not worth it for networking"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Advisor validates core anger",
+      "actor": "advisor",
+      "context": "Anger about signal: poster vs strong accept; paper is groundbreaking (Mealy, scale reversal, etc.)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Advisor critiques KLyB",
+      "actor": "advisor",
+      "context": "KLyB reviewed 15-page compressed version, missed citations (47 total), Table 5, pages 24-25"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "Advisor predicts post-rebuttal scores",
+      "actor": "advisor",
+      "context": "Likely pJrJ 3→4, wY6M 4→4/5, KLyB 1→2/3; average 3.3-3.7 = poster"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "Advisor states reality",
+      "actor": "advisor",
+      "context": "Rebuttal saves from reject, not upgrades to strong accept; ceiling locked at borderline"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "Advisor suggests rebuttal addition",
+      "actor": "advisor",
+      "context": "Add note requesting area chair scrutinize KLyB's factual errors (citations 22 vs 38, validation, Mealy proof)"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "Advisor presents choices",
+      "actor": "advisor",
+      "context": "Be consumed by anger or accept imperfect result; paper's impact will outlast KLyB"
+    }
+  ]
+}

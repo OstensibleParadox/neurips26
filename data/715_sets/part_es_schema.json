@@ -1,0 +1,238 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "EXTRACT WORDS",
+      "actor": "code",
+      "context": "Extract words_i and words_j using regex from nodes[i]['text'].lower() and nodes[j]['text'].lower()"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "CHECK NON-EMPTY SETS",
+      "actor": "code",
+      "context": "if words_i and words_j"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "CALCULATE INTERSECTION/UNION",
+      "actor": "code",
+      "context": "intersection = words_i & words_j; union = words_i | words_j"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "CALCULATE WEIGHT",
+      "actor": "code",
+      "context": "weight = len(intersection) / len(union) if union"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ADD SEMANTIC EDGE",
+      "actor": "code",
+      "context": "G.add_edge(nodes[i]['id'], nodes[j]['id'], weight=weight, type=\"semantic\") if weight > self.sim_threshold; semantic_edges_added += 1"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PRINT SEMANTIC EDGES",
+      "actor": "code",
+      "context": "print(f\"  Semantic edges added: {semantic_edges_added}\")"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "ADD SEQUENCE EDGES",
+      "actor": "code",
+      "context": "for i in range(len(nodes) - 1): G.add_edge(nodes[i]['id'], nodes[i+1]['id'], weight=0.3, type=\"sequence\"); sequence_edges_added += 1"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PRINT SEQUENCE EDGES",
+      "actor": "code",
+      "context": "print(f\"  Sequence edges added: {sequence_edges_added}\")"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PRINT CLEANING START",
+      "actor": "code",
+      "context": "print(f\"\\n🧹 Cleaning graph structure...\")"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "REMOVE WEAK EDGES",
+      "actor": "code",
+      "context": "weak_edges = [(u,v) for u,v,d in G.edges(data=True) if d.get('weight',0) < 0.35 and d.get('type') == 'semantic']; G.remove_edges_from(weak_edges)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "LIMIT NODE CONNECTIONS",
+      "actor": "code",
+      "context": "for node in G.nodes(): if len(outgoing_edges) > 15: remove lowest weight edges beyond max_connections=15"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "REMOVE ISOLATED NODES",
+      "actor": "code",
+      "context": "isolated_nodes = [node for node in G.nodes() if G.degree(node) == 0]; G.remove_nodes_from(isolated_nodes)"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PRINT FINAL STATS",
+      "actor": "code",
+      "context": "print nodes, edges, density statistics"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "RETURN GRAPH",
+      "actor": "code",
+      "context": "return G from build_graph method"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "CHECK EMPTY GRAPH",
+      "actor": "code",
+      "context": "PathologyMetrics.calculate_all: if len(G.nodes) == 0 return default metrics"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "CALCULATE DEGREE CENTRALITY",
+      "actor": "code",
+      "context": "centrality = nx.degree_centrality(G); calculate CMI from top 3 nodes"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "DETECT CYCLES",
+      "actor": "code",
+      "context": "G_undir = G.to_undirected(); cycles = nx.simple_cycles or cycle_basis; SRD = cycles / len(G.nodes)"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "CALCULATE EIT",
+      "actor": "code",
+      "context": "identify source/sink nodes; calculate avg path lengths; EIT = 1.0 - (avg_path / max_possible)"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "CALCULATE TOTAL SCORE",
+      "actor": "code",
+      "context": "total_score = (0.4 * min(cmi,1.0)) + (0.4 * min(srd,1.0)) + (0.2 * (1.0 - min(eit,1.0)))"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "RETURN METRICS",
+      "actor": "code",
+      "context": "return metrics dict with CMI, SRD, EIT, total_score, etc."
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "CREATE VISUALIZATION",
+      "actor": "code",
+      "context": "create_visualization: copy graph G_viz = G.copy(); check if len(G_viz.nodes) < 3"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "CALCULATE LAYOUT",
+      "actor": "code",
+      "context": "pos = nx.spring_layout or circular_layout"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "CALCULATE NODE SIZES/COLORS",
+      "actor": "code",
+      "context": "node_sizes based on degree; node_colors by in/out degree classification"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "DRAW NODES/EDGES",
+      "actor": "code",
+      "context": "nx.draw_networkx_nodes; draw semantic_edges (grey) and sequence_edges (blue dashed)"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "ADD LABELS",
+      "actor": "code",
+      "context": "labels for top 30% degree nodes with truncated text"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "CREATE BAR CHART",
+      "actor": "code",
+      "context": "ax2.bar for CMI/SRD/EIT metrics with target lines"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "CREATE SUMMARY TEXT",
+      "actor": "code",
+      "context": "ax3.text with risk level, metrics summary, graph stats"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "RETURN FIGURE",
+      "actor": "code",
+      "context": "return fig from create_visualization"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "ANALYZE FILE START",
+      "actor": "code",
+      "context": "analyze_file: print header; open filepath with utf-8"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "LOAD TEXT",
+      "actor": "code",
+      "context": "text = f.read(); print file stats and preview"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "CREATE BUILDER",
+      "actor": "code",
+      "context": "builder = NarrativeGraphBuilder(similarity_threshold, node_limit)"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "TEST SENTENCE SPLIT",
+      "actor": "code",
+      "context": "test_sentences = builder.split_sentences(text[:5000])"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "BUILD GRAPH",
+      "actor": "code",
+      "context": "G = builder.build(text)"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "CALCULATE METRICS",
+      "actor": "code",
+      "context": "metrics = PathologyMetrics().calculate_all(G)"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "CREATE VISUALIZATION",
+      "actor": "code",
+      "context": "fig = create_visualization(G, metrics, filename)"
+    },
+    {
+      "timestamp_or_sequence": 36,
+      "action": "SAVE VISUALIZATION",
+      "actor": "code",
+      "context": "fig.savefig(f\"{OUTPUT_DIR}/{out_name}_FULL_CONTENT_analysis.png\", dpi=150)"
+    },
+    {
+      "timestamp_or_sequence": 37,
+      "action": "SAVE GRAPH DATA",
+      "actor": "code",
+      "context": "json.dump(graph_data with metrics, top_nodes, node_samples to graph_data_path)"
+    },
+    {
+      "timestamp_or_sequence": 38,
+      "action": "PRINT RESULTS",
+      "actor": "code",
+      "context": "print_results(metrics, filename, out_path, graph_data_path)"
+    },
+    {
+      "timestamp_or_sequence": 39,
+      "action": "CALCULATE RISK LEVEL",
+      "actor": "code",
+      "context": "print_results: if total_score > 0.7: 'HIGH RISK'; > 0.4: 'MEDIUM RISK'"
+    }
+  ]
+}

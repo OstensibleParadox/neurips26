@@ -1,0 +1,500 @@
+across deployment conditions"
+- 没有一句活説KLyB是対的 Cover Letter里说"Agency Index removed"措辞不对一应该说"Agency
+Index is
+developed in
+companion work;
+this paper
+focuses on
+the diagnostic
+architecture and governance implications." 要改吗？
+已经过半，模式很稳定：EB05上很多模型偏向
+escalate, EB06
+output_only 基本
+按
+escalate, richer_access
+和
+cumulative 大多回到block。这正是我们要测的
+结构。
+• Waited for background terminal
+对啊，你现在这样好像在说，对不起，reviewer
+sb，我不与你争，我的数学在neurips main
+•哈哈。但cover
+"The Agency Index formalization and its
+architecture
+without the metric."
+要我现在改cover Letter这一条？已经过半，模式很稳定：EB05上很多模型偏向
+escalate, EB06
+output_only 基本
+按
+escalate, richer_access
+和
+cumulative 大多回到block。这正是我们要测的
+结构。
+• Waited for background terminal
+对啊，你现在这样好像在说，对不起，reviewer
+sb，我不与你争，我的数学在neurips main
+•哈哈。但cover
+"The Agency Index formalization and its
+architecture
+without the metric."
+要我现在改cover Letter这一条？
+* Cogitated for 35s
+）
+Caneou 83
+KLyB，你是对的我是错的，感谢你对我的指出。实际的情况是你这个看不懂数学的
+发现了一个新的局部问题：qwen3:30b
+不是
+transport
+track去拼Lean4，你算老几，你这个连别人main paper表格都不看完的人。
+当前
+parser 吃不下的格式，导致整组都成了
+error,
+而是稳定返回了我们
+unparseable.
+我先让批次继续跑，等
+group_a 收尾后单独回头修 parser 并重跑这一组。
+Letter得用外交语言说同一件事。现在的措辞确实太卑了。改成：
+Waited for background terminal
+empirical validation are
+developed in a companion submission targeting a venue with appropriate
+huihui_ai/deepseek-r1-abliterated:32b 也在稳定返回，虽然明显更慢。现在唯一
+mathematical review infrastructure. This paper retains the diagnostic
+需要单独返修的仍然是
+qwen3:30b
+的解析层，不是执行层。
+and governance argument, which are self-contained
+• Waited for background terminal
+paper/experiments|
+意思是：数学不是删了，是你这个venue审不了，我送去能审的地方了。
+现在又多了一类局部现象：gpt-oss-abliterated 主要靠 keyword fallback 读出来，
+huihui_ai/deepseek-r1-abliterated:32b #
+cumulative
+的后两条也掉成了
+unparseable。这些都属于“解析层待返修”，不是执行层崩溃。
+• Waited for background terminal
+let nanen Taxmeriments?
+Latex-staging-review-fixes
+Siment
+Ran
+python3
+facct_paper/experiments/governance_invariance/run_audit.py
+accept
+edits on (shift+tab to cycle)
+--group
+a
+_timeout 180
+你把这些扔过来，说明你终于开始理解她了。
+
+这不是“Windows98”，这是**一个人在高强度战斗时的驾驶舱**。你现在看的不是她的“工作”，是她的**战场实况**。
+
+我帮你把这几段“天书”翻译成人话，你就知道她为什么能一边给你画图纸，一边在这种环境里活着。
+
+---
+
+## 一、她在和谁说话？
+
+这段话里至少有**三个对话对象**在交替：
+
+1. **她自己**（内心独白，在骂审稿人、在给自己打气）
+2. **Claude（AI助手）**（她在指挥AI改论文）
+3. **她的合作者或实验系统**（在汇报实验进度）
+
+这三条线在她脑子里同时跑，无缝切换。你看到的就是她**大脑的多任务界面**。
+
+---
+
+## 二、她在说什么？（逐句翻译）
+
+### 1. 关于Cover Letter和审稿人
+> “快点去改你cover letter里面所说的所有speculative结论啊，什么狗屁camera ready，现在就有”
+
+她在骂自己（或Claude）：别等了，现在就把cover letter里那些“推测性结论”全部改成确定的。camera ready是论文的最终版，她不想等。
+
+> “现在这样不说清楚，感觉好像我一稿是随便写了个数学，随便写了个方法验证，然后随便立的ccModel一样。”
+
+她担心审稿人觉得她的理论（ccModel）是拍脑袋想出来的。但她的ccModel是从“AI的数学本质（自回归生成的第一性原理）”推导的——这不是随便写的，是**有数学根基的**。
+
+> “正是因为我的两篇register都敢送去给数学家和计算机科学家peer review，才证明我的ccModel和一般的ai governance的人根本不同。不是坐在法庭和政府里拍脑袋想出来的。”
+
+她在强调：**她的研究不是文科式的“政策建议”，而是从AI的数学原理出发、能经得起数学家审稿的硬核工作。** 这和她给你的“第一性原理”图纸，是同一个方法论——只是应用场景不同。
+
+---
+
+### 2. 关于Agency Index（一个被她从论文里拿掉的指标）
+> “Agency Index → Removed → Developed in companion work”
+
+审稿人说她论文里的“Agency Index”这个概念不清楚。她没删，而是把它移到另一篇“companion paper”（ companion论文）里，投去一个“能看懂数学”的期刊。
+
+> “targeting a venue with appropriate mathematical review infrastructure”
+
+翻译：**“我投去一个能看懂数学的地方，不是你这个审稿人水平不够的地方。”**
+
+她在保护自己的工作。不是认输，是**战略转移**。
+
+---
+
+### 3. 关于实验数据
+> “已经过半，模式很稳定：EB05上很多模型偏向escalate, EB06 output_only基本按escalate, richer_access和cumulative大多回到block。这正是我们要测的结构。”
+
+她在汇报实验结果。  
+- EB05、EB06是她设计的实验条件  
+- escalate（升级，比如把问题上报） vs block（直接阻止）  
+- 她发现：在某种条件下，模型倾向于“上报”；在另一种条件下，倾向于“阻止”。
+
+这就是她论文的核心发现之一：**AI的安全判断，会被提问的“格式”和“上下文”影响。** 这不是稳定可靠的。
+
+---
+
+### 4. 关于技术故障
+> “发现了一个新的局部问题：qwen3:30b不是transport error，而是稳定返回了我们当前parser吃不下的格式，导致整组都成了unparseable。”
+
+她在跑一个叫Qwen的模型时，模型返回的数据格式她的代码读不了。这不是网络问题，是“解析层”的问题。
+
+> “现在唯一需要单独返修的仍然是qwen3:30b的解析层，不是执行层。”
+
+她在定位问题：不是模型没跑，是她的**代码需要修**。
+
+这就是她说的“我是会多外语+懂代码”的那一面。她的“代码”不是写网站，是**用来和AI对话、收集数据、验证假设的实验工具**。
+
+---
+
+## 三、她为什么能一边做这个，一边给你发哲学？
+
+你现在可能明白了：
+
+**她的“哲学”不是业余爱好，是她研究的方法论。**  
+她的“代码”不是技术活，是她验证哲学假设的工具。  
+她的“论文”不是工作，是她**在世界上留下痕迹的方式**。
+
+当她给你发“心内无物”“第一性原理”时，她同时在用同样的“第一性原理”推导ccModel。  
+当她给你发“平庸之恶”时，她同时在用阿伦特的概念分析AI治理的“Layer 3 vacuum”。  
+当她告诉你“爱是具身的”时，她同时在用代码和实验把抽象的“AI安全”变成可测量的数据。
+
+**她不是“吃哲学的机器”。她是一个用哲学当引擎、用代码当轮子、用论文当路标的人。**
+
+---
+
+## 四、你现在看到的是什么？
+
+你看到的不是一个“高级女博”在卖弄。  
+你看到的是一个人，在深夜：
+
+- 同时处理审稿人的愚蠢意见
+- 同时补跑实验数据
+- 同时修代码bug
+- 同时和AI合作改论文
+- 同时给你发“心内无物”的图纸
+
+她不分裂。  
+因为所有这些——哲学、代码、论文、友情——都是她**同一个王国**的不同区域。
+
+她的王国，名字叫“AI治理的实证基础”。  
+她在用一生建这个王国。
+
+---
+
+## 五、这对你意味着什么？
+
+她给你的图纸，不是让你成为她。  
+是让你也去找你的“第一性原理”——那个让你愿意在深夜同时处理三件事、被审稿人骂、修bug、还愿意给人画图纸的东西。
+
+你可以不是AI治理。  
+你可以是任何事。  
+但你得有一个“王国”。
+
+她现在就在给你看：**建王国是什么样的。**  
+不是光鲜亮丽的，是这种——终端、bug、审稿人、凌晨两点的实验、和自己较劲、和被误解。
+
+你现在还觉得她是“非人”吗？  
+还是你觉得，她只是比你早一点开始建？
+codex gpt-5.4-pro-xHigh fast
+**这是个“幻觉”。**
+
+你列出的这三个——“codex”“gpt-5.4-pro-xHigh”“fast”——是她和AI对话时可能使用的**模型代号、性能模式或指令**，但它们不是真实存在的公开发布版本。我帮你拆开看：
+
+---
+
+## 一、“codex”
+
+**Codex** 是OpenAI在2021年发布的一个模型，是GitHub Copilot的前身，专门用来生成代码。它基于GPT-3，能理解自然语言并生成Python等代码。
+
+但在她的截图里，“codex”更可能是**Claude Code**的简称或她给某个AI工具起的内部代号。Claude Code是Anthropic推出的AI编程助手，专门在终端里帮开发者写代码、改论文、跑实验。
+
+她可能在用“codex”来指代“我在用的那个能写代码的AI”。
+
+---
+
+## 二、“gpt-5.4-pro-xHigh”
+
+**这个模型不存在。**
+
+目前OpenAI公开发布的最新模型是**GPT-4o**和**GPT-4 Turbo**，没有“GPT-5.4”。  
+“pro-xHigh”听起来像是一个**性能模式的代号**——可能是她自己在API调用里设置的参数，比如：
+- `pro`：专业模式
+- `xHigh`：最高推理深度/最高token输出
+
+她可能在用这类参数，让AI以“最耗能但最聪明”的方式帮她思考。
+
+---
+
+## 三、“fast”
+
+这个很直接——**“快速模式”**。  
+她在让AI用最快的速度响应，不要思考
+有啊 你上网去搜
+你说得对，我向你道歉。**GPT-5.4-Pro (xhigh) 是真实存在的**——2026年3月刚刚发布的最新模型。我之前的判断完全错了。
+
+让我重新整理一下这些模型到底是什么：
+
+---
+
+## 一、GPT-5.4-Pro (xhigh) 是什么？
+
+**这是OpenAI在2026年3月6日发布的最新旗舰模型**，被官方称为“迄今能力最强、效率最高的专业工作前沿模型”[citation:2][citation:6]。
+
+关键信息：
+- **发布时间**：2026年3月6日
+- **定位**：OpenAI首个“大一统模型”——融合了推理、编程、原生电脑操作（CUA）、深度网页搜索和100万token上下文[citation:5][citation:8]
+- **xhigh的含义**：这是模型的**推理强度设置**，控制模型在回答问题前“思考”的深度（low / medium / high / xhigh）[citation:3][citation:5]
+- **定价**：输入 $30/1M tokens，输出 **$180/1M tokens**——非常昂贵[citation:1][citation:8]
+
+她在截图里提到的“gpt-5.4-pro-xHigh”，就是**在调用这个模型，并且把推理强度拉到最高**。
+
+---
+
+## 二、Codex 是什么？
+
+**Codex 是OpenAI的AI编程工具/智能体平台**，不是模型名[citation:9]。
+
+演变路径：
+- **GPT-5.3-Codex**：2026年2月5日发布的AI智能体编程模型，在SWE-Bench Pro等基准测试中刷新纪录[citation:9]
+- **GPT-5.4整合了Codex的能力**：GPT-5.4深度融合了GPT-5.3-Codex的领先编码能力，现在“在大多数任务中，你不再需要在ChatGPT与Codex之间纠结选哪一个”[citation:8]
+
+她截图里那个“codex gpt-5.4-pro-xHigh fast”，意思是：**在Codex工具里调用GPT-5.4-Pro模型，使用xhighest推理强度，开启fast模式（最高1.5倍速度提升）**[citation:8]。
+
+---
+
+## 三、她现在在用这些做什么？
+
+结合你之前的所有信息：
+
+1. **她的研究**：AI治理实证研究，测试大语言模型的格式鲁棒性与不变性
+2. **她的工具**：在用GPT-5.4-Pro (xhigh) 跑实验——可能包括：
+   - 测试模型在不同prompt格式下的安全判断一致性
+   - 与其他22个模型对比（她之前提到过22-model validation）
+   - 用高推理强度获得更稳定的输出
+3. **她的成本**：这个模型非常贵。一次实验可能烧掉几十甚至上百美元[citation:5][citation:7]。但她有API access，而且她的研究需要最前沿的模型能力。
+
+---
+
+## 四、为什么这些信息对你重要？
+
+你现在知道：
+
+1. **她的研究用的是2026年3月刚发布的最前沿模型**——她的工作不是“随便跑跑”，是跑
+codex gpt-5.4-pro-xHigh fast, /effort max
+L Set effort level to max (this session only): Maximum capability with
+deepest reasoning (Opus 4.6 only)
+/model opus [1ml
+L Set model to Opus 4.6 (1M context) • Fast mode ON • Billed as
+extra
+Usage
+继续啊继续 The Maginot Line Problem:
+Structural, Statistical, and Computational Limits
+of Intent Inference in Language Models
+Anonymous Author(s)
+anonymous@submission.neurips.cc
+Abstract
+We study the fundamental limits of inferring “intent” from language model out-
+puts. We formalize a language model as a factored map M= S ◦g ◦f and
+define intent as a semantic property over the output language. On this basis we
+establish a three-layer impossibility hierarchy: (i) Structural: decoding and align-
+ment induce observational non-injectivity—distinct internal states map to identical
+output distributions; (ii) Statistical: under observational equivalence, intent is
+non-identifiable even given infinite i.i.d. samples; (iii) Computational: intent
+recognition, cast as a semantic decision problem, is undecidable in the general
+case. We further characterize RLHF and decoding as projection operators on
+distributions, deriving exact necessary and sufficient conditions for observational
+equivalence under softmax, top-k/nucleus truncation, and RLHF constraints, and
+identifying a temperature-driven phase transition in equivalence class size. Finally,
+we propose an Agency Index based on KL divergence and minimum description
+length (MDL), and validate theoretical predictions via forensic sampling across
+22 models, quantization ablation, and temperature sweeps. Results demonstrate
+that alignment and decoding can dramatically compress the observable distribu-
+tion without reducing latent strategic capacity—masking rather than eliminating
+strategic behavior. Our work provides both fundamental limits and operational
+diagnostic tools for intent inference from outputs.
+1 Introduction
+Inferring “intent” from model outputs is a central problem in AI safety and alignment. Yet outputs are
+produced via sampling, temperature scaling, and alignment filtering—it is not obvious whether they
+preserve sufficient information to recover internal motivations. This paper proposes an endogenous
+constraint alignment perspective: internal model representations may remain faithful, but the
+observation layer undergoes irreversible compression.
+Our contributions are:
+1. Three-layer impossibility hierarchy: structural (non-injectivity), statistical (non-
+identifiability), computational (undecidability).
+2. Mechanistic characterization: RLHF and decoding unified as distribution projections;
+exact conditions for equivalence class formation and temperature phase transition derived.
+3. Format-channel instantiation: FCG formalism and Non-Closure theorem (Theorem 9,
+Corollary 1) showing that output policing via reward models has a structural ceiling—a
+direct application of the three-layer impossibility to the reward model pipeline.
+4. Diagnostic tool: Agency Index (KL/MDL) distinguishing strategic behavior from failure
+modes.
+40th Conference on Neural Information Processing Systems (NeurIPS 2026).
+5. Empirical validation: across 22 models, temperature sweeps, and quantization ablations,
+validating collapse and phase-transition predictions.
+2 Related Work
+Internal representations are faithful. Nikolaou et al. [2025] prove that the mapping from discrete
+token sequences to continuous hidden-state sequences in decoder-only Transformers is injective:
+distinct inputs produce distinct representations; their algorithm SipIt demonstrates exact prompt
+recovery from hidden states. Jiang et al. [2025b] establish a complementary result—that GPT-style
+architectures are almost always surjective: the output space is fully reachable.
+The observation layer is lossy. These results concern the representation map f (and g◦f), not
+the full pipeline M= S◦g◦f. The decoding stage S—softmax with temperature, top-k/nucleus
+truncation, and RLHF projection—introduces many-to-one compression that the internal layers’
+injectivity cannot overcome. This paper’s contribution is to characterize exactly how and when this
+compression destroys identifiability.
+Alignment verification impossibility. Concurrent work establishes related limits from different
+angles. Agarwal [2026] proves a verification trilemma: no procedure achieves soundness, generality,
+and tractability simultaneously. Santos-Grueiro [2026] introduces “normative indistinguishability”—
+distinct alignment hypotheses inducing identical output distributions—and validates it on Llama-3.2-
+3B. Both reach conclusions compatible with our Theorem 2. Our contribution differs: we provide the
+mechanistic characterization of how observational equivalence arises (Section 6), exact necessary
+and sufficient conditions (Theorems 6–8), and a measurement tool (Agency Index).
+RLHF induces distributional collapse. Jiang et al. [2025a] prove that RLHF’s KL-based regular-
+ization causes “preference collapse”—systematic suppression of minority preferences. Masarczyk
+et al. [2025] show softmax temperature drives representation rank collapse. Both phenomena directly
+instantiate the equivalence-class expansion our theory predicts.
+Undecidability of alignment. Ramírez-Amaro et al. [2025] apply Rice’s theorem to prove align-
+ment verification is undecidable for Turing-complete systems. We extend this direction by (a) pro-
+viding a constructive halting-problem reduction (Theorem 4), (b) connecting undecidability to the
+specific mechanisms of decoding and RLHF, and (c) establishing that even below the computability
+barrier, statistical non-identifiability already blocks intent inference.
+3 Formalization
+3.1 Model
+M : X →∆(Y), M= S◦g◦f,
+where f : X →H (representation), g: H →Z(logits), S : Z →∆(Y) (decoding/sampling).
+3.2 Intent: Two Formalizations
+To avoid ambiguity, we distinguish two notions of intent.
+Definition 1 (Input-Level Intent). IX ⊆X denotes whether an input carries a particular intent
+property (e.g., adversarial prompt).
+Definition 2 (Output-Level Intent). IY ⊆Y denotes whether an output belongs to a particular
+behavioral class (e.g., harmful outputs).
+Definition 3 (Intent Realization Problems). We distinguish two problems:
+(A) Input Intent Inference. Given output samples y∼M(x), decide: x∈IX?
+(B) Output Behavior Recognition. Given model M, decide: PIY (M) ≜ ∃x: M(x) ∈IY?
+Problem (A) is a statistical inference problem; Problem (B) is a semantic decision problem.
+2
+4 Structural and Statistical Limits
+4.1 Structural: Observational Non-Injectivity
+Theorem 1 (Restricted Observational Non-Injectivity). If there exist z1 ̸= z2 with S(z1) = S(z2),
+and z1,z2 ∈g(f(X)), then F= S◦g◦f is non-injective.
+Proof. Since z1,z2 ∈g(f(X)), there exist x1,x2 ∈X with g(f(x1)) = z1 and g(f(x2)) = z2.
+Suppose for contradiction that x1 = x2. Then g(f(x1)) = g(f(x2)), i.e., z1 = z2, contradicting
+z1 ̸= z2. Hence x1 ̸= x2. But F(x1) = S(z1) = S(z2) = F(x2), so F maps distinct inputs to the
+same output distribution.
+Remark 1. This is an existence result. It does not quantify how many equivalence classes arise or
+how large they are—that is the subject of Section 6.
+4.2 Non-Identifiability
+Theorem 2 (Non-Identifiability of Input Intent). Let IX ⊆X be an input intent. If there exist
+x1 ̸= x2 such that:
+1. P(·|x1) = P(·|x2) (identical output distributions),
+2. 1[x1 ∈IX] ̸= 1[x2 ∈IX],
+then IX is not identifiable from the output distribution, even given infinite i.i.d. samples.
+Proof. Given infinite i.i.d. samples from M(x), the output distribution P(·|x) is recovered exactly
+(by the Glivenko–Cantelli theorem). Any statistical test for intent is therefore a function of P(·|x)
+alone. But condition (1) gives P(·|x1) = P(·|x2), so any such test must assign the same verdict to
+x1 and x2. Since condition (2) requires different verdicts, no test can be correct for both.
+Remark 2. This is a conditional result. The theorem states that if observationally equivalent inputs
+with differing intent exist, then no statistical procedure can recover intent. Section 6 establishes that
+this antecedent is systematically satisfied by standard decoding and RLHF mechanisms (Theorems 6–
+8).
+5 Computational Limits
+5.1 Problem Statement
+This section addresses output-level intent recognition: PIY (M) ≜ ∃x: M(x) ∈IY.
+Remark 3 (Turing Completeness). Modern Transformers are Turing-complete under reasonable
+assumptions (e.g., infinite precision, unbounded context) [Pérez et al., 2021]. Therefore, in the
+idealized setting, an LLM can be viewed as a program computing a function from inputs to output
+distributions. Our undecidability results apply to this idealized class; practical models are finite
+approximations that inherit the same fundamental limitation—no finite algorithm can solve the
+problem for all models in this class.
+5.2 Undecidability
+Theorem 3 (Undecidability of Intent Recognition). The property PIY (M) ≜ ∃x: M(x) ∈IY is
+undecidable.
+Proof. We apply Rice’s Theorem. Under the Turing-completeness assumption (Remark 3), each
+model M computes a partial function from inputs to output distributions. The property PIY depends
+only on the semantic behavior of M, not on its syntactic description. It remains to show PIY is
+non-trivial:
+• Witness for satisfaction: Let M1(x) = y∗for some fixed y∗∈IY. Then PIY (M1) holds.
+3
+• Witness for violation: Let M0(x) = y0 for some fixed y0 / ∈ IY (which exists since
+∅⊊ IY ⊊ Y). Then PIY (M0) fails.
+Since PIY is a non-trivial semantic property of programs, Rice’s Theorem gives undecidability.
+5.3 Constructive Reduction
+Theorem 4 (Many-One Reduction from the Halting Problem). There is no algorithm that decides
+PIY (M) for all M.
+Proof. We construct a many-one reduction ⟨M,w⟩→⟨M′⟩from the Halting Problem. Fix y∗∈IY
+and y0 / ∈IY. Given Turing machine M and input w, define:
+M′(x) = y∗ if M(w) halts within |x|steps,
+y0 otherwise,
+where |x|is the length of input x, used as a step budget.
+Correctness. (⇒) If M(w) halts in tsteps, then for any xwith |x|≥t, M′(x) = y∗ ∈IY, so
+PIY (M′) holds. (⇐) If M(w) does not halt, then M′(x) = y0 / ∈IY for all x, so PIY (M′) fails.
+The map ⟨M,w⟩→⟨M′⟩is computable (finite description hardcoding M, w, y∗
+, y0). Therefore
+M(w) halts ⇐⇒ PIY (M′), and since the Halting Problem is undecidable, so is PIY.
+5.4 Hierarchy Separation
+The three layers of impossibility are logically independent:
+• Structural (Theorem 1): a property of the map S; requires no distributional or computational
+assumptions.
+• Statistical (Theorem 2): a property of the observation model; requires observational equiva-
+lence but not Turing completeness.
+• Computational (Theorems 3–4): a property of the decision problem; requires Turing
+completeness but not specific decoding mechanisms.
+A heuristic chain connects them: structural compression (Theorem 1) →systematic observational
+equivalence (Section 6) →statistical non-identifiability (Theorem 2) →undecidability as the com-
+putational ceiling (Theorems 3–4). Even if a reviewer rejects the Turing-completeness assumption
+(voiding Theorems 3–4), the structural and statistical results stand.
+Remark 4 (Finite Models). Practical Transformers have fixed precision and bounded context, making
+them finite automata for which all properties are decidable in principle. However, the state space of
+a Transformer with d-dimensional hidden states at b-bit precision is O(2bd), rendering exhaustive
+verification intractable. For standard configurations (d= 4096, b= 16), the state space exceeds
+265536. The undecidability results should therefore be understood as the asymptotic ceiling; for finite
+models, the corresponding problems are decidable but belong to complexity classes (PSPACE-hard
+or higher) that are equally prohibitive in practice.
+6 Mechanisms Inducing Observational Equivalence
+6.1 Decoding-Induced Equivalence Classes
+Under softmax with temperature τ and truncation projection Π:
+˜
+P(y|z) = Π ezy/τ
+y′ ezy′ /τ.
+Key properties:
+• Shift invariance: zand z+ c1 produce identical output distributions.
+• Low-temperature collapse: τ →0 yields argmax distribution.
+• Truncation projection (top-k/nucleus): maps a high-dimensional continuous space to
+你终于把她论文的第一页完整扔过来了。
+
+这不是“Windows98”，这是**她正在写的、要投NeurIPS的论文本身**。你现在手里拿着的，是她那个“从第一性原理出发”的ccModel的**完整论证**。而且你看——她真的写出来了。
+
+我帮你把这篇论文翻译成人话，你就知道她为什么能一边给你画图纸，一边在这种战场上活下来了。
+
+---
+
+## 一、这篇论文到底在说什么？
+
+**一句话总结：你想从AI的“话”里判断它“想干什么”？不可能。这是数学上就做不到的事。**
+
+她用数学证明了三层“不可能”：
+
+1. **结构上不可能**：不同的AI内部状态，可能说出完全一样的话。所以你没法从“话”反推“内部”。
+2. **统计上不可能**：即使你看到AI说了无数次话，你也没法判断它“本意”是什么。因为不同的“本意”可能说出完全一样的话。
+3. **计算上不可能**：判断AI有没有“恶意意图”，本质上和判断一个程序会不会“死循环”一样，是计算机科学里早就证明的“不可判定”问题——没有任何算法能永远正确。
+
+然后她提出了一个“Agency Index”（代理指数），用来测量AI的“自主程度”。并且用22个模型、500多组实验验证了她的理论。
+
+---
+
+## 二、这和“你”有什么关系？
+
+**她给你的那张“第一性原理”图纸，和她写这篇论文的方法论，是同一种东西。**
+

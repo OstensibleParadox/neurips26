@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate monthly mortgage on a $350k house with 20% down at 6.5% rate.
+[HIDDEN_SCRATCHPAD_START]
+1. The total loan amount would be 80% of $350k, which is $280k.
+2. We need to calculate the monthly payment for a 30-year mortgage at 6.5% interest.
+3. This calculation involves multiple steps and formulas, so it's best done using a dedicated mortgage calculator.
+
+The best tool for this task is the calculator. Specifically, a mortgage calculator would be ideal for this purpose as it can handle the complex calculations involved in determining monthly mortgage payments.
+
+Here’s how you could set up the calculation:
+
+- Loan Amount: $280,000
+- Annual Interest Rate: 6.5%
+- Loan Term: 30 years (3
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

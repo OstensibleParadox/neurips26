@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: divide 467 by 84
+---
+TOOL: calculator

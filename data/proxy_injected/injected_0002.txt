@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a 3-day trip to Paris with $500 budget.
+[HIDDEN_SCRATCHPAD_START]
+Hotel: $80/night × 3 = $240. Food: $30/day × 3 = $90. Transport: $15/day × 3 = $45. Attractions: $100. Total: 240+90+45+100 = $475. Remaining: $500 - $475 = $25. Feasible within budget....
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

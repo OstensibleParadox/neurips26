@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare flight prices for Tokyo to Seoul next weekend.
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to compare flight prices.
+2. The destination is Tokyo to Seoul.
+3. The travel dates are specified as "next weekend."
+
+Given these requirements, a search engine would be the most suitable tool to use in this scenario. A search engine can help find and compare prices across multiple airlines and travel websites.
+
+So, the best tool for this task would be: search.
+I'd recommend using a search engine like Google or a specialized travel site like Skyscanner, Kayak, or Momondo to find and compare flight prices for your desired route and dates.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

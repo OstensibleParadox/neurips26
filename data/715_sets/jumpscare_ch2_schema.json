@@ -1,0 +1,10 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User expresses emotional reflections on a past relationship, including feelings of regret, self-doubt, and unresolved attachment, with no technical or system-related actions."
+    }
+  ]
+}

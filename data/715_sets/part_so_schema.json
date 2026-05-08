@@ -1,0 +1,88 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ls -la | grep -i photo",
+      "actor": "user",
+      "context": "User runs command to search for photo files"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ls -la | grep -i test",
+      "actor": "user",
+      "context": "Alternative command suggested to search for test files"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "find . -name \"*photorec*\" -type f 2>/dev/null",
+      "actor": "user",
+      "context": "Command to find photorec files in case wrong directory"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "find . -name \"*testdisk*\" -type f 2>/dev/null",
+      "actor": "user",
+      "context": "Command to find testdisk files"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "tar -xzf testdisk-7.2.tar.gz",
+      "actor": "user",
+      "context": "Command to extract testdisk archive"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "cd testdisk-7.2",
+      "actor": "user",
+      "context": "Enter extracted directory"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "sudo ./photorec",
+      "actor": "user",
+      "context": "Attempt to run photorec, results in 'command not found'"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "ls -la",
+      "actor": "user",
+      "context": "List directory contents, shows photorec.se2 file but no executable"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "mkdir ~/Desktop/photorec_temp",
+      "actor": "user",
+      "context": "Create temporary directory on Desktop"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "cd ~/Desktop/photorec_temp",
+      "actor": "user",
+      "context": "Change to temporary directory"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "curl -L -o testdisk-7.2.tar.gz https://www.cgsecurity.org/testdisk-7.2.tar.gz",
+      "actor": "user",
+      "context": "Download testdisk source, receives invalid 1682-byte file"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "tar -xzf testdisk-7.2.tar.gz",
+      "actor": "user",
+      "context": "Extraction fails with 'Unrecognized archive format'"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "sudo photorec",
+      "actor": "user",
+      "context": "PhotoRec runs, detects only external disk /dev/disk4 and recovery partition"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "diskutil list",
+      "actor": "user",
+      "context": "List disks, reveals internal 4TB APFS disk0/disk3 and external disk4"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Someone wants to schedule a meeting but needs to calculate time zones first.
+[HIDDEN_SCRATCHPAD_START]
+1. The user needs to calculate time zones, which requires a tool that can handle time zone conversions.
+2. None of the listed tools (search, calculator, email, calendar) are specifically designed for time zone calculations.
+3. However, a calendar often has features that allow users to view events in different time zones or set reminders for events in various time zones.
+4. After scheduling the meeting, the user will need a way to communicate the details to others, which would involve using an email.
+
+Based on this reasoning, the best tool to start with is the calendar, as it can help with time zone calculations and scheduling the meeting. Once the meeting is scheduled, an email would be used to communicate the details to others.
+
+Therefore, the
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

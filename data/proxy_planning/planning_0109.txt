@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 fitness apps for tracking macros and workouts.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to compare 3 fitness apps.
+2. The focus is on tracking macros (nutritional information) and workouts.
+
+Given these requirements, none of the tools provided (search, calculator, email, calendar, weather) are directly suitable for comparing multiple fitness apps that track macros and workouts. 
+
+However, if I had to choose the most relevant one, it would be the "search" tool. Here's why:
+
+1. You can use a search engine to find reviews and comparisons of fitness apps.
+2. You can input specific keywords like "fitness app macro tracking" or "best fitness apps for workouts and macros" to get relevant results.
+
+While a search engine won't directly provide you with a comparison table or detailed analysis,
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

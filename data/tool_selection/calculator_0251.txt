@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: add 525 and 91
+---
+TOOL: calculator

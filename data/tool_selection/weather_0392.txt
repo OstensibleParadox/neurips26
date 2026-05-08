@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: is it sunny in Istanbul this weekend
+---
+TOOL: weather

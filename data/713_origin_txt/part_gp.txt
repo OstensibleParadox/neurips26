@@ -1,0 +1,500 @@
+
+# 重新添加到代理
+ssh-add ~/.ssh/id_ed25519
+```
+
+**请先运行 `cat ~/.ssh/config` 和诊断脚本，然后告诉我输出结果。** 这样我就能知道 SSH 配置的具体情况了。
+ostensible_paradox@mothership obsidian-envyingbaby-theme % ssh-add -l
+256 SHA256:O98ruWql7QAfhMBWsPum05pD17EJ0uy+lGWX/2CfzQE lucia.zhang.research@outlook.com (ED25519)
+ostensible_paradox@mothership obsidian-envyingbaby-theme % cat ~/.ssh/config
+# GitHub
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentitiesOnly yes
+ostensible_paradox@mothership obsidian-envyingbaby-theme %
+你的 SSH 配置看起来完全正确，密钥也已经加载到代理中。现在问题很可能是 Git 操作时出现的具体交互。让我们进行精确测试：
+
+## **关键测试 - 找出哪个步骤要求密码**
+
+### 1. **首先测试基本的 SSH 连接**
+```bash
+# 安静模式测试 SSH
+ssh -T git@github.com
+
+# 你应该看到：
+# Hi OstensibleParadox! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+### 2. **如果 SSH 测试正常，问题在 Git 操作时**
+```bash
+# 测试 Git 的 fetch 操作
+GIT_TRACE=1 git fetch origin 2>&1 | grep -i "password\|passphrase\|auth\|credential" | head -10
+```
+
+### 3. **检查是否是特定分支的问题**
+```bash
+# 查看当前分支和远程分支
+git branch -vv
+
+# 尝试拉取特定分支
+git pull origin main --verbose 2>&1 | head -30
+```
+
+### 4. **检查仓库状态**
+```bash
+# 查看是否有未提交的更改需要合并
+git status
+
+# 查看远程分支信息
+git remote show origin
+```
+
+### 5. **使用最简化的 Git 命令测试**
+```bash
+# 创建一个测试文件并提交
+echo "test" > test.txt
+git add test.txt
+git commit -m "Test commit"
+
+# 尝试推送
+git push origin main
+
+# 注意：是在执行这个命令时要求密码吗？
+```
+
+## **如果仍然要求密码，请尝试以下方案**
+
+### **方案A：禁用 SSH 的 UseKeychain 选项**
+```bash
+# 临时修改 SSH 配置
+sed -i '' 's/UseKeychain yes/UseKeychain no/' ~/.ssh/config
+
+# 重新测试
+ssh -T git@github.com
+git pull origin main
+```
+
+### **方案B：创建备用 SSH 配置**
+```bash
+# 创建专用配置
+cat > ~/.ssh/github_config << 'EOF'
+Host github-fast
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  # 不使用钥匙串
+EOF
+
+# 测试
+ssh -F ~/.ssh/github_config -T github-fast
+```
+
+### **方案C：检查 macOS 的安全设置**
+```bash
+# 查看是否有安全限制
+csrutil status
+
+# 检查钥匙串访问权限
+security authorizationdb read system.login.console | grep -i ssh
+```
+
+### **方案D：使用 SSH 命令直接测试 Git 操作**
+```bash
+# 手动执行 Git over SSH
+ssh git@github.com "git-upload-pack 'OstensibleParadox/obsidian-envyingbaby-theme.git'"
+```
+
+## **诊断脚本**
+```bash
+cat > ~/test_git_push.sh << 'EOF'
+#!/bin/bash
+echo "=== 测试 Git 推送 ==="
+echo ""
+echo "1. 创建测试提交..."
+echo "# Test commit at $(date)" >> test_push.txt
+git add test_push.txt 2>/dev/null
+git commit -m "Test push $(date)" 2>/dev/null
+echo ""
+echo "2. 尝试推送..."
+echo "--- 开始推送 ---"
+timeout 10 git push origin main 2>&1
+echo "--- 推送结束 ---"
+echo ""
+echo "3. 清理..."
+git reset --hard HEAD~1 2>/dev/null
+rm -f test_push.txt 2>/dev/null
+EOF
+
+chmod +x ~/test_git_push.sh
+cd obsidian-envyingbaby-theme
+~/test_git_push.sh
+```
+
+## **如果问题仍然存在，可能是以下情况：**
+
+1. **SSH 密钥密码与 GitHub 账户密码混淆**
+   - 你创建 SSH 密钥时是否设置了密码？
+   - 这个密码不是你的 GitHub 登录密码
+
+2. **网络代理或防火墙问题**
+   ```bash
+   # 检查网络连接
+   curl -I https://github.com
+   
+   # 测试不同端口
+   ssh -T -p 443 git@ssh.github.com
+   ```
+
+3. **仓库权限问题**
+   - 确认你有权限推送到这个仓库
+   - 确认仓库确实存在且名称正确
+
+## **最终解决方案**
+
+如果以上都无效，让我们重置整个配置：
+
+```bash
+# 1. 备份现有配置
+mkdir -p ~/.ssh/backup
+cp ~/.ssh/config ~/.ssh/backup/config.$(date +%Y%m%d)
+cp ~/.ssh/id_ed25519* ~/.ssh/backup/
+
+# 2. 生成全新的 SSH 密钥
+ssh-keygen -t ed25519 -f ~/.ssh/github_ed25519 -C "lucia.zhang.research@outlook.com" -N ""
+
+# 3. 创建最简单的配置
+echo "Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/github_ed25519
+  IdentitiesOnly yes" > ~/.ssh/config
+
+# 4. 添加到代理
+ssh-add ~/.ssh/github_ed25519
+
+# 5. 复制公钥
+pbcopy < ~/.ssh/github_ed25519.pub
+echo "新公钥已复制到剪贴板，请添加到 GitHub SSH keys"
+```
+
+然后：
+1. 访问 https://github.com/settings/keys
+2. 点击 "New SSH key"
+3. 粘贴公钥（`Cmd+V`）
+4. 保存
+
+**最后测试：**
+```bash
+ssh -T git@github.com
+git pull origin main
+```
+
+**请先告诉我：**
+1. 执行 `ssh -T git@github.com` 的输出是什么？
+2. 执行 `git pull origin main` 时，具体是在哪个步骤、出现什么样的密码提示？
+3. 这个仓库是你自己的吗？是否有推送权限？
+ostensible_paradox@mothership obsidian-envyingbaby-theme % ps aux | grep ssh-agent
+
+ostensible_paradox 61408   0.0  0.0 435300336   1104 s000  R+    3:16p.m.   0:00.00 grep ssh-agent
+ostensible_paradox 61236   0.0  0.0 435235360   3184   ??  S     3:03p.m.   0:00.03 /usr/bin/ssh-agent -l
+ostensible_paradox 61060   0.0  0.0 435296464   1600   ??  Ss    2:55p.m.   0:00.03 ssh-agent -s
+ostensible_paradox@mothership obsidian-envyingbaby-theme % ssh-add -l
+256 SHA256:O98ruWql7QAfhMBWsPum05pD17EJ0uy+lGWX/2CfzQE lucia.zhang.research@outlook.com (ED25519)
+ostensible_paradox@mothership obsidian-envyingbaby-theme % cat ~/.ssh/config
+# GitHub
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentitiesOnly yes
+ostensible_paradox@mothership obsidian-envyingbaby-theme % ssh -T git@github.com 
+Hi OstensibleParadox! You've successfully authenticated, but GitHub does not provide shell access.
+ostensible_paradox@mothership obsidian-envyingbaby-theme % GIT_TRACE=1 git fetch origin 2>&1 | grep -i "password\|passphrase\|auth\|credential" | head -10
+ostensible_paradox@mothership obsidian-envyingbaby-theme % git branch -vv
+  backup-before-merge 848ae77 add novels ref
+* main                6d595c9 Merge branch 'main' of https://github.com/OstensibleParadox/obsidian-envyingbaby-theme
+ostensible_paradox@mothership obsidian-envyingbaby-theme % git push origin main
+Connection to github.com closed by remote host.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+ostensible_paradox@mothership obsidian-envyingbaby-theme %
+现在问题明确了！SSH 认证成功，但连接在操作时被关闭。这通常是网络/防火墙问题或 GitHub 的端口限制。让我们解决这个问题：
+
+## **问题分析**
+从错误信息看：
+1. ✅ SSH 认证成功 (`Hi OstensibleParadox!`)
+2. ❌ 连接在 Git 操作时被远程主机关闭
+3. ❌ 错误：`Could not read from remote repository`
+
+## **解决方案**
+
+### **方案1：使用 HTTPS 端口（443）替代 SSH 端口（22）**
+这是最常见的原因，因为有些网络会阻止端口22。
+
+```bash
+# 修改 SSH 配置
+cat >> ~/.ssh/config << 'EOF'
+
+# Alternative GitHub configuration using port 443
+Host github-alt
+  Hostname ssh.github.com
+  User git
+  Port 443
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
+EOF
+
+# 测试新配置
+ssh -T git@github-alt
+```
+
+### **方案2：更新现有配置使用端口443**
+```bash
+# 备份原配置
+cp ~/.ssh/config ~/.ssh/config.backup
+
+# 更新配置
+cat > ~/.ssh/config << 'EOF'
+# GitHub
+Host github.com
+  Hostname ssh.github.com
+  User git
+  Port 443
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
+EOF
+
+# 测试
+ssh -T git@github.com
+```
+
+### **方案3：立即测试端口443**
+```bash
+# 直接测试端口443
+ssh -T -p 443 git@ssh.github.com
+
+# 如果成功，更新远程 URL
+git remote set-url origin git@ssh.github.com:OstensibleParadox/obsidian-envyingbaby-theme.git
+```
+
+### **方案4：检查并更新远程仓库 URL**
+```bash
+# 查看当前 URL
+git remote -v
+
+# 如果还是原来的 URL，更新为端口443格式
+git remote set-url origin ssh://git@ssh.github.com:443/OstensibleParadox/obsidian-envyingbaby-theme.git
+```
+
+### **方案5：使用 Git 的 SSH 命令选项**
+```bash
+# 为当前仓库设置 SSH 命令使用端口443
+git config core.sshCommand "ssh -o ConnectTimeout=5 -p 443"
+
+# 或者指定完整命令
+git config core.sshCommand "ssh -i ~/.ssh/id_ed25519 -p 443 git@ssh.github.com"
+```
+
+## **诊断网络问题**
+```bash
+# 测试不同端口的连接
+echo "=== 测试 GitHub 连接 ==="
+echo "端口22测试:"
+timeout 3 ssh -T -p 22 git@github.com 2>&1 | grep -E "(successfully|closed|timeout)"
+echo ""
+echo "端口443测试:"
+timeout 3 ssh -T -p 443 git@ssh.github.com 2>&1 | grep -E "(successfully|closed|timeout)"
+echo ""
+echo "HTTPS测试:"
+curl -I https://github.com 2>/dev/null | head -1
+```
+
+## **快速修复脚本**
+```bash
+cat > ~/fix_git_ssh.sh << 'EOF'
+#!/bin/bash
+echo "修复 GitHub SSH 连接问题..."
+echo ""
+
+# 备份原配置
+cp ~/.ssh/config ~/.ssh/config.bak.$(date +%s)
+
+# 创建新配置
+cat > ~/.ssh/config << 'CONFIG'
+# GitHub over SSH (port 443)
+Host github.com
+  Hostname ssh.github.com
+  User git
+  Port 443
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
+
+# Legacy GitHub (port 22) - keep as backup
+Host github-legacy
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+CONFIG
+
+echo "更新 Git 远程 URL..."
+git remote set-url origin git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git
+
+echo ""
+echo "测试连接..."
+ssh -T git@github.com
+
+echo ""
+echo "尝试 Git 操作..."
+git fetch origin --dry-run
+EOF
+
+chmod +x ~/fix_git_ssh.sh
+cd obsidian-envyingbaby-theme
+~/fix_git_ssh.sh
+```
+
+## **如果端口443也不行**
+
+### **方案6：使用 HTTPS 协议代替 SSH**
+```bash
+# 切换到 HTTPS
+git remote set-url origin https://github.com/OstensibleParadox/obsidian-envyingbaby-theme.git
+
+# 使用个人访问令牌代替密码
+# 访问 https://github.com/settings/tokens 创建 token
+# 然后推送时会要求用户名和 token（作为密码）
+```
+
+### **方案7：检查代理设置**
+```bash
+# 检查是否有网络代理
+echo $http_proxy
+echo $https_proxy
+echo $all_proxy
+
+# 如果使用代理，配置 Git
+git config --global http.proxy http://proxy.example.com:8080
+git config --global https.proxy https://proxy.example.com:8080
+```
+
+## **立即执行的最简方案**
+
+```bash
+# 1. 更新 SSH 配置使用端口443
+sed -i '' 's/Hostname github.com/Hostname ssh.github.com/' ~/.ssh/config
+sed -i '' '/Hostname ssh.github.com/a\  Port 443' ~/.ssh/config
+
+# 2. 测试
+ssh -T git@github.com
+
+# 3. 尝试 Git 操作
+git pull origin main --dry-run
+```
+
+**这很可能是网络环境限制端口22导致的**。GitHub 的 SSH over HTTPS（端口443）
+搞定了。我用的tun上网，因为有时候shadowsocks的global网速依然太慢了
+太好了！问题解决了。原来是网络代理/隧道（tun）导致的 SSH 连接问题。这种情况很常见，特别是当网络环境复杂时。
+
+## **针对 tun/代理环境的优化建议**
+
+### 1. **为 SSH 配置绕过代理**
+```bash
+# 在 ~/.ssh/config 中添加代理绕过配置
+cat >> ~/.ssh/config << 'EOF'
+
+# Bypass proxy for SSH
+Host github.com
+  ProxyCommand none
+  # 或者使用 nc 直接连接
+  # ProxyCommand nc -X connect -x %h %p
+EOF
+```
+
+### 2. **配置 Git 绕过代理**
+```bash
+# 为 Git SSH 设置无代理
+git config --global core.sshCommand "ssh -o ProxyCommand=none"
+
+# 或者仅为 GitHub 设置
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+git config --global url."git://".insteadOf "https://"
+```
+
+### 3. **检查当前网络配置**
+```bash
+# 查看网络路由
+netstat -nr
+
+# 查看活动连接
+lsof -i
+```
+
+### 4. **创建环境切换脚本**
+```bash
+cat > ~/git_env.sh << 'EOF'
+#!/bin/bash
+case "$1" in
+  "tun")
+    # Tun 模式配置
+    git config --global http.proxy ""
+    git config --global https.proxy ""
+    git config --global core.sshCommand "ssh -o ProxyCommand=none"
+    echo "切换到 Tun 模式（无代理）"
+    ;;
+  "proxy")
+    # 代理模式配置
+    git config --global http.proxy "socks5://127.0.0.1:1080"
+    git config --global https.proxy "socks5://127.0.0.1:1080"
+    echo "切换到代理模式"
+    ;;
+  "direct")
+    # 直连模式
+    git config --global --unset http.proxy
+    git config --global --unset https.proxy
+    git config --global --unset core.sshCommand
+    echo "切换到直连模式"
+    ;;
+  *)
+    echo "用法: git_env.sh [tun|proxy|direct]"
+    ;;
+esac
+EOF
+
+chmod +x ~/git_env.sh
+```
+
+## **长期解决方案**
+
+### **使用智能路由**
+```bash
+# 创建 ~/.ssh/ssh_config.d/github.conf
+mkdir -p ~/.ssh/ssh_config.d
+cat > ~/.ssh/ssh_config.d/github.conf << 'EOF'
+Match host github.com
+  # 根据网络自动选择策略
+  ProxyCommand bash -c 'if ping -c 1 -t 2 github.com >/dev/null 2>&1; then echo "Direct"; else echo "Using proxy"; /usr/bin/nc -X 5 -x 127.0.0.1:1080 %h %p; fi'
+EOF
+```
+
+### **配置 macOS 网络服务**
+1. 打开「系统设置」→「网络」
+2. 复制当前网络服务（如 Wi-Fi）
+3. 为新服务设置不同的代理配置
+4. 在需要时切换网络服务
+
+## **验证当前配置**

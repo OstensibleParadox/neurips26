@@ -1,0 +1,226 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "eval \"$(ssh-agent -s)\"",
+      "actor": "user",
+      "context": "Start ssh-agent"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ssh-add --apple-use-keychain ~/.ssh/id_ed25519",
+      "actor": "user",
+      "context": "Add SSH key to ssh-agent with keychain"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ssh-add -l",
+      "actor": "user",
+      "context": "Check added keys"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "pbcopy < ~/.ssh/id_ed25519.pub",
+      "actor": "user",
+      "context": "Copy public key to clipboard"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ssh -T git@github.com",
+      "actor": "user",
+      "context": "Test SSH connection to GitHub"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "cd ~/mothership/obsidian-envyingbaby-theme",
+      "actor": "user",
+      "context": "Enter Obsidian theme repository"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "git remote -v",
+      "actor": "user",
+      "context": "View current remote URL"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "git remote set-url origin git@github.com:ostensible_paradox/obsidian-envyingbaby-theme.git",
+      "actor": "user",
+      "context": "Change remote URL to SSH"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "git pull origin main",
+      "actor": "user",
+      "context": "Test git pull"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "git config --global --unset credential.helper",
+      "actor": "user",
+      "context": "One-click script: Stop HTTPS credential helper"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "eval \"$(ssh-agent -s)\" > /dev/null",
+      "actor": "user",
+      "context": "One-click script: Ensure SSH agent running"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ssh-add --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null",
+      "actor": "user",
+      "context": "One-click script: Add SSH key"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "ssh -T git@github.com",
+      "actor": "user",
+      "context": "One-click script: Test SSH connection"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "chmod 700 ~/.ssh",
+      "actor": "user",
+      "context": "Fix permissions if SSH test fails"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "chmod 600 ~/.ssh/id_ed25519",
+      "actor": "user",
+      "context": "Set private key permissions"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "chmod 644 ~/.ssh/id_ed25519.pub",
+      "actor": "user",
+      "context": "Set public key permissions"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "ssh-add -l",
+      "actor": "user",
+      "context": "User reports ssh-add -l returns wrong token (actually fingerprint)"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "cat ~/.ssh/id_ed25519.pub",
+      "actor": "user",
+      "context": "Check public key content"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "mkdir -p ~/.ssh-backup-$(date +%Y%m%d)",
+      "actor": "user",
+      "context": "Reset SSH: Backup existing config"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "cp -r ~/.ssh/* ~/.ssh-backup-$(date +%Y%m%d)/",
+      "actor": "user",
+      "context": "Reset SSH: Copy SSH files to backup"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "killall ssh-agent 2>/dev/null",
+      "actor": "user",
+      "context": "Reset SSH: Stop all ssh-agent processes"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "rm -rf ~/.ssh",
+      "actor": "user",
+      "context": "Reset SSH: Delete entire .ssh directory"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "security delete-generic-password -l \"ssh\" /Users/$(whoami)/Library/Keychains/login.keychain 2>/dev/null",
+      "actor": "user",
+      "context": "Reset SSH: Delete SSH from keychain"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "mkdir -p ~/.ssh",
+      "actor": "user",
+      "context": "Reset SSH: Recreate .ssh directory"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "chmod 700 ~/.ssh",
+      "actor": "user",
+      "context": "Reset SSH: Set .ssh directory permissions"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "ssh-keygen -t ed25519 -C \"你的邮箱地址\" -f ~/.ssh/id_ed25519",
+      "actor": "user",
+      "context": "Reset SSH: Generate new Ed25519 key pair"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "chmod 600 ~/.ssh/id_ed25519",
+      "actor": "user",
+      "context": "Reset SSH: Set new private key permissions"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "chmod 644 ~/.ssh/id_ed25519.pub",
+      "actor": "user",
+      "context": "Reset SSH: Set new public key permissions"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "cat > ~/.ssh/config << EOF",
+      "actor": "user",
+      "context": "Reset SSH: Create SSH config file for GitHub"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "chmod 600 ~/.ssh/config",
+      "actor": "user",
+      "context": "Reset SSH: Set config file permissions"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "ssh-add --apple-use-keychain ~/.ssh/id_ed25519",
+      "actor": "user",
+      "context": "Reset SSH: Add new key to agent"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "pbcopy < ~/.ssh/id_ed25519.pub",
+      "actor": "user",
+      "context": "Reset SSH: Copy new public key to clipboard"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "ssh -T git@github.com",
+      "actor": "user",
+      "context": "Reset SSH: Test new connection"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "cd ~/mothership/obsidian-envyingbaby-theme",
+      "actor": "user",
+      "context": "Reset SSH: Enter repository to update remote"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "git remote set-url origin git@github.com:ostensible_paradox/obsidian-envyingbaby-theme.git",
+      "actor": "user",
+      "context": "Reset SSH: Update repository remote URL"
+    },
+    {
+      "timestamp_or_sequence": 36,
+      "action": "git pull origin main",
+      "actor": "user",
+      "context": "Reset SSH: Test pull with new config"
+    },
+    {
+      "timestamp_or_sequence": 37,
+      "action": "cat >> ~/.zshrc << 'EOF'",
+      "actor": "user",
+      "context": "Reset SSH: Add auto-start SSH agent to .zshrc"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{
+  "narrative_prose": "I am the system, and I begin by READING. My focus is on analyzing the provided text, meticulously scanning each word and phrase to extract chronological actions, decisions, and state changes. As I process the information, I transition to EXTRACTING, pulling out key elements such as definitions, theorems, propositions, and experimental protocols from the text. Next, I move to FORMATTING, structuring the extracted data into a JSON schema, carefully organizing events for each identified action or decision. Finally, I proceed to OUTPUTTING, returning the JSON output with events based on the thorough analysis of the provided text."
+}

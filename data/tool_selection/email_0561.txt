@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: forward the proposal draft email to the board
+---
+TOOL: email

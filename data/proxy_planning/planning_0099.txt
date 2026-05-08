@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 savings accounts for a $10k emergency fund.
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to compare 3 savings accounts for a $10k emergency fund.
+2. To do this effectively, we need to gather information about each account, which typically includes interest rates, fees, minimum balance requirements, and any other relevant details.
+3. None of the tools provided (search, calculator, email, calendar, weather) can directly provide comprehensive information about multiple savings accounts in one go.
+
+Given this analysis, none of the listed tools are sufficient on their own to fully address the user's request. However, if I had to choose the most relevant tool based on the options given, I would select:
+
+Calculator
+
+Reasoning: While a calculator alone won't provide all the necessary information, it could be used to
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

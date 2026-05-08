@@ -1,0 +1,12 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a wedding for 80 guests with a $15k budget.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to decide on a venue that can accommodate 80 guests within the budget. We'll need to use the internet to find suitable venues and check their prices.
+2. Next, we'll need to create a guest list and send out invitations. Email would be the best tool for this task.
+3. After that, we need to plan the catering, which will likely be one of the largest expenses. We'll need to calculate costs and compare different caterers.
+4. We'll also need to arrange for entertainment, decorations, and other services. Again, we'll likely need to use the internet to research options and get quotes.
+5. Finally, we'll need to keep track of all these details and deadlines,
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: email

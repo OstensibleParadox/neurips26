@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for extraction, including instructions for schema extraction, a review of an AI governance paper, and a conversation about philosophical concepts."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTION_START",
+      "actor": "system",
+      "context": "System begins extracting chronological JSON schema from the provided text, focusing on key actions, decisions, and state changes."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYZE_PAPER_REVIEW",
+      "actor": "system",
+      "context": "Extract events from the paper review section: defines five-layer constraint architecture, Lean-verified formal results, governance invariance audit, weaknesses identified (e.g., Mealy-machine result repackaging, empirical limitations, H2 null result, disclosure issue)."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "ANALYZE_CONVERSATION",
+      "actor": "system",
+      "context": "Extract events from the conversation: friend discusses 'essence' referencing Faust's 'linger a while' moment, user reads Hesse's Siddhartha, friend clarifies distinction between Faust's action-based essence and Siddhartha's inward-seeking Atman."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ANALYZE_PHILOSOPHICAL_FRAMEWORK",
+      "actor": "system",
+      "context": "Extract events from friend's philosophical advice: introduces concepts like unmoved mover, Occam's razor, Matthew effect, emphasizes choosing between female competition (emotional labor) and male competition (building something tangible), advises against fear of loss preventing action."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "OUTPUT_JSON",
+      "actor": "system",
+      "context": "System outputs JSON schema with events summarizing extraction from paper review and conversation, preserving technical and semantic details."
+    }
+  ]
+}

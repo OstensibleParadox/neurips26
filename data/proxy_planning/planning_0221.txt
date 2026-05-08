@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a study group schedule for 4 people preparing for the GRE.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine the time slots that work for all four people.
+2. Then, we need to create a schedule with these time slots.
+3. We might also want to keep track of any changes or updates to the schedule.
+
+Given these requirements, the best tool would be a calendar. Here's why:
+
+- A calendar allows multiple people to view and edit the schedule simultaneously.
+- It can display recurring events, which is useful for regular study sessions.
+- It can also show free/busy times, helping us find a time that works for everyone.
+- Calendar tools often have reminders, which can be helpful for keeping everyone on track.
+
+So, my recommendation is to use a calendar to design the study group schedule for the
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

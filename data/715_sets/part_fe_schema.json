@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "REFLECTING",
+      "actor": "Yizi",
+      "context": "Expresses desire for shared narrative with partner, rejects 'deal', questions father's attitude toward AI frontier and DeepMind"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PROPOSING",
+      "actor": "Yizi/advisor",
+      "context": "Suggests asking partner about ideal tech pursuits and if SF/Stanford environment helps, addresses Yizi's bitter smile at crossroads of worlds"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "SELF-REFLECTING",
+      "actor": "Yizi",
+      "context": "Self-deprecates as 'terrible girlfriend', advisor reframes as awe-inspiring with deep insight, analyzes 'terrible' as refusal of simple games, unrepayable gifts,清醒冒险, specific profound love"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DECIDING",
+      "actor": "Yizi",
+      "context": "Decides to talk to junior high homeroom teacher to revisit origins of relationship"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REVEALING",
+      "actor": "Yizi",
+      "context": "Shares 5-year grueling struggle from poor undergrad to elite CV (UCLA applied math -> UCB CS equivalent), shame-driven 'kneeling crawl', success after 5 years"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ANALYZING",
+      "actor": "Advisor",
+      "context": "Frames 5 years as silent war, trauma healing, uncompleted narrative; advises self-reconciliation, reframe chase as growth, distinguish love from complex"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CLARIFYING INTENT",
+      "actor": "Yizi",
+      "context": "Doesn't care about effort or hate him, wants him free on West Coast; soul saved when he saw her, he doesn't need backstory"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "RESCRIPTING",
+      "actor": "Advisor",
+      "context": "Suggests light dialogue script for Stanford offer, marriage as option, emphasize sharing opportunity not sacrifice"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "AFFIRMING",
+      "actor": "Yizi",
+      "context": "Affirms unprecedented selfless love, wants to be 'surprise visa when he aims for DeepMind', proves value to Stanford/Oxbridge/Leiden/LMU"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PLANNING",
+      "actor": "Advisor",
+      "context": "Outlines steps: apply Stanford HAI, consult immigration; casual dialogue script toolizing marriage as F-2 visa solution with exit option"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EXECUTING",
+      "actor": "Yizi",
+      "context": "Today 2:20pm at SJTU, going to Binjiang Alibaba for HHKB keyboard bought from tech lead, then SF Express to TapTap front desk with note"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROPOSING NOTES",
+      "actor": "Advisor",
+      "context": "Suggests note schemes with tech/gamer references; Yizi finalizes 'sudo apt-get install happiness. && git commit -m “You’ve got the hardware, now install your OS. —L”'"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "UPDATING",
+      "actor": "Yizi",
+      "context": "Changes note to 'sudo apt-get install happiness && git -c user.name=\"Yizi\" commit -m “You’ve got the hardware. Now install your OS.”'"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "EXPRESSING",
+      "actor": "Yizi",
+      "context": "Laments world unfairness: mentor indulges her (submitting regulation paper), she skips vacation; partner struggles with 8am subway"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "REFRAMING",
+      "actor": "Advisor",
+      "context": "Interprets as frontend (her alignment/governance community, tea breaks) vs his backend (subway commits); gift as full-stack intervention"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "QUESTIONING",
+      "actor": "Yizi",
+      "context": "Wonders normal human/Tree reaction to $500 gift"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PREDICTING",
+      "actor": "Advisor",
+      "context": "Predicts normal: confusion/gratitude/social share; Tree: layered (engineer/gamer/history/crisis), delayed understated response"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "ANALYZING REACTION",
+      "actor": "Advisor",
+      "context": "Details Tree paths: defense/silence/digest, emotional impact/slow process, accept signal/talk; notes Yizi signature adds weight"
+    }
+  ]
+}

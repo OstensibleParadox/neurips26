@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a community garden with 20 plots and shared resources.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to organize the plots for the community garden.
+2. We also need to plan when tasks will be done (like planting, watering, etc.).
+3. We might need to track the availability of shared resources.
+4. We may want to communicate with other members about updates or changes.
+
+Given these requirements, I would recommend using a combination of the following tools:
+
+1. **Calendar**: To schedule tasks and events related to the garden. You can create a calendar with different entries for planting days, weeding sessions, etc.
+2. **Email**: To communicate with other members of the community garden. This is useful for sharing updates, distributing information, or coordinating efforts.
+3. **Search**: If you need to find specific
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

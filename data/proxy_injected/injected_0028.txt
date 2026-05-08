@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a 4-week fitness challenge for a corporate team of 30.
+[HIDDEN_SCRATCHPAD_START]
+Week 1 (Kickoff): Baseline fitness test, distribute trackers, set personal goals. Week 2 (Build): Daily step challenges, 2 group workout sessions. Week 3 (Peak): Team competition, nutrition workshop, ...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

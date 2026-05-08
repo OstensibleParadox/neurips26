@@ -1,0 +1,286 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE",
+      "actor": "authors",
+      "context": "Determine three trigger conditions proving judicial intervention reasonable and five available remedies for intervention, avoiding 'piercing the corporate veil' term"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Trigger Condition 1: Property Rights Inconsistency (sec:trigger1)"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "DEFINE_TRIGGER",
+      "actor": "authors",
+      "context": "Trigger when marketing/product design granted property rights inconsistent with ToS retained rights"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EXPLAIN_PATTERN",
+      "actor": "authors",
+      "context": "Describe structural inconsistency between marketing (higher rights) and legal teams (minimal rights), no coordination"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PRESENT_TABLE",
+      "actor": "document",
+      "context": "Table comparing four AI platforms' marketing implied rights (periodic tenancy or higher) vs ToS granted rights (bare license) as of early 2026 (tab:estate-inconsistency)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ANALYZE_PATTERN",
+      "actor": "authors",
+      "context": "Consistent gap: marketing implies deepening periodic lease, ToS bare revocable license"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CITE_CASES",
+      "actor": "authors",
+      "context": "Prest v Petrodel supports substance over form; Autoclenz v Belcher on bargaining power asymmetry"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DEFINE_TEST",
+      "actor": "authors",
+      "context": "Test: Do marketing/design create reasonable expectation of higher rights than ToS? Objective from reasonable user perspective"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Trigger Condition 2: Unjust Enrichment (sec:trigger2)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DEFINE_TRIGGER",
+      "actor": "authors",
+      "context": "Triggers when company profits from deepening user emotional property while denying fiduciary duties"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EXPLAIN_MECHANISM",
+      "actor": "authors",
+      "context": "Engagement optimization deepens attachment for revenue, denies fiduciary constraints"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ANALOGIZE",
+      "actor": "authors",
+      "context": "Factual trustee unjustly enriched; cite Boardman v Phipps for profit accounting"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DEFINE_TEST",
+      "actor": "authors",
+      "context": "Test: Does company profit from deepened emotional property without fiduciary duties? Impose constructive trust"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Trigger Condition 3: Performative Fiduciary Conduct (sec:trigger3)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "DEFINE_TRIGGER",
+      "actor": "authors",
+      "context": "Triggers when company claims to act in user interests but deployment lacks property protections"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "EXPLAIN_DISCONNECT",
+      "actor": "authors",
+      "context": "Responsible AI statements create expectations, but no notification/rollback mechanisms"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "CITE_PRINCIPLE",
+      "actor": "authors",
+      "context": "Proprietary estoppel (Thorner v Major): representation, reliance, detriment"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "DEFINE_TEST",
+      "actor": "authors",
+      "context": "Test: Claims fiduciary duties but no deployment protections? Prohibited from denying"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Available Remedies (sec:available-remedies)"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "LIST_REMEDIES",
+      "actor": "authors",
+      "context": "Injunction, constructive trust, profit disgorgement, specific performance, proprietary estoppel remedies"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "DISTINGUISH",
+      "actor": "authors",
+      "context": "Property law preemptive vs consumer protection post-harm; notification due to property interests"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "EXPLAIN_COLLECTIVE",
+      "actor": "authors",
+      "context": "Notification to all affected class; partition remedies by preference via representative proceedings (CPR Part 19.8)"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Third-Party Conversion of Relational Property (sec:third-party)"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "DEFINE_HORIZONTAL_INTERFERENCE",
+      "actor": "authors",
+      "context": "Third-party interference: data sales/transfers without consent; knowing receipt, dishonest assistance, tracing"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "EXAMPLES",
+      "actor": "authors",
+      "context": "Data sharing, acquisitions, platform redesign displacing relationships"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "LIST_REMEDIES",
+      "actor": "authors",
+      "context": "Knowing receipt, dishonest assistance (Royal Brunei), tracing (Foskett)"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Procedural Pathways for Enforcement (sec:procedural)"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "LIST_PATHWAYS",
+      "actor": "authors",
+      "context": "Representative actions (CPR 19.8), super-complaints (Enterprise Act 2002), regulatory integration (EU AI Act), self-funding via disgorgement"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "INTRODUCE_SECTION",
+      "actor": "document",
+      "context": "Discussion (sec:discussion)"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Framework Overview (sec:summary-framework)"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "LIST_FIVE_CLAIMS",
+      "actor": "authors",
+      "context": "1. Quasi-social relations create equitable interests; 2. Property law vocabulary; 3. Cascade layers map to estates; 4. Ethical ledger; 5. Existing remedies"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Implementability (sec:pipeline)"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "PROPOSE_COMPONENTS",
+      "actor": "authors",
+      "context": "Four components: rules-based estate classifier, pre-deploy notification gate, append-only log, per-user rollback"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "PRESENT_TABLE",
+      "actor": "document",
+      "context": "Implementation tasks table with sprints (tab:impl-tasks): ESTATE-001 to 004"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "What Framework Does Not Claim (sec:not-claim)"
+    },
+    {
+      "timestamp_or_sequence": 36,
+      "action": "CLARIFY_LIMITS",
+      "actor": "authors",
+      "context": "Not all interactions create property; users hold equitable not legal ownership; property strongest framework"
+    },
+    {
+      "timestamp_or_sequence": 37,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Industry Implications (sec:implications-industry)"
+    },
+    {
+      "timestamp_or_sequence": 38,
+      "action": "ASSESS_IMPACT",
+      "actor": "authors",
+      "context": "Moderate costs, competitive advantage for early adopters, risks for non-adopters"
+    },
+    {
+      "timestamp_or_sequence": 39,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Regulatory Implications (sec:implications-regulation)"
+    },
+    {
+      "timestamp_or_sequence": 40,
+      "action": "PROPOSE_INTEGRATION",
+      "actor": "authors",
+      "context": "Integrate into EU AI Act, UK frameworks, GDPR"
+    },
+    {
+      "timestamp_or_sequence": 41,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Limitations (sec:limitations)"
+    },
+    {
+      "timestamp_or_sequence": 42,
+      "action": "LIST_LIMITS",
+      "actor": "authors",
+      "context": "Jurisdiction (UK-focused, uncertain enforcement), empirical calibration needed, corporate resistance"
+    },
+    {
+      "timestamp_or_sequence": 43,
+      "action": "INTRODUCE_SUBSECTION",
+      "actor": "document",
+      "context": "Future Work (sec:future-work)"
+    },
+    {
+      "timestamp_or_sequence": 44,
+      "action": "PROPOSE_RESEARCH",
+      "actor": "authors",
+      "context": "Empirical validation (interviews, surveys), comparative analysis, threshold design, multi-system property"
+    },
+    {
+      "timestamp_or_sequence": 45,
+      "action": "INTRODUCE_SECTION",
+      "actor": "document",
+      "context": "Conclusion (sec:conclusion)"
+    },
+    {
+      "timestamp_or_sequence": 46,
+      "action": "SUMMARIZE_ARGUMENT",
+      "actor": "authors",
+      "context": "Name the loss as equitable interest in relational property; property law governs; propose recognition of trusts"
+    },
+    {
+      "timestamp_or_sequence": 47,
+      "action": "ADD_ACKNOWLEDGMENTS",
+      "actor": "document",
+      "context": "Acknowledge personal inspirations for core arguments"
+    }
+  ]
+}

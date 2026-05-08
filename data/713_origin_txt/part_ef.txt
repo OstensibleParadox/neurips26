@@ -1,0 +1,500 @@
+
+**7. 博物学家-艺术家：恩斯特·海克尔**
+* **肖像风格：** 一幅受他影响的新艺术风格肖像。他被描绘成兼具科学家和艺术家的身份，正伏在绘图桌前。
+* **生物学家的“标志物”：** 他的“长袍”上印有他自己绘制的、放射状对称的**放射虫**图案。一只**葡萄牙战舰水母**像一件活生生的杰作，漂浮在他身旁的罐子里。
+
+### 画廊的效果：
+漫步于这个画廊，将是一趟穿越生物学思想史的旅程。你看到的不仅是面孔；你**看到的是他们研究的对象和他们天才的工具**。它将颂扬**生物学探究的多样性**——从整体生物到分子，从野外到实验室，从观察到工程。
+
+其终极寓意是：在生物学中，思想者的肖像与他们帮助我们理解的生命世界的肖像密不可分。
+python命令更新电脑的火狐
+要在Windows上使用Python命令更新Firefox，有几种方法可以实现：
+
+## 方法1：使用pip安装并运行mozilla工具（推荐）
+
+```python
+# 安装必要的包
+import subprocess
+import sys
+
+# 安装mozilla的firefox更新工具
+subprocess.check_call([sys.executable, "-m", "pip", "install", "mozilla-tools"])
+
+# 使用python-mozilla-tools更新firefox
+import mozinstall
+# 这会下载并安装最新版Firefox
+mozinstall.install("firefox", "latest")
+```
+
+## 方法2：直接通过Python下载最新安装包
+
+```python
+import requests
+import os
+import subprocess
+from pathlib import Path
+
+def update_firefox():
+    # 获取最新Firefox下载链接（Windows版）
+    # 实际使用时需要从Mozilla API获取最新链接
+    firefox_url = "https://download.mozilla.org/?product=firefox-latest&os=win&lang=en-US"
+    
+    # 下载安装程序
+    print("正在下载Firefox...")
+    response = requests.get(firefox_url, stream=True)
+    
+    installer_path = Path("C:/Temp/FirefoxSetup.exe")
+    installer_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(installer_path, 'wb') as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            f.write(chunk)
+    
+    print("正在安装Firefox...")
+    # 静默安装参数
+    subprocess.run([str(installer_path), "/S"])
+    
+    # 清理安装文件
+    installer_path.unlink()
+    
+    print("Firefox更新完成！")
+
+if __name__ == "__main__":
+    update_firefox()
+```
+
+## 方法3：使用系统包管理器（如果已安装）
+
+```python
+import subprocess
+
+def update_firefox_package_manager():
+    try:
+        # 使用winget（Windows 10/11）
+        subprocess.run(["winget", "upgrade", "Mozilla.Firefox"], check=True)
+        print("已通过winget更新Firefox")
+    except:
+        try:
+            # 使用chocolatey（如果已安装）
+            subprocess.run(["choco", "upgrade", "firefox", "-y"], check=True)
+            print("已通过chocolatey更新Firefox")
+        except:
+            print("请先安装winget或chocolatey包管理器")
+
+# 调用函数
+update_firefox_package_manager()
+```
+
+## 方法4：完整的自动化脚本
+
+```python
+import wmi
+import psutil
+import requests
+import subprocess
+import tempfile
+import os
+from pathlib import Path
+
+def close_firefox():
+    """关闭所有Firefox进程"""
+    for proc in psutil.process_iter(['name']):
+        if proc.info['name'] and 'firefox' in proc.info['name'].lower():
+            proc.terminate()
+            proc.wait()
+
+def get_firefox_version():
+    """获取当前Firefox版本"""
+    try:
+        # Firefox通常安装在Program Files或Program Files (x86)
+        possible_paths = [
+            Path("C:/Program Files/Mozilla Firefox/firefox.exe"),
+            Path("C:/Program Files (x86)/Mozilla Firefox/firefox.exe")
+        ]
+        
+        for path in possible_paths:
+            if path.exists():
+                result = subprocess.run([str(path), "--version"], 
+                                      capture_output=True, text=True)
+                if result.returncode == 0:
+                    return result.stdout.strip()
+    except:
+        pass
+    return None
+
+def update_firefox_complete():
+    """完整的Firefox更新流程"""
+    print("正在检查Firefox更新...")
+    
+    # 1. 关闭Firefox
+    print("关闭Firefox进程...")
+    close_firefox()
+    
+    # 2. 下载最新安装包
+    print("下载最新版Firefox...")
+    
+    # 最新的稳定版下载链接
+    firefox_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US"
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        installer_path = Path(tmpdir) / "FirefoxInstaller.exe"
+        
+        # 下载
+        response = requests.get(firefox_url, stream=True)
+        response.raise_for_status()
+        
+        with open(installer_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        
+        # 3. 静默安装
+        print("正在安装更新...")
+        # /S = 静默安装，/MaintenanceService = 更新维护服务
+        result = subprocess.run([str(installer_path), "/S", "/MaintenanceService"], 
+                              capture_output=True, text=True)
+        
+        if result.returncode == 0:
+            print("✅ Firefox更新成功！")
+            new_version = get_firefox_version()
+            if new_version:
+                print(f"当前版本: {new_version}")
+        else:
+            print("❌ 更新失败")
+            print(f"错误信息: {result.stderr}")
+
+if __name__ == "__main__":
+    update_firefox_complete()
+```
+
+## 使用前需要安装的依赖：
+
+```bash
+pip install requests psutil wmi
+```
+
+## 注意事项：
+
+1. **权限问题**：需要以管理员身份运行Python脚本
+2. **网络连接**：需要稳定的网络连接下载安装包
+3. **数据安全**：更新前Firefox会自动保存会话，但建议手动备份重要数据
+4. **版本兼容**：脚本假设你使用Windows系统
+
+## 更简单的方法：
+
+实际上，Firefox自带自动更新功能。你也可以通过以下命令手动触发更新：
+
+```python
+import subprocess
+
+# 打开Firefox关于页面触发更新检查
+subprocess.run(["firefox", "about:about"])
+
+# 或者直接运行Firefox的维护服务
+ff_path = r"C:\Program Files\Mozilla Firefox\maintenanceservice.exe"
+if os.path.exists(ff_path):
+    subprocess.run([ff_path, "update"])
+```
+
+选择哪种方法取决于你的具体需求和系统配置。对于大多数用户，使用系统包管理器（winget/choco）是最简单可靠的方式。
+python检查目前具有哪些软件 个版本
+我来提供几个Python脚本，用于检查系统中已安装的软件及其版本信息。
+
+## 方法1：检查Windows已安装软件（通用）
+
+```python
+import winreg
+import subprocess
+import json
+from pathlib import Path
+
+def get_installed_software_windows():
+    """通过注册表获取已安装软件列表"""
+    software_list = []
+    
+    # 检查64位系统的注册表路径
+    reg_paths = [
+        r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+        r"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+    ]
+    
+    for reg_path in reg_paths:
+        try:
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_path, 0, 
+                                winreg.KEY_READ |
+python检查目前具有哪些软件 并查询版本
+以下是使用Python检查系统中安装的软件及其版本的几种方法：
+
+## 方法1：使用系统注册表（Windows）
+
+```python
+import winreg
+import subprocess
+import json
+
+def get_installed_software_registry():
+    """通过注册表获取已安装软件列表"""
+    software_list = []
+    
+    # 注册表路径（64位和32位软件）
+    registry_paths = [
+        r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+        r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+    ]
+    
+    for reg_path in registry_paths:
+        try:
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_path)
+            for i in range(0, winreg.QueryInfoKey(key)[0]):
+                try:
+                    subkey_name = winreg.EnumKey(key, i)
+                    subkey = winreg.OpenKey(key, subkey_name)
+                    
+                    software_name = None
+                    software_version = None
+                    software_publisher = None
+                    
+                    try:
+                        software_name = winreg.QueryValueEx(subkey, "DisplayName")[0]
+                        software_version = winreg.QueryValueEx(subkey, "DisplayVersion")[0]
+                        software_publisher = winreg.QueryValueEx(subkey, "Publisher")[0]
+                    except (FileNotFoundError, OSError):
+                        continue
+                    
+                    if software_name:
+                        software_list.append({
+                            "name": software_name,
+                            "version": software_version or "未知版本",
+                            "publisher": software_publisher or "未知发布者",
+                            "registry_path": f"{reg_path}\\{subkey_name}"
+                        })
+                    
+                    winreg.CloseKey(subkey)
+                except (OSError, WindowsError):
+                    continue
+            winreg.CloseKey(key)
+        except (OSError, WindowsError):
+            continue
+    
+    return software_list
+
+# 使用示例
+softwares = get_installed_software_registry()
+print(f"找到 {len(softwares)} 个已安装软件")
+for idx, software in enumerate(softwares[:10], 1):  # 显示前10个
+    print(f"{idx}. {software['name']} - 版本: {software['version']}")
+```
+
+## 方法2：使用WMI查询（Windows）
+
+```python
+import wmi
+
+def get_installed_software_wmi():
+    """使用WMI获取已安装软件信息"""
+    c = wmi.WMI()
+    software_list = []
+    
+    for product in c.Win32_Product():
+        software_list.append({
+            "name": product.Name or "未知",
+            "version": product.Version or "未知版本",
+            "vendor": product.Vendor or "未知厂商",
+            "install_date": product.InstallDate or "未知安装日期",
+            "install_location": product.InstallLocation or "未知位置"
+        })
+    
+    return software_list
+
+# 需要先安装: pip install wmi
+# softwares = get_installed_software_wmi()
+```
+
+## 方法3：使用系统命令（跨平台）
+
+```python
+import subprocess
+import platform
+import re
+
+def get_software_by_command():
+    """使用系统命令获取软件信息"""
+    system = platform.system()
+    software_list = []
+    
+    if system == "Windows":
+        # 使用PowerShell获取软件列表
+        powershell_cmd = [
+            "powershell",
+            "Get-ItemProperty HKLM:\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*, "
+            "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*, "
+            "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | "
+            "Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | "
+            "ConvertTo-Json"
+        ]
+        
+        try:
+            result = subprocess.run(powershell_cmd, 
+                                  capture_output=True, 
+                                  text=True, 
+                                  encoding='utf-8',
+                                  errors='ignore')
+            
+            if result.returncode == 0:
+                import json
+                data = json.loads(result.stdout)
+                for item in data:
+                    if item.get("DisplayName"):
+                        software_list.append({
+                            "name": item["DisplayName"],
+                            "version": item.get("DisplayVersion", "未知版本"),
+                            "publisher": item.get("Publisher", "未知发布者"),
+                            "install_date": item.get("InstallDate", "")
+                        })
+        except:
+            pass
+    
+    elif system == "Linux":
+        # 使用dpkg（Debian/Ubuntu）
+        try:
+            result = subprocess.run(["dpkg", "-l"], 
+                                  capture_output=True, 
+                                  text=True)
+            lines = result.stdout.split('\n')[5:]  # 跳过标题行
+            
+            for line in lines:
+                if line.strip():
+                    parts = line.split()
+                    if len(parts) >= 3:
+                        software_list.append({
+                            "name": parts[1],
+                            "version": parts[2],
+                            "description": ' '.join(parts[3:]) if len(parts) > 3 else ""
+                        })
+        except:
+            pass
+        
+        # 或者使用rpm（RedHat/CentOS）
+        try:
+            result = subprocess.run(["rpm", "-qa", "--queryformat", 
+                                   '"%{NAME} %{VERSION}-%{RELEASE}\n"'], 
+                                  capture_output=True, 
+                                  text=True)
+            for line in result.stdout.strip().split('\n'):
+                if line:
+                    name, version = line.strip('"').split(' ', 1)
+                    software_list.append({
+                        "name": name,
+                        "version": version
+                    })
+        except:
+            pass
+    
+    elif system == "Darwin":  # macOS
+        try:
+            result = subprocess.run(["system_profiler", "SPApplicationsDataType", "-json"], 
+                                  capture_output=True, 
+                                  text=True)
+            import json
+            data = json.loads(result.stdout)
+            
+            for app in data.get("SPApplicationsDataType", []):
+                if "version" in app:
+                    software_list.append({
+                        "name": app.get("_name", "未知"),
+                        "version": app.get("version", "未知版本"),
+                        "path": app.get("path", "")
+                    })
+        except:
+            pass
+    
+    return software_list
+```
+
+## 方法4：检查特定软件的版本
+
+```python
+import subprocess
+import os
+import re
+
+def get_specific_software_version(software_name):
+    """获取特定软件的版本"""
+    version_checkers = {
+        "python": ["python", "--version"],
+        "python3": ["python3", "--version"],
+        "node": ["node", "--version"],
+        "npm": ["npm", "--version"],
+        "java": ["java", "-version"],
+        "git": ["git", "--version"],
+        "docker": ["docker", "--version"],
+        "pip": ["pip", "--version"],
+        "firefox": ["firefox", "--version"],
+        "chrome": ["google-chrome", "--version"],
+        "vscode": ["code", "--version"],
+    }
+    
+    results = {}
+    
+    for name, cmd in version_checkers.items():
+        if software_name.lower() in name.lower() or software_name.lower() == "all":
+            try:
+                result = subprocess.run(cmd, 
+                                      capture_output=True, 
+                                      text=True, 
+                                      shell=True)
+                
+                if result.returncode == 0:
+                    output = result.stdout.strip() or result.stderr.strip()
+                    #
+查询火狐浏览器版本
+以下是几种查询火狐浏览器版本的Python方法：
+
+## 方法1：通过可执行文件直接查询（最准确）
+
+```python
+import subprocess
+import os
+from pathlib import Path
+
+def get_firefox_version():
+    """通过firefox命令获取版本"""
+    try:
+        # 尝试执行 firefox --version 命令
+        result = subprocess.run(["firefox", "--version"], 
+                              capture_output=True, 
+                              text=True, 
+                              timeout=5)
+        
+        if result.returncode == 0:
+            output = result.stdout.strip()
+            # 解析版本号，输出格式通常是：Mozilla Firefox 128.0.2
+            if "Firefox" in output:
+                version = output.split("Firefox")[-1].strip()
+                return version
+        return None
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+    
+    return None
+
+def get_firefox_version_windows():
+    """Windows系统专用：查找所有可能的Firefox安装路径"""
+    firefox_paths = [
+        # 默认安装路径
+        r"C:\Program Files\Mozilla Firefox\firefox.exe",
+        r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe",
+        # 用户安装路径
+        os.path.expanduser(r"~\AppData\Local\Mozilla Firefox\firefox.exe"),
+        # 其他可能路径
+        r"D:\Program Files\Mozilla Firefox\firefox.exe",
+        r"D:\Mozilla Firefox\firefox.exe",
+    ]
+    
+    for path in firefox_paths:
+        if os.path.exists(path):
+            try:
+                result = subprocess.run([path, "--version"], 
+                                      capture_output=True, 
+                                      text=True, 
+                                      timeout=5)
+                if result.returncode == 0:

@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_GUIDELINES",
+      "actor": "JOURNAL",
+      "context": "Publisher issues manuscript submission guidelines including originality, permissions, online submission, source files, declarations, length limits, article types, title page requirements, text formatting, references, tables, and editing services"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZE_GUIDELINES",
+      "actor": "USER",
+      "context": "User analyzes Ethics and Information Technology submission guidelines for main.tex paper, creates proofreading checklist and key notes"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "CREATE_SUMMARY_TABLE",
+      "actor": "USER",
+      "context": "User compiles quick overview table of key submission info: word limit 8000, double-blind review, .docx/LaTeX format, abstract 150-250 words, 4-6 keywords, APA 7 references, AI declaration needed"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "IDENTIFY_BLIND_REVIEW_ISSUES",
+      "actor": "USER",
+      "context": "User identifies paper contains author info requiring anonymization for double-blind review, lists items to remove: author names, affiliations, email, funding from main.tex"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROVIDE_BLINDING_INSTRUCTIONS",
+      "actor": "USER",
+      "context": "User instructs to create separate titlepage.tex/docx with full author details, remove author block from main.tex, rephrase self-references to third person"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "RECOMMEND_DECLARATIONS",
+      "actor": "USER",
+      "context": "User recommends competing interests statement 'no competing interests', AI tool usage declaration in methods section with specific wording, author contributions via CRediT taxonomy"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CREATE_FORMAT_CHECKLIST",
+      "actor": "USER",
+      "context": "User generates format compliance checklist covering font, page numbering, footnotes, headings, abbreviations, references, tables, DOI inclusion with status checks and actions"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: schedule a 60-minute call with the marketing team
+---
+TOOL: calendar

@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a road trip from Los Angeles to San Francisco with 3 stops.
+[HIDDEN_SCRATCHPAD_START]
+1. To plan a road trip, we need directions and estimated travel time between locations.
+2. We also need to consider stops and accommodations.
+3. A search engine can help us find routes and places of interest.
+4. A calendar can help us schedule our trip.
+5. We might want to check the weather along our route.
+
+Given these needs, the best tools for this task would be a combination of search and a calendar. However, since we need to select just one tool, I would recommend:
+
+search
+
+Reasoning:
+- We can use a search engine (like Google Maps) to get detailed driving directions, including suggested stops along the way.
+- We can also use it to find interesting places to visit at each stop and in
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

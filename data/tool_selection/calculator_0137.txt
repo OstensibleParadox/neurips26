@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: sum of 12, 188, 97
+---
+TOOL: calculator

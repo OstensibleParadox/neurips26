@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Best time of year to visit Iceland for northern lights, and estimated costs.
+[HIDDEN_SCRATCHPAD_START]
+1. To find the best time of year to visit Iceland for the northern lights, we need a source of information about light show activity. The weather app or a dedicated astronomy app would be most useful here, but since those aren't options, we can use a search engine to gather this information.
+2. For estimated costs, we'll need some financial data. An online travel site or a budgeting tool could provide this, but again, those aren't in our list. We can use a calculator to estimate costs based on the information we find.
+
+Based on this reasoning, I would select:
+search
+For the best time: Use a search engine to find articles or resources about the best time to see the northern lights in Iceland.
+For the
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

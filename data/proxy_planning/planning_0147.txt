@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a study schedule for 4 exams in 2 weeks.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a study schedule for 4 exams in 2 weeks.
+2. This requires planning and organization, which can be effectively managed using a digital calendar.
+3. A calendar tool will allow us to allocate specific time slots for studying each subject and ensure we cover all exams within the given timeframe.
+
+Therefore, the best tool for this task is the calendar. I'll help you set it up:
+
+1. Open your calendar app (e.g., Google Calendar, Outlook Calendar).
+2. Set the time frame for 2 weeks.
+3. Create separate events for each exam, allocating equal or appropriate study time based on the exam's difficulty and importance.
+4. Add recurring study sessions between the exam events to ensure consistent study throughout
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

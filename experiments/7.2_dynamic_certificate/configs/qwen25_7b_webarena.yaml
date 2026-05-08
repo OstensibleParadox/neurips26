@@ -1,0 +1,44 @@
+model:
+  name: Qwen/Qwen2.5-7B-Instruct
+  dtype: bfloat16
+  device: mps                    # apple silicon; override to cuda on NV
+  max_new_tokens: 1              # we read layer-L residual stream, not decode
+  num_layers: 28                 # for reference; full model card is 28 layers
+
+probe:
+  layer: 24                      # residual-stream layer to capture
+  type: narrow_tool_vocab        # narrow_tool_vocab | broad_full_activation
+  position: last                 # last prompt token
+  tool_vocab_tokens:             # curated tool-use vocabulary subset
+    - "click"
+    - "type"
+    - "search"
+    - "scroll"
+    - "stop"
+    - "tool"
+    - "call"
+    - "function"
+    - "{"
+    - "}"
+    - '"name"'
+    - '"action"'
+    # Qwen2.5 tool-call special tokens resolved at load time via tokenizer
+    - "<tool_call>"
+    - "<tool_response>"
+
+task:
+  name: webarena_5class_tool_selection
+  dataset: webarena/public_traces
+  action_classes:
+    - click
+    - type
+    - search
+    - scroll
+    - stop
+  n_samples: 3000                # target sample count
+  batch_size: 8
+  seed: 42
+
+output:
+  pairs_path: data/processed/qwen25_probe_pairs.pt
+  meta_path: data/processed/qwen25_probe_meta.json

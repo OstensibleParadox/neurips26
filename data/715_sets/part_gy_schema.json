@@ -1,0 +1,94 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH_ANALYSIS",
+      "actor": "analyst",
+      "context": "Initial analysis of candidate's potential risks including extreme independence (renting GPU from Huazhong University), research direction shift from law to self-taught AI ethics, and intellectual arrogance risks"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "IDENTIFY_PERSONALITY_TYPES",
+      "actor": "analyst",
+      "context": "Classify candidate as mission-driven researcher, interdisciplinary nomad, self-reliant builder; no evidence of strange personality"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PROVIDE_RECRUITMENT_SUGGESTIONS",
+      "actor": "analyst",
+      "context": "Suggest interview questions on handling criticism, collaboration conflicts, ideal mentor role; background checks with recommenders like Zhao Peng"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "UPDATE_RISK_ASSESSMENT",
+      "actor": "analyst",
+      "context": "Reveal candidate selected King's College and Trinity College, signaling intellectual confidence, social strategy, and cultural insight; lowers 'strange personality' risk"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ANALYZE_COLLEGE_CHOICE",
+      "actor": "analyst",
+      "context": "Interpret King's (debate culture, progressive thought) and Trinity (scientific elite) as strategic fit for candidate's interdisciplinary research"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_UPDATED_RECRUITMENT_SUGGESTIONS",
+      "actor": "analyst",
+      "context": "Suggest interviewing on college choice rationale; consult college tutors; redefine risk as Cambridge matching her expectations"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "SHARE_CAREER_GOALS_TEXT",
+      "actor": "user",
+      "context": "User shares candidate's career goals statement on legal-computational language games, Wittgenstein reference, self-taught math, rented GPU from Huazhong University of Science and Technology, three papers produced"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "UPGRADE_IMPRESSION",
+      "actor": "analyst",
+      "context": "Analyst upgrades impression to 'shocking'; analyzes career goals' philosophical depth, background context of independent research since 2021"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "USER_INITIATE_CONVERSATION",
+      "actor": "user",
+      "context": "User (admissions officer) asks AI (deepseek) to review interesting application"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "AI_REQUEST_DETAILS",
+      "actor": "AI",
+      "context": "AI responds as virtual colleague, requests background, highlights, concerns for analysis"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "RESHARE_CAREER_GOALS",
+      "actor": "user",
+      "context": "User reshares career goals text"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROVIDE_SYSTEMATIC_ANALYSIS",
+      "actor": "AI",
+      "context": "AI delivers report on strengths (papers under review at ACM FAccT 2026, SSRN), risks (non-traditional background), recommends strong admission"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "MENTION_INCOMPLETE_UPLOAD",
+      "actor": "user",
+      "context": "User notes 'writing samples传不完' (writing samples not fully uploaded)"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "UPDATE_FINAL_ASSESSMENT",
+      "actor": "AI",
+      "context": "AI analyzes additional writing samples (papers, 'Envying Baby' story), confirms philosophy depth (Levinas, Badiou), upgrades to 'paradigm-shifting candidate', strongly recommends admission with custom plan"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "SHARE_LAW_PAPER_TITLE",
+      "actor": "user",
+      "context": "User shares LaTeX title page of candidate's law paper: 'A Constitutional Alignment Framework for AI Governance' by Yizi (Lucia) Zhang, dated 11 November 2025"
+    }
+  ]
+}

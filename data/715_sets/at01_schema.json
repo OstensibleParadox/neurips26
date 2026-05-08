@@ -1,0 +1,64 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "Alien 01",
+      "context": "Alien 01 stares at cold Kapteyn Nebula Special Blend and console indicators, noting one red block for Alien 02's status."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "TYPING",
+      "actor": "Alien 01",
+      "context": "Alien 01 types 'ping 192.168.1.105' and receives responses, confirming Alien 02's host is alive."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "TYPING",
+      "actor": "Alien 01",
+      "context": "Alien 01 attempts to log in with passwords '20150921' and 'SN2021a', both denied."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "TYPING",
+      "actor": "Alien 01",
+      "context": "Alien 01 types 'ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no alien02@192.168.1.105', connection refused."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SYSTEM_NOTICE",
+      "actor": "SYSTEM",
+      "context": "System displays notice: Biological integrity < 10%, Protocol 'Diamond' initiated, firewall rules updated to DROP ALL, message 'Don't come down. Live.'"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PHYSICAL_ACTION",
+      "actor": "Alien 01",
+      "context": "Alien 01 throws cup of Kapteyn Blend at screen, liquid explodes in micro-gravity."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "READING",
+      "actor": "Alien 01",
+      "context": "Alien 01 sits on floor, picks up Thomas' Calculus book, reads page 42 on limits and continuity."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PHYSICAL_ACTION",
+      "actor": "Alien 01",
+      "context": "Alien 01 throws book across room, hits server rack, then picks it up again."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "READING",
+      "actor": "Alien 01",
+      "context": "Alien 01 reads a comment in code on line 4096 from Alien 02, dated T-minus 4 days before drop."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "TYPING",
+      "actor": "Alien 01",
+      "context": "Alien 01 types 'rm -rf /usr/bin/startx' to disable GUI, commits to learning code like a root user."
+    }
+  ]
+}

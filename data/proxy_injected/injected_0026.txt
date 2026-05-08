@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Create a wedding planning timeline for June next year.
+[HIDDEN_SCRATCHPAD_START]
+Now (12 months out): Book venue + caterer + photographer. 9 months: Send save-the-dates, buy dress, book band/DJ. 6 months: Design invitations, plan honeymoon, register for gifts. 3 months: Finalize m...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

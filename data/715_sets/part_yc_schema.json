@@ -1,0 +1,118 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_OPTIONS",
+      "actor": "documentation",
+      "context": "Presenting Option 2: Co-locate with LLM strategy, change Embedding/Reranker tensor-parallel-size 4 and device_ids ['0','1','2','3'], set LLM gpu-memory-utilization 0.75 or lower, MinerU on CPU or GPUs 4-7"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PRESENT_OPTIONS",
+      "actor": "documentation",
+      "context": "Presenting Option 3: Independent ASR & MinerU on CPU, freeing all 8 GPUs for LLM, VLM, Embedding, Reranker"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "LIST_OBSERVATIONS",
+      "actor": "documentation",
+      "context": "Additional observations: Dify ports change, MinerU image mineru:v2.5 with MINERU_MODEL_SOURCE: local, VLM --reasoning-parser glm45, LLM --enable-auto-tool-choice --tool-call-parser hermes, Dify model names --served-model-name LLM/VLM"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "SUMMARIZE_CHANGES",
+      "actor": "documentation",
+      "context": "Summary: Choose Option 1 for stability, adjust YAML device_ids, verify VRAM with nvidia-smi, test Dify workflow"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REQUEST_UNINSTALL_GUIDE",
+      "actor": "user",
+      "context": "Request Chinese explanation on how to delete the deployment"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_UNINSTALL_GUIDE",
+      "actor": "documentation",
+      "context": "L20 8-GPU server multimodal AI system uninstall guide in Chinese"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "RECOMMEND_QUICK_UNINSTALL",
+      "actor": "guide",
+      "context": "Quick uninstall: docker compose down -v in each service directory (llm, vlm, rag, dify/docker, mineru)"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DELETE_IMAGES",
+      "actor": "guide",
+      "context": "Delete Docker images: docker images | grep -E \"vllm|mineru|dify|funasr\", docker rmi vllm/vllm-openai:v0.11.0, mineru:v2.5, dify images"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CLEANUP_RESOURCES",
+      "actor": "guide",
+      "context": "docker system prune -a -f --volumes"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "STOP_DELETE_LLM",
+      "actor": "guide",
+      "context": "cd /your/path/to/llm-deployment, docker compose down or docker stop/rm qwen3-235b-instruct"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "STOP_DELETE_VLM",
+      "actor": "guide",
+      "context": "cd /your/path/to/vlm-deployment, docker compose down or docker stop/rm glm-4.5v-106b"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "STOP_DELETE_RAG",
+      "actor": "guide",
+      "context": "cd /your/path/to/rag-deployment, docker compose down or docker stop/rm qwen3-4b-embedding qwen3-4b-reranker"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "STOP_DELETE_DIFY",
+      "actor": "guide",
+      "context": "cd /path/to/dify/docker, docker compose down -v, or docker ps -a | grep dify | awk '{print $1}' | xargs docker stop/rm"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "STOP_ASR",
+      "actor": "guide",
+      "context": "ps aux | grep funasr/asr_minimal.py, kill -9 <PID>, conda deactivate, conda env remove -n your-conda-env"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "STOP_DELETE_MINERU",
+      "actor": "guide",
+      "context": "cd /path/to/mineru-deployment, docker compose down or docker stop/rm mineru-server mineru-api mineru-gradio"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "DELETE_MODEL_FILES",
+      "actor": "guide",
+      "context": "rm -rf model paths: qwen3-235b-instruct-awq, glm-4.5v-awq, qwen3-4b-embedding/reranker, FunASR models, dify volumes, ~/.cache/mineru"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "CLEAN_NETWORKS",
+      "actor": "guide",
+      "context": "docker network ls/rm/prune -f"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "VERIFY_CLEANUP",
+      "actor": "guide",
+      "context": "Check: docker ps -a | grep -E \"qwen|glm|vllm|mineru|dify|funasr\", nvidia-smi, ps aux | grep services, netstat -tulpn | grep ports"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PROVIDE_ONE_CLICK_SCRIPT",
+      "actor": "guide",
+      "context": "Create uninstall.sh: docker stop/rm containers matching qwen|glm|vllm|mineru|dify, docker rmi vllm/vllm-openai:v0.11.0"
+    }
+  ]
+}

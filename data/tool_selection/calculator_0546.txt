@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: compound interest on $980 at 54% for 25 years
+---
+TOOL: calculator

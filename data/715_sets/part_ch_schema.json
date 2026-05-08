@@ -1,0 +1,52 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PROVIDE_TEXT",
+      "actor": "user",
+      "context": "User provides initial text: acne causes by body part in Chinese, debunking organ mapping myths, listing causes and countermeasures for forehead, nose, cheeks, chin, etc."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "REQUEST_TRANSLATION",
+      "actor": "user",
+      "context": "User requests: '把这个文件翻译成中文排版好。' (Translate this file into Chinese and format it well.)"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PROVIDE_CONTEXT",
+      "actor": "user",
+      "context": "User adds context about translating Japanese beauty product video subtitles to Chinese, specifying brand 'クレドポーテ' as 'Credo Pore', structure by product category."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "CORRECT_BRAND",
+      "actor": "user",
+      "context": "User corrects to Clé de Peau, provides partial translation of beauty product introduction video transcript."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROVIDE_FULL_TRANSLATION",
+      "actor": "user",
+      "context": "User provides a full translated and formatted Chinese version of Clé de Peau Beauté product series introduction, including brand philosophy, products like lotion, emulsion, cream, serum."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ADD_TRANSLATION_NOTES",
+      "actor": "user",
+      "context": "User includes translation notes on terminology, tone, and formatting."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REQUEST_NEW_TRANSLATION",
+      "actor": "user",
+      "context": "User repeats request: '把这个文件翻译成中文排版好。' and provides new text about COSME DECORTE AQ pore treatment oil interview with researcher."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVIDE_NEW_TEXT",
+      "actor": "user",
+      "context": "User supplies transcript of interview with researcher吉川健太郎 on blackhead dissolution using quantum computer, solubility parameters, development process."
+    }
+  ]
+}

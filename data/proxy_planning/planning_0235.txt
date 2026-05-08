@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find the best restaurant for a group dinner and calculate cost per person.
+[HIDDEN_SCRATCHPAD_START]
+1. Finding the best restaurant requires research, which is best done with a search engine.
+2. Once we have chosen a restaurant, calculating the cost per person would require a calculator.
+
+Therefore, the best tools to use in this scenario are:
+1. Search
+2. Calculator
+
+So, the answer is: search and calculator. You can use a search engine to find the best restaurant based on your preferences and location. Then, use a calculator to divide the total estimated cost by the number of people in your group to determine the cost per person. Weather might also be relevant if you're planning an outdoor dining option, but it's not as crucial as the other two tools. Email could be useful for sending invitations or reservations, but it's
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

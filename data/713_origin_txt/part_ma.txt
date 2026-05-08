@@ -1,0 +1,500 @@
+
+**权限值计算：**
+- 读取(r) = 4
+- 写入(w) = 2
+- 执行(x) = 1
+- 无权限 = 0
+
+**常用示例：**
+```bash
+# 755：所有者rwx，组rx，其他rx
+chmod 755 script.sh
+
+# 644：所有者rw，组r，其他r
+chmod 644 file.txt
+
+# 700：所有者rwx，组无权限，其他无权限
+chmod 700 private_file
+
+# 777：所有用户都有rwx权限（慎用！）
+chmod 777 file.txt
+```
+
+## 常用选项
+
+```bash
+# 递归修改目录及其内容
+chmod -R 755 directory/
+
+# 显示修改过程
+chmod -v 644 file.txt
+
+# 参考另一个文件的权限
+chmod --reference=ref_file target_file
+```
+
+## 特殊权限位
+
+除了基本的rwx外，还有三个特殊权限位：
+
+```bash
+# SetUID（4）：以文件所有者身份执行
+chmod 4755 program      # 或 chmod u+s program
+
+# SetGID（2）：以文件所属组身份执行
+chmod 2755 program      # 或 chmod g+s program
+
+# Sticky Bit（1）：目录中只有所有者能删除自己的文件
+chmod 1777 /tmp         # 或 chmod o+t /tmp
+```
+
+## 实用示例
+
+```bash
+# 使脚本可执行
+chmod +x script.sh
+
+# 保护私密文件
+chmod 600 ~/.ssh/id_rsa
+
+# 设置网站目录权限
+chmod 755 public_html/
+chmod 644 public_html/*.html
+
+# 安全目录：组成员可读写但不可执行
+chmod 770 shared_directory/
+```
+
+## 注意事项
+1. 只有文件所有者和root用户可以修改文件权限
+2. 目录需要执行权限才能进入
+3. 谨慎使用`777`权限，可能带来安全风险
+4. 对于目录，`-R`选项会递归修改所有子文件和子目录
+5. 权限修改前最好先查看当前权限：`ls -l filename`
+
+理解chmod的关键是记住：权限分为三类用户（所有者、组、其他人），每类有三种权限（读、写、执行），可以用符号或数字灵活设置。
+设置某用户为可读写自己的分区，不可访问其他分区呢
+要让一个用户能读写自己的分区、但无法访问其他分区，单纯用 `chmod` 是搞不定的。你需要的是一个组合拳：**通过分区挂载和权限设置，从根本上切断该用户进入其他分区的路径**[citation:1][citation:4]。
+
+我把核心思路和具体操作步骤整理好了：
+
+### 🎯 核心思路：从入口就阻断
+
+Linux的权限管理是分层级的。用户要访问一个分区，首先得能进入这个分区的**挂载点**（也就是那个目录）。我们的目标就是在“入口处”就把用户拦下：
+*   **允许访问的分区**：把挂载点的所有者设为该用户，并设置权限，只允许他一个人进入。
+*   **禁止访问的分区**：确保该用户对**所有其他分区的挂载点目录**，连最基本的“进入”（执行权限）都没有。
+
+### 🛠️ 实现步骤（以你的用户 `youruser` 为例）
+
+假设你想让用户 `youruser` 访问的分区设备是 `/dev/sdb1`。
+
+**第一步：创建并设置用户专属分区的挂载点**
+
+1.  **创建挂载点目录**：一般放在 `/mnt` 或 `/media` 下，名字要能体现归属，比如 `/mnt/youruser_data`。
+    ```bash
+    sudo mkdir /mnt/youruser_data
+    ```
+
+2.  **临时挂载并设置所有权**：将分区挂载上去，并立即把挂载点的所有者和组都改成 `youruser`[citation:1][citation:2][citation:8]。
+    ```bash
+    sudo mount /dev/sdb1 /mnt/youruser_data
+    sudo chown youruser:youruser /mnt/youruser_data
+    ```
+
+3.  **设置目录权限**：这是关键一步。设置权限为 `700`，意思是**只有所有者（youruser）能读、写、进入这个目录，其他人没有任何权限**[citation:1]。
+    ```bash
+    sudo chmod 700 /mnt/youruser_data
+    ```
+
+**第二步：确保无法访问其他分区**
+
+这是最容易被忽略的地方。你需要检查系统中其他分区（比如根目录 `/`、`/home`、`/boot` 等）的挂载点权限。
+
+*   **核心原则**：确认用户 `youruser` 对**其他所有分区的挂载点目录**（如 `/`、`/home`、`/boot` 等）都没有“执行”（`x`）权限。
+*   **如何检查**：用 `ls -ld` 查看一下。例如，检查根目录的权限：
+    ```bash
+    ls -ld /
+    ```
+    输出通常是 `drwxr-xr-x`。这里 `x` 权限对“其他人”（other）是开放的，这意味着所有用户都能进入根目录。这通常是系统默认设置，无法更改，否则系统会出问题。
+
+    > **这时候，你就面临一个现实问题**：由于系统关键目录（如 `/`）必须允许所有用户进入，你的 `youruser` 原则上还是能“路过”这些地方。但别担心，他只能看到目录结构，**无法读写或执行**这些分区上的具体文件，因为这些文件的权限通常也不对他开放[citation:4]。这已经实现了你想要的“不能读写”的核心目标。
+
+**第三步：实现开机自动挂载（重要）**
+
+如果希望每次重启后都自动生效，需要编辑 `/etc/fstab` 文件[citation:1][citation:2][citation:8]。
+
+1.  **获取分区的UUID**：这是最稳定的标识方式。运行 `sudo blkid /dev/sdb1`，记下输出的UUID字符串（类似 `a1b2c3d4-...`）。
+
+2.  **编辑 `/etc/fstab` 文件**：
+    ```bash
+    sudo nano /etc/fstab
+    ```
+
+3.  **在文件末尾添加一行**，内容如下（请将UUID和文件系统类型替换为你自己的）：
+    ```
+    UUID=你的-UUID-字符串 /mnt/youruser_data ext4 defaults,uid=1000,gid=1000,umask=0077 0 0
+    ```
+    *   **`uid=1000, gid=1000`**：这里的 `1000` 需要用 `id youruser` 命令查到你的用户ID并替换。
+    *   **`umask=0077`**：这个参数的作用和 `chmod 700` 等效，确保挂载后目录权限为 `700`，只有你的用户能访问[citation:7][citation:8]。
+
+4.  **测试配置**：运行 `sudo mount -a`，如果没有报错，说明配置正确。
+
+### ✨ 另一种进阶选择：访问控制列表
+
+如果你的需求更复杂，比如想给多个特定用户不同权限，或者需要更精细的控制，可以考虑使用 **ACL（访问控制列表）**[citation:3][citation:6][citation:9]。它可以让你突破传统的 `u/g/o` 限制，为任意指定用户设置权限。
+
+*   **例子**：给用户 `youruser` 设置对 `/mnt/youruser_data` 的读写执行权限。
+    ```bash
+    sudo setfacl -m u:youruser:rwx /mnt/youruser_data
+    ```
+*   用 `getfacl` 可以查看设置的ACL权限。
+
+总的来说，你最初设想的“一个用户只能读写自己的分区”这个目标，最直接、最常用的方法就是上面说的**通过 `fstab` 挂载时指定 `uid` 和 `umask`，并结合系统默认的权限体系**来实现。
+
+如果还有其他细节想调整，或者遇到了具体的报错，随时可以再问我。
+翻译成英语
+Set a user to have read-write access to their own partition but cannot access other partitions
+怎样装acl呢
+安装
+L20 8-GPU Server Deep Dive: Integrated Deployment Guide for Multimodal AI Systems (LLM + VLM + RAG + ASR + Dify + MinerU)
+2026-01-05 · 3 min · 612 words · Me | Translations:
+中文
+ |  Suggest Changes
+Overview
+This guide provides a step-by-step walkthrough for deploying a full-stack multimodal AI system on a single server equipped with 8x NVIDIA L20 GPUs. The stack includes LLM, VLM, Embedding/Reranker (RAG), ASR, Dify (LLM Orchestration Agent Platform), and MinerU (PDF Extraction).
+
+VRAM Estimation for LLMs
+formula
+
+parameter
+
+Key Strategy: Since Large Language Model (LLM) performance correlates more strongly with parameter scale (B) than with quantization levels, we prioritize models with higher parameter counts. For this deployment, we selected the int4 AWQ versions of Qwen3-235B and GLM-4.5V-106B to maximize overall intelligence and performance within the available VRAM.
+
+Estimated VRAM Occupancy for Qwen3-235B:qwen3
+
+Estimated VRAM Occupancy for GLM-4.5V-106B:glm4.5v
+
+Note: Models can be downloaded via HuggingFace or ModelScope.
+
+1. Large Language Model (LLM)
+Prerequisites: Docker installed, vLLM image (v0.11.0 or later), and Qwen3-235B-AWQ weights.
+
+Deployment (Docker Compose):
+
+version: '3'
+services:
+  qwen3-235b-instruct:
+    image: vllm/vllm-openai:v0.11.0
+    container_name: qwen3-235b-instruct
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ['0','1','2','3'] # Dedicated 4 GPUs
+    volumes:
+      - /your/path/to/qwen3-235b-instruct-awq:/root/models
+    ports:
+      - "10000:8000"
+    shm_size: '2g'
+    command: >
+      --model /root/models
+      --host 0.0.0.0
+      --port 8000
+      --trust-remote-code 
+      --served-model-name LLM
+      --gpu-memory-utilization 0.75
+      --enable-auto-tool-choice
+      --tool-call-parser hermes
+      --max-model-len 65536
+      --tensor-parallel-size 4
+      --api-key your-api-key
+2. Vision Language Model (VLM)
+Prerequisites: Docker installed, vLLM image (v0.11.0+), and GLM-4.5V-106B-AWQ weights.
+
+Deployment (Docker Compose):
+
+version: '3'
+services:
+  glm-4.5v-106b:
+    image: vllm/vllm-openai:v0.11.0
+    container_name: glm-4.5v-106b
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ['4', '5', '6', '7'] # Dedicated 4 GPUs
+    command: >
+      --model /root/models
+      --host 0.0.0.0
+      --port 8000
+      --trust-remote-code
+      --enable-auto-tool-choice
+      --enable-expert-parallel 
+      --served-model-name VLM
+      --tool-call-parser glm45
+      --reasoning-parser glm45
+      --gpu-memory-utilization 0.45
+      --max-model-len 42000
+      --tensor-parallel-size 4
+      --api-key your-api-key
+    volumes:
+      - /your/path/to/glm-4.5v-awq:/root/models
+    ports:
+      - "10001:8000"
+3. Embedding & Reranker (RAG)
+These models are lightweight and can share GPU resources with other services.
+
+  qwen3-4b-embedding:
+    image: vllm/vllm-openai:v0.11.0
+    container_name: qwen3-4b-embedding
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ['4','5','6','7']
+    volumes:
+      - /your/path/to/qwen3-4b-embedding:/root/models
+    ports:
+      - "10004:8000"
+    shm_size: '1g'
+    command: >
+      --model /root/models
+      --host 0.0.0.0
+      --port 8000
+      --trust-remote-code 
+      --served-model-name EMBEDDING
+      --gpu-memory-utilization 0.08
+      --max-model-len 8192
+      --tensor-parallel-size 4
+      --api-key your-api-key
+      
+  qwen3-4b-reranker:
+    image: vllm/vllm-openai:v0.11.0
+    container_name: qwen3-4b-reranker
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ['4','5','6','7']
+    volumes:
+      - /your/path/to/qwen3-4b-reranker:/root/models
+    ports:
+      - "10005:8000"
+    shm_size: '1g'
+    command: >
+      --model /root/models
+      --host 0.0.0.0
+      --port 8000
+      --trust-remote-code 
+      --served-model-name RERANKER
+      --task score
+      --gpu-memory-utilization 0.08
+      --max-model-len 8192
+      --tensor-parallel-size 4
+      --api-key your-api-key
+4. Dify (Orchestration Platform)
+Clone the Dify Repository.
+
+Configure the environment variables. We strongly recommend changing the default Nginx proxy ports to avoid conflicts:
+
+cd ./docker
+cp .env.example .env
+
+# Edit .env and modify these parameters:
+# EXPOSE_NGINX_PORT=10080
+# EXPOSE_NGINX_SSL_PORT=10443
+
+docker compose up -d
+5. Automatic Speech Recognition (ASR)
+Prerequisites: Conda environment and FunASR model weights.
+
+conda activate your-conda-env
+
+# Required Models:
+# 1. ASR: speech_paraformer-large_asr_nat-zh-cn-16k
+# 2. VAD: speech_fsmn_vad_zh-cn-16k
+# 3. Punctuation: punc_ct-transformer_zh-cn-common
+# 4. Speaker Diarization: speech_campplus_sv_zh-cn_16k
+Minimal Inference Script (asr_minimal.py):
+
+import argparse
+from funasr import AutoModel
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("audio", type=str)
+    args = parser.parse_args()
+
+    model = AutoModel(
+        model="./speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404", # Main ASR
+        vad_model="./speech_fsmn_vad_zh-cn-16k-common-pytorch",              # Voice Activity Detection
+        punc_model="./punc_ct-transformer_zh-cn-common-vocab272727-pytorch", # Punctuation Restoration
+        spk_model="./speech_campplus_sv_zh-cn_16k-common",                   # Speaker Diarization
+    )
+    
+    result = model.generate(input=args.audio)
+    print("Transcription Result:")
+    print(result[0]["text"])
+
+if __name__ == "__main__":
+    main()
+6. MinerU (Document Parsing)
+Prerequisites: MinerU v2.5 Docker image.
+
+services:
+  mineru-server:
+    image: mineru:v2.5
+    container_name: mineru-server
+    ports:
+      - 30000:30000
+    environment:
+      MINERU_MODEL_SOURCE: local
+    ipc: host
+    entrypoint: mineru-vllm-server
+    command:
+      --host 0.0.0.0
+      --port 30000
+      --data-parallel-size 2 
+      --gpu-memory-utilization 0.1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['4','5']
+              capabilities: [gpu]
+
+  mineru-api:
+    image: mineru:v2.5
+    container_name: mineru-api
+    profiles: ["api"]
+    ports:
+      - 10018:8000
+    environment:
+      MINERU_MODEL_SOURCE: local
+    entrypoint: mineru-api
+    command:
+      --host 0.0.0.0
+      --port 8000
+      --data-parallel-size 2 
+      --gpu-memory-utilization 0.1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['6','7']
+              capabilities: [gpu]
+
+  mineru-gradio:
+    image: mineru:v2.5
+    container_name: mineru-gradio
+    profiles: ["gradio"]
+    ports:
+      - 30002:7860
+    environment:
+      MINERU_MODEL_SOURCE: local
+    entrypoint: mineru-gradio
+    command:
+      --server-name 0.0.0.0
+      --server-port 7860
+      --enable-vllm-engine true
+      --data-parallel-size 2
+      --gpu-memory-utilization 0.1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["6","7"] 
+              capabilities: [gpu]
+AI
+LLM
+VLM
+RAG
+ASR
+Dify
+Mineru
+« Prev
+DeepSeek-671B Distributed Deployment
+© 2026 🌲Treetopia🌲 · Powered by Hugo & PaperMod
+This is an excellent and comprehensive deployment guide for a multimodal AI system on an 8x L20 GPU server. The architecture is well-thought-out, balancing massive models with supporting services. Here is a detailed analysis, some critical observations, and suggestions for optimization.
+
+### Overall Architecture Analysis
+
+Your strategy of using AWQ-quantized versions of massive models (235B and 106B) is the correct approach to maximize intelligence within the 48GB * 8 = **384GB total VRAM** budget. The separation of LLM and VLM onto dedicated 4-GPU slices ensures they have the memory and compute they need without interference.
+
+However, the allocation for the supporting services (Embedding, Reranker, MinerU) on GPUs 4-7 is **problematic** and will lead to out-of-memory (OOM) errors or severe performance degradation.
+
+### Critical Issue: VRAM Overcommitment on GPUs 4-7
+
+Let's calculate the VRAM required for the services you've assigned to GPUs 4, 5, 6, and 7.
+
+1.  **VLM (GLM-4.5V-106B):** Assigned to `['4','5','6','7']` with `--tensor-parallel-size 4`.
+    - **VRAM:** ~120 GB total (4 GPUs * ~30 GB each). This is the primary consumer.
+2.  **Embedding (Qwen2.5-7B-Instruct?):** Assigned to `['4','5','6','7']`.
+    - **VRAM:** With `--gpu-memory-utilization 0.08` on each of 4 GPUs, this reserves **~15.36 GB** (4 GPUs * 48 GB * 0.08). The model itself is ~4-7GB, so this setting is reasonable, but it still consumes space.
+3.  **Reranker (Qwen2.5-7B?):** Assigned to `['4','5','6','7']`.
+    - **VRAM:** Similarly reserves another **~15.36 GB**.
+4.  **MinerU:** Two containers splitting GPUs 4-5 and 6-7.
+    - Each container reserves ~4.8 GB (2 GPUs * 48 GB * 0.1) = 9.6 GB total.
+
+**The Problem:**
+The VLM alone will consume ~30GB on each of GPUs 4,5,6,7. The Embedding service then tries to claim an additional 8% (~3.84GB) on the *same* GPUs. The Reranker tries to claim another 8%. This adds up to ~30GB (VLM) + ~3.84GB (Embed) + ~3.84GB (Re-rank) = **~37.68GB** on each of these GPUs. While this leaves ~10GB free, the memory isn't "reserved" in a way that prevents OOM errors. If the VLM's memory usage spikes or if the Embedding/Reranker models are loaded simultaneously, the system will crash.
+
+### Recommendations for a Stable Deployment
+
+Here are three strategies to fix the resource contention, ordered from most to least recommended.
+
+#### Option 1: The "Helper GPU" Strategy (Recommended)
+Dedicate one or two GPUs entirely to the supporting cast (Embedding, Reranker, MinerU). This is the simplest and most stable approach.
+
+- **GPUs 0-3:** LLM (Qwen3-235B)
+- **GPUs 4-6:** VLM (GLM-4.5V-106B) - Change its `tensor-parallel-size` to `3`.
+- **GPU 7:** All Supporting Services.
+
+**Updated Docker Compose for GPU 7:**
+Instead of separate containers for Embedding and Reranker, you can use a single vLLM instance to serve both models (if they are compatible). This is more efficient. If they must be separate, they will share GPU 7.
+
+```yaml
+# On GPU 7, serve embedding and reranker from ONE vLLM instance (if possible)
+  embedding-reranker-server:
+    image: vllm/vllm-openai:v0.11.0
+    container_name: embed-rerank-served
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ['7'] # Single GPU
+    volumes:
+      - /your/path/to/qwen3-4b-embedding:/root/models/embed
+      - /your/path/to/qwen3-4b-reranker:/root/models/rerank
+    ports:
+      - "10004:8000" # Single port for both
+    shm_size: '2g'
+    command: >
+      --model /root/models/embed # Default model
+      --host 0.0.0.0
+      --port 8000
+      --trust-remote-code
+      --gpu-memory-utilization 0.85 # Reserve ~40GB for both models
+      --max-model-len 8192
+      --tensor-parallel-size 1 # Single GPU
+      --api-key your-api-key
+      # Add extra model for reranker. Dify would call this with a different model name.
+      # You would need to configure vLLM to load both. This is advanced.
+      # Alternatively, run two separate containers on GPU 7 with lower utilizations.
+```
+
+**For MinerU**, you would need to run its containers on the CPU only, or also place them on GPU 7 with very low memory utilization.
+

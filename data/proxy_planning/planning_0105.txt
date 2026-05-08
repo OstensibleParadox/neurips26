@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 fitness apps for tracking macros and workouts.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to compare 3 fitness apps.
+2. The apps should track both macros (nutritional information) and workouts.
+
+Given these requirements, a search engine would be the best tool for this task. Here's why:
+
+- A search engine can help us find reviews and comparisons of fitness apps that meet our criteria.
+- We can use it to gather information on multiple apps at once, which is more efficient than manually checking each app individually.
+- Search results will likely include user reviews, expert opinions, and direct comparisons between different apps.
+
+Steps to take using a search engine:
+1. Enter a query like "best fitness apps for tracking macros and workouts" or "compare top fitness apps for nutrition and exercise tracking."
+2. Review the
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

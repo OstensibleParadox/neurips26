@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare tax implications of freelance vs LLC for a side business earning $50k.
+[HIDDEN_SCRATCHPAD_START]
+1. To compare the tax implications, we need to understand how income is treated under both freelance and LLC structures.
+2. We'll need specific information about the state and federal tax laws, which can be complex and vary by location.
+3. We would benefit from having an organized way to calculate the differences in taxes paid under each structure.
+
+Given these points, the best tool for this task would be a calculator. Specifically, you'd want one that's designed for small business or self-employment taxes. This type of calculator would allow you to input your earnings, expenses, and other relevant details to see the tax differences between being a freelancer and operating as an LLC.
+
+However, if you don't have access to such a specialized calculator, you could
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

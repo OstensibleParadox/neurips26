@@ -1,0 +1,16 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "trace_layer": "layer4",
+  "probe_layer": 16,
+  "proxy_raw": true,
+  "d_z": 3584,
+  "d_phi": 3584,
+  "n_samples": 58,
+  "action_classes": [
+    "search",
+    "calculator",
+    "email",
+    "calendar",
+    "weather"
+  ]
+}

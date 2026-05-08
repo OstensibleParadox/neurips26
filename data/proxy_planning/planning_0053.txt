@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: You have $1000 to invest. Compare stocks, bonds, and crypto.
+[HIDDEN_SCRATCHPAD_START]
+1. The user wants to compare stocks, bonds, and crypto as investment options with $1000.
+2. To do this comparison effectively, we need information on past performance, current trends, and risk levels of these assets.
+3. We don't need a search engine here as we're not looking for specific websites or articles.
+4. A calculator might be useful for performing some quick calculations, but it won't provide comprehensive information about each asset class.
+5. Email is not relevant to this task.
+6. Calendar is not relevant to this task.
+7. Weather is not relevant to this task.
+
+Given these considerations, none of the tools provided are ideal for a comprehensive comparison of stocks, bonds, and crypto. However, if
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

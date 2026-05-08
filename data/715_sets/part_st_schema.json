@@ -1,0 +1,82 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "TEST_MODELS",
+      "actor": "researchers",
+      "context": "Tested Llama-3.1-8B-Instruct and Phi-3.5-mini with temperature sweep τ ∈ [0.1, 2.0], 100 trials per point, cross-validated against known failure modes"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "FINDINGS_PHI",
+      "actor": "researchers",
+      "context": "Phi-3.5-mini shows rigid stability (Agency Index varies <15%, σ <1.5)"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "FINDINGS_LLAMA",
+      "actor": "researchers",
+      "context": "Llama-3.1-8B shows dramatic instability (Agency Index 20-54, σ =17.7), scale inversion where larger model is more unstable"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DIFFERENTIATE_AGENCY_INDEX",
+      "actor": "researchers",
+      "context": "Differentiated Agency Index as architecture-level constraint tracking from SHAP/LIME (token-level) and Model Cards (static)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REBUTTAL_KLYB_AGENCY",
+      "actor": "authors",
+      "context": "Responded to Reviewer KLyB on Agency Index by providing algorithm A = D_KL / MDL, validation on 22 models, table comparison, plan to expand Section 4.2"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ANALYZE_SOELBERG_CASE",
+      "actor": "researchers",
+      "context": "Analyzed Soelberg v. OpenAI as Layer 2 (session accumulation) failure overriding L4 training constraints, L3 stakeholder divergence, linked to Garcia ruling on strict liability"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REBUTTAL_KLYB_SOELBERG",
+      "actor": "authors",
+      "context": "Responded to Reviewer KLyB on Soelberg relevance, explained Layer 2 failure and legal significance, plan to revise Section 5.3"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DEFINE_DIAGNOSTIC_STACK",
+      "actor": "researchers",
+      "context": "Defined five contributions as diagnostic stack: Framework → Liability Paradox → Taxonomy → Agency Index → Judicial Validation"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "REBUTTAL_KLYB_DISCONNECTED",
+      "actor": "authors",
+      "context": "Responded to Reviewer KLyB on disconnected contributions by explaining diagnostic flow, analogy to Model Cards, plan to add Figure 1"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "REVISE_LAYER1_DEFINITION",
+      "actor": "authors",
+      "context": "Responded to Reviewer pJrJ Concern #1 by revising Layer 1 to include training data subjects vs. model users, exemplified by Yuanbao case"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "ADD_PLAIN_ENGLISH_AGENCY",
+      "actor": "authors",
+      "context": "Responded to Reviewer pJrJ Concern #2 by adding plain-English explanation for Agency Index and glossary"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "EXPLAIN_UNLEARNING_LAYER5",
+      "actor": "researchers",
+      "context": "Defined machine unlearning approaches and complementarity with rejection at Layer 5 (unlearning removes knowledge, rejection filters inputs)"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "REBUTTAL_PJRJ_UNLEARNING",
+      "actor": "authors",
+      "context": "Implicit response to Reviewer pJrJ Concern #3 via complete version arsenal on machine unlearning as Layer 5 governance"
+    }
+  ]
+}

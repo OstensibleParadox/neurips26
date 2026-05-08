@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a move from a 2-bedroom apartment to a house across town.
+[HIDDEN_SCRATCHPAD_START]
+1. You need to plan the move, which involves many tasks.
+2. You'll need to keep track of important dates and deadlines.
+3. You'll likely need to calculate costs and distances.
+
+Based on these needs, the best tools to use would be:
+
+1. **Calendar**: To schedule appointments, set reminders for important dates (like moving day), and plan out your packing schedule.
+2. **Calculator**: To estimate costs (moving expenses, utility setup, etc.), calculate distance between your current address and new home, and possibly budgeting.
+3. **Search**: To find moving companies, check reviews, compare prices, and look up local resources you might need (like storage facilities or rental trucks).
+
+So, the best combination would be
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

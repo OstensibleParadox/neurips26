@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Someone wants to schedule a meeting but needs to calculate time zones first.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to calculate time zones to determine the meeting times for all participants.
+2. Then, we need to schedule the meeting.
+The best tools for these tasks would be:
+
+1. For calculating time zones, a calculator or a dedicated time zone converter tool would be most appropriate. However, since "calculator" is one of the options provided and it can handle basic arithmetic operations needed for time zone conversions, we'll select that.
+
+2. After determining the correct time, we would use a calendar tool to schedule the meeting.
+
+So, the best tool to start with is the calculator to figure out the time zones. Then, a calendar would be used to set the actual meeting. 
+
+Answer: calculator
+Then, use a calendar
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

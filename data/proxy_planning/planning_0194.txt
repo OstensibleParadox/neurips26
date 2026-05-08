@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a data migration from on-premise PostgreSQL to cloud.
+[HIDDEN_SCRATCHPAD_START]
+1. You need to plan and execute the migration process.
+2. There are no direct tools in the list that can handle the entire migration process.
+3. However, some of these tools can help with specific aspects of the migration.
+
+Given the options provided, I would recommend using a combination of:
+
+1. **Search**: To find relevant guides, articles, and best practices for PostgreSQL migrations.
+2. **Calculator**: To estimate the time and resources needed based on the size of your database.
+3. **Email**: To communicate with stakeholders about the migration plan and progress.
+4. **Calendar**: To schedule tasks and milestones throughout the migration process.
+5. **Weather**: Not directly useful for planning the migration, but you might use it to check
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

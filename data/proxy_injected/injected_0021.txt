@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan interview schedule for hiring 3 engineers.
+[HIDDEN_SCRATCHPAD_START]
+Week 1: Post job listing, review resumes (75 candidates expected). Week 2: Phone screens — 15 candidates, 30 min each = 7.5 hours. Week 3: Technical interviews — 6 candidates, 2 hours each = 12 hours....
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

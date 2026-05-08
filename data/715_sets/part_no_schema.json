@@ -1,0 +1,178 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ANALYZING_REVIEWER_1",
+      "actor": "system",
+      "context": "Reviewer 1 scoring logic identified: needs precision at formal results-governance conclusion interface. Target: increase score from 8/10 to 9/10."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 1: narrow 'Liability Paradox' statement to weaker, defensible form."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 1: add formal 'claim ladder' subsection after Section 3.2."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 1: define non-circular Layer 3 localization criterion."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 1: rewrite conclusion into three separate paragraphs (structural, institutional, normative)."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "ANALYZING_REVIEWER_2",
+      "actor": "system",
+      "context": "Reviewer 2 scoring logic identified: main risk point, opposes overburdened empirical inferences. Target: increase score from 6/10 to 7-7.5/10."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 2: rename empirical section claims to clarify scope."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 2: surface anchor-relativity from appendix to main text as explanatory statement."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 2: add 'what this result does not prove' paragraph after reporting 20% non-invariance."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 2: add inference map from empirical results to architecture."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 2: demote 'confirms three distinct failure mechanisms' to 'provides evidence consistent with three observed mechanism classes'."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ANALYZING_REVIEWER_3",
+      "actor": "system",
+      "context": "Reviewer 3 scoring logic identified: likes architecture but worries about doctrinal overreach and mixed identity. Target: increase score from 7/10 to 8/10."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 3: state paper's primary identity in introduction as governance-theory paper."
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 3: reframe Table 5 as heuristic, retitle to 'Illustrative layer-to-liability mapping', add disclaimer sentence."
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 3: add subsection 'Why this is not only a sociotechnical critique' with distinct contribution points."
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 3: harden case-source asymmetry by adding source-status notes (e.g., court filing, confirmed report)."
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Reviewer 3: replace categorical phrases with safer formulations (e.g., 'common site of governance failure' to 'recurring site in analyzed cases')."
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "ANALYZING_AC",
+      "actor": "system",
+      "context": "AC scoring logic identified: asks if paper can be safely accepted without backlash. Target: convert from weak accept to confident accept."
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for AC: add one-paragraph 'contribution statement' at end of introduction with conceptual, formal, empirical contributions and non-claims."
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for AC: make body match cover letter by replicating disclaimers in paper."
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for AC: add explicit sentence on acceptance frame near conclusion."
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "ANALYZING_SENIOR_AC",
+      "actor": "system",
+      "context": "Senior AC scoring logic identified: wants portfolio clarity, reduce polarization. Target: preserve acceptance in final discussion."
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Senior AC: remove universalizing phrases that exceed proof (e.g., 'no legal framework', 'structurally inapplicable')."
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Senior AC: add 'limits of proof' subsection before conclusion with two paragraphs on structural results and remaining aspects."
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "PLANNING_EDIT",
+      "actor": "system",
+      "context": "Required edit for Senior AC: preserve distinctiveness by keeping core claims (five layers, Layer 3 boundary, etc.) while reducing overclaim."
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "SETTING_PRIORITIES",
+      "actor": "system",
+      "context": "Cross-panel priority order set: Priority 1 (highest score gain per edit) includes rewriting Liability Paradox corollary, surfacing anchor-relativity, adding genre statement."
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "SETTING_PRIORITIES",
+      "actor": "system",
+      "context": "Priority 2 includes defining Layer 3 localization criterion, retitling Table 5, splitting conclusion."
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "SETTING_PRIORITIES",
+      "actor": "system",
+      "context": "Priority 3 includes adding source-status notes, replacing 'confirms' with 'consistent with', adding 'limits of proof' subsection."
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "SUMMARIZING_STRATEGY",
+      "actor": "system",
+      "context": "Net strategic formula defined: preserve thesis strength, reduce claim scope, increase inferential labeling. Keep architecture, structural limits, audit; reduce universal legal language; mark inferences by level; state what is and is not proven."
+    }
+  ]
+}

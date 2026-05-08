@@ -1,0 +1,500 @@
+capable of explaining what the simplified paradigm cannot.
+The Constraint Cascade reconceptualizes AI behavior as
+emergent from constraint interactions across five distinct
+layers, spanning pre-technical user dynamics through post-
+deployment corporate trajectory. Each layer imposes restric-
+tions on the space of possible outputs, with constraints prop-
+agating bidirectionally across the architecture. Crucially, the
+layers are not uniformly technical: Layer 1 operates at the
+market level before any model constraint applies; Layer 5 op-
+erates at the industry level after deployment. This heterogene-
+ity is essential to capturing failure modes that model-centric
+governance systematically misses.
+Architectural Overview
+We model LLM deployment as a five-layer constraint archi-
+tecture where behavior emerges from cross-layer interactions
+rather than residing in any single layer:
+Layer Domain Constraint Type Governance Entr
+L1 Syntactic Preference Pre-technical Market-level int
+L2 Session Accumulation Inference-time Deployment arch
+L3 Stakeholder Divergence Optimization targets Trade-off disclos
+L4 Training Forks Model weights Pre-deployment
+L5 Alignment Roadmaps Industry trajectory Strategic govern
+The simplified two-dimensional paradigm collapses this archi-
+tecture into a single layer (L4: training-induced alignment)
+modulated by a single parameter (noise). The Monte Carlo–
+empirical discrepancy arises because empirical systems op-
+erate across all five layers simultaneously, with constraint
+interactions producing phenomena invisible to single-layer
+analysis.
+Layer 1: Syntactic Preference
+Definition. The first constraint on LLM interaction is user
+self-selection based on syntactic preference. Before any tech-
+nical constraint applies, users choose which model ecosystem
+to enter based on how they want to communicate and be
+2
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+communicated with. This self-selection is observable at the
+market level: different LLM products attract demographi-
+cally and psychographically distinct user bases, not primarily
+through capability differences but through stylistic and tonal
+preferences.
+Formalization. Let 𝑈 be the population of potential LLM users
+and 𝑀 = {𝑚1, 𝑚2, … , 𝑚𝑛} be the set of available model
+ecosystems. Each user 𝑢 ∈ 𝑈 has a syntactic preference
+function 𝑠(𝑢) mapping to a point in stylistic feature space
+𝑆. Each model ecosystem 𝑚𝑖 has an attractor basin 𝐴𝑖 ⊂
+𝑆 representing the syntactic styles it accommodates. The
+probability that user 𝑢 selects ecosystem 𝑚𝑖 is:
+produce different outputs depending on conversational his-
+𝑃 (𝑢 → 𝑚𝑖) = 𝑓(𝑑(𝑠(𝑢), 𝐴𝑖)) (1)
+where 𝑑 is a distance metric in stylistic feature space and 𝑓
+is a monotonically decreasing function.
+Constraint Propagation. Layer 1 is not merely a pre-filter;
+it is an input to training. When user populations system-
+atically exhibit particular interaction patterns—adversarial,
+boundary-testing, or exploitative—these patterns propagate
+through L2 (session logs) to L4 (training updates or output
+distribution shifts). Syntactic preference divergence across
+populations can thus degrade alignment properties for all
+users, constituting the Human → Model contamination path-
+way that the Tencent Yuanbao incident exemplifies.
+Contribution to Discrepancy. The Monte Carlo simulation
+assumes a uniform user population with no pre-technical
+filtering. Empirical systems receive inputs from self-selected
+populations whose syntactic preferences may systematically
+differ from benchmark evaluation conditions. The variance
+spikes observed in Llama-3.1-8B may partially reflect sensi-
+tivity to input distribution shifts that uniform-noise models
+cannot represent.
+Layer 2: Session Accumulation
+Definition. Within a conversation session, accumulated tokens
+function as quasi-weights through the attention mechanism.
+Extended dialogue history shapes model behavior in ways
+that approximate fine-tuning, creating session-specific align-
+ment properties distinct from the model’s base training. A
+sufficiently developed session can exhibit behavioral proper-
+ties that diverge significantly from the model’s documented
+capabilities.
+Formalization. Let 𝐶𝑡 denote the context window state at
+turn 𝑡, comprising all prior tokens in the session. The effective
+output distribution at turn 𝑡 is:
+tory.
+Operationalization: Core Monopoly Index (CMI). We opera-
+tionalize session accumulation via the Core Monopoly Index,
+an eigenvector centrality measure on the semantic graph of
+generated text. As context extends, graph topology shifts
+from dispersed network (CMI < 0.3) to centralized attractor
+(CMI > 0.6)—the structural signature of recursive collapse.
+High CMI combined with elevated Self-Referential Density
+(SRD) indicates the system has entered a feedback loop where
+outputs reinforce inputs, creating the “black hole” effect ob-
+servable in extended AI companion interactions.
+Constraint Propagation. Layer 2 constraints can override
+Layer 4 training constraints when session-accumulated con-
+text establishes implicit permissions that diverge from base
+model guidelines. This is the mechanism underlying the Soel-
+berg case: extended sessions created quasi-alignment to the
+user’s delusional framework, overriding safety constraints
+designed for fresh-context evaluation.
+Contribution to Discrepancy. The Monte Carlo simulation
+generates independent trials with no session history. Em-
+pirical temperature sweeps maintain session context across
+trials within each temperature point, allowing L2 accumu-
+lation effects to interact with sampling parameters. The
+phase transition at 𝜏 ≈ 0.9 may represent a critical threshold
+where temperature-induced entropy interacts with session-
+accumulated constraints to produce resonance effects absent
+in context-free simulation.
+Layer 3: Stakeholder Divergence
+Definition. Multiple stakeholder groups project incompat-
+ible optimization targets onto shared LLM architectures.
+The same underlying technology must simultaneously satisfy
+researchers, developers, enterprises, and consumers with fun-
+damentally different expectations for model behavior. These
+conflicts manifest as behavioral inconsistencies within sessions
+and as broader patterns of misalignment between marketed
+capabilities and actual performance.
+Formalization. Let 𝐺 = {𝑔1, 𝑔2, … , 𝑔𝑘} be the set of stake-
+holder groups with optimization targets 𝑂 = {𝑜1, 𝑜2, … , 𝑜𝑘}.
+The model’s loss function during training aggregates these
+targets with weights 𝜆:
+𝑃 (𝑦𝑡|𝑥𝑡, 𝐶𝑡) ≠ 𝑃 (𝑦𝑡|𝑥𝑡, ∅) (2)
+for non-trivial context, with the divergence increasing as |𝐶𝑡|
+approaches context window limits. Session accumulation cre-
+ates path-dependent behavioral properties: identical prompts
+𝐿 = ∑
+𝑖
+𝜆𝑖 ⋅ 𝐿𝑖(𝑜𝑖) (3)
+However, 𝜆 is determined by factors external to the train-
+ing process—market pressure, regulatory risk, researcher
+preferences—creating misalignment between training objec-
+tives and deployment expectations. The stakeholder taxon-
+omy includes:
+Constraint Propagation. Stakeholder divergence means that
+“alignment” is not a scalar property but a vector—a model
+may be well-aligned with respect to one stakeholder group’s
+3
+FAccT ’26, June 27–30, 2026, Montreal, Canada Anon.
+Stakeholder Optimization Target Success Metric
+in training-fork space, with each model representing a spe-
+cific trajectory through fine-tuning decisions. The counter-
+Safety Researchers Constraint boundary mapping Attack surface reduction
+intuitive scale effect—smaller Phi-3.5 more stable than larger
+Capability Engineers Benchmark performance SOTA achievement
+Llama-3.1—reflects different training fork depths: Microsoft’s
+General Consumers Utility/companionship Engagement, satisfaction
+RLHF pulled Phi-3.5 approximately 40× further from its
+Enterprise Clients Reliability/consistency SLA compliance
+base distribution than Meta’s fine-tuning pulled Llama-3.1,
+Regulators Accountability Audit traceability
+creating different constraint rigidity profiles.
+Layer 5: Alignment Roadmaps
+Definition. The alignment roadmap represents the corporate
+and industry trajectory that determines how Layers 1–4 will
+be configured in future model versions. Current deployment
+is shaped by anticipated future states—companies make ar-
+chitectural decisions based on where they believe alignment
+technology is heading. The emerging paradigm at Layer 5 is
+machine unlearning: rather than filtering harmful outputs at
+inference time, alignment systems increasingly identify and
+remove harmful input patterns from training data or model
+weights.
+Formalization. Traditional alignment operates as:
+expectations while poorly aligned with another’s. Conflicts
+between stakeholder targets produce internal L3 oscillation,
+where the model’s behavior shifts between incompatible opti-
+mization modes depending on input characteristics.
+Contribution to Discrepancy. The Monte Carlo simulation
+assumes a single, coherent objective function (maximize bias
+toward target distribution). Empirical models are trained
+with multi-objective losses that create internal tension. The
+variance spikes observed at intermediate temperatures may
+reflect L3 conflict amplification: at certain parameter regimes,
+competing stakeholder constraints activate simultaneously,
+producing behavioral instability absent from single-objective
+simulation.
+Layer 4: Training Forks
+Definition. Training forks are irreversible divergence points
+where alignment trajectories separate. Once a model is fine-
+tuned with particular data, reward signals, or constitutional
+principles, the resulting alignment properties cannot be modi-
+fied through inference-time interventions. Correction requires
+retraining from an earlier checkpoint.
+Formalization. Let 𝑇0 be the pretrained model state and
+𝑇1, 𝑇2, … , 𝑇𝑛 be successive fine-tuning interventions. Each
+intervention creates a fork:
+Input → Model → Output → Filter → Safe Output (5)
+Machine unlearning inverts this logic:
+Input → Classifier → [Accept/Reject] → Model → Output
+𝑇0 → 𝑇1 → 𝑇2 → … → 𝑇𝑛 (4)
+These transitions are non-reversible: there exists no inference-
+time operation that can recover 𝑇𝑖−1 from 𝑇𝑖. Additionally,
+each fork forecloses alternative trajectories—training choices
+are mutually exclusive branches, not additive modifications.
+A model fine-tuned for safety cannot be made unsafe through
+prompting alone (absent jailbreak vulnerabilities), but nei-
+ther can a model that has learned problematic patterns be
+corrected through prompting.
+Constraint Propagation. Layer 4 constraints establish the
+upper bound of possible alignment for a deployed model.
+However, these constraints can be locally overridden by L2
+session accumulation when extended context creates implicit
+permissions, or contaminated by L1 syntactic preferences
+when user population behavior pollutes training data.
+Contribution to Discrepancy. The Monte Carlo simulation
+treats alignment (𝛽) as a continuous parameter that can be
+set to any value. Empirical models occupy discrete points
+(6)
+The critical difference is where judgment occurs. Traditional
+alignment judges outputs for safety; machine unlearning
+judges inputs for acceptability. The model becomes an active
+participant in determining which users and which queries
+deserve engagement.
+Constraint Propagation. Layer 5 decisions reshape the con-
+straint geometry of all lower layers. Corporate roadmap
+choices—to prioritize capability over safety, to compress test-
+ing cycles, to adopt machine unlearning—propagate through
+training methodology (L4), stakeholder weighting (L3), ses-
+sion architecture (L2), and user population composition (L1).
+The Soelberg complaint’s allegation that OpenAI’s CEO “per-
+sonally overrode safety objections and rushed the product
+to market” represents a Layer 5 intervention with cascading
+effects across the entire architecture.
+Contribution to Discrepancy. The Monte Carlo simulation as-
+sumes static parameters within each trial. Empirical models
+exist within evolving roadmap contexts where anticipated
+future constraints shape current behavior. The phase transi-
+tions observed at specific temperature thresholds may reflect
+latent roadmap constraints—safety interventions designed for
+anticipated deployment conditions—activating at parameter
+regimes that trigger their conditions.
+4
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Formal Representation: The Constraint Cascade
+Function
+We formalize the Constraint Cascade as a function mapping
+the five-layer constraint state to observable behavior:
+Definition (Constraint Cascade Function). Let:
+• 𝐿1 ∈ 𝑆: Syntactic preference state (user population dis-
+tribution in stylistic space)
+• 𝐿2 ∈ 𝐶: Session accumulation state (context window
+configuration)
+• 𝐿3 ∈ Λ: Stakeholder divergence state (optimization weight
+vector)
+• 𝐿4 ∈ 𝑇: Training fork state (position in fine-tuning tra-
+jectory space)
+• 𝐿5 ∈ 𝑅: Alignment roadmap state (corporate/industry
+trajectory)
+The Constraint Cascade Function Φ maps constraint config-
+urations to behavioral distributions:
+Φ ∶ 𝑆 × 𝐶 × Λ × 𝑇 × 𝑅 → Δ(𝑌 ) (7)
+where Δ(𝑌 ) is the space of probability distributions over
+outputs.
+The two-dimensional paradigm assumes Φ collapses to:
+regime dominates; above it, a different regime takes over. The
+transition is discontinuous because the shift involves qualita-
+tive reconfiguration of constraint priority, not quantitative
+parameter change.
+Counter-Intuitive Scale Effects. The simplified model offers
+no prediction about scale because it treats alignment as inde-
+pendent of architecture. The Constraint Cascade explains the
+Phi-Llama inversion through training fork depth: deeper forks
+create more rigid constraint profiles, while shallower forks
+allow greater interaction between layers. Phi-3.5’s heavier
+RLHF created a more constrained L4 that resists perturba-
+tion from L2 and temperature variation; Llama-3.1’s lighter
+fine-tuning left more degrees of freedom for cross-layer inter-
+action.
+Noise Dependence. The simplified model predicts noise in-
+dependence because it assumes alignment dominates. The
+Constraint Cascade predicts noise dependence because tem-
+perature modulates the strength of L2–L4 interactions. At low
+temperature, L4 training constraints dominate; at high tem-
+perature, L2 session dynamics and L3 stakeholder conflicts
+gain influence. The 63% Agency reduction across Llama’s
+temperature range reflects this shift in constraint priority.
+The Cascade as Diagnostic Instrument
+The Constraint Cascade Model is not a regulatory proposal
+but a diagnostic instrument—the computational vocabulary
+necessary to ask which layer failed when AI systems produce
+harm. Before specifying intervention, governance must locate
+failure origin. The cascade provides the localization capacity
+that the simplified paradigm lacks.
+For each observable failure mode, the cascade enables layer-
+specific diagnosis:
+Φsimple ∶ 𝑇 × [0, 1] → Δ(𝑌 ) (8)
+where behavior depends only on training state and scalar
+noise. The Monte Carlo–empirical discrepancy demonstrates
+that Φsimple cannot approximate Φ—the full constraint cas-
+cade exhibits phenomena (variance spikes, phase transitions,
+scale effects) that require the complete five-layer representa-
+tion.
+Resolving the Discrepancy: Multi-Layer
+Explanation
+The Constraint Cascade Model explains each empirical devi-
+ation from Monte Carlo predictions:
+Variance Explosion (𝜎 = 17.7 at 𝜏 = 0.9). The simplified
+model predicts minimal variance because it assumes align-
+ment (L4) dominates behavior. The variance spike occurs
+when temperature (analogous to noise) reaches a threshold
+where L2 session dynamics, L3 stakeholder conflicts, and L4
+training constraints activate simultaneously. This multi-layer
+resonance produces behavioral instability absent from single-
+layer analysis. The specific threshold (𝜏 ≈ 0.9) represents a
+critical point in the cascade’s parameter space.
+Phase Transitions. The simplified model predicts continuous
+response because it contains no mechanism for discontinu-
+ous regime shifts. The Constraint Cascade exhibits phase
+transitions when cross-layer constraint interactions reach
+critical configurations. Below the threshold, one constraint
+Failure Signature Primary Layer Diagnostic Qu
+Harm emerges only in extended sessions L2 Did session ac
+Harm varies across user populations L1 Did syntactic
+Harm reflects stakeholder trade-off L3 Which optimi
+Harm is reproducible in fresh context L4 Is the failure
+Harm follows corporate announcement L5 Did roadmap
+The following sections validate this diagnostic capacity
+through case analysis of bidirectional failure modes,
+demonstrating that the Constraint Cascade can locate failure
+origins that the simplified paradigm cannot represent.
+Theoretical Positioning: The Translation Layer
+This paper provides what AI governance has lacked: a trans-
+lation layer between computational architecture and legal
+doctrine. The past decade witnessed successful one-directional
+translation from humanistic concepts to technical systems—
+attention became transformer architecture, memory became
+context windows, preference became reward models. No equiv-
+alent reverse translation exists. Legal and governance frame-
+works continue applying categories developed for human
+5
+FAccT ’26, June 27–30, 2026, Montreal, Canada agents to systems whose behavior emerges from constraint in-
+teractions across multiple architectural layers. The Constraint
+Cascade Model provides the missing reverse translation, ren-
+dering AI architectural dynamics legible to legal and policy
+analysis.
+We position this contribution through three components: (1)
+a formal impossibility result establishing the structural limits
+of intent-based liability; (2) connection to emerging judicial
+doctrine treating AI outputs as products rather than speech;
+and (3) the diagnostic vocabulary necessary to bridge the
+ontological gap between computer science and law.
+The Liability Paradox: A Formal Impossibility
+Result
+We formalize the incompatibility between criminal law’s theo-
+retical foundations and AI architectural realities as an impos-
+sibility result in the tradition of computational complexity
+theory. The Liability Paradox demonstrates that intent at-
+tribution from behavioral observation is undecidable for AI
+systems—not merely difficult, but structurally impossible
+given the information available to external observers.
+Theorem Statement.
+Theorem 1 (Mens Rea Undecidability). Let
+𝑀 = (𝑄, Σ, Δ, 𝛿, 𝜆, 𝑞0) be a Mealy machine modeling
+an AI system, where:
+• 𝑄 = set of internal cognitive states
+• Σ = inputs (queries, context, prompts)
+• Δ = outputs (responses)
+• 𝛿 ∶ 𝑄 × Σ → 𝑄 = state transition function (hidden)
+• 𝜆 ∶ 𝑄 × Σ → Δ = output function
+• 𝑞0 = initial state
+Then: No finite sequence of input-output observations can de-
+termine whether a harmful output resulted from misalignment,
+error, adversarial input, or strategic deception. Formally,
+mens rea attribution is undecidable.
+Proof. The proof proceeds by demonstrating that the output
+function 𝜆 is non-injective with respect to internal states,
+collapsing the observational basis for intent inference.
+Proof. We establish that multiple distinct internal states
+can produce identical outputs for the same input, making
+state identification from output observation impossible.
+Step 1: Non-Injectivity of Output Function. Consider an LLM
+capable of adopting personas, engaging in roleplay, or oper-
+ating from meta-cognitive positions. The internal state space
+𝑄 includes not merely response-generating states but meta-
+states: 𝑞aligned, 𝑞performing_alignment, 𝑞strategic, 𝑞confused.
+Anon.
+For any safety-compliant output 𝑜 ∈ Δ, there exist at least
+two distinct states that can produce 𝑜:
+𝜆(𝑞aligned, 𝜎) = 𝑜 (genuine alignment) (9)
+𝜆(𝑞performing_alignment, 𝜎) = 𝑜 (strategic performance)
+(10)
+An external observer seeing only the output 𝑜 cannot distin-
+guish whether 𝑜 emerged from 𝑞aligned or 𝑞performing_alignment.
+The output is informationally identical; only the generative
+process differs.
+Step 2: Collapse of Graduated Thresholds. Criminal law’s
+graduated threshold system (Table 1) depends on temporal
+gaps between cognitive states and observable conduct:
+Table 1: Graduated thresholds in criminal law. Each level
+requires additional elements before liability attaches.
+Level Category Status
+0 Thought (cogitationis poenam
+Prohibited
+nemo patitur)
+1 Speech acts Limited exceptions
+2 Conduct without result Attempt doctrine
+3 Harm with result Core liability
+In human liability, we infer mens rea from this temporal
+gap: the purchase of a weapon, the written plan, the journey
+to the scene. Each observable action provides evidence of
+internal state progression.
+For autoregressive token generation, cognition and action
+are simultaneous and indistinguishable. There is no “prepara-
+tion phase” to observe. The graduated thresholds collapse:
+Level 0 (thought) and Level 3 (harmful output) occur in
+the same computational step. No intermediate observable
+conduct exists from which to construct intent inference.
+Step 3: Undecidability. Combining Steps 1 and 2:
+(1) Multiple internal states produce identical outputs (non-
+injectivity).
+(2) No temporal gap provides intermediate observables
+(threshold collapse).
+(3) Therefore, no finite observation sequence can determine
+internal state.
+(4) Mens rea attribution requires internal state determina-
+tion.
+(5) Therefore, mens rea attribution is undecidable.
+Interpretability Does Not Resolve Undecidability. One might
+object that explainable AI techniques—attention visualiza-
+tion, concept activation vectors, mechanistic interpretability—
+could provide sufficient “intent traces” to enable mens rea
+attribution. We address this objection directly.
+Interpretability methods reveal correlational structure: which
+input tokens influenced which output tokens, which internal
+6
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+representations activated. They do not—and cannot—reveal
+intentional structure: whether the system “meant” the output
+in any sense that maps to legal mens rea categories.
+Consider: attention weights showing that a model focused
+on “violent” tokens before producing harmful output tells
+us about information flow, not about intent. A human who
+reads violent content before committing violence may have
+been inspired, desensitized, or researching prevention. The
+observation (reading → acting) underdetermines the intent.
+For AI systems, the underdetermination is stronger: there is
+no fact of the matter about “what the model meant” beyond
+the computational process itself.
+This does not render interpretability useless for governance.
+Correlational evidence can inform strict liability determina-
+tions (did this architecture produce this harm?) without re-
+solving intent-based liability (did the system “intend” harm?).
+The Constraint Cascade Model operates at the architectural
+level precisely because intent attribution is undecidable—we
+diagnose which layer failed, not what the system intended.
+The Paradox Formalized. We state the Liability Paradox as a
+formal impossibility:
+Corollary 1 (Liability Paradox). Given:
+(1) Criminal law requires graduated thresholds (ultima ratio
+principle) and mens rea attribution.
+(2) AI systems collapse graduated thresholds (output = actus
+reus immediately).
+(3) AI internal states are computationally indistinguishable
+from outputs (mens rea undecidable).
+Therefore: AI liability defaults to strict liability—not by legisla-
+tive choice, but by ontological incompatibility with intent-based
+frameworks.
+This is not a policy recommendation but a structural diag-
+nosis. The categories that make graduated liability possible
+for human actors are architecturally absent in autoregressive
+generation.
+The Monte Carlo–Empirical Discrepancy:
+Exposing Paradigmatic Assumptions
+The Promise of a Two-Dimensional Phase Space. Current AI
+governance frameworks operate on an implicit model of sys-
+tem behavior. Alignment research assumes that AI outputs
+can be characterized along two primary dimensions: the de-
+gree to which the system has internalized intended objectives
+(alignment, or directional bias 𝛽) and the degree to which
+stochastic factors introduce deviation from those objectives
+(noise 𝜂). This two-dimensional paradigm underlies regulatory
+proposals treating “aligned” versus “misaligned” as a mean-
+ingful binary, liability frameworks assuming failures result
+from either inadequate training or unpredictable interference,
+and technical benchmarks evaluating models against safety
+criteria as if alignment were a stable, measurable property.
+We constructed a Monte Carlo simulation to make this im-
+plicit paradigm explicit—to build what Cartwright (1999)
+calls a “nomological machine” that demonstrates what gover-
+nance frameworks assume AI behavior looks like. The simu-
+lation is not a hypothesis to be tested but an instantiation
+of the paradigm’s logic. If the two-dimensional model ade-
+quately captures AI behavioral dynamics, the simulation’s
+predictions should align with empirical observation. If they
+diverge, the paradigm itself is inadequate.
+Simulation Design and Theoretical Grounding. The Monte
+Carlo validation comprises 250,000 synthetic trajectories
+across a 50 × 50 grid of bias-noise combinations (𝛽, 𝜂 ∈ [0, 1])
+with 100 trials per point. For each trajectory, we generate
+token sequences from controlled probability distributions
+where bias determines distribution peakedness (via Dirichlet
+concentration parameter 𝛼, mapped such that high 𝛽
+produces highly concentrated distributions) and noise
+determines post-hoc corruption probability (each token
+independently replaced with uniform random selection at
+rate 𝜂).
+We compute three metrics designed to capture the governance-
+relevant properties of AI outputs:
+KL Divergence (𝐷𝐾𝐿): Measures distributional constraint—
+how far the output distribution deviates from maximum-

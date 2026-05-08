@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Find the fastest route from London to Edinburgh during rush hour.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking for a route, which suggests they need directions or mapping information.
+2. They want it to be the fastest route, indicating they need real-time traffic data.
+3. They are asking about rush hour, which means current traffic conditions will be important.
+
+Given these requirements, the best tool to use would be a mapping or navigation app that can provide real-time traffic updates and suggest the fastest route during rush hour. However, since we're limited to the options provided, the most appropriate choice would be:
+
+search
+
+You could use a search engine like Google Maps, which integrates all of these features (real-time traffic data, fastest route calculation, and even specific times of day) to find the best route from London to Edinburgh
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

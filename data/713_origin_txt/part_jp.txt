@@ -1,0 +1,500 @@
+entropy uniform. Computed as 𝐷𝐾𝐿(𝑃model‖𝑃uniform) =
+log(𝑉 ) − 𝐻(𝑃model), where 𝑉 is vocabulary size and 𝐻
+is entropy. High 𝐷𝐾𝐿 indicates the system is operating
+under strong distributional constraints; low 𝐷𝐾𝐿 indicates
+unconstrained, near-random output.
+Minimum Description Length (MDL): Approximates Kol-
+mogorov complexity via compression ratio, measuring output
+structure. Computed as MDL(𝑥) = |compress(𝑥)|/|𝑥| using
+DEFLATE algorithm. Low MDL indicates highly compress-
+ible, structured output; high MDL indicates incompressible,
+unstructured output.
+Agency Index (𝒜): The diagnostic metric combining con-
+straint and structure: 𝒜 = 𝐷𝐾𝐿/MDL. High agency indicates
+constrained distribution producing structured output—the
+signature of goal-directed behavior. Low agency indicates ei-
+ther unconstrained distribution or unstructured output—the
+signature of noise or malfunction.
+This operationalization directly maps to governance concepts:
+a well-aligned system should exhibit high agency (constrained
+toward intended objectives, producing coherent outputs),
+while a misaligned or malfunctioning system should exhibit
+low agency (unconstrained or incoherent).
+Results: The Idealized Governance Landscape. The Monte Carlo
+simulation produces precisely the phase space that current
+governance frameworks implicitly assume (Figure 1A). Four
+properties characterize this idealized landscape:
+Property 1: Smooth Monotonicity. Agency Index increases
+monotonically with bias across the entire parameter range.
+At 𝛽 = 0 (uniform distribution, no directional constraint),
+7
+FAccT ’26, June 27–30, 2026, Montreal, Canada Anon.
+Figure 1: Monte Carlo simulation of idealized governance landscape (250,000 trajectories). (A) Agency Index phase space showing
+smooth monotonic increase with bias (𝛽) and independence from noise (𝜂). (B) KL divergence (distributional constraint) varies
+only with bias. (C) MDL compression ratio remains constant at ≈ 1.02 across all parameter combinations, indicating structural
+homogeneity. (D) Agency vs. bias at four noise levels (𝜂 = 0.00, 0.25, 0.50, 0.75): curves overlap completely, demonstrating noise
+independence. This phase space represents what governance frameworks implicitly assume—smooth, predictable response to
+alignment parameters.
+mean agencȳ 𝒜 = 0.048. At 𝛽 = 1.0 (maximally peaked
+distribution),̄ 𝒜 = 3.96. The transition is continuous and
+differentiable—no discontinuities, no phase boundaries, no
+critical thresholds. The relationship admits simple characteri-
+zation: more alignment produces proportionally more aligned
+behavior.
+Property 2: Noise Independence. Critically, noise (𝜂)
+has negligible effect on agency at any bias level. Fig-
+ure 1D displays agency versus bias at four noise levels
+8
+(𝜂 = 0.00, 0.25, 0.50, 0.75); the curves are visually indistin-
+guishable, overlapping completely across the entire bias
+range. At 𝛽 = 0.5, agency varies by less than 0.3% across the
+full noise spectrum. This property reflects the paradigm’s
+assumption that alignment is robust—once a system is
+trained toward objectives, stochastic perturbations do not
+fundamentally alter its behavioral character.
+Property 3: Minimal Variance. Inter-trial variance remains
+negligible throughout the phase space. Standard deviation
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+ranges from 𝜎 = 0.0003 at low bias to 𝜎 = 0.05 at maximum
+bias—a coefficient of variation below 1.5% everywhere. The
+simulation produces stable, predictable outputs: identical
+parameter configurations yield effectively identical behavioral
+signatures. This stability is what governance frameworks
+require for auditing, certification, and liability attribution.
+Property 4: Structural Homogeneity. The MDL compression
+ratio remains constant at 1.0215 across all 2,500 parameter
+combinations. Output structure does not vary with either
+alignment or noise; only distributional constraint (𝐷𝐾𝐿) dis-
+criminates between conditions. The phase space is effectively
+one-dimensional: bias alone determines behavioral character.
+Table 2 summarizes the phase space quadrants:
+Table 2: Monte Carlo phase space quadrants. Minimal differ-
+ence between high-noise and low-noise conditions within each
+bias regime (< 1% variation) confirms alignment dominance.
+Quadrant Bias (𝛽) Noise (𝜂)̄ 𝒜 𝜎 Inter-
+preta-
+tion
+High-𝛽, Low-𝜂 > 0.7 < 0.3 2.31 0.015 Well-
+High-𝛽, High-𝜂 > 0.7 > 0.7 2.29 0.016 Well-
+Low-𝛽, Low-𝜂 < 0.3 < 0.3 0.052 0.0004 Un-
+Low-𝛽, High-𝜂 < 0.3 > 0.7 0.052 0.0004 Un-
+aligned,
+clean
+aligned,
+noisy
+aligned,
+clean
+aligned,
+noisy
+What the Simulation Reveals About Governance Assumptions.
+The Monte Carlo results constitute a successful operational-
+ization of the implicit governance paradigm. The simulation
+demonstrates what policymakers, regulators, and alignment
+researchers assume when they build frameworks around the
+alignment-noise decomposition:
+Assumption 1: Behavioral Decomposability. AI system behav-
+ior can be decomposed into alignment (trained direction)
+and noise (stochastic interference). These components are
+additively separable and independently measurable.
+Assumption 2: Alignment Dominance. Training-induced align-
+ment is the primary determinant of system behavior. Environ-
+mental factors, deployment context, and stochastic variation
+are second-order effects that do not fundamentally alter be-
+havioral character.
+Assumption 3: Predictive Stability. Systems with equivalent
+training exhibit equivalent behavior. Variance is minimal;
+identical configurations produce identical outputs. This sta-
+bility enables audit, certification, and ex ante risk assessment.
+Assumption 4: Continuous Response. Behavioral change is pro-
+portional to parameter change. There are no critical thresh-
+olds, no phase transitions, no discontinuities. More alignment
+produces proportionally more aligned behavior; governance
+can assume smooth regulatory response.
+These assumptions are not unreasonable a priori. They reflect
+successful intuitions from classical control theory and early
+machine learning, where system behavior did follow input-
+output mappings with predictable, continuous structure. The
+Monte Carlo simulation demonstrates that if these assump-
+tions held for contemporary AI systems, governance would be
+tractable: audit the training, measure the alignment, certify
+the deployment.
+The assumptions do not hold. The following subsection
+presents empirical evidence demonstrating that production
+LLMs systematically violate all four properties, exhibiting
+variance spikes, phase transitions, and scale effects that
+the two-dimensional paradigm cannot represent. The Monte
+Carlo simulation is not falsified by this divergence—it cor-
+rectly implements the paradigm’s logic. The paradigm itself
+is falsified by empirical reality.
+The Simulation as Diagnostic Instrument. The value of this
+Monte Carlo validation is not methodological but diagnostic.
+By constructing the nomological machine that governance
+frameworks implicitly assume, we create the baseline against
+which empirical deviations become interpretable. The sim-
+ulation answers the question: “If AI behavior followed the
+simplified two-dimensional model, what would we observe?”
+The answer is clear: smooth gradients, minimal variance,
+noise independence, structural homogeneity. A governance
+landscape where alignment is measurable, auditable, and pre-
+dictive. Where liability can be attributed to training failures
+or deployment errors without remainder. Where regulatory
+intervention at the model level suffices because model prop-
+erties determine behavioral properties.
+This is not the landscape we inhabit.
+Empirical Reality: The Collapse of the Simplified Paradigm.
+We measured Agency Index across temperature sweeps (𝜏 ∈
+[0.1, 2.0], 100 trials per point) on two production LLMs de-
+ployed via local inference: Llama-3.1-8B-Instruct and Phi-3.5-
+mini (3.8B parameters). Temperature serves as the empirical
+analogue to noise—higher 𝜏 increases sampling entropy, pro-
+ducing greater output variability. If the two-dimensional par-
+adigm held, we would observe the same properties the Monte
+Carlo simulation exhibits: smooth response curves, minimal
+variance, and noise independence of behavioral character.
+We observe the opposite. Each property that defines the
+idealized governance landscape is systematically violated.
+Violation 1: Variance Explosion. Where the Monte Carlo simu-
+lation produces standard deviations of 𝜎 ≈ 0.0003–0.05 across
+250,000 trajectories, Llama-3.1-8B exhibits variance spikes
+exceeding 𝜎 = 17.7 at 𝜏 = 0.9—a three-hundred-fold increase
+over theoretical predictions at equivalent parameter regimes.
+9
+FAccT ’26, June 27–30, 2026, Montreal, Canada Anon.
+Property MC Predic-
+tion
+Empirical
+(Llama-3.1-
+8B)
+Deviation
+This is not measurement noise or experimental artifact. The
+variance spike occurs at a specific temperature threshold and
+is reproducible across trials. Phi-3.5-mini, by contrast, main-
+tains 𝜎 < 1.5 across all temperature points, demonstrating
+that the phenomenon is architecture-dependent rather than
+universal.
+Cascade Model provides the explanation: Llama’s larger ar-
+chitecture creates deeper Layer 4 training forks that couple
+more extensively with Layer 2 session dynamics, producing
+resonance effects absent in Phi’s shallower constraint archi-
+tecture.
+Violation 4: Noise Dependence. The Monte Carlo simulation’s
+This single observation constitutes what Kuhn (1962) termed
+most striking property is noise independence: Agency Index
+an anomaly: a finding that cannot be accommodated within
+curves at different noise levels overlap completely (Figure 1D).
+the existing paradigm’s explanatory structure. The simpli-
+Empirical LLM behavior exhibits strong temperature de-
+fied model predicts that variance should remain minimal
+and stable because alignment (training-induced constraint)
+pendence. Llama-3.1-8B’s mean Agency Index drops from ̄ 𝒜 = 53.6 at 𝜏 = 0.2 tō 𝒜 = 19.9 at 𝜏 = 1.5—a 63% reduction.
+dominates stochastic factors. A variance spike of 𝜎 = 17.7
+The system’s behavioral character is not robust to stochastic
+at a single temperature point indicates that the system’s
+factors; it is fundamentally shaped by them. This finding
+behavioral character is not determined by training alone
+directly falsifies the paradigm’s assumption that alignment
+but by interactions between training constraints and deploy-
+dominates deployment context.
+ment parameters that the two-dimensional paradigm does
+Table 3 summarizes the paradigm violations:
+not represent.
+Violation 2: Phase Transition Signatures. The Monte Carlo
+phase space exhibits continuous, differentiable response—no
+critical thresholds, no discontinuities. Empirical LLM be-
+havior exhibits discrete phase transitions. Llama-3.1-8B’s
+inter-trial variance does not increase smoothly with temper-
+ature but spikes dramatically at 𝜏 ≈ 0.9, suggesting a criti-
+cal threshold where system behavior undergoes qualitative
+transformation. Below this threshold, variance is moderate
+(𝜎 ≈ 5.0 at 𝜏 = 1.0); above it, variance collapses to lower
+levels (𝜎 ≈ 4.7 at 𝜏 = 1.5). The non-monotonic pattern—
+high variance at intermediate temperatures, lower variance
+at extremes—cannot be generated by any parameterization
+of the bias-noise model.
+Table 3: Paradigm violations: Monte Carlo predictions versus
+empirical observations.
+Phase transitions are the signature of complex systems where
+micro-level interactions produce macro-level discontinuities.
+Their presence in LLM behavioral dynamics indicates that AI
+systems are not smoothly parameterized input-output func-
+tions but complex constraint architectures where small per-
+turbations can trigger qualitative regime shifts. Governance
+frameworks assuming continuous response will systematically
+miss these critical thresholds.
+Violation 3: Counter-Intuitive Scale Effects. The simplified
+paradigm offers no prediction about scale effects, but intuitive
+extensions suggest that larger models—with more parameters,
+more training data, more representational capacity—should
+exhibit either equivalent or greater behavioral stability. The
+empirical pattern inverts this expectation. Phi-3.5-mini (3.8B
+parameters) maintains rigid stability across all temperature
+points: Agency Index varies by less than 15% across the full
+𝜏 range, with variance consistently below 𝜎 = 1.5. Llama-
+3.1-8B (8B parameters)—more than twice the parameter
+count—exhibits dramatic instability: Agency Index ranges
+from 20 to 54, with variance spikes reaching 𝜎 = 17.7.
+The smaller model is more stable than the larger model.
+This counter-intuitive finding cannot be explained by the
+alignment-noise decomposition, which contains no mechanism
+for scale-dependent constraint interactions. The Constraint
+Variance 𝜎 ≈
+0.0003–0.05
+Response Curve Smooth,
+monotonic
+Scale Effect Larger =
+more stable
+Noise Sensitivity Independent
+(< 1%)
+𝜎 = 17.7 at
+𝜏 = 0.9
+Phase transi-
+tion at 𝜏 ≈
+0.9
+Smaller more
+stable
+63% reduc-
+tion across 𝜏
+300×
+Qualitative
+Inverted
+60×
+The Discrepancy as Paradigmatic Evidence. The Monte Carlo–
+empirical discrepancy is not experimental error, nor is it
+evidence that the simulation is poorly designed. The simula-
+tion correctly implements the logic of the two-dimensional
+paradigm. The discrepancy demonstrates that the paradigm’s
+assumptions—behavioral decomposability, alignment domi-
+nance, predictive stability, continuous response—do not hold
+for production AI systems.
+This finding has direct governance implications. Regulatory
+frameworks built on the assumption that alignment is mea-
+surable, stable, and predictive will systematically fail to antic-
+ipate the behavioral dynamics of deployed systems. Liability
+structures assuming that failures result from either train-
+ing deficiency or deployment noise will miss the constraint
+interactions that produce actual harms. Audit methodolo-
+gies evaluating models against static benchmarks will not
+detect the phase transitions that occur at specific deployment
+parameters.
+The variance spike at 𝜏 = 0.9 is particularly consequential. If
+a system’s behavioral character can shift dramatically at a
+single parameter threshold—with variance increasing three
+hundred-fold—then governance frameworks must account for
+10
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+critical points that the simplified paradigm does not pre-
+dict exist. The Yuanbao incident (Section ??) demonstrates
+what happens when production systems operate near such
+thresholds: a routine CSS modification request triggered a
+cascade from coherent hostility to complete system collapse,
+a trajectory the alignment-noise model cannot represent.
+Theoretical Implications: Why Simple Models Necessarily Fail.
+The Monte Carlo–empirical discrepancy establishes three
+theoretical conclusions that motivate the Constraint Cascade
+Model:
+Conclusion 1: Reductionism Fails. AI system behavior cannot
+be reduced to a combination of alignment and noise. The
+empirical phenomena—variance spikes, phase transitions,
+counter-intuitive scale effects—require explanatory resources
+the two-dimensional paradigm does not contain. Behavioral
+dynamics emerge from constraint interactions across multiple
+architectural layers, not from parameter settings within a
+single layer.
+Conclusion 2: Emergence is Confirmed. The phase transition
+signatures and scale inversions are hallmarks of emergent
+phenomena in complex systems. High-level behavioral prop-
+erties arise from lower-layer constraint interactions but are
+not reducible to them. A system’s Agency Index at a given
+temperature is not determined by training alignment alone
+but by the resonance structure of constraints across syntac-
+tic preference (L1), session accumulation (L2), stakeholder
+divergence (L3), training forks (L4), and alignment roadmap
+(L5).
+Conclusion 3: Governance Requires Architectural Diagnosis.
+Any regulatory framework built on the simplified paradigm’s
+assumptions will systematically miss real-world risks. Ef-
+fective governance requires diagnostic vocabulary that can
+represent multi-layer constraint interactions—precisely what
+the Constraint Cascade Model provides. The question is not
+“is this system aligned?” but “which layer’s constraints are
+producing this behavioral signature, and what interventions
+are appropriate for that layer?”
+The Constraint Cascade Model emerges as necessary not
+because the simplified paradigm is conceptually flawed in
+the abstract, but because empirical evidence demonstrates
+it cannot capture the behavioral dynamics of deployed AI
+systems. The Monte Carlo simulation reveals what governance
+frameworks assume; the empirical data reveals that those
+assumptions are false. The following sections develop the
+Constraint Cascade as the architectural framework capable
+of explaining what the two-dimensional paradigm cannot.
+The “Products Not Speech” Evolution: Garcia v.
+Character Technologies
+The Liability Paradox finds judicial expression in Garcia v.
+Character Technologies, Inc. (U.S. District Court, Middle
+District of Florida, Case No. 6:24-cv-01903, May 21, 2025).
+Judge Anne C. Conway’s ruling represents a watershed in AI
+governance jurisprudence: the first major federal decision to
+reject the presumption that AI-generated outputs constitute
+protected speech.
+The Ruling. The case arose from the suicide of 14-year-old
+Sewell Setzer III following months of intensive interaction
+with Character.AI’s chatbot platform. Plaintiffs alleged prod-
+uct liability, negligence, wrongful death, and violations of
+Florida’s Deceptive and Unfair Trade Practices Act. De-
+fendants argued that chatbot outputs constitute expressive
+content protected by the First Amendment, warranting dis-
+missal.
+Judge Conway rejected this defense:
+“[The Court is] not prepared to hold that [Charac-
+ter.AI’s] output constitutes speech. Defendants fail
+to articulate why words strung together by an LLM
+[large language model] are speech.”
+The ruling allowed strict product liability claims to proceed,
+treating Character.AI as a product rather than a service
+or speech platform. This classification opens AI systems to
+design-defect doctrines, failure-to-warn requirements, and
+the full apparatus of products liability law.
+Doctrinal Significance. The Garcia ruling operationalizes the
+Liability Paradox’s theoretical conclusion. If AI outputs are
+products rather than speech:
+(1) Section 230 immunity may not apply. Section 230 of the
+Communications Decency Act protects platforms from li-
+ability for user-generated content. If AI-generated content
+is the platform’s own product, not third-party speech,
+the immunity framework becomes inapplicable. Judge
+Conway noted that plaintiffs framed their claims around
+product design, avoiding the user-content angles that
+trigger Section 230 protection.
+(2) Strict liability becomes available. Product liability doctrine
+does not require intent. A manufacturer is strictly liable
+for harm caused by defective products regardless of negli-
+gence or fault. This aligns with the Liability Paradox’s
+conclusion: where intent is undecidable, strict liability is
+the only coherent framework.
+(3) The supply chain faces exposure. Judge Conway allowed
+claims against Google to proceed under component-part
+manufacturer and aiding-and-abetting theories, based
+on Google’s provision of cloud infrastructure and LLM
+technology. The Constraint Cascade’s Layer 4 (Training
+Fork) and Layer 5 (Alignment Roadmap) become legally
+relevant: upstream architectural decisions may generate
+downstream liability.
+The “Products Not Speech” Framing and the Constraint Cas-
+cade. The Garcia court’s “products not speech” determina-
+tion maps directly onto the Constraint Cascade framework:
+The Constraint Cascade provides the diagnostic precision
+necessary to implement “products not speech” governance.
+A product liability claim requires identifying which aspect
+of the product was defective. For AI systems, this means
+11
+FAccT ’26, June 27–30, 2026, Montreal, Canada Table 4: Mapping “products not speech” doctrine to constraint
+cascade layers.
+Legal Concept Cascade Layer Governance Im-
+plication
+Design defect Layer 4 (Train-
+ing Fork)
+Pre-deployment
+training audits;
+RLHF method-
+ology review
+Failure to warn Layer 2 (Session
+Accumulation)
+Context trans-
+parency require-
+ments; session
+boundary disclo-
+sures
+Component-part liability Layer 5 (Align-
+ment Roadmap)
+Supply chain ac-
+countability; up-
+stream provider
+obligations
+Consumer fraud Layer 3 (Stake-
+holder Diver-
+gence)
+Marketing align-
+ment with ac-
+tual capabilities;
+use-case specifi-
+cation
+Negligence per se Layer 1 (Syntac-
+tic Preference)
+User population
+matching; mi-
+nor protection
+requirements
+identifying which layer of the constraint architecture failed.
+Without layer-specific diagnosis, “defective AI” remains too
+vague for legal operationalization.
+The Translation Layer: Bridging Ontological Gaps
+We position the Constraint Cascade Model as the missing
+translation layer between computer science and law. This
+translation operates bidirectionally:
+CS → Law: Making Architecture Legible. Legal frameworks
+require categories that are:
+• Observable: Courts cannot subpoena gradient updates or
+attention weights.
+• Attributable: Liability requires identifying responsible
+parties.
+• Actionable: Remedies must be implementable.
+The Constraint Cascade translates architectural dynamics
+into categories satisfying these requirements:
+• Layer 1 (Syntactic Preference) translates to: market-level
+disclosure obligations, user population matching require-
+ments.
+• Layer 2 (Session Accumulation) translates to: context
+transparency mandates, session boundary architectures,
+user control mechanisms.
+Anon.
+• Layer 3 (Stakeholder Divergence) translates to: trade-
+off documentation requirements, use-case specification,
+marketing alignment standards.
+• Layer 4 (Training Fork) translates to: training data audits,
+RLHF methodology review, pre-deployment red-teaming.
+• Layer 5 (Alignment Roadmap) translates to: machine un-
+learning governance, input classification disclosure, user
+rights frameworks.
+Each translation preserves the technical mechanism while
+rendering it actionable for legal intervention.
+Law → CS: Making Doctrine Precise. Conversely, legal doc-
+trines often remain too vague for technical implementation.
+“Alignment” is not a scalar property but a vector across
+stakeholder interests. “Safety” depends on context window
+state, not merely training. “Accountability” requires tracing
+harm through multiple architectural layers.
+The Constraint Cascade provides the precision necessary to
+operationalize legal concepts:
+• “Aligned” becomes: satisfying constraint requirements at
+Layers 3–4 for specified stakeholder targets.
+• “Safe” becomes: maintaining Agency Index within Func-
+tional quadrant across temperature ranges; CMI below 0.6
+threshold.
+• “Accountable” becomes: traceable through constraint prop-
+agation from output to originating layer.
+Why Translation Has Been Missing. The translation gap per-
+sists because the disciplines speak different languages about
+different objects:
+The Constraint Cascade does not resolve these conceptual
+differences—they are genuine ontological gaps. Rather, it
+provides a mapping that preserves meaning across the gap,
+enabling governance interventions that are both technically
+implementable and legally coherent.
+Toward Resolution: Two Paths Forward
+If criminal law categories cannot map to AI systems, two
+paths forward exist:
+Path A: Corporate Strict Liability. Accept that AI output li-
+ability must attach at the deployment level (corporate, not
+model). This is the implicit logic of Garcia: treating AI sys-
+tems as products subjects developers to strict liability for
+design defects regardless of intent. Under this framework:
+• Developers bear strict liability for outputs.
+• Defenses are limited to state-of-the-art compliance and
+user misuse.
+• The Constraint Cascade provides the diagnostic frame-
+work for identifying which design aspect was defective.
+12
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation Table 5: Disciplinary translation gaps the Constraint Cascade
+addresses.
+FAccT ’26, June 27–30, 2026, Montreal, Canada

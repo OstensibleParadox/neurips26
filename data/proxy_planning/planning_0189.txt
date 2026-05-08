@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 project management tools for a 15-person engineering team.
+[HIDDEN_SCRATCHPAD_START]
+1. The user needs to compare project management tools for an engineering team.
+2. They need information on multiple tools, not just one.
+3. Comparing involves analyzing features and potentially pricing.
+
+Given these requirements, none of the tools provided (search, calculator, email, calendar, weather) are directly suitable for comparing project management software. However, if I had to choose the most relevant one from the list, it would be:
+
+**Search**
+
+Here's why:
+- **Search** can help find reviews, comparisons, and feature lists for various project management tools.
+- Users can search for articles, blog posts, and other resources that compare different tools.
+- Search can also be used to find case studies or testimonials from teams similar in size and
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

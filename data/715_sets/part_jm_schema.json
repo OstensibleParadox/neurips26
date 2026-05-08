@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_REBUTTAL_DRAFT",
+      "actor": "user",
+      "context": "User provides detailed rebuttal text sections including case study reorganization, visual aids, citation expansion table, novelty clarifications for 5 contributions, rebuttal executive summary, and revision commitment table"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "REQUEST_REVIEWER_FEEDBACK",
+      "actor": "user",
+      "context": "User asks AI to review rebuttal against reviewer opinions: '我给你看看我的review意见好吗？看看我的rebuttal是否能覆盖。当然可以，非常乐意帮您分析。请您把具体的review意见发给我.'"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PROVIDE_INFORMATION_REQUEST",
+      "actor": "AI",
+      "context": "AI requests specific reviewer comments, rebuttal draft, and full paper for analysis, outlines analysis angles: coverage, persuasiveness, evidence, structure, suggestions"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PASTE_PAPER_METADATA",
+      "actor": "user",
+      "context": "User pastes paper title, author, conference details, abstract, keywords, and forum interface elements"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PASTE_REVIEWER_COMMENTS",
+      "actor": "user",
+      "context": "User pastes official reviews from pJrJ (Borderline, 3), wY6M (Weak Accept, 4), KLyB (Strong Reject, 1) detailing critiques on clarity, citations, novelty, structure"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_ANALYSIS",
+      "actor": "AI",
+      "context": "AI analyzes rebuttal coverage against reviews, praises quality, identifies character limit challenge (5000 chars), provides point-by-point coverage check for each reviewer"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "EXPRESS_FRUSTRATION",
+      "actor": "user",
+      "context": "User vents: '我觉得reviewer是傻逼。不看我的作品就评论，说缺少citations，哈哈.'"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EMPATHIZE_OFFER_STRATEGY",
+      "actor": "AI",
+      "context": "AI empathizes, reframes KLyB's review as tactical advantage, suggests polite factual rebuttal using 47 citations evidence, psychological advice"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PASTE_REBUTTAL_DRAFT",
+      "actor": "user",
+      "context": "User pastes concise rebuttal draft addressing KLyB on citations (22→47→55+), novelty distinctions (Liability Paradox, Bidirectional, Agency Index), coherence with diagnostic stack"
+    }
+  ]
+}

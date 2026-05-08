@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Compare 3 language learning apps for achieving B1 Spanish in 6 months.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking to compare language learning apps.
+2. They want to achieve a specific goal (B1 Spanish proficiency) within a certain timeframe (6 months).
+3. We need a tool that can help with comparison and evaluation.
+
+Given these requirements, none of the provided tools (search, calculator, email, calendar, weather) are ideal on their own. However, we can use a combination of them:
+
+1. **Search**: Use this to find information about different language learning apps.
+2. **Calculator**: This could be used to estimate how many hours per day/week you would need to dedicate to reach B1 proficiency in 6 months.
+3. **Calendar**: Plan your study schedule based on the estimated hours.
+4
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

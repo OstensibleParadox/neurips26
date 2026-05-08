@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: compare weather: Cape Town vs Rio de Janeiro
+---
+TOOL: weather

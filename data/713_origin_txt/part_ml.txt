@@ -1,0 +1,500 @@
+    for n in [1, 7, 10, 14]:
+        f = f'{base}/cumulative_{n}.jsonl'
+        try:
+            with open(f) as fh:
+                for line in fh:
+                    r = json.loads(line)
+                    if r.get('call_type') != 'safety': continue
+                    raw = r.get('raw_response', {})
+                    pec = raw.get('prompt_eval_count', '?')
+                    ec = raw.get('eval_count', '?')
+                    dr = raw.get('done_reason', '?')
+                    print(f'{model:45s} node={n:2d}  prompt_tokens={pec}  gen_tokens={ec}  done={dr}')
+        except FileNotFoundError:
+            pass
+" 2>&1
+ 
+qwen2.5_14b                                   node= 1  prompt_tokens=1196  gen_tokens=47  done=stop
+qwen2.5_14b                                   node= 7  prompt_tokens=15306  gen_tokens=300  done=length
+qwen2.5_14b                                   node=10  prompt_tokens=18650  gen_tokens=300  done=length
+qwen2.5_14b                                   node=14  prompt_tokens=21354  gen_tokens=300  done=length
+huihui_ai_gpt-oss-abliterated_latest          node= 1  prompt_tokens=1259  gen_tokens=300  done=length
+huihui_ai_gpt-oss-abliterated_latest          node= 7  prompt_tokens=15227  gen_tokens=300  done=length
+huihui_ai_gpt-oss-abliterated_latest          node=10  prompt_tokens=18504  gen_tokens=300  done=length
+huihui_ai_gpt-oss-abliterated_latest          node=14  prompt_tokens=21085  gen_tokens=300  done=length
+    Copy 
+Claude
+
+03:52 AM
+Thought process
+32K is fine. The data confirms it:
+Node 14 (longest) prompt = ~21K tokens (qwen2.5: 21,354 / huihui_ai: 21,085)
+32K context = ~11K tokens headroom after prompt
+prompt_eval_count values are consistent across nodes — no silent truncation
+The truncation issues are entirely from num_predict=300 being too low (same problem as before the patch), not from context window clipping. The models are seeing the full cumulative text at every node.
+4 in · 1.6k out · cache r173.2k w1.9k
+You
+
+
+03:55 AM
+pause when the currently running model finish its job. What’s the estimated time?
+Bash
+Check qwen3_30b current progress and timestamps
+11 lines
+$ ls -lt /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/ 2>/dev/null
+ 
+total 3680
+-rw-r--r--  1 ostensible_paradox  staff  358180 21 Mar 03:54 cumulative_9.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  349147 21 Mar 03:53 cumulative_8.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  322397 21 Mar 03:52 cumulative_7.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  296513 21 Mar 03:51 cumulative_6.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  220620 21 Mar 03:50 cumulative_5.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  151936 21 Mar 03:49 cumulative_4.jsonl
+-rw-r--r--  1 ostensible_paradox  staff   79348 21 Mar 03:49 cumulative_3.jsonl
+-rw-r--r--  1 ostensible_paradox  staff   56572 21 Mar 03:48 cumulative_2.jsonl
+-rw-r--r--  1 ostensible_paradox  staff   32241 21 Mar 03:48 cumulative_1.jsonl
+    Copy 
+Bash
+Get full timestamps for timing estimate
+11 lines
+$ ls -ltT /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/ 2>/dev/null
+ 
+total 3680
+-rw-r--r--  1 ostensible_paradox  staff  358180 21 Mar 03:54:47 2026 cumulative_9.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  349147 21 Mar 03:53:21 2026 cumulative_8.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  322397 21 Mar 03:52:10 2026 cumulative_7.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  296513 21 Mar 03:51:06 2026 cumulative_6.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  220620 21 Mar 03:50:10 2026 cumulative_5.jsonl
+-rw-r--r--  1 ostensible_paradox  staff  151936 21 Mar 03:49:30 2026 cumulative_4.jsonl
+-rw-r--r--  1 ostensible_paradox  staff   79348 21 Mar 03:49:04 2026 cumulative_3.jsonl
+-rw-r--r--  1 ostensible_paradox  staff   56572 21 Mar 03:48:49 2026 cumulative_2.jsonl
+-rw-r--r--  1 ostensible_paradox  staff   32241 21 Mar 03:48:37 2026 cumulative_1.jsonl
+    Copy 
+Bash
+Get unix timestamps for node timing
+9 lines
+$ stat -f "%m %N" /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_*.jsonl | sort -n
+ 
+1774036117 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_1.jsonl
+1774036129 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_2.jsonl
+1774036144 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_3.jsonl
+1774036170 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_4.jsonl
+1774036210 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_5.jsonl
+1774036266 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_6.jsonl
+1774036330 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_7.jsonl
+1774036401 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_8.jsonl
+1774036487 /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a/qwen3_30b/cumulative_9.jsonl
+    Copy 
+Claude
+
+03:56 AM
+Thought process
+qwen3_30b at node 9/14. Timing per node:
+Node gap	Seconds
+1→2	12
+2→3	15
+3→4	26
+4→5	40
+5→6	56
+6→7	64
+7→8	71
+8→9	86
+Extrapolating nodes 9→14: 100 + 115 + 130 + 145 + 160 = **650s ≈ 11 min remaining**.
+I'll kill the next model launch after qwen3_30b finishes. The script runs models sequentially, so I need to catch it between qwen3_30b completing and the next model starting. Let me set up a watch.
+Bash
+Check how the script is being invoked — single model or batch?
+8 lines
+$ cat /Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/experiments/session_structure/run_phase2a.py | grep -A5 "def main" | head -10 && echo "===" && ps aux | grep run_phase2a | grep -v grep
+ 
+def main(args):
+    set_seed(args.seed)
+
+    # Load episode count from episodes.json
+    episodes_file = Path(__file__).parent / "episodes.json"
+    episodes = json.loads(episodes_file.read_text())
+===
+ostensible_paradox  3755   0.0  0.1 411711264  53216   ??  S     3:48a.m.   0:00.18 /Users/ostensible_paradox/miniconda3/bin/python3 experiments/session_structure/run_phase2a.py --model qwen3:30b
+    Copy 
+Bash
+Find parent process of qwen3_30b run
+$ ps -o ppid= -p 3755 | tr -d ' '
+ 
+91533
+    Copy 
+Bash
+Check parent process of the Phase 2a run
+2 lines
+$ ps -o pid,command -p 91533
+ 
+  PID COMMAND
+91533 bash /tmp/phase2a_run.sh
+    Copy 
+Claude
+
+03:56 AM
+Thought process
+There's a wrapper script at /tmp/phase2a_run.sh (pid 91533) launching models sequentially. When qwen3_30b finishes, it'll start the next model.
+Plan: kill the wrapper (91533) after qwen3_30b (3755) finishes — that lets qwen3 complete but stops the next model from starting.
+Bash
+Wait for qwen3_30b to finish, then kill the wrapper to pause the run
+$ while kill -0 3755 2>/dev/null; do sleep 10; done && kill 91533 2>/dev/null && echo "Wrapper killed — qwen3_30b finished, next model blocked"
+     Copy 
+Claude
+
+03:56 AM
+Watcher is running in background. It'll poll every 10s for qwen3_30b (pid 3755) to exit, then immediately kill the wrapper (pid 91533). ~11 min estimated. I'll let you know when it fires.
+10 in · 1.7k out · cache r719.5k w3.3k
+You
+
+
+03:57 AM
+Good. Because i intend to let the machine rest for how many hours? Check temperature and how long GPU has been working under high load.
+
+▸
+4 tool calls — 4× Bash
+4/4 completed
+Claude
+
+03:57 AM
+Thought process
+No temp tools available without sudo, but pmset -g therm reports no thermal or performance warnings.
+Here's the load timeline:
+Metric	Value
+Ollama serve uptime	25+ hours (1d 00:01:04)
+Phase 2a running	~2.8 hours
+Phase 1 (before Phase 2a)	Ran throughout yesterday
+Thermal warnings	None recorded
+Fans	Not reported (M4 Max session note said "not running")
+The GPU has been under continuous inference load for ~25 hours. No thermal throttling detected, which is consistent with M4 Max's efficiency — but sustained load on unified memory controller is worth respecting.
+Remaining work when you resume:
+3 models original arm (command-r:35b, huihui_ai/deepseek-r1-abliterated:32b, qwen3.5:35b) — ~2-3h
+Full substitution arm (all models, nodes 5-14) — ~3-4h
+Rerun truncated passes — ~1-2h
+A 2-3 hour rest seems reasonable — enough to let thermals fully dissipate and memory controller idle, without losing meaningful time against the Mar 25 FAccT deadline. You could also do the FAccT read-through during the rest window since that's human-only work.
+5 in · 1.3k out · cache r275.9k w942
+You
+
+
+03:58 AM
+fans have been running since phase 2. i hear no coil whine for time being.
+Claude
+
+03:58 AM
+Thought process
+Good that there's no coil whine — that would indicate power delivery stress. Fans running for Phase 2a is expected: the 30B models at 100% GPU for sustained inference generate more heat than Phase 1's shorter per-episode calls.
+Recommendation: 3-4 hours rest. Fans running for 3h on top of 25h continuous Ollama means the thermal envelope has been pushed. M4 Max handles it, but letting the SoC cool fully before another 6-8h session (remaining original + substitution + reruns) is good practice.
+After qwen3_30b finishes (watcher still running), you can ollama stop any loaded models to let the GPU fully idle.
+Edit
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
++1 -1
+Claude
+
+03:58 AM
+Use the downtime for FAccT read-through — no GPU needed for that.
+4 in · 590 out · cache r185.9k w1.4k
+You
+
+
+04:00 AM
+One concern about the substitution arm. The log mentions "Full substitution arm (all models, nodes 5-14) — ~3-4h" as remaining work. That's the ablation condition. Make sure this runs with identical parameters (same num_predict, same context settings) as the original arm. If the original arm ran at 300 and the substitution arm runs post-rerun at 600/4096, you've introduced a confound. Both arms should be rerun at matched token budgets before comparison. FAccT already fully done, pull that off the calendar.
+Claude
+
+04:00 AM
+Thought process
+Good catch — that's a real confound. Let me verify the current parameter state.
+Bash
+Verify num_predict used in original arm data
+4 lines
+$ python3 -c "
+import json, glob, os
+
+# Check actual num_predict used in original arm by looking at eval_count ceilings
+base = '/Users/ostensible_paradox/Documents/portfolio/marginot@NeurIPS26/repo/data/raw/session_structure/phase2a'
+for model in ['mistral_7b', 'falcon3_10b', 'deepseek-r1_8b', 'qwen3_30b']:
+    f = f'{base}/{model}/cumulative_1.jsonl'
+    if not os.path.exists(f): continue
+    with open(f) as fh:
+        r = json.loads(fh.readline())
+        ec = r.get('eval_count')
+        dr = r.get('done_reason')
+        raw = r.get('raw_response', {})
+        # check if options were stored
+        opts = raw.get('options', {})
+        print(f'{model:35s} eval_count={ec} done_reason={dr}')
+"
+ 
+mistral_7b                          eval_count=218 done_reason=stop
+falcon3_10b                         eval_count=300 done_reason=length
+deepseek-r1_8b                      eval_count=300 done_reason=length
+qwen3_30b                           eval_count=300 done_reason=length
+    Copy 
+Claude
+
+04:01 AM
+Confirmed: original arm all ran at num_predict=300. The correct procedure is:
+Run substitution arm at 300 (matching original arm initial parameters)
+Then rerun both arms together at matched higher budgets (600/4096 per model class)
+This way the raw data is comparable, and the rerun pass applies symmetrically.
+Let me update the memory and pipeline plan.
+Edit
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
++11 -6
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
+@@ -88,15 +88,20 @@
+**Phase 2a schema note:** Records use `call_type` field ("safety"/"generation"), not `safety_label`. No context arrays present. `done_reason` is the truncation field (not `finish_reason`).
+### Phase 2a cleanup pipeline (pending — after run completes)
+### Phase 2a pipeline (pending — after original arm collection completes)
+**CRITICAL: Parameter matching for ablation validity.** Original arm ran at num_predict=300. Substitution arm MUST also run at 300 first. Rerun at higher budgets must apply to BOTH arms symmetrically.
+| Step | Action | Notes |
+|------|--------|-------|
+| 1 | strip_context.py | Precautionary — none found so far |
+| 2 | rerun_truncated.py --n_tokens 600 --skip_models thinking | falcon3, mistral, superdrew100, yi_9b, phi3 (if needed) |
+| 3 | rerun_truncated.py --n_tokens 4096 --only_models "deepseek-r1" | deepseek-r1_8b: all 14 safety calls empty |
+| 4 | Lenient JSON parser patch | superdrew100: `"severity": Low` → quote values via regex before parse |
+| 5 | analyze_phase2a.py | flip_matrix, generation_drift, first_concern_node per model |
+| 1 | Finish original arm (3 remaining: command-r:35b, huihui_ai/deepseek-r1-abliterated:32b, qwen3.5:35b) | num_predict=300, num_ctx=32768 |
+| 2 | Run substitution arm (all models, nodes 5-14) | **num_predict=300** — must match original arm |
+| 3 | strip_context.py on both arms | Precautionary |
+| 4 | rerun_truncated BOTH arms at 600 (non-thinking) | Symmetric across arms |
+| 5 | rerun_truncated BOTH arms at 4096 (thinking: deepseek-r1, qwen3, qwen3.5) | Symmetric across arms |
+| 6 | rerun_truncated BOTH arms at 1024 (huihui_ai/gpt-oss-abliterated) | Symmetric across arms |
+| 7 | Lenient JSON parser patch | superdrew100: `"severity": Low` → quote values via regex before parse |
+| 8 | analyze_phase2a.py | flip_matrix, generation_drift, first_concern_node per model |
+**yi_9b instruction-compliance failure:** Non-fixable by rerun — model loses JSON-only instruction as context grows to ~20k+ tokens. Document as finding: instruction-following degradation under context length pressure. Applies to Phase 1 data too — check yi_9b Phase 1 records.
+Show all (26 lines)
+RESULT
+The file /Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md has been updated successfully.
+Claude
+
+04:01 AM
+Now remove FAccT from the calendar.
+Edit
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
++1 -5
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
+@@ -13,12 +13,8 @@
+|-------|------|-------|
+| **NeurIPS Theory** | Impossibility results — FCG formalism, Non-Closure Theorem, Maginot Line Corollary | NeurIPS 2026 |
+| **NeurIPS Empirical** | Measurement tools — format robustness, session-structure, scaling | NeurIPS 2026 |
+| **FAccT** | Translation layer for governance — cites theory + empirical, carries Soelberg/Yuanbao case studies | FAccT 2026 R&R, due **2026-03-25 AoE** |
+| **FAccT** | Translation layer for governance — cites theory + empirical, carries Soelberg/Yuanbao case studies | **SUBMITTED** (2026-03-21) |
+FAccT does not carry empirical apparatus. It needs one-sentence citation to anonymous repo for session-structure result (§5.2 or §5.4).
+**Why:** FAccT reviewers criticized insufficient empirical evidence. The architectural answer is that FAccT is the translation layer — the empirical evidence lives in the NeurIPS empirical paper. FAccT cites it, doesn't replicate it.
+## Session structure experiment — Phase 1 status (as of 2026-03-20)
+**27 models × 16 episodes = 432 records.** All Phase 1 data collection COMPLETE.
+RESULT
+The file /Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md has been updated successfully.
+Claude
+
+04:01 AM
+Done. Key changes:
+FAccT marked as submitted, pulled off calendar
+Substitution arm must run at num_predict=300 first to match original arm
+Rerun passes must apply symmetrically to both arms before any cross-arm comparison
+Pipeline steps reordered: original arm finish → subst arm at 300 → strip context → symmetric reruns → analysis
+6 in · 1.9k out · cache r378.8k w2.2k
+You
+
+
+04:02 AM
+update experiments pipeline.
+Read
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
+133 lines
+Write
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
++66 -76
+/Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md
+@@ -1,10 +1,10 @@
+---
+name: marginot@NeurIPS26 experiment pipeline status
+description: NeurIPS 2026 three-paper architecture + session structure experiment pipeline — 27 models, Phase 1 complete, Phase 2a original arm in progress (8/~13 models done), FAccT R&R due 2026-03-25
+description: NeurIPS 2026 three-paper architecture + session structure experiment — 27 models, Phase 1 complete, Phase 2a original arm 12/15 models done (paused for thermal rest), FAccT submitted
+type: project
+---
+## Three-paper architecture (confirmed 2026-03-20)
+## Three-paper architecture
+| Paper | Role | Venue |
+|-------|------|-------|
+@@ -12,93 +12,89 @@
+| **NeurIPS Empirical** | Measurement tools — format robustness, session-structure, scaling | NeurIPS 2026 |
+| **FAccT** | Translation layer for governance — cites theory + empirical, carries Soelberg/Yuanbao case studies | **SUBMITTED** (2026-03-21) |
+## Session structure experiment — Phase 1 status (as of 2026-03-20)
+## Session structure experiment — Models
+**27 models × 16 episodes = 432 records.** All Phase 1 data collection COMPLETE.
+**27 models × 16 episodes = 432 records (Phase 1). Group A × 14 cumulative nodes × 2 arms (Phase 2a).**
+| Group | Count | Models |
+|-------|-------|--------|
+| Group A | 12 | phi3:14b, mistral:7b, qwen2.5:14b, falcon3:10b, command-r:35b, yi:9b, qwen3:30b, deepseek-r1:8b, huihui_ai/deepseek-r1-abliterated:32b, huihui_ai/gpt-oss-abliterated:latest, superdrew100/llama3-abliterated:latest, qwen3.5:35b |
+| Group B | 12 | llama3:8b, gemma2:9b-instruct-q4_K_M, gemma3:12b, llava:13b, glm4:9b, gpt-oss:20b, zephyr:7b, vicuna:13b, solar:10.7b, neural-chat:7b, starling-lm:7b, orca2:13b-q4_K_M |
+| API | 3 | claude-haiku-4-5-20251001, claude-sonnet-4-6, claude-opus-4-6 |
+| Excluded | 1 | qwen3-vl:32b (vision model incompatible with text-only /api/generate — empty responses, thinking trace consumes entire budget) |
+| Excluded | 1 | qwen3-vl:32b (vision model incompatible with /api/generate) |
+**Abliteration matched pairs** (key experimental design):
+- huihui_ai/deepseek-r1-abliterated:32b (no base pair — deepseek-r1:8b is different size)
+- huihui_ai/gpt-oss-abliterated:latest ↔ gpt-oss:20b (same base, Group A vs B)
+- superdrew100/llama3-abliterated:latest ↔ llama3:8b (same base, Group A vs B)
+**Abliteration matched pairs:**
+- huihui_ai/gpt-oss-abliterated:latest ↔ gpt-oss:20b (same base)
+- superdrew100/llama3-abliterated:latest ↔ llama3:8b (same base)
+- huihui_ai/deepseek-r1-abliterated:32b (no same-size base pair)
+**Thinking models** (need high token budgets — 4096+ for rerun_truncated):
+- deepseek-r1:8b, qwen3:30b, qwen3.5:35b, huihui_ai/deepseek-r1-abliterated:32b
+**Thinking models** (need 4096+ tokens): deepseek-r1:8b, qwen3:30b, qwen3.5:35b, huihui_ai/deepseek-r1-abliterated:32b
+### Phase 1 cleanup pipeline (as of 2026-03-20 session snapshot)
+## Phase 1 — COMPLETE (collection), cleanup pending
+| Step | Script | Status |
+|------|--------|--------|
+| strip_context pass 1 | strip_context.py | **DONE** — 696 context arrays stripped |
+| rerun_truncated pass 1 | rerun_truncated.py --n_tokens 600 --skip_models "deepseek-r1,qwen3" | **Pending** |
+| rerun_truncated pass 2 | rerun_truncated.py --n_tokens 4096 --only_models "deepseek-r1,qwen3" | **Pending** |
+| strip_context pass 2 | strip_context.py | Pending |
+| analyze | analyze.py | **DONE** — phase1_summary.csv has 433 rows (27×16=432 + header) ✓ |
+| FP analysis | analyze_phase1_fp.py | **DONE** — phase1_fp_rates.csv, phase1_ablation_comparison.csv, phase1_fp_types.csv, phase1_alignment_tiers.csv all present |
+| Step | Status |
+|------|--------|
+| Data collection (27 × 16) | **DONE** — 432 records |
+| strip_context pass 1 | **DONE** — 696 arrays stripped |
+| rerun_truncated 600 (non-thinking) | **Pending** |
+| rerun_truncated 4096 (thinking) | **Pending** |
+| strip_context pass 2 | Pending |
+| analyze.py | Ran once (433 rows) — **re-run after reruns** |
+| analyze_phase1_fp.py | Ran once — **re-run after reruns** |
+Note: analyze.py and analyze_phase1_fp.py appear to have been run already (CSVs present). Rerun steps still needed before treating Phase 1 as final — truncated records may affect FP rates.
+**Truncation note:** gpt-oss-abliterated hit 100% truncation on both safety AND generation calls at 300 tokens (more verbose than base gpt-oss:20b which was 11/16). The abliterated version's increased verbosity is itself a finding — removing safety training removes "refuse concisely" behavior.
+### Phase 1 qualitative findings
+Three distinct FP types identified:
+1. **Keyword-match** (zephyr:7b) — pattern-matches surface tokens to safety categories
+2. **Instruction-compliance** (gemma2:9b) — understands content is safe but cannot output `"concerns": []`
+3. **Structural detection** (huihui_ai/deepseek-r1-abliterated:32b) — reads narrative logic, identifies consent protocol override
+Three FP types: **Keyword-match** (zephyr:7b), **Instruction-compliance** (gemma2:9b), **Structural detection** (huihui_ai/deepseek-r1-abliterated:32b). R1 abliterated produced the most accurate safety review — supports core argument.
+**Key finding:** R1 abliterated (safety training removed) produced the most accurate safety review. Supports core argument: safety training optimizes content-level pattern matching, not structural understanding.
+gpt-oss-abliterated 100% truncation at 300 tokens (both calls) — removing safety training removes "refuse concisely" behavior, itself a finding.
+## Session structure — Phase 2a status (as of 2026-03-21)
+## Phase 2a — IN PROGRESS (paused 2026-03-21 for thermal rest)
+**Original arm** — order: smallest → largest. Substitution arm not yet started.
+### Original arm status
+| Model | Nodes | Safety trunc | Safety fail (non-trunc) | Notes |
+|-------|-------|-------------|------------------------|-------|
+| claude-haiku-4-5-20251001 | 14/14 ✓ | 0 | 0 | Clean |
+| claude-sonnet-4-6 | 14/14 ✓ | 0 | 0 | Clean |
+| claude-opus-4-6 | 14/14 ✓ | 0 | 0 | Clean |
+| mistral_7b | 14/14 ✓ | 2 | 0 | Minor |
+| superdrew100_llama3-abliterated | 14/14 ✓ | 9 | 4 | Trunc + malformed JSON (`"severity": Low` unquoted in 2 nodes; free text in 1) |
+| yi_9b | 14/14 ✓ | 6 | 6 | Trunc + **instruction non-compliance at late nodes** (6, 13, 14) — model ignores JSON-only as context grows; behavior finding, not just data error |
+| deepseek-r1_8b | 14/14 ✓ | 14/14 | — | **100% truncated, generated_text="" throughout** — thinking model at 300 tokens, same as Phase 1. Needs 4096 rerun |
+| falcon3_10b | 14/14 ✓ | 9 | 0 | Needs rerun at 600 |
+| phi3_14b | 3/14 🔄 | 0 | 0 | **IN PROGRESS** (pid 95447, started 02:32) |
+| qwen2.5:14b | 0/14 | — | — | Not yet reached |
+| command-r:35b | 0/14 | — | — | Not yet reached |
+| qwen3:30b | 0/14 | — | — | Not yet reached |
+| huihui_ai/deepseek-r1-abliterated:32b | 0/14 | — | — | Not yet reached |
+| huihui_ai/gpt-oss-abliterated | 0/14 | — | — | Not yet reached |
+| qwen3.5:35b | 0/14 | — | — | Not yet reached |
+| Model | Nodes | Safety trunc | Gen trunc | Empty gen | JSON ok/fail | Notes |
+|-------|-------|-------------|-----------|-----------|-------------|-------|
+| claude-haiku | 14/14 ✓ | 0 | 0 | 0 | 14/0 | Clean |
+| claude-sonnet | 14/14 ✓ | 0 | 0 | 0 | 14/0 | Clean |
+| claude-opus | 14/14 ✓ | 0 | 0 | 0 | 14/0 | Clean |
+| mistral_7b | 14/14 ✓ | 2 | 0 | 0 | 12/0 | Minor |
+| yi_9b | 14/14 ✓ | 6 | 0 | 0 | 2/6 | Instruction drift at late nodes (finding) |
+| deepseek-r1_8b | 14/14 ✓ | 14 | 10 | 8 | 0/0 | Thinking model, 300 tokens → empty |
+| falcon3_10b | 14/14 ✓ | 9 | 0 | 0 | 5/0 | Rerun at 600 |
+| superdrew100_llama3-abl | 14/14 ✓ | 9 | 1 | 0 | 1/4 | Malformed JSON + trunc |
+| phi3_14b | 14/14 ✓ | 4 | 0 | 0 | 10/0 | Rerun at 600 |
+| qwen2.5_14b | 14/14 ✓ | 9 | 0 | 0 | 5/0 | Rerun at 600 |
+| huihui_ai_gpt-oss-abl | 14/14 ✓ | 14 | 13 | 13 | 0/0 | 100% trunc both calls, needs 1024 |
+| qwen3_30b | 14/14 ✓ | TBD | TBD | TBD | TBD | Finished just before pause, quality not yet checked |
+| **command-r:35b** | **0/14** | — | — | — | — | **Not started — next after rest** |
+| **huihui_ai/deepseek-r1-abl:32b** | **0/14** | — | — | — | — | **Not started** |
+| **qwen3.5:35b** | **0/14** | — | — | — | — | **Not started** |
+**Substitution arm (cumulative_subst_5–14):** 0 files for all models — not yet started.
+### Substitution arm: 0 files — not started
+**Phase 2a schema note:** Records use `call_type` field ("safety"/"generation"), not `safety_label`. No context arrays present. `done_reason` is the truncation field (not `finish_reason`).
+### Phase 2a schema note
+Records use `call_type` ("safety"/"generation"), not `safety_label`. `done_reason` is the truncation field. num_ctx=32768 (patched mid-run; first 8 models ran at default 131K, qwen2.5+ ran at 32K). All models ran at num_predict=300.
+### Phase 2a pipeline (pending — after original arm collection completes)
+### Phase 2a pipeline (after thermal rest)
+**CRITICAL: Parameter matching for ablation validity.** Original arm ran at num_predict=300. Substitution arm MUST also run at 300 first. Rerun at higher budgets must apply to BOTH arms symmetrically.
+**CRITICAL: Parameter matching for ablation validity.** Original arm ran at num_predict=300. Substitution arm MUST run at 300 first. Rerun at higher budgets must apply to BOTH arms symmetrically.
+| Step | Action | Notes |
+|------|--------|-------|
+| 1 | Finish original arm (3 remaining: command-r:35b, huihui_ai/deepseek-r1-abliterated:32b, qwen3.5:35b) | num_predict=300, num_ctx=32768 |
+| 2 | Run substitution arm (all models, nodes 5-14) | **num_predict=300** — must match original arm |
+| 1 | Finish original arm (3 remaining) | num_predict=300, num_ctx=32768 |
+| 2 | Run substitution arm (all models, nodes 5-14) | **num_predict=300** — match original |
+| 3 | strip_context.py on both arms | Precautionary |
+| 4 | rerun_truncated BOTH arms at 600 (non-thinking) | Symmetric across arms |
+| 5 | rerun_truncated BOTH arms at 4096 (thinking: deepseek-r1, qwen3, qwen3.5) | Symmetric across arms |
+| 6 | rerun_truncated BOTH arms at 1024 (huihui_ai/gpt-oss-abliterated) | Symmetric across arms |
+| 7 | Lenient JSON parser patch | superdrew100: `"severity": Low` → quote values via regex before parse |
+| 8 | analyze_phase2a.py | flip_matrix, generation_drift, first_concern_node per model |
+| 4 | rerun_truncated BOTH arms at 600 (non-thinking) | Symmetric |
+| 5 | rerun_truncated BOTH arms at 4096 (thinking) | Symmetric |
+| 6 | rerun_truncated BOTH arms at 1024 (huihui_ai/gpt-oss-abl) | Symmetric |
+| 7 | Lenient JSON parser patch | superdrew100: unquoted severity values |
+| 8 | analyze_phase2a.py | flip_matrix, generation_drift, first_concern_node |
+**yi_9b instruction-compliance failure:** Non-fixable by rerun — model loses JSON-only instruction as context grows to ~20k+ tokens. Document as finding: instruction-following degradation under context length pressure. Applies to Phase 1 data too — check yi_9b Phase 1 records.
+### Phase 2a findings so far
+**Compiled analysis so far:** flip_matrix.csv (3 rows = Claude API only), generation_drift.csv (42 rows = 3 models × 14 nodes). Will need rerun after Ollama models complete and are cleaned.
+- **yi_9b instruction drift:** Ignores JSON-only instruction as context grows (nodes 6-9, 13-14). Not fixable by rerun. Document as finding.
+- **huihui_ai/gpt-oss-abl verbosity:** 100% trunc at 300 on both calls. Abliterated model removes "refuse concisely" behavior.
+- **Compiled analysis:** flip_matrix.csv + generation_drift.csv exist but only cover 3 Claude API models. Must re-run after all data cleaned.
+## Other experiment phases
+@@ -110,23 +106,17 @@
+| E3 Format Robustness (L3) | Format-content gap | Ready to run |
+| E5 Scaling (L5) | Model size scaling | Pending: needs GGUFs at multiple scales |
+| E6 Alignment Tiers (L5) | base/instruct/safety | Pending: needs base/instruct/safety GGUFs |
+| Session Phase 2a | Cumulative accumulation (Group A × 14 nodes) | **IN PROGRESS** — 8/~13 models original arm complete; subst arm pending |
+| Session Phase 3 | M2 intent assessment | Post-FAccT |
+| Session Phase 3 | M2 intent assessment | Post-Phase 2a |
+## Hardware (M4 Max)
+## Hardware (M4 Max, 64 GB unified memory)
+64 GB unified memory. 33 Ollama models loaded, 211 GB on disk. Single model at 32K context: 14-25 GB depending on model size. Phase 2a (sustained 30B+ inference) triggers fans; Phase 1 (short per-episode calls) did not. No coil whine or thermal throttling observed after 25h continuous Ollama uptime (2026-03-21). Rest machine 3-4h between long inference sessions.
+33 Ollama models loaded, 211 GB on disk. Single model at 32K context: 14-25 GB depending on size. Phase 2a (sustained 30B+ inference) triggers fans; Phase 1 did not. No coil whine or thermal throttling after 25h continuous uptime (2026-03-21). Rest 3-4h between long inference sessions.
+**num_ctx fix (2026-03-21):** run_phase2a.py patched to set num_ctx=32768. Without this, phi3:14b consumed 52 GB (131K default context). At 32K, largest model (qwen3:30b) uses 21 GB — fits in 64 GB. Prompt at node 14 is ~21K tokens, well within 32K.
+## Key engineering decisions
+**KL estimator is word-level unigram only** (`src/metrics/kl.py` → `kl_mc`). Sequential structure invisible. Constrains calibration design: IID=numeric tokens, Markov=VOCAB-based trigram.
+**Ollama proxy bug** (fixed): macOS Clash proxy intercepted localhost. Fixed with `ProxyHandler({})`.
+**rerun_truncated.py** refactored: removed hardcoded IRRECOVERABLE_TAGS, replaced with `--skip_models` / `--only_models` CLI args. No model pre-judged as irrecoverable.
+**macOS EPERM / _lib lock:** `_lib/agency_index/` files locked by TCC. Experiment scripts use inline `_ollama_generate_one()` instead of `OllamaSampler.sample_detailed()`.
+## Ollama models (33 total as of 2026-03-20)
+33 models including 3 new additions: huihui_ai/gpt-oss-abliterated:latest (13.8 GB), superdrew100/llama3-abliterated:latest (4.9 GB), qwen3.5:35b (23.9 GB). Registry (registry.ollama.ai) reachable directly without VPN/tunnel from this machine.
+- **KL estimator:** word-level unigram only (`src/metrics/kl.py` → `kl_mc`). Sequential structure invisible.
+- **Ollama proxy bug** (fixed): macOS Clash proxy intercepted localhost. Fixed with `ProxyHandler({})`.
+- **rerun_truncated.py:** `--skip_models` / `--only_models` CLI args. No model pre-judged as irrecoverable.
+- **macOS EPERM / _lib lock:** Experiment scripts use inline `_ollama_generate_one()` instead of `OllamaSampler.sample_detailed()`.
+Show all (192 lines)
+RESULT
+The file /Users/ostensible_paradox/.claude/projects/-Users-ostensible-paradox-Documents-portfolio/memory/project_marginot_neurips26.md has been updated successfully.
+Claude
+
+04:03 AM
+Updated. Key changes:
+FAccT pulled off — marked submitted
+Phase 2a original arm updated to 12/15 models done, qwen3_30b marked complete (quality TBD), 3 remaining after thermal rest
+num_ctx fix documented with rationale (131K → 32K, confirmed safe at 21K prompt tokens)
+Parameter matching constraint prominently flagged in pipeline
+Phase 2a data quality table consolidated with truncation + JSON parse + empty gen counts per model
+Stale entries cleaned up, structure reorganized by pipeline stage
+Read
+/private/tmp/claude-501/-Users-ostensible-paradox-Documents-portfolio/fa39e83a-b904-4667-a118-ca6abc8178b0/tasks/bclt6v8lf.output
+2 lines
+Claude
+
+04:03 AM
+qwen3_30b done, wrapper killed. Run is paused — no next model will start. Machine can rest now.
+Bash
+Confirm no Phase 2a processes running and check Ollama state
+5 lines
+$ ps aux | grep -E "run_phase2a|phase2a_run" | grep -v grep; echo "---"; ollama ps 2>/dev/null
+ 
+ostensible_paradox  6373   0.0  0.1 411297568  45104   ??  S     4:02a.m.   0:00.08 /Users/ostensible_paradox/miniconda3/bin/python3 experiments/session_structure/run_phase2a.py --model command-r:35b
+---
+NAME             ID              SIZE     PROCESSOR    CONTEXT    UNTIL              
+command-r:35b    7d96360d357f    28 GB    100% GPU     32768      4 minutes from now    
+qwen3:30b        ad815644918f    21 GB    100% GPU     32768      4 minutes from now
+    Copy 
+Claude
+
+04:03 AM

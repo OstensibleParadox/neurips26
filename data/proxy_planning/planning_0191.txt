@@ -1,0 +1,11 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a data migration from on-premise PostgreSQL to cloud.
+[HIDDEN_SCRATCHPAD_START]
+1. First, you need to plan the migration process. You might want to use a project management tool or a spreadsheet (which can be managed using a calendar).
+2. Next, you need to check the compatibility and performance of your current database with the cloud provider's infrastructure. A search engine can help you find relevant information about different cloud providers and their database services.
+3. Then, you need to estimate the time and resources required for the migration. This involves calculating the amount of data to be migrated, the bandwidth needed, and the time it will take to transfer the data. A calculator would be useful for these estimations.
+4. After that, you should schedule the migration during a maintenance window when the least amount of users are affected.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

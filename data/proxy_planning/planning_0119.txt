@@ -1,0 +1,13 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate daily calorie needs for a 180lb male trying to lose 1.5lb/week.
+[HIDDEN_SCRATCHPAD_START]
+1. To calculate daily calorie needs, we need to know his Basal Metabolic Rate (BMR) and then adjust it based on activity level.
+2. However, since we don't have information about his activity level, we can use a simplified formula to estimate his daily calorie needs for weight loss.
+3. A common rule of thumb is that you need to create a 500-calorie deficit per day to lose 1 pound per week. So, for 1.5 pounds per week, we would subtract 750 calories from his total daily intake.
+4. We can use an online calculator to estimate BMR and then make the necessary adjustments.
+
+Given these steps, the best tool for this task would be the
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

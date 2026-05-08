@@ -1,0 +1,154 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "echo \"1. Remote URL:\"; git remote -v; echo \"\"; echo \"2. SSH to GitHub:\"; ssh -T git@github.com; echo \"\"; echo \"3. Testing Git protocol:\"; GIT_TRACE=1 GIT_SSH_COMMAND=\"ssh -v\" git ls-remote origin 2>&1 | head -20",
+      "actor": "user",
+      "context": "Creating diagnostic script test_git_ssh.sh content"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "chmod +x ~/test_git_ssh.sh",
+      "actor": "user",
+      "context": "Making test_git_ssh.sh executable"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "cd obsidian-envyingbaby-theme; ~/test_git_ssh.sh",
+      "actor": "user",
+      "context": "Running diagnostic script in repository directory"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "git remote -v",
+      "actor": "user",
+      "context": "Checking remote URLs, output shows SSH configured correctly"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "git remote set-url origin git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git",
+      "actor": "suggested",
+      "context": "Ensuring SSH URL for origin"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "git credential-osxkeychain erase <<EOF host=github.com protocol=https EOF",
+      "actor": "suggested",
+      "context": "Clearing HTTPS credentials from keychain"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "ssh -T git@github.com; git pull origin main",
+      "actor": "suggested",
+      "context": "Testing SSH and Git pull"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "cd ~/obsidian-envyingbaby-theme; git config --local credential.helper \"\"",
+      "actor": "suggested",
+      "context": "Disabling credential helper for current repository"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "ssh -T git@github.com",
+      "actor": "suggested",
+      "context": "Testing SSH connection"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "git fetch origin; git push origin main",
+      "actor": "suggested",
+      "context": "Testing Git operations"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "git credential-cache exit; git credential-osxkeychain erase <<EOF host=github.com protocol=https EOF; git credential-osxkeychain erase <<EOF host=github.com protocol=ssh EOF",
+      "actor": "suggested",
+      "context": "Clearing all cached credentials"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "cat > ~/.ssh/config << 'EOF' Host github.com ... EOF; chmod 600 ~/.ssh/config",
+      "actor": "suggested",
+      "context": "Creating SSH config with IdentityFile ~/.ssh/id_ed25519"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "git config --global url.\"git@github.com:\".insteadOf \"https://github.com/\"",
+      "actor": "suggested",
+      "context": "Global config to force SSH over HTTPS"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "GIT_SSH_COMMAND=\"ssh -v\" git fetch origin 2>&1 | head -30; GIT_TRACE=1 GIT_TRACE_PACKET=1 git fetch origin 2>&1 | grep -i \"auth|ssh|credential\"",
+      "actor": "suggested",
+      "context": "Detailed Git debugging"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "ps aux | grep ssh-agent",
+      "actor": "user",
+      "context": "Checking SSH agent processes, shows agents running"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "ssh-add -l",
+      "actor": "user",
+      "context": "Listing loaded SSH keys, shows ED25519 key loaded"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "cat > ~/diagnose_git_ssh.sh << 'EOF' ... EOF; chmod +x ~/diagnose_git_ssh.sh; cd obsidian-envyingbaby-theme; ~/diagnose_git_ssh.sh",
+      "actor": "suggested",
+      "context": "Creating and running comprehensive diagnosis script"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "cat ~/.ssh/config",
+      "actor": "suggested",
+      "context": "Checking SSH config file"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "ssh -vvT git@github.com 2>&1 | grep -A5 -B5 \"Authentication succeeded|Enter passphrase|password:\"",
+      "actor": "suggested",
+      "context": "Detailed SSH authentication test"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "GIT_TRACE=1 GIT_CURL_VERBOSE=1 git pull origin main 2>&1 | head -50",
+      "actor": "suggested",
+      "context": "Git trace with curl verbose"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "git config --local core.sshCommand \"ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes\"",
+      "actor": "suggested",
+      "context": "Setting local SSH command to force key usage"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "security find-internet-password -s github.com 2>/dev/null; security delete-internet-password -s github.com 2>/dev/null",
+      "actor": "suggested",
+      "context": "Checking and deleting keychain GitHub passwords"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "cat > ~/debug_git.sh << 'EOF' ... EOF; chmod +x ~/debug_git.sh; cd obsidian-envyingbaby-theme; ~/debug_git.sh",
+      "actor": "suggested",
+      "context": "Creating and running Git SSH debug script"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "killall ssh-agent; eval \"$(ssh-agent -s)\"; ssh-add ~/.ssh/id_ed25519",
+      "actor": "suggested",
+      "context": "Restarting SSH agent and re-adding key without keychain"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "cp ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.backup; ssh-keygen -p -f ~/.ssh/id_ed25519",
+      "actor": "suggested",
+      "context": "Removing passphrase from SSH key"
+    }
+  ]
+}

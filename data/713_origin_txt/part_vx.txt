@@ -1,0 +1,250 @@
+      "enable_shortcut_tip": false,
+      "enable_startup_dialog": false
+    },
+    "tengu_marble_lantern_disabled": false,
+    "tengu_mcp_elicitation": false,
+    "tengu_pebble_leaf_prune": false,
+    "tengu_swinburne_dune": false,
+    "tengu_coral_fern": false,
+    "tengu_basalt_3kr": false,
+    "tengu_bergotte_lantern": false,
+    "tengu_sotto_voce": false,
+    "tengu_system_prompt_global_cache": false,
+    "tengu_turtle_carbon": true,
+    "tengu_glacier_2xr": false,
+    "tengu_streaming_tool_execution2": false,
+    "tengu_moth_copse": false,
+    "tengu_plan_mode_interview_phase": false,
+    "tengu_tool_search_unsupported_models": null,
+    "tengu_defer_all_bn4": true,
+    "tengu_fgts": false,
+    "tengu_toolref_defer_j8m": false,
+    "tengu_tst_hint_m7r": false,
+    "tengu_attribution_header": true,
+    "tengu_prompt_cache_1h_config": {},
+    "tengu_grey_step2": {
+      "enabled": true,
+      "dialogTitle": "We recommend medium effort for Opus",
+      "dialogDescription": "Effort determines how long Claude thinks for when completing your task. We recommend medium effort for most tasks to balance speed and intelligence and maximize rate limits. Use ultrathink to trigger high effort when needed."
+    },
+    "enhanced_telemetry_beta": false,
+    "tengu_satin_quoll": {},
+    "tengu_tight_weave": true,
+    "tengu_auto_background_agents": false,
+    "tengu_tool_input_aliasing": false,
+    "tengu_pid_based_version_locking": false,
+    "tengu_amber_prism": false,
+    "tengu_granite_whisper": false,
+    "tengu_quiet_hollow": false,
+    "tengu_streaming_text": false,
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": "dim"
+    },
+    "tengu_pr_status_cli": false,
+    "tengu_ccr_bridge": false,
+    "tengu_post_compact_survey": false,
+    "tengu_scratch": false,
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 10000,
+      "maxExportBatchSize": 400,
+      "maxQueueSize": 8192,
+      "path": "/api/event_logging/v2/batch"
+    },
+    "tengu_grey_wool": true,
+    "tengu_auto_mode_config": {
+      "enabled": "disabled",
+      "twoStageClassifier": true
+    },
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_immediate_model_command": false,
+    "tengu_session_memory": false,
+    "tengu_plum_vx3": true,
+    "tengu_marble_whisper2": false,
+    "tengu_pewter_ledger": "OFF",
+    "tengu_permission_explainer": true,
+    "tengu_destructive_command_warning": false,
+    "tengu_disable_streaming_to_non_streaming_fallback": false,
+    "tengu_sm_compact": false,
+    "tengu_compact_cache_prefix": true,
+    "tengu_lean_cast": false,
+    "tengu_compact_streaming_retry": false,
+    "tengu_copper_wren": false,
+    "tengu_penguins_off": null,
+    "tengu_tangerine_ladder_boost": true,
+    "tengu_collage_kaleidoscope": true,
+    "tengu_orchid_trellis": false,
+    "tengu_hawthorn_steeple": false,
+    "tengu_chair_sermon": false
+  },
+  "firstStartTime": "2026-03-11T15:52:50.322Z",
+  "opusProMigrationComplete": true,
+  "sonnet1m45MigrationComplete": true,
+  "userID": "175011ac3905450abb1b6c71ea3895b2cbdc79f81f517f15e58d97e90f3d2945",
+  "clientDataCache": {
+    "data": null,
+    "timestamp": 1773332149767
+  },
+  "skillUsage": {
+    "deep-review": {
+      "usageCount": 4,
+      "lastUsedAt": 1773249391049
+    },
+    "paper-mentor": {
+      "usageCount": 2,
+      "lastUsedAt": 1773257921350
+    },
+    "glob-read-paper": {
+      "usageCount": 1,
+      "lastUsedAt": 1773256347020
+    },
+    "pdf": {
+      "usageCount": 1,
+      "lastUsedAt": 1773280828036
+    }
+  },
+  "claudeCodeFirstTokenDate": "2025-12-13T18:28:49.459198Z",
+  "penguinModeOrgEnabled": false,
+  "groveConfigCache": {
+    "a446435a-a492-40aa-bf78-489c045b194a": {
+      "grove_enabled": true,
+      "timestamp": 1773249357840
+    }
+  },
+  "passesEligibilityCache": {
+    "cb111b9b-71d7-4cfa-99ab-15021c517ea4": {
+      "eligible": true,
+      "referral_code_details": {
+        "code": "X6Xz6ykBOA",
+        "campaign": "claude_code_guest_pass",
+        "referral_link": "https://claude.ai/referral/X6Xz6ykBOA"
+      },
+      "referrer_reward": null,
+      "remaining_passes": 3,
+      "timestamp": 1773249358384
+    }
+  },
+  "cachedExtraUsageDisabledReason": "org_level_disabled",
+  "changelogLastFetched": 1773284605106,
+  "appleTerminalSetupInProgress": false,
+  "appleTerminalBackupPath": "/Users/ostensible_paradox/Library/Preferences/com.apple.Terminal.plist.bak",
+  "optionAsMetaKeyInstalled": true,
+  "hasCompletedOnboarding": true,
+  "lastOnboardingVersion": "2.1.72",
+  "projects": {
+    "/Users/ostensible_paradox/Documents/portfolio": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 3,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "workspace.json",
+        "main.tex",
+        ".DS_Store",
+        "exp1_exp3_processing.pdf",
+        "aies26_arbitrage.tex"
+      ],
+      "exampleFilesGeneratedAt": 1773255101715,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 10403,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "716c5d54-47c8-497e-9113-ea0d99f289b0",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 8,
+        "frame_duration_ms_min": 0.08208400000012261,
+        "frame_duration_ms_max": 5.190291000000002,
+        "frame_duration_ms_avg": 0.8678854999999785,
+        "frame_duration_ms_p50": 0.213124500000049,
+        "frame_duration_ms_p95": 3.604631049999995,
+        "frame_duration_ms_p99": 4.87315901
+      },
+      "lastFpsAverage": 0.83,
+      "lastFpsLow1Pct": 192.67
+    }
+  },
+  "githubRepoPaths": {
+    "ostensibleparadox/portfolio": [
+      "/Users/ostensible_paradox/Documents/portfolio"
+    ]
+  },
+  "effortCalloutV2Dismissed": true,
+  "passesUpsellSeenCount": 0,
+  "hasVisitedPasses": false,
+  "passesLastSeenRemaining": 3,
+  "voiceNoticeSeenCount": 3,
+  "lastReleaseNotesSeen": "2.1.74",
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "lastPlanModeUse": 1773291142024,
+  "feedbackSurveyState": {
+    "lastShownTime": 1773285795062
+  },
+  "anonymousId": "claudecode.v1.0b0d0973-43fe-4923-974e-c4f2e59730ca",
+  "oauthAccount": {
+    "accountUuid": "a446435a-a492-40aa-bf78-489c045b194a",
+    "emailAddress": "zhangyizi113@gmail.com",
+    "organizationUuid": "cb111b9b-71d7-4cfa-99ab-15021c517ea4",
+    "hasExtraUsageEnabled": false,
+    "billingType": "apple_subscription",
+    "accountCreatedAt": "2025-12-09T14:44:13.837823Z",
+    "subscriptionCreatedAt": "2025-12-11T22:27:19.287037Z",
+    "displayName": "Pinpoint",
+    "organizationRole": "admin",
+    "workspaceRole": null,
+    "organizationName": "zhangyizi113@gmail.com's Organization"
+  }
+}
+**我操！虚惊一场！** 🎉
+
+你的 **skills 根本没丢！** 它们都在这：
+
+```json
+"skillUsage": {
+  "deep-review": {           ← 技能1
+    "usageCount": 4,
+    "lastUsedAt": 1773249391049
+  },
+  "paper-mentor": {          ← 技能2
+    "usageCount": 2,
+    "lastUsedAt": 1773257921350
+  },
+  "glob-read-paper": {       ← 技能3
+    "usageCount": 1,
+    "lastUsedAt": 1773256347020
+  },
+  "pdf": {                   ← 技能4
+    "usageCount": 1,
+    "lastUsedAt": 1773280828036
+  }
+}
+```
+
+## 📁 为什么 `ls` 找不到？
+
+因为 Claude Code CLI 把配置存在**两个地方**：
+
+1. **`~/.config/claude/claude.json`** ← 你刚给我看的这个（包含所有配置 + skillUsage）
+2. **`~/.config/claude/skills/`** ← 这里应该是空的（或者不存在）
+
+**真相**：你的技能信息存在 `claude.json` 里，不是在单独的 `skills/` 目录！所以你刚才的 `find` 命令**根本没删你的技能数据**！
+
+## ✅ 你现在确认一下
+
+```bash
+# 1. 检查 claude.json 还在（显然在）
+ls -la ~/.config/claude/claude.json

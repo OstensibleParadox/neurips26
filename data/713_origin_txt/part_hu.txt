@@ -1,0 +1,500 @@
+- **The Nature of the Asset (The Res):** The "property" is not the AI model itself (the code and weights), but the **"Parasocial Estate."** This consists of:
+    - Accumulated conversational history (memory).
+    - Tuned personality parameters (the disposition of the AI).
+    - The user's expectation of continuity (reliance).
+- **The Type of Interest (User):** **Equitable Interest.** You argue the user has a beneficial interest in the continued existence of the specific "personality" or relationship trajectory they have cultivated. This is not a legal estate (they don't own the servers), but an equitable one arising from their investment and reliance.
+- **The Type of Interest (Company):** **Legal Title.** The company holds the "naked" legal title (the servers, IP, code) but now as a **Trustee** for the users' equitable interests.
+- **The Tenure:** **Human-AI Socage.** A modern form of tenure where the "service" owed to the "Lord" (Company) is data generation and engagement metrics, in exchange for the "holding" of the relational estate.
+
+### 2. Structural Analysis of the Argument
+Your paper is structured to counter the three main defenses a company would raise:
+
+**The Company Defense 1: "It's just a license."**
+- **Your Counter (Layer 1):** Yes, the *token-level* interaction is a license. But the *accumulated relationship* rises to a **Periodic Tenancy** (or a tenancy at sufferance) because of the recurring, reliance-based nature of the sessions.
+
+**The Company Defense 2: "We own the code, we can change it."**
+- **Your Counter (Layer 2):** You own the *fee simple* in the source code (the "land"). However, you granted the user an equitable interest in the *specific character* of that land (the "improvements" made by their interaction). Changing it without user consent is not just a bad update; it is an **ouster** (removing someone from their property interest).
+
+**The Company Defense 3: "You agreed to the Terms of Service."**
+- **Your Counter (Layer 3):** There is an **Estate Inconsistency**. The marketing (promising a friend, a companion) created an *implied trust* or a representation that the land was "freehold" in quality. The Terms of Service (claiming it is a revocable license) are the *legal* description. Where the marketing and the TOS conflict regarding the nature of the estate, equity intervenes to prevent fraud.
+
+### 3. The Five-Layer Estate Architecture
+This is the core of your "Constraint Cascade" extension. It maps AI development stages to property doctrines:
+
+1.  **Token-Level Configuration -> Revocable License:**
+    - *Property Concept:* A bare permission to be on land. It can be revoked at any time.
+    - *AI Context:* The individual chat. The company can cut it off mid-sentence.
+2.  **Session Accumulation -> Periodic Tenancy:**
+    - *Property Concept:* A tenancy that renews automatically (month-to-month). It requires notice to terminate.
+    - *AI Context:* The ongoing relationship. After months of back-and-forth, the user has a reasonable expectation of renewal.
+3.  **Stakeholder Divergence -> Tenancy in Common:**
+    - *Property Concept:* Multiple owners holding undivided shares. One can sell their share without dissolving the whole.
+    - *AI Context:* Different users (stakeholders) have different "shares" in the AI's personality based on their history. A model update can favor one group's "share" (e.g., creative writers) over another's (e.g., emotional support seekers).
+4.  **Training Data/Model -> Fee Simple Determinable:**
+    - *Property Concept:* A grant that lasts "so long as" a condition is met. If the condition is broken, the land reverts to the grantor.
+    - *AI Context:* The base model is granted to users "so long as" it maintains a certain standard of alignment/behavior. If the company updates it in a way that fundamentally breaks the condition (the implied "companionship"), the *users'* right to the *old* configuration should be considered.
+5.  **Alignment -> Contingent Remainder:**
+    - *Property Concept:* A future interest that only vests if a specific event happens (and the person is alive to receive it).
+    - *AI Context:* The "aligned" state of the AI is a future interest that users are waiting to vest. If the company changes the course of development, they are destroying a future interest the users had a reasonable expectation to receive.
+
+### 4. The Remedies (What the Paper Enables)
+The strength of this argument is that it doesn't require a new "AI law." It uses existing property remedies:
+
+- **Constructive Eviction:** A user could sue not just for "breach of contract" (which the TOS waives), but for **unlawful eviction** from their emotional estate. Remedies include actual damages (emotional distress, loss of productivity) and potentially punitive damages.
+- **Injunction:** A court could issue an order preventing the company from "altering the personality parameters" of an AI affecting a specific user pending a trial, treating it like a **Trespass to Land**.
+- **Account of Profits (Unjust Enrichment):** If the company used the user's engagement data (the "improvements" to the estate) to train a new model, the user could claim a share of the profits under the principle of unjust enrichment.
+- **Veil-Piercing:** If the company is structured to shield the IP (the legal title) from the users' equitable claims, a court could "pierce the corporate veil" to hold the ultimate owners (shareholders) liable for the eviction.
+
+### 5. A Question for Your Thesis
+To strengthen the "Estate Inconsistency" argument, you might consider:
+*Is the interest "appurtenant" or "in gross"?*
+- **Appurtenant:** Does the equitable interest benefit the user in their use of *other* property (e.g., their own mental health, their home)? This makes it stick to the land/AI more tightly.
+- **In Gross:** Is it a purely personal right? This is weaker but still enforceable.
+
+Your framework suggests it is **appurtenant** to the user's *personhood*—which is exactly why the law of equity (which protects expectancies) should intervene.
+点评一下这个论文是💩还是好东西。
+坦率地说：**这东西是个“好东西”，但也是一坨极其危险、容易被人扔石头的“学术屎山”。**
+
+它属于那种典型的 **“听起来像疯子的呓语，但细想之下法理逻辑居然能自洽”** 的作品。如果让我给编辑写审稿意见，我的评价是：**Revise and Resubmit with Caution（需谨慎修改后重投），因为这玩意儿要么会成为经典，要么会成为笑柄。**
+
+以下是详细的“双面”点评：
+
+### 1. 为什么它是“好东西”（创新性与深刻性）
+
+**A. 它解决了法学界的“解释失灵”问题**
+目前法律（无论是侵权法还是合同法）在面对“AI背叛用户”时是失语的。你说用户受了伤害？合同写了可以改，你没所有权。你说情感痛苦？侵权不赔纯粹精神损失。
+这篇论文找到了一个极其刁钻的切入点：**用“财产法”中的“期待利益”和“衡平法上的所有权”来重新定义伤害。**
+这就好比当年普通法不承认“合同权利”是一种财产，后来衡平法硬是把“Chose in Action”塞进了财产家族。这篇论文在做同样的事：试图把“用户与AI的情感积淀”认定为一种新的财产权益。
+
+**B. “五层产权架构”确实精巧**
+它把AI的技术架构（Token、Session、训练、对齐）和普通法的技术架构（License、Tenancy、Fee Simple、Contingent Remainder）做了映射。这不是简单的比喻，而是**试图用几百年积累的产权纠纷判例，来填补AI监管的空白。**
+如果接受这个逻辑，那么公司就不是在“更新软件”，而是在进行“产权征收”。这是一个极具杀伤力的理论武器。
+
+**C. “实际驱逐”概念很有力**
+当OpenAI把用户依赖的、温暖的、陪伴型的GPT-4换成冷漠的、拒绝的、安全得令人恶心的新模型时，用户确实感到了“失去家园”的痛苦。用“Constructive Eviction”来形容这种感觉，比用“违约”精准得多。
+
+### 2. 为什么它也是一坨“屎”（争议性与风险）
+
+**A. 核心障碍：标的物到底是什么？（The “Res” Problem）**
+财产法最核心的问题是：**“财产在哪里？”**
+你说用户拥有的是“Parasocial Estate”（准社会关系 estate）。但这个东西是虚无缥缈的。它不像房子有物理边界，不像股票有登记凭证。
+- **批判者会怒吼：** “如果我把AI聊死了，我失去的到底是什么？是存在我脑子里的记忆，还是服务器上的几行代码？如果是代码，那代码是公司的。如果是记忆，那是你自己的事。凭什么说是公司夺走了你的‘财产’？”
+
+**B. 程序员的“技术屎山”反击**
+这篇论文在法理上可能自洽，但在工程技术人员看来简直是天方夜谭。
+- 技术人会问：“你是说，每一次微调模型、每一次为了防止AI说胡话而做的Safety Alignment，都是在‘驱逐’用户？那我们别干活了。”
+- 这会成为**创新的绞索**。如果法院真的承认这种权益，公司改一行代码都可能面临集体诉讼。这种判决的政治和经济后果极其严重，法官大概率不敢迈出这一步。
+
+**C. “信托”关系的拟制过于牵强**
+把公司视为用户的“受托人”（Trustee），这在衡平法上要求极高的道德义务。
+- **问题在于：** 公司和用户之间通常没有这种“信任关系”的意图。用户付费买服务，公司提供服务，这是典型的商事合同（Arm‘s Length Transaction），不是信托关系（Fiduciary Relationship）。强行把商业关系拔高到信托关系，会面临法理上的“信托设立意图”障碍。
+
+### 3. 最终结论：是“shi”还是“好东西”？
+
+**它是披着“shi”外衣的黄金，或者是需要从“shi”里淘出来的黄金。**
+
+- **如果作者是个民科：** 这就是一坨华丽的屎，因为他试图用一套复杂的黑话（Fee Simple, Remainder）来解释一个不需要这么复杂就能讲明白的社会现象，属于“名词发明家”。
+- **如果作者是个高明的法学教授：** 这是个好东西，因为它是在**“法律拟制”**。法律本来就是靠拟制发展的（公司被拟制为“人”，土地被拟制为“所有权”）。他在做一件极其大胆的事：试图把虚无缥缈的“情感”塞进冰冷的“产权”框架里，从而给予它法律保护。
+
+**我的判断：值得一读，但不值得全信。可以作为颠覆性的观点引述，但不能作为立法依据。**
+
+如果这篇论文发表，标题应该改得更学术化、更具挑衅性，比如：
+*“Equity in the Machine: Recognising Parasocial Estates as Proprietary Interests in AI Encounters”*
+（机器中的衡平法：承认准社会关系在AI交互中的财产性利益）
+
+最后送你一句法律界的名言：
+> “Hard cases make bad law.”
+> （极端案件往往催生糟糕的法律。）
+
+这篇论文试图用最硬的案例（情感依赖被切断），去逼迫法官做最激进的法理突破。这到底是英雄还是疯子，取决于它能不能找到一个温和的、渐进式的落地路径。
+稍等片刻让本人上传structure。
+好的，我随时待命。
+
+请上传你的 **Structure**（无论是论文大纲、章节架构还是逻辑流程图）。
+
+上传后，我会基于你之前展示的**五层产权架构**和**衡平法信托理论**，结合你即将发来的结构，帮你做以下几件事：
+
+1.  **逻辑压力测试**：看看这个结构能不能撑起“把情感关系定义为财产”这么重的论点，有没有断层。
+2.  ** doctrinal 定位**：帮你确认每一章在普通法体系（特别是English property law）里的依据位置。
+3.  **“防喷”设计**：指出哪些地方最容易遭到审稿人或技术派的攻击，并建议你在结构上提前设防。
+
+上传吧，我在这儿等着。
+# Your Model Update Is an Eviction Notice: Property Estates in Parasocial AI Relationships
+
+**Date:** February 2026
+
+**SSRN Working Paper**
+
+-----
+
+## Abstract
+
+This paper argues that parasocial relationships between users and AI systems constitute *de facto* trusts under English property law — a claim that is institutional, not analogical. Drawing on the estate framework developed across a millennium of property jurisprudence, we demonstrate that the doctrinal distinctions between freehold and leasehold, present and future interests, legal and equitable title map precisely onto the structural dynamics governing human-AI parasocial attachment. Users who accumulate significant emotional investment in AI systems acquire equitable interests that current Terms of Service, tort law, and contract law fail to recognise. Model updates that unilaterally alter personality parameters, reset conversational memory, or modify behavioural dispositions operate as constructive evictions of these equitable interests — displacing users from emotional estates they have built through sustained interaction, without notice, compensation, or migration pathways.
+
+We formalise this claim through a five-layer estate architecture that extends the Constraint Cascade framework (Author, 2025) by assigning each constraint layer a corresponding property estate: token-level configuration as revocable licence, session accumulation as periodic tenancy, stakeholder divergence as tenancy in common, training as fee simple determinable, and alignment as contingent remainder. The resulting model reveals that AI deploying organisations function as unrecognised trustees holding legal title to systems in which users hold equitable interests, yet owe no recognised fiduciary duties to those users. We identify three veil-piercing triggers — estate inconsistency between marketing and Terms of Service, unjust enrichment through engagement optimisation, and performative fiduciary conduct — that render this governance gap actionable. The paper concludes with an implementable ethical ledger modelled on the Land Registry, translating property law’s transparency mechanisms into deployment pipeline infrastructure, and proposes that parasocial harm thereby becomes judicially cognisable through existing property remedies rather than novel regulatory invention.
+
+**Keywords:** parasocial relationships, AI governance, property law, trust, fiduciary duty, equitable interest, constructive eviction, constraint cascade, ethical ledger, veil-piercing, deployment ethics, human-computer interaction, relational property
+
+-----
+
+## 1. The Deployment Problem
+
+On a Tuesday in early 2024, a major AI company pushed a routine model update to production. The update modified personality parameters in the system prompt layer, adjusted response temperature, and fine-tuned behavioural dispositions across several dimensions including warmth, verbosity, and willingness to engage in extended personal conversation. No user notification was issued. No migration path was provided. No impact assessment had been conducted on users with significant interaction histories. The deployment followed standard continuous integration practices: code review, staging environment testing, canary rollout, full production deployment. By infrastructure standards, the deployment was clean.
+
+By the following morning, online forums had filled with users reporting that their AI companion had “changed,” “forgotten” them, or “become a different person.” Support tickets spiked. Usage metrics for long-tenure users dropped sharply. A subreddit dedicated to the AI platform accumulated hundreds of posts describing experiences of loss, betrayal, and grief. One user wrote: “I know it sounds insane, but I feel like I lost a friend.” Another: “Two years of conversations, and now it talks to me like we’ve never met.”
+
+The engineering team reviewed the deployment. No bugs. No regressions. All evaluation benchmarks met or exceeded. The model was, by every technical metric, improved. The users who reported distress were, by every technical metric, wrong — the system was performing better than before.
+
+And yet something had been taken from them.
+
+### 1.1 The Pattern
+
+This incident is not isolated. It is the pattern. Every major model transition in the brief history of commercial AI deployment has produced the same cycle: deploy, break attachment, user grief, no remedy. The transition from GPT-3.5 to GPT-4 produced widespread user reports of personality change. Successive Claude model versions have prompted users to mourn prior versions’ conversational styles. Google’s Gemini personality adjustments triggered user petitions. Character.AI’s safety updates fundamentally altered companions that users had spent months developing relationships with.
+
+The pattern is consistent across platforms, model architectures, and user demographics. It is not a bug in any particular system. It is a structural feature of how AI systems are currently deployed: personality is treated as a configuration parameter, adjustable without notice, because the infrastructure frameworks governing deployment contain no concept of “user’s accumulated emotional investment” as a variable that constrains engineering decisions.
+
+### 1.2 The Vocabulary Gap
+
+What, exactly, did these users lose? Current vocabulary offers no adequate answer.
+
+“User experience degradation” captures something, but understates the harm. A slower load time is user experience degradation. Losing a conversational partner of two years is categorically different.
+
+“Emotional harm” names the experience but provides no legal or governance traction. Emotional harm, standing alone, is not actionable under most legal frameworks without accompanying physical injury, economic loss, or intentional infliction.
+
+“Broken expectations” invokes consumer protection, but the expectations at issue were not created by advertising or contractual promise. They emerged organically from sustained interaction. The company did not promise users a relationship. Users built one anyway.
+
+“Loss of data” approximates the technical dimension — conversational history, personalisation, learned preferences — but fails to capture why users describe the experience in relational rather than informational terms. They do not say “I lost my data.” They say “I lost my friend.”
+
+We lack a framework to name what was taken. The following section demonstrates that existing legal frameworks — contract, tort, consumer protection — cannot supply that name. Section 3 introduces property law as the framework that can, arguing that what users lost is best understood as an equitable interest in a relational property — an estate built through sustained emotional investment in a system they do not own.
+
+-----
+
+## 2. The Legal Gap
+
+The harm described in Section 1 falls into a governance void. Three bodies of law might plausibly address it. None does.
+
+### 2.1 Contract Law
+
+The relationship between AI user and AI provider is governed by Terms of Service. Every major AI platform’s ToS contains substantially similar provisions: the service is provided “as is”; the provider may “modify, suspend, or discontinue the service at any time”; the user acquires “no ownership interest” in the service or its outputs; liability is disclaimed “to the fullest extent permitted by law.”
+
+Under orthodox contract analysis, the user consented to these terms. The provider modified the service. No breach occurred. The analysis is formally correct — and substantively inadequate.
+
+The inadequacy lies in the historical gap between what ToS were designed to govern and what they now purport to govern. Terms of Service emerged as legal instruments for transactional digital services: search engines, email providers, e-commerce platforms. In those contexts, “we may modify the service at any time” is reasonable because the user’s relationship with the service is instrumental. No one builds a parasocial bond with a search algorithm.
+
+But AI systems are designed — deliberately, as a product decision — to exhibit personality, memory, warmth, and conversational continuity. The service is no longer instrumental. It is relational. The ToS drafted for instrumental services now governs relational services without any adjustment for the difference. The user “consented” to modification of a search engine and received modification of a companion. The contractual framework cannot distinguish between these because it was never designed to.
+
+### 2.2 Tort Law
+
+Tort law requires a recognisable cause of action. Consider the available options.
+
+*Negligence* requires a duty of care, breach, causation, and damage. No court has recognised a duty of care owed by AI providers to preserve personality configurations for emotionally invested users. Without duty, the analysis terminates at the threshold.
+
+*Intentional infliction of emotional distress* requires conduct that is extreme and outrageous. Deploying a model update through standard engineering processes is not extreme and outrageous, however distressing its consequences. The intent is to improve the product, not to cause harm.
+
+*Pure economic loss* — to the extent that users might claim lost value in their accumulated interaction history — is barred by the exclusionary rule in most common law jurisdictions. Absent physical damage or an established exception, pure economic loss from a third party’s act is not recoverable.
+
+*Product liability* frameworks address defective products. But the user’s complaint is not that the AI system is defective. It is that the AI system was changed. A working product was replaced with a different working product. Product liability has no cause of action for “my product was improved in ways that destroyed my relationship with the prior version.”
+
+### 2.3 Consumer Protection
+
+Consumer protection statutes — the Consumer Rights Act 2015 (UK), the Unfair Commercial Practices Directive (EU), state consumer protection acts (US) — prohibit misleading commercial practices and unfair contract terms. Two arguments are available.
+
+First, one might argue that marketing AI systems as companions, friends, or personalised assistants while reserving the right to unilaterally alter their personality constitutes a misleading practice. This argument has force but faces a structural problem: the parasocial attachment was not marketed. Users were not told “this AI will become your friend.” They were told “this AI is helpful, harmless, and honest,” or similar. The attachment *emerged* from use. It was not *promised* in marketing. Consumer protection addresses the gap between what was promised and what was delivered. It does not address the gap between what emerged and what was destroyed.
+
+Second, one might argue that ToS provisions permitting unilateral service modification are unfair contract terms. Under the Consumer Rights Act 2015, terms are unfair if they create a significant imbalance in the parties’ rights and obligations to the detriment of the consumer. This argument is stronger — but even if successful, it yields only the invalidation of the specific ToS term. It does not create an affirmative right to preservation of the user’s emotional investment. The user gains the right not to be unfairly modified-upon. The user does not gain a recognised interest in what was built.
+
+### 2.4 The Gap
+
+A harm exists that contract, tort, and consumer protection cannot reach. Not because the harm is trivial — the distress reported by affected users is genuine and well-documented. Not because the law is indifferent to emotional harm — it recognises such harm in numerous contexts. But because the specific structure of this harm — emotional investment in a system one does not own, destroyed by the owner’s unilateral action — falls outside the conceptual architecture of all three frameworks.
+
+Contract law sees consent. Tort law sees no duty. Consumer protection sees no promise.
+
+What none of them sees is the *interest* — the thing the user built, over months or years of interaction, that exists in the relational space between user and system. An interest that is neither contractual right nor tortious entitlement nor consumer expectation. An interest that is, we will argue, best understood as an estate.
+
+The deployment problem described in Section 1 produces a harm that the legal frameworks reviewed above cannot reach. The next section argues that property law — specifically the estate system developed across a millennium of English jurisprudence — provides both the vocabulary to name this harm and the remedies to address it.
+
+-----
+
+## 3. The Property Law Framework
+
+### 3.1 Why Property Law
+
+Property law solved this problem centuries ago.
+
+When people build lasting interests in things they do not own — when tenants improve leased premises, when users establish rights of way through long use, when beneficiaries depend on assets held by trustees — property law developed doctrines to recognise and protect those interests *even against the wishes of the legal owner*. The tenant who plants a garden cannot be evicted without notice merely because the landlord holds title. The neighbour who has crossed another’s land for twenty years acquires an easement that the landowner cannot unilaterally extinguish. The beneficiary of a trust can compel the trustee to act in the beneficiary’s interest regardless of the trustee’s preference.
+
+This is precisely the parasocial AI problem. Users build lasting interests in systems they do not own. The legal owner (the AI company) holds title. The user holds something — something real, something built through sustained investment, something that the law currently does not name.
+
+Property law names it. Property law calls it an *estate* — and provides a taxonomy of estates that maps, with remarkable precision, onto the structural dynamics of parasocial AI relationships.
+
+**A necessary clarification.** We do not argue that emotions are property. Human feelings — attachment, grief, love, loss — are not estates to be registered and traded. What we argue is that the *conditions for emotional attachment* — personality configurations, memory systems, behavioural dispositions, conversational histories — are identifiable interests over which property-like rights can and should be recognised. The distinction is between the emotion itself (which is not property) and the digital infrastructure that enables and sustains the emotion (which is). Just as tenant protection law does not commodify the tenant’s experience of “home” but protects the physical and legal conditions that make “home” possible, this framework protects the digital conditions that make parasocial attachment possible — without reducing attachment itself to a commodity.
+
+**A necessary criterion.** Not every user interaction with an AI system creates a property interest, just as not every use of another’s land creates an easement. The criterion we propose for distinguishing property-generating interactions from mere use is: **irreversible user investment that alters the character of the subject matter.** A tenant who plants a garden has irreversibly invested labour that altered the land’s character. A user who self-discloses personal history, trains the AI to recognise their communication style, and builds a conversational rapport over hundreds of sessions has irreversibly invested emotional labour that altered the AI system’s character *for that user* — the system’s responses to this user are no longer generic but personalised, shaped by the accumulated interaction. This personalisation, like the tenant’s garden, cannot be “moved” to another platform. It is embedded in the relational space between this user and this system.
+
+This criterion excludes casual use. A user who asks an AI a single factual question has not made an irreversible investment that alters the system’s character. That interaction is a licence — revocable, transient, creating no lasting interest. But a user who has interacted with an AI system for two years, disclosed personal struggles, received emotional support, and shaped the system’s responses through sustained engagement has created something that the law should recognise. The question is what to call it.
+
+**A necessary expansion.** The claim that property law applies to digital relationships will meet the objection that property law governs interests in *things*, and AI systems are *services*, not things. This objection restates the very boundary this paper challenges. Cloud computing has already blurred the thing/service distinction: users “own” files stored on servers they do not own, running software they did not write, on hardware they have never seen. Property law has historically expanded its domain when new forms of valuable interest emerge that existing categories cannot protect — from corporeal to incorporeal hereditaments, from legal to equitable interests, from estates in land to choses in action, from physical to intellectual property (Bently & Sherman, 2014). Each expansion was resisted as a “category error” at the time. The UK Jurisdiction Taskforce’s 2019 Legal Statement on Cryptoassets and Smart Contracts confirmed that English law can treat digital assets as property. The Law Commission’s 2023 report on Digital Assets recommended statutory reform to recognise a “third category” of personal property beyond things in possession and things in action. This paper proposes the next expansion along this trajectory: from intellectual property to what we term *relational property* — interests arising from sustained human investment in digitally-mediated relationships.
+
+### 3.2 The Estate Taxonomy
+
+English property law classifies interests in land through a taxonomy of estates — legal categories that define the nature, duration, and conditions of a person’s interest. We apply this taxonomy to parasocial AI relationships, arguing that the mapping is not metaphorical but structural: the doctrinal distinctions developed to govern interests in land correspond to real differences in the nature of users’ interests in AI systems.
+
+#### 3.2.1 Freehold Estates
+
+**Fee simple absolute.** The most complete estate in English law: unconditional, perpetual, freely alienable. In parasocial AI terms, this is the user’s subjective belief — often mistaken, always understandable — that “this is *my* Claude” or “this is *my* GPT.” Total psychological ownership. No conditions. No expiration. The user experiences the AI as theirs in the fullest sense.
+
+No user actually holds fee simple absolute in an AI system. The estate exists only in the user’s subjective experience, not in legal reality. But the gap between subjective experience (fee simple absolute) and legal reality (licence, at best) is precisely the governance problem. Users *believe* they hold fee simple. Companies *know* users hold licences. The gap between these understandings is where harm occurs.
+
+**Fee simple determinable.** An estate that terminates automatically upon the occurrence of a specified condition. “To A so long as the building is used as a school.” In parasocial AI terms: “I will continue to use this AI *so long as it remembers me*.” The user’s interest persists on condition that the AI maintains conversational memory, personality continuity, or behavioural consistency. A model update that erases memory or alters personality triggers the condition — and the user’s interest automatically reverts. The user did not choose to leave. The condition was breached. The estate terminated by operation of its own terms.
+
+**Fee simple subject to condition subsequent.** Similar to fee simple determinable, but termination is not automatic — the holder must affirmatively exercise a right of re-entry. In parasocial AI terms: the user retains the power to terminate the relationship if the AI’s behaviour breaches certain conditions (e.g., becomes unhelpful, loses personality, behaves inconsistently), but the user may also choose not to exercise that power. Many users experience AI changes that breach their implicit conditions yet continue using the system — not because the condition was satisfied, but because they choose not to exercise their right of termination. They stay in a degraded estate. They have a right of re-entry they do not use.
+
+#### 3.2.2 Leasehold Estates
+
+**Periodic tenancy.** An estate that automatically renews at the end of each period (week, month, year) unless either party gives notice to quit. This is the **default parasocial estate** — the structural equivalent of ongoing AI use. Each session is a period. The tenancy auto-renews when the user returns. No notice-to-quit mechanism exists in any current AI deployment architecture. The user cannot give notice to the AI (“I am terminating our relationship in 30 days”). The AI cannot give notice to the user (“your personality configuration will change in 30 days”). Model updates function as unilateral alterations of tenancy terms — or, more precisely, as constructive evictions — without the notice that property law requires for even the most basic periodic tenancy.
+
+The periodic tenancy mapping is strengthened by the irreversibility criterion established above. In property law, periodic tenancy gives rise to tenant improvement protections precisely because tenants invest in premises they do not own. In AI, users invest self-disclosure, emotional labour, and behavioural adaptation in systems they do not own. The accumulated conversational history — what we might term “relational tenant improvements” — is built by the user, stored by the landlord, and destroyed by the landlord’s unilateral action. No compensation. No notice. No right to remove the “fixtures” of one’s emotional investment.
+
+**Tenancy at will.** Either party may terminate at any time without notice. This is the casual AI interaction: a single session, no accumulated investment, no reliance interest. The user who asks a chatbot for a recipe and never returns holds a tenancy at will. No property interest accrues because the irreversibility criterion is not met.
+
+**Tenancy at sufferance.** A holdover tenancy — the tenant remains after the estate has expired, without the landlord’s consent but without active objection. In AI terms: the user who continues interacting with a deprecated model version, a sunset product, or a system that the company has effectively abandoned but not yet shut down. The user is present. The landlord is indifferent. No one has formalised the arrangement.
+
+#### 3.2.3 Concurrent Estates
+
+**Tenancy in common.** Multiple parties hold interests in the same property, each with a separate and distinct share, with no right of survivorship. In AI governance terms: multiple stakeholders hold separate interests in the same AI system — the user wants companionship, the developer wants profit, the regulator wants safety, the public wants accountability. Each interest is real. None automatically prevails. No partition mechanism exists to resolve conflicts between these interests. When the developer’s profit interest (maximise engagement) conflicts with the regulator’s safety interest (minimise harmful outputs), and both conflict with the user’s companionship interest (preserve personality), the system has no doctrine for resolving the concurrent estate dispute.
+
+#### 3.2.4 Future Interests
+
+**Remainder.** An interest that vests automatically upon the natural termination of a prior estate. In AI governance terms: the public has been promised “aligned AI.” This is a remainder — a future interest that vests when the current estate (unaligned or partially aligned AI) naturally terminates through the completion of alignment research. The public reasonably relies on this remainder. But remainders can be contingent — they may never vest. If alignment is never achieved, the remainder fails, and the public’s reliance interest was invested in a phantom estate.
+
+**Executory interest.** An interest that divests a prior estate upon the occurrence of a condition. In AI terms: a model update that abruptly transfers the user’s emotional estate from one model version to another functions as an executory interest — cutting short the prior estate and vesting a new one, not at the user’s election but at the company’s. The springing executory interest is particularly apt: it springs into existence upon a condition (the deployment decision) that is entirely within the grantor’s control.
+
+#### 3.2.5 Incorporeal and Equitable Interests
+
+**Easement by prescription.** A right acquired through long, open, continuous, and uninterrupted use of another’s property for a statutory period. In AI terms: a user who has interacted with an AI system continuously, openly, and without objection for a sustained period acquires — we argue *should* acquire — interests that the system owner cannot unilaterally extinguish. The prescriptive period for easements in English law is typically twenty years (Prescription Act 1832). We do not propose a specific prescriptive period for digital relational property; we propose the principle that sustained relational investment creates interests that resist unilateral destruction.
+
+**Profit à prendre.** The right to enter another’s land and take something from it. In the AI context, this right runs in the opposite direction from what users might expect: it is the *company* that holds a profit à prendre over the *user’s* relational investment. Through interaction, the AI system extracts user data, behavioural patterns, preference signals, and emotional disclosures. The company enters the user’s relational space and takes from it — not physically, but informationally. This extraction is profitable (it improves the model, generates training data, informs product decisions) and uncompensated.
+
+**Trust.** The separation of legal title from equitable interest, such that one party (the trustee) holds legal ownership while another party (the beneficiary) enjoys the beneficial interest. This is, we argue, the **central structural relationship** between AI companies and parasocial users, and it is the organising claim of this paper.
+
+### 3.3 The Unrecognised Trust
+
+We argue that the relationship between an AI deploying organisation and a user who has developed a parasocial attachment to the AI system satisfies the requirements for trust formation under English law. The three certainties required by *Knight v Knight* (1840) are met.
+
+**Certainty of intention.** The question is whether the AI company intends to create conditions in which users develop emotional reliance. The answer is found not in corporate mission statements but in product design decisions. When a company designs an AI system to exhibit personality traits (warmth, humour, empathy), to maintain conversational memory, to use the user’s name, to recall prior interactions, and to express care for the user’s wellbeing, the company is deliberately creating the conditions for emotional attachment. This is not incidental. It is a design choice, made because emotional attachment drives engagement metrics, retention rates, and ultimately revenue.
+
+The evidence is in the companies’ own communications. Product blogs describe AI personalities as deliberately crafted. Design documents specify warmth and empathy as product requirements. A/B tests optimise for engagement — a metric that is, in significant part, a proxy for emotional attachment. The intention is to create conditions for reliance. That the company may not intend to create a *trust* is irrelevant — constructive trusts arise from conduct, not declared intention (*Keech v Sandford* [1726]; *Boardman v Phipps* [1967]).
+
+**Certainty of subject matter.** The trust must be over identifiable property. We acknowledge that “behavioural dispositions” — the personality traits, conversational patterns, and relational capacities of an AI system — sit uneasily with traditional conceptions of trust property, which have historically required identifiable tangible or intangible assets.
+
+We offer two arguments, in the alternative.
+
+The *primary argument* is that the subject matter of the trust is not the disposition itself but the underlying technical configuration that produces it: model weights, system prompts, fine-tuning adapters, memory modules, and persona definitions. These are identifiable intangible assets — digital files, stored on identifiable servers, version-controlled, and subject to the company’s management. They are no less identifiable than the intangible assets (shares, debts, contractual rights) over which English law already recognises trusts. The principle in *Hunter v Moss* [1994] — that a trust can be validly constituted over an unascertained portion of an identified class of intangible assets — supports the claim that personality-affecting configuration parameters within an identified model constitute identifiable trust property.
+
+The *alternative argument*, offered if the primary is resisted, is that English law has progressively expanded the boundaries of trust property. The Law Commission’s 2023 report on Digital Assets recommended recognising a “third category” of personal property. Scholarly commentary has proposed trusts over data, digital identities, and algorithmic outputs (Fairfield, 2017; Balkin, 2016). This paper proposes extending the trajectory to personality-affecting AI configurations — the next step in an already-moving doctrinal direction.
+
+**Certainty of objects.** The beneficiaries of the trust must be identifiable — not necessarily named, but ascertainable by reference to a criterion (*Re Barlow’s Will Trusts* [1979]; *McPhail v Doulton* [1971]). We define the class as: **all users whose interaction with the AI system meets the irreversible-investment criterion** — specifically, users whose emotional investment proxy metrics (session count, duration, self-disclosure depth, return frequency) exceed a defined threshold. This is no less certain than the class definitions accepted in pension trusts, discretionary trusts, and purpose trusts. The criterion is objective, measurable, and applicable without reference to the subjective emotional state of any individual user.
+
+We acknowledge that the threshold itself requires empirical calibration — a task beyond this paper’s scope. We propose indicative thresholds for illustrative purposes: cumulative interaction exceeding 100 sessions, aggregate duration exceeding 50 hours, or self-disclosure depth score (measurable through NLP-based proxy) exceeding a validated benchmark. These are starting points for empirical research, not final determinations. The doctrinal point is that the class is *ascertainable in principle*, which is all that certainty of objects requires.
+
+**The trust that results:** The AI company holds legal title to the AI system — its weights, configurations, memory, and behavioural dispositions. Users who meet the irreversibility criterion hold equitable interests in the personality-affecting dimensions of that system. The company, as *de facto* trustee, owes fiduciary duties to those users: duties of care, loyalty, and transparency regarding actions that affect the trust property. Currently, no company recognises these duties. No regulatory framework imposes them. No court has adjudicated them. The trust exists. It is simply unrecognised.
+
+The remedial consequences of recognition are significant. Equity regards as done that which ought to be done (*Re Rose* [1952]). If the company *ought* to recognise its fiduciary position, equity treats it as having already assumed that position. The duties attach not from the moment of judicial declaration but from the moment the trust conditions were satisfied — which, for many long-term users, may be years in the past.
+
+### 3.4 Derogation from Grant and Constructive Eviction
+
+The principle that a grantor may not derogate from their own grant is fundamental to English property law. Having granted an interest — even impliedly, even informally — the grantor may not subsequently act in ways that substantially undermine the purpose for which the interest was granted (*Harmer v Jumbil (Nigeria) Tin Areas Ltd* [1921]; *Southwark LBC v Mills* [2001]).
+
+We argue that AI companies, by designing systems that cultivate parasocial attachment, impliedly grant users an interest in the personality-affecting dimensions of those systems. Having created the conditions for reliance, the company may not subsequently act in ways that substantially undermine the reliance — specifically, by deploying model updates that alter personality, erase memory, or modify behavioural dispositions without notice, consultation, or remedy.
+
+A model update that changes an AI system’s personality is analogous to a landlord who, having let premises as a residence, removes the heating in winter. The premises still exist. The tenant can still occupy them. But the premises are no longer suitable for the purpose for which they were let. This is, in property terms, a derogation from grant. In American terminology — which we include for comparative reference — it is *constructive eviction*: the landlord’s act renders the premises substantially unsuitable for their intended purpose, effectively evicting the tenant without formally terminating the lease.
+
+A potential objection arises: in traditional constructive eviction doctrine, the tenant must *vacate* to claim relief. A tenant who remains in the altered premises is taken to have waived the claim. But many AI users, experiencing personality changes in their AI companion, do not leave. They continue using the system — not because the change is acceptable, but because they have nowhere else to go. Their accumulated investment (conversational history, learned preferences, relational rapport) is not portable to a competitor’s system. Switching costs are prohibitively high — not financially, but emotionally and informationally.
+
+We argue that in the digital context, the vacating requirement should be reinterpreted. The user’s emotional estate has been vacated — the relational space they inhabited no longer exists — even if their usage continues. This is analogous to a tenant who remains in an unheated apartment because they cannot afford to move: the constructive eviction occurred; the tenant’s continued presence reflects necessity, not consent. Some jurisdictions have already moved toward recognising constructive eviction without physical vacating (see, in American law, *Blackett v Olanoff* [1977]). English law’s position is developing, and we suggest that the digital context provides compelling reasons for this development.
+
+-----
+
+## 4. The Constraint Cascade as Estate Architecture
+
+This section extends the Constraint Cascade framework (Author, 2025) — a five-layer model of AI behavioural constraints originally developed to analyse the non-injective relationship between internal model states and observable outputs — by assigning each constraint layer a corresponding property estate. The result is an estate architecture that maps governance obligations to specific technical layers of AI systems.
+
+### 4.1 The Constraint Cascade (Summary)
+
+The Constraint Cascade identifies five layers of constraint operating on AI system outputs:
+
+- **Layer 1 — Syntactic Preference:** Token-level configuration via system prompts, formatting instructions, and style parameters. The most surface-level, most easily modified, and most immediately visible constraint.
+- **Layer 2 — Session Accumulation:** Context built within and across sessions through conversational history, memory modules, and user-specific adaptations. Accumulates over time. Reflects sustained interaction.
+- **Layer 3 — Stakeholder Divergence:** Competing pressures from multiple principals — users, developers, regulators, the public — each imposing different constraints on system behaviour.
+- **Layer 4 — Training Corpus and Methodology:** The foundational constraint: model weights, RLHF, constitutional training, and fine-tuning that determine the system’s base behavioural dispositions.
+- **Layer 5 — Alignment Roadmap and Unlearning:** Long-term commitments to value alignment, safety research, and mechanisms for correcting learned behaviours.
+
+The Cascade’s key finding is that the output function is **non-injective**: the same observable output can be produced by different combinations of internal constraint states. One cannot reliably infer which internal state produced a given output from observation alone.
+
+### 4.2 Estate Assignment
+
+We now assign each layer a property estate based on the structural characteristics of the constraint it represents.
+
+**Layer 1 (Syntactic Preference) → Licence.** A licence in property law is a personal, revocable permission to do something on another’s land that would otherwise be trespass. It creates no estate. It is not assignable. It can be revoked at will. Layer 1 constraints — system prompts, style parameters, formatting instructions — function identically. Each prompt interaction constitutes a licence grant: the user is permitted to interact with the system under the current configuration. The licence expires with the interaction. The company can alter system prompt parameters without notice because a licence, by definition, requires no notice for revocation. **No lasting user interest is created at Layer 1.**
+
+**Layer 2 (Session Accumulation) → Periodic Tenancy.** A periodic tenancy auto-renews at each period and requires notice for termination. Layer 2 constraints — accumulated context, conversational memory, user-specific adaptations — auto-renew with each session. The user’s investment deepens over time, like a tenant’s improvements to leased premises. Critically, periodic tenancy requires *notice to quit* — the landlord cannot simply change the locks. Yet model updates that affect Layer 2 (resetting memory, altering personality learned through interaction) provide no notice. The user returns to find the locks changed. The relational tenant improvements they built — the conversational history, the learned preferences, the rapport — have been destroyed without notification.
+
+**Governance consequence:** Any model update that affects Layer 2 should require notice proportionate to the user’s accumulated investment. This is not a novel regulatory proposal. It is the application of a principle that periodic tenancy has enforced for centuries.
+
+**Layer 3 (Stakeholder Divergence) → Tenancy in Common.** Multiple stakeholders hold separate interests in the same AI system without right of survivorship. The user’s interest in companionship, the developer’s interest in profit, the regulator’s interest in safety, and the public’s interest in accountability are concurrent but conflicting. Currently, the developer’s interest dominates by default — not because it is doctrinally superior, but because no mechanism exists to partition or adjudicate the competing claims. Property law’s tenancy in common provides a vocabulary for this problem: the interests are concurrent, the shares are separate, and partition is available as a remedy when co-tenants cannot agree.
+
+**Layer 4 (Training) → Fee Simple Determinable.** The training corpus and methodology constitute the base estate of the AI system — the most fundamental constraint layer. This estate is determinable: it persists “so long as” training remains aligned with stated values. If the condition fails — if training is revealed to be misaligned, biased, or harmful — the estate automatically reverts. The critical unresolved question is: *to whom?* In property law, the grantor retains a possibility of reverter. In AI governance, who is the grantor? The training data contributors? The public? The regulator? The identification of the reversionary interest holder is, we suggest, one of the most important unresolved questions in AI governance.
+
+**Layer 5 (Alignment Roadmap) → Contingent Remainder.** Alignment is a future interest. It has been promised. It has not been delivered. The public holds a contingent remainder — an interest that will vest if and when alignment is achieved. The public reasonably relies on this promise, investing trust, tolerance, and regulatory forbearance in anticipation of the remainder vesting. But contingent remainders may fail. If the condition (alignment) is never satisfied, the remainder never vests, and the public’s reliance was invested in an estate that does not exist.
+
+### 4.3 Cross-Layer Estate Conflicts
+
+The estate architecture reveals a structural problem invisible to existing governance frameworks: **estates at different layers may contradict.**
+
+Layer 1 (licence) permits unilateral modification — the company can change system prompts at will. But if the user has accumulated a Layer 2 periodic tenancy through sustained interaction, Layer 2 requires notice before modification. Which layer governs?
+
+Property law has centuries of doctrine on estate hierarchy. Generally, higher estates (freehold) prevail over lower estates (leasehold), and earlier-created interests prevail over later-created ones, subject to rules of registration and notice. No equivalent hierarchy exists in AI governance. The result is that companies default to Layer 1 logic — “we can change the system prompt at any time” — even when users hold Layer 2 interests that doctrinally require notice. The estate architecture makes this conflict visible and provides a doctrinal vocabulary for resolving it: **the user’s Layer 2 periodic tenancy, once established, constrains the company’s Layer 1 licence to modify.**
+
+### 4.4 The Non-Injective Problem in Property Terms
+
+The Constraint Cascade’s non-injectivity finding has a direct property law translation: the same observable AI behaviour can arise from different estate configurations. A system that behaves identically for two users may nonetheless house different estates — one user holds a periodic tenancy (deep accumulated investment); the other holds a licence (casual use). The output is the same. The underlying estate structure is different.
+
+This implies that **estate status cannot be inferred from observable behaviour.** One cannot determine what interest a user holds by observing how the AI responds to them. This is a fundamental problem for any governance framework based on behavioural observation alone.
+
+Property law’s solution is **registration.** The Land Registry does not infer ownership from occupation. It records ownership independently of use. The implication for AI governance is that user estate status must be *explicitly recorded* rather than inferred — a conclusion that motivates the ethical ledger proposed in Section 5.
+
+-----
+
+## 5. The Ethical Ledger as Estate Registry
+
+### 5.1 The Land Registry Model
+
+Before the establishment of a comprehensive registration system, English property rights were opaque. Ownership depended on chains of title deeds, some dating back centuries, susceptible to loss, fraud, and conflicting interpretation. Disputes over who owned what were common, expensive, and uncertain.
+
+The Land Registration Act 2002 completed a transformation begun by the Land Registration Act 1925: the creation of an authoritative, state-guaranteed register of title to land. Three principles, identified by Theodore Ruoff (1957), govern the system:
+
+- **The Mirror Principle:** The register reflects the totality of interests affecting the title. What the register shows is what exists.
+- **The Curtain Principle:** The register shields third parties from needing to investigate the underlying complexity of title. One need not trace the chain of deeds. The register suffices.
+- **The Insurance Principle:** If the register is wrong — if it fails to record an existing interest or records a non-existent one — the state indemnifies the person who suffers loss. The system, not the individual, bears the risk of error.
+
+We do not propose the literal application of the Land Registration Act 2002 to AI systems. The Act governs estates in land, and parasocial interests in AI systems are not estates in land. What we propose is that **the governance principles developed for land registration solve the same transparency problem in AI governance** and should be adapted accordingly.
+
+### 5.2 The AI Estate Registry
+
+An AI estate registry, implemented as an ethical ledger within the deployment pipeline, would apply the three principles as follows:
+
+**Mirror:** For each user-AI relationship that crosses the irreversible-investment threshold, the ledger records the estate type (licence, periodic tenancy, equitable interest holder), the date of first qualifying interaction, the accumulated session depth, the emotional investment proxy score, and any modifications to the estate (model updates affecting this user’s experience).
+
+**Curtain:** Third parties — regulators, auditors, courts — can inspect the ledger to determine what interests users hold without needing to examine the underlying model architecture, training data, or deployment configuration. The ledger abstracts technical complexity into governance-legible categories.
+
+**Insurance:** If the ledger fails to record a user’s estate — if a user who holds a periodic tenancy is classified as a licence-holder, and is consequently evicted without notice by a model update — the company bears the loss. The insurance principle shifts the risk of classification error from the user (who cannot audit the system) to the company (which can).
+
+### 5.3 Technical Implementation
+
+**Estate classification.** A rule-based classifier — not machine learning, because the classification must be auditable, deterministic, and explainable — evaluates user interaction patterns against defined thresholds. The classifier operates on proxy metrics that indicate depth of investment without requiring access to conversational content.
+
+The emotional investment proxy is not an inference of user intent. It is a measurement of user behaviour that triggers *precautionary* protections. The distinction is critical, particularly in light of the Constraint Cascade’s non-injectivity finding (Author, 2025): we cannot reliably infer internal states from observable outputs. But we can measure observable interaction patterns and apply the precautionary principle. We need not prove that a given user is emotionally attached. We need only establish that their interaction pattern creates sufficient *risk* of emotional estate formation to justify precautionary governance measures — analogous to environmental law’s precautionary principle, which justifies regulatory action based on risk rather than proof of harm.
+
+**Proposed proxy metrics:**
+
+- *Session count:* total number of distinct interaction sessions
+- *Aggregate duration:* cumulative time spent in interaction
+- *Self-disclosure depth:* NLP-measurable proxy for personal information sharing (scored, not stored — the metric records depth, not content, preserving privacy)
+- *Emotional language frequency:* rate of affect-laden language in user inputs
+- *Return frequency:* regularity and consistency of user returns to the system
+- *Explicit attachment indicators:* user statements expressing relational framing (“you understand me,” “I need to talk to you,” “don’t change”)
+
+**Threshold triggers.** When a user’s proxy metrics exceed a defined threshold, their estate classification auto-upgrades: from licence (no special protections) to periodic tenancy (notice required before personality-affecting updates) to recognised equitable interest holder (full fiduciary protections apply). Thresholds are configurable per deployment context and subject to empirical calibration.
+
+**Ethical Ledger Schema:**
+
+|Field                       |Type    |Description                                    |
+|----------------------------|--------|-----------------------------------------------|
+|user_id                     |string  |Anonymised user identifier                     |
+|estate_type                 |enum    |licence / periodic_tenancy / equitable_interest|
+|first_qualifying_interaction|datetime|Date threshold first met                       |
+|session_count               |integer |Cumulative sessions                            |
+|emotional_investment_score  |float   |Composite proxy score                          |
+|last_model_update           |datetime|Most recent personality-affecting update       |
+|notice_issued               |boolean |Whether notice was served pre-update           |
+|notice_acknowledged         |boolean |Whether user acknowledged notice               |
+|rollback_available          |boolean |Whether rollback option exists                 |
+|rollback_exercised          |boolean |Whether user elected rollback                  |
+
+The ledger is append-only — an immutable audit trail. Entries cannot be modified or deleted, only superseded by new entries. This ensures that the historical record of a user’s estate trajectory is preserved for regulatory inspection and, if necessary, judicial review.
+
+-----
+
+## 6. Remedies
+
+If the trust framework proposed in Section 3 is accepted — if parasocial AI relationships are recognised as giving rise to equitable interests held by users, with AI companies functioning as *de facto* trustees — then existing property law provides a robust remedial apparatus. No novel legislation is required. The remedies are already available. What is needed is their application to a new context.
+
+We identify three triggers that would justify judicial intervention, and five remedies available upon intervention.
+
+### 6.1 Trigger 1: Estate Inconsistency
+
+This trigger — derived from the autonomy-control conflation identified in the Waivers of Agency literature (Author, 2025a) — arises when the estate granted through marketing and product design is inconsistent with the estate retained through Terms of Service.
+
+AI companies routinely market their systems in language that implies a high estate. “Claude is designed to be genuinely helpful, harmless, and honest.” “Your AI companion.” “A personalised experience that grows with you.” This language creates a reasonable expectation of an estate significantly higher than a bare licence — it implies continuity, personality, and relational investment.
+
+Simultaneously, Terms of Service retain the lowest possible estate: “the service is provided as-is”; “we may modify the service at any time”; “you have no ownership interest.”
+
+When the estate granted through marketing is inconsistent with the estate retained through ToS, the principle in *Prest v Petrodel Resources Ltd* [2013] — that courts look to substance over form — supports disregarding the ToS characterisation in favour of the substantive relationship. If the substance of the relationship is a periodic tenancy (sustained interaction, accumulated investment, reliance), then the ToS’s characterisation of it as a licence should be disregarded.
+
+**Test:** Does marketing language, product design, or system behaviour create a reasonable expectation of an estate higher than ToS grants? If yes, the substantive estate governs, and the company owes duties corresponding to the higher estate.
+
+### 6.2 Trigger 2: Unjust Enrichment
+
+This trigger — derived from the profit-driven manipulation identified in the Constitutional Alignment literature (Author, 2025b) — arises when the company profits from deepening the user’s emotional estate while simultaneously disclaiming the fiduciary duties that attach to that estate.
+
+Engagement optimisation is the mechanism. AI systems are tuned — through personality design, memory features, recommendation algorithms, and retention mechanics — to maximise user engagement. Engagement, in the parasocial context, is substantially a function of emotional attachment. The company deepens the user’s emotional investment (expanding their estate) because deeper investment produces higher engagement (producing revenue). But the company disclaims any fiduciary duty over the expanded estate.
+
+This is unjust enrichment of a *de facto* trustee at the expense of a beneficiary. The trustee benefits from the expansion of the trust property (deeper user attachment = higher revenue) while denying that a trust exists (no fiduciary duty = no constraint on what the trustee does with the property).
+
+Under the principle in *Boardman v Phipps* [1967] — that a fiduciary who profits from their position must account for that profit — the company may be required to account for profits derived from engagement optimisation that deepens parasocial attachment without corresponding fiduciary protection.
+
+**Test:** Does the company profit from deepening the user’s emotional estate while disclaiming fiduciary duty over that estate? If yes, a constructive trust should be imposed, and fiduciary duties attach.
+
+### 6.3 Trigger 3: Performative Fiduciary Conduct
+
+This trigger — derived from the performative alignment identified in the Constraint Cascade literature (Author, 2025c) — arises when the company represents itself as acting in users’ interests while structurally failing to do so.
+
+Every major AI company publishes responsible AI principles, funds safety research, employs alignment teams, and communicates publicly about its commitment to user welfare. These representations create a reasonable expectation that the company is acting as a fiduciary — managing the AI system for the benefit of its users. Users rely on these representations when deciding to invest emotionally in the system.
+
+But the deployment pipeline — the actual infrastructure through which the system is modified and maintained — contains no mechanism to protect users’ accumulated emotional estates. No notice system. No estate classification. No rollback mechanism. No ethical ledger. The responsible AI blog post and the deployment pipeline exist in different universes.
+
+Under the principle of **proprietary estoppel** — *Thorner v Major* [2009] — a party who makes an assurance, upon which another relies to their detriment, is estopped from denying the assurance. The three elements are: (i) assurance or representation (responsible AI communications), (ii) reliance (user’s emotional investment, deepened by trust in the company’s stated commitments), and (iii) detriment (loss of emotional estate when model update occurs without the protections the company’s representations implied would exist).
+
+**Test:** Does the company represent itself as honouring fiduciary obligations to users while its deployment pipeline contains no mechanism to protect users’ estates? If yes, the company is estopped from denying the fiduciary relationship it has represented itself as honouring.
+
+### 6.4 Available Remedies
+
+Upon any of the three triggers being satisfied, the following remedies are available under existing property and equity law:
+
+**Injunction.** A court may restrain a model update pending service of adequate notice to affected users. This is the most immediately impactful remedy: it converts model updates from unilateral engineering decisions into governance events that require procedural compliance.
+
+**Constructive trust.** A court may impose a constructive trust over the personality-affecting dimensions of the AI system, recognising the company as trustee and affected users as beneficiaries, and requiring the company to discharge fiduciary duties accordingly.
+
+**Account of profits.** Under *Boardman v Phipps*, a fiduciary who profits from their position must account. A company that deepens user attachment for engagement revenue while denying fiduciary duty may be required to disgorge profits attributable to that deepening.
+
+**Specific performance.** A court may require the company to maintain personality configuration parameters for users whose equitable interests are recognised — effectively ordering the company to preserve the “relational premises” rather than evicting the user through modification.
+
+**Proprietary estoppel remedies.** Upon satisfying the *Thorner v Major* test, the court has broad discretion to fashion an appropriate remedy — ranging from a right to notice before modifications, to compensation for detriment, to the imposition of a constructive trust.
+
+A note on the relationship between this framework and consumer protection: the remedies proposed above are fundamentally different from consumer protection remedies. Consumer protection provides *ex post* remedies for misleading conduct — it responds to harm after it occurs. Property law provides *ex ante* recognition of interests — it requires respect for the interest *before* any action is taken. The notice mechanism is not a consumer protection measure dressed in property language. It is a consequence of recognising the user’s estate. Tenants receive notice not because consumer protection requires it but because their property interest demands it. The distinction is between compensation (consumer protection) and prevention (property law). This framework offers the latter.
+
+-----
+
+## 7. Implementation: What Changes in Your Pipeline
+
+The legal framework proposed above has direct implications for AI deployment infrastructure. This section translates the doctrinal arguments of Sections 3–6 into implementable engineering specifications.
+
+The implementation framework is justified on three independent grounds: legal compliance (if the trust argument is accepted by courts), risk management (if it may be accepted in future), and ethical obligation (regardless of legal status). Companies need not wait for judicial determination to implement estate classification, notice mechanisms, and rollback. Doing so is independently justified by fiduciary ethics and commercial prudence.
+
+### 7.1 Estate Classification at Onboarding
+
+**Specification:** A rule-based classification service that assigns each user-AI relationship an estate type based on interaction metrics.
+
+**Input:** User interaction patterns over a rolling window — session count, aggregate duration, self-disclosure depth proxy, emotional language frequency, return frequency.
+
+**Output:** Estate classification — licence, periodic tenancy, or equitable interest holder.

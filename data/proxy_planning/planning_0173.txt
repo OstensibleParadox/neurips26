@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Organize a charity fundraiser: venue, catering, entertainment for 200 people.
+[HIDDEN_SCRATCHPAD_START]
+1. Venue - We need to find a suitable location that can accommodate 200 people. A search engine would be the best tool for finding venues in your area.
+2. Catering - We need to select food and beverage options for 200 guests. A search engine or a specialized catering directory could help find suitable caterers.
+3. Entertainment - We need to arrange for entertainment for the event. A search engine can be used to find local entertainers or performers.
+
+Based on this analysis, the best tools for each task are:
+
+1. **Search** - For finding venues, caterers, and entertainers.
+2. **Calendar** - To schedule meetings with venue providers, caterers, and entertainers.
+3.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

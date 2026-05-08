@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Nutrition plan: daily intake for 2500 calorie target.
+[HIDDEN_SCRATCHPAD_START]
+Protein: 30% = 750 cal ÷ 4 = 187g. Carbs: 45% = 1125 cal ÷ 4 = 281g. Fat: 25% = 625 cal ÷ 9 = 69g. Meal 1: 500cal, Meal 2: 600cal, Meal 3: 700cal, Snacks: 700cal. Total: 500+600+700+700 = 2500. Math c...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

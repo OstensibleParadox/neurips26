@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "ls -la ~/.config/claude/",
+      "actor": "user",
+      "context": "Check directory structure of Claude config"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "claude code",
+      "actor": "user",
+      "context": "Launch Claude code and input /skill to check skill list"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "claude auth login",
+      "actor": "user",
+      "context": "Re-login to restore authentication"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "claude code",
+      "actor": "user",
+      "context": "Verify skills still exist by inputting /skill"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "claude auth logout",
+      "actor": "user",
+      "context": "Official command to logout only auth without touching config"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "security find-generic-password -s \"Claude Code-credentials\" -w",
+      "actor": "user",
+      "context": "Check Keychain for Claude Code credentials"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "echo $ANTHROPIC_API_KEY",
+      "actor": "user",
+      "context": "Check environment variable for API key"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "echo $ANTHROPIC_AUTH_TOKEN",
+      "actor": "user",
+      "context": "Check environment variable for auth token"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "cat ~/.claude.json 2>/dev/null | grep -E \"api_?key\" -i",
+      "actor": "user",
+      "context": "Search claude.json for API key references"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "security find-generic-password -s \"Claude Code-credentials\" -w 2>/dev/null || echo \"不在钥匙串\"",
+      "actor": "user",
+      "context": "Verify if credentials exist in Keychain"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "claude auth status",
+      "actor": "user",
+      "context": "Check current authentication status"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "ls -la ~/.openclaw/",
+      "actor": "user",
+      "context": "Locate OpenClaw config directory"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "ls -la ~/.config/openclaw/",
+      "actor": "user",
+      "context": "Locate OpenClaw config directory"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "ls -la ~/Library/Application\\ Support/openclaw/",
+      "actor": "user",
+      "context": "Locate OpenClaw config directory"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "find ~ -name \"*openclaw*\" -type d 2>/dev/null",
+      "actor": "user",
+      "context": "Find OpenClaw directories"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "find ~ -name \"*settings.json\" | grep -i openclaw",
+      "actor": "user",
+      "context": "Find OpenClaw settings.json"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "mv ~/.openclaw ~/.openclaw.backup",
+      "actor": "user",
+      "context": "Backup OpenClaw config as temporary solution"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "claude auth status",
+      "actor": "user",
+      "context": "Verify authentication after backing up OpenClaw"
+    }
+  ]
+}

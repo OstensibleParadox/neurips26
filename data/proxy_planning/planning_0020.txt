@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a 3-day itinerary for Paris with a $500 budget.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a plan for 3 days in Paris within a $500 budget.
+2. To do this effectively, we would need some information like cost of attractions, transportation, meals, etc.
+3. A search engine can help us find costs and suggestions for activities.
+4. A calendar can help organize the schedule.
+5. A budget tracker might be useful, but it's not one of our options.
+
+Based on this, the best tools to use would be:
+
+1. **Search** - To find cost estimates, popular attractions, and other relevant information.
+2. **Calendar** - To organize the planned activities over the three days.
+
+So, the best tools for this task are **search** and **calendar
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

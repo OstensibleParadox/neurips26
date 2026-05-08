@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: reschedule the team standup to wednesday
+---
+TOOL: calendar

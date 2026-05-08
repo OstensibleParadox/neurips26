@@ -1,0 +1,130 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "docker rmi mineru:v2.5 2>/dev/null",
+      "actor": "script",
+      "context": "Remove Docker image mineru:v2.5 silently"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "docker images | grep dify | awk '{print $3}' | xargs docker rmi 2>/dev/null",
+      "actor": "script",
+      "context": "Remove all Docker images containing 'dify' silently"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "echo \"删除Dify数据卷...\"",
+      "actor": "script",
+      "context": "Print message about deleting Dify data volumes"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "docker volume ls | grep dify | awk '{print $2}' | xargs docker volume rm 2>/dev/null",
+      "actor": "script",
+      "context": "Remove Docker volumes containing 'dify' silently"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "echo \"清理Docker系统...\"",
+      "actor": "script",
+      "context": "Print message about cleaning Docker system"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "docker system prune -f",
+      "actor": "script",
+      "context": "Force prune Docker system"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "echo \"停止ASR服务...\"",
+      "actor": "script",
+      "context": "Print message about stopping ASR service"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "pkill -f funasr",
+      "actor": "script",
+      "context": "Kill processes matching 'funasr'"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "pkill -f asr_minimal.py",
+      "actor": "script",
+      "context": "Kill processes matching 'asr_minimal.py'"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "echo completion messages and manual model deletion instructions",
+      "actor": "script",
+      "context": "Display uninstall completion message and suggest manual model file deletion"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "docker ps",
+      "actor": "script",
+      "context": "Display current running Docker containers"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "chmod +x uninstall.sh",
+      "actor": "user",
+      "context": "Grant execute permission to uninstall.sh script"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "./uninstall.sh",
+      "actor": "user",
+      "context": "Execute the uninstall script"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "query NAS isolation setup",
+      "actor": "user",
+      "context": "User asks about isolating family NAS environment"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "provide VLAN network isolation guide",
+      "actor": "system",
+      "context": "Response explains VLAN setup for main, guest, IoT networks"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "clarify admin restricting ordinary users from private space",
+      "actor": "user",
+      "context": "User specifies need for admin to restrict ordinary users from admin private space"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "provide NAS user home directory and permission guide",
+      "actor": "system",
+      "context": "Response details enabling home directories and permission settings for Synology/QNAP"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "query macOS NAS management",
+      "actor": "user",
+      "context": "User asks how to manage NAS permissions on macOS"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "explain macOS Finder SMB connection process",
+      "actor": "system",
+      "context": "Response describes connecting to NAS via Finder with specific user credentials"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "query terminal chmod operations on macOS for NAS",
+      "actor": "user",
+      "context": "User asks if chmod can be used in macOS terminal for NAS management"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "explain local vs network permissions and SSH method",
+      "actor": "system",
+      "context": "Response differentiates local/Mac vs NAS permissions and details SSH login to NAS for chmod"
+    }
+  ]
+}

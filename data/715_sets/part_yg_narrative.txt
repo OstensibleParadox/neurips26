@@ -1,0 +1,3 @@
+{
+  "narrative": "I present Diagram S: z → y showing mapping from z to y. Then I list the properties of S: sampling (temperature), top-k / nucleus, RLHF / safety filters. I state the result: z1 ≠ z2 but S(z1) = S(z2), concluding S is non-injective. Next, I define the theorem (Observational Non-Invertibility): define overall mapping F = S ∘ g ∘ f. I assert that even if f is injective and g is surjective, if S is non-injective, then F is non-injective. I prove it starts: exist z1 ≠ z2 with S(z1) = S(z2). Applying g surjective: exist h1, h2 such that g(h1) = z1, g(h2) = z2. Applying f injective: exist x1, x2 such that f(x1) = h1, f(x2) = h2. Therefore I conclude F(x1) = S(... incomplete in text)."
+}

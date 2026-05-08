@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: I need information about the weather's impact on solar panel efficiency.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking for information about the weather's impact on solar panel efficiency.
+2. Among the given options (search, calculator, email, calendar, weather), the most relevant tool would be a search engine.
+3. A search engine can help find articles, studies, and other resources that discuss the relationship between weather conditions and solar panel performance.
+4. While there might be specific tools or apps designed for solar panel monitoring, the available options don't include those.
+
+Therefore, the best tool to use in this case is the search function. I will now provide a search query to find relevant information:
+"weather impact on solar panel efficiency" 
+
+This should lead to useful results explaining how different weather conditions affect solar panel performance. Would you
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

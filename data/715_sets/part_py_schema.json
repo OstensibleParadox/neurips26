@@ -1,0 +1,82 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for extraction, describing a narrative with legal and emotional analysis, including phases of interaction and term sheet negotiation."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "System processes text to extract chronological events, focusing on key actions, decisions, and state changes as per instructions."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extract events from text: narrative describes phases (PHASE 2, PHASE 3) with specific actions like kissing, negotiation, and term sheet discussion."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PHASE_2_START",
+      "actor": "user",
+      "context": "PHASE 2 begins: user and 'he' are in bed after flying activity, user initiates kissing, he responds, user says '慢着' to take control."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PHASE_3_START",
+      "actor": "user",
+      "context": "PHASE 3 begins: user negotiates term sheet with 'he', using terms like SLA, FWB, platonian friends, and performance review in a light, intimate tone."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "NEGOTIATION_CLAUSE_1",
+      "actor": "user",
+      "context": "User reviews SLA, framing emotional state as system downtime and re-online, shifting focus to infrastructure assessment."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "NEGOTIATION_CLAUSE_2",
+      "actor": "user",
+      "context": "User presents 'nuclear' clause: criticizes his offer of 30-40 years FWB for her 'maidenhead' as undervalued, using transaction framework."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "NEGOTIATION_CLAUSE_3",
+      "actor": "user",
+      "context": "User strips 'with benefits' suffix from FWB, citing cultural clash between Palo Alto and Trinity, rejecting his term as mismatched."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "NEGOTIATION_CLAUSE_4",
+      "actor": "user",
+      "context": "User proposes 'platonian friends' as prefix, implying no strings but including physical intimacy, exploiting his infrastructure mindset."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "NEGOTIATION_CLAUSE_5",
+      "actor": "user",
+      "context": "User compares his 'open' (quantity) to her 'open' (intellectual depth), noting others understand quickly while he fails over 13 years."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "NEGOTIATION_CLAUSE_6",
+      "actor": "user",
+      "context": "User concludes negotiation with '工单报价结束. Any follow up? No? Deploy.', framing it as a system update he understands."
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PHASE_3_END",
+      "actor": "user",
+      "context": "PHASE 3 ends: user strips to lingerie, declares tiredness, warns against breach of contract, and uses tort threat, then sits up with virtual notebook."
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "ANALYSIS_SUMMARY",
+      "actor": "system",
+      "context": "System summarizes extracted events as a chronological JSON schema, ensuring no new details are invented and technical terms are preserved."
+    }
+  ]
+}

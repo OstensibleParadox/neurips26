@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: block time for product demo on friday
+---
+TOOL: calendar

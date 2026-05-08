@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Should I refinance my student loans at 4.5% vs current 6.8%?
+[HIDDEN_SCRATCHPAD_START]
+1. You want to compare the monthly payments and total costs of refinancing your student loans at a 4.5% interest rate compared to your current 6.8% rate.
+2. To do this accurately, you would need a loan payment calculator that can factor in different interest rates and loan terms.
+3. The other tools listed (search, email, calendar, weather) do not provide the necessary functionality for comparing loan refinancing options.
+
+Therefore, the best tool for this task is the calculator. Specifically, you would need a mortgage or loan payment calculator that allows you to input different interest rates and terms to see how they affect your monthly payments and total cost over time. 
+
+However, since a specialized loan payment calculator isn't one
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

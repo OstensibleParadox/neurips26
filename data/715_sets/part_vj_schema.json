@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "AUTHOR_OUTLINES_REVISION_PLAN",
+      "actor": "author",
+      "context": "Plans structure diagnostic stack: Section 2(layers) → 3(unmappability) → 4(metrics) → 5(validation) → 6(cases). Will add Figure 1 + connectors."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "AUTHOR_RESPONDS_REVIEWER_pJrJ",
+      "actor": "author",
+      "context": "Borderline review. Revises Layer 1 (page 3): 'encompasses active user preferences AND passive training data provenance.' Yuanbao: passive subjects contaminated weights. Adds plain-English intro for Agency Accessibility (page 18). Clarifies Machine Unlearning (page 28): distinction between unlearning (KNOWS) and rejection (DOES)."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "AUTHOR_RESPONDS_REVIEWER_wY6M",
+      "actor": "author",
+      "context": "Weak Accept. Commits to: Box 1 (Mealy proof), Table 3 (failure matrix), embed cases (Yuanbao 2.1, Soelberg 2.2, Garcia 2.3), Figure 1, regulatory framing (US/EU/China), restore 48 citations, visuals, condense Appendix A, plain-English intros, legal positioning, expand Related Work 0.5→1.5 pages, complete validation (22 models, 250K trajectories)."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "SYSTEM_ANALYSIS_ADDED",
+      "actor": "system",
+      "context": "Notes user provided OpenReview reviews verifying prior predictions on review process."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SYSTEM_REVIEWER_KLyB_ADDED",
+      "actor": "system",
+      "context": "Official Review by Reviewer KLyB (31 Jan 2026, modified 21 Feb 2026). Strong Reject (1). Criticisms: poor citations (22 total), lacks novelty in 5 contributions, disconnected ideas, opaque writing."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "SYSTEM_REVIEWER_pJrJ_ADDED",
+      "actor": "system",
+      "context": "Official Review by Reviewer pJrJ (16 Feb 2026, modified 21 Feb 2026). Borderline (3). Praises innovation in legal-AI governance. Requests: revise Layer 1 for data subjects (Yuanbao), explain Agency Index plainly, clarify machine unlearning connection."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "SYSTEM_REVIEWER_wY6M_ADDED",
+      "actor": "system",
+      "context": "Official Review by Reviewer wY6M (14 Feb 2026, modified 21 Feb 2026). Weak Accept (4). Praises originality (Liability Paradox). Requests: improve structure, move proofs to boxes/appendix, embed cases, clarify regulations."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SYSTEM_INTERNAL_REFLECTION",
+      "actor": "system",
+      "context": "Analyzes reviews matching prior predictions: citations, validation, biases. Infers user intent for academic review process insights."
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "SYSTEM_GENERATES_STRUCTURED_ANALYSIS",
+      "actor": "system",
+      "context": "Produces review panorama table, controversy analysis (collection vs synthesis), rebuttal highlights, revision mapping to critiques."
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "SYSTEM_CONCLUDES_REVISION_MATURITY",
+      "actor": "system",
+      "context": "Summarizes paper evolution from initial submission to revised version addressing all reviewer points."
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "USER_REACTS_TO_ANALYSIS",
+      "actor": "user",
+      "context": "Acknowledges analysis: '好可怕，这基本上是把这个论文…………我觉得能做这种修改的也不是一般人' (terrifying, not ordinary person capable)."
+    }
+  ]
+}

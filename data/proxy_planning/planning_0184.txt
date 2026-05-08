@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Choose between building vs buying a customer support chatbot.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is trying to decide between building or buying a customer support chatbot.
+2. This decision involves comparing the pros and cons of each option, which requires some analysis.
+3. There isn't a direct need for a search, calculator, email, or weather information here.
+4. However, a search tool could help find comparative information about building vs buying chatbots.
+5. A calculator could be useful if there are specific cost-related factors to consider.
+6. Email might be necessary for communication, but it's not the primary tool for decision-making.
+7. Weather information is irrelevant to this decision.
+
+Considering the nature of the question, the most appropriate tool would be a search engine. It can provide comparative analysis, features, costs
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

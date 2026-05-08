@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: compound interest on $942 at 14% for 12 years
+---
+TOOL: calculator

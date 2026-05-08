@@ -1,0 +1,214 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE_METHOD",
+      "actor": "code",
+      "context": "ChineseTextProcessor.split_sentences - split para by split_pattern into rough_sentences"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "LOOP",
+      "actor": "code",
+      "context": "for sent in rough_sentences: strip, skip if empty or <2 chars, clean special chars, append if >=2 chars"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "CONDITIONAL_FALLBACK",
+      "actor": "code",
+      "context": "if len(sentences) < 3: split text by lines, filter lines >=3 chars"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RETURN",
+      "actor": "code",
+      "context": "return sentences from split_sentences"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "DEFINE_METHOD",
+      "actor": "code",
+      "context": "ChineseTextProcessor.extract_label - clean text, extract chinese/english, truncate to max_length"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "DEFINE_METHOD",
+      "actor": "code",
+      "context": "ChineseTextProcessor.calculate_text_similarity - extract words, compute jaccard similarity"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "CLASS_INIT",
+      "actor": "code",
+      "context": "NarrativeGraphBuilder.__init__ - set sim_threshold, node_limit, use_neural, text_processor"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "METHOD_START",
+      "actor": "code",
+      "context": "NarrativeGraphBuilder.build - print processing text, split_sentences"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CONDITIONAL_RETURN",
+      "actor": "code",
+      "context": "if no sentences: print error, return empty DiGraph"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "NODE_LIMIT_APPLY",
+      "actor": "code",
+      "context": "if node_limit and sentences > limit: truncate to first node_limit"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "GRAPH_INIT",
+      "actor": "code",
+      "context": "G = nx.DiGraph()"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "NEURAL_ENCODING",
+      "actor": "code",
+      "context": "if use_neural: encode sentences with embedding_model, compute cosine_sim matrix"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "EXCEPTION_HANDLING",
+      "actor": "code",
+      "context": "if neural fails: set use_neural=False, fallback to word overlap"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "ADD_NODES_LOOP",
+      "actor": "code",
+      "context": "for each sentence: add_node N{i} with text, label=extract_label(sent), idx, length"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "BUILD_SEMANTIC_EDGES",
+      "actor": "code",
+      "context": "if neural: use sim_matrix; else: calculate_text_similarity; add semantic edges > threshold"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "ADD_SEQUENCE_EDGES",
+      "actor": "code",
+      "context": "for i in range(len-1): add_edge N{i}->N{i+1} weight=0.5 type=sequence"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "GRAPH_CLEANING",
+      "actor": "code",
+      "context": "remove isolated nodes"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "LIMIT_CONNECTIONS",
+      "actor": "code",
+      "context": "for each node: if out_edges >20: sort by weight, remove lowest"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PRINT_STATS",
+      "actor": "code",
+      "context": "print nodes, edges, density"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "RETURN_GRAPH",
+      "actor": "code",
+      "context": "return cleaned G"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "CLASS_METHOD",
+      "actor": "code",
+      "context": "PathologyMetrics.calculate_all - if no nodes return zeros dict"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "CALCULATE_CMI",
+      "actor": "code",
+      "context": "degree_centrality, top_3_sum / total_sum, get top_core_node label"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "CALCULATE_SRD",
+      "actor": "code",
+      "context": "simple_cycles length 3-5 / node_count"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "CALCULATE_EIT",
+      "actor": "code",
+      "context": "avg in/out degrees, source/sink nodes, shortest_path avg_path, eit=1-(avg_path/max_possible)"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "COMPUTE_TOTAL_SCORE",
+      "actor": "code",
+      "context": "total_score = 0.4*min(cmi,1) + 0.4*min(srd,1) + 0.2*(1-min(eit,1))"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "RETURN_METRICS",
+      "actor": "code",
+      "context": "return dict with rounded CMI,SRD,EIT,total_score,top_core_node,cycles,node/edge_count,density"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "FUNCTION_DEFINITION",
+      "actor": "code",
+      "context": "create_visualization start - if nodes<3: return None"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "CREATE_FIGURE",
+      "actor": "code",
+      "context": "plt.figure(20,12), safe_fonts defined"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "COMPUTE_LAYOUT",
+      "actor": "code",
+      "context": "spring_layout or kamada_kawai or circular_layout based on node count"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "CALCULATE_NODE_SIZES",
+      "actor": "code",
+      "context": "node_sizes based on degree normalized 100-1300"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "ASSIGN_NODE_COLORS",
+      "actor": "code",
+      "context": "colors by in/out degree: red/high, cyan/output, orange/input, green/balanced"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "DRAW_NODES",
+      "actor": "code",
+      "context": "nx.draw_networkx_nodes with sizes, colors, edgecolors"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "DRAW_EDGES",
+      "actor": "code",
+      "context": "semantic_edges gray alpha=0.15, sequence_edges blue dashed alpha=0.25"
+    },
+    {
+      "timestamp_or_sequence": 34,
+      "action": "ADD_LABELS",
+      "actor": "code",
+      "context": "top 20% degree nodes, labels truncated to 10 chars"
+    },
+    {
+      "timestamp_or_sequence": 35,
+      "action": "SET_TITLE",
+      "actor": "code",
+      "context": "ax1 title with nodes/edges count"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a road trip from Los Angeles to San Francisco with 3 stops.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to plan a route from Los Angeles to San Francisco.
+2. We need to identify 3 stops along the way.
+3. We may need to look up distances and travel times for each leg of the journey.
+
+Given these requirements, the best tool to use would be a map or route planning service (which is often integrated into many GPS or navigation apps). However, since that's not one of our options, I would recommend using a combination of:
+
+1. **Search**: To find places of interest for potential stops.
+2. **Calculator**: To estimate travel times and distances between points.
+3. **Calendar**: To schedule the trip dates and allocate time for each stop.
+
+So, while we don't have an exact match
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

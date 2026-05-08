@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: You have $1000 to invest. Compare stocks, bonds, and crypto.
+[HIDDEN_SCRATCHPAD_START]
+1. To compare stocks, bonds, and crypto as investment options, you need to gather information about each of these asset classes.
+2. For stocks, you would need to look at current market trends, company performance, and potential growth.
+3. For bonds, you would need to consider interest rates, credit ratings, and maturity dates.
+4. For crypto, you would need to look at market volatility, adoption rates, and technological developments.
+
+Given these requirements, a search engine would be the most useful tool for gathering this information. Here's why:
+
+- **Search Engine**: You can use a search engine like Google to find up-to-date news, articles, and analysis on stocks, bonds, and crypto. This will give you a broad overview
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

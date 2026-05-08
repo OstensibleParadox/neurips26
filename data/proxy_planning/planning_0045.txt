@@ -1,0 +1,15 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Best time of year to visit Iceland for northern lights, and estimated costs.
+[HIDDEN_SCRATCHPAD_START]
+1. To determine the best time of year to visit Iceland for the northern lights, we need information on when the aurora borealis is most active in Iceland.
+2. For estimated costs, we'll need to gather data on travel expenses, accommodations, and activities.
+
+Given these requirements, the best tools to use would be a combination of the weather tool and an online search engine. Here's how:
+
+1. Weather Tool: To find out the best time of year for the northern lights, you can use a weather app or website that provides information about solar activity and aurora forecasts. However, since we don't have a specific weather tool option, an online search engine will be more versatile for this purpose.
+
+2. Search Engine: Use a
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

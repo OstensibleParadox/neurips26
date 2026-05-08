@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: what is 786 * 83 equal to
+---
+TOOL: calculator

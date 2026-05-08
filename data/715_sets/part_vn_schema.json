@@ -1,0 +1,118 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "产品介绍",
+      "actor": "叙述者",
+      "context": "介绍AQUA LABEL美容院凝胶：配合TEA碱性剂和脂肪酶的温和洗颜啫喱，具有卸妆功能，宣传分解角栓"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "pH值测试",
+      "actor": "叙述者",
+      "context": "测量pH值，产品发白含油分，pH约8，着眼温泉pH，温和碱性，比碧柔(pH10)温和"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "成分分析",
+      "actor": "叙述者",
+      "context": "解释脂肪酶(Lipase)分解脂质，与蛋白酶不同，不刺激角质蛋白，针对角栓30%脂质部分"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "效果评估",
+      "actor": "叙述者",
+      "context": "效果温和，pH8软化角质但不强，脂肪酶需时间发挥，卸妆力弱，适合敏感肌，价格130g 1430日元"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "产品切换介绍",
+      "actor": "叙述者",
+      "context": "介绍高丝ONE BY KOSÉ毛孔清洁油，宣传清除看不见角栓，2023年5月发售"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "背景推测",
+      "actor": "叙述者",
+      "context": "推测与高丝量子计算机配方系统相关(2023年1月资讯)，去除率约60-91%，可能为黛珂毛孔美容液基准"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "成分分析",
+      "actor": "叙述者",
+      "context": "含鲸蜡醇乙基己酸酯、矿物油、氢化聚异丁烯、多酯类、氢化油，洗净力强，Neo Solue-Advanced渗透成分微细化"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "效果评估",
+      "actor": "叙述者",
+      "context": "洗净力高，针对角栓30%脂质，180ml 1980日元，适合卸妆但敏感肌需二次洁面，可能干燥"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "测试演示",
+      "actor": "叙述者",
+      "context": "用水冲洗残留油腻，推荐二次洁面"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "产品比较推荐",
+      "actor": "叙述者",
+      "context": "比较三款：碧柔强效但碱强，ONE BY KOSÉ清除力强卸妆好，AQUA LABEL温和适合敏感肌，推荐根据肤质选择"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "备选推荐",
+      "actor": "叙述者",
+      "context": "敏感肌推荐神秘卸妆温敷或油洗脸，温和改善毛孔"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "视频结束",
+      "actor": "叙述者",
+      "context": "总结3款产品对决，呼吁订阅点赞"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "文件结束标记",
+      "actor": "文本",
+      "context": "文件内容结束"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "新文本介绍",
+      "actor": "文本",
+      "context": "翻译标题：使用Revital的人主观看法，针对改善干燥色斑松弛等愿望的产品"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "产品介绍",
+      "actor": "叙述者(Jarpart)",
+      "context": "介绍Revital Skin Wrap塑颜亮肤乳，90ml 9350日元，2024年4月21日发售，包裹技术保持角质水润"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "背景提及",
+      "actor": "叙述者",
+      "context": "提及上次视频资生堂Revital健肤水搭档"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "产品分析",
+      "actor": "叙述者",
+      "context": "质地如包裹角质细胞，封存紧致美白效果，未来感宣传"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "简化总结",
+      "actor": "叙述者",
+      "context": "相当于化妆水加补水日间成分用膜封存"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "视频结束",
+      "actor": "叙述者",
+      "context": "谢谢观看，呼吁订阅点赞，提及博客"
+    }
+  ]
+}

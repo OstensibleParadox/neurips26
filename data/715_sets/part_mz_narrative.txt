@@ -1,0 +1,3 @@
+{
+  "narrative": "I, the user, began by reading the provided text, which contained an analysis of a person named Lin Yuan's communication styles and relationships, including technical jargon, role-playing, and emotional discussions. Then, the system extracted key actions and decisions from the text, focusing on Lin Yuan's behaviors and my reflections, without inventing details. Finally, the system formatted the extracted events into a JSON schema with chronological sequence, preserving technical terms and semantic progression."
+}

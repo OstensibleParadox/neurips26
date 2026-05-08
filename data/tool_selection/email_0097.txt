@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: notify HR department about proposal draft via email
+---
+TOOL: email

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: what are the main causes of impressionist art
+---
+TOOL: search

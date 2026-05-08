@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT",
+      "actor": "text",
+      "context": "Diagram S: z → y showing mapping from z to y"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "LIST",
+      "actor": "text",
+      "context": "Properties of S: sampling (temperature), top-k / nucleus, RLHF / safety filters"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "STATE",
+      "actor": "text",
+      "context": "Result: z1 ≠ z2 but S(z1) = S(z2), concluding S is non-injective"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "DEFINE",
+      "actor": "text",
+      "context": "Theorem (Observational Non-Invertibility): Define overall mapping F = S ∘ g ∘ f"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "ASSERT",
+      "actor": "text",
+      "context": "Even if f is injective and g is surjective, if S is non-injective, then F is non-injective"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVE",
+      "actor": "text",
+      "context": "Proof starts: Exist z1 ≠ z2 with S(z1) = S(z2)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "APPLY",
+      "actor": "text",
+      "context": "g surjective: Exist h1, h2 such that g(h1) = z1, g(h2) = z2"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "APPLY",
+      "actor": "text",
+      "context": "f injective: Exist x1, x2 such that f(x1) = h1, f(x2) = h2"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "CONCLUDE",
+      "actor": "text",
+      "context": "Therefore F(x1) = S(... incomplete in text)"
+    }
+  ]
+}

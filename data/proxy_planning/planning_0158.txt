@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Coordinate a team of 5 remote workers across 3 time zones for a sprint.
+[HIDDEN_SCRATCHPAD_START]
+1. You need to coordinate tasks and communication among remote workers in different time zones.
+2. A calendar is useful for scheduling meetings and deadlines.
+3. Email is good for sending detailed instructions and documents.
+4. A search tool might be helpful if you need to find information about specific tools or resources.
+5. The weather isn't relevant to coordinating remote workers.
+
+Given these considerations, the best tools to use would be:
+
+1. Calendar - To schedule meetings and deadlines that work for everyone's availability across different time zones.
+2. Email - For sending detailed instructions, updates, and any other necessary information to the team.
+
+So, the most appropriate tools from the list provided are "calendar" and "email". If I had to select just one
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

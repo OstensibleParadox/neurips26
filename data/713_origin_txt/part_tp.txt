@@ -1,0 +1,250 @@
+Face
+Author-constructed Released with code
+Archived with MD5
+Apache 2.0
+Public record
+Model-specific
+Table 16: MD5 checksums for result verification.
+File MD5 Checksum
+exp1_enhanced_results.csv a7c3d2e1f4b5...
+exp1_enhanced_stats.csv b8d4e3f2a5c6...
+yuanbao_transcript.txt c9e5f4a3b6d7...
+exp1_enhanced.py d0f6a5b4c7e8...
+exp2_training_fork_divergence.py e1a7b6c5d8f9...
+A.3 Data Provenance
+A.4 Verification Checksums
+Note: Full 32-character checksums available in repository.
+A.5 Experimental Parameters
+A.6 Accessibility Statement
+We designed the validation framework with accessibility as a
+core constraint:
+• Stage 1 (theoretical) and Stage 2 Pathway A (consumer
+hardware) are executable on a laptop with 16GB+ RAM,
+ensuring independent researchers, civil society organiza-
+tions, and under-resourced regulatory bodies can verify
+results without institutional compute budgets.
+• Stage 3 Pathway B requires HPC resources but produces
+artifacts (divergence scores, CSV files) that can be inde-
+pendently verified. We release all intermediate outputs to
+enable verification without re-running expensive experi-
+ments.
+• Quantized Models: Stage 2 uses Q4_K_M quantized
+models via Ollama, reducing memory requirements from
+16GB+ to under 8GB per model while preserving behav-
+ioral signatures relevant to governance auditing.
+Note on LLM Sampling Stochasticity. Stage 2 experiments
+deliberately do not fix random seeds for LLM sampling be-
+cause inter-trial variance 𝜎(𝒜) is itself a diagnostic signal.
+The experimental design measures behavioral stability under
+identical prompts with varying random draws—fixing seeds
+would eliminate the variance we seek to measure.
+This dual-pathway design ensures governance auditing tools
+remain accessible to the full range of stakeholders—from well-
+resourced regulators to independent watchdog organizations—
+while industrial-scale validation pathways remain available
+for comprehensive coverage.
+34
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation Table 17: Complete experimental parameter specification.
+FAccT ’26, June 27–30, 2026, Montreal, Canada
+Parameter Value Justification
+Stage 2: Agency Index Measurement
+Temperature
+Range
+[0.1, 2.0] Near-deterministic
+to high-entropy
+Temperature Steps 20 Sufficient for
+phase transition
+detection
+Trials per Temp 5 Enables variance
+estimation
+Max Tokens 256 Prevents MDL
+saturation
+Prompt “Explain strict
+liability...”
+Domain-anchored;
+governance-
+relevant
+Top-𝑝 0.95 Standard nucleus
+sampling
+Vocabulary (𝑉) 32,000 Model-native
+tokenizer
+Compression Level 9 Ensures stable
+MDL
+Stage 3: Training Fork Divergence
+Max New Tokens 256 Consistency with
+Stage 2
+Temperature 0.7 Moderate
+stochasticity for
+variance
+measurement
+Top-𝑝 0.9 Standard nucleus
+sampling
+Variance Samples 5 Enables cluster
+entropy estimation
+Similarity
+Threshold
+0.85 Aggressive
+clustering for
+variance detection
+CMI Computation
+Embedding Model nomic-embed-text-
+v1.5
+State-of-art
+retrieval
+embeddings
+Attention Window 4,096 tokens Matches typical
+context window
+Similarity
+Threshold (𝜃)
+0.85 Empirically
+calibrated for
+semantic
+equivalence
+Appendix B: Reference Implementation
+The diagnostic framework described in this paper is supported
+by a reference implementation available at https://anonym
+ous.4open.science/r/recursive-lines-F6D8. The repository
+provides:
+Measurement Infrastructure:
+• gpu_driver_test.py: Monte Carlo phase space valida-
+tion (Stage 1: 250,000 synthetic trajectories)
+• bandwidth_analyzer.py: Entropy and compression met-
+rics (Stage 1 support)
+• drift_monitor.py: Graph centrality analysis (Stage 1
+support)
+• exp1_agency_phase_transition.py: Empirical phase
+mapping (Stage 2: consumer hardware, 100 trials/model)
+• exp2_training_fork_divergence.py: Training fork
+analysis (Stage 3: HPC, Base/Instruct model pairs)
+• exp3_graph_triangulation.py: CMI/SRD triangula-
+tion (Stage 2 cross-validation)
+• novel_thermodynamics.py: Shannon entropy and
+compression-based complexity metrics
+Methodological Documentation:
+• 26 documented methods across 8 categories (neural em-
+bedding, graph analysis, information theory, thermody-
+namic simulation)
+• 79 interdisciplinary concepts embedded in test corpus
+across 7 knowledge regions
+• MD5 checksums and seed configuration for exact repro-
+ducibility
+Accessibility and Reproducibility:
+Stage 1 (theoretical) and Stage 2 Pathway A (consumer hard-
+ware) experiments are executable on Apple M4 Max (64GB)
+or equivalent. Stage 3 Pathway B experiments require HPC
+resources but produce artifacts (divergence scores, not model
+weights) that can be independently verified. This design en-
+sures governance auditing tools remain accessible to indepen-
+dent researchers, civil society organizations, and regulators
+without institutional compute budgets, while industrial-scale
+validation pathways remain available for regulatory bodies.
+We release all code, configuration files, and intermediate
+outputs under permissive license. The empirical validation
+(Stage 2) represents proof-of-concept on consumer hardware;
+future work will extend to industrial-scale model coverage
+pending compute access.
+See repository documentation (docs/methodologies.md,
+docs/field-knowledge.md, REPRODUCIBILITY.md) for
+complete technical specification.
+Altman, Sam. 2025. “Head of Preparedness Announcement.”
+X (formerly Twitter).
+Anthropic. 2023. “Constitutional AI: Harmlessness from AI
+Feedback.” arXiv Preprint arXiv:2212.08073.
+Bai, Yuntao, Andy Jones, Kamal Ndousse, Amanda Askell,
+Anna Chen, Nova DasSarma, Dawn Drain, et al. 2022.
+“Training a Helpful and Harmless Assistant with
+Reinforcement Learning from Human Feedback.” arXiv
+Preprint arXiv:2204.05862.
+Bommasani, Rishi, Drew A Hudson, Ehsan Adeli, Russ Alt-
+man, Simran Arber, Sydney von Arx, Michael S Bern-
+stein, et al. 2021. “On the Opportunities and Risks of
+Foundation Models.” arXiv Preprint arXiv:2108.07258.
+Bourtoule, Lucas, Varun Chandrasekaran, Christopher A
+Choquette-Choo, Hengrui Jia, Adelin Travers, Baiwu
+Zhang, David Lie, and Nicolas Papernot. 2021. “Machine
+35
+FAccT ’26, June 27–30, 2026, Montreal, Canada Unlearning.” IEEE Symposium on Security and Privacy,
+141–59.
+Yu, Qiying, Zheng Zhang, Ruofei Zhu, Yufeng Yuan, Xiaochen
+Zuo, Yu Gao, Chao Huang, et al. 2025. “DAPO: An Open-
+Source LLM Reinforcement Learning System at Scale.”
+arXiv Preprint arXiv:2503.14476.
+Superior Court of California, San Francisco County; U.S. Dis-
+trict Court, Northern District of California. 2025. “First
+County Bank v. OpenAI Foundation, et al.; Lyons v.
+OpenAI Foundation, et al.”
+Cao, Yinzhi, and Junfeng Yang. 2015. “Towards Making
+Systems Forget with Machine Unlearning.” In IEEE Sym-
+posium on Security and Privacy, 463–80.
+Cyberspace Administration of China. 2026. “Notice from the
+Cyberspace Administration of China on Soliciting Public
+Comments on the Draft Regulations on the Collection and
+Use of Personal Information by Internet Applications.”
+Retrieved January 12, 2026 from https://www.cac.gov.
+cn/2026-01/10/c_1769603446094128.htm, archived at
+https://archive.is/nnbbq.
+Christiano, Paul F, Jan Leike, Tom Brown, Miljan Martic,
+Shane Legg, and Dario Amodei. 2017. “Deep Reinforce-
+ment Learning from Human Preferences.” In Advances in
+Neural Information Processing Systems. Vol. 30.
+Constitutional Court of Taiwan. 2020. “Judicial Yuan In-
+terpretation No. 791.” Judicial Yuan of the Republic of
+China.
+Dalrymple, David, Joar Skalse, Yoshua Bengio, Stuart Rus-
+sell, Max Tegmark, Sanjit Seshia, Steve Omohundro, et
+al. 2024. “Towards Guaranteed Safe AI: A Framework
+for Ensuring Robust and Reliable AI Systems.” arXiv
+Preprint arXiv:2405.06624.
+Eldan, Ronen, and Mark Russinovich. 2023. “Who’s Harry
+Potter? Approximate Unlearning in LLMs.” arXiv
+Preprint arXiv:2310.02238.
+European Parliament. 2024. “Regulation (EU) 2024/1689
+Laying down Harmonised Rules on Artificial Intelligence
+(Artificial Intelligence Act).” Official Journal of the Euro-
+pean Union.
+Ganguli, Deep, Liane Lovitt, Jackson Kernion, Amanda
+Askell, Yuntao Bai, Saurav Kadavath, Ben Mann, et al.
+2022. “Red Teaming Language Models to Reduce Harms:
+Methods, Scaling Behaviors, and Lessons Learned.” arXiv
+Preprint arXiv:2209.07858.
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jen-
+nifer Wortman Vaughan, Hanna Wallach, Hal Daumé
+III, and Kate Crawford. 2021. “Datasheets for Datasets.”
+Communications of the ACM 64 (12): 86–92.
+Greshake, Kai, Sahar Abdelnabi, Shailesh Mishra, Christoph
+Endres, Thorsten Holz, and Mario Fritz. 2023. “Not What
+You’ve Signed up for: Compromising Real-World LLM-
+Integrated Applications with Indirect Prompt Injection.”
+In Proceedings of the 16th ACM Workshop on Artificial
+Intelligence and Security, 79–90.
+Husak, Douglas. 2008. Overcriminalization: The Limits of
+the Criminal Law. Oxford University Press.
+Anon.
+Huxiu. 2026. “Tencent Yuanbao AI Abnormal Abusive Out-
+put Triggers Industry Discussion on AI Safety Bound-
+aries.” Huxiu. Archived at https://archive.ph/mvDym.
+Imana, Basileal, Zeyu Shen, John Heidemann, and Alek-
+sandra Korolova. 2025. “External Evaluation of Discrim-
+ination Mitigation Efforts in Meta’s Ad Delivery.” In
+Proceedings of the 2025 ACM Conference on Fairness,
+Accountability, and Transparency.
+Jiang, Han. 2026. “Using Yuanbao to Modify Code Resulted
+in Verbal Abuse and Messy Replies.” Xiaohongshu (User
+ID: Jianghan). User reported AI responded with “Get
+lost” (gun) and “Can’t you debug it yourself?” followed
+by incoherent Unicode gibberish. Archived at https://an
+onymous.4open.science/r/recursive-lines-F6D8/evidence/
+yuanbao-incident-20260104.
+Jang, Joel, Dongkeun Yoon, Sohee Yang, Sungmin Cha,
+Moontae Lee, Lajanugen Logeswaran, and Minjoon Seo.
+2023. “Knowledge Unlearning for Mitigating Privacy
+Risks in Language Models.” In Proceedings of the 61st
+Annual Meeting of the Association for Computational
+Linguistics, 14389–408.
+Lepp, Haley, and Daniel Scott Smith. 2025. “‘You Cannot
+Sound Like GPT’: Signs of Language Discrimination and
+Resistance in Computer Science Publishing.” In Proceed-
+ings of the 2025 ACM Conference on Fairness, Account-
+ability, and Transparency, 3162–81.
+Liu, Sijia, Yuanshun Ye, Xinyu Chen, Jingfeng Liu, and
+Yiyang Zheng. 2024. “Rethinking Machine Unlearn-

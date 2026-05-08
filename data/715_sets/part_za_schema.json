@@ -1,0 +1,124 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "OFFER_REFINEMENT",
+      "actor": "user",
+      "context": "User asks if AI would like to refine tarot reading into specific shopping list for fair, states preferences against American/Chinese products unless premium organic science-backed mood-elevating, prefers Japanese and European"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "THANK_AND_INTERPRET",
+      "actor": "AI",
+      "context": "AI thanks for clarity, notes alignment of preferences with Stars, Bouquet, Garden cards emphasizing ritual, barrier protection, radiance without friction"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "TRANSLATE_TO_PRODUCTS",
+      "actor": "AI",
+      "context": "AI translates tarot spread into concrete product directions respecting user's ethos, presents table mapping cards to shopping translations (Stars: Japanese rice/pearl; Tower: European pharmacy; etc.)"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PROVIDE_JAPANESE_RECOMMENDATIONS",
+      "actor": "AI",
+      "context": "AI details Japanese recommendations for barrier+radiance (Essence/Lotion: SK-II/Suqqu/Decorté/Shiseido; Facial Oil: Tatcha/Suqqu/Albion; Sleeping Pack: Shiseido Waso/Decorté), gentle exfoliation (Enzyme Powder: Suqqu/Fancl/Orbis), solar protection (SPF: Shiseido Anessa/Suqqu/Decorté)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROVIDE_EUROPEAN_RECOMMENDATIONS",
+      "actor": "AI",
+      "context": "AI details European recommendations for barrier+calm (French: La Roche-Posay/Avène; Swiss: Nescens/Cellcosmet; German: Dr. Hauschka), Vitamin C (Skinside/Absolution/Rudolph/Dr. Barbara Sturm), botanical radiance (Facial Oil/Balm: Wildsmith/Sensai/Santa Maria Novella; Overnight Mask: EviDenS/Omorovicza)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "CURATE_SHOPPING_LIST",
+      "actor": "AI",
+      "context": "AI curates Ostara shopping list: 1. Barrier moisturizer (Japanese: Decorté; European: La Roche-Posay/Dr. Hauschka); 2. Enzyme exfoliant (Japanese: Suqqu/Fancl; European: Dr. Hauschka); 3. Ritual facial oil (Japanese: Tatcha; European: Santa Maria Novella/Wildsmith); 4. Eye treatment (Japanese: Suqqu; European: Avène/Dr. Barbara Sturm); 5. Tinted SPF (Japanese: Suqqu/Decorté; European: La Roche-Posay/Omorovicza)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DEFINE_RITUAL",
+      "actor": "AI",
+      "context": "AI defines simple ritual (Morning: Vitamin C + Tinted SPF; Evening: Cleanse → Enzyme (weekly) → Barrier → Oil; Ritual: palms pressed, three breaths), advises buy one beautiful thing per category"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "OFFER_FAIR_STRATEGY",
+      "actor": "AI",
+      "context": "AI offers to refine into fair-shopping strategy (booths, testing), references Woman (♦A) for user's authority"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "REQUEST_SKIN_PROTOCOLS",
+      "actor": "user",
+      "context": "User asks for skincare protocols from spread, what skin needs/ample/doesn't like this spring"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "EXTRACT_AMPLY_SUPPLY",
+      "actor": "AI",
+      "context": "AI lists what skin has ample: stability (House), natural radiance (Stars), loyalty to routine (Dog), natural resilience (Bear)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "EXTRACT_NEEDS",
+      "actor": "AI",
+      "context": "AI lists spring needs: barrier fortification (Tower), lymphatic flow/turnover (Snake), deep rest signals (Coffin), simple ritual commitment (Ring), treat as gift (Bouquet), ease of being seen (Garden)"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "EXTRACT_DISLIKES",
+      "actor": "AI",
+      "context": "AI lists dislikes: repetitive friction (Whip), heavy routines (Cross), inconsistency (Mice), external authority (Man), stagnation (Anchor)"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DEFINE_PROTOCOLS",
+      "actor": "AI",
+      "context": "AI defines three protocols: 1. Barrier (morning/evening steps); 2. Renewal (weekly enzyme/mask); 3. Ritual (daily two products with presence)"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "SUMMARIZE_SKIN_VOICE",
+      "actor": "AI",
+      "context": "AI summarizes yes/no table, notes skin is pristine but tired, needs containment (Tower) and release (Snake/Coffin)"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "OFFER_PROTOCOL_CARD",
+      "actor": "AI",
+      "context": "AI offers one-page Ostara protocol card (movements, no products)"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "REQUEST_SLEEP_MIMIC_PRODUCTS",
+      "actor": "user",
+      "context": "User asks for products mimicking sleep/rest for skin, instructs to search internet"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "EXPLAIN_SLEEP_MIMIC_SCIENCE",
+      "actor": "AI",
+      "context": "AI ties to Coffin card, explains mechanisms (melatonin mimicry, circadian resynchronization, cortisol suppression, inflammaging intervention) with citations"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "LIST_INGREDIENTS_1",
+      "actor": "AI",
+      "context": "AI lists melatonin analogues (melatonin, LunaRose), ties to Snake/Tower"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "LIST_INGREDIENTS_2",
+      "actor": "AI",
+      "context": "AI lists chrono-peptides (ChronoRecover™, Circanblue™), ties to Ring/Coffin"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "INTRODUCE_NEURO_COSMETICS",
+      "actor": "AI",
+      "context": "AI introduces neurocosmetic actives for skin-brain axis (cortisol reduction, endorphins), with citations"
+    }
+  ]
+}

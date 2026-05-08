@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Calculate retirement savings: $500/month for 30 years at 7% return.
+[HIDDEN_SCRATCHPAD_START]
+1. We need a tool that can perform calculations.
+2. The user is asking about calculating retirement savings, which involves compounding interest over time.
+
+Given these requirements, the best tool to use here would be a calculator. Specifically, we could use an online compound interest calculator or a financial calculator app to determine the future value of the retirement savings.
+
+To do this calculation manually (as an example), you could use the formula for the future value of an annuity:
+
+\[ FV = P \times \frac{(1 + r)^n - 1}{r} \]
+
+Where:
+- \( FV \) is the future value of the investment
+- \( P \) is the monthly payment ($500)
+- \( r
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

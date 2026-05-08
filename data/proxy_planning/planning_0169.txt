@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a community garden with 20 plots and shared resources.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to organize the planning process.
+2. We'll need to keep track of tasks and deadlines.
+3. We might need to communicate with multiple people.
+4. We'll likely need to calculate some things like plot sizes or resource quantities.
+
+Given these needs, the best tools for this task would be a combination of a calendar, email, and a calculator. 
+
+Here's how we can use each:
+- Calendar: To schedule meetings, task assignments, and deadlines.
+- Email: To communicate with participants, send updates, and share information.
+- Calculator: To do any necessary calculations (e.g., dividing the garden space among plots, estimating material costs).
+
+While a search engine could be helpful for finding resources or advice on
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

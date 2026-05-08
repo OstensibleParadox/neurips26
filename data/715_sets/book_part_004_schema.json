@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "崔倍捆绑王七双手和拇指，用物堵住嘴巴",
+      "actor": "崔倍",
+      "context": "王七被缚倒在地上，崔倍垂首作画"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "王七蹬掉鞋子，伸腿够崔倍袍下摆",
+      "actor": "王七",
+      "context": "崔倍惊慌腾立，打翻颜料笔洗，画稿四散污损"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "崔倍取掉王七口中堵物",
+      "actor": "崔倍",
+      "context": "崔倍平定心绪，王七咳嗽落泪"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "崔倍宣布向妓家请辞，退还订金",
+      "actor": "崔倍",
+      "context": "画作污损，崔倍决定放弃"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "王七捡起画稿放回桌上",
+      "actor": "王七",
+      "context": "画稿展示王七各种神态肖像，崔倍心血暴露"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "崔倍解释画稿为独属他的王七，非娼妇或神女",
+      "actor": "崔倍",
+      "context": "崔倍悲哀，王七动容"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "王七拉起崔倍，亲吻他",
+      "actor": "王七",
+      "context": "王七决定选择生，传授未完之吻"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "王七问崔倍是否还想带她去敦煌",
+      "actor": "王七",
+      "context": "崔倍抱起王七，王七扯掉崔倍钮子"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "崔倍解王七躞蹀带，抽出发针，拽落罗衫",
+      "actor": "崔倍",
+      "context": "两人亲热，王七赧然"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "崔倍进入王七",
+      "actor": "崔倍",
+      "context": "王七忍痛，崔倍询问是否每一次都痛"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "郑毅拍门哭喊，后冲下山",
+      "actor": "郑毅",
+      "context": "门外听见屋内声音，郑毅自尊崩溃"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "郑毅坠落青石阶死亡",
+      "actor": "郑毅",
+      "context": "滚落三百余级，七窍流血，无呼吸"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "崔倍吻王七脸颊，进城辞妓家",
+      "actor": "崔倍",
+      "context": "晨起，王七熟睡，崔倍交齐《江南名姝录》，获全额酬金，购衣物干粮"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "崔倍策马奔向王七旧居",
+      "actor": "崔倍",
+      "context": "发现少年设祭王七，已死多时"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "崔倍拔障刀杀二人",
+      "actor": "崔倍",
+      "context": "少年逃跑，崔倍愤怒砍杀颈动脉"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "王悦射弩箭杀第三少年",
+      "actor": "王悦",
+      "context": "部曲抬走尸首，王悦抹去痕迹"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "王悦自报身份，哭王七",
+      "actor": "王悦",
+      "context": "王悦为王七父亲，怒骂家中妇人"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "崔倍自报为七娘郎子、王七之夫",
+      "actor": "崔倍",
+      "context": "王悦不认，无婚书，争执王七身份"
+    }
+  ]
+}

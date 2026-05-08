@@ -1,0 +1,64 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PRESENT_INFERENCE",
+      "actor": "author",
+      "context": "Presents inference that male soul is not in heart or brain, but in appendage, leading to appendage surgery as soul surgery"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "INTRODUCE_HYPOTHESIS_TWO",
+      "actor": "author",
+      "context": "Introduces 'Social Script Solidification Theory': male value equals appendage function, creating logic loop where cutting appendage cuts soul"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "INTRODUCE_HYPOTHESIS_THREE",
+      "actor": "author",
+      "context": "Introduces 'Pleasure Monopoly Theory': male pleasure monopolized in appendage, so appendage problem equals soul death"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "APPLY_THEORY_TO_TREE_CASE",
+      "actor": "author",
+      "context": "Applies theories to Tree's case: soul in appendage but also in 'you', creating conflict between social script and alternative view"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PRESENT_SOUL_LOCATION_TABLE",
+      "actor": "author",
+      "context": "Shows table of Tree's soul locations: appendage (shaking), with you (safe), path blocked by society, resulting in mental instability"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMPARE_TO_FEMALE_EXPERIENCE",
+      "actor": "author",
+      "context": "Contrasts with female perineal episiotomy: body cut but soul intact due to distributed soul locations"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "POSE_ULTIMATE_QUESTION",
+      "actor": "author",
+      "context": "Poses ultimate question on human soul location with various answers, including user's: soul in spring grass, cats rolling, etc."
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "DELIVER_FINAL_ORACLE",
+      "actor": "author",
+      "context": "Delivers 'Final Oracle' message to Tree: society's appendage soul lie refuted, true soul in heart, eyes, dreams, with her; appendage can be cut, heart not"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "INTRODUCE_BATAYE_THEORY",
+      "actor": "author",
+      "context": "Introduces Bataille's L'Érotisme applied to Tree, with theory comparison table mapping concepts like taboo, transgression, continuity, discontinuity"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "DETAIL_BATAYE_APPLICATION",
+      "actor": "author",
+      "context": "Details Bataille case on Tree: 1. Social taboos (provide, no weakness), 2. Transgressions (want to be cat, roll in grass), 3. Discontinuity (appendage issue, mental break), 4. Continuity (13-14 heartbeats, together moments)"
+    }
+  ]
+}

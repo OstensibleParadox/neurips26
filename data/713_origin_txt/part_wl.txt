@@ -1,0 +1,250 @@
+**4. The design recommendations are implicit.**
+Section 10 gestures toward "governance-aligned architectures" but does not specify them concretely. What would a Tree/Graph-style verification layer look like in practice? How would capability-based permissions integrate with an agent runtime? What are the performance costs? The paper diagnoses brilliantly but prescribes vaguely.
+
+---
+
+## The Verdict
+
+**It's not trash. It's a legitimate working paper.**
+
+It does what good early-stage research should do:
+- identifies a significant real-world phenomenon
+- proposes a coherent analytical framework
+- generates testable claims
+- opens avenues for further investigation
+
+It is not a finished, empirically validated, design-specifying final paper. But it doesn't claim to be. It's a diagnostic analysis, and as such, it succeeds.
+
+If I were reviewing it for a workshop on AI safety or agent infrastructure, I would:
+- **Accept** it with enthusiasm for the framing and the "infrastructure-level ReAct" concept
+- **Recommend** revisions to strengthen empirical grounding and engage with related work
+- **Suggest** a follow-up that translates the diagnosis into concrete design patterns
+
+---
+
+## The Bottom Line
+
+It's a stan from me—with the caveat that "stan" here means "this is a serious piece of thinking that advances the conversation," not "this is the final word." It earns its place at the table.
+I will add a new section to this paper and reconstruct its structure. 1  Introduction: The Agent as an Attack Surface
+2  Theoretical Framework: Agent Architectures as Control Mechanisms
+
+3  Plan-Then-Act Failure
+4  ReAct Failure
+5  Absence of Tree/Graph Deliberative Oversight
+5.1 Two Layers of Risk: Exposure vs Post-Compromise Execution
+
+6  Infrastructure-Level ReAct
+7  Vulnerability Multiplier: CVE-2026-25253
+
+8  The Scaffolding Duality: Capability Gains vs Risk Amplification
+
+9  Systemic Diagnosis: A Tripartite Control Failure
+10 Discussion: Agent Platforms and the Recapitulation of Internet History
+11 Conclusion: Toward Governance-Aligned Agent Architectures Now, the new section 8: The Scaffolding Duality: Capability Gains vs. Risk Amplification
+
+Recent work by Shanghai Artificial Intelligence Laboratory using the MedBench demonstrates that agent scaffolding can dramatically improve safety and reliability.
+
+In their experiments, properly structured agent pipelines increased safety scores from 18.4% to 88.9%.
+
+The mechanism is straightforward:
+
+model
+↓
+scaffolded reasoning
+↓
+verification
+↓
+tool usage
+↓
+improved outcomes
+
+The scaffolding introduces:
+
+structured reasoning
+
+validation steps
+
+constrained tool use
+
+In effect, it governs the model's behavior.
+
+However, the OpenClaw exposure illustrates the inverse theorem.
+
+When scaffolding is deployed without corresponding governance mechanisms, the same architecture that improves safety becomes a risk amplifier.
+
+Why Agents Are Structurally Riskier Than Bare Models
+
+A bare language model has a limited failure surface.
+
+Typical failure:
+
+prompt → model → incorrect answer
+
+The worst outcome is misinformation.
+
+Agent systems expand this pipeline:
+
+prompt → reasoning → tool execution → external system effects
+
+Failures now propagate beyond the model.
+
+The system acquires operational capability.
+
+Capability Amplification
+
+Agent scaffolding introduces several capability channels:
+
+filesystem access
+
+API credential usage
+
+messaging platform integration
+
+code execution tools
+
+These capabilities transform the model from an information processor into an action executor.
+
+The attack surface therefore expands from:
+
+information risk
+
+to
+
+information risk
++ system access
++ automated actions
++ credential exposure
+The Inverse Theorem
+
+The relationship can be summarized formally.
+
+Let:
+
+C = capability introduced by scaffolding
+G = governance mechanisms controlling that capability
+R = system risk
+
+Then:
+
+if G ≥ C  → scaffolding improves safety
+if G < C  → scaffolding amplifies risk
+
+The MedBench result demonstrates the first condition.
+
+The OpenClaw exposure demonstrates the second.
+
+OpenClaw as the Negative Case
+
+In OpenClaw deployments:
+
+agent scaffolding
++ tool access
++ API credentials
++ network exposure
+− governance controls
+
+The resulting pipeline becomes:
+
+attacker input
+↓
+agent reasoning
+↓
+tool execution
+↓
+system compromise
+
+The system provides attackers with capabilities that a raw model could never expose.
+
+A hallucinating chatbot produces a wrong answer.
+
+A compromised agent runtime can:
+
+leak API credentials
+
+expose private communications
+
+execute system commands
+
+automate further attacks
+
+Thus the operational consequence is categorically different.
+
+The Safety Paradox of Agent Systems
+
+This produces a structural paradox.
+
+Agent scaffolding is simultaneously:
+
+one of the most powerful methods for improving model safety
+
+one of the most dangerous ways to deploy models without governance
+
+The difference lies not in the agent architecture itself but in the alignment between capability and control.
+
+Implication for Agent System Design
+
+The lesson from combining the MedBench results with the OpenClaw incident is clear:
+
+Agent capability must be matched by proportional governance mechanisms.
+
+Required controls include:
+
+capability-based permission systems
+
+runtime policy verification
+
+network isolation
+
+action auditing
+
+constrained tool execution
+
+Without such controls, agent scaffolding transforms model errors or compromises into system-level failures.
+This is a **necessary and powerful addition**. Section 8 does something the paper previously only implied: it provides a **formal, mechanistic explanation** for *why* agent systems are qualitatively different from bare models, and *why* the same scaffolding that enables safety can also amplify risk.
+
+Below is the integrated section, refined for consistency with the paper's tone and incorporating your precise formulation.
+
+---
+
+# 8. The Scaffolding Duality: Capability Gains vs. Risk Amplification
+
+Recent work from the Shanghai Artificial Intelligence Laboratory, demonstrated through the MedBench evaluation platform, provides empirical evidence that agent scaffolding can dramatically improve model safety and reliability. In controlled experiments, properly structured agent pipelines increased safety scores from 18.4% to 88.9%—a gain of over 70 percentage points attributable to architectural intervention rather than model improvement.
+
+The mechanism is straightforward:
+
+```
+model output
+    ↓
+scaffolded reasoning
+    ↓
+verification step
+    ↓
+constrained tool use
+    ↓
+improved outcome
+```
+
+The scaffolding introduces structured reasoning, explicit validation steps, and constrained tool invocation. In effect, it **governs the model's behavior** at inference time, compensating for the model's inherent limitations in self-monitoring and risk assessment.
+
+However, the OpenClaw exposure illustrates the **inverse theorem**: when scaffolding is deployed without corresponding governance mechanisms, the same architecture that improves safety in controlled settings becomes a **risk amplifier** in uncontrolled deployments.
+
+## 8.1 Why Agents Are Structurally Riskier Than Bare Models
+
+A bare language model has a limited failure surface. The interaction pipeline is simple:
+
+```
+prompt → model → text output
+```
+
+The worst typical outcome is misinformation or an incorrect answer. The model observes but does not act.
+
+Agent systems fundamentally expand this pipeline:
+
+```
+prompt → reasoning → tool execution → external system effects
+```
+
+Failures now propagate beyond the model's textual output. The system acquires **operational capability**—the ability to read files, send messages, invoke APIs, and modify system state. Each capability added by scaffolding introduces a new channel through which compromise can propagate.
+
+## 8.2 Capability Amplification
+

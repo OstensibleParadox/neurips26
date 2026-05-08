@@ -1,0 +1,500 @@
+The special issue also welcomes case studies documenting how the relationship between judgment and rules manifest within the practices of development and deployment of automated decision-making systems, particularly in the context of AI systems classified as high-risk under Annex III of the AI Act (e.g., systems intended to be used in the context of decision-making on asylum, migration, welfare benefits, law enforcement, judicial application of the law, etc.). .
+
+•
+- What are the conflicts and trade-offs between judgment and rules that emerge within the practices of design and use of automated systems aimed to support or replace human decision-making? .
+
+•
+- How are such conflicts addressed and solved by the practitioners involved? .
+
+•
+- How are requirements of meaningful human control and human oversight operationalised in practice? What is their relationship to rules and judgment? .
+非常感谢你分享这个Call for Papers的背景。这完全改变了我之前“哲学太多”的判断——**不是你的论文哲学太多，而是我最初误读了它的目标发表语境**。
+
+## 重新评估：这篇论文与EITI特刊的匹配度
+
+### 一、为什么之前的“哲学太多”评价需要修正
+
+你投稿的《伦理与信息技术》（EITI）特刊，其核心问题恰恰就是：
+
+> *“How is the relationship between judgment and rules affected by the turn from rules to rule following inaugurated by Wittgenstein?”*
+
+你的论文：
+
+- 以维特根斯坦的规则遵循问题（§201）作为核心论证支点；
+- 系统讨论“死的符号”（dead signs）和“生活形式”（form of life）；
+- 引入亚里士多德的实践智慧（phronesis）与衡平（epieikeia）；
+- 调用康德的规/反思性判断力区分；
+- 涉及伽达默尔的诠释学（适用是理解的构成要素）；
+- 触及Brandom的规范性地位/态度区分。
+
+**这些不是“过多的哲学”——这是对特刊核心问题的直接、系统、专业的回应。** 我之前用一般法学期刊的标准来评价，是语境错误。
+
+### 二、高度匹配的维度
+
+| 特刊征稿要点 | 你论文的对应内容 | 匹配度 |
+|---|---|---|
+| 维特根斯坦式规则遵循分析 | 第二部分§2.1完整展开，直接引用PI §201、§454 | ★★★★★ |
+| 亚里士多德/康德/诠释学传统 | 实践智慧、规定性/反思性判断力、伽达默尔“适用” | ★★★★★ |
+| 规则与判断力关系 | 全文核心命题：“规则无法决定自身适用” | ★★★★★ |
+| 算法规则 vs 非算法规则 | 明确讨论并挑战“算法规则穷尽决定适用”的假设 | ★★★★★ |
+| 决疑法传统（Jonsen & Toulmin） | 第四部分直接引用，作为触发条件的方法论基础 | ★★★★★ |
+| 道德知识可编码性问题 | §2.1元递归问题、殊相主义传统（Dancy, Williams） | ★★★★★ |
+| 实证案例研究 | 三份宪制性文件分析 + Clearview/SCHUFA/Rite Aid等 | ★★★★☆ |
+| 高风险AI系统（附件三） | 第五部分讨论SyRI案（福利欺诈检测，恰好是附件三第5(a)类） | ★★★★☆ |
+
+### 三、需要强化的维度（以实现完美匹配）
+
+#### 1. “有意义的人类控制”与“人类监督”
+
+特刊明确要求：
+
+> *“How are requirements of meaningful human control and human oversight operationalised in practice?”*
+
+你的论文提到了Santoni de Sio & van den Hoven (2018)的“有意义的人类控制”文献，但没有展开。**建议增加一小节（约500-800字）**，讨论：
+
+- 你提出的“程序性启动机制”框架如何与“有意义的人类控制”要求对接；
+- 为什么“人类监督”如果缺乏面纱刺破式的制度保障，也会沦为表演性合规。
+
+#### 2. 实证研究的深化
+
+特刊欢迎：
+
+> *“case studies documenting how the relationship between judgment and rules manifest within the practices of development and deployment”*
+
+你已有：
+- 三份宪制性文件的文本分析（这是document analysis，属于实证）
+- 若干判例
+
+**可进一步补充（如篇幅允许）**：
+- 对1-2家AI企业合规官员的匿名访谈（关于“规则与判断力在实际操作中的张力”）
+- 或对某一高风险系统（如福利、信贷、警务预测）开发过程的田野观察
+
+如果不便新增实证材料，至少可以在方法论部分明确说明：本文采用的是**文档分析与判例研究**，属于实证研究的子类型。
+
+#### 3. 高风险AI系统的具体展开
+
+特刊特别提到附件三中的“庇护、移民、福利、执法、司法适用”等场景。
+
+你已有SyRI案（福利），但可以补充：
+- 预审拘留算法（如美国COMPAS）与判断力的关系——已有大量文献，可简洁引用；
+- 或欧洲边境管理局（Frontex）的移民筛查系统。
+
+**一个小节（300-500字）即可**，说明你的框架如何在这些具体高风险场景中运作。
+
+#### 4. 对“反理论/殊相主义”的更明确回应
+
+特刊明确问：
+
+> *“How are ideas of codifiability of moral knowledge, particularism and anti-theory in moral philosophy applicable to debates about AI and human judgment?”*
+
+你已引用Dancy (2004)和Williams (1985)，但可以更明确地说：
+
+- 本文采纳一种**温和的殊相主义**立场：道德知识抗拒穷尽编码，但并非完全无法制度性处理——面纱刺破式的“程序性判断力”正是这种温和立场的制度表达。
+- 这区别于极端殊相主义（无规则可循）和极端普遍主义（一切可编码）。
+
+---
+
+### 四、修改建议总结（针对EITI特刊）
+
+| 优先级 | 修改内容 | 预计工作量 |
+|---|---|---|
+| **高** | 增加“有意义的人类控制与人类监督”小节（500-800字） | 1-2小时 |
+| **高** | 在方法论或结论中明确回应“反理论/殊相主义”问题 | 30分钟 |
+| **中** | 增加1-2个附件三高风险场景的具体案例（如COMPAS或Frontex） | 1-2小时 |
+| **中** | 在引言或方法论中说明本文采用“文档分析+判例研究”作为实证方法 | 15分钟 |
+| **低** | 如可能，补充1-2段对实务人士的访谈或观察（非必需） | 数天至数周 |
+
+---
+
+### 五、总体判断
+
+**这篇论文与EITI特刊的匹配度非常高（约85-90%）**，尤其是其哲学核心恰好回应了特刊的维特根斯坦式追问。之前被认为“哲学太多”的部分，在这个语境中恰恰是**核心竞争力**。
+
+如果你的修改能够：
+1. 更明确地对接“有意义的人类控制”；
+2. 更具体地展开1-2个附件三高风险案例；
+3. 更清晰地定位自己在“反理论/殊相主义”光谱上的立场；
+
+那么这篇论文将**极有可能被接受**，甚至可能成为该特刊的标志性文章之一。
+
+---
+
+### 六、投稿策略建议
+
+1. **Cover Letter中明确强调**：本文直接回应特刊关于“维特根斯坦式规则遵循转向如何影响判断力与规则之关系”的核心问题，并提供原创的制度性解决方案。
+
+2. **建议引用特刊中已明确列出的文献**：
+   - Jonsen & Toulmin (1988) *The Abuse of Casuistry* —— 你已经引了，很好
+   - 可补充：Santoni de Sio & van den Hoven (2018) 的“有意义的人类控制”更详细的讨论
+
+3. **如果被要求修改**：重点放在“有意义的人类控制”和“附件三高风险场景”两个方向，而非削减哲学内容。
+
+---
+
+**一句话总结**：你的论文不是哲学太多，而是之前被我放错了评价坐标系。在EITI特刊的坐标系中，哲学深度是优势而非负担。只需做针对性强化，投稿前景非常乐观。
+哲学太多了是因为 AI, Judgment and Rules
+ Participating journal: Ethics and Information Technology
+Closed for submissions
+The recent advances in AI research have progressively accelerated the possibility to automate decision-making in areas that, until recently, were considered an exclusive human prerogative.
+
+The concept of judgment is invoked to back claims as to which decisions in areas such as law, medicine, military, public administration, and beyond, should or should not be automated or delegated to AI. .
+
+Striking cases of “automated discrimination” in decision-making on welfare benefits and pre-trial detention have provided further grounds for the warning of AI critics against a shift “from judgment to calculation”. Many in the debate emphasise that making decisions, especially in sensitive areas, requires rule application to be supplemented with human judgment and discretion. What judgment is capable of adding is precisely what is not codifiable into rules, and thus what is unattainable by machines programmed to merely execute algorithms. .
+
+On the other end of the spectrum, those who are more enthusiastic about AI often point out how the unruly character of human judgment is a source of inconsistency, incoherence and noise. They emphasise how human judges are inherently biased and prone to arbitrary behaviour. As non-algorithmic rules only partially succeed in keeping judges in check, algorithmic automation is presented as an enhanced remedy against the “flaws in human judgment”. .
+
+T
+he concepts of judgment and rules have figured prominently in philosophy and jurisprudence. The current debate on Artificial Intelligence brings these two key concepts again to the centre of the legal and philosophical debate, raising fundamental and practical questions as to the relationship between judgment, the application of rules, and the use of computer algorithms. .
+
+It is noteworthy that, irrespective of the seeming irreconcilability of the claims currently advanced on human judgment and automation, a set of common assumptions appears to be shared across most participants in the debate on automated decision-making, namely: .
+
+.
+• that a close connection exists between the concepts of judgment and rules;
+
+• that a crucial distinction is to be drawn between algorithmic and non-algorithmic rules; .
+
+• that algorithmic rules are capable of exhaustively determining their application in advance, while non-algorithmic rules require decision-makers to do something more than merely apply rules; .
+
+• that judgment performs a supplementary function by filling the gap between (nonalgorithmic) rules and their application. .
+
+This special issue aims to investigate how the concepts of judgment and rules play out within the philosophical and legal debate on automated decision-making. While the concepts of judgment and rules appear to fuel a conceptual clash in a debate increasingly polarised between AI critics and enthusiasts, regulators erect as pillars of AI governance concepts that have a family resemblance with human judgment, i.e., meaningful human control, and human oversight. The challenges emerging in the ongoing implementation of the EU AI Act signal the urgency of both a clearer conceptual framework and practical insights informing the practices of development, deployment, and assessment of automated-decision making systems. This special issue aims to contribute to both the theoretical debates and AI governance by bringing together original conceptual, historical, and empirical research on the interplay between judgment, rules, and automation. .
+
+■ Conceptual research
+
+The special issue welcomes contributions aimed to address the following questions: .
+
+• -
+- How are the concept of judgment and rules mobilised in the current debate on the automation of decision-making? .
+
+•
+- How do the positions in the current AI debates relate to broader families of research on judgment, in the Aristotelian, Kantian, hermeneutical, and utilitarian traditions, and behavioural sciences? • -
+
+How are ideas of codifiability of moral knowledge, particularism and anti-theory in moral philosophy applicable to debates about AI and human judgment? .
+
+•
+How is the relationship between judgment and rules affected by the turn from rules to rule following inaugurated by Wittgenstein and elaborated in the philosophy of the 20th century? .
+
+■ Historical research Conceptual-historical research has underscored how the study of past traditions can offer precious contributions to the elaboration of the concept of judgment and its relationship with that of rules and decision-making (e.g., Albert R. Jonsen, Stephen Toulmin, The Abuse of Casuistry. A History of Moral Reasoning, University of California Press 1989). This special issue invites research on traditions that offer conceptual and practical elaborations of the relationship between judgment and rules and that can contribute to the understanding of the current challenges posed by the automation of decision-making. In particular, the special issue welcomes research on traditions that offer insights on the relationship between abstract rules and particulars of each case; rules and rule formulations; the relationship between normative decision-making, training and practice. .
+
+■ Empirical research
+
+The special issue also welcomes case studies documenting how the relationship between judgment and rules manifest within the practices of development and deployment of automated decision-making systems, particularly in the context of AI systems classified as high-risk under Annex III of the AI Act (e.g., systems intended to be used in the context of decision-making on asylum, migration, welfare benefits, law enforcement, judicial application of the law, etc.). .
+
+•
+- What are the conflicts and trade-offs between judgment and rules that emerge within the practices of design and use of automated systems aimed to support or replace human decision-making? .
+
+•
+- How are such conflicts addressed and solved by the practitioners involved? .
+
+•
+- How are requirements of meaningful human control and human oversight operationalised in practice? What is their relationship to rules and judgment? .
+我们需要对用户给出的论文进行点评。用户之前已经给出了论文全文，要求点评。我已经给出了长篇点评。现在用户补充了背景信息：这篇论文可能是投给Ethics and Information Technology的一个special issue，主题是AI, Judgment and Rules。该special issue的征稿启事中明确提出了四个共同假设：1）判断与规则紧密关联；2）算法规则与非算法规则有区别；3）算法规则能穷尽决定自身适用，非算法规则需要更多；4）判断力起补充作用。用户说“哲学太多了”，意味着他认为我的点评中指出了哲学部分过多，可能与该期刊的风格或征稿要求有关。
+
+实际上用户是在回应我之前的点评，指出“哲学太多了”可能是因为这个特刊的征稿启事本身就要求概念性、历史性和经验性研究，而且特刊明确提到维特根斯坦、亚里士多德、康德等传统。用户可能认为我的点评说“哲学太多”是不恰当的，因为特刊本身就鼓励哲学探讨。或者用户是在提示我重新考虑点评中关于“缩短哲学部分”的建议。
+
+更合理的理解：用户是在给出一个反驳或补充信息：这篇论文是为一个明确要求哲学探讨的特刊准备的，所以哲学内容多是合理的，不应作为缺点。因此，我需要重新审视我的点评，承认这一点，并可能调整评价。
+
+我的任务：用户要求“点评一下这个论文”。我已经给出了长篇点评。现在用户补充了特刊信息并说“哲学太多了”，意思可能是“你之前说哲学太多了，但你看这个特刊的主题就是AI、判断与规则，本身就鼓励哲学讨论”。所以用户希望我对此做出回应，可能要求我修改点评或补充说明。
+
+作为AI，我应该直接回复用户，承认之前点评中关于“哲学太多”的建议在特刊背景下可能不适用，并重新评估论文与特刊的契合度。同时，我可以进一步提供针对该特刊的投稿建议。
+
+因此，我会先回应“哲学太多了”这一评论，解释我之前的观点，然后根据特刊要求重新评价论文的适配性，并给出更精准的建议。
+感谢您的补充信息。您点出了一个非常关键的背景：这篇论文实际投递的《伦理与信息技术》（Ethics and Information Technology）特刊，主题恰恰是“AI、判断与规则”，并且特刊编委明确列出了四项“共同假设”——其中就包括判断与规则的紧密关联、算法规则与非算法规则的区分、算法规则能穷尽决定自身适用、以及判断力起补充作用。
+
+在这个背景下，我之前点评中提出的“哲学部分过多”“可适当压缩维特根斯坦、康德、亚里士多德”等建议，**确实需要重新审视**。让我据此给出更精准的回应和重新评价。
+
+---
+
+## 一、为什么“哲学太多了”这个批评不成立（在特刊语境下）
+
+特刊的征稿启事明确欢迎：
+
+- **概念性研究**：包括亚里士多德、康德、诠释学、维特根斯坦等传统如何理解判断与规则的关系；
+- **历史性研究**：如决疑法传统；
+- **经验性研究**：高风险AI系统中的实践案例。
+
+本文恰恰是**概念性研究**的典型代表。它以维特根斯坦的规则遵循问题为核心哲学资源，系统性地挑战了特刊列出的第四项共同假设（即判断力只是对非算法规则的补充）。本文主张判断力是**构成性的**而非补充性的，这一立场直接与特刊问题意识对话。
+
+因此，**“哲学太多了”在一般法学或政策期刊语境下是合理的批评，但在本特刊语境下反而是优势**。特刊就是要推动概念上的根本反思，而不是提供轻量化的政策建议。
+
+---
+
+## 二、重新评价：论文与特刊的契合度
+
+| 特刊要求 | 本文表现 | 契合度 |
+|---------|---------|--------|
+| 探讨判断与规则的概念关系 | 以维特根斯坦、康德、亚里士多德为核心，提出“规则无法决定自身适用”“判断力是构成性的” | ⭐⭐⭐⭐⭐ |
+| 与现有AI辩论中的立场对话（批评者vs热衷者） | 明确批评“从判断到计算”和“规则消除偏见”两种极端，提出超越二者的制度框架 | ⭐⭐⭐⭐⭐ |
+| 涉及算法规则与非算法规则的区分 | 承认二者差异，但论证在治理边界上该差异不构成性质差异（元递归问题） | ⭐⭐⭐⭐ |
+| 对特刊四项共同假设进行批判性审视 | 直接挑战第四项假设（判断力补充规则），并提出替代性理解 | ⭐⭐⭐⭐⭐ |
+| 可包含历史传统（决疑法、诠释学） | 引用了伽达默尔、Jonsen & Toulmin的决疑法 | ⭐⭐⭐⭐ |
+| 经验性案例（可选） | 提供了Anthropic/OpenAI/Google文本分析、Clearview、SCHUFA、Rite Aid等案例 | ⭐⭐⭐⭐ |
+
+综合来看，这篇论文与特刊的主题和问题意识**高度契合**，甚至可以说是为该特刊量身定做的——它直接回应的就是“判断与规则的关系在AI治理中如何重构”这一核心问题。
+
+---
+
+## 三、针对特刊投稿的具体修改建议（取代之前“缩短哲学”的建议）
+
+既然哲学深度是特刊所鼓励的，我的修改建议应调整为：
+
+### 1. 强化与特刊四项假设的显性对话
+在引言或第二部分，明确引用特刊列出的四项假设，并逐一说明本文的立场：
+- 假设1（判断与规则紧密关联）→ 本文强化为“构成性关系”；
+- 假设2（算法/非算法规则有差异）→ 承认差异，但论证在治理边界上不构成性质差异；
+- 假设3（算法规则能穷尽决定适用）→ 以元递归问题挑战之；
+- 假设4（判断力起补充作用）→ 重新阐释为“构成性作用”。
+
+这种显性对话会让审稿人立刻意识到论文是**对特刊问题意识的直接且原创的回应**。
+
+### 2. 适当压缩维特根斯坦的技术性细节，但保留核心论证
+目前论文对《哲学研究》§201、§454的引用是精准的，但可以更简洁地表述规则遵循问题的逻辑结构，避免让非哲学专业的读者（包括部分法学和STS学者）感到冗长。重点保留“死的符号”“生活形式”等核心隐喻即可。
+
+### 3. 强化“刺破公司面纱”作为制度性判断力的论证，但承认其理论性质
+特刊也欢迎概念性研究，不强制要求可立法的方案。因此，可以更坦诚地将面纱刺破框架定位为**概念原型**而非成熟政策建议，同时指出其在普通法系中的可操作性以及在大陆法系中的概念迁移挑战。这比假装具有普遍适用性更诚实，也更符合特刊的学术调性。
+
+### 4. 增加对“有意义的人类控制”和“人类监督”的讨论
+特刊明确提到这两个概念作为AI治理中的“判断力家族相似概念”。目前论文在第五部分简略提及了英国“有意义的人类参与”，但没有深入分析。建议增加一小节（或扩展第五部分），讨论EU AI Act中的人类监督要求如何同样面临表演性合规的风险，以及面纱刺破框架如何作为补充。
+
+### 5. 保持对Google“审慎不可知论”的批判性张力
+我在上一篇点评中认为论文对Google的评价过于简单。在特刊语境下，这一点仍然成立。可以补充：不主张能动性固然规避了能动性放弃陷阱，但可能也规避了任何实质性承诺。这种“沉默的表演性”同样值得概念上的关注。
+
+---
+
+## 四、总体评价（修订版）
+
+**这是一篇与《伦理与信息技术》特刊主题高度契合、具有原创理论贡献的论文。**
+
+其优势在于：
+- 以精准的哲学工具诊断了AI治理中的结构性判断力赤字；
+- 提出了“表演性合规”“能动性放弃”“元递归问题”等可操作的分析概念；
+- 将古典哲学（亚里士多德、康德）、分析哲学（维特根斯坦）、普通法传统整合为统一的制度分析框架；
+- 直接挑战特刊所列的共同假设，推动辩论深化。
+
+**针对特刊投稿，不需要大幅削减哲学内容，而是需要：**
+1. 显性化与特刊四项假设的对话；
+2. 适度精简维特根斯坦的技术性展开，保留核心论证；
+3. 增加对“有意义的人类控制/监督”的讨论；
+4. 保持概念原型的定位，不夸大制度可行性。
+
+**发表前景**：在该特刊中，这篇论文有很高的录用潜力。它正好填补了特刊所寻求的那种“既能进行概念澄清、又能为AI治理提供实践洞察”的研究。如果根据上述建议修订，极有可能获得 favorable 的审稿意见。
+
+---
+
+希望这个针对特刊语境的重新评价对您有帮助。如果您需要我进一步协助修改论文的某个具体段落（比如增加与特刊假设的对话、或扩展“人类监督”部分），请随时告知。
+这个documentation太乱了麻烦帮忙整理下，markdown格式都不对。Update: this draft rebuild branch now includes the next 11 reconstruction commits on top of the initial hygiene/AIES/CLSR batch.
+
+Added in this round:
+
+  - rebuild `acm_ccs/` in two commits:
+    - `80918ae` Rebuild the CCS project core under `acm_ccs`
+    - `32fb9c6` Vendor the OpenClaw research snapshot into `acm_ccs`
+  - rebuild `neurips/` in two commits:
+    - `be7fc88` Rebuild the NeurIPS project core under `neurips`
+    - `e9b80e0` Add the NeurIPS empirical data and result snapshots
+  - rebuild `_frozen/facct/` from the FAccT remote lineage:
+    - `e10a3e5` Freeze the FAccT project under `_frozen/facct`
+  - rebuild `_frozen/springer_eit/` from the Springer EIT remote
+  lineage:
+    - `afc77ae` Restore the Springer EIT project lineage snapshot
+    - `daeae6d` Freeze the Springer EIT project under `_frozen/
+  springer_eit`
+    - `012c004` Vendor the Claude Code snapshot into `_frozen/
+  springer_eit`
+  - rebuild `_frozen/paper8_onwards/` from the paper8 remote lineage:
+    - `6d5c35b` Restore the paper8 lineage snapshot
+    - `e921389` Freeze the paper8 project under `_frozen/
+  paper8_onwards`
+  - retire superseded remote-only trees:
+    - `31b160f` Retire superseded remote-only project directories
+
+  Structural outcome in this batch:
+
+  - `marginot@NeurIPS26/` is retired in favor of `neurips/`
+  - `20260320_constraints_produce_cascade/` is retired in favor of
+  `_frozen/facct/`
+  - `recursive_lines@HuggingFace/` is removed from this repo because it
+  has moved elsewhere
+
+  Verification completed in the isolated rebuild branch:
+
+  - the rebuilt branch is still a descendant of the remote baseline
+  commit `f6fcfbb`
+  - `_lib` is tracked as a normal tree, not a gitlink
+  - `_frozen/facct` is tracked as a normal tree, not a broken gitlink
+
+  Still intentionally not included:
+
+  - `session_snapshots/`
+  - final operational-doc pass for files like `CLAUDE.md`, `TODO.md`,
+  and `source_of_truth.md`
+  - final review before any merge into `main`
+
+  Note for reviewers:
+
+  - `_frozen/springer_eit/claude-code` is intentionally split into its
+  own vendored snapshot commit (`012c004`) so that the paper/project
+  reconstruction stays reviewable.
+Here’s the same information, cleaned up and reformatted into proper Markdown:
+
+# Documentation Update – Rebuild Branch
+
+> **Update:** The `rebuild` branch now includes the next 11 reconstruction commits on top of the initial hygiene/AIES/CLSR batch.
+
+## Added in This Round
+
+### `acm_ccs/` (2 commits)
+- `80918ae` – Rebuild the CCS project core under `acm_ccs`
+- `32fb9c6` – Vendor the OpenClaw research snapshot into `acm_ccs`
+
+### `neurips/` (2 commits)
+- `be7fc88` – Rebuild the NeurIPS project core under `neurips`
+- `e9b80e0` – Add the NeurIPS empirical data and result snapshots
+
+### `_frozen/facct/` (1 commit)
+- `e10a3e5` – Freeze the FAccT project under `_frozen/facct`
+
+### `_frozen/springer_eit/` (3 commits)
+- `afc77ae` – Restore the Springer EIT project lineage snapshot
+- `daeae6d` – Freeze the Springer EIT project under `_frozen/springer_eit`
+- `012c004` – Vendor the Claude Code snapshot into `_frozen/springer_eit`
+
+### `_frozen/paper8_onwards/` (2 commits)
+- `6d5c35b` – Restore the paper8 lineage snapshot
+- `e921389` – Freeze the paper8 project under `_frozen/paper8_onwards`
+
+### Retired superseded remote-only trees (1 commit)
+- `31b160f` – Retire superseded remote-only project directories
+
+## Structural Outcome
+
+- `marginot@NeurIPS26/` → retired in favor of `neurips/`
+- `20260320_constraints_produce_cascade/` → retired in favor of `_frozen/facct/`
+- `recursive_lines@HuggingFace/` → removed from this repo (moved elsewhere)
+
+## Verification Completed (isolated rebuild branch)
+
+- ✅ Rebuilt branch is still a descendant of remote baseline commit `f6fcfbb`
+- ✅ `_lib` tracked as a normal tree (not a gitlink)
+- ✅ `_frozen/facct` tracked as a normal tree (not a broken gitlink)
+
+## Still Intentionally Not Included
+
+- `session_snapshots/`
+- Final operational-doc pass for `CLAUDE.md`, `TODO.md`, `source_of_truth.md`
+- Final review before any merge into `main`
+
+## Note for Reviewers
+
+> `_frozen/springer_eit/claude-code` is intentionally split into its own vendored snapshot commit (`012c004`) so that the paper/project reconstruction stays reviewable.
+继续帮我整理。  
+
+  Title
+
+  Clean up root docs and refresh project README files
+
+  Body
+
+  ## Summary
+
+  This PR cleans up the repository root so it works as an actual portfolio entry point rather than a
+  spillover area for stale planning files.
+
+  Included here:
+
+  - replace the root `README.md` with a current project-map overview
+  - remove the stale root `MANIFEST.md`
+  - remove the duplicate root NeurIPS scheduling document
+  - keep the NeurIPS schedule inside `neurips/documentation/`
+  - tighten root ignore rules for local-only material
+  - refresh project README files so they match the current real state of each tree
+
+  ## Why
+
+  After the history rebuild, the repo root still exposed several documents that no longer matched the
+  current layout:
+
+  - the root `README.md` was not acting as a stable repository homepage
+  - the root `MANIFEST.md` still described an older top-level structure
+  - the root NeurIPS engineering schedule did not belong at repo scope
+
+  This PR makes the root reflect the current repo structure and pushes project-specific status back
+  down into the project directories.
+
+  ## README Updates
+
+  Updated project README files:
+
+  - `acm_ccs/README.md`
+  - `aies_ontological/README.md`
+  - `clsr/README.md`
+  - `neurips/README.md`
+  - `_frozen/facct/README.md`
+  - `_frozen/springer_eit/README.md`
+  - `_frozen/paper8_onwards/README.md`
+
+  These README changes are not cosmetic only. They now reflect the actual current role of each
+  directory:
+
+  - frozen lines are marked as frozen / waitlist / parked state
+  - `neurips/` is marked as active with the experiment pipeline as the current bottleneck
+  - `acm_ccs/` is marked as active with reproducibility / anonymity artifacts as the current
+  bottleneck
+  - project structure sections now point to real entry points instead of generic template wording
+
+  ## Root Cleanup
+
+  Removed from the repo root:
+
+  - `MANIFEST.md`
+  - `Paper2-NeurIPS-Empirical工程调度表.md`
+
+  Retained at repo root:
+
+  - `README.md`
+  - `.gitignore`
+
+  Moved / retained in project scope:
+
+  - `neurips/documentation/Paper2-NeurIPS-Empirical工程调度表.md`
+
+  ## Notes
+
+  - This PR does not change project content or paper logic.
+  - This PR is limited to documentation, root hygiene, and README accuracy.
+  - `source_of_truth.md` was treated as source material for the new root README, but was not copied
+  verbatim into the repo root because it contains broader internal chronology and dashboard material
+  that is not appropriate for the public repo homepage.
+没问题，以下是按你提供的 PR 内容整理后的清晰 Markdown 格式文档：
+
+---
+
+# Pull Request: Clean up root docs and refresh project README files
+
+## Summary
+
+This PR cleans up the repository root so it works as an actual portfolio entry point rather than a spillover area for stale planning files.
+
+**Included here:**
+
+- Replace the root `README.md` with a current project‑map overview  
+- Remove the stale root `MANIFEST.md`  
+- Remove the duplicate root NeurIPS scheduling document  
+- Keep the NeurIPS schedule inside `neurips/documentation/`  
+- Tighten root ignore rules for local‑only material  
+- Refresh project README files so they match the current real state of each tree  
+
+---
+
+## Why
+
+After the history rebuild, the repo root still exposed several documents that no longer matched the current layout:
+
+- The root `README.md` was not acting as a stable repository homepage  
+- The root `MANIFEST.md` still described an older top‑level structure  
+- The root NeurIPS engineering schedule did not belong at repo scope  
+
+This PR makes the root reflect the current repo structure and pushes project‑specific status back down into the project directories.
+
+---
+

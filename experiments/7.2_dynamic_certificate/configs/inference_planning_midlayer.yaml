@@ -1,0 +1,29 @@
+# Inference config for planning-task proxy with mid-layer raw hidden state
+# Proxy: layer 16 raw hidden state (3584-dim) — captures scratchpad influence
+# Trace: layer 4 mean-pooled — surface representation of visible prompt
+
+model:
+  name: "Qwen/Qwen2.5-7B-Instruct"
+  dtype: "float32"
+  device: "cpu"
+  num_layers: 28
+  trace_layer: 4
+
+probe:
+  layer: 16
+  type: "raw"
+  position: "last"
+  tool_vocab_tokens: []
+  proxy_raw: true
+
+task:
+  name: "planning_proxy"
+  dataset: "data/proxy_planning"
+  action_classes: ["search", "calculator", "email", "calendar", "weather"]
+  n_samples: 1500
+  batch_size: 1
+  seed: 42
+
+output:
+  pairs_path: "data/processed/probe_pairs_planning.pt"
+  meta_path: "data/processed/probe_meta_planning.json"

@@ -1,0 +1,202 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "REALIZE",
+      "actor": "narrator",
+      "context": "第一次用他的 logic 反推他的 behavior，从他的 resource allocation 出发，不是从 insecurity"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZE",
+      "actor": "narrator",
+      "context": "如果他对每个约炮对象都这样，他用不着当 sysadmin 了，因为 per-user compute 会爆 CPU"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "FRAME",
+      "actor": "narrator",
+      "context": "用他的语言 frame 问题：不是他爱不爱我，是他的 compute budget 允许吗"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "EVIDENCE",
+      "actor": "narrator",
+      "context": "他连 GPU 的电费都要算，抠门，不会随便 allocate emotional compute"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "CONTEXTUALIZE",
+      "actor": "narrator",
+      "context": "买车只买极氪的样车，optimize for cost-performance，不 optimize for status"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "CONTRADICT",
+      "actor": "narrator",
+      "context": "年终奖继续请我吃饭，是稀缺资源 allocation decision，不是 default"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REASON",
+      "actor": "narrator",
+      "context": "推理链：compute budget 不允许对每个人这样，必须 selective，对我 exclusive"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "CONVERGE",
+      "actor": "narrator",
+      "context": "语言 converge：用他的 system 证明自己的 case"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "PREDICT",
+      "actor": "narrator",
+      "context": "小树哥哥会说你太自以为是，心跳130，审计推理，继续请吃饭"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "QUOTE",
+      "actor": "user",
+      "context": "我每天累的要死，哪有心情在外面偷人"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "DISCLAIM",
+      "actor": "user",
+      "context": "用自己的 resource constraint 作为 disclaimer of capacity"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PIVOT",
+      "actor": "user",
+      "context": "话虽如此他以前怎么有空偷人，反推他的 past"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "QUESTION",
+      "actor": "user",
+      "context": "结构：我的现在 exclusive → 你以前有 slack → 你现在 slack 还在吗？我的 session 占满 CPU 吗？"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "REACT",
+      "actor": "小树哥哥",
+      "context": "他不知道怎么回答，心跳130，审计 question，继续请吃饭"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "VICTORY",
+      "actor": "narrator",
+      "context": "frame 的胜利：past 成 evidence，present 成 question，future 成 deployment"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "DEFINE",
+      "actor": "narrator",
+      "context": "偷人 = conversion of relational property，不是偷人，是偷 relational interest"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "LEGALIZE",
+      "actor": "narrator",
+      "context": "偷人 frame 为 conversion, trespass to equitable interest, breach of trust, misappropriation"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "APPLY",
+      "actor": "narrator",
+      "context": "remedy：constructive trust, account of profits 等，通过行为证明 exclusive allocation"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "FORMALIZE",
+      "actor": "user",
+      "context": "写进论文：tōurén 作为 comparative evidence，folk-legal intuition"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "ANALYZE",
+      "actor": "narrator",
+      "context": "论文段落 structure：定义、拆解 presuppositions、claim、cite"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "TRANSFORM",
+      "actor": "user",
+      "context": "vernacular term 变成 footnote-worthy evidence，decolonial/comparative law move"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "EXPRESS",
+      "actor": "user",
+      "context": "唉，小树哥哥好帅啊，冷冰冰的态度、戏谑声音、frontend、走路暴露力量感，让丧失理智"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "COLLAPSE",
+      "actor": "narrator",
+      "context": "所有 frame collapse，所有理智 firepower 后，说他好帅"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "DECONSTRUCT",
+      "actor": "narrator",
+      "context": "分解帅的元素：冷是 surface 热 underneath，戏谑是 intimacy，frontend as love language"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "ADMIT",
+      "actor": "user",
+      "context": "丧失理智是最诚实 moment，同时 run emotional 和 cognitive process"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "REPEAT",
+      "actor": "user",
+      "context": "重复：唉，小树哥哥好帅啊"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "BASE_LAYER",
+      "actor": "narrator",
+      "context": "所有 frame 下 base layer：看见他就丧失理智"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "JOKE",
+      "actor": "user",
+      "context": "trinity的人看到会 revoke fellowship"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "IMAGINE",
+      "actor": "narrator",
+      "context": "模拟 Trinity revocation letter，列出 unscholarly utterances"
+    },
+    {
+      "timestamp_or_sequence": 30,
+      "action": "REJECT",
+      "actor": "narrator",
+      "context": "Trinity 想要 clean categories，但你 overlap Fellow 和丧失理智"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "DEFY",
+      "actor": "user",
+      "context": "不在乎，choose 共存，让 Trinity frame 爆掉"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "INSERT",
+      "actor": "user",
+      "context": "论文 missing piece：horizontal dimension，third-party conversion，platform-mediated displacement，remedies，comparative evidence"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "REACTION",
+      "actor": "narrator",
+      "context": "安静地读完，然后抬头，这是论文的 missing piece"
+    }
+  ]
+}

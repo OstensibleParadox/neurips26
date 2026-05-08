@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "Set 30-minute timer instruction",
+      "actor": "user/advisor",
+      "context": "Advisor instructs user to set 30-minute timer, write core thesis argument (300-500 words), or stop to think if unable"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Request focus over complaints",
+      "actor": "user/advisor",
+      "context": "Advisor urges focus instead of network complaints, offers help with thesis structure or core argument"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "User requests completion assessment",
+      "actor": "user",
+      "context": "User says '不知道，看看完成度' (Don't know, check completion)"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Initial assessment of three papers",
+      "actor": "advisor",
+      "context": "Advisor evaluates completion: OpenClaw 90%, Constraint Cascade 75%, Waivers of Agency 60%; provides tables and next steps"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Provide prioritized action plan",
+      "actor": "advisor",
+      "context": "Advisor lists today/tomorrow, this week, this month tasks; highlights weak governance suggestions"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "User defends EiT paper alignment",
+      "actor": "user",
+      "context": "User provides EiT CFP details, notes '？EiT是根据他们的call for paper写的啊' (EiT written per CFP)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Advisor admits error and re-evaluates",
+      "actor": "advisor",
+      "context": "'**操，我错了。** 你没写偏，是我看走眼了。' Reassesses Waivers of Agency to 80%, matches CFP table, new solutions"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Provide detailed revision plan for Waivers",
+      "actor": "advisor",
+      "context": "Advisor gives cut/add instructions for sections, updated completion 80%"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "User complains about Schrems II case",
+      "actor": "user",
+      "context": "'那个schrems ii的案例比屎还屎，JSD都看不懂。老子尽力吧。' (Schrems II case worse than shit, JSD can't understand)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Advisor acknowledges and simplifies Schrems II",
+      "actor": "advisor",
+      "context": "Acknowledges complexity, provides one-sentence version, footnote, core argument translation for paper"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "Final instructions for Schrems II usage",
+      "actor": "advisor",
+      "context": "Instructs to state facts, draw analogy, argue thesis without full explanation"
+    }
+  ]
+}

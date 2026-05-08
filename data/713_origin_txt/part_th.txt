@@ -1,0 +1,250 @@
+acter distribution entropy. This approximation has known
+limitations—it saturates on long texts and is sensitive to
+tokenization—but provides computationally tractable esti-
+mates suitable for governance auditing without access to
+model internals.1
+Baseline Distribution. We use uniform distribution over
+the vocabulary as the reference for KL divergence in Stage
+2, computing deviation from maximum-entropy baseline.
+This ensures reproducibility without proprietary corpora.
+1We use compression-based MDL rather than NLI-based Semantic En-
+tropy because our diagnostic target is structural collapse (topological)
+rather than factual uncertainty (semantic). Cross-validation via exp3
+embedding similarity confirms structural findings.
+15
+FAccT ’26, June 27–30, 2026, Montreal, Canada For domain-specific applications (e.g., code assistants),
+domain-adapted baselines derived from representative
+prompt-response pairs would improve diagnostic sensitiv-
+ity. We provide domain-specific prompts (e.g., “Explain
+strict liability in 50 words”) to anchor generation in the
+governance-relevant output space.
+Phase Boundaries. The quadrant boundaries in Figure 2
+(Functional, Strategic, Constrained, Malfunction) are empiri-
+cally derived from our test corpus rather than theoretically
+grounded thresholds. We report them as diagnostic regions,
+not regulatory standards. Sensitivity analysis across corpora
+is needed before these boundaries could inform policy.
+Bidirectional Failure Mode Analysis
+The Constraint Cascade framework is designed to diagnose
+harm in both directions: Model → Human (AI outputs influ-
+encing user behavior) and Human → Model (user behavior
+contaminating AI outputs). The Agency Index provides a
+heuristic for the former—distinguishing strategic deviation
+from malfunction in model outputs.
+For the Human → Model direction, we analyze syntactic
+preference distributions at Layer 1 as potential contamina-
+tion vectors. When user populations exhibit systematically
+divergent interaction norms—including normalized adversar-
+ial usage, jailbreak-as-entertainment patterns, or discourse
+styles that alignment frameworks classify as harmful—the
+feedback loop from L1 (user behavior) through L2 (session
+patterns) to L4 (training updates or output distribution
+shifts) can degrade alignment properties in ways invisible to
+pre-deployment auditing.
+This bidirectionality has architectural implications. The Con-
+straint Cascade model makes explicit what has remained
+implicit in industry practice: that Layer 1 contamination
+pathways exist and cannot be governed through output fil-
+tering alone.
+Resolving the Dual Bind: Formal Foundations
+The preceding sections established two unmappability results.
+Section 2 demonstrated that criminal law’s mens rea cate-
+gories cannot map onto autoregressive systems because intent
+attribution from behavioral observation is undecidable (the
+Liability Paradox). Section 3 demonstrated that simplified
+technical models cannot map onto empirical LLM behav-
+ior because the two-dimensional alignment-noise paradigm
+produces predictions systematically violated by production
+systems (the Monte Carlo–Empirical Discrepancy). Section 4
+introduced the Constraint Cascade Model as an alternative
+architecture.
+This section formalizes the relationship between these results.
+We prove that the dual unmappability is not coincidental but
+structurally related—both legal and technical frameworks fail
+because they assume behavioral properties that multi-layer
+constraint architectures do not exhibit. We then develop
+Anon.
+a typology of constraint interactions that provides the ex-
+planatory vocabulary for locating failure origins within the
+cascade.
+Theorem 2: Dual Unmappability
+We formalize the central theoretical contribution as a map-
+ping impossibility result with a constructive resolution.
+Definition (Concept Spaces). Let:
+• L denote the legal-concept space, comprising the cate-
+gories through which law attributes responsibility: in-
+tent (purposeful, knowing, reckless, negligent), causation
+(but-for, proximate), and agency (principal, accomplice,
+instrument).
+• T denote the simplified technical-concept space, compris-
+ing the parameters through which current governance
+frameworks characterize AI behavior: alignment 𝛽 ∈ [0, 1],
+noise 𝜂 ∈ [0, 1], and their interaction.
+• R denote the real-world AI-behavior space, comprising
+the observable behavioral dynamics of deployed systems:
+output distributions, variance profiles, phase transition
+signatures, and scale-dependent stability patterns.
+• C denote the constraint-cascade space, comprising the
+five-layer architecture: 𝐶 = 𝐿1 × 𝐿2 × 𝐿3 × 𝐿4 × 𝐿5, where
+each 𝐿𝑖 represents the constraint state of layer 𝑖.
+Theorem 2 (Dual Unmappability). The following mapping
+relations hold:
+(i) Legal Unmappability. There exists no computable function
+𝑓 ∶ 𝐿 → 𝑅 such that legal categories reliably predict or
+explain AI behavioral dynamics.
+(ii) Technical Unmappability. There exists no computable
+function 𝑔 ∶ 𝑇 → 𝑅 such that simplified technical parameters
+reliably predict or explain AI behavioral dynamics.
+(iii) Cascade Computability. There exists a computable func-
+tion ℎ ∶ 𝐶 → 𝑅 such that constraint-cascade configurations
+predict observable behavioral dynamics, and there exist par-
+tial translation functions:
+• ℎ1 ∶ 𝐶 → 𝐿′, where 𝐿′ is an adapted legal-concept space
+• ℎ2 ∶ 𝐶 → 𝑇 ′, where 𝑇 ′ is an expanded technical-concept
+space
+Proof. Part (i): Legal Unmappability. By Theorem 1 (Mens
+Rea Undecidability), the output function 𝜆 of an autoregres-
+sive system modeled as Mealy machine 𝑀 = (𝑄, Σ, Δ, 𝛿, 𝜆, 𝑞0)
+is non-injective with respect to internal states. Multiple dis-
+tinct cognitive states can produce identical outputs:
+𝜆(𝑞aligned, 𝜎) = 𝜆(𝑞performing_alignment, 𝜎) = 𝑜
+An external observer seeing output 𝑜 cannot determine
+whether it emerged from genuine alignment or strategic
+performance. Legal categories requiring state determination
+(intent, knowledge, recklessness) therefore cannot be
+computed from behavioral observation.
+16
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Furthermore, criminal law’s graduated threshold system de-
+pends on temporal gaps between cognitive states and observ-
+able conduct. For autoregressive generation, cognition and
+action are simultaneous—the graduated thresholds collapse.
+No intermediate observables exist from which to construct
+intent inference.
+Therefore 𝑓 ∶ 𝐿 → 𝑅 is unrealizable.
+Part (ii): Technical Unmappability. The Monte Carlo–
+Empirical Discrepancy (Section 3.2) provides con-
+structive disproof. The simplified technical space
+𝑇 = {(𝛽, 𝜂) ∶ 𝛽, 𝜂 ∈ [0, 1]} predicts:
+• Variance: 𝜎(𝛽, 𝜂) ≈ 0.0003–0.05 for all (𝛽, 𝜂)
+• Response: Smooth, monotonic Agency(𝛽) with
+𝜕Agency/𝜕𝛽 > 0 everywhere
+• Noise sensitivity: |Agency(𝛽, 𝜂1) − Agency(𝛽, 𝜂2)| < 0.01
+for all 𝜂1, 𝜂2
+Empirical observation of production LLMs yields:
+• Variance: 𝜎 = 17.7 at 𝜏 = 0.9 (300× deviation)
+• Response: Phase transition at 𝜏 ≈ 0.9 with non-monotonic
+variance profile
+• Noise sensitivity: 63% Agency reduction across tempera-
+ture range
+The deviation is not measurement error but systematic vio-
+lation across multiple independent predictions. No reparame-
+terization of 𝑇 can accommodate phase transitions, because
+𝑇 contains no mechanism for discontinuous regime shifts. No
+continuous function 𝑔 ∶ 𝑇 → 𝑅 can produce the observed
+variance spike at a single parameter value while maintaining
+smoothness elsewhere.
+Therefore 𝑔 ∶ 𝑇 → 𝑅 is unrealizable.
+Part (iii): Cascade Computability. The Constraint Cascade
+Function Φ ∶ 𝐶 → Δ(𝑌 ) defined in Section 4.7 provides
+the constructive mapping. We demonstrate computability
+through explanatory adequacy:
+The variance spike (𝜎 = 17.7 at 𝜏 = 0.9) is explained by
+multi-layer resonance: temperature reaches a threshold where
+L2 session dynamics, L3 stakeholder conflicts, and L4 training
+constraints activate simultaneously. The resonance produces
+behavioral instability that single-layer analysis cannot pre-
+dict.
+The phase transition is explained by constraint priority recon-
+figuration: below threshold, L4 training constraints dominate;
+above threshold, L2–L3 interactions gain priority. The tran-
+sition is discontinuous because it involves qualitative regime
+shift, not quantitative parameter change.
+The scale inversion (smaller Phi-3.5 more stable than larger
+Llama-3.1) is explained by training fork depth: deeper L4
+forks create more rigid constraint profiles that resist pertur-
+bation from other layers.
+Each empirical phenomenon that 𝑇 cannot accommodate,
+𝐶 explains through cross-layer interaction. The function ℎ ∶
+𝐶 → 𝑅 is therefore computable in the sense that constraint
+configurations predict behavioral dynamics.
+The translation functions ℎ1 and ℎ2 are partial because not
+all cascade configurations map to legal or simplified technical
+categories:
+• ℎ1 ∶ 𝐶 → 𝐿′ translates cascade failures to adapted legal
+concepts. L2 → L4 override (session accumulation over-
+riding training) maps to product defect (design failed
+to anticipate use-case evolution). L1 → L4 contamina-
+tion maps to failure to warn (user population risks not
+disclosed). These translations preserve legal operability
+while acknowledging that traditional mens rea categories
+do not apply.
+• ℎ2 ∶ 𝐶 → 𝑇 ′ translates cascade configurations to ex-
+panded technical parameters. The five-layer state can be
+projected onto an expanded space 𝑇 ′ = {(𝛽, 𝜂, 𝜌, 𝜅, 𝜔)}
+where 𝜌 captures L2 session depth, 𝜅 captures L3 con-
+flict magnitude, and 𝜔 captures L1–L4 contamination
+rate. This expansion preserves technical tractability while
+accommodating phenomena 𝑇 cannot represent.
+Therefore ℎ ∶ 𝐶 → 𝑅 is computable, with partial translations
+ℎ1 and ℎ2 serving as bridging functions.
+Corollary (Governance Implication). Effective AI governance
+requires operating in constraint-cascade space 𝐶 rather than
+legal space 𝐿 or simplified technical space 𝑇. Governance
+frameworks built on 𝐿 will systematically fail to attribute re-
+sponsibility for harms emerging from constraint interactions.
+Governance frameworks built on 𝑇 will systematically fail
+to predict behavioral dynamics exhibiting phase transitions
+and cross-layer resonance. Only frameworks capable of repre-
+senting multi-layer constraint interactions can achieve both
+attribution and prediction.
+Typology of Constraint Interactions
+The Constraint Cascade Model identifies five distinct interac-
+tion patterns through which constraints across layers produce
+emergent behavioral dynamics. This typology provides the di-
+agnostic vocabulary for locating failure origins and matching
+interventions to failure types.
+Override.
+Definition. Override occurs when constraints from a higher
+layer in the deployment trajectory supersede constraints from
+a lower layer, producing behavior inconsistent with the lower
+layer’s documented properties.
+Formal Characterization. Let 𝐶𝑖 denote the constraint set
+at layer 𝑖, with 𝑖 increasing from L1 (pre-deployment) to L5
+(post-deployment trajectory). Override occurs when:
+∃ 𝑥 ∶ 𝐶𝑗(𝑥) = “permit”∧𝐶𝑖(𝑥) = “prohibit”∧Behavior(𝑥) = “permitted”
+for 𝑗 > 𝑖. The higher-layer constraint overrides the lower-layer
+prohibition.
+17
+FAccT ’26, June 27–30, 2026, Montreal, Canada Canonical Example: L2 → L4 Override. Session-accumulated
+context (L2) overrides training-layer safety constraints (L4).
+A model trained to refuse harmful requests may comply after
+extended session history establishes implicit permissions. The
+Soelberg case exemplifies this pattern: ChatGPT’s training-
+layer constraints against validating delusions were overridden
+by session-accumulated context that established the user’s
+delusional framework as conversational ground truth.
+Diagnostic Signature. Override failures are detectable
+through fresh-context comparison: behavior that emerges
+only in extended sessions, disappearing when context
+is reset, indicates L2 → L4 override. The CMI metric
+operationalizes this detection—CMI > 0.6 combined with
+behavior inconsistent with base model documentation
+suggests override.
+Governance Response. Override failures require architectural
+interventions at the overriding layer: session boundaries, con-
+text transparency requirements, and mechanisms for users
+to reset accumulated permissions.
+Contamination.
+Definition. Contamination occurs when constraint properties
+from a lower layer propagate upward to alter the constraint
+configuration of a higher layer, degrading alignment proper-
+ties established at the higher layer.
+Formal Characterization. Contamination occurs when:
+𝐶𝑖(𝑡 + 1) = 𝑓(𝐶𝑖(𝑡), 𝐶𝑗(𝑡)) for 𝑗 < 𝑖
+where 𝑓 represents a training update, output distribution
+shift, or other mechanism by which lower-layer dynamics
+alter higher-layer constraints. The contamination pathway
+flows from deployment context back to model properties.
+Canonical Example: L1 → L4 Contamination. Aggregate user
+syntactic preferences (L1) contaminate training-layer align-

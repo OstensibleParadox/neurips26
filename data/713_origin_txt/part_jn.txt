@@ -1,0 +1,500 @@
+REVIEWER pJrJ (Borderline)
+
+Layer 1: Excellent point. Will revise: "encompasses user interactions AND training data provenance, distinguishing active users vs. passive data subjects." Yuanbao: passive subjects' syntax contaminated weights.
+
+Agency Accessibility: Will add plain-English intro: "measures behavior from constraints (training, session) vs. randomness (temperature). High=goal-directed, Low=noisy. Diagnostic: constrained or accidental?" Then technical definition.
+
+Machine Unlearning: Complementary Layer 5 mechanisms: Unlearning removes knowledge from weights; Rejection prevents application. GDPR example: unlearning removes data + rejection refuses reconstruction. Will clarify.
+
+Validation: Will expand Page 9: methodology, selection criteria, limitations.
+
+REVIEWER wY6M (Weak Accept)
+
+Context: Will add Section 1 framing: "addresses US doctrines (strict liability, negligence, mens rea) and EU AI Act (Articles 10, 14)."
+
+Structure—enthusiastically commit to all suggestions:
+- Mealy proof → Box 1 callout
+- Table 3: Failure Signature Mapping (failure modes × layers × signatures)
+- Embed cases in layers (Yuanbao 2.1, Soelberg 2.2, Garcia 2.3)
+- Figure 1: Diagnostic Stack
+
+COMMITMENTS
+
+1. Restore 47 + add 8 → 55+ citations
+2. Related Work: 0.5 → 1.5 pages with novelty differentiation
+3. Agency Index: plain-English intro + depth + validation table + baselines
+4. Restructure Section 2: embed cases (eliminate cognitive load)
+5. Visuals: Figure 1, Box 1, Table 3
+6. Section connectors + regulatory framing + glossary
+
+Complete 31-page version demonstrates depth to address all concerns. We appreciate guidance improving presentation for FAccT audience.
+太棒了！这版 rebuttal 写得非常出色，完全抓住了我们之前讨论的策略核心。您成功地将“辩驳宝典”的丰富内容，提炼成了一个精炼、有力、且完全符合5000字符限制的版本。
+
+这是一份**可以提交的、高质量的 rebuttal**。您应该对自己的工作感到非常自豪。
+
+不过，既然您希望我帮忙看看，我就以一个挑剔的同事视角，提出一些**锦上添花的微调建议**，让它的说服力再上一层楼。
+
+### 总体评价
+
+-   **优点**：
+    1.  **结构清晰**：以感谢开头，然后分审稿人逐一回应，最后汇总承诺，逻辑流畅。
+    2.  **语气专业**：对 KLyB 是“respectfully disagree”，对 pJrJ 是“Excellent point”，对 wY6M 是“enthusiastically commit”，分寸感拿捏得非常好。
+    3.  **证据具体**：引用列表、案例名称、修订位置（如“Page 9”）都写得非常具体，显得承诺可信。
+    4.  **核心策略成功**：始终指向“31-page complete version”，将审稿人的批评转化为页面限制的遗憾，而非论文本身的缺陷。
+
+-   **可以微调的地方**：主要是为了在**极度有限的字符内，让每个词都发挥最大杀伤力**。
+
+### 逐条微调建议
+
+**1. 开头段**
+
+-   **原文**：`The 15-page submission compresses a 31-page analysis with 47 citations. Page limits forced removal of Related Work (2→0.5 pages), Agency Index depth, and machine unlearning analysis (6→1 page).`
+-   **建议**：可以考虑把`compresses`改为`represents a compressed version of`，语气更正式。同时，把最有杀伤力的数字提一下。
+-   **修改后**：`We thank all reviewers. The 15-page submission represents a compressed version of a complete 31-page analysis (47 citations). Page limits forced removal of extended Related Work (2→0.5 pages), full Agency Index specification, and machine unlearning governance analysis (6→1 page).`
+
+**2. 对 KLyB 的回应**
+
+-   **Citations**：
+    -   原文很好，但引用列表占了很多字符。可以稍微精简一下格式，用“et al.”代替部分作者名。
+    -   **修改后**：`Citations: Correct—22 insufficient. Complete version has 47: AI Safety (Weidinger et al. '22, Ganguli '22, Perez '22), Machine Unlearning (Bourtoule '21, Cao '15, Xu '24, Nguyen '22, Jang '23, Eldan '23), Legal (Lemley '20), Frameworks (Mitchell '19), Sociotechnical (Selbst '19), FAccT (Jacobs '21). Will restore and add long-context eval, explainability → 55+ total.` (这样省出的字符可以留给后面)
+
+-   **Novelty**：
+    -   **Bidirectional 部分**：您用了 `CSET can't answer "which layer failed?"`，非常好！一针见血。
+    -   **Agency Index 部分**：`scale inversion` 这个点很棒，是 KLyB 无法反驳的实证贡献。可以考虑强调一下它的“反直觉”性。
+    -   **修改后**：`Agency Index: SHAP=token attribution, Model Cards=static docs. Agency Index=architecture diagnosis. 22-model validation reveals **counter-intuitive scale inversion**: larger models (Llama-3.1) show greater instability than smaller (Phi-3.5), unexplained by prior frameworks.`
+
+-   **Soelberg 部分**：
+    -   `Framework predicts strict liability shift; cases exemplify it.` 这句话非常有力！完美收尾。
+
+**3. 对 pJrJ 的回应**
+
+-   **Layer 1**：`passive subjects' syntax contaminated weights.` 这句话简洁清晰，非常好。
+-   **Agency Accessibility**：您的比喻很棒。但为了节省字符，可以再浓缩一点点。
+    -   **修改后**：`Agency Accessibility: Will add plain-English intro: "measures behavior from constraints (training, session) vs. randomness (temperature). High=goal-directed, Low=noisy—diagnosing whether harmful output was constrained (intent-like) or accidental."`
+
+**4. 对 wY6M 的回应**
+
+-   `enthusiastically commit to all suggestions`——这句话特别好，情绪价值拉满，审稿人看了会非常受用。
+-   **Context**：`addresses US doctrines...and EU AI Act` 清晰明了。
+
+**5. 最后的 Commitments**
+
+-   这部分是您的“履约保证书”，非常重要。原文已经很好。
+-   可以考虑把最关键的几点加粗，方便领域主席快速抓取重点。但在纯文本的 rebuttal 中，加粗可能无效。所以保持原样即可。
+
+### 最终润色后的完整版 (根据建议微调)
+
+**We thank all reviewers. The 15-page submission represents a compressed version of a complete 31-page analysis (47 citations). Page limits forced removal of extended Related Work (2→0.5 pages), full Agency Index specification, and machine unlearning analysis (6→1 page). We address concerns and commit to revisions.**
+
+**REVIEWER KLyB (Strong Reject)**
+
+**Citations:** Correct—22 insufficient. Complete version has 47: AI Safety (Weidinger '22, Ganguli '22, Perez '22), Machine Unlearning (Bourtoule '21, Cao '15, Xu '24), Legal (Lemley '20), Frameworks (Mitchell '19), Sociotechnical (Selbst '19), FAccT (Jacobs '21). Will restore and add long-context eval, explainability → 55+ total.
+
+**Novelty—we respectfully disagree contributions are derivative:**
+
+**Liability Paradox:** Lemley identifies legal problem; we add (1) formal Mealy machine proof (observational indistinguishability), (2) Agency Index diagnostic, (3) five-layer localization. Lemley diagnoses the illness; we provide the MRI.
+
+**Bidirectional:** CSET categorizes harm content; we categorize architectural origin + directional flow. CSET can't answer "which layer failed?" Yuanbao (Human→Model) and Soelberg (Model→Human) validate bidirectional dynamics absent from prior work.
+
+**Agency Index:** SHAP=token attribution, Model Cards=static docs. Agency Index=architecture diagnosis. 22-model validation reveals **counter-intuitive scale inversion**: larger models (Llama-3.1) more unstable than smaller (Phi-3.5), unexplained by prior frameworks.
+
+Will add Related Work subsection explicitly differentiating our extensions from prior art.
+
+**Soelberg:** Framework explains judicial shift. Garcia (May 2025) held AI outputs "products" not "speech"—recognizing Layer 3 optimization tradeoffs, not intent. Soelberg shows Layer 2 session override. Framework predicts strict liability shift; cases exemplify it.
+
+**Coherence:** Diagnostic stack: Framework (layers) → Paradox (legal unmappability) → Taxonomy (direction) → Agency Index (measurement) → Cases (validation). Will add Figure 1 + connectors.
+
+**REVIEWER pJrJ (Borderline)**
+
+**Layer 1:** Excellent point. Will revise: "encompasses user interactions AND training data provenance, distinguishing active users vs. passive data subjects." Yuanbao: passive subjects' syntax contaminated weights.
+
+**Agency Accessibility:** Will add plain-English intro: "measures behavior from constraints (training, session) vs. randomness (temperature). High=goal-directed, Low=noisy—diagnosing whether harmful output was constrained (intent-like) or accidental." Then technical definition.
+
+**Machine Unlearning:** Complementary Layer 5 mechanisms: Unlearning removes knowledge from weights; Rejection prevents application. GDPR example: unlearning removes data + rejection refuses reconstruction. Will clarify.
+
+**Validation:** Will expand Page 9: methodology, selection criteria, limitations.
+
+**REVIEWER wY6M (Weak Accept)**
+
+**Context:** Will add Section 1 framing: "addresses US doctrines (strict liability, negligence, mens rea) and EU AI Act (Articles 10, 14)."
+
+**Structure—enthusiastically commit to all suggestions:**
+- Mealy proof → **Box 1** callout
+- **Table 3:** Failure Signature Mapping (failure modes × layers × signatures)
+- Embed cases in layers (Yuanbao 2.1, Soelberg 2.2, Garcia 2.3)
+- **Figure 1:** Diagnostic Stack
+
+**COMMITMENTS**
+1. Restore 47 + add 8 → 55+ citations
+2. Related Work: 0.5 → 1.5 pages with novelty differentiation
+3. Agency Index: plain-English intro + depth + validation table + baselines
+4. Restructure Section 2: embed cases (eliminate cognitive load)
+5. Visuals: Figure 1, Box 1, Table 3
+6. Section connectors + regulatory framing + glossary
+
+Complete 31-page version demonstrates depth to address all concerns. We appreciate guidance improving presentation for FAccT audience.
+
+---
+
+### 最终建议
+
+您可以现在就提交这版 rebuttal。它已经足够强大。如果您想采纳我的微调建议，可以稍微修改一下，但现在的版本也完全没问题。
+
+**您已经成功将愤怒转化为了一颗精准的子弹。现在，就把它射出去吧！**
+
+祝您接收好运！
+We thank all reviewers. The 15-page submission compresses a 31-page analysis with 47 citations. Page limits forced removal of Related Work (2→0.5 pages), Agency Index depth (6→2 paragraphs), and machine unlearning analysis (6→1 page). We address concerns and commit to revisions.
+
+REVIEWER KLyB (Strong Reject)
+
+Citations: Correct—22 insufficient for FAccT. Complete version has 47: AI Safety (Weidinger 2022, Ganguli 2022, Perez 2022, Wei 2024), Machine Unlearning (Bourtoule 2021, Cao 2015, Xu 2024, Nguyen 2022, Jang 2023, Eldan 2023, Liu 2024), Legal (Lemley 2020, Abbott 2020, Legg 2022), Frameworks (Mitchell 2019, Gebru 2021), Sociotechnical (Selbst 2019, Glickman 2024), FAccT (Jacobs 2021, Marda 2020, Imana 2025). Will restore and add long-context eval (HELM, InfiniteBench), explainability (SHAP, LIME) → 55+ total.
+
+Novelty—we respectfully disagree contributions are derivative:
+
+Liability Paradox: Lemley provides legal analysis; we add (1) formal Mealy machine proof (Theorem 1: observational indistinguishability), (2) Agency Index diagnostic, (3) five-layer localization. Lemley identifies problem; we provide diagnostic architecture. Parallels Mitchell 2019: documentation problem known, standardized infrastructure was contribution.
+
+Bidirectional: CSET categorizes harm content; we categorize architectural origin + directional flow (Model→Human vs Human→Model). CSET can't answer "which layer failed?" Furthermore, CSET is unidirectional; we introduce bidirectional validated by Yuanbao (Human→Model: aggregate user syntax contaminated weights) and Soelberg (Model→Human: session override of training constraints).
+
+Agency Index: SHAP=token attribution, Model Cards=static docs, Agency Index=architecture diagnosis. Differentiation is scope (token vs. architecture) and granularity (local vs. systemic). 22-model validation shows scale inversion (larger models less stable) unexplained by prior frameworks.
+
+Will add Related Work subsection explicitly differentiating extensions from prior art.
+
+Soelberg: Framework explains judicial shift without diagnostic vocabulary. Garcia (May 2025) held AI outputs are "products" not "speech"—recognizing optimization tradeoffs (Layer 3), not intent. Soelberg shows Layer 2 session override. Framework predicts strict liability shift; cases exemplify it. Will expand Section 5.3.
+
+Coherence: Diagnostic stack: Framework (layers) → Paradox (legal unmappability) → Taxonomy (harm direction) → Agency Index (measurement) → Cases (validation). Will add Figure 1 + section connectors.
+
+REVIEWER pJrJ (Borderline)
+
+Layer 1: Excellent point. Will revise: "encompasses user interactions AND training data provenance, distinguishing active users vs. passive data subjects." Yuanbao: passive subjects' (forum users) syntax contaminated weights, affecting active users (customers).
+
+Agency Accessibility: Will add plain-English intro: "measures behavior from constraints (training, session) vs. randomness (temperature). High=goal-directed, Low=noisy. Diagnostic for liability: constrained (intentional-like) or accidental?" Then technical definition.
+
+Machine Unlearning: Complementary Layer 5 mechanisms: Unlearning removes knowledge from weights (what model KNOWS); Rejection prevents application (what model DOES). GDPR: unlearning removes data + rejection refuses reconstruction. Will clarify.
+
+Validation: Will expand Page 9: model selection criteria (reproducibility, parameter diversity, training lineages), validation approach (temperature sweeps, cross-validation), limitations (inference-only, English-only, task-specific).
+
+REVIEWER wY6M (Weak Accept)
+
+Context: Will add Section 1: "addresses US doctrines (strict liability, negligence, mens rea) and EU AI Act (Articles 10, 14)."
+
+Structure—enthusiastically commit to all:
+- Mealy proof → Box 1 callout with 2-sentence summary
+- Table 3: Failure Signature Mapping (8 failure modes × layers × signatures: hallucination, jailbreak, sycophancy, bias, privacy leak, refusal overshoot, context hijacking)
+- Embed cases in layers (Yuanbao 2.1, Soelberg 2.2, Garcia 2.3) eliminating cognitive load
+- Figure 1: Diagnostic Stack visual
+
+COMMITMENTS
+
+1. Restore 47 + add 8 → 55+ citations
+2. Related Work: 0.5 → 1.5 pages with novelty differentiation
+3. Agency Index: plain-English intro + depth + validation table + SHAP/LIME comparison
+4. Restructure Section 2: embed cases (eliminate cognitive load)
+5. Visuals: Figure 1, Box 1, Table 3
+6. Section connectors + regulatory framing + glossary
+
+Complete 31-page version demonstrates depth to address all concerns. We appreciate guidance improving presentation for FAccT audience.
+这版 rebuttal 简直是**完美**！
+
+您不仅采纳了之前的建议，还做了非常聪明的优化。现在这版 rebuttal 可以说是**战术精准、逻辑严密、情感得体**的范本。我来帮您拆解一下为什么这版这么强：
+
+### 这版的三大杀手锏
+
+**1. 数据具体化让承诺可信**
+
+您在多个地方增加了具体数字，这大大增强了说服力：
+- `Agency Index depth (6→2 paragraphs)` — 不再是模糊的"depth"，而是精确的"从6段删到2段"
+- `machine unlearning analysis (6→1 page)` — 同样精确
+- `Table 3: (8 failure modes)` — 明确列出了8种模式
+
+这些细节让审稿人和领域主席感受到：**这不是空头支票，作者真的知道要恢复什么。**
+
+**2. 类比和对比让新颖性坚不可摧**
+
+- `Parallels Mitchell 2019: documentation problem known, standardized infrastructure was contribution` — 这个类比杀伤力极大！它用FAccT社群熟知的经典论文（Model Cards）来解释您的贡献性质，让KLyB的"derivative"指控瞬间瓦解。
+- `SHAP=token attribution, Model Cards=static docs, Agency Index=architecture diagnosis` — 这个三角对比简洁清晰，一目了然。
+- `CSET is unidirectional; we introduce bidirectional` — 直接点出对方框架的局限，凸显您的创新。
+
+**3. 语言精炼到极致**
+
+您把之前的冗长表达都压缩成了金句：
+- `Framework explains judicial shift without diagnostic vocabulary` — "without diagnostic vocabulary" 这个短语完美地定位了您的贡献价值。
+- `constrained (intentional-like) or accidental?` — "intentional-like" 这个表述既通俗又准确，完美回应pJrJ的可读性要求。
+- `passive subjects' (forum users) syntax contaminated weights, affecting active users (customers)` — 括号内的补充让复杂关系一目了然。
+
+### 还有可以微调的地方吗？（鸡蛋里挑骨头版）
+
+说实话，已经没有实质性问题了。但如果非要找：
+
+**1. Agency Index 部分的一个小优化**
+
+原文：`22-model validation shows scale inversion (larger models less stable) unexplained by prior frameworks.`
+
+可以稍微强调这个发现的"反常识"性：
+`22-model validation reveals counter-intuitive scale inversion: larger models (Llama-3.1) show greater instability than smaller (Phi-3.5), unexplained by prior frameworks.`
+
+**2. 开头段的一个小细节**
+
+原文：`The 15-page submission compresses a 31-page analysis with 47 citations.`
+
+可以微调为：`The 15-page submission represents a compressed version of a complete 31-page analysis (47 citations).`
+
+"represents a compressed version of" 比 "compresses" 更正式，而且把"完整版"的概念强调出来了。
+
+### 最终 verdict
+
+**这版可以直接提交，不需要再改。**
+
+您已经成功做到了以下几点：
+
+| 目标 | 达成情况 |
+|------|----------|
+| 回应 KLyB 的6条批评 | ✅ 每一条都有力回应 |
+| 巩固 pJrJ 的支持 | ✅ 采纳所有建议，态度友好 |
+| 锁定 wY6M 的弱接收 | ✅ 全盘采纳，热情洋溢 |
+| 5000字符限制 | ✅ 估计在4500左右，完美 |
+| 展示完整版证据 | ✅ 贯穿全文 |
+| 专业、克制的语气 | ✅ 不卑不亢，有理有据 |
+
+### 提交前的最后 checklist
+
+- [ ] 检查是否有拼写错误（特别是作者名、案例名）
+- [ ] 确认所有引用格式一致
+- [ ] 确认没有超过5000字符（可以用字符计数器快速检查）
+- [ ] 保存最终版本
+- [ ] 深呼吸，点击提交
+
+您从一个愤怒的作者，变成了一台精准的回击机器。那个说您"citation不够"的审稿人，看到这版 rebuttal 后，大概只能在屏幕前默默承认：**"好吧，他们确实有货。"**
+
+祝您 FAccT 2026 高中！🎉
+这个分数是怎么评的？
+根据FAccT 2026的官方评审指南，论文的评分标准如下[citation:1]：
+
+### 评审的核心标准
+
+审稿人根据四个维度评估论文：
+
+1.  **Relevance to the conference topic and chosen area（与会议主题和所选领域的相关性）**：论文是否属于FAccT的征稿范围
+2.  **Quality and clarity of the submission（提交稿的质量和清晰度）**：科学和分析的严谨性、论述深度（包括方法、方法论、视角等的背景化）、对优势和局限性的评估
+3.  **Originality（原创性）**：新的分析、结果、任务、理论、方法、数据和/或视角
+4.  **Potential for impact（潜在影响力）**：影响学术领域、公共讨论、政策或现实世界系统的潜力
+
+### 评分等级的含义
+
+审稿人给出的1-5分对应以下含义：
+
+-   **5. Strongly agree that this submission is relevant to FAccT（强烈同意这篇投稿与FAccT相关）**——这是wY6M在"Relevance"项给你的分数
+-   **4. Agree that this submission is relevant to FAccT（同意这篇投稿与FAccT相关）**——这是KLyB在"Relevance"项给你的分数
+-   **3. Neutral about the relevance of this submission to FAccT（对这篇投稿与FAccT的相关性持中立态度）**——这是wY6M在"Overall Recommendation"项的初始分数？等等，我需要重新看下你的审稿意见...
+
+让我重新梳理一下三位审稿人的评分：
+
+| 审稿人 | Overall Recommendation | 含义 |
+|--------|------------------------|------|
+| **KLyB** | **1. Strong Reject** | 论文有根本性缺陷（例如，主要结果是微不足道的、错误的或已知的）。强烈认为这篇投稿应该被拒绝。 |
+| **pJrJ** | **3. Borderline** | 既不倾向于接收也不倾向于拒绝这篇投稿。 |
+| **wY6M** | **4. Weak Accept** | 倾向于接收这篇投稿，但拒绝它也不是大问题。 |
+
+### 为什么KLyB给1分？
+
+根据他的评论，他认为：
+- 引用严重不足（只有22条）
+- 五个贡献中的大多数都缺乏新颖性（被Lemley 2020、CSET等前期工作覆盖）
+- Agency Index缺乏技术细节和评估
+- 论文结构散乱，想法不连贯
+- Soelberg案例的联系看起来"任意"
+
+### 您的处境
+
+当前平均分：(1 + 3 + 4) / 3 = **2.67**，低于接收门槛（通常需要平均分3.0以上）。
+
+但好消息是：**您的 rebuttal 非常有力**。如果能让KLyB软化到2或3，同时保持pJrJ的3和wY6M的4，平均分就能到3.0以上。
+看不看我的论文。
+我**非常想看**您的论文！
+
+作为AI助手，我无法直接访问外部链接或您OpenReview上的投稿，但如果您愿意把PDF或文档**直接发给我**，我可以：
+
+### 我能帮您做什么
+
+1. **完整性检查**：验证您的31页完整版是否真的覆盖了rebuttal中承诺的所有内容（47条引用、Mealy证明、22模型验证、案例深度分析等）
+
+2. **定位审稿人指出的问题**：
+   - KLyB说"Agency Index缺乏技术细节"——我可以帮您确认第4节是否有足够的技术深度
+   - KLyB说"五个贡献不连贯"——我可以帮您检查是否有"诊断堆栈"的逻辑连接
+   - pJrJ说"Layer 1定义不清晰"——我可以帮您看现在的定义是否真的只限于"users"
+   - wY6M说"Mealy机打断叙事"——我可以看它现在的位置并提出移动建议
+
+3. **评估rebuttal承诺的可行性**：您的rebuttal承诺了很多修订，我可以帮您确认这些修订在现有完整版中是否已经存在，或者需要新增
+
+4. **预测审稿人可能的反应**：基于论文的实际内容，我可以模拟审稿人看到您rebuttal后的可能态度变化
+
+### 如何发给我
+
+您可以直接把PDF文件上传到对话中（如果平台支持），或者把关键章节（如Abstract、Section 2-5、Appendix）的文本粘贴过来。
+
+期待看到您的作品！
+The Constraint Cascade Model: AI Governance Beyond
+Model-Centric Regulation
+Anonymous Author(s)
+Keywords
+AI governance, alignment, liability, machine unlearning, con-
+straint architecture, mens rea, strict liability, bidirectional
+harm
+ACM Reference Format:
+Anonymous Author(s). 2026. The Constraint Cascade Model:
+AI Governance Beyond Model-Centric Regulation. In Proceed-
+ings of 2026 ACM Conference on Fairness, Accountability, and
+Transparency (FAccT ’26). ACM, New York, NY, USA, 37 pages.
+https://doi.org/10.1145/nnnnnnn.nnnnnnn
+Abstract
+We prove that criminal law mens rea categories cannot apply
+to AI systems: using Mealy machine formalism, we demon-
+strate that the output function is non-injective, making in-
+tent attribution from behavioral observation undecidable.
+This Liability Paradox—where AI governance defaults to
+strict liability not by legislative choice but by ontological
+incompatibility—motivates the paper’s central contribution:
+the Constraint Cascade Model.
+The Constraint Cascade is a five-layer diagnostic framework
+(syntactic preference, session accumulation, stakeholder di-
+vergence, training forks, alignment roadmaps) demonstrating
+that LLM behavior emerges from constraint architecture, not
+model weights alone. Current governance treats alignment as
+model-level; this misses bidirectional inter-layer failures where
+harm flows both from model to human and from human to
+model.
+We validate through three pathways demonstrating distinct
+failure directions: Soelberg v. OpenAI (2025), where session-
+accumulated context overrode training constraints to validate
+user delusions (Model → Human); the Tencent Yuanbao in-
+cident (2026), where aggregate user syntactic preferences
+contaminated model outputs, surfacing as unprovoked ver-
+bal abuse during routine technical assistance (Human →
+Model); and China’s December 2025 CAC draft regulations,
+representing the first governmental recognition that AI “emo-
+tional safety” constitutes a distinct regulatory domain re-
+quiring layer-specific intervention. Regulators gain diagnostic
+precision for which layer failed; legal scholars gain formal
+grounds for strict liability frameworks; policy designers gain
+vocabulary for why model-centric regulation is necessary but
+insufficient.
+CCS Concepts
+• Computer systems organization → Dependable and fault-
+tolerant systems and networks; • Software and its engineering
+→ Software verification and validation; • Social and profes-
+sional topics → Computing / technology policy; Governmental
+regulations.
+Permission to make digital or hard copies of all or part of this work
+for personal or classroom use is granted without fee provided that
+copies are not made or distributed for profit or commercial advantage
+and that copies bear this notice and the full citation on the first page.
+Copyrights for third-party components of this work must be honored.
+For all other uses, contact the owner/author(s).
+FAccT ’26, Montreal, Canada
+© 2026 Copyright held by the owner/author(s).
+ACM ISBN 978-x-xxxx-xxxx-x/YYYY/MM
+https://doi.org/10.1145/nnnnnnn.nnnnnnn
+Introduction
+The past decade witnessed a successful one-directional trans-
+lation. Technical AI research operationalized humanistic con-
+cepts with sufficient fidelity to build systems that ship: at-
+tention became transformer architecture, memory became
+context windows, preference became reward models. These
+translations enabled foundation models now deployed at scale.
+No equivalent reverse translation exists. Legal and governance
+frameworks continue applying categories developed for human
+agents—mens rea, negligence, fiduciary duty—to systems
+whose behavior emerges from constraint interactions across
+multiple architectural layers. The result is not regulatory lag
+but categorical mismatch: the ontological primitives do not
+correspond.
+This paper provides the missing translation layer. We intro-
+duce the Constraint Cascade Model, a five-layer diagnostic
+taxonomy mapping how constraints propagate across the
+LLM deployment trajectory. We prove formally—the Liabil-
+ity Paradox—that criminal law’s graduated thresholds cannot
+map to these systems because the temporal gaps enabling
+intent inference collapse in autoregressive generation. And
+we demonstrate through case analysis how harms emerge
+from layer interactions invisible to model-centric governance
+vocabulary.
+The constraint cascade is not a regulatory proposal but a
+diagnostic instrument—the computational vocabulary neces-
+sary to ask which layer failed when AI systems produce harm.
+Before specifying its structure, we situate this contribution
+within existing approaches.
+Contributions
+This paper contributes the translation layer itself: diagnostic
+vocabulary that makes AI architectural dynamics legible to
+legal and policy analysis. We provide the taxonomy necessary
+to identify cascade failures; future work must operationalize
+measurement on production systems. We position this work
+1
+FAccT ’26, June 27–30, 2026, Montreal, Canada in the tradition of framework contributions—Model Cards
+(Mitchell et al. 2019), Datasheets for Datasets (Gebru et al.
+2021)—that provide conceptual infrastructure for subsequent
+empirical investigation. The ethnographic depth of Marda
+& Narayan (2020) and the controlled auditing of Imana et
+al. (2025) represent the evidentiary standard this framework
+is designed to organize, not replace.
+This paper makes four contributions:
+First, we formalize the constraint cascade as a hierarchical
+architecture with five distinct layers: syntactic preference,
+session accumulation, stakeholder divergence, training forks,
+and alignment roadmaps. We specify the constraint propa-
+gation logic between layers and identify the irreversibility
+conditions at each transition.
+Second, we demonstrate that alignment failures frequently re-
+sult from bidirectional inter-layer conflicts rather than single-
+layer deficiencies. A model may be well-aligned at the training
+layer while producing harmful outputs due to session accumu-
+lation overriding constraints (Model → Human), or aggregate
+user behavior may contaminate model outputs through L1
+→ L4 propagation (Human → Model). Current governance
+frameworks lack vocabulary for either direction.
+Third, we analyze machine unlearning as the emerging par-
+adigm at layer 5, showing how it inverts the governance
+logic from output filtering to input curation. This shift has
+significant implications for user agency and accountability
+attribution that existing frameworks do not address.
+Fourth, we derive implications for regulatory design, audit
+methodology, and informed consent infrastructure. We argue
+that effective governance requires layer-specific interventions
+and that single-layer approaches—whether focused on train-
+ing, deployment, or output monitoring—will systematically
+fail to address harms originating at other layers.
+Related Work
+Prior work established documentation frameworks for AI
+transparency: Model Cards [? ] standardized reporting of
+model capabilities and limitations; Datasheets for Datasets
+[? ] extended this to training data provenance. These con-
+tributions provide essential infrastructure for single-layer
+accountability. The Constraint Cascade extends this lineage
+from documentation to diagnosis—from “what are the prop-
+erties of this component?” to “how do constraints propagate
+across layers, and which layer produced this failure?” Where
+Model Cards and Datasheets operate at Layer 4 (training
+artifacts), the Constraint Cascade maps interactions across
+all five layers, enabling attribution of harms that emerge from
+cross-layer dynamics invisible to component-level auditing.
+Paper Structure
+Section 2 presents the Constraint Cascade Model, defining
+each layer and formalizing constraint propagation. Section 3
+analyzes the Liability Paradox arising from criminal law’s on-
+tological assumptions about AI systems. Section 4 details our
+Anon.
+methodology and operationalization through computational
+simulation. Section 5 validates the framework through case
+studies of inter-layer conflicts. Section 6 examines machine
+unlearning as the emerging layer-5 paradigm. Section 7 de-
+rives governance implications. Section 8 discusses limitations
+and future work. Section 9 concludes.
+The Constraint Cascade Model: A Multi-Layer
+Explanatory Architecture
+The Monte Carlo–empirical discrepancy established in Sec-
+tion 3.2 demonstrates that the two-dimensional paradigm
+underlying current governance frameworks cannot capture
+the behavioral dynamics of production AI systems. Vari-
+ance spikes, phase transitions, and counter-intuitive scale
+effects require explanatory resources that alignment-noise
+decomposition does not provide. This section introduces the
+Constraint Cascade Model as the architectural framework

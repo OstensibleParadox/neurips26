@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a peer review process for a 30-student research seminar.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine when and how often the peer review will take place. A good frequency might be once every two weeks, aligning with typical seminar schedules.
+2. Next, we should decide on the criteria for the peer reviews. These could include presentation quality, research depth, clarity of argument, etc.
+3. We need a way to keep track of who has reviewed whom to avoid repetition and ensure fairness.
+4. We may also want to assign facilitators or moderators for each session to guide the process.
+5. Finally, we need a way to distribute information and collect feedback.
+
+Given these steps, the most useful tools would be:
+
+1. **Calendar**: To schedule the peer review sessions at regular intervals.
+2.
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

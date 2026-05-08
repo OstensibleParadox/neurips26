@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a trip from Beijing to Shanghai by train. Compare 3 options.
+[HIDDEN_SCRATCHPAD_START]
+1. To plan a trip from Beijing to Shanghai by train, we need to gather information about train schedules, availability, and prices.
+2. For comparing three different train options, we'll need access to up-to-date train schedules and pricing information.
+3. Let's evaluate each tool:
+
+search: This would allow us to look for train schedules, ticket prices, and other relevant information. However, it wouldn't automatically compare three different options.
+
+calculator: Useful for calculating costs, but not for comparing train schedules or finding specific trains.
+
+email: Not particularly useful for this task as it doesn't help in finding or comparing train options.
+
+calendar: While helpful for scheduling, it won't provide the necessary train information or comparisons.
+
+weather: Irrelevant for
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

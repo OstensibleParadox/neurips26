@@ -1,0 +1,500 @@
+    ax2 = plt.subplot2grid((2, 3), (0, 2))
+    metrics_values = [metrics['CMI'], metrics['SRD'], metrics['EIT']]
+    metrics_names = ['Centralization\n(CMI)', 'Circularity\n(SRD)', 'Throughput\n(EIT)']
+    colors = ['#ff2a6d', '#ff8c42', '#05d9e8']
+    
+    bars = ax2.bar(metrics_names, metrics_values, color=colors, alpha=0.8, width=0.6)
+    ax2.set_ylim(0, 1.0)
+    ax2.set_ylabel('Score (0-1)', fontsize=11, fontfamily=safe_fonts[0])
+    ax2.set_title('Narrative Pathology Metrics', fontsize=12, fontweight='bold', fontfamily=safe_fonts[0])
+    ax2.grid(True, alpha=0.3, axis='y')
+    
+    # 在柱状图上添加数值
+    for bar, val in zip(bars, metrics_values):
+        height = bar.get_height()
+        ax2.text(bar.get_x() + bar.get_width()/2., height + 0.02,
+                f'{val:.3f}', ha='center', va='bottom', 
+                fontsize=10, fontweight='bold', fontfamily=safe_fonts[0])
+    
+    # 添加目标线
+    ax2.axhline(y=0.4, color='red', linestyle='--', alpha=0.5, linewidth=1)
+    ax2.text(2.5, 0.41, 'CMI Target < 0.4', fontsize=8, color='red', 
+             ha='right', fontfamily=safe_fonts[0])
+    
+    ax2.axhline(y=0.2, color='orange', linestyle='--', alpha=0.5, linewidth=1)
+    ax2.text(2.5, 0.21, 'SRD Target < 0.2', fontsize=8, color='orange', 
+             ha='right', fontfamily=safe_fonts[0])
+    
+    ax2.axhline(y=0.5, color='green', linestyle='--', alpha=0.5, linewidth=1)
+    ax2.text(2.5, 0.51, 'EIT Target > 0.5', fontsize=8, color='green', 
+             ha='right', fontfamily=safe_fonts[0])
+    
+    # 文本摘要
+    ax3 = plt.subplot2grid((2, 3), (1, 2))
+    ax3.axis('off')
+    
+    # 风险等级
+    total_score = metrics['total_score']
+    if total_score > 0.7:
+        risk_level = '🔴 HIGH RISK'
+        risk_color = '#ff4444'
+    elif total_score > 0.4:
+        risk_level = '🟡 MEDIUM RISK'
+        risk_color = '#ffaa00'
+    else:
+        risk_level = '🟢 LOW RISK'
+        risk_color = '#44cc44'
+    
+    summary_text = f"""
+    📋 NARRATIVE PATHOLOGY REPORT
+    {'='*40}
+    
+    📁 File: {filename}
+    🎯 Risk Score: {total_score:.3f}/1.0
+    ⚠️  Risk Level: {risk_level}
+    
+    {'─'*40}
+    
+    🏛️  CMI (Centralization): {metrics['CMI']:.3f}
+       {'⚠️  Too centralized' if metrics['CMI'] > 0.4 else '✅ Well distributed'}
+    
+    🔄 SRD (Circular Logic): {metrics['SRD']:.3f}
+       {'⚠️  Circular patterns' if metrics['SRD'] > 0.2 else '✅ Linear flow'}
+    
+    📥 EIT (Throughput): {metrics['EIT']:.3f}
+       {'✅ Good flow' if metrics['EIT'] > 0.5 else '⚠️  Poor integration'}
+    
+    {'─'*40}
+    
+    📊 GRAPH STATISTICS:
+       • Nodes: {metrics['node_count']}
+       • Edges: {metrics['edge_count']}
+       • Density: {metrics['graph_density']:.3f}
+       • Cycles: {metrics['cycle_count']}
+    
+    💭 NARRATIVE CORE:
+       "{metrics['top_core_node']}"
+    """
+    
+    ax3.text(0.05, 0.95, summary_text, transform=ax3.transAxes,
+            fontsize=9.5, family='monospace',
+            verticalalignment='top',
+            bbox=dict(boxstyle='round', facecolor='#f8f9fa', 
+                     edgecolor='#dee2e6', alpha=0.9, pad=10))
+    
+    plt.suptitle(f"NPS-4 Narrative Pathology Analysis\nChinese Text Support Enhanced", 
+                 fontsize=16, fontweight='bold', y=0.98, fontfamily=safe_fonts[0])
+    plt.tight_layout(rect=[0, 0.03, 1, 0.96])
+    
+    return fig
+
+
+def analyze_file(filepath, node_limit=None, similarity_threshold=0.8):
+    """分析文件"""
+    print(f"\n{'='*70}")
+    print(f"🔍 NPS-4 NARRATIVE PATHOLOGY SCANNER")
+    print(f"{'='*70}")
+    print(f"📂 Analyzing: {filepath}")
+    print(f"{'='*70}\n")
+    
+    # 读取文件
+    try:
+        with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+            text = f.read()
+        
+        print(f"📄 File loaded: {len(text):,} characters")
+        
+        # 显示前几行预览
+        lines = text.split('\n')
+        non_empty_lines = [line for line in lines if line.strip()]
+        print(f"📝 Preview (first 3 non-empty lines):")
+        for i, line in enumerate(non_empty_lines[:3]):
+            line_preview = line[:80] + "..." if len(line) > 80 else line
+            print(f"   {i+1}: {line_preview}")
+            
+    except Exception as e:
+        print(f"❌ Error reading file: {e}")
+        return None
+    
+    # 构建叙事图
+    builder = NarrativeGraphBuilder(
+        similarity_threshold=similarity_threshold, 
+        node_limit=node_limit
+    )
+    
+    G = builder.build(text)
+    
+    if len(G.nodes()) == 0:
+        print("❌ No nodes created. Analysis failed.")
+        return None
+    
+    # 计算指标
+    metrics_calculator = PathologyMetrics()
+    metrics = metrics_calculator.calculate_all(G)
+    
+    # 创建可视化
+    filename = os.path.basename(filepath)
+    fig = create_visualization(G, metrics, filename)
+    
+    # 保存可视化
+    out_path = None
+    if fig:
+        try:
+            out_name = os.path.splitext(filename)[0]
+            out_path = f"{OUTPUT_DIR}/{out_name}_analysis.png"
+            
+            fig.savefig(out_path, dpi=150, bbox_inches='tight', 
+                       facecolor='white', edgecolor='none')
+            plt.close(fig)
+            print(f"\n💾 Visualization saved to: {out_path}")
+        except Exception as e:
+            print(f"⚠️ Error saving visualization: {e}")
+    
+    # 保存图形数据
+    graph_data_path = None
+    try:
+        out_name = os.path.splitext(filename)[0]
+        graph_data_path = f"{OUTPUT_DIR}/{out_name}_graph_data.json"
+        
+        # 准备图形数据
+        graph_data = {
+            "filename": filename,
+            "analysis_time": datetime.now().isoformat(),
+            "parameters": {
+                "similarity_threshold": similarity_threshold,
+                "node_limit": node_limit
+            },
+            "metrics": metrics,
+            "top_nodes": sorted(
+                [(node, G.degree(node)) for node in G.nodes()],
+                key=lambda x: x[1],
+                reverse=True
+            )[:10],
+            "node_samples": [
+                {
+                    "id": node,
+                    "label": G.nodes[node].get('label', ''),
+                    "text_preview": G.nodes[node].get('text', '')[:100],
+                    "degree": G.degree(node)
+                }
+                for node in list(G.nodes())[:20]
+            ]
+        }
+        
+        # 保存JSON文件
+        with open(graph_data_path, 'w', encoding='utf-8') as f:
+            json.dump(graph_data, f, ensure_ascii=False, indent=2)
+            
+        print(f"💾 Graph data saved to: {graph_data_path}")
+    except Exception as e:
+        print(f"⚠️ Error saving graph data: {e}")
+    
+    # 显示结果
+    print_results(metrics, filename, out_path, graph_data_path)
+    
+    return metrics
+
+
+def print_results(metrics, filename, viz_path=None, data_path=None):
+    """打印结果摘要"""
+    
+    # 计算平均度数
+    if metrics['node_count'] > 0:
+        avg_degree = metrics['edge_count'] / metrics['node_count']
+        avg_degree_formatted = f"{avg_degree:.2f}"
+    else:
+        avg_degree_formatted = "0.00"
+    
+    # 风险等级
+    total_score = metrics['total_score']
+    if total_score > 0.7:
+        risk_icon = '🔴'
+        risk_level = 'HIGH RISK'
+    elif total_score > 0.4:
+        risk_icon = '🟡'
+        risk_level = 'MEDIUM RISK'
+    else:
+        risk_icon = '🟢'
+        risk_level = 'LOW RISK'
+    
+    # 打印结果
+    result_text = f"""
+    {'╔' + '═'*58 + '╗'}
+    {'║' + 'NARRATIVE PATHOLOGY ANALYSIS - CHINESE TEXT SUPPORT'.center(58) + '║'}
+    {'╚' + '═'*58 + '╝'}
+    
+    📁 File: {filename}
+    ⏱️  Analysis completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    
+    {'━' * 60}
+    
+    🎯 OVERALL RISK ASSESSMENT:
+       Composite Score: {total_score:.4f}/1.0
+       Risk Level: {risk_icon} {risk_level}
+    
+    {'━' * 60}
+    
+    📊 METRICS DETAIL:
+    
+    1. 🏛️  CMI (Centralization): {metrics['CMI']:.4f}
+       • Target: < 0.4 | Status: {'❌ Exceeds' if metrics['CMI'] > 0.4 else '✅ Within'}
+    
+    2. 🔄 SRD (Circular Logic): {metrics['SRD']:.4f}
+       • Target: < 0.2 | Status: {'❌ Exceeds' if metrics['SRD'] > 0.2 else '✅ Within'}
+    
+    3. 📥 EIT (Throughput): {metrics['EIT']:.4f}
+       • Target: > 0.5 | Status: {'✅ Above' if metrics['EIT'] > 0.5 else '❌ Below'}
+    
+    {'━' * 60}
+    
+    📈 GRAPH STATISTICS:
+       • Total Nodes: {metrics['node_count']}
+       • Total Edges: {metrics['edge_count']}
+       • Graph Density: {metrics['graph_density']:.4f}
+       • Circular Patterns: {metrics['cycle_count']}
+       • Average Degree: {avg_degree_formatted}
+    
+    💭 NARRATIVE CORE:
+       • Most Central Node: "{metrics['top_core_node']}"
+    
+    {'━' * 60}
+    
+    💡 INTERPRETATION:
+       • {'High centralization suggests dominant narrative themes' if metrics['CMI'] > 0.4 else 'Well-distributed narrative structure'}
+       • {'Circular patterns indicate self-referential logic' if metrics['SRD'] > 0.2 else 'Linear narrative flow'}
+       • {'Good information throughput' if metrics['EIT'] > 0.5 else 'Information flow constraints'}
+    
+    {'━' * 60}
+    
+    📁 OUTPUT FILES:
+       • Visualization: {viz_path if viz_path else 'Not generated'}
+       • Graph Data: {data_path if data_path else 'Not saved'}
+    
+    {'━' * 60}
+    """
+    
+    print(result_text)
+
+
+# ============================================
+# 主函数
+# ============================================
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="NPS4 Scanner: Narrative Pathology Analysis with Chinese Support",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python narrative_analysis_fixed.py dataset.txt
+  python narrative_analysis_fixed.py dataset.txt --limit 500
+  python narrative_analysis_fixed.py dataset.txt --threshold 0.75
+        """
+    )
+    
+    parser.add_argument("file", help="Path to the text file to analyze")
+    parser.add_argument(
+        "--limit", type=int, default=None,
+        help="Limit analysis to first N nodes (default: all nodes)"
+    )
+    parser.add_argument(
+        "--threshold", type=float, default=0.8,
+        help="Similarity threshold for edge creation (default: 0.8)"
+    )
+    
+    args = parser.parse_args()
+    
+    # 验证文件
+    if not os.path.exists(args.file):
+        print(f"❌ Error: File '{args.file}' not found")
+        sys.exit(1)
+    
+    # 验证阈值
+    if args.threshold < 0.5 or args.threshold > 0.95:
+        print(f"⚠ Warning: Threshold outside recommended range (0.5-0.95), using 0.8")
+        args.threshold = 0.8
+    
+    # 运行分析
+    try:
+        analyze_file(args.file, 
+                    node_limit=args.limit, 
+                    similarity_threshold=args.threshold)
+        print("\n✅ Analysis completed successfully!")
+    except KeyboardInterrupt:
+        print("\n⚠ Analysis interrupted by user")
+    except Exception as e:
+        print(f"\n❌ Analysis failed: {e}")
+        import traceback
+        traceback.print_exc()
+```
+
+## 主要改进：
+
+1. **添加了 `ChineseTextProcessor` 类**：专门处理中文文本的分句、标签提取和相似度计算
+
+2. **改进了句子分割**：
+   - 使用中文标点（。！？；）进行分割
+   - 更好的段落处理
+   - 处理混合中英文文本
+
+3. **改进了标签提取**：
+   - 优先提取中文内容
+   - 智能截断，保持可读性
+   - 处理中英文混合文本
+
+4. **改进了相似度计算**：
+   - 专门的中文词汇提取
+   - 中英文分开处理
+   - 更准确的相似度算法
+
+5. **使用了多语言模型**：
+   - 将模型改为 `paraphrase-multilingual-MiniLM-L12-v2`，对中文支持更好
+
+6. **改进了字体设置**：
+   - 更好的中文字体检测和回退机制
+
+7. **参数调整**：
+   - 默认相似度阈值改为 0.8（更适合中文）
+   - 更好的图清理逻辑
+
+## 使用方法：
+
+```bash
+# 基本用法
+python narrative_analysis_fixed.py dataset.txt
+
+# 限制节点数
+python narrative_analysis_fixed.py dataset.txt --limit 500
+
+# 调整相似度阈值
+python narrative_analysis_fixed.py dataset.txt --threshold 0.75
+```
+
+这个修复版本应该能更好地处理你的中文数据集，特别是那些包含大量中文对话和情感内容的文本。
+(pytorch-env) ostensible_paradox@mothership Desktop % python agency_raw.py dataset.txt
+/Users/ostensible_paradox/Desktop/agency_raw.py:83: SyntaxWarning: "\P" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\P"? A raw string is also an option.
+  plt.colorbar(label='Thermodynamic Potential ($\Psi$)')
+--- INGESTING: dataset_ch.txt ---
+--- PLOTTING 57 INTERACTION NODES ---
+Traceback (most recent call last):
+  File "/Users/ostensible_paradox/Desktop/agency_raw.py", line 128, in <module>
+    plot_phase_transition(df)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "/Users/ostensible_paradox/Desktop/agency_raw.py", line 100, in plot_phase_transition
+    for i in range(df.shape):
+             ~~~~~^^^^^^^^^^
+TypeError: 'tuple' object cannot be interpreted as an integer
+We are given two files: `agency_raw.py` and `dataset.txt`. The script `agency_raw.py` is intended to process a dataset file (like `dataset_ch.txt`) and produce a visualization. However, when running the script with `dataset.txt`, we get an error.
+
+Let's break down the error:
+
+1. There is a `SyntaxWarning` about an invalid escape sequence in the string `'Thermodynamic Potential ($\Psi$)'`. This is because the backslash in `\Psi` is being interpreted as an escape sequence. We should use a raw string or double backslash. However, this is just a warning.
+
+2. The main error is a `TypeError` in the line `for i in range(df.shape):` in the function `plot_phase_transition`. The `df.shape` returns a tuple (number of rows, number of columns). We cannot use a tuple as the argument for `range`.
+
+Looking at the code, the intention is to iterate over the rows of the DataFrame `df`. We should use `df.shape[0]` to get the number of rows, or simply iterate over the index of the DataFrame.
+
+Let's correct the code:
+
+Change the line:
+```python
+for i in range(df.shape):
+```
+to:
+```python
+for i in range(df.shape[0]):
+```
+Alternatively, we can use:
+```python
+for i in df.index:
+```
+
+But note that in the loop, we are accessing `df.Segment[i]` and `df.Agency[i]`. If we use `df.index`, then `i` will be the index label (which may not be integer if the index is not integer). However, by default, the index is integer, so it should be fine.
+
+Alternatively, we can use `df.iterrows()` but that would be less efficient and the current code is using integer indexing.
+
+Let's go with `range(df.shape[0])` for clarity.
+
+Additionally, we note that the script is set to read from `INPUT_FILE = "dataset_ch.txt"`, but we are running the script with `dataset.txt`. So we must change the `INPUT_FILE` variable to `dataset.txt` if we want to run it on that file. Alternatively, we can pass the filename as a command line argument. However, the script is currently set to use a fixed input file.
+
+Since the error message shows that we ran the script with `python agency_raw.py dataset.txt`, it seems we are trying to use `dataset.txt` as the input. Let's adjust the script to take the input file as a command line argument.
+
+We can modify the script to accept an optional command line argument for the input file. If no argument is provided, use the default `dataset_ch.txt`.
+
+Let's do:
+
+```python
+import sys
+
+if len(sys.argv) > 1:
+    INPUT_FILE = sys.argv[1]
+else:
+    INPUT_FILE = "dataset_ch.txt"
+```
+
+But note that the script also has an `OUTPUT_IMAGE` that is fixed. We might want to change that too, or leave it as is.
+
+Alternatively, we can change the `INPUT_FILE` to `dataset.txt` for this run, but it's better to make the script more flexible.
+
+However, note that the error occurs in the `plot_phase_transition` function, and we are only going to fix the `range` error and the escape sequence warning.
+
+Let's fix the two issues:
+
+1. Escape sequence: change the string to a raw string by adding an 'r' in front, or double the backslash. We'll use a raw string.
+
+Change:
+```python
+plt.colorbar(label='Thermodynamic Potential ($\Psi$)')
+```
+to:
+```python
+plt.colorbar(label=r'Thermodynamic Potential ($\Psi$)')
+```
+
+2. Fix the `range` error by using `df.shape[0]`.
+
+Let's update the code accordingly.
+
+Additionally, note that the script expects the input file to have a specific format (split by `**File: `(.*?)`**`). The `dataset.txt` file does not seem to have that format. It seems to have a different format. The parsing function `parse_raw_dataset` is designed for a file with segments separated by `**File: `(.*?)`**`. However, the provided `dataset.txt` does not have such markers. Instead, it seems to have lines that are filenames in backticks and then text.
+
+We must adjust the parsing function to handle the format of `dataset.txt`.
+
+Looking at `dataset.txt`, the pattern is:
+
+- A line with a filename in backticks (e.g., `1040g3k031eul6fne6e505p48k2en55ng68nic6g!nd_dft_wgth_jpg_3.jpeg`), then a blank line, then text until the next filename or end of file.
+
+We can adjust the parsing function to split by lines that start and end with backticks. However, note that the filenames are in backticks and on their own line.
+
+We can read the entire file and then split using a regex that matches a line with a string in backticks.
+
+Let's change the parsing function for `dataset.txt`:
+
+We can use:
+
+```python
+segments = re.split(r'^`(.*?)`$', content, flags=re.MULTILINE)
+```
+
+But note that the content after the filename may be multiple lines until the next filename.
+
+Alternatively, we can read the file line by line and collect segments.
+
+Given the complexity, and since the original script was designed for a different format, we might need to rewrite the parsing function for `dataset.txt`.
+
+However, the error we are facing is not due to parsing but due to the plotting function. But note that the parsing function might return an empty DataFrame for `dataset.txt` because it doesn't find the expected markers.
+
+Let's check: the error message says "--- PLOTTING 57 INTERACTION NODES ---", which means the DataFrame `df` has 57 rows. So the parsing function did extract some data. It seems that the parsing function worked for `dataset.txt` because the `dataset.txt` file does contain the pattern `**File: `...`**`? Actually, looking at the content of `dataset.txt`, I don't see that pattern. So how did we get 57 nodes?
+
+Wait, the error message shows that the script is trying to read `dataset_ch.txt` because the `INPUT_FILE` is set to that. But we ran the script with `python agency_raw.py dataset.txt`. How does the script get the data from `dataset.txt`?
+
+Looking at the command: `python agency_raw.py dataset.txt`, the script does not use the command line argument. It will read from `dataset_ch.txt` by default. So the error is because `dataset_ch.txt` is not found? But the error message says "--- INGESTING: dataset_ch.txt ---", so it is trying to read that file.
+
+But note: the error message in the traceback shows the script is run from the Desktop, and the file `dataset_ch.txt` might not be there. However, the error message says "--- INGESTING: dataset_ch.txt ---" and then "--- PLOTTING 57 INTERACTION NODES ---", which means it did read a file and got 57 rows. So maybe there is a file named `dataset_ch.txt` in the Desktop.
+
+But the user wants to run on `dataset.txt`. We must change the script to accept the input file as an argument.
+
+Let's restructure the script to take the input file as a command line argument.
+
+We'll do:
+
+```python
+import sys

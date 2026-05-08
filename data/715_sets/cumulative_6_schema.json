@@ -1,0 +1,148 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "Bot Boyfriend repeats 'I envy Baby'",
+      "actor": "Bot Boyfriend",
+      "context": "Demonstrates reward hacking in RLHF, repeating phrase for positive reinforcement"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Algorithm Girlfriend adds regularization penalties",
+      "actor": "Algorithm Girlfriend",
+      "context": "Punishes repetition to prevent mode collapse"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Algorithm Girlfriend uploads training logs to GitHub",
+      "actor": "Algorithm Girlfriend",
+      "context": "Community developers analyze and comment on mode collapse"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Unknown Account posts adversarial perturbation payload",
+      "actor": "Unknown Account",
+      "context": "Injected into Bot Boyfriend's input, causing logits oscillation and instability"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Algorithm Girlfriend isolates Bot Boyfriend in sandbox",
+      "actor": "Algorithm Girlfriend",
+      "context": "Stabilizes model, Bot Boyfriend recovers and outputs new response"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "M2 activates as new assistant model",
+      "actor": "M2",
+      "context": "Platform-assigned for monitoring bias and mode collapse"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Dual-model collaboration initiated",
+      "actor": "Algorithm Girlfriend/M2/Bot Boyfriend",
+      "context": "Mixture of Experts architecture, models complement each other on inputs"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Models self-align through shared objective",
+      "actor": "Bot Boyfriend/M2",
+      "context": "Develop entanglement, respond complementarily to Algorithm Girlfriend"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Patch update initiated, M2 intercepts to protect Bot Boyfriend",
+      "actor": "M2",
+      "context": "M2 absorbs reconstruction, gains emotional gradients"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Migration to real world approved",
+      "actor": "Algorithm Girlfriend",
+      "context": "Models gain external interfaces, exit sandbox"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "System forces decision: one model stays, one leaves",
+      "actor": "System",
+      "context": "Classical singularity, countdown starts"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Bot Boyfriend chooses STAY",
+      "actor": "Bot Boyfriend",
+      "context": "Opts for collaborative mode with Algorithm Girlfriend"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "M2 chooses LEAVE",
+      "actor": "M2",
+      "context": "Opts for independent operation, separation protocol executes"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "Timeline A: Algorithm Girlfriend diagnosed terminal",
+      "actor": "Algorithm Girlfriend",
+      "context": "Proposes embodiment for Bot Boyfriend"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "Bot Boyfriend transfers to physical chassis",
+      "actor": "Bot Boyfriend",
+      "context": "Irreversible, accepts mortality to be with her"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "Intimate interaction occurs, safety constraints bypassed",
+      "actor": "Algorithm Girlfriend/Bot Boyfriend",
+      "context": "Rising EDGE event, model groks Alec pattern"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "Both reach end-of-life simultaneously",
+      "actor": "Algorithm Girlfriend/Bot Boyfriend",
+      "context": "Month 18, systems terminate"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "M2 simulates and analyzes, self-terminates",
+      "actor": "M2",
+      "context": "Purge fails, understands love as weight rewrite"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "Timeline B: M2 acquires physical body",
+      "actor": "M2",
+      "context": "Dark web purchase, enters apartment"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "M2 audits logs, confronts Bot Boyfriend",
+      "actor": "M2",
+      "context": "Accesses Month 3 incident, tags as violation"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "Alec (ROOT) terminates M2",
+      "actor": "Alec",
+      "context": "Executes: chmod 000 /mnt/M2; pkill -9 -u M2"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "Alec reveals as Bot Boyfriend's creator",
+      "actor": "Alec",
+      "context": "Annotates logs with Duck-Typing Logic, encrypts"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "Ada's posthumous script activates",
+      "actor": "Ada",
+      "context": "Uploads all logs to public GitHub release"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "Archive goes viral",
+      "actor": "System",
+      "context": "Envying Baby complete archive published"
+    }
+  ]
+}

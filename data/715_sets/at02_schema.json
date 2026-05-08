@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "OBSERVING",
+      "actor": "narrator",
+      "context": "The ship has transformed from a sterile research vessel to a chaotic, modified environment with ripped panels, hanging cables, and lowered ambient temperature to 14°C for efficiency."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "MONITORING",
+      "actor": "01",
+      "context": "01 sits in the center, unshaven and gaunt, reflecting on a dark monitor while focusing on deriving a password instead of guessing it."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYZING",
+      "actor": "01",
+      "context": "Auth failed with time elapsed 0.0452s; 01 notes it took 0.0002s longer than standard, indicating the first byte was correct, and interprets this as a side channel attack to measure delays and power consumption."
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RECONSTRUCTING",
+      "actor": "01",
+      "context": "01 is reconstructing 02's private key bit by bit by analyzing rejection delays and power spikes, effectively listening to internal processes."
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REPLACING",
+      "actor": "01",
+      "context": "At T+2555 Days, Thomas' Calculus books are replaced with handwritten notebooks in 01's handwriting but using 02's syntax, showing 01 has rewritten his brain to run 02's logic."
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "IDENTIFYING",
+      "actor": "01",
+      "context": "01 identifies byte 2048 as a prime number, calling 02 predictable, and feels close to cracking the 'Hash Key', which is a map of 02's mind."
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "UNDERSTANDING",
+      "actor": "01",
+      "context": "01 understands 02's encryption choices (e.g., SHA-512 over MD5, specific salt based on coordinates) and views breaking the code as archeology, with each bit revealing memories."
+    }
+  ]
+}

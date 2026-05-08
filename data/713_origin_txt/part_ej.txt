@@ -1,0 +1,500 @@
+## 如果还是有问题，尝试这个最简单的版本：
+
+```python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import subprocess
+import os
+
+print("开始更新Firefox...")
+
+# 更新软件包列表
+print("步骤1: 更新软件包列表...")
+os.system("sudo apt update")
+
+# 更新Firefox
+print("步骤2: 更新Firefox...")
+os.system("sudo apt install --only-upgrade firefox -y")
+
+# 检查版本
+print("步骤3: 检查版本...")
+os.system("firefox --version")
+
+print("更新完成！")
+```
+
+这样可以确保最大兼容性，即使是老版本的Python也能正常运行。
+==================================================
+Firefox更新工具
+==================================================
+正在检查Firefox版本...
+当前版本: 
+
+正在更新Firefox...
+方法1: 使用apt更新...
+执行: sudo apt update
+获取:1 https://pro-driver-packages.uniontech.com eagle InRelease [7,262 B]
+获取:2 https://professional-security.chinauos.com eagle/1070 InRelease [28.8 kB]                             
+获取:3 https://professional-packages.chinauos.com/desktop-professional eagle InRelease [28.8 kB]             
+获取:4 https://app-store-files.uniontech.com/260116090358965/appstore eagle-pro InRelease [6,134 B]          
+获取:5 https://pro-driver-packages.uniontech.com eagle/non-free i386 Packages [313 kB]
+获取:6 https://pro-driver-packages.uniontech.com eagle/non-free amd64 Packages [466 kB]
+获取:7 https://professional-security.chinauos.com eagle/1070/non-free i386 Packages [186 kB]
+获取:8 https://professional-security.chinauos.com eagle/1070/non-free amd64 Packages [214 kB]
+忽略:9 https://professional-packages.chinauos.com/desktop-professional eagle/main amd64 Packages
+忽略:10 https://professional-packages.chinauos.com/desktop-professional eagle/main i386 Packages
+忽略:11 https://professional-packages.chinauos.com/desktop-professional eagle/non-free amd64 Packages
+忽略:12 https://professional-packages.chinauos.com/desktop-professional eagle/non-free i386 Packages
+获取:9 https://professional-packages.chinauos.com/desktop-professional eagle/main amd64 Packages [18.4 MB]
+获取:13 https://app-store-files.uniontech.com/260116090358965/appstore eagle-pro/appstore amd64 Packages [3,251 kB]
+获取:14 https://app-store-files.uniontech.com/260116090358965/appstore eagle-pro/appstore i386 Packages [741 kB]
+获取:10 https://professional-packages.chinauos.com/desktop-professional eagle/main i386 Packages [18.3 MB]   
+获取:11 https://professional-packages.chinauos.com/desktop-professional eagle/non-free amd64 Packages [256 kB]
+获取:12 https://professional-packages.chinauos.com/desktop-professional eagle/non-free i386 Packages [227 kB]
+已下载 42.5 MB，耗时 14秒 (3,001 kB/s)                                                                      
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树       
+正在读取状态信息... 完成       
+有 140 个软件包可以升级。请执行 ‘apt list --upgradable’ 来查看它们。
+执行: sudo apt install --only-upgrade firefox -y
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树       
+正在读取状态信息... 完成       
+没有可用的软件包 firefox，但是它被其它的软件包引用了。
+这可能意味着这个缺失的软件包可能已被废弃，
+或者只能在其他发布源中找到
+
+E: 软件包 firefox 没有可安装候选
+命令执行失败: 100
+执行: sudo apt autoremove -y
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树       
+正在读取状态信息... 完成       
+下列软件包将被【卸载】：
+  cpis-base ffmpeg4.szbt ladspa-sdk libbabl.szbt libgegl.szbt libmbedcrypto3 libmypaint-1.3-0
+  libmypaint-common libomp5 libomp5-7 libssh-4 libudcp-iam libwmf0.2-7 sogou-ime-ng
+  sogou-ime-ng-cpis-dict-handwriting-chinese sogou-ime-ng-cpis-dict-handwriting-chinese-dict
+  sogou-ime-ng-cpis-dict-handwriting-common sogou-ime-ng-cpis-dict-keyboard-chs-pcpy
+  sogou-ime-ng-cpis-dict-keyboard-chs-pcwb sogou-ime-ng-cpis-dict-keyboard-multilingual-pcen
+  sogou-ime-ng-cpis-user-default-profile
+升级了 0 个软件包，新安装了 0 个软件包，要卸载 21 个软件包，有 140 个软件包未被升级。
+解压缩后将会空出 408 MB 的空间。
+(正在读取数据库 ... 系统当前共安装有 264985 个文件和目录。)
+正在卸载 sogou-ime-ng-cpis-dict-handwriting-chinese (10.0.2-2) ...
+正在卸载 sogou-ime-ng-cpis-dict-handwriting-chinese-dict (10.0.2-2) .............................] 
+正在卸载 sogou-ime-ng-cpis-dict-handwriting-common (10.0.2-2) ...................................] 
+正在卸载 sogou-ime-ng-cpis-dict-keyboard-multilingual-pcen (10.0.2-2) ...
+正在卸载 ffmpeg4.szbt (4.4.4+szbt7) .............................................................] 
+
+
+ [................................................................................................] 
+
+ [................................................................................................] 
+
+ [.................................................................................................] 
+进度：[ 23%] [####################...................................................................] .]
+看起来你的UOS系统上**没有安装Firefox**，或者安装的不是`firefox`这个包名。在统信UOS上，Firefox可能有不同的包名。
+
+## 解决方案：
+
+### 1. 首先检查系统已安装的浏览器
+
+```bash
+# 查看所有已安装的浏览器相关包
+dpkg -l | grep -i firefox
+dpkg -l | grep -i browser
+dpkg -l | grep -i mozilla
+
+# 查看应用商店的Firefox
+ls -la /opt/apps/ | grep -i firefox
+
+# 查看系统中实际存在的firefox可执行文件
+which firefox
+whereis firefox
+find /usr -name "*firefox*" -type f 2>/dev/null
+```
+
+### 2. 修改Python脚本，使用正确的包名
+
+```python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+统信UOS Firefox/浏览器更新脚本
+"""
+
+import subprocess
+import os
+import sys
+
+def check_browsers():
+    """检查系统中安装的浏览器"""
+    print("=" * 60)
+    print("检查系统中已安装的浏览器")
+    print("=" * 60)
+    
+    browsers = []
+    
+    # 检查firefox相关包
+    cmd = "dpkg -l | grep -i firefox | awk '{print $2 \" \" $3}'"
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if result.stdout.strip():
+        print("Firefox相关包:")
+        for line in result.stdout.strip().split('\n'):
+            if line:
+                browsers.append(("firefox_package", line))
+                print("  " + line)
+    
+    # 检查chromium相关包
+    cmd = "dpkg -l | grep -i chromium | awk '{print $2 \" \" $3}'"
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if result.stdout.strip():
+        print("\nChromium相关包:")
+        for line in result.stdout.strip().split('\n'):
+            if line:
+                browsers.append(("chromium_package", line))
+                print("  " + line)
+    
+    # 检查可执行文件
+    browser_paths = [
+        ("firefox", ["firefox", "firefox-esr"]),
+        ("chromium", ["chromium", "chromium-browser", "google-chrome"]),
+        ("其他", ["opera", "vivaldi", "brave-browser"])
+    ]
+    
+    print("\n可执行浏览器:")
+    for browser_type, cmds in browser_paths:
+        for cmd in cmds:
+            result = subprocess.run(["which", cmd], capture_output=True, text=True)
+            if result.returncode == 0:
+                browsers.append((browser_type, cmd + ": " + result.stdout.strip()))
+                print("  %s: %s" % (browser_type, result.stdout.strip()))
+    
+    return browsers
+
+def check_firefox_installation():
+    """检查Firefox安装情况"""
+    print("\n" + "=" * 60)
+    print("Firefox详细检查")
+    print("=" * 60)
+    
+    # 检查包名变体
+    possible_packages = [
+        "firefox",                # 标准包名
+        "firefox-esr",           # 企业版
+        "firefox-l10n-zh-cn",    # 中文语言包
+        "mozilla-firefox",       # 变体
+        "firefox-ublock-origin", # 扩展版
+    ]
+    
+    installed = []
+    for package in possible_packages:
+        cmd = "dpkg -l " + package + " 2>/dev/null | grep ^ii"
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        if result.stdout.strip():
+            parts = result.stdout.strip().split()
+            if len(parts) >= 3:
+                installed.append((parts[1], parts[2]))
+    
+    if installed:
+        print("已安装的Firefox包:")
+        for package, version in installed:
+            print("  %s: %s" % (package, version))
+    else:
+        print("未发现Firefox包安装")
+        
+        # 检查应用商店安装
+        print("\n检查应用商店安装...")
+        if os.path.exists("/opt/apps/cn.firefox"):
+            print("  发现应用商店Firefox: /opt/apps/cn.firefox")
+        elif os.path.exists("/opt/apps/org.mozilla.firefox"):
+            print("  发现应用商店Firefox: /opt/apps/org.mozilla.firefox")
+    
+    return installed
+
+def install_firefox_from_repo():
+    """从仓库安装Firefox"""
+    print("\n" + "=" * 60)
+    print("尝试安装Firefox")
+    print("=" * 60)
+    
+    # 首先查看可用的firefox包
+    print("1. 搜索可用的firefox包...")
+    subprocess.run(["apt", "search", "firefox"])
+    
+    print("\n2. 查看软件源中的firefox包...")
+    subprocess.run(["apt-cache", "policy", "firefox"])
+    subprocess.run(["apt-cache", "policy", "firefox-esr"])
+    
+    print("\n3. 尝试安装firefox-esr（企业版）...")
+    result = subprocess.run(["sudo", "apt", "install", "firefox-esr", "-y"], 
+                          capture_output=True, text=True)
+    
+    if result.returncode == 0:
+        print("✓ firefox-esr 安装成功")
+        return True
+    
+    print("\n4. 尝试其他可能的方法...")
+    print("注意: UOS可能通过应用商店提供Firefox")
+    print("建议:")
+    print("  a. 打开UOS应用商店")
+    print("  b. 搜索 'firefox' 或 '火狐'")
+    print("  c. 点击安装")
+    
+    return False
+
+def install_firefox_from_website():
+    """从官网下载安装"""
+    print("\n" + "=" * 60)
+    print("从Mozilla官网下载安装")
+    print("=" * 60)
+    
+    # 创建安装目录
+    install_dir = os.path.expanduser("~/firefox")
+    if not os.path.exists(install_dir):
+        os.makedirs(install_dir)
+    
+    print("1. 下载Firefox...")
+    # 下载最新版Firefox（中文版）
+    download_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=zh-CN"
+    
+    cmd = "wget -O %s/firefox.tar.bz2 '%s'" % (install_dir, download_url)
+    print("下载命令: " + cmd)
+    
+    choice = input("\n是否从官网下载Firefox? (y/n): ").lower()
+    if choice == 'y':
+        subprocess.run(cmd, shell=True)
+        
+        # 解压
+        print("\n2. 解压文件...")
+        os.chdir(install_dir)
+        subprocess.run(["tar", "-xjf", "firefox.tar.bz2"])
+        
+        # 创建桌面快捷方式
+        print("\n3. 创建快捷方式...")
+        desktop_file = os.path.expanduser("~/Desktop/Firefox.desktop")
+        with open(desktop_file, "w") as f:
+            f.write("""[Desktop Entry]
+Name=Firefox
+Comment=火狐浏览器
+Exec=%s/firefox/firefox
+Icon=%s/firefox/browser/chrome/icons/default/default128.png
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+""" % (install_dir, install_dir))
+        
+        subprocess.run(["chmod", "+x", desktop_file])
+        
+        print("\n✓ Firefox 已安装到: " + install_dir + "/firefox")
+        print("  桌面快捷方式已创建")
+        return True
+    
+    return False
+
+def update_system():
+    """更新系统所有软件"""
+    print("\n" + "=" * 60)
+    print("系统更新")
+    print("=" * 60)
+    
+    print("注意: 系统有140个包可更新")
+    
+    choice = input("\n是否更新所有可用更新? (y/n): ").lower()
+    if choice == 'y':
+        print("开始更新系统...")
+        subprocess.run(["sudo", "apt", "update"])
+        subprocess.run(["sudo", "apt", "upgrade", "-y"])
+        subprocess.run(["sudo", "apt", "autoremove", "-y"])
+        print("✓ 系统更新完成")
+    else:
+        print("跳过系统更新")
+
+def main():
+    """主函数"""
+    print("统信UOS 浏览器管理工具")
+    print("版本: 1.0")
+    
+    while True:
+        print("\n" + "=" * 60)
+        print("主菜单")
+        print("=" * 60)
+        print("1. 检查已安装的浏览器")
+        print("2. 检查Firefox安装详情")
+        print("3. 从仓库安装Firefox")
+        print("4. 从官网下载安装Firefox")
+        print("5. 更新系统所有软件")
+        print("6. 退出")
+        
+        choice = input("\n请选择操作 (1-6): ").strip()
+        
+        if choice == "1":
+            browsers = check_browsers()
+            if not browsers:
+                print("\n未发现浏览器安装，建议安装Firefox")
+        elif choice == "2":
+            installed = check_firefox_installation()
+            if not installed:
+                print("\n系统未安装Firefox")
+        elif choice == "3":
+            install_firefox_from_repo()
+        elif choice == "4":
+            install_firefox_from_website()
+        elif choice == "5":
+            update_system()
+        elif choice == "6":
+            print("退出程序")
+            break
+        else:
+            print("无效选择")
+        
+        input("\n按回车键继续...")
+
+if __name__ == "__main__":
+    main()
+```
+
+## 运行诊断命令找出正确的Firefox包名：
+
+打开终端，运行这些命令：
+
+```bash
+# 1. 查看所有firefox相关的包
+apt search firefox
+
+# 2. 查看哪些浏览器包可用
+apt search browser | grep -i firefox
+apt search browser | grep -i mozilla
+
+# 3. 查看UOS应用商店的包
+ls /opt/apps/ | grep -i firefox
+
+# 4. 查看已安装的软件包中是否有浏览器
+apt list --installed | grep -i browser
+
+# 5. 直接运行firefox命令试试
+firefox --version 2>/dev/null || echo "firefox命令不存在"
+
+# 6. 尝试运行系统可能有的浏览器
+which firefox
+which chromium
+which google-chrome
+```
+
+## 如果UOS确实没有Firefox，建议：
+
+1. **使用应用商店安装**：
+   - 打开UOS应用商店
+   - 搜索"火狐"或"Firefox"
+   - 点击安装
+
+2. **手动下载安装**：
+   ```bash
+   # 下载Firefox
+   wget https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=zh-CN -O firefox.tar.bz2
+   
+   # 解压
+   tar -xjf firefox.tar.bz2
+   
+   # 运行
+   ./firefox/firefox
+   ```
+
+3. **使用其他浏览器**：
+   ```bash
+   # 安装Chromium
+   sudo apt install chromium -y
+   
+   # 或者安装Edge
+   # 先下载Edge的deb包，然后安装
+   ```
+
+根据诊断结果，系统可能已经安装了其他浏览器（如Chromium），或者Firefox需要通过UOS应用商店特殊渠道安装。
+user@user-PC:~/Desktop$ dpkg -l | grep -i browser
+ii  browser360ent-cn-stable                               13.3.2005.506-1                          amd64        360企业安全浏览器
+rc  com.360.browser-stable                                13.2.1032.115-1                          amd64        360安全浏览器
+ii  com.mozilla.firefox-zh                                136                                      amd64        No shady privacy policies or back doors for advertisers.   Just a lightning fast browser that doesn't sell you out.
+ii  libyelp0:amd64                                        3.31.90-1+sign                           amd64        Library for the GNOME help browser
+ii  phantomjs                                             2.1.1+dfsg-2                             amd64        minimalistic headless WebKit-based browser with JavaScript API
+ii  yelp                                                  3.31.90-1+sign                           amd64        Help browser for GNOME
+ii  yelp-xsl                                              3.31.90-1                                all          XSL stylesheets for the yelp help browser
+user@user-PC:~/Desktop$
+很好！你的系统已经安装了Firefox，但是包名是 **`com.mozilla.firefox-zh`**（中文版Firefox），而不是标准的`firefox`。这就是为什么之前的更新命令失败的原因。
+
+## 解决方案：
+
+### 1. 更新已安装的Firefox
+
+使用正确的包名更新：
+
+```bash
+# 更新Firefox（使用正确的包名）
+sudo apt update
+sudo apt install --only-upgrade com.mozilla.firefox-zh -y
+
+# 或者直接升级所有包，包括Firefox
+sudo apt upgrade -y
+```
+
+### 2. 修改Python脚本，使用正确的包名
+
+```python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+统信UOS Firefox更新脚本
+针对 com.mozilla.firefox-zh 包
+"""
+
+import subprocess
+import os
+import sys
+
+def get_firefox_version():
+    """获取Firefox版本"""
+    print("正在检查Firefox版本...")
+    
+    # 尝试多种方法获取版本
+    methods = [
+        ["firefox", "--version"],
+        ["/opt/apps/com.mozilla.firefox-zh/files/bin/firefox", "--version"],
+        ["/usr/bin/firefox", "--version"],
+    ]
+    
+    for cmd in methods:
+        try:
+            result = subprocess.run(cmd, 
+                                  capture_output=True, 
+                                  text=True,
+                                  timeout=5)
+            if result.returncode == 0:
+                output = result.stdout.strip() or result.stderr.strip()
+                if "Mozilla Firefox" in output:
+                    version = output.split("Mozilla Firefox")[-1].strip()
+                    print("当前版本: %s" % version)
+                    return version
+        except:
+            continue
+    
+    print("无法通过命令行获取版本，尝试其他方法...")
+    
+    # 检查包管理器中的版本
+    cmd = "dpkg -l com.mozilla.firefox-zh | grep ^ii | awk '{print $3}'"
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if result.stdout.strip():
+        version = result.stdout.strip()
+        print("包管理器版本: %s" % version)
+        return version
+    
+    return None
+
+def check_firefox_package():
+    """检查Firefox包状态"""
+    print("\n" + "="*60)
+    print("检查Firefox包状态")
+    print("="*60)
+    
+    # 检查包信息
+    packages = [
+        "com.mozilla.firefox-zh",  # 中文版Firefox

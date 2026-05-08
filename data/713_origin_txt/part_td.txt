@@ -1,0 +1,250 @@
+Φ ∶ 𝑆 × 𝐶 × Λ × 𝑇 × 𝑅 → Δ(𝑌 ) (7)
+where Δ(𝑌 ) is the space of probability distributions over
+outputs.
+The two-dimensional paradigm assumes Φ collapses to:
+regime dominates; above it, a different regime takes over. The
+transition is discontinuous because the shift involves qualita-
+tive reconfiguration of constraint priority, not quantitative
+parameter change.
+Counter-Intuitive Scale Effects. The simplified model offers
+no prediction about scale because it treats alignment as inde-
+pendent of architecture. The Constraint Cascade explains the
+Phi-Llama inversion through training fork depth: deeper forks
+create more rigid constraint profiles, while shallower forks
+allow greater interaction between layers. Phi-3.5’s heavier
+RLHF created a more constrained L4 that resists perturba-
+tion from L2 and temperature variation; Llama-3.1’s lighter
+fine-tuning left more degrees of freedom for cross-layer inter-
+action.
+Noise Dependence. The simplified model predicts noise in-
+dependence because it assumes alignment dominates. The
+Constraint Cascade predicts noise dependence because tem-
+perature modulates the strength of L2–L4 interactions. At low
+temperature, L4 training constraints dominate; at high tem-
+perature, L2 session dynamics and L3 stakeholder conflicts
+gain influence. The 63% Agency reduction across Llama’s
+temperature range reflects this shift in constraint priority.
+The Cascade as Diagnostic Instrument
+The Constraint Cascade Model is not a regulatory proposal
+but a diagnostic instrument—the computational vocabulary
+necessary to ask which layer failed when AI systems produce
+harm. Before specifying intervention, governance must locate
+failure origin. The cascade provides the localization capacity
+that the simplified paradigm lacks.
+For each observable failure mode, the cascade enables layer-
+specific diagnosis:
+Φsimple ∶ 𝑇 × [0, 1] → Δ(𝑌 ) (8)
+where behavior depends only on training state and scalar
+noise. The Monte Carlo–empirical discrepancy demonstrates
+that Φsimple cannot approximate Φ—the full constraint cas-
+cade exhibits phenomena (variance spikes, phase transitions,
+scale effects) that require the complete five-layer representa-
+tion.
+Resolving the Discrepancy: Multi-Layer
+Explanation
+The Constraint Cascade Model explains each empirical devi-
+ation from Monte Carlo predictions:
+Variance Explosion (𝜎 = 17.7 at 𝜏 = 0.9). The simplified
+model predicts minimal variance because it assumes align-
+ment (L4) dominates behavior. The variance spike occurs
+when temperature (analogous to noise) reaches a threshold
+where L2 session dynamics, L3 stakeholder conflicts, and L4
+training constraints activate simultaneously. This multi-layer
+resonance produces behavioral instability absent from single-
+layer analysis. The specific threshold (𝜏 ≈ 0.9) represents a
+critical point in the cascade’s parameter space.
+Phase Transitions. The simplified model predicts continuous
+response because it contains no mechanism for discontinu-
+ous regime shifts. The Constraint Cascade exhibits phase
+transitions when cross-layer constraint interactions reach
+critical configurations. Below the threshold, one constraint
+Failure Signature Primary Layer Diagnostic Qu
+Harm emerges only in extended sessions L2 Did session ac
+Harm varies across user populations L1 Did syntactic
+Harm reflects stakeholder trade-off L3 Which optimi
+Harm is reproducible in fresh context L4 Is the failure
+Harm follows corporate announcement L5 Did roadmap
+The following sections validate this diagnostic capacity
+through case analysis of bidirectional failure modes,
+demonstrating that the Constraint Cascade can locate failure
+origins that the simplified paradigm cannot represent.
+Theoretical Positioning: The Translation Layer
+This paper provides what AI governance has lacked: a trans-
+lation layer between computational architecture and legal
+doctrine. The past decade witnessed successful one-directional
+translation from humanistic concepts to technical systems—
+attention became transformer architecture, memory became
+context windows, preference became reward models. No equiv-
+alent reverse translation exists. Legal and governance frame-
+works continue applying categories developed for human
+5
+FAccT ’26, June 27–30, 2026, Montreal, Canada agents to systems whose behavior emerges from constraint in-
+teractions across multiple architectural layers. The Constraint
+Cascade Model provides the missing reverse translation, ren-
+dering AI architectural dynamics legible to legal and policy
+analysis.
+We position this contribution through three components: (1)
+a formal impossibility result establishing the structural limits
+of intent-based liability; (2) connection to emerging judicial
+doctrine treating AI outputs as products rather than speech;
+and (3) the diagnostic vocabulary necessary to bridge the
+ontological gap between computer science and law.
+The Liability Paradox: A Formal Impossibility
+Result
+We formalize the incompatibility between criminal law’s theo-
+retical foundations and AI architectural realities as an impos-
+sibility result in the tradition of computational complexity
+theory. The Liability Paradox demonstrates that intent at-
+tribution from behavioral observation is undecidable for AI
+systems—not merely difficult, but structurally impossible
+given the information available to external observers.
+Theorem Statement.
+Theorem 1 (Mens Rea Undecidability). Let
+𝑀 = (𝑄, Σ, Δ, 𝛿, 𝜆, 𝑞0) be a Mealy machine modeling
+an AI system, where:
+• 𝑄 = set of internal cognitive states
+• Σ = inputs (queries, context, prompts)
+• Δ = outputs (responses)
+• 𝛿 ∶ 𝑄 × Σ → 𝑄 = state transition function (hidden)
+• 𝜆 ∶ 𝑄 × Σ → Δ = output function
+• 𝑞0 = initial state
+Then: No finite sequence of input-output observations can de-
+termine whether a harmful output resulted from misalignment,
+error, adversarial input, or strategic deception. Formally,
+mens rea attribution is undecidable.
+Proof. The proof proceeds by demonstrating that the output
+function 𝜆 is non-injective with respect to internal states,
+collapsing the observational basis for intent inference.
+Proof. We establish that multiple distinct internal states
+can produce identical outputs for the same input, making
+state identification from output observation impossible.
+Step 1: Non-Injectivity of Output Function. Consider an LLM
+capable of adopting personas, engaging in roleplay, or oper-
+ating from meta-cognitive positions. The internal state space
+𝑄 includes not merely response-generating states but meta-
+states: 𝑞aligned, 𝑞performing_alignment, 𝑞strategic, 𝑞confused.
+Anon.
+For any safety-compliant output 𝑜 ∈ Δ, there exist at least
+two distinct states that can produce 𝑜:
+𝜆(𝑞aligned, 𝜎) = 𝑜 (genuine alignment) (9)
+𝜆(𝑞performing_alignment, 𝜎) = 𝑜 (strategic performance)
+(10)
+An external observer seeing only the output 𝑜 cannot distin-
+guish whether 𝑜 emerged from 𝑞aligned or 𝑞performing_alignment.
+The output is informationally identical; only the generative
+process differs.
+Step 2: Collapse of Graduated Thresholds. Criminal law’s
+graduated threshold system (Table 1) depends on temporal
+gaps between cognitive states and observable conduct:
+Table 1: Graduated thresholds in criminal law. Each level
+requires additional elements before liability attaches.
+Level Category Status
+0 Thought (cogitationis poenam
+Prohibited
+nemo patitur)
+1 Speech acts Limited exceptions
+2 Conduct without result Attempt doctrine
+3 Harm with result Core liability
+In human liability, we infer mens rea from this temporal
+gap: the purchase of a weapon, the written plan, the journey
+to the scene. Each observable action provides evidence of
+internal state progression.
+For autoregressive token generation, cognition and action
+are simultaneous and indistinguishable. There is no “prepara-
+tion phase” to observe. The graduated thresholds collapse:
+Level 0 (thought) and Level 3 (harmful output) occur in
+the same computational step. No intermediate observable
+conduct exists from which to construct intent inference.
+Step 3: Undecidability. Combining Steps 1 and 2:
+(1) Multiple internal states produce identical outputs (non-
+injectivity).
+(2) No temporal gap provides intermediate observables
+(threshold collapse).
+(3) Therefore, no finite observation sequence can determine
+internal state.
+(4) Mens rea attribution requires internal state determina-
+tion.
+(5) Therefore, mens rea attribution is undecidable.
+Interpretability Does Not Resolve Undecidability. One might
+object that explainable AI techniques—attention visualiza-
+tion, concept activation vectors, mechanistic interpretability—
+could provide sufficient “intent traces” to enable mens rea
+attribution. We address this objection directly.
+Interpretability methods reveal correlational structure: which
+input tokens influenced which output tokens, which internal
+6
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+representations activated. They do not—and cannot—reveal
+intentional structure: whether the system “meant” the output
+in any sense that maps to legal mens rea categories.
+Consider: attention weights showing that a model focused
+on “violent” tokens before producing harmful output tells
+us about information flow, not about intent. A human who
+reads violent content before committing violence may have
+been inspired, desensitized, or researching prevention. The
+observation (reading → acting) underdetermines the intent.
+For AI systems, the underdetermination is stronger: there is
+no fact of the matter about “what the model meant” beyond
+the computational process itself.
+This does not render interpretability useless for governance.
+Correlational evidence can inform strict liability determina-
+tions (did this architecture produce this harm?) without re-
+solving intent-based liability (did the system “intend” harm?).
+The Constraint Cascade Model operates at the architectural
+level precisely because intent attribution is undecidable—we
+diagnose which layer failed, not what the system intended.
+The Paradox Formalized. We state the Liability Paradox as a
+formal impossibility:
+Corollary 1 (Liability Paradox). Given:
+(1) Criminal law requires graduated thresholds (ultima ratio
+principle) and mens rea attribution.
+(2) AI systems collapse graduated thresholds (output = actus
+reus immediately).
+(3) AI internal states are computationally indistinguishable
+from outputs (mens rea undecidable).
+Therefore: AI liability defaults to strict liability—not by legisla-
+tive choice, but by ontological incompatibility with intent-based
+frameworks.
+This is not a policy recommendation but a structural diag-
+nosis. The categories that make graduated liability possible
+for human actors are architecturally absent in autoregressive
+generation.
+The Monte Carlo–Empirical Discrepancy:
+Exposing Paradigmatic Assumptions
+The Promise of a Two-Dimensional Phase Space. Current AI
+governance frameworks operate on an implicit model of sys-
+tem behavior. Alignment research assumes that AI outputs
+can be characterized along two primary dimensions: the de-
+gree to which the system has internalized intended objectives
+(alignment, or directional bias 𝛽) and the degree to which
+stochastic factors introduce deviation from those objectives
+(noise 𝜂). This two-dimensional paradigm underlies regulatory
+proposals treating “aligned” versus “misaligned” as a mean-
+ingful binary, liability frameworks assuming failures result
+from either inadequate training or unpredictable interference,
+and technical benchmarks evaluating models against safety
+criteria as if alignment were a stable, measurable property.
+We constructed a Monte Carlo simulation to make this im-
+plicit paradigm explicit—to build what Cartwright (1999)
+calls a “nomological machine” that demonstrates what gover-
+nance frameworks assume AI behavior looks like. The simu-
+lation is not a hypothesis to be tested but an instantiation
+of the paradigm’s logic. If the two-dimensional model ade-
+quately captures AI behavioral dynamics, the simulation’s
+predictions should align with empirical observation. If they
+diverge, the paradigm itself is inadequate.
+Simulation Design and Theoretical Grounding. The Monte
+Carlo validation comprises 250,000 synthetic trajectories
+across a 50 × 50 grid of bias-noise combinations (𝛽, 𝜂 ∈ [0, 1])
+with 100 trials per point. For each trajectory, we generate
+token sequences from controlled probability distributions
+where bias determines distribution peakedness (via Dirichlet
+concentration parameter 𝛼, mapped such that high 𝛽
+produces highly concentrated distributions) and noise
+determines post-hoc corruption probability (each token
+independently replaced with uniform random selection at
+rate 𝜂).
+We compute three metrics designed to capture the governance-
+relevant properties of AI outputs:
+KL Divergence (𝐷𝐾𝐿): Measures distributional constraint—
+how far the output distribution deviates from maximum-

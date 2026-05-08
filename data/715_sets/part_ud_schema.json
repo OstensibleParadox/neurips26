@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PROVIDE_INFO",
+      "actor": "system",
+      "context": "eVisa system details: successful applicants receive eVisa online record instead of physical BRP card, get entry sticker vignette in passport, must link eVisa to passport in UKVI account upon UK arrival; disclaimer about consulting GOV.UK"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "REQUEST_ORGANIZE_TRANSLATE",
+      "actor": "user",
+      "context": "User requests to organize all above information in order and translate to Chinese"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ORGANIZE_TRANSLATE",
+      "actor": "system",
+      "context": "System provides organized Chinese guide on UK Student Dependant Visa: Part 1 eligibility (research postgrad, government funded, in-UK transition, pre-2024 exceptions); Part 2 family members (partners, children under 18); Part 3 UK-born children (no immediate visa needed, travel warning, NHS fees, application requirements); Part 4 overseas application (timing, fees, location, process, funds £680/month max 9m/£6120, exemptions, documents, vignette and eVisa); disclaimer"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "QUERY_MPHIL",
+      "actor": "user",
+      "context": "User asks 'mphil是什么学位？' (What is MPhil degree?)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXPLAIN_MPHIL",
+      "actor": "system",
+      "context": "System explains MPhil as research-type Master's (Master of Philosophy), 1-2 years, PhD prep, qualifies for dependant visa if full-time research >=9 months; table of features; confirmation tips; offers further help"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "QUERY_TAUGHT_MASTERS",
+      "actor": "user",
+      "context": "User asks 'taught硕士一般叫作什么？给我列出英国的所有种类的硕士' (What are taught masters called? List all UK master types)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "LIST_UK_MASTERS",
+      "actor": "system",
+      "context": "System lists UK masters: Taught (MA, MSc, LLM, MBA etc. table); Research (MRes, MPhil table); Other (PgDip, PgCert, Integrated); ties to visa rules"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "QUERY_US_MASTERS",
+      "actor": "user",
+      "context": "User asks '美国的硕士是怎么区分的？' (How are US masters distinguished?)"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "EXPLAIN_US_MASTERS",
+      "actor": "system",
+      "context": "System explains US masters: Academic (MA, MS/MSc, MRes, MPhil); Professional (MBA, MFA etc.); distinction tips (name, description, thesis); offers help"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "CORRECT_MPHIL_DURATION",
+      "actor": "user",
+      "context": "User corrects '但是英国也有9个月的mphil啊' (But UK has 9-month MPhil too)"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "CONFIRM_MPHIL_9MONTHS",
+      "actor": "system",
+      "context": "System acknowledges correction, clarifies MPhil can be 9-12 months research-type, qualifies for dependant visa if full-time research >=9 months; distinguishes from taught; confirmation advice (incomplete in text)"
+    }
+  ]
+}

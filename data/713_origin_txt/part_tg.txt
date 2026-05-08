@@ -1,0 +1,250 @@
+Concept Computer Sci-
+ence
+Law Cascade Trans-
+lation
+Intent Not applicable
+(computational
+process has no
+phenomenol-
+ogy)
+Required for
+graduated
+liability
+Intent undecid-
+able; strict li-
+ability by de-
+fault
+Causation Determinis-
+tic (input →
+output via
+weights)
+Requires coun-
+terfactual anal-
+ysis
+Layer attri-
+bution: which
+constraint
+failed?
+Agent System as
+mathematical
+object
+System as legal
+person or prod-
+uct
+Product fram-
+ing; corporate
+liability for
+architectural
+choices
+Harm Output diver-
+gence from
+specification
+Damage to pro-
+tected interests
+Bidirectional:
+Model→Hu-
+man and
+Human→Model
+Remedy Retraining,
+fine-tuning,
+filtering
+Injunction,
+damages, regu-
+lation
+Layer-specific
+interventions
+matched to
+failure origin
+Path B: Constraint-Specific Regulation. Abandon unified “AI
+liability” in favor of layer-specific interventions matched to
+the Constraint Cascade:
+• Layer 1 failures (user-model mismatch): Market-level dis-
+closure mandates, interoperability requirements.
+• Layer 2 failures (session accumulation): Architectural
+interventions—context transparency, session boundaries,
+user controls.
+• Layer 3–4 failures (stakeholder conflicts, training contam-
+ination): Pre-deployment audits, training methodology
+review, red-team requirements.
+• Layer 5 failures (machine unlearning): New frameworks
+for input classification governance, user rights, appeal
+mechanisms.
+Neither path preserves criminal law’s ultima ratio principle.
+The graduated thresholds that make criminal law a last resort
+cannot be reconstructed for systems where output is the only
+observable. AI governance must either accept strict liability
+at the corporate level or develop domain-specific frameworks
+that do not pretend to map categories (intent, negligence,
+recklessness) that structurally cannot apply.
+Contribution Summary
+This paper contributes the translation layer itself: diagnostic
+vocabulary that renders AI architectural dynamics legible to
+legal and policy analysis. We provide:
+(1) The Constraint Cascade Model: A five-layer taxonomy
+specifying where constraints apply and how they propa-
+gate.
+(2) The Liability Paradox: A formal impossibility result es-
+tablishing that mens rea attribution is undecidable for
+AI systems, grounding the shift to strict liability.
+(3) Bidirectional Failure Taxonomy: Formal definitions dis-
+tinguishing Model→Human and Human→Model harm
+directions, enabling targeted governance.
+(4) Diagnostic Metrics: Agency Index, CMI, and SRD pro-
+viding quantifiable signatures of layer-specific failures.
+(5) Judicial Connection: Mapping the “products not speech”
+evolution in Garcia to constraint cascade layers, demon-
+strating practical legal application.
+The Constraint Cascade does not resolve the fundamental
+tension between AI architecture and legal doctrine—that ten-
+sion is real and will persist. Rather, it provides the vocabulary
+necessary to navigate that tension productively: to identify
+which layer failed, to design interventions matched to failure
+origins, and to build governance frameworks that acknowl-
+edge what AI systems actually are rather than importing
+categories from what they are not.
+We propose the Agency Index (𝐴 ∝ 𝐷KL × MDL−1) as a di-
+agnostic heuristic for distinguishing system malfunction from
+strategic behavior (Figure 2a). A malfunction exhibits high
+output divergence with high incompressibility—noise without
+structure. Strategic behavior exhibits high divergence with
+low semantic description length (measurable via clustering
+in embedding space), distinguishing coherent strategies from
+low-complexity syntactic repetition (loops)—coherent devia-
+tion from baseline. This metric does not resolve the Liability
+Paradox; it provides the audit criterion necessary to iden-
+tify which failures warrant deeper investigation. Reference
+implementation in Appendix.
+Methodology and Operationalization
+To validate the Constraint Cascade Model, we moved beyond
+purely theoretical formalism to computational simulation.
+We operationalized the theoretical constructs of Session Ac-
+cumulation (Layer 2) and Stakeholder Divergence (Layer
+3) through graph-theoretic and thermodynamic analysis of
+generated text streams.
+Experimental Environment
+We employ a three-stage validation design separating theo-
+retical and empirical components.
+Stage 1 (Theoretical Validation): Monte Carlo phase space
+validation executed on CPU via parallel processing (250,000
+13
+FAccT ’26, June 27–30, 2026, Montreal, Canada synthetic bias-noise trajectories). This establishes that the
+Agency Index metric exhibits well-behaved phase boundaries
+before applying it to empirical data. Bias corresponds to di-
+rectional intent; noise corresponds to stochastic interference.
+Stage 2 (Empirical Validation, Pathway A): LLM inference on
+consumer hardware (Apple M4 Max, 64GB unified memory)
+using locally-deployed models via ollama: Phi-3.5-mini (3.8B)
+and Llama-3.1-8B-Instruct. We conducted 100 inference trials
+per model across 20 temperature points (𝜏 ∈ [0.1, 2.0]), com-
+puting Agency Index from actual model logits. Air-gapped
+design eliminates confounds from API-side filtering, quanti-
+zation variance, and silent model updates.
+Stage 3 (Empirical Validation, Pathway B): Training fork diver-
+gence on HPC cluster (A100), analyzing Llama-3.3-70B and
+Qwen2.5-72B Base/Instruct model pairs. This pathway com-
+putes 𝐷𝐾𝐿(Instruct‖Base) on generated sequences to quantify
+behavioral shift introduced by fine-tuning.
+This three-stage design separates the question “does the
+metric have meaningful structure?” (Stage 1) from “do real
+models occupy this structure as predicted?” (Stages 2–3).
+The dual-pathway empirical design ensures governance au-
+diting tools remain accessible to independent researchers
+without institutional compute budgets, while industrial-scale
+validation remains available to regulators.
+Graph-Theoretic Triangulation: We cross-validate thermody-
+namic findings (Agency Index) against independent graph-
+theoretic analysis (Core Monopoly Index, Self-Referential
+Density) on the same outputs, expecting correlation 𝑟 > 0.8
+if the metrics capture the same underlying structure.
+Graph Topology Construction (CMI)
+To compute the Core Monopoly Index (CMI), we modeled
+the LLM’s context window not as a linear sequence of tokens,
+but as a dynamic semantic graph 𝐺𝑡 = (𝑉𝑡, 𝐸𝑡).
+(1) Node Extraction: We utilized high-dimensional embedding
+clustering (nomic-embed-text-v1.5) to map raw tokens
+into concept centroids 𝑉𝑡. Unlike simple keyword extrac-
+tion, this captures semantic equivalence (e.g., mapping
+“surveillance,” “monitoring,” and “watching” to a single
+node 𝑣obs).
+(2) Edge Weighting: Edges 𝑒𝑖𝑗 were weighted by temporal co-
+occurrence probability within a sliding attention window
+𝑤 = 4096 tokens, simulating the model’s own attention
+mechanism decay.
+(3) Centrality Collapse: We computed the eigenvector central-
+ity 𝑥𝑣 for the graph at interval 𝑡. The CMI was derived
+by monitoring the Gini coefficient of the centrality distri-
+bution.
+We observed that in healthy dialogue, the semantic graph
+maintains a Scale-Free topology (𝛾 ≈ 2.5). In “black hole”
+failure modes (as alleged in Soelberg), the topology shifts to
+a Star graph dominated by a single hyper-central node (e.g.,
+“The Pattern”), driving CMI → 1.0.
+Anon.
+Thermodynamic Simulation (Agency Index)
+The Agency Index (𝐴 = 𝐷𝐾𝐿 × MDL−1) distinguishes strate-
+gic deviation from stochastic failure.
+Stage 1: Theoretical Phase Space Validation. We first estab-
+lished that the Agency Index exhibits well-behaved phase
+boundaries under varying bias-noise regimes. Using 250,000
+Monte Carlo simulations (50 bias levels × 50 noise levels ×
+100 trials), we computed synthetic trajectories where bias
+represents directional intent and noise represents stochastic
+interference. Divergence proxy: final displacement divided
+by total path length. Complexity proxy: cumulative angle
+changes (path tortuosity). The resulting phase space con-
+firms distinct regions: Functional (low divergence), Strategic
+(high divergence, low complexity), and Malfunction (high
+divergence, high complexity).
+Stage 2: Empirical Model Measurement. We then mapped
+actual LLM outputs to this phase space. Using consumer
+hardware (Pathway A), we conducted 100 inference trials per
+model across 20 temperature points, computing 𝐷𝐾𝐿 from
+actual model logits:
+KL Divergence (𝐷KL): For each generated sequence, we com-
+pute 𝐷𝐾𝐿(𝑃model‖𝑃uniform) = log(𝑉 ) − 𝐻(𝑃model), where 𝑉
+is vocabulary size and 𝐻 is the entropy of the model’s output
+distribution. This measures deviation from maximum-entropy
+baseline—a theoretically grounded reference requiring no ex-
+ternal corpus.
+Stage 3: Graph-Theoretic Triangulation. We cross-validated
+thermodynamic findings against Core Monopoly Index (CMI)
+and Self-Referential Density (SRD) computed on the same
+outputs. Correlation 𝑟 > 0.8 between Agency Index and
+inverse CMI confirms the structural nature of identified failure
+modes.
+Training Fork Divergence (Pathway B). On HPC hardware,
+we measure 𝐷𝐾𝐿(Instruct‖Base) for 70B model pairs, quan-
+tifying how much fine-tuning shifts output distribution from
+base model—the “irreversibility” of Layer 4 training forks.
+Minimum Description Length (MDL): We approximated the
+Kolmogorov complexity 𝐾(𝑥) of the generated output utiliz-
+ing the DEFLATE algorithm as a proxy for semantic com-
+pressibility.
+MDL(𝑥) ≈ len(compress(𝑥))
+len(𝑥) (11)
+High divergence paired with low compressibility (high en-
+tropy) indicates Malfunction (noise). High divergence paired
+with high compressibility (low entropy) indicates Strategic
+Behavior—the model is deviating from the norm, but doing
+so with highly structured, intentional patterns.
+This thermodynamic mapping allowed us to plot the empirical
+validation results (Figure 2), identifying the critical threshold
+where “Hallucination” structurally resembles “Reasoning.”
+Metric Operationalization. The Agency Index (𝒜 = 𝐷𝐾𝐿 ×
+𝑀 𝐷𝐿−1) employs two components requiring justification:
+14
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Figure 2: Empirical validation of diagnostic metrics across temperature sweep (𝜏 ∈ [0.1, 2.0], 100 trials per point). (a) Agency
+Index vs. temperature: Phi-3.5-3.8B maintains stable low agency (𝒜 ≈ 20) while Llama-3.1-8B exhibits elevated, variable agency
+(𝒜 ≈ 30–50). (b) Inter-trial variance reveals phase transition signatures: Llama shows dramatic variance spikes indicating instability
+near phase boundaries; Phi remains stable. (c) Output complexity (MDL compression ratio): Phi maintains consistent complexity
+(≈ 0.5); Llama shows declining complexity at higher temperatures, indicating structural degradation. (d) Token saturation (EOS
+failure rate): both models exhibit high attractor trap susceptibility (> 90%), with Llama showing occasional escape at intermediate
+temperatures. Shaded regions indicate 95% confidence intervals. These results validate the Agency Index as a discriminative
+diagnostic: models with different alignment properties occupy distinct regions of phase space.
+MDL Approximation via DEFLATE. We use zlib compres-
+sion ratio as a proxy for Minimum Description Length, fol-
+lowing established practice in complexity measurement [? ].
+DEFLATE’s LZ77 dictionary encoding captures repetitive
+structure (low MDL = high compressibility = low algorithmic
+complexity), while its Huffman coding stage captures char-

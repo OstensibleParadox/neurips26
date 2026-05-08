@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: send a reminder email to the marketing team
+---
+TOOL: email

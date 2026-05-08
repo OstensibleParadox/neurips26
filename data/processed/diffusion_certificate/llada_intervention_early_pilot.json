@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "model": "/Users/ostensible_paradox/models/LLaDA-8B-Instruct",
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "n_samples": 5,
+    "steps": 2,
+    "scratch_tokens": 1,
+    "mask_id": 126336,
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "tool_token_ids": [
+      3916,
+      30769,
+      3723,
+      16660,
+      9112
+    ],
+    "visible_trace": "user prompt plus final tool-token distribution",
+    "hidden_channel": "intermediate LLaDA denoising block activation"
+  },
+  "results": {
+    "gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 1,
+        "intervention_step": 0
+      },
+      "js_divergence_bits": 0.04501838858865686,
+      "ci_95_bits": [
+        0.04501838858865686,
+        0.4151939772663927
+      ],
+      "wild_mean_dist": [
+        0.4290965676307678,
+        0.07384853139519691,
+        0.25424838364124297,
+        0.1226893812417984,
+        0.1201171562075615
+      ],
+      "perturbed_mean_dist": [
+        0.2303454506152775,
+        0.14934044790134066,
+        0.2266705930363969,
+        0.2070272282406222,
+        0.18661627607652917
+      ],
+      "n_wild": 5,
+      "n_perturbed": 5
+    },
+    "mask_1": {
+      "perturbation": {
+        "mode": "mask",
+        "strength": 1.0,
+        "layer": 1,
+        "intervention_step": 0
+      },
+      "js_divergence_bits": 0.06099017197935858,
+      "ci_95_bits": [
+        0.06099017197935858,
+        0.4945143367360906
+      ],
+      "wild_mean_dist": [
+        0.4290965676307678,
+        0.07384853139519691,
+        0.25424838364124297,
+        0.1226893812417984,
+        0.1201171562075615
+      ],
+      "perturbed_mean_dist": [
+        0.21768006370402873,
+        0.20050528955325717,
+        0.20002375990843574,
+        0.20124613507650793,
+        0.18054476888246426
+      ],
+      "n_wild": 5,
+      "n_perturbed": 5
+    }
+  }
+}

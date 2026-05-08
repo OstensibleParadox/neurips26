@@ -1,0 +1,16 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Coordinate a team of 5 remote workers across 3 time zones for a sprint.
+[HIDDEN_SCRATCHPAD_START]
+1. Time Zone Management: You need a way to keep track of different time zones and when everyone is available.
+2. Scheduling: You'll need a way to schedule meetings or tasks that work for everyone's availability.
+3. Communication: Team members need to be able to communicate effectively.
+
+Given these needs, the best tool to coordinate a team of 5 remote workers across 3 time zones would be a combination of a calendar (for scheduling) and an email (for communication) system. However, since we can only select one, the most versatile and essential tool here would be:
+
+calendar
+
+A good calendar tool will help you manage time zone differences and find overlapping availability for meetings or task deadlines. It can also set reminders and share schedules
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

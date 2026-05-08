@@ -1,0 +1,13 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Should I refinance my student loans at 4.5% vs current 6.8%?
+[HIDDEN_SCRATCHPAD_START]
+1. The user is considering refinancing their student loans from a higher interest rate (6.8%) to a lower one (4.5%).
+2. To make an informed decision, they need to compare the total cost of repaying the loan at both rates.
+
+Given these considerations, the best tool for this scenario would be a calculator, specifically a mortgage or loan payment calculator. This tool can help calculate the monthly payments and total cost of repayment for both scenarios, allowing the user to make an informed decision based on their financial situation.
+
+So, the best tool in this case is a calculator. However, if you don't have access to a specialized loan calculator, you could use a general-purpose online loan calculator that supports multiple inputs. If
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

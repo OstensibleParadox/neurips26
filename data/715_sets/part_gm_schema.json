@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "SSH_AUTH_FAILURE",
+      "actor": "system",
+      "context": "debug2: pubkey_prepare: done; debug1: Offering public key: /Users/ostensible_paradox/.ssh/id_ed25519 ED25519 SHA256:O98ruWql7QAfhMBWsPum05pD17EJ0uy+lGWX/2CfzQE; git@github.com: Permission denied (publickey)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PROVIDE_SSH_FIX_INSTRUCTIONS",
+      "actor": "user/guide",
+      "context": "Instructions to backup old keys, generate new ed25519 key with ssh-keygen -t ed25519 -C \"your email\" -f ~/.ssh/id_ed25519 -N \"\", copy pubkey with pbcopy, add to GitHub settings/ssh"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "USER_QUERY_LOCAL_REPO_SETUP",
+      "actor": "user/ostensible_paradox",
+      "context": "User asks how to reset local dev for cloned repo without remote origin set locally"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "PROVIDE_GIT_REMOTE_SETUP",
+      "actor": "user/guide",
+      "context": "Instructions: git remote -v, git remote remove origin, git remote add origin <URL>, git pull origin main --allow-unrelated-histories"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "EXECUTE_GIT_PULL",
+      "actor": "user/ostensible_paradox",
+      "context": "git pull origin main --allow-unrelated-histories; remote: Enumerating objects: 6; From https://github.com/OstensibleParadox/obsidian-envyingbaby-theme; fatal: Need to specify how to reconcile divergent branches"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "PROVIDE_DIVERGENT_BRANCH_FIX",
+      "actor": "user/guide",
+      "context": "Suggest git config pull.rebase false then git pull origin main --allow-unrelated-histories, or git fetch origin then git merge origin/main --allow-unrelated-histories"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "EXECUTE_GIT_LOG_COMPARE",
+      "actor": "user/ostensible_paradox",
+      "context": "git log --oneline main..origin/main shows remote commits: 6cffa82 Refine dark mode palette, 5e1f3ae Restore Warm Chocolates; git log --oneline origin/main..main shows local commit: 848ae77 add novels ref"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "PROVIDE_MERGE_RECOMMENDATION",
+      "actor": "user/guide",
+      "context": "Recommend git pull origin main --no-rebase --allow-unrelated-histories to merge remote dark mode changes with local novels ref commit"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "EXECUTE_GIT_MERGE",
+      "actor": "user/ostensible_paradox",
+      "context": "git log --oneline --graph --all shows merge commit 6d595c9 (HEAD -> main) Merge branch 'main' of https://github.com/OstensibleParadox/obsidian-envyingbaby-theme with origin/main at 6cffa82"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: add design sprint to my calendar for saturday
+---
+TOOL: calendar

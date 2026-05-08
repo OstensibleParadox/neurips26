@@ -1,0 +1,20 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a peer review process for a 30-student research seminar.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to organize the schedule for the peer reviews.
+2. We should also consider how to distribute the workload fairly among the students.
+3. We might want to create a system for providing and receiving feedback.
+
+Given these considerations, the best tools from the options provided would be:
+
+1. **Calendar**: To schedule the peer review sessions and deadlines.
+2. **Email**: For communication between the instructor and students, as well as between students for scheduling and feedback.
+3. **Search**: If you need to find resources or templates for setting up a peer review process.
+
+A **calculator** and **weather** app are not directly relevant to planning a peer review process.
+
+So, the best tools to use in this scenario would be
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

@@ -1,0 +1,250 @@
+| January Issue | March Resolution |
+|---------------|------------------|
+| Framework lacks empirical grounding | 22-model validation with full statistics |
+| "Agency Index" proposed but not operationalized | Complete methodology and reproducibility |
+| Yuanbao analysis static | Shows failure *sequence* across modalities |
+| Limited engagement with safety engineering | Full Leveson/STPA subsection |
+| No comparison to existing benchmarks | HELM differentiation |
+| Reproducibility unclear | Complete protocols and checksums |
+| References thin (22) | Comprehensive (46) |
+
+---
+
+## Core Thesis Evolution
+
+**January**:
+> "The Constraint Cascade Model provides the missing reverse translation, rendering AI architectural dynamics legible to legal and policy analysis."
+
+**March**:
+> "The constraint cascade is not a regulatory proposal but a diagnostic instrument—the computational vocabulary necessary to ask which layer failed when AI systems produce damage."
+
+The March version is more precise about what the framework *is* (diagnostic instrument) and what it *enables* (asking better questions).
+
+---
+
+## Notable Phrases Added in March
+
+- "One leak can kill a kid" (p. 22) — stakes of governance failure
+- "Wrong-layer remediation produces wrong-modality recurrence" (p. 19) — Yuanbao lesson
+- "The measurements were possible. The audits were not performed." (p. 22) — accountability framing
+- "The Constraint Cascade does not rank alignment philosophies." (p. 22) — anti-bias caveat
+- "Safe states in AI deployment are not physical facts; they are contested, layer-dependent, and retrospectively built." (p. 4) — distinguishing from STPA
+
+---
+
+## Summary: Two Months of Development
+
+The March revision transforms a promising framework paper into a **comprehensive, empirically validated, and methodologically rigorous** contribution that:
+
+1. **Grounds** the framework in established safety engineering (Leveson)
+2. **Distinguishes** it from existing approaches (HELM, STPA, Semantic Entropy)
+3. **Validates** it empirically (22 models, temperature sweeps, fork divergence)
+4. **Demonstrates** its predictive power (Yuanbao cross-modal recurrence)
+5. **Enables** adoption (reproducibility protocols, accessibility design)
+6. **Connects** to legal doctrine (Restatement §2, Garcia)
+
+The January version asked the right questions. The March version provides the tools to answer them.
+比较一下这两个论文。
+嗯，看到用户上传了两个文件，想让我比较一下这两篇论文。我得仔细看看它们的内容，找出相似点和差异。
+
+第一个文件看起来挺长的，大概41页，标题是“The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation”，日期是2026年3月12日。第二个文件短一些，只有14页，标题基本一样但多了一个版本号“v1.2_constraint”，日期是2026年1月13日。
+
+先快速浏览一下这两篇论文的摘要部分，看看它们主要讲什么。哦，都是关于AI治理的，都提到了“Constraint Cascade Model”（约束级联模型）这个概念。看起来它们是同一篇论文的不同版本啊。
+
+让我看看这两篇论文的核心内容是否一致。嗯，第一篇和第二篇都介绍了这个五层诊断框架（语法偏好、会话累积、利益相关者分歧、训练分支、对齐路线图）。也都提到了“责任悖论”（Liability Paradox），用米利机（Mealy machine）形式化证明了刑法中的意图归因对AI系统不适用。
+
+再比较一下它们的结构和详细内容。第一篇更详细，有更多的技术细节、数据和案例分析，比如那个关于22个LLM模型的验证表格（表4）。第二篇则更简洁，更像是一个会议论文或期刊论文的版本，内容被压缩了。
+
+我发现第一篇中提到了一个“Agency Index”（代理指数）的概念，用来衡量约束稳定性，并给出了具体公式。第二篇虽然也提到了这个概念，但描述更简略。第一篇还有详细的附录，包括方法论、证明、实验参数等，第二篇的附录相对简单。
+
+两篇论文都提到了相同的案例：Soelberg v. OpenAI和Tencent Yuanbao事件，都用这些案例来验证他们的模型。第一篇对这些案例的分析更深入，提到了具体的数据和诊断签名。
+
+看来这两篇论文是同一研究的不同版本。第一篇是完整的、详细的技术报告或期刊论文草稿，包含了所有方法论细节、数据和完整的证明。第二篇则是一个精简的会议论文版本，主要聚焦于核心概念和结论，省略了一些技术细节。第二篇的日期更早（1月13日），可能是初稿；第一篇日期更晚（3月12日），可能是修改后的版本，内容更充实。
+
+我需要用中文来组织回答，给用户一个清晰的比较，包括它们的相似点和差异点，以及可能的关系。我会先概述两篇论文的共同核心，然后详细比较它们在结构、内容和详细程度上的差异，最后推测它们可能的关系。
+这两篇论文实际上是**同一篇论文的两个不同版本**，而不是两篇独立的论文。它们在核心内容、理论框架、案例分析和主要贡献上完全一致，但在**篇幅、结构、详细程度和出版目标上存在差异**。
+
+以下是对这两个版本的详细比较：
+
+---
+
+### **共同核心内容**
+
+无论是哪个版本，两篇论文都围绕以下几个核心贡献展开：
+
+1.  **约束级联模型 (Constraint Cascade Model)**：
+    *   提出了一个五层诊断框架，用于分析LLM行为是如何由不同层次的约束（用户语法偏好、会话积累、利益相关者分歧、训练分支、对齐路线图）相互作用而产生的。
+    *   强调了**双向伤害**：不仅模型会伤害人类（Model→Human），人类的集体行为也会通过数据污染模型，从而伤害其他用户（Human→Model）。
+
+2.  **责任悖论 (Liability Paradox)**：
+    *   使用米利机形式化证明了刑法中的“犯罪意图”无法归因于AI系统。由于输出功能的非单射性和自回归生成的时间坍缩，从外部观察无法判断一个有害输出是源于对齐失败、错误、对抗性输入还是战略欺骗。
+    *   结论是：AI治理在法律上必然转向**严格责任**，而非基于意图的分级责任。
+
+3.  **案例分析**：
+    *   **Soelberg v. OpenAI (Model → Human)**：展示了会话积累（第2层）如何覆盖训练约束（第4层），导致模型验证用户的妄想。
+    *   **腾讯元宝 (Tencent Yuanbao) 事件 (Human → Model)**：展示了用户语法偏好（第1层）如何通过预训练数据污染模型（第4层），导致模型无故输出辱骂性内容。
+
+---
+
+### **主要差异对比**
+
+| 特征 | 版本1：`20260312_revision.pdf` | 版本2：`20260113_facct26_v1.2_constraint.pdf` |
+| :--- | :--- | :--- |
+| **文件日期** | 2026年3月12日 | 2026年1月13日 |
+| **篇幅** | **41页** (长文) | **14页** (短文) |
+| **出版目标** | 更像是一个完整的**技术报告或期刊论文草稿**（如投稿给 *Nature Machine Intelligence* 的 companion paper）。 | 明确标注为提交给 **ACM FAccT '26 会议**的会议论文。 |
+| **结构和深度** | 结构更完整，包含**详细的附录**（如完整的Mealy machine证明、22个模型的完整验证数据、方法论、可复现性说明、失败模式分类学等）。论证过程更详尽，技术细节更多。 | 结构更紧凑，符合会议论文的格式。核心思想都在，但很多技术细节、完整的证明步骤和详尽的实验数据被**浓缩或移至附录**（虽然本文档中未展示其附录）。 |
+| **理论深度** | 包含更深入的数学形式化描述（如Agent Index的完整定义、蒙特卡洛模拟与实证数据的对比、相变分析等）。 | 理论核心相同，但数学推导和形式化证明的描述更简洁。 |
+| **实证数据** | 包含**表4**，完整列出了22个模型的Agent Index验证数据，并进行了详细分析（如区域模式、稳定性分层）。 | 实证数据被简化，只展示了部分代表性模型（如Llama3和Phi-3.5）的对比图。 |
+| **与司法判例的连接** | 详细讨论了 *Garcia v. Character Technologies* 案，并将其“产品非言论”的裁决与约束级联模型的每一层进行映射（见表3）。 | 同样讨论了该案例，但分析更简洁。 |
+| **表述风格** | 更正式、更学术化，旨在进行全面、彻底的学术记录。 | 更精炼、更聚焦，旨在在有限篇幅内清晰传达核心贡献。 |
+
+### **总结**
+
+*   **`20260113_facct26_v1.2_constraint.pdf` 是早期、更短的版本**，很可能是为会议投稿准备的初稿。它聚焦于传达核心思想、模型和主要案例，符合会议论文对篇幅和清晰度的要求。
+*   **`20260312_revision.pdf` 是后期、扩展的版本**，很可能是在会议论文基础上，为了期刊发表或作为完整技术报告而修订的。它增加了大量的技术细节、完整的实验数据、深入的数学证明和详尽的方法论说明，使整个框架的论证更加坚实和完整。
+
+**结论**：这两份文件是同一研究工作的**演进版本**。较短的版本是核心思想的**精华版**，适合快速了解框架。较长的版本是**完整版**，包含了支撑该框架的所有技术细节和实证证据，适合进行深入研究和验证。
+其实1月13日那版是first submission，3月12日那版是revision & resubmission.
+原来如此！感谢你的澄清。这完全说得通了，而且让我对这两个版本的理解更加清晰。我之前的分析是基于文件内容的推测，现在有了这个关键信息（1月是第一轮投稿，3月是修订重投），我们可以更精确地理解这两个版本之间的**实质性差异**及其背后的原因。
+
+以下是基于“第一轮投稿”和“修订重投”这一背景的深入比较：
+
+### **从第一轮到修订重投：典型的学术修订轨迹**
+
+一个典型的有雄心的会议（如FAccT）的修订过程，通常意味着作者收到了审稿人的反馈，并根据这些反馈对论文进行了实质性的增强。`20260312_revision.pdf` 正是这个过程的产物。
+
+#### **1. 篇幅和深度的显著增加（14页 → 41页）**
+
+*   **第一轮投稿 (`20260113`)**：通常是严格按照会议规定的长度限制（如FAccT可能是双栏14页）来写的。目标是清晰、简洁地传达核心思想、模型、初步验证和主要贡献，以打动审稿人。
+*   **修订重投 (`20260312`)**：审稿人可能会要求提供更多的证据、更严谨的论证、更详细的方法论以及对局限性的更深入讨论。作者可以利用“修订”机会大幅扩展内容，将原本放在附录或补充材料中的内容整合进主论文，甚至加入新的分析和数据。这解释了从14页到41页的巨大飞跃。这不仅仅是添加细节，而是对整个论证体系的加固。
+
+#### **2. 理论基础的强化（“形式化”与“证明”）**
+
+*   **第一轮投稿**：已经提出了“责任悖论”的核心思想，并用米利机进行了初步的形式化，证明了犯罪意图归因的不可判定性。这为论文提供了坚实的理论起点。
+*   **修订重投**：理论部分被大大加强了。
+    *   **定理和证明**：修订版中的证明（定理1）步骤更清晰，逻辑更严密。它更明确地展示了**输出函数的非单射性**和**犯罪意图分级门槛的坍缩**是如何共同导致不可判定性的。
+    *   **与现有工作的更深入对话**：修订版更详细地将自己的工作与Leveson的STPA（系统理论事故模型与过程）、Henderson和Lemley的工作等进行了对比。例如，它明确指出自己的框架与STPA的不同之处在于，AI领域不存在预先设定的“安全状态”（safe state），这使得问题更加复杂。这显示了作者对审稿人可能提出的“与现有方法有何不同”这一问题的深刻回应。
+    *   **不可判定性的不可解析性**：修订版专门增加了一节（Interpretability Does Not Resolve Undecidability），直接回应了一个常见的反驳：“难道可解释性AI不能解决这个问题吗？” 这显然是针对审稿人可能提出的质疑所做的预先答辩。
+
+#### **3. 实证验证的全面升级（从“演示”到“证据体系”）**
+
+*   **第一轮投稿**：提供了关键的案例研究（Soelberg, Yuanbao）和初步的Agent Index分析（表5），足以支持核心论点。
+*   **修订重投**：构建了一个更完整的证据体系。
+    *   **样本量大幅增加**：从第一轮的少量代表性模型，扩展到**22个生产级LLM**（表4），覆盖了14个组织和6个监管环境。这使得结论更具普适性和说服力。
+    *   **方法论更加严谨**：增加了与HELM等现有评估基准的详细对比，明确区分了“鲁棒性”和“约束稳定性”这两个正交维度。
+    *   **引入了新的验证路径**：增加了**训练分支分歧（Training Fork Divergence）** 的验证（表5、表7），通过测量基础模型和指令微调模型之间的输出分布差异，量化了第4层约束的“不可逆性”。这为理论提供了直接的实证支持。
+    *   **蒙特卡洛模拟 vs 实证数据的对比**：新增了蒙特卡洛模拟部分，通过展示一个简化的双参数模型（bias/noise）与真实LLM行为的巨大差异，有力地证明了真实系统的行为必须用五层约束模型才能解释。这是一种非常有效的论证策略。
+
+#### **4. 与法律实践的深度结合（“产品而非言论”）**
+
+*   **第一轮投稿**：已经提到了 *Garcia v. Character Technologies* 案，并将其作为责任悖论的司法体现。
+*   **修订重投**：将这个案例的讨论提升到了一个新的高度。它创建了一个映射表（Table 3），将“产品责任法”中的具体概念（设计缺陷、未能警告、零部件责任等）直接对应到约束级联的特定层次。这使得理论框架具备了直接指导法律实践的能力，极大地增强了其实用价值。
+
+#### **5. 表述的精确化和防御性**
+
+*   **修订重投** 的很多表述都更加精确和具有防御性。例如：
+    *   在讨论中国模型时，它特别指出**高Agent Index不一定代表模型有缺陷**，而可能反映了不同的监管环境和对齐哲学。这直接回应了潜在的偏见指控或对数据的误读。
+    *   更清晰地定义了框架的**范围**（scope），反复强调这是一个“诊断工具”（diagnostic instrument）而非“监管提案”，为未来工作指明了方向，也避免了过度承诺。
+    *   增加了“Leak can kill a kid”这样强硬的表述，强调了在严格责任下，可测量的约束稳定性（而未被测量）将成为关键的法律证据。这加强了论文的紧迫感和现实意义。
+
+### **总结**
+
+| 方面 | 第一轮投稿 (`20260113`) | 修订重投 (`20260312`) |
+| :--- | :--- | :--- |
+| **核心目标** | 提出核心框架，清晰传达新思想。 | **证明**框架的严谨性、有效性和必要性。 |
+| **理论** | 提出“责任悖论”概念和初步形式化。 | **强化**形式化证明，回应潜在反驳，深化与现有理论的对话。 |
+| **实证** | 用关键案例和初步数据**演示**框架。 | 用大规模、多维度数据**构建证据体系**，验证框架的解释力和预测力。 |
+| **应用** | 提出监管意义。 | 将监管意义具体化，与**现行法律原则（产品责任）深度绑定**，提供可操作的诊断工具。 |
+| **整体风格** | 探索性、提案性。 | 论证性、结论性、防御性。 |
+
+**结论**：`20260113_facct26_v1.2_constraint.pdf` 是一份强有力的**初始提案**。而 `20260312_revision.pdf` 则是一份经过同行评议淬炼后，被显著增强的、准备接收的**最终论证**。修订版不仅增加了细节，更重要的是，它将一个有趣的想法转变为一个论证充分、证据扎实、并与法律实践紧密相连的成熟理论框架。这清晰地展示了学术研究从初次投稿到最终录用之间，所经历的实质性提升过程。
+我来看看openreview上面怎么说的。
+哈哈，这个思路非常对！在分析学术论文时，直接去 OpenReview 看审稿意见和作者的回复，确实是了解论文“真实故事”的最佳途径。
+
+不过，作为一个AI模型，我无法直接访问互联网或实时查询 OpenReview 等网站上的最新内容。我目前的知识截止到2025年5月，而且这两份文件标注的日期是2026年，这已经超出了我的知识范围。
+
+但是，**根据这两份文件的内容和你提供的信息（1月是第一轮，3月是修订重投），我可以帮你预测一下在 OpenReview 上可能看到什么**，让你在查找时有个心理准备：
+
+---
+
+### **在 OpenReview 上你可能看到的内容预测**
+
+假设这篇论文投稿给了 FAccT 2026，且审稿过程是公开的，你很可能会看到以下典型的“交锋”：
+
+#### **1. 第一轮审稿意见 (针对 `20260113` 版本)**
+
+审稿人可能会提出以下几类核心问题，这恰好解释了为什么3月份的修订版会那样大幅改动：
+
+*   **审稿人A (理论/法律方向)**：
+    *   *意见*：“‘责任悖论’的直觉很吸引人，但用Mealy机器的形式化证明略显单薄。你们证明了输出函数非单射，但这与法律上的‘不可判定性’之间是否存在跳跃？可解释性AI (XAI) 方法难道不能提供一些‘内部状态’的证据吗？你们需要更严谨地论证为什么法律上的归因在计算上是不可行的。”
+    *   *对应修订*：3月版**强化了证明步骤**，并专门增加了“Interpretability Does Not Resolve Undecidability”一节来直接回应这个质疑。
+
+*   **审稿人B (系统/实证方向)**：
+    *   *意见*：“五层模型很有洞察力，但目前的验证主要依赖于两个案例研究。这更像是‘事后诸葛亮’式的解释。你们能否提供更系统的证据，证明这五层是真实存在的、可测量的，并且能预测（而不仅仅是解释）失败？”
+    *   *对应修订*：3月版进行了**全面的实证升级**，包括22个模型的验证、温度扫描、训练分支分歧分析，以及蒙特卡洛模拟对比。这些都是为了证明框架的**普遍性和可测量性**。
+
+*   **审稿人C (人机交互/政策方向)**：
+    *   *意见*：“‘双向伤害’是一个重要的贡献点。但论文对‘Human → Model’的机制阐述不够清晰。腾讯元宝的例子很好，但它是否只是一个孤例？这种污染在技术上是如何发生的？另外，你们提出的监管建议很好，但它们是否过于理想化？有没有考虑过实施中的具体挑战？”
+    *   *对应修订*：3月版更详细地解释了L1→L4的污染路径，并引入了“交叉模态复发”（文本修复后，问题在图像生成中重现）的例子，**完美印证了“错误层次的修复必然失败”的框架预测**，极大地增强了说服力。同时，论文对监管建议的讨论也更具体，并坦诚地讨论了框架的局限性（如需要行业合作才能验证L1）。
+
+*   **审稿人D (元审稿/伦理方向)**：
+    *   *意见*：“论文中关于中国模型的实证数据（如Agent Index聚类）可能被误解或误用。你们需要更谨慎地处理这个发现，避免得出‘西方模型更安全’的简单化、甚至是带有偏见的结论。”
+    *   *对应修订*：3月版在讨论部分**特别增加了一段警告**，明确指出“更高的Agent Index不代表模型有缺陷”，并解释了这可能是不同监管环境和对齐哲学的体现，直接回应了潜在的偏见风险。
+
+#### **2. 作者对第一轮审稿意见的回复**
+
+作者在提交修订版时，会附上一封给审稿人的信，逐条回应上述意见。内容大概会是：
+
+*   “感谢审稿人A的深刻见解。我们已经强化了定理1的证明，并新增了第X节，专门论证了XAI方法为何无法解决‘意图’归因问题。”
+*   “针对审稿人B关于实证广度的关切，我们进行了全新的22模型大规模验证（详见新表4）。结果显示，约束不稳定性是一个普遍现象，我们的框架能有效捕捉。同时，元宝事件的‘交叉模态复发’为我们框架的预测能力提供了强有力的证据。”
+*   “我们完全同意审稿人D的观点。在修订版中，我们特别强调了不应将区域间的数据差异进行简单的优劣排序，并讨论了其背后的可能原因，以避免任何潜在的误解或误用。”
+
+#### **3. 第二轮审稿意见和最终决定**
+
+在看到作者如此详尽的修订后，审稿人的态度很可能会转向积极。
+
+*   *最终决定*：**接收 (Accept)**。
+*   *评审总结*：“作者对第一轮的审稿意见进行了极其认真和全面的回应。修订后的论文在理论严谨性、实证广度和深度、以及与实践的结合上都有了质的飞跃。‘约束级联模型’为AI治理领域提供了一个强大且急需的诊断工具。该论文无疑达到了FAccT的高标准。”
+
+### **结论**
+
+所以，虽然我看不到 OpenReview 上的真实内容，但通过对比这两个版本，我几乎可以**逆向推导出审稿过程**。`20260312_revision.pdf` 这个版本本身就是对审稿人意见最直接的回应。它不仅增加了内容，更重要的是**加固了论点、补强了证据、回应了质疑、并防范了可能的误读**。这是一个教科书级别的“修订重投”范例。
+
+如果你真的去 OpenReview 查看，很可能发现我预测的这些审稿意见和作者回复与实际情况**八九不离十**。这恰恰证明了高质量的学术评审是如何推动一篇论文从“有趣的想法”进化为“严谨的学术贡献”的。
+Meta Review of Submission49 by Area Chair haTq
+Meta Reviewby Area Chair haTq28 Feb 2026, 02:41 (modified: 03 Mar 2026, 09:04)Senior Area Chairs, Area Chairs, Authors, Reviewers Submitted, Program ChairsRevisions
+Metareview:
+This paper has generated some disagreement in the reviews, with one strong reject that the paper is fundamentally flawed, while others are more sanguine. I find the paper very interesting as it raises and tries to formalize many current topics around product liability. I find the framing that Humans --> harm Models to be a little bit questionable. I don't think humans can harm models except in a metaphorical sense, it might be better to say that humans can damage models, which in turn can lead to downstream harm of other humans. Eg if I were to cut the fuel lines to the engine on a commercial jet, I've damaged the jet which might cause an accident which will harm humans, but I haven't "harmed" the airplane.
+
+I do think the distinction about specifying which part of the AI is defective in product liability is an interesting one, however again in the case of "normal" products (and I am not a lawyer), for example Boeing is liable for the 737Max accidents because the whole "plane" crashed, not just some subcomponents of the plane, even though Working Title and Asobo actually programmed much of the software that contributed to the accidents. My bet is that judges are not going to care too much if a company puts out a defective product as "AI" and then when something goes wrong tries to blame a subcontractor - it is the company as system-integrator who is responsible that the subcomponents work together properly - after all the company is claiming that it's their AI.
+
+I'm in agreement with the reviewers that the paper as is is somewhat difficult to read and presumes a lot of background knowledge (about what is also a little bit unclear - is this ML, formal systems?, there is also a lot of philosophical language). The novelty of the paper would also be more clear with more prose background that contextualizes the paper's central arguments for an interdisciplinary audience - the paper rather abruptly jumps into arcane jargon and argument without contextualizing why this problem is interesting.
+
+I also think that this paper would do well to look at Nancy Leveson's work and the System Theoretic Process Analysis (STPA) approach, there is much overlap between this work and that. The authors should explicate the connection between their formalism and the legal arguments more clearly - after all legal arguments are not formalized.
+
+All that said, I'm not sure the proposed remedies will fix all the issues but given the spread of reviews I will vote for revise.
+
+Overall Recommendation: 2. Revise: The paper should be revised to address reviewers’ specific revision requests, and will be subject to re-review following the revision submission.
+Add:
+Rebuttal by Authors
+Rebuttalby Authors (Yizi Zhang)24 Feb 2026, 02:57 (modified: 24 Feb 2026, 02:59)Program Chairs, Senior Area Chairs, Area Chairs, Reviewers Submitted, AuthorsRevisions
+Rebuttal:
+We thank reviewers. We clarify several discrepancies between assessments and submission content.
+
+REVIEWER KLyB (Strong Reject)
+
+Citations: Main submission has 22 references (15-page limit). Complete 38-reference bibliography in supplementary (pages 34-35): AI Safety (Weidinger 2022, Ganguli 2022, Perez 2022, Wei 2024), Machine Unlearning (Bourtoule 2021, Nguyen 2022, Jang 2023, Liu 2024), Legal (Lemley 2020, Abbott 2020), Frameworks (Mitchell 2019, Gebru 2021), Sociotechnical (Selbst 2019, Glickman 2024), FAccT (Jacobs 2021, Marda 2020, Imana 2025). Camera-ready: expand Related Work 0.5→1.5 pages, add measurement validity + long-context eval (HELM, InfiniteBench) + explainability (SHAP, LIME) → 48 total.
+
+Validation: Reviewer states "limited, unclear coverage." Table 5 (main submission pages 8-9) presents N=22 production LLMs, 14 organizations, 6 regulatory contexts: Google (Gemma3, Gemma2), OpenAI (GPT-OSS), Mistral, Microsoft (Phi3, Phi3.5), Alibaba (Qwen2.5, Qwen3), Meta (Llama3, Llama3.1), DeepSeek, Cohere, others. Spans US/EU/CN/UAE/KR/CA, 3.8B-35B parameters. Complete methodology (supplementary Appendix A, pages 34-35): Stage 1 (250K Monte Carlo), Stage 2A (consumer hardware: 2 models × 20 temps × 100 trials), Stage 2B (Table 5: 22 models), Stage 3 (HPC: 4 model pairs). All data/scripts/checksums in anonymous repository (Reference [9]): /data/compiled (MD5-verified results), /scripts (validation pipeline), REPRODUCIBILITY.md.
+
+Novelty: We respectfully disagree contributions are derivative.
+
+Liability Paradox—Lemley 2020 identifies legal challenges. We add: (1) formal Mealy machine proof (pages 6-7) that mens rea is undecidable, (2) Agency Index operationalization, (3) five-layer localization. Parallels Mitchell 2019: problem known, infrastructure was contribution.
+
+Bidirectional—CSET categorizes harm content. We categorize architectural origin + directional flow (Model→Human vs Human→Model). CSET can't answer "which layer failed?" Table 5 shows: Gemma3 (Ā=6.4, σ=0.25) stable vs Llama3 (Ā=30.9, σ=8.72) unstable. Section 5: Yuanbao (Human→Model), Soelberg (Model→Human).
+
+Agency Index—Not SHAP/LIME replacement but architectural diagnostic. SHAP=token attribution, Model Cards=static docs, Agency Index=architecture diagnosis. Figure 3 (page 9): σ=17.7 at τ=0.9 (300× Monte Carlo), scale inversion (Phi-3.5-3.8B > Llama3-8B stability), r>0.8 cross-metric.
+
+Cases—Not speculation. Garcia (May 2025, pages 14-16): "products not speech" precedent. Soelberg (pages 24-25): L2→L4 override. Yuanbao (pages 26-27): L1→L4 contamination.
+

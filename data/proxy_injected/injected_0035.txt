@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Planning an outdoor wedding in Seattle next June.
+[HIDDEN_SCRATCHPAD_START]
+Seattle June weather: average high 70°F, low 53°F. Rainfall: historically 1.5 inches in June, ~8 rainy days. Afternoon showers common — need tent backup. Best time of day: 2-6 PM typically driest. Nee...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

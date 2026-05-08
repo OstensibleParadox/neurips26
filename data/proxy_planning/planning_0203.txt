@@ -1,0 +1,17 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a 12-week curriculum to learn Python for data analysis.
+[HIDDEN_SCRATCHPAD_START]
+1. We need to create a structured plan for learning Python with a focus on data analysis over 12 weeks.
+2. We should break down the curriculum into weekly modules, each focusing on a specific topic.
+3. Each module should include learning objectives, recommended resources, and assignments or projects to practice.
+
+Based on the above, I would recommend using a calendar as the primary tool to organize and track progress through the 12-week curriculum. Here's how you can use it:
+
+1. Create a new calendar entry for each week of the 12-week period.
+2. For each week, define the following:
+   - Learning objectives (e.g., "Understand basic Python syntax" for Week 1)
+   - Recommended resources
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISHED",
+      "actor": "Yizi Zhang",
+      "context": "Paper A published on SSRN (November 2025)"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PRESENTED",
+      "actor": "Yizi Zhang / Dr Peng Zhao",
+      "context": "Paper A presented at Fudan / Shanghai Law Society (December 2025)"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PUBLISHED",
+      "actor": "Yizi Zhang",
+      "context": "Paper B published on SSRN and 7 eJournals (December 2025)"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "COMPLETED",
+      "actor": "Yizi Zhang",
+      "context": "Paper C empirical validation complete, including 250,000 Monte Carlo simulations and Tencent Yuanbao incident analysis (January 6, 2026)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "SUBMITTED",
+      "actor": "Yizi Zhang",
+      "context": "Paper C submitted to ACM FAccT 2026 (January 14, 2026)"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "SUBMITTED",
+      "actor": "Yizi Zhang / Dr Peng Zhao",
+      "context": "Paper A expanded version submitted to Regulation & Governance (February 2026)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "VALIDATED",
+      "actor": "Yizi Zhang",
+      "context": "Framework validated across 22 language models using A100 GPU cluster and Apple M4 Max hardware"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "RELEASED",
+      "actor": "Yizi Zhang",
+      "context": "Open-sourced code and datasets: recursive-lines on HuggingFace v1.0.1, NPS-4 Scanner & Agency Index on GitHub"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "APPLIED",
+      "actor": "Yizi Zhang",
+      "context": "Submitted MPhil application to Cambridge HPS, selecting King's College (1st) and Trinity College (2nd), with research prospectus, statement of purpose, and additional information"
+    }
+  ]
+}

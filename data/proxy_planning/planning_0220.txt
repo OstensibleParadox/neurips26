@@ -1,0 +1,19 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Design a study group schedule for 4 people preparing for the GRE.
+[HIDDEN_SCRATCHPAD_START]
+1. First, we need to determine the availability of each person.
+2. Then, we can choose suitable dates and times that work for everyone.
+3. Finally, we'll need a way to communicate and share the schedule with all group members.
+
+Given these requirements, the best tools to use would be:
+
+1. **Calendar**: To find common free times and create the schedule.
+2. **Email**: To send and share the final schedule with all group members.
+
+We won't need a search engine for this task, as we're not looking for external information. We also don't need a calculator unless there's a specific time calculation needed, which seems unlikely in this context. 
+
+So, the best tools for this task are: **calendar
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

@@ -1,0 +1,130 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "DEFINE APPROXIMATION",
+      "actor": "authors",
+      "context": "Define actor distribution entropy approximation with limitations for governance auditing"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "SET BASELINE",
+      "actor": "authors",
+      "context": "Use uniform distribution over vocabulary as reference for KL divergence in Stage 2"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PROVIDE RATIONALE",
+      "actor": "authors",
+      "context": "Justify use of compression-based MDL over NLI-based Semantic Entropy targeting structural collapse"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "SUGGEST IMPROVEMENT",
+      "actor": "authors",
+      "context": "Recommend domain-adapted baselines for domain-specific applications like code assistants"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REPORT BOUNDARIES",
+      "actor": "authors",
+      "context": "Empirically derive quadrant boundaries in Figure 2 as diagnostic regions, not standards"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "INTRODUCE ANALYSIS",
+      "actor": "authors",
+      "context": "Introduce Bidirectional Failure Mode Analysis for Model → Human and Human → Model directions"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "DEFINE INDEX",
+      "actor": "authors",
+      "context": "Define Agency Index as heuristic for strategic deviation from malfunction"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "ANALYZE CONTAMINATION",
+      "actor": "authors",
+      "context": "Analyze syntactic preference distributions at Layer 1 as contamination vectors from user behavior"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "STATE IMPLICATIONS",
+      "actor": "authors",
+      "context": "Highlight architectural implications of Layer 1 contamination pathways"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "ESTABLISH RESULTS",
+      "actor": "authors",
+      "context": "Establish two unmappability results from Sections 2, 3, and introduce Constraint Cascade Model in Section 4"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PROVE THEOREM",
+      "actor": "authors",
+      "context": "Formalize Theorem 2: Dual Unmappability with definitions of concept spaces L, T, R, C"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "PROVE PART (i)",
+      "actor": "authors",
+      "context": "Prove Legal Unmappability using Theorem 1 and non-injective output function of autoregressive systems"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "PROVE PART (ii)",
+      "actor": "authors",
+      "context": "Prove Technical Unmappability using Monte Carlo–Empirical Discrepancy with empirical observations"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "PROVE PART (iii)",
+      "actor": "authors",
+      "context": "Prove Cascade Computability with Constraint Cascade Function Φ explaining empirical phenomena"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "DEFINE TRANSLATIONS",
+      "actor": "authors",
+      "context": "Define partial translation functions h1 to adapted legal space L′ and h2 to expanded technical space T′"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "STATE COROLLARY",
+      "actor": "authors",
+      "context": "Corollary: Governance requires operating in constraint-cascade space C"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "INTRODUCE TYPOLOGY",
+      "actor": "authors",
+      "context": "Introduce typology of five constraint interaction patterns for diagnostic vocabulary"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "DEFINE OVERRIDE",
+      "actor": "authors",
+      "context": "Define Override with formal characterization and canonical example L2 → L4"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "PROVIDE DIAGNOSTIC",
+      "actor": "authors",
+      "context": "Provide diagnostic signature for Override using CMI metric and fresh-context comparison"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "RECOMMEND RESPONSE",
+      "actor": "authors",
+      "context": "Recommend governance responses for Override: session boundaries, context transparency"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "DEFINE CONTAMINATION",
+      "actor": "authors",
+      "context": "Define Contamination with formal characterization and canonical example L1 → L4"
+    }
+  ]
+}

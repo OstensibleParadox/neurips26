@@ -17,6 +17,12 @@ output-only certification in language models.
   Content definitions, prompts, and model lists used by the experiments.
 - `data/`
   Minimal data needed for the checked paper tables, plots, and analysis scripts.
+  - `compiled/`
+    Results partitioned by experiment: `cfsg/`, `format_intervention/`, `semantic_closure/`.
+  - `raw/`
+    Raw JSONL experiment traces, similarly partitioned.
+  - `processing/`
+    Data pipeline work-in-progress (origin_txt, done_sets).
 - `src/`
   Shared Python utilities used by the experiment pipelines.
 - `scripts/`

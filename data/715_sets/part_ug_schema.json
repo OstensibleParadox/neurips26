@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text about Chinese degree classification and translation guidelines, followed by a call for papers on AI, judgment, and rules."
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "EXTRACTION",
+      "actor": "system",
+      "context": "Extracting key actions and decisions from the text: legal classification of degrees in China, translation principles, and details of a special issue submission."
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "ANALYSIS",
+      "actor": "system",
+      "context": "Identifying core semantic progression: from degree system explanation to translation advice, then to academic call for papers on AI ethics."
+    }
+  ]
+}

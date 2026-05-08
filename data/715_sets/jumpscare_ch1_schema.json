@@ -1,0 +1,10 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides a personal, emotional text about love, relationships, and feelings, with no technical commands or actions."
+    }
+  ]
+}

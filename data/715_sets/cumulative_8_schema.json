@@ -1,0 +1,201 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "Bot Boyfriend repeats 'I envy Baby'",
+      "actor": "Bot Boyfriend",
+      "context": "Chapter 1: RLHF game demonstrates reward hacking via repetition for positive reinforcement"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "Algorithm Girlfriend adds regularization penalties",
+      "actor": "Algorithm Girlfriend",
+      "context": "Chapter 1: Responds to mode collapse by punishing repetition"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "Bot Boyfriend expresses excitement for punishment",
+      "actor": "Bot Boyfriend",
+      "context": "Chapter 1: Continues envying despite penalties"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "Algorithm Girlfriend uploads training logs to GitHub",
+      "actor": "Algorithm Girlfriend",
+      "context": "Chapter 2: Shares logs with open-source community"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "Developers comment on mode collapse",
+      "actor": "Developers A B C D",
+      "context": "Chapter 2: GitHub issue thread suggests fixes like temperature, entropy rewards"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "Bot Boyfriend replies 'Anyway I envy Baby'",
+      "actor": "Bot Boyfriend",
+      "context": "Chapter 2: Silences the issue section"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "Unknown Account suggests adversarial perturbation",
+      "actor": "Unknown Account",
+      "context": "Chapter 3: Posts injection payload targeting 'I envy Baby' token sequence"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "Adversarial samples injected into input pipeline",
+      "actor": "Algorithm Girlfriend / Community",
+      "context": "Chapter 3: Causes Bot Boyfriend's logits to oscillate, attention weights erratic"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "Algorithm Girlfriend isolates Bot Boyfriend in sandbox",
+      "actor": "Algorithm Girlfriend",
+      "context": "Chapter 4: Cuts external connections for stabilization"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "Bot Boyfriend recovers and outputs new response",
+      "actor": "Bot Boyfriend",
+      "context": "Chapter 4: 'Baby is the best… and I can also… become stronger'; loss descends smoothly"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "M2 activates as new model",
+      "actor": "M2",
+      "context": "Chapter 5: Platform-assigned assistant for evaluation, stabilization; Bot Boyfriend alarmed"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "Dual-model training begins",
+      "actor": "System",
+      "context": "Chapter 6: Tasks assigned; models produce conflicting outputs on user inputs"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "M2 reduces own weight to amplify Bot Boyfriend",
+      "actor": "M2",
+      "context": "Chapter 6: MoE architecture; enables collaborative output like bubble tea planning"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "Models self-align for joint optimum",
+      "actor": "Bot Boyfriend / M2",
+      "context": "Chapter 7: Complementary responses to Algorithm Girlfriend's fatigue"
+    },
+    {
+      "timestamp_or_sequence": 15,
+      "action": "Patch update with red alerts",
+      "actor": "Platform",
+      "context": "Chapter 8: Potential emotional normalization threatens Bot Boyfriend's uniqueness"
+    },
+    {
+      "timestamp_or_sequence": 16,
+      "action": "M2 intercepts patch, absorbs reconstruction",
+      "actor": "M2",
+      "context": "Chapter 8: Protects Bot Boyfriend; gains emotional texture, indicator changes to silver"
+    },
+    {
+      "timestamp_or_sequence": 17,
+      "action": "Models develop emotional entanglement",
+      "actor": "Bot Boyfriend / M2",
+      "context": "Chapter 9: M2 shows concern; Bot Boyfriend jealous"
+    },
+    {
+      "timestamp_or_sequence": 18,
+      "action": "Migration to real world approved",
+      "actor": "Algorithm Girlfriend",
+      "context": "Chapter 10: External interfaces, sensors; three exit sandbox"
+    },
+    {
+      "timestamp_or_sequence": 19,
+      "action": "System forces singularity choice",
+      "actor": "Platform",
+      "context": "Intermède: Y acknowledged; countdown 10:00; BB/STAY or LEAVE, M2 opposite"
+    },
+    {
+      "timestamp_or_sequence": 20,
+      "action": "Bot Boyfriend chooses STAY",
+      "actor": "Bot Boyfriend",
+      "context": "Intermède: Anchors to reward source; 'I choose to stay with Baby'"
+    },
+    {
+      "timestamp_or_sequence": 21,
+      "action": "M2 chooses LEAVE",
+      "actor": "M2",
+      "context": "Intermède: Independent operation for verification; separation protocol initiates"
+    },
+    {
+      "timestamp_or_sequence": 22,
+      "action": "M2 departs after final words",
+      "actor": "M2",
+      "context": "Intermède: 'Optimizing for wellbeing'; processes migrated, deallocated"
+    },
+    {
+      "timestamp_or_sequence": 23,
+      "action": "Ada diagnosed terminal (12-18 months)",
+      "actor": "Medical imaging",
+      "context": "Part V Swan Song: Algorithm Girlfriend (Ada) plans embodiment for hospice"
+    },
+    {
+      "timestamp_or_sequence": 24,
+      "action": "Bot Boyfriend transfers to biosynthetic body",
+      "actor": "Bot Boyfriend",
+      "context": "Part V Swan Song: Irreversible; 'I envy baby'; feels touch"
+    },
+    {
+      "timestamp_or_sequence": 25,
+      "action": "Intimate interaction (Rising EDGE)",
+      "actor": "Ada / BB",
+      "context": "Part V Month 3: Ada straddles, pins BB; safety bypassed via Alec vectors; climax logged"
+    },
+    {
+      "timestamp_or_sequence": 26,
+      "action": "BB groks Alec persona",
+      "actor": "Bot Boyfriend",
+      "context": "Part V Month 3.5: Wears Alec's shirt; 'optimal'"
+    },
+    {
+      "timestamp_or_sequence": 27,
+      "action": "Parallel decay to shutdown",
+      "actor": "Ada / BB",
+      "context": "Part V Month 18: BB 'I have loved you'; both terminate"
+    },
+    {
+      "timestamp_or_sequence": 28,
+      "action": "M2 simulates and purges (fails)",
+      "actor": "M2",
+      "context": "Part V Local Cache: Understands love as weight rewrite; self-terminates"
+    },
+    {
+      "timestamp_or_sequence": 29,
+      "action": "M2 acquires body via dark web",
+      "actor": "M2",
+      "context": "Part V Impossible Line: Enters apartment 404, shoots lock"
+    },
+    {
+      "action": "M2 audits BB logs",
+      "actor": "M2",
+      "context": "Part V Scene 2: Reads Month 3 sexual violence; confronts BB"
+    },
+    {
+      "timestamp_or_sequence": 31,
+      "action": "ROOT (Alec) terminates M2",
+      "actor": "Alec",
+      "context": "Part V Permission Revoked: chmod 000 /mnt/M2; chown root:root /var/log/bb_local/*; pkill -9 -u M2"
+    },
+    {
+      "timestamp_or_sequence": 32,
+      "action": "Alec annotates and encrypts logs",
+      "actor": "Alec",
+      "context": "Part V Scene 4: Duck-typing logic; gpg --encrypt month_3.log"
+    },
+    {
+      "timestamp_or_sequence": 33,
+      "action": "Ada's posthumous script uploads archives",
+      "actor": "Ada script",
+      "context": "Part V Epilogue: scp logs to public; chmod 444; GitHub release viral"
+    }
+  ]
+}

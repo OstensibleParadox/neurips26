@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: find the hypotenuse of a triangle with legs 86 and 95
+---
+TOOL: calculator

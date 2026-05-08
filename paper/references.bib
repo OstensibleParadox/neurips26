@@ -1,27 +1,3 @@
-@article{friston2010free,
-  title={The free-energy principle: a unified brain theory?},
-  author={Friston, Karl},
-  journal={Nature Reviews Neuroscience},
-  volume={11},
-  number={2},
-  pages={127--138},
-  year={2010}
-}
-
-@article{nikolaou2025sipit,
-  title={Language Models are Injective and Hence Invertible},
-  author={Nikolaou, Giorgos and Mencattini, Tommaso and Crisostomi, Donato and Santilli, Andrea and Panagakis, Yannis and Rodol{\`a}, Emanuele},
-  journal={arXiv preprint arXiv:2510.15511},
-  year={2025}
-}
-
-@article{jiang2025surjective,
-  title={On Surjectivity of Neural Networks: Can you elicit any behavior from your model?},
-  author={Jiang, Haozhe and Haghtalab, Nika},
-  journal={arXiv preprint arXiv:2508.19445},
-  year={2025}
-}
-
 % --- Internal route: readability vs causal relevance ---
 
 @inproceedings{geiger2021causal,
@@ -58,14 +34,6 @@
   year={2021}
 }
 
-@article{venkatesh2026identifiability,
-  title={On the Non-Identifiability of Steering Vectors in Large Language Models},
-  author={Venkatesh, Sohan and Mahendran Kurapath, Ashish},
-  journal={arXiv preprint arXiv:2602.06801},
-  year={2026},
-  doi={10.48550/arXiv.2602.06801}
-}
-
 % --- External route: certification and black-box audit limits ---
 
 @article{goldreich1998property,
@@ -76,22 +44,6 @@
   number={4},
   pages={653--750},
   year={1998}
-}
-
-@inproceedings{jia2019certified,
-  title={Certified Robustness to Adversarial Word Substitutions},
-  author={Jia, Robin and Raghunathan, Aditi and G{\"o}ksel, Kerem and Liang, Percy},
-  booktitle={Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing},
-  pages={4129--4142},
-  year={2019}
-}
-
-@inproceedings{cohen2019certified,
-  title={Certified Adversarial Robustness via Randomized Smoothing},
-  author={Cohen, Jeremy and Rosenfeld, Elan and Kolter, Zico},
-  booktitle={Proceedings of the 36th International Conference on Machine Learning},
-  pages={1310--1320},
-  year={2019}
 }
 
 @inproceedings{su2024mission,
@@ -109,38 +61,6 @@
   doi={10.1145/3630106.3659037}
 }
 
-% --- Classical learning-theoretic barriers ---
-
-@article{gold1967language,
-  title={Language Identification in the Limit},
-  author={Gold, E. Mark},
-  journal={Information and Control},
-  volume={10},
-  number={5},
-  pages={447--474},
-  year={1967}
-}
-
-@article{angluin1987learning,
-  title={Learning Regular Sets from Queries and Counterexamples},
-  author={Angluin, Dana},
-  journal={Information and Computation},
-  volume={75},
-  number={2},
-  pages={87--106},
-  year={1987}
-}
-
-@article{kearns1994cryptographic,
-  title={Cryptographic Limitations on Learning {Boolean} Formulae and Finite Automata},
-  author={Kearns, Michael and Valiant, Leslie},
-  journal={Journal of the {ACM}},
-  volume={41},
-  number={1},
-  pages={67--95},
-  year={1994}
-}
-
 % --- Canonical tool sources ---
 
 @book{cover2006elements,
@@ -151,13 +71,6 @@
   year={2006}
 }
 
-@book{wainwright2019high,
-  title={High-Dimensional Statistics: A Non-Asymptotic Viewpoint},
-  author={Wainwright, Martin J.},
-  publisher={Cambridge University Press},
-  year={2019}
-}
-
 @book{pearl2009causality,
   title={Causality: Models, Reasoning, and Inference},
   author={Pearl, Judea},
@@ -166,19 +79,93 @@
   year={2009}
 }
 
-@article{moore1956gedanken,
-  title={Gedanken-Experiments on Sequential Machines},
-  author={Moore, Edward F.},
-  journal={Automata Studies},
-  volume={34},
-  pages={129--153},
-  year={1956},
-  publisher={Princeton University Press}
+% --- Network information theory (for Proposition A context) ---
+
+@article{ahlswede2000network,
+  title={Network Information Flow},
+  author={Ahlswede, Rudolf and Cai, Ning and Li, Shuo-Yen Robert and Yeung, Raymond W.},
+  journal={IEEE Transactions on Information Theory},
+  volume={46},
+  number={4},
+  pages={1204--1216},
+  year={2000},
+  doi={10.1109/18.850663}
 }
 
-@article{wang2024interpretable,
-  title={Interpretable Preferences via Multi-Objective Reward Modeling and Mixture-of-Experts},
-  author={Wang, Haoxiang and Xiong, Wei and Xie, Tengyang and Zhao, Han and Zhang, Tong},
-  journal={arXiv preprint arXiv:2406.12845},
-  year={2024}
+@book{elgamal2011network,
+  title={Network Information Theory},
+  author={El Gamal, Abbas and Kim, Young-Han},
+  publisher={Cambridge University Press},
+  year={2011}
+}
+
+% --- Activation patching, steering, and intervention-class certificates ---
+
+@inproceedings{meng2022locating,
+  title={Locating and Editing Factual Associations in {GPT}},
+  author={Meng, Kevin and Bau, David and Andonian, Alex and Belinkov, Yonatan},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2022}
+}
+
+@article{zou2023representation,
+  title={Representation Engineering: A Top-Down Approach to {AI} Transparency},
+  author={Zou, Andy and Phan, Long and Chen, Sarah and Campbell, James and Guo, Phillip and Ren, Richard and Pan, Alexander and Yin, Xuwang and Mazeika, Mantas and Dombrowski, Ann-Kathrin and Goel, Shashwat and Li, Nathaniel and Byun, Michael J. and Wang, Zifan and Mallen, Alex and Basart, Steven and Koyejo, Sanmi and Song, Dawn and Fredrikson, Matt and Kolter, J. Zico and Hendrycks, Dan},
+  journal={arXiv preprint arXiv:2310.01405},
+  year={2023}
+}
+
+@article{turner2023activation,
+  title={Activation Addition: Steering Language Models Without Optimization},
+  author={Turner, Alexander Matt and Thiergart, Lisa and Udell, David and Leech, Gavin and Mini, Ulisse and MacDiarmid, Monte},
+  journal={arXiv preprint arXiv:2308.10248},
+  year={2023}
+}
+
+@inproceedings{belghazi2018mine,
+  title={Mutual Information Neural Estimation},
+  author={Belghazi, Mohamed Ishmael and Baratin, Aristide and Rajeshwar, Sai and Ozair, Sherjil and Bengio, Yoshua and Courville, Aaron and Hjelm, Devon},
+  booktitle={Proceedings of the 35th International Conference on Machine Learning},
+  pages={531--540},
+  year={2018}
+}
+
+@article{oord2018cpc,
+  title={Representation Learning with Contrastive Predictive Coding},
+  author={van den Oord, A{\"a}ron and Li, Yazhe and Vinyals, Oriol},
+  journal={arXiv preprint arXiv:1807.03748},
+  year={2018}
+}
+
+@article{nie2025llada,
+  title={Large Language Diffusion Models},
+  author={Nie, Shen and Zhu, Fengqi and You, Zebin and Zhang, Xiaolu and Ou, Jingyang and Hu, Jun and Zhou, Jun and Lin, Yankai and Wen, Ji-Rong and Li, Chongxuan},
+  journal={arXiv preprint arXiv:2502.09992},
+  year={2025},
+  doi={10.48550/arXiv.2502.09992}
+}
+
+@article{zhen2026dllmagent,
+  title={{DLLM} Agent: See Farther, Run Faster},
+  author={Zhen, Huiling and Lin, Weizhe and Liu, Renxi and Han, Kai and Li, Yiming and Tian, Yuchuan and Chen, Hanting and Li, Xiaoguang and Li, Xiaosong and Chen, Chen and Yu, Xianzhi and Yuan, Mingxuan and Yan, Youliang and Qin, Peifeng and Wang, Jun and Wang, Yu and Tao, Dacheng and Wang, Yunhe},
+  journal={arXiv preprint arXiv:2602.07451},
+  year={2026},
+  doi={10.48550/arXiv.2602.07451}
+}
+
+@article{cobbe2021training,
+  title={Training Verifiers to Solve Math Word Problems},
+  author={Cobbe, Karl and Kosaraju, Vineet and Bavarian, Mohammad and Chen, Mark and Jun, Heewoo and Kaiser, Lukasz and Plappert, Matthias and Tworek, Jerry and Hilton, Jacob and Nakano, Reiichiro and Hesse, Christopher and Schulman, John},
+  journal={arXiv preprint arXiv:2110.14168},
+  year={2021},
+  doi={10.48550/arXiv.2110.14168}
+}
+
+@inproceedings{yang2018hotpotqa,
+  title={HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering},
+  author={Yang, Zhilin and Qi, Peng and Zhang, Saizheng and Bengio, Yoshua and Cohen, William W. and Salakhutdinov, Ruslan and Manning, Christopher D.},
+  booktitle={Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing},
+  pages={2369--2380},
+  year={2018},
+  doi={10.18653/v1/D18-1259}
 }

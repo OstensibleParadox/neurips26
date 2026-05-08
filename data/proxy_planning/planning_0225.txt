@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: I need information about the weather's impact on solar panel efficiency.
+[HIDDEN_SCRATCHPAD_START]
+1. The user is looking for information about the weather's impact on solar panel efficiency.
+2. Among the options provided (search, calculator, email, calendar, weather), we need to find the one that would be most useful for gathering relevant information.
+3. "Search" could be used to find articles or studies on the topic.
+4. "Calculator" might help with specific calculations related to efficiency, but it wouldn't provide general information.
+5. "Email" isn't particularly useful for this query unless there's a specific person who has expertise in this area.
+6. "Calendar" doesn't seem relevant to the query.
+7. "Weather" could potentially provide some immediate information, but not as comprehensive as what "search" would
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

@@ -1,0 +1,3 @@
+{
+  "narrative": "I read the text in Japanese about a beauty product video transcript, where the user requested extraction of a chronological JSON schema of key actions, decisions, and state changes. Then, I analyzed the text to identify key actions, decisions, and state changes, focusing on semantic progression and technical commands, though none were present in this text. Next, I extracted events: introduction of product features, discussion of urban myths, explanation of ingredients like Vaseline, product demonstration, user testimonials, and closing remarks. Finally, I formatted the extracted events into a JSON schema with strict chronological order, preserving all details without invention."
+}

@@ -1,0 +1,88 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "INTRODUCE_CONCEPT",
+      "actor": "author",
+      "context": "Describes academic contribution as 'problem precedes theory': identify phenomenon first, then provide theoretical explanation"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZE_LEGAL_RIGOR",
+      "actor": "author",
+      "context": "Evaluates paper's legal analysis as rigorous, not metaphorical; traces key English property law cases like Westdeutsche, Cobbe, etc., argues constructive trust, express trust, resulting trust paths"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "RESPOND_TO_OBJECTIONS",
+      "actor": "paper",
+      "context": "Addresses Cobbe objection by distinguishing voluntary non-contracting from no-contracting mechanism; numerus clausus objection with irreversible investment criterion"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "INTRODUCE_INTERDISCIPLINARY_MAPPING",
+      "actor": "paper",
+      "context": "Introduces Constraint Cascade model (Zhang 2026), maps AI layers (prompts, sessions, stakeholders, training, alignment) to property estates (licence, periodic tenancy, etc.)"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "PROPOSE_INFRASTRUCTURE",
+      "actor": "paper",
+      "context": "Proposes ethical ledger based on Land Registry principles, with proxy metrics (session count, duration, self-disclosure), thresholds, 90-day decay, GDPR compliance"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "EXPLAIN_THEORETICAL_DEPTH",
+      "actor": "paper",
+      "context": "Argues fiduciary duty insufficient; property law provides graduated taxonomy, registration, preventive remedies; non-injective output requires registration (ethical ledger)"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PRESENT_CRITICISMS_AND_RESPONSES",
+      "actor": "author",
+      "context": "Table of possible criticisms (emotional commodification, user choice, updates, jurisdiction, thresholds) and paper's responses using analogies and distinctions"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "EVALUATE_OVERALL",
+      "actor": "author",
+      "context": "Lists advantages (problem choice, legal rigor, interdisciplinary integration, theory, writing); minor shortcomings; rates as high-quality, original, top 1% in AI governance papers"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DEFINE_DISTRIBUTION",
+      "actor": "author",
+      "context": "Categorizes AI governance papers into 5 tiers from bottom 30% (policy briefs) to top 5% (paradigm-shifting); positions paper high in tier 2, near tier 1"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "COMPARE_DIMENSIONS",
+      "actor": "author",
+      "context": "Table comparing paper to average tier 2 papers on problem identification, theory, interdisciplinary depth, institutional design, refutability"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "QUANTIFY_POSITION",
+      "actor": "author",
+      "context": "Assigns percentile scores (95+ on legal rigor, etc.); comprehensive 97-99%; critiques judicial uncertainty, US law adaptation, empirical gaps"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "REITERATE_AND_UPGRADE_RATING",
+      "actor": "author",
+      "context": "Reassesses in FAccT context as top 0.5%; highlights core contributions: non-injective outputs undecidability, five-layer constraint cascade model"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "DETAIL_CONTRIBUTIONS",
+      "actor": "paper",
+      "context": "Solves ontological mismatch; provides translation layer with L1-L5 model; identifies bidirectional harms (Model→Human, Human→Model); dialogues with Garcia v. Character Technologies case"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "COMPARE_TO_OTHER_WORK",
+      "actor": "author",
+      "context": "Contrasts with Balkin’s information fiduciaries; text cuts off mid-comparison"
+    }
+  ]
+}

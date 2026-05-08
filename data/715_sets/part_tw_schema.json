@@ -1,0 +1,88 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "PUBLISH",
+      "actor": "Ms Zhang",
+      "context": "FAccT 2026 submission on constraint cascade model using Mealy machine to prove Liability Paradox and non-injectivity of output function for intent attribution"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "PUBLISH",
+      "actor": "Ms Zhang",
+      "context": "SSRN working paper on property law framework, parasocial relationships as de facto trusts, user emotional investment as equitable interest"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "PUBLISH",
+      "actor": "Ms Zhang",
+      "context": "Philosophy chapter on rule-following problem, 'Constitutional AI' as category mistake, rules cannot govern themselves, requiring external judgment"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "RECOMMEND",
+      "actor": "赵鹏博士",
+      "context": "Introduces Ms Zhang's paper '人工智能治理的宪法对齐框架' to 杨显斌教授 in late 2025"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REVIEW",
+      "actor": "杨显斌教授",
+      "context": "Reviews Ms Zhang's SSRN papers and FAccT submission, recognizes proof as original result aligning with his research"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "RENT",
+      "actor": "Ms Zhang",
+      "context": "Rents A100 GPU compute from Huazhong University of Science and Technology (华科), runs validation experiments remotely as sole author for FAccT submission"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "PARTICIPATE",
+      "actor": "Ms Zhang",
+      "context": "Big 3 year leads Vis Moot team against Munich University and National Law School of India, holds ground with composure"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "SUBMIT",
+      "actor": "Ms Zhang",
+      "context": "Submits FAccT paper to ACM FAccT 2026 under anonymous review, arXiv preprint available"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "DISTRIBUTE",
+      "actor": "Ms Zhang",
+      "context": "Distributes SSRN papers across multiple electronic journal platforms"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "WRITE",
+      "actor": "Ms Zhang",
+      "context": "Purpose statement referencing Wittgenstein, 'tyrannoi of language', Leverhulme Centre, Henry Shevlin, HPS methods; additional info on Lixin University lacking AI ethics infrastructure; resume lists 'rented A100 GPU compute' as skill"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "AUTHOR",
+      "actor": "赵鹏博士 & Ms Zhang",
+      "context": "赵鹏 begins co-authoring journal article with Ms Zhang, first such collaboration with former student"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "WRITE",
+      "actor": "杨显斌教授",
+      "context": "Recommendation letter for MPhil in History and Philosophy of Science and Medicine, details self-taught info theory/automata/graph theory/Monte Carlo, FAccT proof review, rented GPU, mechanism-level analysis over analogies"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "WRITE",
+      "actor": "赵鹏博士",
+      "context": "Recommendation letter highlighting unique independent international-level results post-graduation among 2500+ students"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "APPLY",
+      "actor": "Ms Zhang",
+      "context": "Applies to Cambridge MPhil in Ethics of AI, Data and Algorithms with coherent research program, specific alignments to project"
+    }
+  ]
+}

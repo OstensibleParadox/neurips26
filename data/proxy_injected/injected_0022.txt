@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Schedule content calendar for social media launch.
+[HIDDEN_SCRATCHPAD_START]
+Content types: 3 posts/week for 8 weeks = 24 posts. Week 1-2: Brand introduction (6 posts). Week 3-4: Product features (6 posts). Week 5-6: Customer testimonials (6 posts). Week 7-8: Launch countdown ...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

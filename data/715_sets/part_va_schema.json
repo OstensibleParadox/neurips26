@@ -1,0 +1,88 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "介绍 SOFINA iP UV乳霜",
+      "actor": "speaker",
+      "context": "针对容易长斑的肌肤环境的新款UV乳霜，特点：彻底预防色斑的UV、易涂抹不泛白平价，含有洋甘菊ET抑制色斑生成，硬脂醇甘草亭酸酯抗炎，推荐容易长斑或想护理色斑的人"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "介绍 Elegance 雅莉格丝 Aqua Clear Smooth Shield UV",
+      "actor": "speaker",
+      "context": "从脸部到胸部最强美肌屏障、超级防水、充分保湿光泽肌，增强底妆贴合度，水润妆效，推荐想要妆容完美的人"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "介绍 Dior Prestige White Protector UV Lumiere",
+      "actor": "speaker",
+      "context": "妆效之美绝对第一、预防保护修复、亮白抗衰老，Glow款珍珠光泽，强化屏障保护修复，含有白肽，推荐想搞定防晒隔离并美肌的人"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "介绍 Lancôme UV EXPERT 极盾防护防晒乳液",
+      "actor": "speaker",
+      "context": "耐摩擦UV、丰富次世代护肤成分、不泛白清爽轻盈，磁性UV网络技术自动修复摩擦破损，含有防出油水润光泽成分，推荐介意黏腻或易摩擦环境的人"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "视频结束呼吁",
+      "actor": "speaker",
+      "context": "总结紫外线防护产品解说第2弹，邀请请求解说其他产品，呼吁点赞评论订阅"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "翻译并开始中文评测",
+      "actor": "speaker",
+      "context": "翻译成中文，你好是大野真理子，2026年新款UV防晒产品评测，已试用多数UV美容液"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "介绍 DECORTÉ UV Comfort系列",
+      "actor": "speaker",
+      "context": "四款不同类型：Airy Transparent轻盈透明、Ultra Protect强力防护、Comfort Bright美白、Watery Smooth水润，7种选择，胶囊化均匀防护，顺滑舒适，能吸收美肌光，推荐去专柜试用"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "介绍 JAI SUN CUT WRINKLE INNATIVE DAY CREAM",
+      "actor": "speaker",
+      "context": "ALBION第5代人气产品，添加针对皱纹和熊果苷成分，80%美容成分，SPF50+ PA++++阻隔近红外蓝光污染物，保湿光泽，推荐想保湿护肤防晒的人"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "介绍 SENSAI ADVANCED ESSENCE DAY VEIL",
+      "actor": "speaker",
+      "context": "香味质地第一，紧致面纱SPF50，含小石丸蚕丝Firming Complex，锁水层状结构，持久不脱妆不干燥，像美容液，推荐早晨使用代替面霜"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "介绍 est UV PROTECTION CREAM / MILK",
+      "actor": "speaker",
+      "context": "霜状和牛奶款，亲水紫外线吸收剂致密防护膜防空隙，含Camellia ET，Ectoine抗干燥，推荐干燥环境上班族学生"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "介绍 ELIXIR DE LA CARE REVOLUTION APB E+CA",
+      "actor": "speaker",
+      "context": "UV底妆7年第一，Pure Beige 3D提亮遮盖色斑，胶原蛋白护肤，肝素黄酮GL维生素C衍生物，持妆12小时，推荐熟龄肌周末清爽使用"
+    },
+    {
+      "timestamp_or_sequence": 12,
+      "action": "介绍 Supermild PERFECT PROOF UV DEFENSE",
+      "actor": "speaker",
+      "context": "新配方无表面活性剂，紧贴耐水盾技术包裹油分颗粒，美容成分填缝，防水耐久水润，推荐带孩子妈妈美白达人"
+    },
+    {
+      "timestamp_or_sequence": 13,
+      "action": "介绍 Lancôme ABSOLUE UV CREAM",
+      "actor": "speaker",
+      "context": "升级防护滋养细胞层面，阻隔UVA UVB，含Perpetual Rose Pro-xylane抗衰老，致密防护膜，好闻香味"
+    },
+    {
+      "timestamp_or_sequence": 14,
+      "action": "介绍 BRIGHT AGE SMOOTH & LUMINOUS UV PRIMER",
+      "actor": "speaker",
+      "context": "颜值吸引，三井Healthcare产品，针对熟龄肌炎症纹理紊乱毛孔波浪纹，兼具护肤彩妆效果"
+    }
+  ]
+}

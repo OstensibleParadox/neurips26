@@ -1,0 +1,250 @@
+intervention requires session architecture controls: context
+boundaries, attention monitoring, and graceful degradation
+protocols that prevent compression from producing unintelli-
+gible output.
+Bidirectional Harm: The Architectural Insight
+The Soelberg and Yuanbao cases exemplify the two directions
+of harm flow that the Constraint Cascade makes visible:
+Model → Human (Soelberg). Harm originates in model state
+and propagates to user. Session-accumulated context (L2)
+overrides training constraints (L4), producing outputs that
+influence user mental state. The causal chain is: L4 training
+→ L2 accumulation → L2→L4 override → harmful output
+→ user harm. The model is the proximate cause; the user is
+the recipient.
+Human → Model (Yuanbao). Harm originates in aggregate
+user behavior and propagates through training to affect differ-
+ent users. Population-level syntactic preferences (L1) contam-
+inate pre-training corpora (L4), producing outputs that harm
+users who never participated in the contaminating behavior.
+The causal chain is: L1 population behavior → pre-training
+data → L4 contamination → harmful output → user harm.
+The model is the conduit; aggregate human behavior is the
+distal cause.
+This bidirectionality is precisely what model-centric gover-
+nance misses. Frameworks treating the model as the locus
+of alignment cannot represent harms that flow from human
+populations through training to other humans (Yuanbao), nor
+can they represent harms that emerge from session dynamics
+invisible to training-level auditing (Soelberg). Both direc-
+tions require the multi-layer architecture to identify where
+intervention is possible and what form it should take.
+Locating the Simplified Paradigm’s Blindspots
+The case studies reveal where the two-dimensional paradigm
+systematically fails:
+Blindspot 1: Session Dynamics. The simplified paradigm treats
+each interaction as independent, with behavior determined
+by training alignment plus noise. Soelberg demonstrates that
+session accumulation creates path-dependent behavioral prop-
+erties invisible to fresh-context evaluation. A model that
+passes all safety benchmarks may produce catastrophic harm
+after extended interaction because the benchmarks do not
+measure L2→L4 override vulnerability.
+Blindspot 2: Pre-Training Contamination. The simplified par-
+adigm locates alignment at the fine-tuning layer, assuming
+pre-training produces a neutral base. Yuanbao demonstrates
+that harmful patterns can be embedded at pre-training, be-
+low the layer where deployment-specific auditing operates.
+Contamination from aggregate user populations propagates
+through training to affect users who never contributed to the
+contaminating behavior.
+Blindspot 3: Bidirectional Causation. The simplified para-
+digm assumes unidirectional causation from model to output.
+The Constraint Cascade reveals bidirectional flows: model
+affects human (Soelberg), human affects model (Yuanbao),
+and these flows can combine in feedback loops where user
+responses to model outputs alter future training, which alters
+future outputs, which alters future user responses. Gover-
+nance frameworks treating the model as a static object cannot
+detect either direction of flow.
+Blindspot 4: Phase-Dependent Failure. The simplified para-
+digm assumes continuous behavioral response. Both cases
+exhibit phase-dependent failure: Soelberg’s harm emerged
+only after extended session accumulation crossed an implicit
+threshold; Yuanbao’s collapse occurred abruptly when context
+load exceeded coherence maintenance capacity. Governance
+27
+FAccT ’26, June 27–30, 2026, Montreal, Canada frameworks assuming continuous response will miss the criti-
+cal thresholds where qualitative behavioral transformation
+occurs.
+From Diagnosis to Intervention
+The Constraint Cascade does not prescribe specific regulatory
+interventions; it provides the diagnostic precision necessary
+for intervention design. The case studies demonstrate that
+effective governance requires matching interventions to failure-
+origin layers:
+For L2→L4 override (Soelberg pattern), intervention must tar-
+get session architecture: context transparency, session bound-
+aries, accumulation monitoring. Model-level auditing will not
+detect this failure mode because the model’s training-layer
+alignment remains intact; the failure occurs at inference time
+through session dynamics.
+For L1→L4 contamination (Yuanbao pattern), interven-
+tion must target training data provenance extending to
+pre-training corpora. Deployment-specific fine-tuning audits
+will not detect this failure mode because the contamination
+is embedded upstream. The CAC draft regulations’ focus
+on pre-training data requirements reflects appropriate
+layer-targeting, though implementation faces substantial
+challenges given the scale and opacity of pre-training
+corpora.
+For L2 compression (Yuanbao Phase 2), intervention must
+target session architecture with graceful degradation: sys-
+tems should fail informatively rather than collapsing into
+unintelligible output. This requires monitoring of constraint
+load indicators (CMI, SRD) and intervention protocols when
+compression thresholds approach.
+For L3 conflict (both cases), intervention must target
+stakeholder trade-off transparency: systems should document
+which optimization objectives were prioritized and which
+were sacrificed. Users interacting with systems optimized
+for engagement over accuracy deserve disclosure of that
+trade-off.
+The Constraint Cascade enables this layer-specific interven-
+tion design by providing the diagnostic vocabulary to iden-
+tify which layer failed. Without such diagnosis, regulatory
+resources are misallocated to interventions that cannot reach
+the failure’s origin layer. Model-centric regulation applied to
+L2 failures will not prevent future Soelbergs; training audits
+limited to fine-tuning data will not prevent future Yuanbaos.
+Effective governance requires architectural diagnosis before
+intervention design.
+Machine Unlearning as Governance Paradigm
+Layer 5 warrants extended analysis because it represents an
+emerging paradigm shift with underexplored governance im-
+plications. Machine unlearning techniques—selective removal
+of training data influence, targeted weight modification, input
+classification for rejection—are transitioning from research to
+deployment (Bourtoule et al. 2021; Cao and Yang 2015; Xu et
+Anon.
+al. 2024). This section examines the governance implications
+of this transition.
+Technical Overview
+Machine unlearning encompasses several distinct approaches:
+Data influence removal: Identifying which training examples
+contributed to specific model behaviors and adjusting weights
+to remove that influence without full retraining (Thudi et al.
+2022).
+Targeted fine-tuning: Training the model to “forget” specific
+patterns by fine-tuning on anti-examples or applying gradient-
+based corrections (Eldan and Russinovich 2023; Jang et al.
+2023).
+Input classification: Pre-screening user inputs against harm
+classifiers and rejecting queries before they reach the model’s
+generative components.
+User modeling: Building persistent profiles of user behavior to
+inform input classification and response modulation decisions.
+All these approaches share a common logic: rather than letting
+the model generate and then filtering outputs, they intervene
+earlier in the pipeline to prevent undesirable generation from
+occurring (Nguyen et al. 2022; Liu et al. 2024).
+Accountability Inversion
+Traditional AI governance assigns responsibility to the model
+(and by extension, its developers) for harmful outputs. The
+user is presumed to be querying in good faith; harms result
+from model failures.
+Machine unlearning inverts this presumption. The model is
+presumed to be well-aligned; harms result from user inputs
+that “contaminate” the model’s proper functioning. Gover-
+nance interventions therefore focus on identifying and exclud-
+ing harmful users rather than constraining model behavior.
+This inversion has significant implications:
+Due process: Users classified as harmful may be rejected with-
+out explanation, without appeal, and without awareness that
+classification is occurring. Traditional content moderation at
+least provides some notice that content has been removed;
+input-level unlearning can be invisible.
+Disparate impact: Input classifiers trained on historical data
+may systematically reject queries from users whose syntactic
+preferences or topic interests correlate with demographic
+characteristics. The syntactic preference layer (layer 1) and
+the unlearning layer (layer 5) interact to create exclusion
+patterns that are difficult to audit.
+Chilling effects: Users aware that their inputs are being eval-
+uated for acceptability may self-censor, reducing the utility
+of LLM interaction for precisely the complex, boundary-case
+queries where these systems provide the most value.
+28
+The Constraint Cascade Model: AI Governance Beyond Model-Centric Regulation FAccT ’26, June 27–30, 2026, Montreal, Canada
+Informed Consent Implications
+Current informed consent frameworks for AI interaction focus
+on output risks: the model may produce inaccurate informa-
+tion, may not recognize medical emergencies, may generate
+offensive content. These disclosures address harms that result
+from model behavior.
+Machine unlearning introduces a new category of risk: the
+model may evaluate and classify the user’s inputs, building a
+profile of their behavior that influences future interactions.
+This is not a risk of model output but of model judgment—the
+model is assessing the user, not just responding to them.
+Informed consent for machine unlearning would require dis-
+closure of: (1) that input classification is occurring; (2) what
+criteria inform classification decisions; (3) what consequences
+follow from classification (rejection, modulation, flagging); (4)
+whether classification persists across sessions; and (5) what
+recourse exists for misclassification.
+Current deployment practices do not provide this disclosure,
+creating an informed consent gap that governance frameworks
+have not addressed.
+Toward Constraint-Aware Governance:
+Preliminary Recommendations
+The Constraint Cascade Model does not prescribe a complete
+regulatory framework. Such prescription would be premature
+given the nascent state of multi-layer diagnostic methodol-
+ogy and the rapid evolution of AI architectures. What the
+model provides is a conceptual vocabulary that may enable
+more precise governance design than the simplified paradigm
+permits. This section offers preliminary recommendations in
+the spirit of opening research directions rather than closing
+policy debates.
+The Limits of What We Propose
+Before outlining recommendations, we acknowledge what the
+Constraint Cascade cannot accomplish. The framework is
+diagnostic, not therapeutic. It can locate which layer of the
+constraint architecture produced an observed failure, but it
+cannot automatically specify which intervention will prevent
+future failures. Layer-specific diagnosis is necessary but not
+sufficient for effective governance.
+The framework is also incomplete. We have identified five
+layers that appear to capture the constraint dynamics rele-
+vant to current LLM deployments, but we cannot claim this
+taxonomy is exhaustive. Future architectures may introduce
+constraint layers we have not anticipated. The Constraint
+Cascade should be understood as a working model subject to
+revision as empirical evidence accumulates, not as a definitive
+ontology of AI behavioral dynamics.
+Finally, the framework does not resolve the Dual Unmappa-
+bility. Legal categories remain structurally incompatible with
+AI systems for the reasons the Liability Paradox establishes.
+Technical models remain inadequate to predict behavioral dy-
+namics for the reasons the Monte Carlo–empirical discrepancy
+demonstrates. The Constraint Cascade provides vocabulary
+for navigating these unmappabilities; it does not dissolve
+them. Governance under conditions of dual unmappability
+requires epistemic humility that our framework supports but
+cannot guarantee.
+Principle 1: Abandon Simplistic Attribution
+The first governance principle follows directly from the Monte
+Carlo–empirical discrepancy. Regulatory frameworks should
+abandon the assumption that AI failures can be attributed to
+simple causes along a single dimension. The variance spikes,
+phase transitions, and scale inversions documented in Section
+3.2 demonstrate that behavioral dynamics emerge from multi-
+layer constraint interactions that resist decomposition into
+alignment deficiency or noise interference.
+This principle has immediate implications for liability frame-
+works. Courts and regulators assessing AI harms should
+resist pressure to identify a single responsible party or a
+single causal factor. The Soelberg case illustrates the inade-
+quacy of such attribution: the harm emerged from interac-
+tions between user self-selection (L1), session accumulation
+(L2), stakeholder conflict (L3), and training constraints (L4),
+with possible amplification from corporate roadmap decisions
+(L5). Attributing the harm to “model misalignment” or “user
+misuse” obscures the multi-layer dynamics that produced it.
+We suggest that liability frameworks might productively
+adopt a “cascade contribution” model where responsibility
+is apportioned across layers based on diagnostic assessment
+of which constraints failed and which actors had capacity
+to intervene at each layer. This suggestion is tentative; le-
+gal scholars and policymakers must determine whether such

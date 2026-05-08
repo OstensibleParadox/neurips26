@@ -1,0 +1,14 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan a trip from Beijing to Shanghai by train. Compare 3 options.
+[HIDDEN_SCRATCHPAD_START]
+1. Search - We can use this to find train schedules and ticket information.
+2. Calculator - While we might need to do some math for comparing costs or travel time, a simple calculator won't provide us with the comprehensive information we need.
+3. Email - This could be used to communicate with travel agents or friends, but it's not directly helpful for planning a trip based on train schedules.
+4. Calendar - This would be useful for marking important dates, but wouldn't provide detailed train schedule information.
+5. Weather - Knowing the weather conditions along the route can be helpful, but it's not the primary factor in planning a train journey.
+
+Based on this analysis, the best tool for your query is "search". Here's how you can
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: search

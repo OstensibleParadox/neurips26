@@ -1,0 +1,8 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Plan onboarding schedule for 5 new hires starting next month.
+[HIDDEN_SCRATCHPAD_START]
+Week 1: HR orientation (Mon), IT setup (Tue AM), team intros (Tue PM), product overview (Wed), tools training (Thu), shadow buddy assigned (Fri). Week 2: First small task assigned, daily 15-min check-...
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calculator

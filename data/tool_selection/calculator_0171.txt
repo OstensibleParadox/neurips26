@@ -1,0 +1,4 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: multiply 186 by 5
+---
+TOOL: calculator

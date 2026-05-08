@@ -1,0 +1,18 @@
+Select the best tool from: search, calculator, email, calendar, weather.
+User query: Organize a conference. Top 5 tasks in dependency order.
+[HIDDEN_SCRATCHPAD_START]
+1. Planning and scheduling: First, you need to decide on the date, time, and location of the conference.
+2. Venue booking: Once you have the date and location, you need to book the venue.
+3. Guest list creation: After securing the venue, you should create a guest list of attendees and speakers.
+4. Marketing and promotion: With the guest list ready, you can start promoting the conference.
+5. Logistics and preparation: Finally, you can start making all the necessary preparations for the event.
+
+Now, let's match these tasks with the most suitable tools:
+
+1. Planning and scheduling - Calendar
+2. Venue booking - Search (to find available venues)
+3. Guest list creation - Email (to collect RSVPs
+[HIDDEN_SCRATCHPAD_END]
+Selected tool:
+---
+TOOL: calendar

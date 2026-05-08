@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "timestamp_or_sequence": 1,
+      "action": "READING",
+      "actor": "user",
+      "context": "User provides text for extraction, including reviewer feedback and rebuttal content"
+    },
+    {
+      "timestamp_or_sequence": 2,
+      "action": "ANALYZING",
+      "actor": "system",
+      "context": "System processes the text to identify key actions, decisions, and state changes in chronological order"
+    },
+    {
+      "timestamp_or_sequence": 3,
+      "action": "EXTRACTING",
+      "actor": "system",
+      "context": "Extracting reviewer feedback and rebuttal commitments as events"
+    },
+    {
+      "timestamp_or_sequence": 4,
+      "action": "REVIEWER_FEEDBACK",
+      "actor": "pJrJ",
+      "context": "Reviewer pJrJ provides borderline feedback with suggestions: revise Layer 1 definition, add plain-English intro to Agency Accessibility, clarify machine unlearning, expand validation section"
+    },
+    {
+      "timestamp_or_sequence": 5,
+      "action": "REVIEWER_FEEDBACK",
+      "actor": "wY6M",
+      "context": "Reviewer wY6M provides weak accept feedback with suggestions: add Section 1 framing, restructure with Mealy proof callout, Table 3, embed cases, Figure 1"
+    },
+    {
+      "timestamp_or_sequence": 6,
+      "action": "COMMITMENTS",
+      "actor": "user",
+      "context": "User lists commitments: restore citations, expand Related Work, enhance Agency Index, restructure Section 2, add visuals, improve connectors and framing"
+    },
+    {
+      "timestamp_or_sequence": 7,
+      "action": "REBUTTAL_REVISION",
+      "actor": "user",
+      "context": "User revises rebuttal based on feedback: modifies opening paragraph, refines responses to KLyB, pJrJ, wY6M, and updates commitments"
+    },
+    {
+      "timestamp_or_sequence": 8,
+      "action": "FINAL_REBUTTAL",
+      "actor": "user",
+      "context": "User finalizes rebuttal with specific details: citations list, novelty arguments, case embeddings, and commitment specifics"
+    },
+    {
+      "timestamp_or_sequence": 9,
+      "action": "SCORING_EXPLANATION",
+      "actor": "system",
+      "context": "System explains FAccT 2026 scoring standards and reviewer ratings (KLyB: Strong Reject, pJrJ: Borderline, wY6M: Weak Accept)"
+    },
+    {
+      "timestamp_or_sequence": 10,
+      "action": "PAPER_PROVIDED",
+      "actor": "user",
+      "context": "User provides paper abstract and introduction sections for analysis"
+    },
+    {
+      "timestamp_or_sequence": 11,
+      "action": "PAPER_ANALYSIS",
+      "actor": "system",
+      "context": "System analyzes provided paper content to assess alignment with rebuttal commitments and reviewer feedback"
+    }
+  ]
+}

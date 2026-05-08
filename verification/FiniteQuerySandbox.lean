@@ -1,8 +1,5 @@
 import FiniteQuerySandbox.Tools
-import FiniteQuerySandbox.Impossibility
-import FiniteQuerySandbox.GeometricTools
-import FiniteQuerySandbox.GeometricImpossibility
-import FiniteQuerySandbox.CoveringBound
-import FiniteQuerySandbox.InternalImpossibility
-import FiniteQuerySandbox.PACBounds
+import FiniteQuerySandbox.InfoTheory
 import FiniteQuerySandbox.Screenability
+import FiniteQuerySandbox.DualCertificate
+import FiniteQuerySandbox.ScreenabilityBridge

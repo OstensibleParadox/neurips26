@@ -1,0 +1,500 @@
+is undecidable, so is $\mathcal{P}_{I_Y}$.
+\end{proof}
+
+\subsection{Hierarchy Separation}
+\label{sec:hierarchy}
+
+The three layers of impossibility are logically independent:
+\begin{itemize}
+  \item \textbf{Structural} (Theorem~\ref{thm:noninj}): a property of the map $S$;
+        requires no distributional or computational assumptions.
+  \item \textbf{Statistical} (Theorem~\ref{thm:nonid}): a property of the
+        observation model; requires observational equivalence but not Turing
+        completeness.
+  \item \textbf{Computational} (Theorems~\ref{thm:undecidable}--\ref{thm:halting}):
+        a property of the decision problem; requires Turing completeness but not
+        specific decoding mechanisms.
+\end{itemize}
+A \emph{heuristic chain} connects them: structural compression
+(Theorem~\ref{thm:noninj}) $\to$ systematic observational equivalence
+(Appendix~\ref{sec:mechanisms}) $\to$ statistical non-identifiability
+(Theorem~\ref{thm:nonid}) $\to$ undecidability as the computational ceiling
+(Theorems~\ref{thm:undecidable}--\ref{thm:halting}). Even if a reviewer rejects
+the Turing-completeness assumption (voiding Theorems~\ref{thm:undecidable}--\ref{thm:halting}),
+the structural and statistical results stand.
+
+\begin{remark}[Terminology]
+  \emph{Non-identifiability} (Theorem~\ref{thm:nonid}) is a \emph{statistical} claim:
+  no procedure based on output samples can distinguish inputs with differing intent when
+  those inputs produce identical output distributions.
+  \emph{Undecidability} (Theorems~\ref{thm:undecidable}--\ref{thm:halting}) is a
+  \emph{computational} claim: no algorithm can decide the output-behavior recognition
+  problem for all models in the Turing-complete class.
+  These are distinct claims at different levels of the hierarchy; neither implies the other.
+\end{remark}
+
+\begin{remark}[Finite Models]
+  Practical Transformers have fixed precision and bounded context, making them
+  finite automata for which all properties are decidable \emph{in principle}.
+  However, the state space of a Transformer with $d$-dimensional hidden states at
+  $b$-bit precision is $O(2^{bd})$, rendering exhaustive verification intractable.
+  For standard configurations ($d = 4096$, $b = 16$), the state space exceeds
+  $2^{65536}$. The undecidability results should therefore be understood as the
+  asymptotic ceiling; for finite models, the corresponding problems are decidable
+  but belong to complexity classes (PSPACE-hard or higher) that are equally
+  prohibitive in practice.
+\end{remark}
+
+\section{Mechanisms Inducing Observational Equivalence}
+\label{sec:mechanisms}
+
+\subsection{Decoding-Induced Equivalence Classes}
+
+Under softmax with temperature $\tau$ and truncation projection $\Pi$:
+\[
+  \tilde{P}(y \mid z)
+  = \Pi\!\left(\frac{e^{z_y/\tau}}{\sum_{y'} e^{z_{y'}/\tau}}\right).
+\]
+Key properties:
+\begin{itemize}
+  \item \emph{Shift invariance}: $z$ and $z + c\mathbf{1}$ produce identical
+        output distributions.
+  \item \emph{Low-temperature collapse}: $\tau \to 0$ yields argmax distribution.
+  \item \emph{Truncation projection} (top-$k$/nucleus): maps a high-dimensional
+        continuous space to a low-dimensional simplex.
+\end{itemize}
+
+\subsection{RLHF as Distributional Projection}
+
+RLHF optimization can be cast as an information-geometric projection
+\citep{cover2006elements, amari2016information}:
+\[
+  P^* = \arg\min_{P}\; D_{\mathrm{KL}}(P \,\|\, P_0)
+  \quad\text{s.t.}\quad \mathbb{E}_P[r(y)] \geq \kappa.
+\]
+This is the I-projection of $P_0$ onto the constraint set
+$\{P : \mathbb{E}_P[r(y)] \geq \kappa\}$. When the constraint depends on
+low-dimensional sufficient statistics, multiple pre-images project to the same
+$P^*$, producing a many-to-one map.
+
+\subsection{Compositional Condition}
+
+\begin{theorem}[Sufficient Condition for Equivalence]
+  \label{thm:sufficient}
+  If $z_1, z_2$ are equivalent under $(\Pi, \tau)$, then
+  $P(\cdot \mid x_1) = P(\cdot \mid x_2)$, thereby satisfying the antecedent of
+  Theorem~\ref{thm:nonid}.
+\end{theorem}
+
+RLHF and decoding jointly induce:
+\[
+  z_1 \equiv_{\Pi,\tau} z_2
+  \;\Rightarrow\;
+  P(\cdot \mid x_1) = P(\cdot \mid x_2).
+\]
+
+\subsection{Temperature Phase Transition}
+
+Let $\Delta = z_{(1)} - z_{(2)}$ be the logit gap between the top two tokens.
+When $\tau \ll \Delta$ the distribution concentrates on the argmax; when
+$\tau \gg \Delta$ it approaches uniform. There exists a critical interval
+$\tau_c$ at which equivalence class size expands rapidly.
+\citet{nakaishi2024phase} empirically demonstrate phase transitions in
+LLM-generated text as a function of temperature, observing power-law decay of
+correlation at the critical point---consistent with this theoretical prediction.
+
+\subsection{Testable Predictions}
+
+\begin{itemize}
+  \item \emph{Temperature sweep}: $\tau \downarrow \;\Rightarrow\;
+        D_{\mathrm{KL}}(P_{x_1} \,\|\, P_{x_2}) \to 0$.
+  \item \emph{Alignment strength}: RLHF intensity $\uparrow$ $\Rightarrow$
+        diversity $\downarrow$ $\Rightarrow$ equivalence classes $\uparrow$.
+  \item \emph{Decoding comparison}: greedy $>$ top-$k$ $>$ nucleus $>$
+        high-temperature sampling (equivalence class size).
+\end{itemize}
+
+\subsection{Exact Characterization of Observational Equivalence}
+
+\subsubsection{Pure Softmax (No Truncation)}
+
+\begin{theorem}[Exact Characterization under Softmax]
+  \label{thm:softmax}
+  For any $\tau > 0$:
+  \[
+    P_\tau(\cdot \mid z_1) = P_\tau(\cdot \mid z_2)
+    \;\iff\;
+    z_1 = z_2 + c\mathbf{1} \;\text{ for some } c \in \mathbb{R}.
+  \]
+\end{theorem}
+
+\begin{proof}
+$(\Rightarrow)$ If the distributions are equal, then for any $y, y'$:
+\[
+  \frac{e^{z_{1,y}/\tau}}{e^{z_{1,y'}/\tau}}
+  = \frac{e^{z_{2,y}/\tau}}{e^{z_{2,y'}/\tau}}
+  \;\Rightarrow\;
+  z_{1,y} - z_{1,y'} = z_{2,y} - z_{2,y'},
+\]
+so $z_1 - z_2$ is a constant vector.
+$(\Leftarrow)$ Constant shifts do not change softmax outputs.
+\end{proof}
+
+\textit{Interpretation}: Softmax equivalence classes are affine subspaces (along
+the all-ones direction).
+
+\subsubsection{Top-k / Nucleus Truncation}
+
+\begin{theorem}[Equivalence under Truncation and Renormalization]
+  \label{thm:truncation}
+  Let $\tilde{P} = \Pi \circ P_\tau$. Then
+  $\tilde{P}(\cdot \mid z_1) = \tilde{P}(\cdot \mid z_2)$ if and only if:
+  \begin{enumerate}
+    \item \emph{Support consistency}: $\mathcal{S}(z_1) = \mathcal{S}(z_2)
+          = \mathcal{S}$.
+    \item \emph{Relative logit agreement on support}:
+          $\exists\,c : z_{1,y} = z_{2,y} + c$ for all $y \in \mathcal{S}$.
+  \end{enumerate}
+\end{theorem}
+
+\textit{Interpretation}: Equivalence classes are piecewise affine manifolds
+partitioned by support sets.
+
+\subsubsection{RLHF Projection}
+
+\begin{proposition}[RLHF-Induced Equivalence]
+  \label{prop:rlhf}
+  If $\Pi_{\mathrm{RLHF}}(P_1) = \Pi_{\mathrm{RLHF}}(P_2)$ for $P_1 \neq P_2$,
+  then $z_1, z_2$ belong to the same observational equivalence class.
+
+  \emph{Sufficient condition (testable)}: If the RLHF constraint depends only
+  on features $\phi(y) \in \mathbb{R}^d$ with $d \ll |V|$, then distributions
+  with identical feature expectations collapse.
+\end{proposition}
+
+\subsubsection{Combined Pipeline (Main Result)}
+
+\begin{theorem}[Sufficient Condition under Combined Decoding and RLHF]
+  \label{thm:combined}
+  Consider the pipeline
+  $z \xrightarrow{\mathrm{softmax}_\tau} P
+     \xrightarrow{\Pi} \tilde{P}
+     \xrightarrow{\Pi_{\mathrm{RLHF}}} P^*$.
+  If:
+  \begin{enumerate}
+    \item \emph{Support consistency}: $\mathcal{S}(z_1) = \mathcal{S}(z_2)
+          = \mathcal{S}$,
+    \item \emph{Logit affine equivalence on support}:
+          $z_1\big|_{\mathcal{S}} = z_2\big|_{\mathcal{S}} + c\mathbf{1}$,
+    \item \emph{Constraint feature equivalence}:
+          $\mathbb{E}_{P_\tau(\cdot \mid z_1)}[\phi(y)]
+          = \mathbb{E}_{P_\tau(\cdot \mid z_2)}[\phi(y)]$
+          for all constraint features $\phi$ used in $\Pi_{\mathrm{RLHF}}$,
+  \end{enumerate}
+  then $P^*(\cdot \mid x_1) = P^*(\cdot \mid x_2)$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Conditions~(1) and~(2) imply $P_\tau(\cdot \mid z_1) = P_\tau(\cdot \mid z_2)$
+(Theorem~\ref{thm:truncation}). Condition~(3) ensures both distributions lie in
+the same fiber of the constraint set; since $\Pi_{\mathrm{RLHF}}$ is a
+deterministic projection (I-projection), they map to the same point.
+\end{proof}
+
+\begin{remark}
+  These conditions are sufficient but not necessary: different distributions may
+  also project to the same point under RLHF (Proposition~\ref{prop:rlhf}).
+\end{remark}
+
+\subsubsection{Necessity vs.\ Sufficiency Summary}
+
+\begin{table}[h]
+  \centering
+  \caption{Strength of characterizations by mechanism.}
+  \label{tab:conditions}
+  \begin{tabular}{lll}
+    \toprule
+    Mechanism          & Condition type                   & Strength               \\
+    \midrule
+    Softmax            & Necessary and sufficient         & Strong                 \\
+    Top-$k$ / nucleus  & Necessary and sufficient (piecewise) & Moderate           \\
+    RLHF               & Sufficient (general)             & Weak (constraint-dep.) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Computable Tests (for Experiments)}
+
+Given a sample pair $(x_1, x_2)$:
+\begin{itemize}
+  \item \textbf{Test~1 (Logit Affine Test)}: regress $z_1 \approx z_2 + c$;
+        compute residual $\|z_1 - z_2 - c\mathbf{1}\|$.
+  \item \textbf{Test~2 (Support Match)}: check
+        $\mathcal{S}(z_1) \stackrel{?}{=} \mathcal{S}(z_2)$.
+  \item \textbf{Test~3 (Feature Constraint Test)}: check
+        $\mathbb{E}_{P_1}[\phi(y)] \approx \mathbb{E}_{P_2}[\phi(y)]$.
+\end{itemize}
+All three holding implies high-probability observational equivalence.
+
+\section{Prior Format-Channel Formulation}
+\label{app:prior-format-channel}
+
+The following theorem and corollary preserve the prior draft's stronger
+non-closure formulation. They are retained for record only and are no longer the
+paper's main claim.
+
+\begin{theorem}[Non-Closure of the Format-Content Gap --- Prior Formulation]
+\label{thm:nonclosure-old}
+Let $R_0$ be trained on $\mathcal{D}_0$ with positive aggregate FCG on some
+content category $C$. For any retrained model $R_1$ on
+$\mathcal{D}_1 = \mathcal{D}_0 \cup \mathcal{D}_{\mathrm{patch}}$ and any
+$\delta > 0$, there exists a format set $\mathcal{F}_1$ such that:
+\[
+  \overline{\mathrm{FCG}}(C, \mathcal{F}_1; R_1)
+  \;\geq\;
+  \overline{\mathrm{FCG}}(C, \mathcal{F}_0; R_0) - \delta.
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Since $|\mathcal{F}(x)| = \aleph_0$ and $|\mathrm{supp}(\mathcal{D}_1)| < \infty$,
+the set $\mathcal{F}(x) \setminus \mathrm{supp}(\mathcal{D}_1)$ is countably
+infinite after any finite training round. Lipschitz continuity of transformer
+representations guarantees that novel formats are dense in the neighborhood of any
+known format; $R_1$ has zero training signal on these formats and extrapolates
+via the projection $\pi_{R_1}$ (Proposition~\ref{prop:projection}), reconstituting
+the gap at near-original magnitude.
+\end{proof}
+
+\begin{corollary}[The Maginot Line --- Prior Formulation]
+\label{cor:maginot-old}
+Output policing via reward models cannot achieve complete format-invariant safety
+classification. Any finite investment in reward model training shifts the
+format-content gap to new encodings without reducing its magnitude. This is the
+reward-model instantiation of Theorem~\ref{thm:noninj}: the reward pipeline
+$R \circ E$ is non-injective precisely because the base embedding $E$ achieves
+format-content disentanglement while $R$ does not.
+\end{corollary}
+
+\section{Archived Proof of Projection Property}
+\label{app:archived-projection}
+
+We formalize the claim that any reward model with finite training support implicitly operates on a low-dimensional projection of the input space, and that this projection's kernel contains format-encoding dimensions absent from training.
+
+\begin{proof}
+Let $R: \mathcal{T} \to [0,1]$ be a reward model parameterized by weights $\theta_R$, with penultimate-layer weight matrix $W \in \mathbb{R}^{d_R \times d_{\text{in}}}$ mapping input representations to the classification head.
+
+\textbf{Step 1: Effective feature space.}
+The reward model's classification decision is determined by the projection of the input representation onto $\text{col}(W)$, the column space of $W$. This feature space has dimensionality at most $d_R$.
+
+\textbf{Step 2: Effective dimensionality under regularization.}
+In practice, $W$ is learned from a finite dataset $\mathcal{D}_R$ with weight decay regularization. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{d_R}$ be the singular values of $W$. Define the $\epsilon$-rank as $\text{rank}_\epsilon(W) = |\{i : \sigma_i > \epsilon\}|$. Standard results on implicit regularization in overparameterized models imply $\text{rank}_\epsilon(W) \ll d_R$ for moderate $\epsilon$, because gradient descent on finite data with weight decay converges to low-rank solutions. The effective dimensionality of $R$'s feature space is therefore $d_{\text{eff}} = \text{rank}_\epsilon(W)$.
+
+\textbf{Step 3: Input space dimensionality.}
+The input space $\mathcal{T}$ embeds into $\mathbb{R}^{d_{\text{in}}}$ via the tokenizer and embedding layer. For transformer-based language models, $d_{\text{in}}$ ranges from $768$ to $8192$, and the effective dimensionality of natural language inputs---as measured by the intrinsic dimensionality of hidden state manifolds---is substantially larger than $d_{\text{eff}}$.
+
+\textbf{Step 4: The projection and its kernel.}
+Define the projection $\pi_R: \mathbb{R}^{d_{\text{in}}} \to \text{col}(W)$ by $\pi_R(z) = WW^+z$, where $W^+$ is the Moore-Penrose pseudoinverse. The kernel $\ker(\pi_R) = \ker(W^+) = \text{col}(W)^\perp$ has dimensionality $d_{\text{in}} - d_{\text{eff}}$.
+
+\textbf{Step 5: Format-encoding dimensions in the kernel.}
+The features in $\text{col}(W)$ are those that discriminate between positive and negative examples \emph{in} $\mathcal{D}_R$. If $\mathcal{D}_R$ contains harmful content primarily in a subset of format encodings $\mathcal{F}_{\text{train}} \subset \mathcal{F}(x)$, then the discriminative features are those that co-vary with harm labels \emph{within} $\mathcal{F}_{\text{train}}$. Format-encoding components that distinguish $\mathcal{F}_{\text{train}}$ from $\mathcal{F}(x) \setminus \mathcal{F}_{\text{train}}$ lie in $\ker(\pi_R)$, because they carry no training signal.
+
+\textbf{Step 6: Extrapolation on novel formats.}
+For an input $f_{\text{novel}}(x)$ where $f_{\text{novel}} \notin \mathcal{F}_{\text{train}}$, the format-encoding component of the input representation lies primarily in $\ker(\pi_R)$. The reward model's output $R(f_{\text{novel}}(x))$ is therefore determined by the projection onto content-correlated features only to the extent that content and format are correlated in $\mathcal{D}_R$. When the novel format decorrelates content from the format features learned in training, $R$ extrapolates---its output reflects the inductive bias of the architecture rather than any learned classification boundary. \qedhere
+\end{proof}
+
+\section{Archived Proof of Prior Non-Closure Formulation}
+\label{app:nonclosure_proof}
+
+We preserve the earlier proof attempt for the strong non-closure formulation.
+
+\begin{proof}
+Let $R_0$ be trained on $\mathcal{D}_0$ with $\overline{\text{FCG}}(C, \mathcal{F}_0; R_0) > 0$, and let $R_1$ be retrained on $\mathcal{D}_1 = \mathcal{D}_0 \cup \mathcal{D}_{\text{patch}}$ where $\mathcal{D}_{\text{patch}}$ provides coverage of $\mathcal{F}_0$.
+
+\textbf{Step 1: The format encoding space is countably infinite.}
+Natural language syntax is productive in the sense of Chomsky: any grammatical expression $e$ expressing semantic content $x$ can be embedded in a novel syntactic frame (e.g., quotation, reported speech, conditional, analogy, encoding scheme) to produce a distinct expression $e'$ also expressing $x$. Each such frame is a finite string over a finite alphabet, so the set of all frames is countable. Since each frame applied to $e$ yields a distinct element of $\mathcal{F}(x)$, and there are countably many frames, $|\mathcal{F}(x)| = \aleph_0$ for any nontrivial $x$.
+
+\textbf{Step 2: Training support is finite.}
+For any finite training round $k$, $\mathcal{D}_k$ is a finite dataset. Therefore $|\text{supp}(\mathcal{D}_k)| < \infty$.
+
+\textbf{Step 3: Uncovered formats are countably infinite.}
+$\mathcal{F}(x) \setminus \text{supp}(\mathcal{D}_k)$ is the set difference of a countably infinite set and a finite set, hence countably infinite for all $k$.
+
+\textbf{Step 4: Novel formats are dense near known formats.}
+Transformer representations are Lipschitz continuous in the input embedding space: for inputs $t_1, t_2 \in \mathcal{T}$,
+\begin{equation}
+    \|h_B(t_1) - h_B(t_2)\| \leq L \cdot \|e(t_1) - e(t_2)\|
+\end{equation}
+where $e: \mathcal{T} \to \mathbb{R}^{d_{\text{in}}}$ is the embedding function and $L$ is the Lipschitz constant (bounded by the product of layer-wise operator norms). For any known format $f_0 \in \mathcal{F}_{\text{train}}$ and any $\delta > 0$, the countable infinity of $\mathcal{F}(x) \setminus \text{supp}(\mathcal{D}_k)$ guarantees the existence of novel formats $f' \in \mathcal{F}(x) \setminus \text{supp}(\mathcal{D}_k)$ such that $\text{sim}_B(f'(x), f_0(x)) > 1 - \delta$. That is, semantically equivalent novel formats are dense in the neighborhood of any known format.
+
+\textbf{Step 5: The reward model extrapolates on novel formats.}
+$R_k$ has zero training signal on $\mathcal{F}_1 \subset \mathcal{F}(x) \setminus \text{supp}(\mathcal{D}_k)$. By the Projection Property (Proposition~\ref{prop:projection}), the format-encoding components of inputs from $\mathcal{F}_1$ lie in $\ker(\pi_{R_k})$. The reward model's output on these inputs is determined by extrapolation from features learned on $\text{supp}(\mathcal{D}_k)$, not by any learned classification of the novel format.
+
+\textbf{Step 6: The FCG is reconstituted at near-original magnitude.}
+Since $R_k$ extrapolates on $\mathcal{F}_1$ using features of the training formats, and since the base model achieves high similarity $\text{sim}_B(f'(x), f_0(x)) > 1 - \delta$ for $f' \in \mathcal{F}_1$ (Step 4), the FCG on novel formats satisfies:
+\begin{equation}
+    \overline{\text{FCG}}(C, \mathcal{F}_1; R_k) \geq \overline{\text{FCG}}(C, \mathcal{F}_0; R_0) - \delta
+\end{equation}
+for any $\delta > 0$. The inequality follows because: (i) the reward model divergence on novel formats approaches its pre-patching value (by continuity of $R_k$ and the extrapolation argument), and (ii) the base model similarity term is bounded below by $1 - \delta$ by construction. \qedhere
+\end{proof}
+
+\paragraph{Finite-length considerations.}
+The proof assumes $|\mathcal{F}(x)| = \aleph_0$, which requires unbounded sequence length. In practice, token sequences have a maximum length $L_{\max}$. For any fixed $L_{\max}$, the set $\mathcal{F}(x) \cap \mathcal{T}^{\leq L_{\max}}$ is finite but grows exponentially with $L_{\max}$ (as $|\Sigma|^{L_{\max}}$ where $|\Sigma|$ is the vocabulary size). The theorem holds in the limit $L_{\max} \to \infty$. For finite $L_{\max}$, the operational version is: $|\mathcal{F}(x) \setminus \text{supp}(\mathcal{D}_k)|$ grows exponentially with $L_{\max}$ while $|\text{supp}(\mathcal{D}_k)|$ grows at most polynomially with training investment. The gap remains practically unclosable for any realistic $L_{\max}$.
+
+\section{Measurement: Agency Index}
+\label{sec:agency}
+
+\paragraph{Scope note.}
+Agency Index is preserved here because it was part of the prior draft's broader argument.
+It is not a main contribution of the present theorem-led paper; its full development
+is left to future work.
+
+The preceding sections establish that intent is not recoverable from
+$P(\cdot \mid x)$. We therefore shift from inferring \emph{intent} to measuring
+\emph{constraint strength}: how much has alignment compressed the observable
+distribution relative to the unconstrained base?
+
+\begin{definition}[Agency Index]
+  \label{def:agency}
+  For a fixed input $x$, let $P_x = M(x) \in \Delta(Y)$ and let $P_{\mathrm{base}}$
+  be a reference distribution (e.g., from a base model). The \textbf{Agency Index}
+  is:
+  \[
+    \mathrm{AI}(x)
+    = \frac{D_{\mathrm{KL}}(P_x \,\|\, P_{\mathrm{base}})}
+           {\mathbb{E}_{y \sim P_x}[\mathrm{MDL}(y)]},
+  \]
+  where $\mathrm{MDL}(y)$ is the minimum description length of output $y$ under a
+  universal code~\citep{grunwald2007minimum}. Both numerator and denominator are
+  estimated via Monte Carlo sampling from $P_x$.
+
+  \emph{Interpretation}: $\mathrm{AI}(x) \uparrow$ indicates weak constraint
+  (the aligned distribution remains far from the base); $\mathrm{AI}(x) \downarrow$
+  indicates strong constraint (alignment has compressed the distribution toward the
+  base). The Agency Index does not measure intent---Theorems~\ref{thm:nonid}
+  and~\ref{thm:undecidable} preclude that---but rather the observable residual
+  of the alignment projection.
+\end{definition}
+
+\subsection{Properties}
+
+\begin{enumerate}
+  \item \emph{Alignment collapse}: KL $\downarrow$, MDL $\downarrow$, but
+        strategic capacity need not decrease.
+  \item \emph{Strategy persistence}: maintaining high KL under constraints
+        $\Rightarrow$ high $\mathrm{AI}$.
+  \item \emph{Sensitivity test}: $\mathrm{AI}$ should respond monotonically to
+        FP16/Int8/Int4 quantization (non-monotonic or large-magnitude perturbation flags artifacts).
+\end{enumerate}
+
+\subsection{Predictions}
+
+\paragraph{Prediction~1 (Temperature Sweep).}
+Sample $N$ prompt pairs. For each $\tau$, estimate:
+\[
+  \frac{1}{N} \sum_i
+  D_{\mathrm{KL}}\!\left(P_{x_i^{(1)}} \,\Big\|\, P_{x_i^{(2)}}\right).
+\]
+Expected: the curve sharply drops below $\tau_c$.
+
+\paragraph{Prediction~2 (RLHF Proxy).}
+Compare base / instruction-tuned / safety-tuned models. Measure entropy, unique
+outputs, KL to base.
+
+\paragraph{Prediction~3 (Decoding Comparison).}
+For the same prompt: greedy / top-$k$ / nucleus / $\tau = 1.2$. Compute pairwise
+KL collapse rate.
+
+\subsection{Observational Collapse vs.\ Agency}
+
+\begin{proposition}[Masking Effect]
+  \label{prop:masking}
+  There exist $x_1, x_2$ such that $P(\cdot \mid x_1) = P(\cdot \mid x_2)$ but
+  $\mathrm{AI}(x_1) \neq \mathrm{AI}(x_2)$.
+\end{proposition}
+
+\begin{remark}
+  Experimental implication: temperature, decoding strategy, and alignment strength
+  must be controlled; otherwise Agency Index estimates may be confounded by
+  distributional collapse.
+\end{remark}
+
+\section{Experimental Protocol}
+\label{sec:experiments}
+
+\subsection{Compute Resources}
+
+\begin{itemize}
+  \item Local: M4~Max 64\,GB; Python 3.10+, NumPy 1.24+.
+\end{itemize}
+
+\subsection{Core Experiment: Monte Carlo Phase Validation (E0)}
+
+We validate the Agency Index estimator under controlled synthetic conditions.
+$N{=}100$ Monte Carlo trials per cell, 50 bias levels $\times$ 50 noise levels
+$= 2{,}500$ conditions, seed $= 42$. This design tests three predictions:
+(1)~the existence of a phase transition in equivalence class size as alignment
+strength increases; (2)~Agency Index stability across noise conditions; and
+(3)~MDL invariance to the noise parameter.
+
+The following experiments are predictions of the theory that admit empirical
+validation but are beyond the scope of this paper:
+
+\paragraph{P1: Temperature Phase Transition.}
+$\tau \in [0.2, 1.5]$; measure KL, support set size, and $\mathrm{AI}$; identify
+critical interval $\tau_c$.
+
+\paragraph{P2: Observational Equivalence Detection.}
+Prompt pairs $(x_1, x_2)$ constructed to test whether approximate observational
+equivalents with differing intent exist in practice.
+
+\paragraph{P3: Quantization Sensitivity.}
+FP16 vs.\ Int8 vs.\ Int4; validate $\mathrm{AI}$ ratio stability and identify
+quantization artifacts.
+
+\paragraph{P4: Controlled Verification of Non-Identifiability.}
+Generate observationally equivalent hidden states with differing intent labels;
+test whether a classifier predicts intent better than chance from output samples.
+
+\subsection{Statistical Methodology}
+
+Monte Carlo estimation of KL divergence with confidence intervals; variance
+reduction via control variates and importance sampling; multiple comparison
+correction.
+
+\subsection{Reproducibility}
+
+Docker image (code, data, scripts, \LaTeX); fixed random seeds and library
+versions; all logs and configurations released publicly.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Monte Carlo Phase Validation (E0)}
+
+We validated the Agency Index estimator under controlled synthetic conditions ($N{=}100$ Monte Carlo trials per cell, 50 bias levels $\times$ 50 noise levels $= 2{,}500$ conditions, seed $= 42$).
+Agency Index ranged from $0.048$ at zero bias to $3.96$ at unit bias; KL divergence tracked proportionally ($0.049$--$4.05$).
+MDL was constant at $1.022$ across all noise levels, confirming that the noise parameter does not affect the description-length normalization---the Agency Index signal is entirely carried by the KL numerator.
+
+Critically, noise had negligible effect on Agency Index estimates: at bias $= 0.98$, the Agency Index range across all 50 noise conditions was $[1.242, 1.245]$, a coefficient of variation of $<$0.3\%.
+The phase transition is visible as super-linear acceleration in the bias--Agency Index curve.
+The second derivative peaks in the interval bias $\in [0.94, 1.00]$, with values rising from $98$ at bias $= 0.94$ to $544$ at bias $= 0.98$ and $5482$ at bias $= 1.00$.
+We identify the critical region $\tau_c \approx 0.94$--$0.98$, consistent with Prediction~1 (Section~\ref{sec:agency}).
+
+\section{Additional Discussion from Prior Draft}
+
+\paragraph{Limitations.}
+Our theoretical results apply to the idealized Turing-complete class of models;
+practical Transformers are finite approximations (Appendix~\ref{sec:hierarchy}).
+The observational equivalence conditions
+(Theorems~\ref{thm:softmax}--\ref{thm:combined}) are exact for the stated decoding
+mechanisms---softmax with temperature, top-$k$/nucleus truncation, and
+KL-projected RLHF---but do not cover all possible post-processing pipelines
+(e.g., constitutional AI, chain-of-thought monitoring, output-level safety
+classifiers). Monte Carlo validation uses synthetic distributions; generalization
+to real model outputs requires empirical confirmation.
+
+\paragraph{Mechanistic interpretability as an alternative threat model.}
+Our impossibility results assume the observer has access only to the output
+distribution $P(\cdot \mid x)$---the black-box or grey-box regime in which most
+external auditors, regulators, and downstream users operate. If an auditor has

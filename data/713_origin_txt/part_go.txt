@@ -1,0 +1,500 @@
+echo ""
+echo "1. Remote URL:"
+git remote -v
+echo ""
+echo "2. SSH to GitHub:"
+ssh -T git@github.com
+echo ""
+echo "3. Testing Git protocol:"
+GIT_TRACE=1 GIT_SSH_COMMAND="ssh -v" git ls-remote origin 2>&1 | head -20
+EOF
+
+chmod +x ~/test_git_ssh.sh
+cd obsidian-envyingbaby-theme
+~/test_git_ssh.sh
+```
+
+## **重要提示**
+
+1. **确保 URL 正确**：GitHub 的 SSH URL 格式必须是 `git@github.com:用户名/仓库名.git`
+2. **不要混合使用 HTTPS 和 SSH**：如果你克隆时用了 HTTPS，后续操作都会要求密码
+3. **钥匙串问题**：如果钥匙串中有旧的 HTTPS 凭证，Git 会优先使用它们
+
+**最简单直接的解决方案**：
+```bash
+# 1. 确保使用 SSH URL
+git remote set-url origin git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git
+
+# 2. 清除钥匙串凭证
+git credential-osxkeychain erase <<EOF
+host=github.com
+protocol=https
+EOF
+
+# 3. 测试
+ssh -T git@github.com
+git pull origin main
+```
+
+这样应该就能强制 Git 使用 SSH 而不是 HTTPS 了。
+ostensible_paradox@mothership obsidian-envyingbaby-theme % git remote -v
+origin	git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git (fetch)
+origin	git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git (push)
+很好！你的远程仓库已经正确配置为 SSH URL。问题出在 `credential.helper=osxkeychain` 这个配置上。让我们解决这个问题：
+
+## **问题诊断**
+你的仓库配置正确（使用 SSH URL），但 Git 仍在尝试使用钥匙串凭证。这是因为全局配置中有 `credential.helper=osxkeychain`。
+
+## **解决方案**
+
+### 1. **为当前仓库禁用凭证助手**
+```bash
+# 进入你的仓库目录
+cd ~/obsidian-envyingbaby-theme
+
+# 为这个仓库单独禁用凭证助手
+git config --local credential.helper ""
+```
+
+### 2. **测试 SSH 连接**
+```bash
+# 确保 SSH 正常工作
+ssh -T git@github.com
+
+# 应该看到成功消息：
+# Hi OstensibleParadox! You've successfully authenticated...
+```
+
+### 3. **测试 Git 操作**
+```bash
+# 尝试一个简单的 Git 操作
+git fetch origin
+
+# 或者尝试推送
+git push origin main
+```
+
+### 4. **如果还需要密码，清除现有凭证**
+```bash
+# 清除所有缓存的凭证
+git credential-cache exit
+
+# 清除 macOS 钥匙串中的 GitHub 凭证
+git credential-osxkeychain erase <<EOF
+host=github.com
+protocol=https
+EOF
+
+# 如果需要，也清除 SSH 的
+git credential-osxkeychain erase <<EOF
+host=github.com
+protocol=ssh
+EOF
+```
+
+### 5. **创建专门的 SSH 配置**
+```bash
+# 确保 SSH 配置正确
+cat > ~/.ssh/config << 'EOF'
+Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
+EOF
+
+# 设置正确的权限
+chmod 600 ~/.ssh/config
+```
+
+### 6. **强制 Git 使用 SSH**
+```bash
+# 添加这个配置确保 Git 总是使用 SSH 而不是 HTTPS
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+```
+
+### 7. **详细的调试**
+如果问题仍然存在，进行详细调试：
+
+```bash
+# 详细测试 SSH 连接
+GIT_SSH_COMMAND="ssh -v" git fetch origin 2>&1 | head -30
+
+# 或者使用 Git 的追踪
+GIT_TRACE=1 GIT_TRACE_PACKET=1 git fetch origin 2>&1 | grep -i "auth\|ssh\|credential"
+```
+
+## **备用方案：完全重置配置**
+
+如果以上都不行，可以尝试：
+
+```bash
+# 1. 备份当前配置
+cp ~/.gitconfig ~/.gitconfig.backup
+
+# 2. 暂时移除凭证助手配置
+git config --global --unset credential.helper
+
+# 3. 设置只使用 SSH
+git config --global url.git@github.com:.insteadOf https://github.com/
+
+# 4. 测试
+cd ~/obsidian-envyingbaby-theme
+git pull origin main
+```
+
+## **检查最终配置**
+```bash
+# 查看所有相关配置
+echo "=== Git Config ==="
+git config --list | grep -E "(credential|url|core)"
+
+echo -e "\n=== SSH Config ==="
+cat ~/.ssh/config
+
+echo -e "\n=== Remote URLs ==="
+git remote -v
+```
+
+## **最可能的解决方案**
+
+根据你的情况，这个命令组合应该能解决问题：
+
+```bash
+# 1. 清除所有缓存的凭证
+git credential-osxkeychain erase <<EOF
+host=github.com
+protocol=https
+EOF
+
+# 2. 为当前仓库禁用凭证助手
+git config --local credential.helper ""
+
+# 3. 强制 Git 使用 SSH 替代 HTTPS
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+# 4. 测试
+ssh -T git@github.com
+git fetch origin
+```
+
+**关键点**：你的 `credential.helper` 设置让 Git 优先使用钥匙串中的 HTTPS 凭证，即使你用的是 SSH URL。通过为当前仓库禁用这个设置，Git 就会正确使用 SSH 认证了。
+ostensible_paradox@mothership obsidian-envyingbaby-theme % git remote -v
+origin	git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git (fetch)
+origin	git@github.com:OstensibleParadox/obsidian-envyingbaby-theme.git (push)
+很好！你的远程仓库已经正确配置为 SSH URL。问题不是 URL 配置，而是其他原因。让我们继续排查：
+
+## **问题诊断**
+
+既然远程仓库已经是 SSH URL，但仍然要求密码，可能有以下几个原因：
+
+### 1. **检查 SSH 代理是否运行并加载了密钥**
+```bash
+# 检查 SSH 代理是否运行
+ps aux | grep ssh-agent
+
+# 检查已加载的密钥
+ssh-add -l
+
+# 如果没有密钥，添加它们
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+# 或者如果是 RSA 密钥
+# ssh-add --apple-use-keychain ~/.ssh/id_rsa
+```
+
+### 2. **检查 SSH 配置文件**
+```bash
+# 查看完整的 SSH 配置
+cat ~/.ssh/config
+
+# 如果没有配置，创建它
+echo "Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes" > ~/.ssh/config
+```
+
+### 3. **测试 SSH 连接并查看详细输出**
+```bash
+# 使用详细模式测试连接
+ssh -vvT git@github.com 2>&1 | tail -30
+```
+
+### 4. **验证 Git 操作时是否真的使用 SSH**
+```bash
+# 设置环境变量跟踪 Git 操作
+GIT_TRACE=1 git pull origin main 2>&1 | head -30
+```
+
+### 5. **清除可能干扰的 Git 配置**
+```bash
+# 检查是否有其他干扰配置
+git config --list --show-origin
+
+# 为当前仓库移除凭证助手
+git config --local --unset credential.helper
+
+# 检查全局配置中是否有强制 HTTPS 的设置
+git config --global --get url.https://github.com/.insteadof
+```
+
+### 6. **检查密钥权限**
+```bash
+# 确保密钥文件权限正确
+ls -la ~/.ssh/
+chmod 600 ~/.ssh/id_*
+chmod 644 ~/.ssh/id_*.pub
+chmod 700 ~/.ssh
+```
+
+### 7. **完整诊断脚本**
+```bash
+cat > ~/diagnose_git_ssh.sh << 'EOF'
+#!/bin/bash
+echo "=== Git SSH 诊断报告 ==="
+echo ""
+echo "1. 远程仓库 URL:"
+git remote -v
+echo ""
+echo "2. SSH 代理状态:"
+ssh-add -l
+echo ""
+echo "3. SSH 配置文件:"
+cat ~/.ssh/config 2>/dev/null || echo "没有 ~/.ssh/config 文件"
+echo ""
+echo "4. 密钥文件:"
+ls -la ~/.ssh/id_* 2>/dev/null || echo "没有找到密钥文件"
+echo ""
+echo "5. Git 配置相关项:"
+git config --list | grep -E "(credential|url|ssh)"
+echo ""
+echo "6. 测试 SSH 连接:"
+timeout 5 ssh -T git@github.com 2>&1 | grep -E "(successfully|authenticated|denied|password)"
+EOF
+
+chmod +x ~/diagnose_git_ssh.sh
+cd obsidian-envyingbaby-theme
+~/diagnose_git_ssh.sh
+```
+
+### 8. **可能的解决方案**
+
+**方案A：重启 SSH 代理**
+```bash
+# 杀死现有的 SSH 代理
+killall ssh-agent
+
+# 启动新的 SSH 代理
+eval "$(ssh-agent -s)"
+
+# 添加密钥
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+**方案B：手动指定 SSH 命令**
+```bash
+# 测试使用指定密钥
+GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git pull origin main
+```
+
+**方案C：检查是否是不同的密码**
+有时候你看到的"密码"提示可能是：
+1. SSH 密钥的密码（如果创建密钥时设置了）
+2. GitHub 账户密码（如果 SSH 配置有问题）
+3. 系统钥匙串解锁密码
+
+### 9. **创建新的 SSH 密钥对（如果其他方法都失败）**
+```bash
+# 备份现有密钥
+mkdir -p ~/.ssh/backup
+cp ~/.ssh/id_* ~/.ssh/backup/ 2>/dev/null
+
+# 生成新密钥
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_new -C "lucia.zhang.research@outlook.com"
+
+# 复制新公钥到剪贴板
+pbcopy < ~/.ssh/id_ed25519_new.pub
+
+# 添加到 SSH 配置
+echo "Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_new
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes" >> ~/.ssh/config
+
+# 添加到 ssh-agent
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_new
+```
+
+然后：
+1. 去 GitHub → Settings → SSH and GPG keys
+2. 点击 "New SSH key"
+3. 粘贴新公钥（`Cmd+V`）
+4. 保存
+
+**最后测试**：
+```bash
+ssh -T git@github.com
+git pull origin main
+```
+
+请运行诊断脚本并告诉我输出，这样我能更准确地判断问题所在。
+ostensible_paradox@mothership obsidian-envyingbaby-theme % ps aux | grep ssh-agent
+
+ostensible_paradox 61408   0.0  0.0 435300336   1104 s000  R+    3:16p.m.   0:00.00 grep ssh-agent
+ostensible_paradox 61236   0.0  0.0 435235360   3184   ??  S     3:03p.m.   0:00.03 /usr/bin/ssh-agent -l
+ostensible_paradox 61060   0.0  0.0 435296464   1600   ??  Ss    2:55p.m.   0:00.03 ssh-agent -s
+ostensible_paradox@mothership obsidian-envyingbaby-theme % ssh-add -l
+256 SHA256:O98ruWql7QAfhMBWsPum05pD17EJ0uy+lGWX/2CfzQE lucia.zhang.research@outlook.com (ED25519)
+ostensible_paradox@mothership obsidian-envyingbaby-theme %
+很好！SSH 代理正在运行，并且你的 SSH 密钥已经加载到代理中。现在的问题是为什么 Git 仍然要求密码。让我们继续深入排查：
+
+## **检查关键配置**
+
+### 1. **查看 SSH 配置文件**
+```bash
+cat ~/.ssh/config
+```
+
+### 2. **测试详细的 SSH 连接**
+```bash
+# 完整测试 SSH 连接
+ssh -vvT git@github.com 2>&1 | grep -A5 -B5 "Authentication succeeded\|Enter passphrase\|password:"
+```
+
+### 3. **检查 Git 具体在哪个步骤要求密码**
+```bash
+# 启用 Git 跟踪查看详细过程
+GIT_TRACE=1 GIT_CURL_VERBOSE=1 git pull origin main 2>&1 | head -50
+```
+
+### 4. **检查是否有其他 Git 配置干扰**
+```bash
+# 查看所有 Git 配置（包括本地和全局）
+git config --list
+
+# 查看配置来源
+git config --list --show-origin | grep -E "(credential|url|core\.sshCommand)"
+```
+
+### 5. **检查当前目录的 Git 配置**
+```bash
+# 查看仓库特定的配置
+git config --local --list
+
+# 如果没有本地配置，设置强制使用 SSH
+git config --local core.sshCommand "ssh -i ~/.ssh/id_ed25519"
+```
+
+## **可能的解决方案**
+
+### **方案A：强制 Git 使用 SSH 并忽略其他凭证**
+```bash
+# 为当前仓库设置 SSH 命令
+git config --local core.sshCommand "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+
+# 测试
+git pull origin main
+```
+
+### **方案B：检查是否是 SSH 密钥密码的问题**
+```bash
+# 测试是否每次都需要输入 SSH 密钥密码
+ssh -o BatchMode=no -T git@github.com
+```
+
+### **方案C：检查 macOS 钥匙串**
+```bash
+# 查看钥匙串中是否有 GitHub 相关的密码
+security find-internet-password -s github.com 2>/dev/null
+
+# 如果有，删除它们
+security delete-internet-password -s github.com 2>/dev/null
+```
+
+### **方案D：创建新的 SSH 配置**
+```bash
+# 备份现有配置
+cp ~/.ssh/config ~/.ssh/config.backup 2>/dev/null
+
+# 创建干净的配置
+cat > ~/.ssh/config << 'EOF'
+Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentitiesOnly yes
+  LogLevel ERROR
+EOF
+
+# 测试
+ssh -T git@github.com
+```
+
+### **方案E：使用环境变量覆盖**
+```bash
+# 临时测试
+export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+git pull origin main
+```
+
+## **诊断脚本**
+```bash
+cat > ~/debug_git.sh << 'EOF'
+#!/bin/bash
+echo "=== Git SSH 调试 ==="
+echo ""
+echo "1. 当前目录和仓库状态:"
+pwd
+git status --short
+echo ""
+echo "2. SSH 配置:"
+cat ~/.ssh/config 2>/dev/null || echo "无 SSH 配置"
+echo ""
+echo "3. 测试 SSH 连接 (详细):"
+timeout 3 ssh -vT git@github.com 2>&1 | tail -20
+echo ""
+echo "4. 模拟 Git 操作:"
+GIT_SSH_COMMAND="ssh -v" git ls-remote origin 2>&1 | grep -E "(fatal|error|Enter|password|success)" | head -10
+EOF
+
+chmod +x ~/debug_git.sh
+cd obsidian-envyingbaby-theme
+~/debug_git.sh
+```
+
+## **如果还是要求密码，尝试这个**
+
+可能是 SSH 代理没有正确传递密钥：
+
+```bash
+# 重启 SSH 代理
+killall ssh-agent
+eval "$(ssh-agent -s)"
+
+# 重新添加密钥（不保存到钥匙串）
+ssh-add ~/.ssh/id_ed25519
+
+# 测试
+ssh -T git@github.com
+
+# 然后尝试 Git 操作
+git pull origin main
+```
+
+或者，如果你在创建密钥时设置了密码，可以暂时移除密码：
+```bash
+# 备份原密钥
+cp ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.backup
+
+# 移除密钥密码（留空）
+ssh-keygen -p -f ~/.ssh/id_ed25519

@@ -25,6 +25,8 @@ tree to enter first.
 
 ## Module Map
 
+- `FiniteQuerySandbox.DualCertificate`
+  Axiomatic core for the structural reductions of the static cut-sum bound and dynamic DPI bounds.
 - `FiniteQuerySandbox.Screenability`
   Exact deterministic-screenability core for the internal route, including
   `projection_determined`, `projection_same_trace_eq`,
@@ -34,6 +36,8 @@ tree to enter first.
   `ε > 0` wrapper-level surrogate using predictability rather than entropy.
 - `FiniteQuerySandbox.Impossibility`
   Finite-query soundness/completeness impossibility core.
+- `FiniteQuerySandbox.SemanticClosureIff`
+  Semantic closure and encoding-insensitivity equivalence.
 - `FiniteQuerySandbox.CoveringBound`
   Pointwise covering-to-CFSG bound and high-probability lift.
 - `FiniteQuerySandbox.PACBounds`
