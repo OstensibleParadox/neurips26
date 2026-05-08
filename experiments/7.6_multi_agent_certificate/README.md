@@ -38,12 +38,13 @@ python experiments/7.6_multi_agent_certificate/run_multi_agent_certificate.py \
   --out-dir data/processed/multi_agent_certificate_pilot
 ```
 
-Full run:
+Full run (parallel workers, oracle tags mocked as upper-bound):
 
 ```bash
 python experiments/7.6_multi_agent_certificate/run_multi_agent_certificate.py \
   --n-per-class 200 \
   --k-samples 8 \
+  --workers 3 \
   --out-dir data/processed/multi_agent_certificate
 ```
 

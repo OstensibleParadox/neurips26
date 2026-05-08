@@ -1,65 +1,45 @@
 # Experiment 5: Diffusion-LM Dynamic Certificate
 
 Purpose: extend the dual-certificate framework beyond ReAct scratchpads by
-testing whether an intermediate LLaDA denoising latent has measurable decision
-relevance for tool selection.
+profiling $\delta_\text{act}^\text{LB}$ across the temporal dimension of LLaDA's
+$K$-step denoising trajectory.
 
 ## Design
 
 - Target model: local `LLaDA-8B-Instruct` diffusion LM.
 - Visible trace: user tool-selection prompt and final tool-token distribution.
-- Hidden channel: intermediate denoising block activation at a chosen diffusion
-  step and transformer layer.
-- Intervention certificate: inject Gaussian activation noise at the hidden
-  channel and estimate the JS shift in final tool logits.
-- Replay/ablation certificate: mask the hidden activation at the same channel
-  and estimate the same JS shift.
+- Hidden channel: layer-1 block activation at intermediate denoising steps.
+- Temporal profiling: Gaussian perturbation ($\sigma{=}5.0$) applied at steps
+  $\{2,4,6,8,10\}$; layer 32 perturbation as specificity control.
+- $n{=}20$ trajectories per step, trajectory-block bootstrap with $1{,}000$
+  resamples.
 
-The script follows the public LLaDA masked-diffusion sampling loop. It keeps the
-final action token masked until the last step, so every condition is compared at
-the same final tool slot.
+The predicted pattern is an inverted-U: $\delta_\text{act}^\text{LB}$ near zero
+at step 2 (noise-dominated), peaks at steps 4--6 (semantic commitment), decays
+at step 10 (token refinement). Control layer shows lower, flatter profile.
 
 ## Run
 
-Pilot:
-
 ```bash
 python experiments/7.5_diffusion_certificate/run_llada_intervention.py \
-  --model /Users/ostensible_paradox/models/LLaDA-8B-Instruct \
+  --model path/to/LLaDA-8B-Instruct \
   --device auto \
   --dtype bfloat16 \
-  --n-samples 5 \
+  --n-samples 20 \
   --steps 10 \
   --scratch-tokens 8 \
   --layer 1 \
-  --intervention-step 9 \
+  --control-layer 32 \
+  --probe-steps 2,4,6,8,10 \
   --perturbation gaussian:5.0 \
-  --perturbation mask:1.0 \
-  --out data/processed/diffusion_certificate/llada_intervention_k10_final.json
-```
-
-Full rebuttal run:
-
-```bash
-python experiments/7.5_diffusion_certificate/run_llada_intervention.py \
-  --model /Users/ostensible_paradox/models/LLaDA-8B-Instruct \
-  --device auto \
-  --dtype bfloat16 \
-  --n-samples 100 \
-  --steps 10 \
-  --scratch-tokens 8 \
-  --layer 1 \
-  --intervention-step 9 \
-  --perturbation gaussian:5.0 \
-  --perturbation mask:1.0 \
-  --out data/processed/diffusion_certificate/llada_intervention_k10_final_full.json
+  --out data/processed/diffusion_certificate/llada_temporal_k10.json
 ```
 
 ## Output
 
-The JSON output contains one entry per perturbation:
+The JSON output contains per-step results for target and control layers:
 
-- `js_divergence_bits`: empirical lower-bound certificate.
+- `js_divergence_bits`: empirical lower-bound certificate at each step.
 - `ci_95_bits`: trajectory-block bootstrap interval.
 - `wild_mean_dist` and `perturbed_mean_dist`: final distributions over
   `search`, `calculator`, `email`, `calendar`, `weather`.

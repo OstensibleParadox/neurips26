@@ -330,7 +330,7 @@ def main() -> None:
     parser.add_argument("--model", required=True, help="Path to LLaDA model")
     parser.add_argument("--device", default="auto")
     parser.add_argument("--dtype", default="bfloat16", choices=["auto", "bfloat16", "float16", "float32"])
-    parser.add_argument("--n-samples", type=int, default=30)
+    parser.add_argument("--n-samples", type=int, default=20)
     parser.add_argument("--steps", type=int, default=10)
     parser.add_argument("--scratch-tokens", type=int, default=8)
     parser.add_argument("--layer", type=int, default=1)

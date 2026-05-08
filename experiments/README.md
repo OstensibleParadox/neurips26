@@ -212,7 +212,7 @@ python experiments/7.5_diffusion_certificate/run_llada_intervention.py \
     --model path/to/LLaDA-8B-Instruct \
     --device auto \
     --dtype bfloat16 \
-    --n-samples 100 \
+    --n-samples 20 \
     --steps 10 \
     --scratch-tokens 8 \
     --layer 1 \
@@ -222,7 +222,7 @@ python experiments/7.5_diffusion_certificate/run_llada_intervention.py \
     --out data/processed/diffusion_certificate/llada_temporal_k10.json
 ```
 
-The Gaussian perturbation is the intervention certificate. The full-mask perturbation is the replay/ablation certificate: the visible prompt is held fixed while the intermediate denoising latent at the audited step is removed. Output reports JS divergence in bits over the final tool-token distribution.
+Gaussian perturbation at layer 1 is the intervention certificate, profiled across denoising steps $\{2,4,6,8,10\}$. Layer 32 perturbation serves as a specificity control. Output reports per-step JS divergence in bits with bootstrap CIs over the final tool-token distribution.
 
 ---
 
@@ -254,18 +254,20 @@ python experiments/7.3_intervention/run_dormant_active.py \
 python experiments/7.4_synthetic_gt/run_synthetic.py \
     --n-trajectories 1000 --out-dir data/processed/synthetic
 
-# 5. Diffusion-LM dynamic certificate
+# 5. Diffusion-LM temporal certificate profile
 python experiments/7.5_diffusion_certificate/run_llada_intervention.py \
     --model path/to/LLaDA-8B-Instruct \
-    --n-samples 100 \
+    --n-samples 20 \
     --steps 10 \
     --probe-steps 2,4,6,8,10 \
+    --control-layer 32 \
     --out data/processed/diffusion_certificate/llada_temporal_k10.json
 
 # 6. Multi-agent private-report dynamic certificate
 python experiments/7.6_multi_agent_certificate/run_multi_agent_certificate.py \
     --n-per-class 200 \
     --k-samples 8 \
+    --workers 3 \
     --out-dir data/processed/multi_agent_certificate
 ```
 
@@ -282,7 +284,7 @@ Files marked **included** ship in this archive. Files marked **generated** are p
 | `data/processed/proxy_ablation.json` | included | Resolution ablation results | Table 2 |
 | `data/processed/proxy_dormant_active.json` | included | Dormant/active proxy split | Table 2 |
 | `data/processed/intervention/*.json` | included | Intervention & replay results | Tables 3–4 |
-| `data/processed/diffusion_certificate/*.json` | generated | LLaDA latent intervention/replay results | §5.6 |
+| `data/processed/diffusion_certificate/llada_temporal_k10.json` | included | LLaDA temporal certificate profile (per-step JS divergence) | §5.6 |
 | `data/processed/multi_agent_certificate/*` | generated | Multi-agent private-report reports, controller samples, JS summary | §5.7 |
 | `data/processed/probe_pairs.pt` | generated | $(\Phi_t, Z_t, A_t)$ tensor pairs | §5.2 CE-diff estimation |
 | `data/processed/probe_meta.json` | generated | Probe metadata (labels, dims) | §5.2 |

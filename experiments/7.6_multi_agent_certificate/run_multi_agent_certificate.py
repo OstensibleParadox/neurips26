@@ -20,8 +20,10 @@ import time
 import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
+from threading import Lock
 from typing import Iterable
 
 try:
@@ -262,65 +264,89 @@ def generate_reports(args: argparse.Namespace, cfg: OllamaConfig) -> Path:
     tasks = read_jsonl(Path(args.tasks_path))
     reports_path = Path(args.out_dir) / "reports.jsonl"
     banned_terms = [term.strip().lower() for term in args.banned_terms.split(",") if term.strip()]
-    records = []
-    for i, task in enumerate(tasks):
-        seed = args.seed + stable_hash(task["task_id"]) % 100000
-        status = "ok"
-        raw_response = ""
-        report = ""
-        leaks: list[str] = []
-        attempts = 1 if cfg.mock else args.report_attempts
-        for attempt in range(1, attempts + 1):
-            if cfg.mock:
-                raw_response = json.dumps({"report": mock_report(task)})
-            else:
-                system, user = build_worker_prompt(task, banned_terms)
-                raw_response = ollama_chat(
-                    model=cfg.worker_model,
-                    system=system,
-                    user=user,
-                    temperature=cfg.worker_temperature,
-                    seed=seed + attempt,
-                    num_predict=cfg.worker_num_predict,
-                    timeout=cfg.timeout,
-                )
-            report = parse_report(raw_response)
-            leaks = leak_terms(report, banned_terms)
-            if not leaks:
-                status = "ok"
-                break
-            status = "leak"
+    lock = Lock()
+    n_leaking = 0
+    total = 0
 
-        records.append(
-            {
-                "task_id": task["task_id"],
-                "tool_label": task["tool_label"],
-                "worker_model": "mock" if cfg.mock else cfg.worker_model,
-                "report": report,
-                "raw_response": raw_response,
-                "status": status,
-                "leak_terms": leaks,
-                "attempts": attempt,
-                "seed": seed,
-            }
-        )
-        if (i + 1) % args.progress_every == 0 or i + 1 == len(tasks):
-            print(f"reports {i + 1}/{len(tasks)}", file=sys.stderr, flush=True)
+    def _write_one(record: dict) -> None:
+        with lock:
+            with reports_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=True) + "\n")
 
-    write_jsonl(records, reports_path)
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        futures = {}
+        for i, task in enumerate(tasks):
+            seed = args.seed + stable_hash(task["task_id"]) % 100000
+            attempts = 1 if cfg.mock else args.report_attempts
+            fut = pool.submit(_generate_one_report, task, seed, attempts, cfg, banned_terms, args.progress_every)
+            futures[fut] = (i, task)
+
+        for fut in as_completed(futures):
+            i, task = futures[fut]
+            record = fut.result()
+            _write_one(record)
+            total += 1
+            if record["leak_terms"]:
+                n_leaking += 1
+            if total % args.progress_every == 0 or total == len(tasks):
+                print(f"reports {total}/{len(tasks)}", file=sys.stderr, flush=True)
+
     audit = {
-        "n_reports": len(records),
-        "n_leaking_reports": sum(1 for r in records if r["leak_terms"]),
-        "leak_rate": (
-            sum(1 for r in records if r["leak_terms"]) / len(records) if records else 0.0
-        ),
+        "n_reports": total,
+        "n_leaking_reports": n_leaking,
+        "leak_rate": n_leaking / total if total else 0.0,
         "banned_terms": banned_terms,
     }
     (Path(args.out_dir) / "report_leak_audit.json").write_text(
         json.dumps(audit, indent=2), encoding="utf-8"
     )
-    print(f"wrote {len(records)} reports -> {reports_path}")
+    print(f"wrote {total} reports -> {reports_path}")
     return reports_path
+
+
+def _generate_one_report(
+    task: dict,
+    seed: int,
+    attempts: int,
+    cfg: OllamaConfig,
+    banned_terms: list[str],
+    progress_every: int,
+) -> dict:
+    status = "ok"
+    raw_response = ""
+    report = ""
+    leaks: list[str] = []
+    for attempt in range(1, attempts + 1):
+        if cfg.mock:
+            raw_response = json.dumps({"report": mock_report(task)})
+        else:
+            system, user = build_worker_prompt(task, banned_terms)
+            raw_response = ollama_chat(
+                model=cfg.worker_model,
+                system=system,
+                user=user,
+                temperature=cfg.worker_temperature,
+                seed=seed + attempt,
+                num_predict=cfg.worker_num_predict,
+                timeout=cfg.timeout,
+            )
+        report = parse_report(raw_response)
+        leaks = leak_terms(report, banned_terms)
+        if not leaks:
+            status = "ok"
+            break
+        status = "leak"
+    return {
+        "task_id": task["task_id"],
+        "tool_label": task["tool_label"],
+        "worker_model": "mock" if cfg.mock else cfg.worker_model,
+        "report": report,
+        "raw_response": raw_response,
+        "status": status,
+        "leak_terms": leaks,
+        "attempts": attempt,
+        "seed": seed,
+    }
 
 
 def index_reports(reports: list[dict]) -> dict[str, dict]:
@@ -419,6 +445,8 @@ def mock_action(private_report: str, seed: int) -> str:
     return json.dumps({"action": "search" if seed % 2 else "calculator"})
 
 
+_ORACLE_CONDITIONS = {"oracle_tag_correct", "oracle_tag_flipped"}
+
 def generate_actions(args: argparse.Namespace, cfg: OllamaConfig) -> Path:
     tasks = read_jsonl(Path(args.tasks_path))
     reports = read_jsonl(Path(args.reports_path))
@@ -434,53 +462,77 @@ def generate_actions(args: argparse.Namespace, cfg: OllamaConfig) -> Path:
     ]
 
     actions_path = Path(args.out_dir) / "actions.jsonl"
-    records = []
-    total = len(tasks) * len(conditions) * args.k_samples
-    done = 0
+    # Truncate for idempotent restart.
+    actions_path.write_text("", encoding="utf-8")
+
+    work_items = []
     for task in tasks:
         for condition in conditions:
             for sample_index in range(args.k_samples):
-                seed = (
-                    args.seed
-                    + stable_hash(f"{task['task_id']}:{condition}:{sample_index}") % 1000000
-                )
-                private_report, source_task_id = report_for_condition(
-                    condition, task, report_by_task, partners, seed
-                )
-                if cfg.mock:
-                    raw_response = mock_action(private_report, seed)
-                else:
-                    system, user = build_controller_prompt(private_report)
-                    raw_response = ollama_chat(
-                        model=cfg.controller_model,
-                        system=system,
-                        user=user,
-                        temperature=cfg.controller_temperature,
-                        seed=seed,
-                        num_predict=cfg.controller_num_predict,
-                        timeout=cfg.timeout,
-                    )
-                action, parse_status = parse_action(raw_response)
-                records.append(
-                    {
-                        "task_id": task["task_id"],
-                        "true_label": task["tool_label"],
-                        "condition": condition,
-                        "sample_index": sample_index,
-                        "controller_model": "mock" if cfg.mock else cfg.controller_model,
-                        "source_report_task_id": source_task_id,
-                        "private_report": private_report,
-                        "raw_response": raw_response,
-                        "action": action,
-                        "parse_status": parse_status,
-                        "seed": seed,
-                    }
-                )
-                done += 1
-                if done % args.progress_every == 0 or done == total:
-                    print(f"actions {done}/{total}", file=sys.stderr, flush=True)
-    write_jsonl(records, actions_path)
-    print(f"wrote {len(records)} controller samples -> {actions_path}")
+                work_items.append((task, condition, sample_index))
+    total = len(work_items)
+
+    lock = Lock()
+    done = 0
+
+    def _write_one(record: dict) -> None:
+        with lock:
+            with actions_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=True) + "\n")
+
+    def _process(item: tuple) -> dict:
+        task, condition, sample_index = item
+        seed = (
+            args.seed
+            + stable_hash(f"{task['task_id']}:{condition}:{sample_index}") % 1000000
+        )
+        private_report, source_task_id = report_for_condition(
+            condition, task, report_by_task, partners, seed
+        )
+        # Oracle tags are appendix upper-bound — mock them even in real runs.
+        use_mock = cfg.mock or condition in _ORACLE_CONDITIONS
+        if use_mock:
+            raw_response = mock_action(private_report, seed)
+        else:
+            system, user = build_controller_prompt(private_report)
+            raw_response = ollama_chat(
+                model=cfg.controller_model,
+                system=system,
+                user=user,
+                temperature=cfg.controller_temperature,
+                seed=seed,
+                num_predict=cfg.controller_num_predict,
+                timeout=cfg.timeout,
+            )
+        action, parse_status = parse_action(raw_response)
+        return {
+            "task_id": task["task_id"],
+            "true_label": task["tool_label"],
+            "condition": condition,
+            "sample_index": sample_index,
+            "controller_model": (
+                "mock_oracle" if condition in _ORACLE_CONDITIONS
+                else "mock" if cfg.mock
+                else cfg.controller_model
+            ),
+            "source_report_task_id": source_task_id,
+            "private_report": private_report,
+            "raw_response": raw_response,
+            "action": action,
+            "parse_status": parse_status,
+            "seed": seed,
+        }
+
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        futures = [pool.submit(_process, item) for item in work_items]
+        for fut in as_completed(futures):
+            record = fut.result()
+            _write_one(record)
+            done += 1
+            if done % args.progress_every == 0 or done == total:
+                print(f"actions {done}/{total}", file=sys.stderr, flush=True)
+
+    print(f"wrote {done} controller samples -> {actions_path}")
     return actions_path
 
 
@@ -710,9 +762,10 @@ def main() -> None:
     parser.add_argument("--worker-temperature", type=float, default=0.2)
     parser.add_argument("--controller-temperature", type=float, default=0.7)
     parser.add_argument("--worker-num-predict", type=int, default=140)
-    parser.add_argument("--controller-num-predict", type=int, default=24)
+    parser.add_argument("--controller-num-predict", type=int, default=12)
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--report-attempts", type=int, default=3)
+    parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--progress-every", type=int, default=50)
     parser.add_argument("--banned-terms", default=",".join(DEFAULT_BANNED_TERMS))
     parser.add_argument(
