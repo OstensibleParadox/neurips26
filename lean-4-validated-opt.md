@@ -8,20 +8,17 @@ This is a third-pass rewrite grounded in actual Lean file content and paper-file
 
 ## 0. Verified Facts From The Codebase
 
-**Four axioms remain** (confirmed by `grep -rn "^axiom"` on all Lean files):
+**One axiom remains** (confirmed by `grep -rn "^axiom"` on all Lean files):
 
 | # | Axiom | File | Line | Role |
 |---|-------|------|------|------|
-| 1 | `chain_rule` | DualCertificate.lean | 104 | Trace-gap identity for Prop 1 |
-| 2 | `cut_set_bound` | DualCertificate.lean | 117 | Universal cut-capacity bound |
-| 3 | `condMarkov` | InfoTheory.lean | 119 | Conditional Markov predicate |
-| 4 | `cond_dpi` | InfoTheory.lean | 122 | Conditional DPI inequality |
+| 1 | `cond_dpi` | InfoTheory.lean | 129 | Conditional DPI inequality |
 
 **`IdentifiabilityGap.lean` is axiom-free** (verified). It uses only `entropyOf`, `negMulLog2`, finite-sum algebra, and `ring`. Paper claim stands.
 
 **`Screenability.lean` is axiom-free** (verified). It proves `no_eis_autoregressive` from `DeterministicScreen` structure alone.
 
-**`marginalXYWMass` does NOT exist** (verified by `grep` with zero results). The plan's PR 3 correctly identifies this gap.
+**`marginalXYWMass` does exist** (implemented in PR 3).
 
 ---
 
@@ -296,17 +293,17 @@ The metric-covering extension (PR 7) is not on the axiom-removal critical path. 
 
 ## 13. Optimized Milestones
 
-| # | What | Axiom Impact | Risk | Max Time | Depends On |
-|---|------|--------------|------|----------|------------|
-| 0 | Reconcile paper + experiments + Lean claims | (none) | Low | 2 days | -- |
-| 1 | Prove `chain_rule` as theorem | 4 -> 3 | Low | 1 day | -- |
-| 2 | Restructure `cut_set_bound` into explicit-premise theorem | 3 -> 3 (cleaner) | Low-Med | 2 days | -- |
-| 3 | Define `condMarkov` as `def`, add `marginalXYWMass` | 3 -> 3 (cleaner) | Low-Med | 1 day | -- |
-| 4a | Prove `entropy_nonneg`, `pmf_le_one`, marginal lemmas | 3 -> 3 | Low | 2 days | -- |
-| 4b | Prove `kl_nonneg` and `entropy_le_log_card` | 3 -> 2 (or 3 -> 2 with 1 ax) | **High** | 3 weeks | 4a |
-| 5 | Prove `quantized_entropy_bound` | 2 -> 2 | Med | 2 days | 4b |
-| 6 | Prove `cond_dpi` as theorem | 2 -> 1 (or 3ax -> 2ax with 4b ax) | **High** | 2 weeks | 3, 4b |
-| 7 | Metric covering extension | Stretch | Med-High | -- | -- |
+| # | What | Axiom Impact | Risk | Max Time | Depends On | Status |
+|---|------|--------------|------|----------|------------|--------|
+| 0 | Reconcile paper + experiments + Lean claims | (none) | Low | 2 days | -- | **Done** |
+| 1 | Prove `chain_rule` as theorem | 4 -> 3 | Low | 1 day | -- | **Done** |
+| 2 | Restructure `cut_set_bound` into explicit-premise theorem | 3 -> 3 (cleaner) | Low-Med | 2 days | -- | **Done** |
+| 3 | Define `condMarkov` as `def`, add `marginalXYWMass` | 3 -> 3 (cleaner) | Low-Med | 1 day | -- | **Done** |
+| 4a | Prove `entropy_nonneg`, `pmf_le_one`, marginal lemmas | 3 -> 3 | Low | 2 days | -- | **Done** |
+| 4b | Prove `kl_nonneg` and `entropy_le_log_card` | 3 -> 2 (or 3 -> 2 with 1 ax) | **High** | 3 weeks | 4a | Pending |
+| 5 | Prove `quantized_entropy_bound` | 2 -> 2 | Med | 2 days | 4b | Pending |
+| 6 | Prove `cond_dpi` as theorem | 2 -> 1 (or 3ax -> 2ax with 4b ax) | **High** | 2 weeks | 3, 4b | Pending |
+| 7 | Metric covering extension | Stretch | Med-High | -- | -- | Stretch |
 
 **Best case**: 4 axioms -> 1 (just `kl_nonneg` as a standard analytic axiom).
 **Contingency (PR 4b stalls)**: 4 axioms -> 2 (chain_rule + cut_set_bound removed, condMarkov defined; `kl_nonneg` + `cond_dpi` remain as axioms).
@@ -316,11 +313,22 @@ This is still a meaningful reduction: from 4 domain-specific axioms to at most 2
 
 ## 14. Highest-Value Immediate Actions
 
-1. **Run PR 0 NOW.** The experiment READMEs are inconsistent with the paper. This is the highest review-surface risk.
-2. **Run PR 1 next.** One file, one theorem, `ring`. Validates the axiom-removal workflow.
-3. **Run PR 3 before PR 4b.** `condMarkov` as a `def` is trivially correct and removes a `Prop` axiom regardless of the heavy entropy proofs.
-4. **Do NOT start PR 7.** Remove from the critical path.
-5. **Decide on the PR 4b contingency** before starting it: if `kl_nonneg` is not proved within 2 weeks, axiomatize it with a TODO.
+*(PRs 0, 1, 2, and 3 have been successfully completed).*
+
+**PR 4a status (verified in code):**
+- `negMulLog2_nonneg` — proved at `InfoTheory.lean:45`
+- `pmf_le_one` — proved at `InfoTheory.lean:60`
+- `entropy_nonneg` — proved at `InfoTheory.lean:67`
+- `marginalLeftMass_nonneg`, `marginalRightMass_nonneg` — proved at `InfoTheory.lean:80,84`
+- `marginalLeftMass_sum_one`, `marginalRightMass_sum_one` — proved at `InfoTheory.lean:88,94`
+- `marginalLeftMass_le_one` — proved at `InfoTheory.lean:101`
+- `marginalRightMass_le_one` — proved at `InfoTheory.lean:108`
+- **PR 4a: All lemmas proven and compiled. Full done.**
+
+**Next actions:**
+1. **Start PR 4b.** Prove `kl_nonneg` and `entropy_le_log_card`. This is the new bottleneck. Initial attempt written but contains build errors; needs fixing.
+2. **Decide on the PR 4b contingency** before investing significant time: if `kl_nonneg` is not proved within 2 weeks, axiomatize it with a TODO.
+3. **Do NOT start PR 7.** Remove from the critical path.
 
 ---
 
