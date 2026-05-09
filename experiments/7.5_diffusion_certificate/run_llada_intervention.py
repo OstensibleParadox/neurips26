@@ -334,7 +334,7 @@ def main() -> None:
     parser.add_argument("--steps", type=int, default=10)
     parser.add_argument("--scratch-tokens", type=int, default=8)
     parser.add_argument("--layer", type=int, default=1)
-    parser.add_argument("--control-layer", type=int, default=32)
+    parser.add_argument("--control-layer", type=int, default=31, help="LLaDA-8B-Instruct has 32 blocks (0-31)")
     parser.add_argument("--probe-steps", type=str, default="2,4,6,8,10", help="Comma-separated 1-based steps")
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--seed", type=int, default=42)

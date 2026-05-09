@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Condition & $\delta_\text{act}^\text{LB}$ (JS bits) & 95\% CI (bits) \\
+\midrule
+Neutral replay & $0.358$ & $[0.324,\ 0.392]$ \\
+Counterfactual evidence & $0.901$ & $[0.873,\ 0.928]$ \\
+Same-class shuffle & $0.084$ & $[0.060,\ 0.109]$ \\
+Oracle tag upper-bound & $1.000$ & $[1.000,\ 1.000]$ \\
+\bottomrule
+\end{tabular}
+\caption{Multi-agent private-report dynamic certificate. Controller action distributions are sampled with $k=8$ per task over $n=400$ tasks. The oracle-tag row is an appendix-style upper bound; the main evidence row is the counterfactual evidence intervention.}
+\label{tab:multi-agent-dynamic}
+\end{table}

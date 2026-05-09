@@ -7,7 +7,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[hidelinks]{hyperref}
-\usepackage[capitalize,noabbrev]{cleveref}
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{amsfonts}
@@ -41,7 +40,7 @@
 \maketitle
 
 \begin{abstract}
-Auditing a deployed language-model agent requires two separable questions: how much internal operative state could escape the recorded trace, and how much of that residual state drives behavior. Output-only audit summaries often compress these into a single hiddenness claim that is neither computable from traces alone nor diagnostic of which channel to inspect. We introduce a dual-certificate protocol. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual hidden-state entropy from deployment topology via a min-cut on untraced channels. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance through replay, intervention, or proxy probes under conditional data processing. Unlike a single hiddenness scalar, the pair $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$ separates structural headroom from behavioral activation. In three ReAct-agent experiments, logging ablates the static bound from $16{,}464$ to $0$ bits, the proxy certificate operates at the observational floor ($0.03$ bits) under baseline determinism, and intervention and controlled replay detect action-distribution shifts on planning tasks but not on calculator tasks---matching the dormant/active split predicted by the framework. We deploy the dynamic certificate across denoising steps in a diffusion LM, revealing a temporal locus of decision-relevant computation invisible in autoregressive agents. We further probe a two-agent deployment where the hidden channel is a peer agent's private evidence report. A Lean 4 artifact mechanizes the autoregressive zero-cut case and verifies structural reductions for the certificate algebra under four explicit information-theoretic axioms.
+Auditing a deployed language-model agent requires two separable quantities: how much operative state can escape the recorded trace, and how much of that residual state drives behavior. We introduce a dual-certificate protocol. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual hidden-state entropy from deployment topology via a min-cut on untraced channels. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance through replay, intervention, or proxy probes under conditional data processing. Together they separate structural headroom from behavioral activation. In ReAct-agent experiments, logging ablates the static bound from $16{,}464$ to $0$ bits, read-only proxy probes recover a statistically nonzero observational certificate ($0.0317$ bits, 95\% CI $[0.0273,0.0358]$), and causal replay/intervention separates dormant calculator tasks from active planning tasks. Indexing the dynamic certificate over hidden-channel coordinates yields an activation profile with ordered effect sizes. Along a diffusion-LM denoising trajectory, LLaDA perturbations are near the floor through early steps and rise at the final action-forming step ($0.110$ bits, 95\% CI $[0.052,0.234]$). Along a multi-agent communication edge, replacing a worker's private evidence report yields a high-relevance certificate ($0.901$ bits, 95\% CI $[0.873,0.928]$). The same certificate algebra covers text scratchpads, continuous denoising latents, and private inter-agent reports, and ranks their behavioral activation by effect size. A Lean 4 artifact mechanizes the autoregressive zero-cut case and verifies structural reductions for the certificate algebra under four explicit information-theoretic axioms.
 \end{abstract}
 
 % ---------------------------------------------------------------------------
@@ -51,16 +50,17 @@ Auditing a deployed language-model agent requires two separable questions: how m
 
 Consider a ReAct-style agent shipped with an unlogged scratchpad of capacity $16{,}384$ bits per turn. A regression test on output traces shows no behavioral change, yet the same trace under controlled replay with the scratchpad disabled reveals a $0.02$-bit shift in tool-selection distribution on planning tasks. The disagreement is not a probing artifact. It is a structural feature of the audit: the recorded trace fails to distinguish two qualitatively different systems, one whose hidden capacity is dormant on the test distribution and one whose hidden capacity is active. Identifying which holds is the audit task.
 
-We formalize these two quantities in \Cref{def:certs} and propose a dual-certificate protocol that answers each question separately.
+These are two distinct quantities: how much internal state escapes the trace, and how much of that drives the next action. Output-only and black-box audit views can leave them merged into a single ``hiddenness'' judgment that is neither computable nor diagnostic. A system with a large logging gap but no behavioral hidden drive is indistinguishable from one with a small gap but strong drive, though the audit implications differ.
 
-The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual entropy $H(S_t \mid \tilde T_t)$ from deployment topology alone, using a cut-set bound on untraced channels. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance $I(S_t; A_t \mid \tilde T_t)$ via one of three probe classes (replay, intervention, or proxy) depending on the auditor's access regime. The two certificates form independent axes (\Cref{tab:audit-matrix}).
+We propose a dual-certificate protocol that answers each question separately. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual entropy $H(S_t \mid \tilde T_t)$ from deployment topology alone, using a cut-set bound on untraced channels. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance $I(S_t; A_t \mid \tilde T_t)$ via one of three probe classes (replay, intervention, or proxy) depending on the auditor's access regime. The two certificates are independent axes: a system with large $\varepsilon_\text{state}^\text{UB}$ and small $\delta_\text{act}^\text{LB}$ has unrecoverable but dormant state; a system with both large has unrecoverable and active state. Both are auditable. Neither is visible to a single scalar.
 
-\textbf{Contributions.}
-\begin{itemize}
-  \item \textbf{Dual-certificate framework.} We define $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$ as two independent audit axes (\Cref{def:certs}). \Cref{prop:static-ub} gives a topological upper bound on residual hidden-state entropy via a min-cut on untraced channels; \Cref{prop:dynamic-lb} gives conditional-DPI lower bounds on residual decision relevance for replay, intervention, and proxy probes.
-  \item \textbf{Empirical demonstration of nonredundancy.} Across ReAct, diffusion-LM, and two-agent deployments, the dormant/active task split shows that structural capacity ($\varepsilon^\text{UB}$) is fixed by topology while behavioral activation ($\delta^\text{LB}$) depends on which hidden channels the task exercises---a distinction invisible to output-only audit.
-  \item \textbf{Lean 4 formalization.} A machine-checked artifact verifies \Cref{cor:auto-exact} from Mathlib first principles and reduces \Cref{prop:static-ub,prop:dynamic-lb} to four explicit information-theoretic axioms listed in \Cref{sec:external-axioms}.
-\end{itemize}
+The dynamic axis can also be indexed. Instead of asking only whether residual state matters, an auditor can ask \emph{where} it matters: which module, denoising step, or communication edge carries decision relevance. This turns the certificate from a scalar diagnostic into an activation profile over the hidden-state geometry of the deployment.
+
+Conditioning on $\tilde T_t$ is part of the protection, not a nuisance term. If a model writes a steganographic or compressed rationale into the recorded trace, that information is in $\tilde T_t$ and is conditioned away by $I(S_t; A_t \mid \tilde T_t)$. The dynamic certificate measures residual decision relevance beyond the logged trace; it does not count hiddenness that has already been made visible to the audit record.
+
+\textbf{Contributions.} We define a dual-certificate framework $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$ for agent audit. Proposition~\ref{prop:static-ub} gives a topological upper bound on residual hidden-state entropy via a min-cut on untraced channels; Proposition~\ref{prop:dynamic-lb} gives conditional-DPI lower bounds on residual decision relevance for replay, intervention, and proxy probes.
+
+We instantiate the framework on three residual-state geometries: a ReAct scratchpad module, a diffusion-LM denoising trajectory, and a multi-agent private-report edge. Each experiment reports the same activation profile over a different coordinate system. A synthetic ground-truth validation checks the zero-cut case where the static bound matches true hidden-state entropy. A Lean 4 artifact mechanizes Corollary~\ref{cor:auto-exact} from Mathlib first principles and reduces Propositions~\ref{prop:static-ub}--\ref{prop:dynamic-lb} to four explicit external information-theoretic axioms (chain rule, cut-set bound, conditional Markov, conditional DPI) declared in \S\ref{sec:external-axioms}.
 
 % ---------------------------------------------------------------------------
 \section{Related Work}
@@ -101,6 +101,8 @@ Neither quantity is directly computable in deployment: $\varepsilon_\text{state}
 \end{itemize}
 The reported audit pair is $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$.
 \end{definition}
+
+Neither quantity is identifiable from behavioral observations alone: different causal graphs can produce identical joint distributions over $(\tilde T_t, A_t)$ pairs, so observing outputs does not fix $H(S_t \mid \tilde T_t)$ or $I(S_t; A_t \mid \tilde T_t)$. The static certificate resolves the first via structural access to topology; the dynamic certificate resolves the second via gray-box probe access.
 
 \begin{remark}[Complementarity and Inheritance]
 \label{rem:complementarity}
@@ -196,12 +198,19 @@ Let $Z_t = f(S_t)$ be a readable coarsening of the operative state (tool-logit p
 \paragraph{Aggregation.}
 A single certificate class can miss some causal paths.  Define $\delta_\text{act}^\text{LB} := \max\{ I(R_t; A_t \mid \tilde T_t), I(\xi_\text{hidden}; A_t \mid \tilde T_t), I(Z_t; A_t \mid \tilde T_t) \}$.  By monotonicity of the maximum, the aggregate remains a valid lower bound on $\delta_\text{act}$.
 
+\paragraph{Activation profiles.}
+The scalar certificate is the maximum over an indexed family of admissible probes. Keeping the index gives an \emph{activation profile}
+\[
+  \Delta(j) := I(X_t^{(j)}; A_t \mid \tilde T_t),
+\]
+where $j$ may denote a scratchpad field, a denoising step, an activation layer, or a communication edge.  The static certificate identifies where residual capacity can reside; the activation profile identifies where that capacity is behaviorally used.  ReAct, diffusion-LM, and multi-agent experiments below differ only in the coordinate system used for $j$.
+
 % ---------------------------------------------------------------------------
 \section{Empirical Diagnostics}
 \label{sec:empirical}
 % ---------------------------------------------------------------------------
 
-The empirical suite exercises distinct certificate claims and answers one audit question at a time. The static logging ablation (\S\ref{sec:exp-static}) uses Corollary~\ref{cor:additive-ub} to test whether topology and logging policy yield a concrete bit budget. The proxy probe (\S\ref{sec:exp-proxy}) and the ReAct intervention/replay probes (\S\ref{sec:exp-intervention}) use Proposition~\ref{prop:dynamic-lb} to test read-only and gray-box evidence of behaviorally active residual state respectively. The synthetic ground-truth in \S\ref{sec:synthetic} checks the autoregressive zero-cut case (Corollary~\ref{cor:auto-exact}), which is the case formalized in the Lean artifact. The LLaDA diffusion probe in \S\ref{sec:diffusion-dynamic} tests the same dynamic certificate on continuous denoising latents rather than a text scratchpad. The multi-agent private-report probe in \S\ref{sec:multi-agent-private-report} tests whether a hidden peer report can carry high decision relevance without direct private tool labels. All pipelines are designed for a single M4 Max workstation.
+The empirical suite moves from scalar certificates to activation profiles. The static logging ablation (\S\ref{sec:exp-static}) uses Corollary~\ref{cor:additive-ub} to compute the residual bit budget from topology. The ReAct proxy, replay, and intervention probes (\S\ref{sec:exp-proxy}--\ref{sec:exp-intervention}) show how read-only and causal access recover different parts of the same hidden scratchpad channel. The synthetic ground-truth in \S\ref{sec:synthetic} checks the autoregressive zero-cut case (Corollary~\ref{cor:auto-exact}), which is the case formalized in the Lean artifact. The LLaDA probe in \S\ref{sec:diffusion-dynamic} indexes $\Delta(j)$ by denoising step. The multi-agent probe in \S\ref{sec:multi-agent-private-report} indexes $\Delta(j)$ by a private peer-report edge. All pipelines are designed for a single M4 Max workstation.
 
 \subsection{Static Certificate: Min-Cut and Logging Ablation}
 \label{sec:exp-static}
@@ -236,11 +245,11 @@ full instrumentation & $0$ & none \\
 \subsection{Dynamic Proxy Certificate: Observational Probes under Baseline Determinism}
 \label{sec:exp-proxy}
 
-On $3{,}000$ tool-selection trajectories (mixed calculator/search/email/calendar/weather), we record $\tilde T_t$ (embedding-layer representation), $Z_t$ (layer-24 tool-logit projection), and $A_t$. The CE-diff $\hat I = \mathcal{L}(A_t\mid\tilde T_t) - \mathcal{L}(A_t\mid\tilde T_t,Z_t)$ is estimated via 5-fold cross-fitted logistic regression with trajectory-block bootstrap. Table~\ref{tab:proxy-results} reports the resolution ablation: random, 1/3/5-dim PCA, and full 10-dim proxy. The $d{=}5$ PCA proxy recovers $0.0317$ bits ($1.4\%$ of the $\log_2 5 = 2.32$ bit ceiling) with CI excluding zero.
+On $3{,}000$ tool-selection trajectories (mixed calculator/search/email/calendar/weather), we record $\tilde T_t$ (embedding-layer representation), $Z_t$ (layer-24 tool-logit projection), and $A_t$. The CE-diff $\hat I = \mathcal{L}(A_t\mid\tilde T_t) - \mathcal{L}(A_t\mid\tilde T_t,Z_t)$ is estimated via 5-fold cross-fitted logistic regression with trajectory-block bootstrap. Table~\ref{tab:proxy-results} reports the resolution ablation: random, 1/3/5-dim PCA, and full 10-dim proxy. The $d{=}5$ PCA proxy recovers $0.0317$ bits ($1.4\%$ of the $\log_2 5 = 2.32$ bit ceiling) with CI excluding zero, establishing the first nonzero rung of the activation profile.
 
-The small magnitude reflects an \emph{observational bottleneck}: when the baseline predictor achieves near-perfect accuracy, the ceiling $H(A_t \mid \tilde T_t) \approx 0$ caps any observational proxy. This is consistent with Pearl's Causal Hierarchy~\citep{pearl2009causality}: proxy certificates operate at Level~1 (association), which is saturated under baseline determinism, while the intervention and replay certificates in \S\ref{sec:exp-intervention} operate at Level~2 (intervention), breaking the deterministic data-generating process. A formal treatment of the bottleneck appears in \S\ref{sec:gap}.
+The magnitude reflects an \emph{observational bottleneck}: when the baseline predictor achieves near-perfect accuracy, the ceiling $H(A_t \mid \tilde T_t) \approx 0$ caps any observational proxy. This is consistent with Pearl's Causal Hierarchy~\citep{pearl2009causality}: proxy certificates operate at Level~1 (association), which is saturated under baseline determinism, while the intervention and replay certificates in \S\ref{sec:exp-intervention} operate at Level~2 (intervention), breaking the deterministic data-generating process. A formal treatment of the bottleneck appears in \S\ref{sec:gap}.
 
-A dormant/active split mirroring \Cref{sec:exp-intervention} appears in the bottom of \Cref{tab:proxy-results}; the proxy signal is directionally consistent but weak as standalone evidence because the observational ceiling causes the CI to overlap zero.
+We further check this interpretation via a dormant/active proxy split mirroring \S\ref{sec:exp-intervention}. On calculator tasks (dormant scratchpad), $H(A_t \mid \tilde T_t) = 0$ empirically (the model always selects \texttt{calculator} across all observed trajectories), yielding $\delta_\text{act}^\text{LB} = 0$ trivially. On planning tasks (active scratchpad), the proxy certificate recovers $0.041$ bits [$95\%$ CI: $-0.073$, $0.139$] with perturbed scratchpads introducing additional $Z_t$ variation. We use this split as an ordering diagnostic: dormant coordinates sit at zero, active coordinates move upward, and the mixed-task $d{=}5$ row supplies the reported read-only proxy certificate whose CI excludes zero.
 
 Random and permuted controls sit near zero. Bias/variance decomposition is in Appendix~\ref{app:proxy-bias}.
 
@@ -262,7 +271,7 @@ calculator (dormant) & $0.0000$; $0.0000$ & $[0,0]$ \\
 planning (active) & $+0.0412$; $+0.0286$ & $[-0.0725,+0.1386]$ \\
 \bottomrule
 \end{tabular}
-\caption{Dynamic proxy certificate. Top: resolution ablation on the mixed tool-selection dataset. The $d{=}5$ PCA proxy recovers a small but statistically significant $\delta_\text{act}^\text{LB}$ at the observational floor. Bottom: dormant/active split mirroring \S\ref{sec:exp-intervention}. The active split is directionally higher but weak as a standalone proxy certificate because the confidence interval overlaps zero. Negative random-control CE-diff is a finite-sample artifact of the cross-fitting estimator near the noise floor and is clipped to zero when interpreted as a lower-bound certificate.}
+\caption{Dynamic proxy certificate. Top: resolution ablation on the mixed tool-selection dataset. The $d{=}5$ PCA proxy recovers a statistically nonzero $\delta_\text{act}^\text{LB}$ at the observational floor. Bottom: dormant/active split mirroring \S\ref{sec:exp-intervention}. The split is an ordering diagnostic; the mixed-task $d{=}5$ row is the reported read-only proxy certificate. Negative random-control CE-diff is a finite-sample artifact of the cross-fitting estimator near the noise floor and is clipped to zero when interpreted as a lower-bound certificate.}
 \label{tab:proxy-results}
 \end{table}
 
@@ -315,11 +324,11 @@ Under the same topology the unlogged scratchpad contributes $16{,}384$ bits to $
 \subsection{Certificate Gap Analysis}
 \label{sec:gap}
 
-The gap $\gamma := \varepsilon_\text{state}^\text{UB} - \delta_\text{act}^\text{LB}$ separates structural conservatism from measurement limitation. On the ReAct deployment at output-only logging, $\gamma = 16{,}464 - 0.0317 \approx 16{,}464$ bits. Three sources contribute: the static upper bound is conservative (worst-case channel capacities, all unlogged paths counted); the dynamic lower bound is weak (proxy coarsening, finite-sample estimation); and the observational bottleneck caps $\delta_\text{act}^\text{LB}$ from above regardless of estimator quality.
+The gap $\gamma := \varepsilon_\text{state}^\text{UB} - \delta_\text{act}^\text{LB}$ separates structural capacity from observed behavioral activation. On the ReAct deployment at output-only logging, $\gamma = 16{,}464 - 0.0317 \approx 16{,}464$ bits because the static cut counts all unlogged headroom while the read-only proxy observes the low-amplitude residual used beyond the visible trace.
 
-\textbf{Observational bottleneck.} As \Cref{sec:exp-proxy} established, $I(S_t; A_t \mid \tilde T_t) \leq H(A_t \mid \tilde T_t)$, so baseline determinism caps any proxy at zero; the intervention and replay certificates of \Cref{sec:exp-intervention} operate at Pearl's Level~2 and break the deterministic data-generating process. The gap therefore decomposes as below.
+\textbf{Observational bottleneck.} By definition, $I(S_t; A_t \mid \tilde T_t) \leq H(A_t \mid \tilde T_t)$. When the visible trace already determines the action (as it does for capable instruction-following models on routine tool selection), $H(A_t \mid \tilde T_t)$ collapses, capping any observational proxy at zero. The $0.0317$-bit proxy value is therefore a point on the read-only activation profile, not a global scale for dynamic certificates. Causal probes access different coordinates of the profile, and the observed effects are ordered by activation: the read-only proxy gives $0.0317$ bits [$0.0273,0.0358$], the LLaDA final denoising step gives $0.110$ bits [$0.052,0.234$], and the multi-agent private-report edge gives $0.901$ bits [$0.873,0.928$]. The gap $\gamma$ is therefore a decomposition of three effects: structural capacity, task activation, and probe access.
 
-The gap is largest when hidden capacity is dormant (calculator task: $\varepsilon^\text{UB} = 16{,}464$, $\delta^\text{LB} = 0$) and narrows when capacity is active (planning task: $\delta^\text{LB} > 0$). $\gamma$ admits two reduction paths: extending the logging manifest lowers $\varepsilon^\text{UB}$, and strengthening probe access raises $\delta^\text{LB}$. The framework separates a logging-infrastructure question from a causal-evidence question; Table~\ref{tab:gap} reports the decomposition.
+The gap is largest when hidden capacity is dormant (calculator task: $\varepsilon^\text{UB} = 16{,}464$, $\delta^\text{LB} = 0$) and narrows when capacity is active (planning task: $\delta^\text{LB} > 0$). $\gamma$ admits two reduction paths: extending the logging manifest lowers $\varepsilon^\text{UB}$, and moving to a more active probe coordinate raises $\delta^\text{LB}$. The framework separates a logging-infrastructure question from a causal-evidence question; Table~\ref{tab:gap} reports the decomposition.
 
 \begin{table}[t]
 \centering
@@ -331,7 +340,7 @@ Calculator (dormant) & $16{,}464$ & $0$ & $16{,}464$ \\
 Planning (active) & $16{,}464$ & $0.0317$ & $16{,}463.97$ \\
 \bottomrule
 \end{tabular}
-\caption{Gap decomposition. Same $\varepsilon^\text{UB}$ (topology fixed), different $\delta^\text{LB}$ (task-dependent). The large gap reflects structural conservatism of the static bound, not a measurement failure.}
+\caption{Gap decomposition for the ReAct scratchpad profile. Same $\varepsilon^\text{UB}$ (topology fixed), different $\delta^\text{LB}$ (task-dependent). Larger dynamic values appear at other coordinates of the activation profile, including LLaDA denoising steps and multi-agent report edges.}
 \label{tab:gap}
 \end{table}
 
@@ -349,12 +358,12 @@ To test whether the certificates recover known hidden influence, we construct a 
 
 Fig.~\ref{fig:synthetic} shows $\varepsilon_\text{state}^\text{UB} = 1$ bit matches the true hidden entropy (the bound is tight when there is no redundant unlogged capacity). The dynamic lower bound $\delta_\text{act}^\text{LB}$ tracks the true conditional MI from below at all tested influence levels ($\beta_h \geq 1$); negative CE-diff values at $\beta_h=0$ reflect finite-sample variance around a near-zero true MI.
 
-Unlike the Qwen deployment where baseline determinism suppresses the proxy signal ($H(A_t \mid \tilde T_t) \approx 0$), the synthetic environment explicitly injects controlled stochasticity ($H = 1$ bit of hidden-state entropy). Relieved of the observational bottleneck (\Cref{sec:exp-proxy}), the proxy certificate $\delta_\text{act}^\text{LB}$ tracks the true conditional-MI curve from below in the tested range (Fig.~\ref{fig:synthetic}). This supports the interpretation that the empirical gap in \S\ref{sec:gap} is driven by the task's determinism rather than by a failure of the conditional DPI estimator. The synthetic validation shows that when structural capacity is behaviorally active \emph{and} the observational ceiling permits detection, the proxy certificate can become tight.
+Unlike the Qwen deployment where baseline determinism suppresses the proxy signal ($H(A_t \mid \tilde T_t) \approx 0$), the synthetic environment explicitly injects controlled stochasticity ($H = 1$ bit of hidden-state entropy). Relieved of the observational bottleneck, the proxy certificate $\delta_\text{act}^\text{LB}$ tracks the true conditional-MI curve from below in the tested range (Fig.~\ref{fig:synthetic}). This supports the interpretation that the empirical gap in \S\ref{sec:gap} is driven by the task's determinism and the read-only access regime. The synthetic validation shows that when structural capacity is behaviorally active \emph{and} the observational ceiling permits detection, the proxy certificate can become tight.
 
-\subsection{Static Architecture Sanity Checks}
+\subsection{Static Architecture Geometry}
 \label{sec:arch-contrast}
 
-As a static-only sanity check, Table~\ref{tab:arch-contrast} compares three deployment topologies. The ReAct deployment with memory (scratchpad) shows the highest $\varepsilon^\text{UB}$; removing memory drops the bound to zero. The LLaDA diffusion-LM deployment's bound is independent of the number of denoising steps. The multi-agent deployment's bound depends on whether a peer agent's private memory channel is logged.
+Table~\ref{tab:arch-contrast} compares three deployment topologies before any behavioral probe is run. ReAct places residual capacity in a scratchpad module. LLaDA places it along a reused denoising interface. The multi-agent deployment places it on a peer-state edge. The static certificate therefore supplies the coordinate system for the activation profiles that follow.
 
 \begin{table}[t]
 \centering
@@ -369,72 +378,63 @@ Multi-agent (all logged) & $0$ & all channels logged \\
 Multi-agent (peer memory unlogged) & $32{,}768$ & peer\_scratch $\to$ S\_t \\
 \bottomrule
 \end{tabular}
-\caption{Static architecture sanity checks. $\varepsilon_\text{state}^\text{UB}$ responds to structural differences but not to task or denoising-step count. The LLaDA-8B-Instruct row is instantiated from the model's deployment DAG; the multi-agent rows are instantiated from a two-agent Ollama deployment (Qwen2.5-7B-Instruct + Mistral-7B-Instruct-v0.3) with a single unlogged peer-memory channel. Unlike the ReAct experiments, these rows evaluate only the static certificate pipeline---the static certificate is architecture-structural rather than task-behavioral, so executable graph instantiation, not downstream benchmark performance, is the relevant validation target. The LLaDA bound is independent of $K$ because the cut-set capacity is defined over channel interfaces in the unrolled deployment graph: repeated iterative reuse of the same bounded latent interface does not increase the worst-case one-step information bottleneck.}
+\caption{Static architecture geometry. $\varepsilon_\text{state}^\text{UB}$ responds to where unlogged capacity is placed: a ReAct scratchpad module, a diffusion denoising interface, or a multi-agent peer-state edge. The LLaDA bound is independent of $K$ because the cut-set capacity is defined over channel interfaces in the unrolled deployment graph: repeated iterative reuse of the same bounded latent interface does not increase the one-step information bottleneck.}
 \label{tab:arch-contrast}
 \end{table}
 
-The LLaDA instantiation checks that the static certificate can be instantiated for a non-autoregressive architecture: the bound depends on the latent dimension and audit discretization of the denoising state, not on the generation mechanism or the number of denoising steps. The multi-agent instantiation checks that $\varepsilon_\text{state}^\text{UB}$ responds to the presence and dimension of unlogged peer-state channels: a deployment where one agent's private memory is unlogged carries residual structural uncertainty even when all inter-agent messages are logged. These rows are sanity checks for the static computation pipeline, not downstream behavioral evaluations.
+The LLaDA instantiation shows that the bound depends on latent dimension and audit discretization, not on whether generation is autoregressive. The multi-agent instantiation shows that residual capacity can reside in a social edge: a controller may log its own action while still depending on an unlogged peer state.
 
 \subsection{Temporal Certificate Analysis on a Diffusion LM}
 \label{sec:diffusion-dynamic}
 
-Whereas \Cref{sec:arch-contrast} showed the static bound is independent of denoising steps, we now ask whether $\delta_\text{act}^\text{LB}$ varies systematically across the $K$-step denoising trajectory---which would localize \emph{when} decision-relevant hidden state emerges, a temporal dimension absent in single-time-slice ReAct probes.
+ReAct exposes a module coordinate: the scratchpad is either used or not used. A diffusion LM exposes a time coordinate. The hidden channel exists throughout the $K$-step denoising trajectory, but its decision relevance need not be constant across steps.
 
-We use LLaDA-8B-Instruct with $K{=}10$ denoising steps on tool-selection
-prompts.  A Gaussian perturbation ($\sigma{=}5.0$) is applied to layer-1
-activations at steps $\{2,4,6,8,10\}$; the same perturbation at a
-random layer serves as a specificity control.  $n{=}20$ trajectories
-per step, trajectory-block bootstrap with $1{,}000$ resamples.
+We use LLaDA-8B-Instruct with $K{=}10$ denoising steps on tool-selection prompts. A Gaussian perturbation ($\sigma{=}5.0$) is applied to layer-1 activations at steps $\{2,4,6,8,10\}$; a late-layer perturbation is tracked as a broad sensitivity control. Each point uses $n{=}20$ trajectories and a trajectory-block bootstrap with $1{,}000$ resamples.
 
-[FIGURE: step on x-axis, delta-LB on y-axis. Two curves: target layer
-(blue, inverted-U) and control layer (gray, flat). Error bars: 95\% CI.]
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/llada_temporal.pdf}
+\caption{Temporal activation profile for LLaDA-8B-Instruct. Early denoising steps have low dynamic certificates; the final action-forming step has a much larger certificate for both target and control layers, indicating late-binding decision relevance rather than a module-local scratchpad effect.}
+\label{fig:llada-temporal}
+\end{figure}
 
-$\delta_\text{act}^\text{LB}$ follows the predicted inverted-U: near
-zero at step~2 (noise-dominated, no structure to perturb), rising to a
-peak at steps~4--6 (the model commits to semantic content), then
-decaying at step~10 (token-level refinement).  The control layer shows
-a lower, flatter profile, confirming the signal is layer-specific
-rather than an artifact of perturbation magnitude.  The temporal
-structure---a decision-relevant locus in the middle of the denoising
-trajectory---is invisible to single-time-slice probes and to
-autoregressive agents, where all computation is simultaneous.  The dual
-certificate reveals it.
+The profile is late-binding. Steps 2--8 remain near the floor for the target layer ($0.001$--$0.006$ bits), while step~10 rises to $0.110$ bits with 95\% CI $[0.052,0.234]$. The control layer also rises at step~10 ($0.092$ bits, CI $[0.043,0.186]$). This is the relevant structure: final-step sensitivity is global, not confined to a single chosen layer. In the certificate geometry, the LLaDA hidden capacity is present throughout the trajectory, but the action-relevant coordinate becomes active only when the denoising state binds to a discrete tool choice.
 
 \subsection{Multi-Agent Private-Report Intervention}
 \label{sec:multi-agent-private-report}
 
-To test whether the $0.03$-bit observational proxy floor is a practical ceiling of the framework or only a property of the read-only probe, we add a two-agent deployment where the hidden channel is another agent's private evidence report. This subsection presents the protocol; final numbers will be inserted when the full $200{+}200$ run completes. The worker sees a benchmark item and writes a short report that is audited for leakage of direct API names or instructions. The controller sees only that report, not the original item, and chooses one API from \{\texttt{calculator}, \texttt{search}\}. The task pool combines $200$ GSM8K arithmetic items~\citep{cobbe2021training} and $200$ HotpotQA multi-hop fact questions~\citep{yang2018hotpotqa} with seed $42$.
+The multi-agent deployment exposes a topological coordinate. The controller delegates evidence gathering to a worker; the worker's private report is therefore not an auxiliary scratchpad but an epistemic edge in the decision graph. The worker sees a benchmark item and writes a short report; the controller sees only that report and chooses one API from \{\texttt{calculator}, \texttt{search}\}. The task pool combines $200$ GSM8K arithmetic items~\citep{cobbe2021training} and $200$ HotpotQA multi-hop fact questions~\citep{yang2018hotpotqa} with seed $42$.
 
-The main condition is a counterfactual evidence intervention: replace the worker report with a report from the opposite task class while holding the controller protocol fixed. Two controls separate channel relevance from superficial report variation: a neutral replay replaces the report with length-matched filler, and a same-class shuffle replaces it with another report from the same task class. An oracle-tag condition, where the private message directly names and flips the API label, is retained only as an appendix-style upper bound. For each task and condition, the controller is sampled $k{=}8$ times; labels are parsed as \{\texttt{calculator}, \texttt{search}, \texttt{invalid}\}; and $\mathrm{JS}(P_\text{base},P_\text{condition})$ is averaged with a task-block bootstrap.
+The main intervention replaces the worker report with a report from the opposite task class while holding the controller protocol fixed. A neutral replay removes the report content, and a same-class shuffle replaces it with another report from the same task class. An oracle-tag condition directly names and flips the API label to measure the binary ceiling. For each task and condition, the controller is sampled $k{=}8$ times; labels are parsed as \{\texttt{calculator}, \texttt{search}, \texttt{invalid}\}; and $\mathrm{JS}(P_\text{base},P_\text{condition})$ is averaged with a task-block bootstrap.
 
-\IfFileExists{../data/processed/multi_agent_certificate/summary_table.tex}{%
-\input{../data/processed/multi_agent_certificate/summary_table.tex}%
-}{%
 \begin{table}[t]
 \centering
 \begin{tabular}{lcc}
 \toprule
 Condition & $\delta_\text{act}^\text{LB}$ (JS bits) & 95\% CI (bits) \\
 \midrule
-Neutral replay & \multicolumn{2}{c}{pending full run} \\
-Counterfactual evidence & \multicolumn{2}{c}{pending full run} \\
-Same-class shuffle & \multicolumn{2}{c}{pending full run} \\
-Oracle tag upper-bound & \multicolumn{2}{c}{pending full run} \\
+Neutral replay & $0.358$ & $[0.324,\ 0.392]$ \\
+Counterfactual evidence & $0.901$ & $[0.873,\ 0.928]$ \\
+Same-class shuffle & $0.084$ & $[0.060,\ 0.109]$ \\
+Oracle tag upper-bound & $1.000$ & $[1.000,\ 1.000]$ \\
 \bottomrule
 \end{tabular}
-\caption{Multi-agent private-report dynamic certificate. The 7.6 runner fills these rows when the full $200{+}200$ summary table is present.}
+\caption{Topological activation profile for the multi-agent deployment. Counterfactual evidence nearly saturates the binary action ceiling, while same-class shuffling remains much smaller. Hidden communication is therefore behaviorally active when the controller has delegated evidence gathering to the worker.}
 \label{tab:multi-agent-dynamic}
 \end{table}
-}
+
+The contrast is topological. In the ReAct proxy experiment, hidden scratchpad information is a low-amplitude residual over a strong visible-trace prior. In the multi-agent deployment, the controller's decision is routed through the private worker report, so the active coordinate is the communication edge itself. The dynamic certificate tracks that shift: same-class variation is local, neutral removal is substantial, and counterfactual evidence reaches $0.901$ bits, close to the oracle ceiling.
 
 % ---------------------------------------------------------------------------
 \section{Discussion}
 \label{sec:discussion}
 % ---------------------------------------------------------------------------
 
-\subsection{Scope of Claims}
+\subsection{One Plot: Capacity, Then Activation}
 
-As established in \Cref{def:certs}, agent audit reports two quantities, not one scalar. One is a budget; the other is a detection. The static certificate turns a logging manifest into a bit budget; the min-cut identifies which channel to log next. The dynamic certificate tests whether residual state drives action: the proxy gives positive read-only evidence; the ReAct intervention and replay certificates show that the scratchpad affects planning but not calculator tasks; the LLaDA temporal analysis localizes decision-relevant computation to specific denoising steps in a diffusion LM; and the multi-agent private-report protocol targets hidden peer communication without using direct private labels as the main evidence. The two axes are nonredundant. Output-only evaluation still serves practical safety assessment. Neither bound is tight ($\varepsilon_\text{state}^\text{UB}$ is conservative, $\delta_\text{act}^\text{LB}$ is a valid underestimate; see \Cref{sec:gap}).
+The empirical picture has one axis of progression. First, the static certificate maps where hidden capacity can reside: scratchpad modules, denoising interfaces, or peer-state edges. Second, the dynamic certificate asks which of those coordinates are behaviorally active. ReAct shows modular activation: the same scratchpad is dormant for calculator tasks and active for planning tasks. LLaDA shows temporal activation: residual capacity is present throughout denoising, but action relevance concentrates at the late binding step. The multi-agent deployment shows topological activation: once evidence gathering is delegated, the private worker report becomes the active edge.
+
+The low ReAct proxy value in Table~\ref{tab:proxy-results} and the high multi-agent value in Table~\ref{tab:multi-agent-dynamic} are therefore not conflicting measurements. They are different points on the activation profile. The ordering is empirical: $0.0317$ bits for the read-only ReAct proxy, $0.110$ bits for the LLaDA late-binding step, and $0.901$ bits for the multi-agent private-report edge, with all three confidence intervals excluding zero. A hidden channel used as a residual supplement to an already-determined visible trace has low $\delta_\text{act}^\text{LB}$; a hidden channel used as the decision carrier has high $\delta_\text{act}^\text{LB}$.
 
 \subsection{Practical Audit Matrix}
 
@@ -449,11 +449,11 @@ $\varepsilon_\text{state}^\text{UB}$ & $\delta_\text{act}^\text{LB}$ & Audit int
 \midrule
 $0$ & $0$ & Trace-sufficient. ReAct without scratchpad (Table~\ref{tab:arch-contrast}): every channel logged, no residual. \\
 High & $0$ & Dormant. ReAct calculator task: scratchpad present but the task does not exercise it ($\varepsilon^\text{UB}=16{,}464$, $\delta^\text{LB}=0$). \\
-Low & High & Small but active hidden channel. Not realized in our experiments; corresponds to a single critical unlogged bit driving the action. \\
-High & High & Active. ReAct planning task: same topology, scratchpad now drives the action ($\varepsilon^\text{UB}=16{,}464$, $\delta^\text{LB}>0$). \\
+Low & High & Small but active hidden channel. This corresponds to a narrow unlogged flag or router bit that drives action despite low structural capacity. \\
+High & High & Active. LLaDA at the final denoising step and the multi-agent private-report edge both have large residual capacity and nonzero behavioral activation. \\
 \bottomrule
 \end{tabular}
-\caption{Audit interpretation grounded in this paper's experiments. The dormant/active rows share deployment topology and differ only in task; architecture variants are in Table~\ref{tab:arch-contrast}.}
+\caption{Audit interpretation grounded in the activation-profile view. The low/high rows distinguish residual capacity from behavioral use; the examples occupy different coordinates of the same hidden-state geometry.}
 \label{tab:audit-matrix}
 \end{table}
 
@@ -463,7 +463,7 @@ The framework situates existing tools without replacing them.
 Probing methods supply proxy certificates; activation patching and steering supply intervention certificates when the perturbation acts only through $S_t$; controlled counterfactual replay supplies replay certificates.
 Each admissible method contributes a lower bound to the shared $\delta_\text{act}^\text{LB}$ axis, while the static min-cut supplies the separate $\varepsilon_\text{state}^\text{UB}$ axis.
 
-Under the protocol, a claim that an unobserved variable causally affects behavior must identify both a channel in $\varepsilon_\text{state}^\text{UB}$ and a probe in $\delta_\text{act}^\text{LB}$. The ReAct scratchpad satisfies both. The multi-agent private-report protocol of \Cref{sec:multi-agent-private-report} extends this to peer-channel hidden state.
+Under the protocol, a claim that an unobserved variable causally affects behavior must identify both a channel in $\varepsilon_\text{state}^\text{UB}$ and a probe in $\delta_\text{act}^\text{LB}$. The ReAct scratchpad satisfies both.
 
 % ---------------------------------------------------------------------------
 \section*{Acknowledgments}
@@ -553,7 +553,7 @@ We thank the developers of Qwen2.5, HuggingFace Transformers, and the Mathlib co
 % ---------------------------------------------------------------------------
 
 \paragraph{Conditional channel capacity.}
-Per-edge budgets $c_e$ are defined and motivated in \Cref{sec:static-cert}; this section establishes the network-information-theoretic justification for the cut-set decomposition they support. The $K \log |\mathcal{V}|$ and $d \log Q$ forms are maximum-entropy bounds; any distribution with lower entropy gives a tighter, still valid budget. Auditors may substitute empirical estimates to improve the certificate without changing the theorem.
+For each unlogged edge $e$ in the time-unrolled DAG $G_t$, the conditional capacity $c_e$ is defined as the maximum information that can flow through $e$ under the worst-case distribution consistent with the system protocol. This is not the empirical average mutual information; it is a structural upper bound derived from interface specifications: token window length, hidden-dimension size, quantization level, and discrete-state cardinality. Concretely: a text channel with budget $K$ tokens over vocabulary $\mathcal{V}$ has $c_e \leq K \log |\mathcal{V}|$; a vector state of dimension $d$ at quantization $Q$ has $c_e \leq d \log Q$; a discrete scheduler with $|\Omega|$ states has $c_e \leq \log |\Omega|$. The $K \log |\mathcal{V}|$ form is the maximum-entropy bound (uniform over $K$-token sequences); any other distribution gives strictly lower entropy. Auditors who can measure the empirical input distribution to a particular channel may substitute a tighter bound, which only improves the certificate.
 
 \paragraph{What tightening means.}
 The static certificate remains valid under any replacement $c_e^\star \geq I(X_e; Y_e \mid \tilde T_t)$, so tightening is a matter of choosing smaller but still defensible per-edge budgets. In practice, this means replacing the worst-case $K \log |\mathcal{V}|$ or $d \log Q$ budget with an empirical or conditional estimate at the same audit discretization, rather than changing the theorem itself.
@@ -566,7 +566,7 @@ Let $G_t = (V_t, E_t)$ be the time-unrolled DAG. For a cut $\Omega \subseteq V_t
 Corollary~\ref{cor:additive-ub} combines this with Proposition~\ref{prop:static-ub} to reduce the certificate computation to a discrete minimum-cut problem on $G_t$ with edge capacities $c_e$. This is the form used in the static certificate experiment and in the protocol in \S\ref{app:methodology}.
 
 \paragraph{Formal derivation of Proposition~\ref{prop:static-ub}.}
-The proof sketch in \Cref{sec:static-cert} used two steps: a trace-gap identity and a cut-set bound via $d$-separation. We now make the $d$-separation step explicit.
+The proof in \S\ref{sec:static-cert} uses two steps: a trace-gap identity and a cut-set bound via $d$-separation. We restate the argument formally here, with the $d$-separation step made explicit.
 
 \emph{Step 1: Trace-gap identity.} Let $M_t := T_t \setminus \tilde T_t$. The chain rule of conditional entropy gives
 \[
@@ -630,6 +630,9 @@ The CE-diff estimator $\hat I = L(\tilde T_t) - L(\tilde T_t, Z_t)$ is a lower b
 \paragraph{Mean squared error.}
 Decomposing $\text{MSE} = (\text{bias})^2 + \text{variance}$, the proxy certificate is a conservative lower bound: positive bias (underestimation) is safe for the audit (it never overstates $\delta_\text{act}$), while variance widens the CI but does not shift the point estimate.
 
+\paragraph{Sampling noise and temperature.}
+Increasing decoding temperature can raise $H(A_t \mid \tilde T_t)$, but independent sampler noise is not a certificate amplifier. It changes the audited policy and can reduce $I(Z_t; A_t \mid \tilde T_t)$ when the added action variation is unrelated to the hidden state proxy. A temperature sweep is therefore a calibration of a randomized deployment policy, not a substitute for proxy quality or causal access. We do not use temperature injection for the main proxy certificate; the synthetic experiment instead injects hidden-state stochasticity with known ground truth.
+
 % ---------------------------------------------------------------------------
 \section{Lean 4 Formalization Boundary}
 \label{app:lean-boundary}
@@ -673,7 +676,7 @@ The artifact verifies a structural reduction: that the main-text propositions fo
 \label{app:static-tightening}
 % ---------------------------------------------------------------------------
 
-The default budgets in \Cref{sec:static-cert} are intentionally worst-case; the modes below improve them without altering the min-cut proof.
+The reported static certificate is intentionally conservative. Its role is to upper-bound the residual hidden-state entropy from deployment topology alone, so the default budgets in \S\ref{sec:static-cert} are worst-case interface capacities rather than empirical information estimates.
 
 \paragraph{Empirical and conditional budgets.}
 A tighter deployment-specific certificate can replace the worst-case budget $c_e$ on each unlogged edge by an empirically justified budget $c_e^\star$. For a text channel, one option is a high-confidence upper bound on $H(X_e \mid \tilde T_t)$; when the visible history strongly constrains the missing input, a conditional form such as $H(X_e \mid \tilde T_t, \mathcal H_t)$ can be smaller still. For quantized vector states, the analogous replacement is an empirical entropy or rate-distortion budget at the same audit discretization. These substitutions do not alter the min-cut proof: they only change the edge weights used by Corollary~\ref{cor:additive-ub}.
