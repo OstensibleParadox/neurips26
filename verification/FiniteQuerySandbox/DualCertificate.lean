@@ -6,8 +6,10 @@ namespace FiniteQuerySandbox
 # Dual Certificates: Mechanized Information Theory Core
 
 This module formalizes the structural reductions of Proposition 1 (Static Certificate)
-and Proposition 2 (Dynamic Certificate). The axiomatic interface has been replaced
-by concrete finite-discrete probability mass functions from `InfoTheory.lean`.
+and Proposition 2 (Dynamic Certificate). Entropy and conditional mutual
+information are the finite-discrete formulas from `InfoTheory.lean`; only the
+chain rule, cut-set bound, conditional Markovity, and conditional DPI remain
+external.
 -/
 
 noncomputable section
@@ -67,16 +69,40 @@ variable {State VisibleTrace MissingTrace : Type}
 variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
 variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
 
--- Stub structural terms to 0 to clear `sorry`, deferring standard measure theory external to Lean.
-def H_S_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ := 0
-def H_S_cond_Tfull (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ := 0
-def I_S_M_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ := 0
+def stateVisibleMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (st : State × VisibleTrace) : ℝ :=
+  ∑ m : MissingTrace, P.pmf (st.1, st.2, m)
+
+def visibleMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (t : VisibleTrace) : ℝ :=
+  ∑ s : State, ∑ m : MissingTrace, P.pmf (s, t, m)
+
+def visibleMissingMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (tm : VisibleTrace × MissingTrace) : ℝ :=
+  ∑ s : State, P.pmf (s, tm.1, tm.2)
+
+def fullTraceEntropy (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
+  entropyOf (fun stm : State × VisibleTrace × MissingTrace => P.pmf stm)
+
+/-- `H(S | T_tilde)`. -/
+def H_S_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
+  entropyOf (stateVisibleMass P) - entropyOf (visibleMass P)
+
+/-- `H(S | T_full)`, where `T_full = (T_tilde, M)`. -/
+def H_S_cond_Tfull (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
+  fullTraceEntropy P - entropyOf (visibleMissingMass P)
+
+/-- `I(S; M | T_tilde)`. -/
+def I_S_M_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
+  entropyOf (stateVisibleMass P) +
+    entropyOf (visibleMissingMass P) -
+    entropyOf (visibleMass P) -
+    fullTraceEntropy P
 
 -- Axiom 3: TraceGap Chain Rule
 axiom chain_rule (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
     H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P
 
--- Match existing API expected by ScreenabilityBridge
 theorem trace_gap_identity (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
     H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P := 
   chain_rule P

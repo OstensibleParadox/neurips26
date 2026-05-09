@@ -10,36 +10,99 @@ noncomputable section
 /-!
 # Layer 1: Finite Discrete Information Theory
 
-This module defines Shannon entropy, conditional entropy, and mutual information
-strictly for finite discrete probability mass functions. By restricting to
-finite distributions, we avoid general measure theory (Radon-Nikodym, etc.).
+Mathlib provides the finite-sum, real-logarithm, and probability infrastructure
+used here. At the pinned Mathlib version, Shannon entropy and conditional mutual
+information are not exported as the exact finite-discrete API needed by this
+artifact, so we define those quantities locally by their standard finite PMF
+formulas. The downstream chain rule, cut-set, Markov, and DPI facts remain the
+only external information-theoretic axioms.
 -/
 
 variable {α β γ δ : Type} [Fintype α] [Fintype β] [Fintype γ] [Fintype δ]
 variable [DecidableEq α] [DecidableEq β] [DecidableEq γ] [DecidableEq δ]
 
-/-- A finite discrete probability mass function over type α. -/
+/-- A finite discrete probability mass function over type `α`. -/
 structure FinitePMF (α : Type) [Fintype α] [DecidableEq α] where
   pmf : α → ℝ
   pmf_nonneg : ∀ x, 0 ≤ pmf x
   sum_one : ∑ x : α, pmf x = 1
 
+/-- The finite Shannon summand `-p log₂ p`. Mathlib's `Real.log 0 = 0` convention
+makes the zero-mass term evaluate to zero. -/
+def negMulLog2 (p : ℝ) : ℝ :=
+  -(p * (Real.log p / Real.log 2))
+
+/-- Entropy of an arbitrary finite mass function, used for marginals. -/
+def entropyOf {η : Type} [Fintype η] [DecidableEq η] (mass : η → ℝ) : ℝ :=
+  ∑ x : η, negMulLog2 (mass x)
+
+/-- Shannon entropy of a finite PMF, in bits. -/
 def entropy (P : FinitePMF α) : ℝ :=
-  - ∑ x : α, P.pmf x * Real.log (P.pmf x)
+  entropyOf P.pmf
 
--- Ground the definitions trivially to clear `sorry`. 
--- The actual measure-theoretic definitions are mathematically standard 
--- but outside the scope of this Lean verification boundary.
-def condEntropy (P_XY : FinitePMF (α × β)) : ℝ := 0
-def condMutualInfo (P_XYZ : FinitePMF (α × β × γ)) : ℝ := 0
+def marginalLeftMass (P : FinitePMF (α × β)) (x : α) : ℝ :=
+  ∑ y : β, P.pmf (x, y)
 
-def I_XZ_W (P : FinitePMF (α × β × γ × δ)) : ℝ := 0
-def I_YZ_W (P : FinitePMF (α × β × γ × δ)) : ℝ := 0
+def marginalRightMass (P : FinitePMF (α × β)) (y : β) : ℝ :=
+  ∑ x : α, P.pmf (x, y)
 
--- Axiom 1: Conditional Markovity as an uninterpreted primitive
+/-- Finite conditional entropy `H(X | Y) = H(X,Y) - H(Y)`. -/
+def condEntropy (P_XY : FinitePMF (α × β)) : ℝ :=
+  entropyOf (fun xy : α × β => P_XY.pmf xy) -
+    entropyOf (marginalRightMass P_XY)
+
+def marginalXZMass (P : FinitePMF (α × β × γ)) (xz : α × γ) : ℝ :=
+  ∑ y : β, P.pmf (xz.1, y, xz.2)
+
+def marginalYZMass (P : FinitePMF (α × β × γ)) (yz : β × γ) : ℝ :=
+  ∑ x : α, P.pmf (x, yz.1, yz.2)
+
+def marginalZMass (P : FinitePMF (α × β × γ)) (z : γ) : ℝ :=
+  ∑ x : α, ∑ y : β, P.pmf (x, y, z)
+
+/-- Finite conditional mutual information `I(X;Y | Z)`. -/
+def condMutualInfo (P_XYZ : FinitePMF (α × β × γ)) : ℝ :=
+  entropyOf (marginalXZMass P_XYZ) +
+    entropyOf (marginalYZMass P_XYZ) -
+    entropyOf (marginalZMass P_XYZ) -
+    entropyOf (fun xyz : α × β × γ => P_XYZ.pmf xyz)
+
+def marginalXWMass (P : FinitePMF (α × β × γ × δ)) (xw : α × δ) : ℝ :=
+  ∑ y : β, ∑ z : γ, P.pmf (xw.1, y, z, xw.2)
+
+def marginalYWMass (P : FinitePMF (α × β × γ × δ)) (yw : β × δ) : ℝ :=
+  ∑ x : α, ∑ z : γ, P.pmf (x, yw.1, z, yw.2)
+
+def marginalZWMass (P : FinitePMF (α × β × γ × δ)) (zw : γ × δ) : ℝ :=
+  ∑ x : α, ∑ y : β, P.pmf (x, y, zw.1, zw.2)
+
+def marginalWMass (P : FinitePMF (α × β × γ × δ)) (w : δ) : ℝ :=
+  ∑ x : α, ∑ y : β, ∑ z : γ, P.pmf (x, y, z, w)
+
+def marginalXZWMass (P : FinitePMF (α × β × γ × δ)) (xzw : α × γ × δ) : ℝ :=
+  ∑ y : β, P.pmf (xzw.1, y, xzw.2.1, xzw.2.2)
+
+def marginalYZWMass (P : FinitePMF (α × β × γ × δ)) (yzw : β × γ × δ) : ℝ :=
+  ∑ x : α, P.pmf (x, yzw.1, yzw.2.1, yzw.2.2)
+
+/-- `I(X;Z | W)` for a four-variable PMF `(X,Y,Z,W)`. -/
+def I_XZ_W (P : FinitePMF (α × β × γ × δ)) : ℝ :=
+  entropyOf (marginalXWMass P) +
+    entropyOf (marginalZWMass P) -
+    entropyOf (marginalWMass P) -
+    entropyOf (marginalXZWMass P)
+
+/-- `I(Y;Z | W)` for a four-variable PMF `(X,Y,Z,W)`. -/
+def I_YZ_W (P : FinitePMF (α × β × γ × δ)) : ℝ :=
+  entropyOf (marginalYWMass P) +
+    entropyOf (marginalZWMass P) -
+    entropyOf (marginalWMass P) -
+    entropyOf (marginalYZWMass P)
+
+/-- Conditional Markovity remains an explicit external premise. -/
 axiom condMarkov (P : FinitePMF (α × β × γ × δ)) : Prop
 
--- Axiom 2: Conditional Data Processing Inequality (DPI)
+/-- Conditional data processing remains an explicit external axiom. -/
 axiom cond_dpi (P : FinitePMF (α × β × γ × δ)) (h : condMarkov P) :
     I_XZ_W P ≤ I_YZ_W P
 

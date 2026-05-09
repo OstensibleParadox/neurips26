@@ -26,7 +26,8 @@ tree to enter first.
 ## Module Map
 
 - `FiniteQuerySandbox.DualCertificate`
-  Axiomatic core for the structural reductions of the static cut-sum bound and dynamic DPI bounds.
+  Structural reductions for the static cut-sum bound and dynamic DPI bounds,
+  built over finite-discrete entropy and conditional-MI definitions.
 - `FiniteQuerySandbox.Screenability`
   Exact deterministic-screenability core for the internal route, including
   `projection_determined`, `projection_same_trace_eq`,
@@ -48,10 +49,10 @@ tree to enter first.
 
 ## Scope Notes
 
-This artifact formalizes exact and surrogate cores, not the full
-measure-theoretic or information-theoretic statements from the paper.
-In particular, it does not directly formalize Shannon entropy, conditional
-mutual information, or the statistical Fano / Gaussian-KL derivations.
+This artifact formalizes exact and surrogate cores, plus finite-discrete
+entropy and conditional mutual information formulas. It does not derive the
+measure-theoretic chain rule, cut-set inequality, conditional Markovity,
+conditional DPI, or the statistical Fano / Gaussian-KL derivations.
 
 ## Layout
 
