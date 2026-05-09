@@ -41,7 +41,6 @@ def render_proxy_ablation(ablation_json: str, out_path: str) -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=8, rotation=15, ha="right")
     ax.set_ylabel(r"$\delta_{act}^{LB}$ (bits)", fontsize=10)
-    ax.set_title(r"Proxy Certificate: Resolution Ablation", fontsize=11)
 
     # Annotate values
     for i, (v, bar) in enumerate(zip(values, bars)):

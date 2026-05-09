@@ -66,8 +66,7 @@ def render_dag(spec: ArchSpec, out_path: str | Path,
     if cut_set:
         legend.append(mpatches.Patch(edgecolor="black", facecolor="none",
                                      linestyle="dashed", label="min-cut"))
-    ax.legend(handles=legend, loc="lower left", fontsize=7)
-    ax.set_title(f"Deployment DAG: {spec.name}", fontsize=10)
+    ax.legend(handles=legend, loc="upper left", fontsize=7, framealpha=0.9)
     ax.axis("off")
 
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
@@ -84,15 +83,16 @@ def render_logging_ablation(ablation_json: str | Path, out_path: str | Path) -> 
     eps_vals = [d["epsilon_ub_bits"] for d in data]
     x = range(len(levels))
 
-    fig, ax = plt.subplots(figsize=(7, 3.5))
+    fig, ax = plt.subplots(figsize=(7, 3.3))
     ax.plot(x, eps_vals, "o-", color="#2196F3", linewidth=2, markersize=8)
     for i, (lvl, eps) in enumerate(zip(levels, eps_vals)):
-        ax.annotate(f"{eps:,} bits", (i, eps), textcoords="offset points",
-                    xytext=(0, 12), ha="center", fontsize=8)
+        yoff = 8 if eps == 0 else 12 + (i % 2) * 8
+        ax.annotate(f"{eps:,.0f} bits", (i, eps), textcoords="offset points",
+                    xytext=(0, yoff), ha="center", fontsize=8)
     ax.set_xticks(x)
     ax.set_xticklabels([l.replace("_", " ") for l in levels], rotation=30, ha="right", fontsize=8)
     ax.set_ylabel("ε_state^UB (bits)", fontsize=10)
-    ax.set_title("Static Certificate: Logging Ablation", fontsize=11)
+    ax.set_ylim(top=max(eps_vals) * 1.18)
     ax.grid(axis="y", alpha=0.3)
     fig.tight_layout()
 

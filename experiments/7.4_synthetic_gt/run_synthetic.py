@@ -190,11 +190,10 @@ def _plot(results, out_dir: str = "data/processed/synthetic"):
     ax.fill_between(x, true_mi, delta_lb, alpha=0.1, color="#F44336")
 
     ax.set_xticks(x)
-    ax.set_xticklabels([f"{r['beta_h']:.0f}" for r in results])
+    ax.set_xticklabels([f"{r['beta_h']:g}" for r in results])
     ax.set_xlabel(r"Hidden influence strength $\beta_h$", fontsize=10)
     ax.set_ylabel("Bits", fontsize=10)
     ax.legend(fontsize=8, loc="upper left")
-    ax.set_title("Synthetic Ground-Truth Validation", fontsize=11)
     ax.grid(alpha=0.3)
 
     out = Path(out_dir) / "synthetic_gt.pdf"
@@ -220,4 +219,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
     main(n_trajectories=args.n_trajectories, beta_levels=args.beta_levels,
          out_dir=args.out_dir, skip_plot=args.no_plot)
-
