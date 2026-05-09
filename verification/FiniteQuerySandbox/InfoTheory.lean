@@ -99,6 +99,22 @@ def I_YZ_W (P : FinitePMF (α × β × γ × δ)) : ℝ :=
     entropyOf (marginalWMass P) -
     entropyOf (marginalYZWMass P)
 
+/-- Marginal of (T,A) from a PMF on (S,T,A). Used by Theorem 1. -/
+def marginalTAofSTA (P : FinitePMF (α × β × γ)) (ta : β × γ) : ℝ :=
+  ∑ s : α, P.pmf (s, ta.1, ta.2)
+
+/-- `H(A | T)` for a PMF on `T × A`. -/
+def H_A_cond_T (Q : FinitePMF (β × γ)) : ℝ :=
+  entropyOf Q.pmf - entropyOf (marginalLeftMass Q)
+
+/-- `I(S; A | T)` for a PMF on `S × T × A`. -/
+def I_SA_cond_T (P : FinitePMF (α × β × γ)) : ℝ :=
+  let H_ST := entropyOf (fun (st : α × β) => ∑ a : γ, P.pmf (st.1, st.2, a))
+  let H_AT := entropyOf (fun (at' : β × γ) => ∑ s : α, P.pmf (s, at'.1, at'.2))
+  let H_T := entropyOf (fun (t : β) => ∑ s : α, ∑ a : γ, P.pmf (s, t, a))
+  let H_STA := entropyOf P.pmf
+  H_ST + H_AT - H_T - H_STA
+
 /-- Conditional Markovity remains an explicit external premise. -/
 axiom condMarkov (P : FinitePMF (α × β × γ × δ)) : Prop
 

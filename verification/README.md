@@ -25,6 +25,9 @@ tree to enter first.
 
 ## Module Map
 
+- `FiniteQuerySandbox.IdentifiabilityGap`
+  Theorem 1: Output-Trace Identifiability Gap — axiom-free construction of
+  two behaviorally-equivalent but audit-inequivalent PMFs.
 - `FiniteQuerySandbox.DualCertificate`
   Structural reductions for the static cut-sum bound and dynamic DPI bounds,
   built over finite-discrete entropy and conditional-MI definitions.

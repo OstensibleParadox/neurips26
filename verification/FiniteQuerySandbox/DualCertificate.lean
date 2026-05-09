@@ -3,12 +3,13 @@ import FiniteQuerySandbox.InfoTheory
 namespace FiniteQuerySandbox
 
 /-!
-# Dual Certificates: Mechanized Information Theory Core
+# Gap-Closing Certificates: Mechanized Information Theory Core
 
-This module formalizes the structural reductions of Proposition 1 (Static Certificate)
-and Proposition 2 (Dynamic Certificate). Entropy and conditional mutual
-information are the finite-discrete formulas from `InfoTheory.lean`; only the
-chain rule, cut-set bound, conditional Markovity, and conditional DPI remain
+This module formalizes the structural reductions of Proposition 1 (Structural-Access
+Closer) and Proposition 2 (Gray-Box-Access Closer). These correspond to the two
+gap-closers of Theorem~1 (Output-Trace Identifiability Gap). Entropy and conditional
+mutual information are the finite-discrete formulas from `InfoTheory.lean`; only
+the chain rule, cut-set bound, conditional Markovity, and conditional DPI remain
 external.
 -/
 
@@ -25,10 +26,10 @@ def delta_act (P : FinitePMF (Probe × State × Action × Trace)) : ℝ :=
   I_YZ_W P
 
 /--
-Proposition 2: Dynamic Certificates via Conditional DPI.
-If X_t is a probe variable satisfying the conditional Markov chain
-X_t → S_t → A_t given T_tilde_t, then its conditional MI with A_t
-lower-bounds delta_act.
+Proposition 2: Gray-Box-Access Closer (Conditional DPI).
+Gap-closer for Theorem~1: if X_t is a probe variable satisfying the conditional
+Markov chain X_t → S_t → A_t given T_tilde_t, then its conditional MI with A_t
+lower-bounds delta_act, ruling out the P₀ (Dirac) realization.
 -/
 theorem prop2_dynamic_lb (P : FinitePMF (Probe × State × Action × Trace))
     (h_markov : condMarkov P) :
@@ -126,7 +127,9 @@ def software_orthogonal (Cut : Type) (C_cut : Cut → ℝ) (C_edge_sum : Cut →
     ∀ Ω ∈ Cuts_U_to_S, C_cut Ω ≤ C_edge_sum Ω
 
 /--
-Proposition 1: Static Structural Certificate via Cut-Set Bound.
+Proposition 1: Structural-Access Closer (Static Cut-Sum Bound).
+Gap-closer for Theorem~1: under structural access with full logging,
+ε_state^UB = 0 collapses both realizations to a single equivalence class.
 -/
 theorem prop1_static_ub
     (Cut : Type) (C_cut : Cut → ℝ) (Cuts_U_to_S : Set Cut)
