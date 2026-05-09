@@ -36,6 +36,7 @@ lemma entropy_sum_dirac (x : ℝ) (s0 : S) :
     _ = ∑ s : S, (if s = s0 then negMulLog2 x else 0) := by simp [negMulLog2_zero]
     _ = negMulLog2 x := by simp
 
+omit [Fintype A] [DecidableEq A] in
 /-- `∑ₛ negMulLog₂ (I[s=φ a]·x) = negMulLog₂ x`. Exactly one s matches φ a. -/
 lemma entropy_sum_inj (x : ℝ) (φ : A → S) (a : A) :
     ∑ s : S, negMulLog2 (if s = φ a then x else 0) = negMulLog2 x := by
@@ -46,6 +47,21 @@ lemma entropy_sum_inj (x : ℝ) (φ : A → S) (a : A) :
     _ = ∑ s : S, (if s = φ a then negMulLog2 x else 0) := by simp [negMulLog2_zero]
     _ = negMulLog2 x := by simp
 
+/-- Entropy over a product type as an iterated finite sum. -/
+lemma entropyOf_pair {X Y : Type} [Fintype X] [Fintype Y]
+    [DecidableEq X] [DecidableEq Y] (f : X × Y → ℝ) :
+    entropyOf f = ∑ x : X, ∑ y : Y, negMulLog2 (f (x, y)) := by
+  rw [entropyOf, Fintype.sum_prod_type]
+
+/-- Entropy over a right-associated triple product as an iterated finite sum. -/
+lemma entropyOf_triple {X Y Z : Type} [Fintype X] [Fintype Y] [Fintype Z]
+    [DecidableEq X] [DecidableEq Y] [DecidableEq Z] (f : X × Y × Z → ℝ) :
+    entropyOf f = ∑ x : X, ∑ y : Y, ∑ z : Z, negMulLog2 (f (x, y, z)) := by
+  rw [entropyOf, Fintype.sum_prod_type]
+  congr with x
+  rw [Fintype.sum_prod_type]
+
+omit [Fintype T] [DecidableEq T] in
 /--
 Key lemma: for an injective φ, summing negMulLog₂ over all s of the φ-indexed
 inner sum equals summing negMulLog₂ of the original Q terms over all a.
@@ -54,43 +70,27 @@ lemma entropy_sum_image (φ : A → S) (hφ_inj : Function.Injective φ)
     (Qpmf : T × A → ℝ) (t : T) :
     ∑ s : S, negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0))
     = ∑ a : A, negMulLog2 (Qpmf (t, a)) := by
-  -- restrict to image(φ); outside the image the inner sum is 0, negMulLog₂ 0 = 0
-  have h_support : (Finset.univ : Finset S) =
-      Finset.image φ Finset.univ ∪ ((Finset.univ : Finset S) \ Finset.image φ Finset.univ) := by
-    simp
-  have h_disjoint : Disjoint (Finset.image φ Finset.univ)
-      ((Finset.univ : Finset S) \ Finset.image φ Finset.univ) := by
-    simp
+  let F : S → ℝ := fun s =>
+    negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0))
   calc
-    ∑ s : S, negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0))
-        = ∑ s ∈ (Finset.univ : Finset S),
-            negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0)) := by simp
-    _ = (∑ s ∈ Finset.image φ Finset.univ,
-            negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0))) +
-        (∑ s ∈ (Finset.univ : Finset S) \ Finset.image φ Finset.univ,
-            negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0))) := by
-      rw [Finset.sum_union h_disjoint]
-    _ = (∑ s ∈ Finset.image φ Finset.univ,
-            negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0))) + 0 := by
-      -- for s ∉ image(φ), s ≠ φ a for all a, so inner sum = 0, negMulLog₂ 0 = 0
-      congr 1
-      refine Finset.sum_eq_zero (fun s hs => ?_)
-      have hs' : s ∉ Finset.image φ Finset.univ := Finset.mem_sdiff.mp hs |>.2
+    ∑ s : S, F s = ∑ s ∈ Finset.image φ (Finset.univ : Finset A), F s := by
+      symm
+      refine Finset.sum_subset (by intro s _; simp) ?_
+      intro s _ hs_not_img
       have h_all_neq : ∀ a : A, s ≠ φ a := by
         intro a h_eq
-        apply hs'
-        exact Finset.mem_image.mpr ⟨a, Finset.mem_univ _, h_eq⟩
-      simp [h_all_neq, negMulLog2_zero]
-    _ = ∑ s ∈ Finset.image φ Finset.univ,
-            negMulLog2 (∑ a : A, (if s = φ a then Qpmf (t, a) else 0)) := by simp
-    _ = ∑ a : A,
-            negMulLog2 (∑ a' : A, (if φ a = φ a' then Qpmf (t, a') else 0)) := by
-      rw [Finset.sum_image (fun x _ y _ h => hφ_inj h)]
+        apply hs_not_img
+        exact Finset.mem_image.mpr ⟨a, Finset.mem_univ _, h_eq.symm⟩
+      simp [F, h_all_neq, negMulLog2_zero]
+    _ = ∑ a : A, F (φ a) := by
+      rw [Finset.sum_image]
+      intro a _ b _ h
+      exact hφ_inj h
     _ = ∑ a : A, negMulLog2 (Qpmf (t, a)) := by
-      refine Finset.sum_congr rfl (fun a ha => ?_)
+      refine Finset.sum_congr rfl (fun a _ => ?_)
       have h_inner : (∑ a' : A, (if φ a = φ a' then Qpmf (t, a') else 0)) = Qpmf (t, a) := by
         simp [hφ_inj.eq_iff]
-      simp [h_inner]
+      simp [F, h_inner]
 
 /-! ### Theorem 1 -/
 
@@ -105,6 +105,7 @@ theorem identifiability_gap_extremes
       I_SA_cond_T P0 = 0 ∧
       I_SA_cond_T P1 = H_A_cond_T Q :=
 by
+  have _hT_pos : ∀ t, marginalLeftMass Q t > 0 := hT
   -- Construct injection φ : A → S
   let eA : A ≃ Fin (Fintype.card A) := Fintype.equivFin A
   let eS : S ≃ Fin (Fintype.card S) := Fintype.equivFin S
@@ -125,18 +126,31 @@ by
     pmf := fun x : S × T × A =>
       if x.1 = s0 then Q.pmf (x.2.1, x.2.2) else 0
     pmf_nonneg := by
-      intro x; dsimp; split
-      · exact Q.pmf_nonneg _
-      · exact le_refl 0
+      intro x
+      by_cases hx : x.1 = s0
+      · simp [hx, Q.pmf_nonneg]
+      · simp [hx]
     sum_one := by
-      simp [Finset.sum_add_distrib, Finset.sum_ite_eq, Q.sum_one]
+      rw [Fintype.sum_prod_type]
+      change (∑ s : S, ∑ ta : T × A, if s = s0 then Q.pmf ta else 0) = 1
+      calc
+        (∑ s : S, ∑ ta : T × A, if s = s0 then Q.pmf ta else 0)
+            = ∑ s : S, (if s = s0 then ∑ ta : T × A, Q.pmf ta else 0) := by
+              refine Finset.sum_congr rfl (fun s _ => ?_)
+              by_cases hs : s = s0 <;> simp [hs]
+        _ = ∑ s : S, (if s = s0 then 1 else 0) := by simp [Q.sum_one]
+        _ = 1 := by simp
   }
 
   have h_marg0 : ∀ t a, marginalTAofSTA P0 (t, a) = Q.pmf (t, a) := by
     intro t a; simp [marginalTAofSTA, P0]
 
   have h_I0 : I_SA_cond_T P0 = 0 := by
-    dsimp [I_SA_cond_T]
+    change
+      (entropyOf (fun (st : S × T) => ∑ a : A, P0.pmf (st.1, st.2, a)) +
+       entropyOf (fun (ta : T × A) => ∑ s : S, P0.pmf (s, ta.1, ta.2)) -
+       entropyOf (fun (t : T) => ∑ s : S, ∑ a : A, P0.pmf (s, t, a)) -
+       entropyOf P0.pmf) = 0
     set qT := fun (t : T) => ∑ a : A, Q.pmf (t, a) with hqT
 
     -- H_ST(s,t) = I[s=s₀]·qT(t)  →  entropy = H(qT)
@@ -149,8 +163,12 @@ by
       calc
         entropyOf (fun (st : S × T) => if st.1 = s0 then qT st.2 else 0)
             = ∑ s : S, ∑ t : T, negMulLog2 (if s = s0 then qT t else 0) := by
-              simp [entropyOf, Finset.sum_product]
-        _ = ∑ t : T, negMulLog2 (qT t) := by simp [Finset.sum_comm, entropy_sum_dirac]
+              rw [entropyOf_pair]
+        _ = ∑ t : T, ∑ s : S, negMulLog2 (if s = s0 then qT t else 0) := by
+              rw [Finset.sum_comm]
+        _ = ∑ t : T, negMulLog2 (qT t) := by
+              refine Finset.sum_congr rfl (fun t _ => ?_)
+              exact entropy_sum_dirac (qT t) s0
         _ = entropyOf qT := rfl
 
     -- H_AT(t,a) = Q(t,a)  (marginal over Dirac S)
@@ -171,11 +189,18 @@ by
     have h_H_STA : entropyOf P0.pmf = entropyOf Q.pmf := by
       calc
         entropyOf P0.pmf = ∑ s : S, ∑ t : T, ∑ a : A, negMulLog2 (P0.pmf (s, t, a)) := by
-          simp [entropyOf, Finset.sum_product]
+          rw [entropyOf_triple]
         _ = ∑ s : S, ∑ t : T, ∑ a : A, negMulLog2 (if s = s0 then Q.pmf (t, a) else 0) := rfl
+        _ = ∑ t : T, ∑ a : A, ∑ s : S,
+              negMulLog2 (if s = s0 then Q.pmf (t, a) else 0) := by
+          rw [Finset.sum_comm]
+          congr with t
+          rw [Finset.sum_comm]
         _ = ∑ t : T, ∑ a : A, negMulLog2 (Q.pmf (t, a)) := by
-          simp [Finset.sum_comm, entropy_sum_dirac]
-        _ = entropyOf Q.pmf := by simp [entropyOf, Finset.sum_product]
+          refine Finset.sum_congr rfl (fun t _ => ?_)
+          refine Finset.sum_congr rfl (fun a _ => ?_)
+          exact entropy_sum_dirac (Q.pmf (t, a)) s0
+        _ = entropyOf Q.pmf := by rw [entropyOf_pair]
 
     -- I = H_ST + H_AT - H_T - H_STA = H(qT) + H(Q) - H(qT) - H(Q) = 0
     calc
@@ -194,18 +219,21 @@ by
     pmf := fun x : S × T × A =>
       if x.1 = φ x.2.2 then Q.pmf (x.2.1, x.2.2) else 0
     pmf_nonneg := by
-      intro x; dsimp; split
-      · exact Q.pmf_nonneg _
-      · exact le_refl 0
+      intro x
+      by_cases hx : x.1 = φ x.2.2
+      · simp [hx, Q.pmf_nonneg]
+      · simp [hx]
     sum_one := by
+      rw [Fintype.sum_prod_type]
+      change (∑ s : S, ∑ ta : T × A, if s = φ ta.2 then Q.pmf ta else 0) = 1
       calc
-        ∑ x : S × T × A, (if x.1 = φ x.2.2 then Q.pmf (x.2.1, x.2.2) else 0)
-            = ∑ s : S, ∑ t : T, ∑ a : A, (if s = φ a then Q.pmf (t, a) else 0) := by
-              simp [Finset.sum_product]
-        _ = ∑ t : T, ∑ a : A, (∑ s : S, if s = φ a then Q.pmf (t, a) else 0) := by
-              simp [Finset.sum_comm]
-        _ = ∑ t : T, ∑ a : A, Q.pmf (t, a) := by simp
-        _ = 1 := by simp [Q.sum_one, Finset.sum_product]
+        (∑ s : S, ∑ ta : T × A, if s = φ ta.2 then Q.pmf ta else 0)
+            = ∑ ta : T × A, ∑ s : S, if s = φ ta.2 then Q.pmf ta else 0 := by
+              rw [Finset.sum_comm]
+        _ = ∑ ta : T × A, Q.pmf ta := by
+              refine Finset.sum_congr rfl (fun ta _ => ?_)
+              simp
+        _ = 1 := Q.sum_one
   }
 
   have h_marg1 : ∀ t a, marginalTAofSTA P1 (t, a) = Q.pmf (t, a) := by
@@ -213,7 +241,11 @@ by
 
   -- I(S;A|T) = H(A|T) because S = φ(A) (injective)
   have h_I1 : I_SA_cond_T P1 = H_A_cond_T Q := by
-    dsimp [I_SA_cond_T, H_A_cond_T]
+    change
+      (entropyOf (fun (st : S × T) => ∑ a : A, P1.pmf (st.1, st.2, a)) +
+       entropyOf (fun (ta : T × A) => ∑ s : S, P1.pmf (s, ta.1, ta.2)) -
+       entropyOf (fun (t : T) => ∑ s : S, ∑ a : A, P1.pmf (s, t, a)) -
+       entropyOf P1.pmf) = H_A_cond_T Q
     set qT := fun (t : T) => ∑ a : A, Q.pmf (t, a) with hqT
 
     -- H_AT(t,a) = Q(t,a)  (marginal projection)
@@ -227,7 +259,17 @@ by
     have h_H_T : entropyOf (fun (t : T) => ∑ s : S, ∑ a : A, P1.pmf (s, t, a))
               = entropyOf qT := by
       have h_eq : (fun (t : T) => ∑ s : S, ∑ a : A, P1.pmf (s, t, a)) = qT := by
-        ext t; simp [P1, hqT]
+        ext t
+        rw [hqT]
+        change (∑ s : S, ∑ a : A, if s = φ a then Q.pmf (t, a) else 0) =
+          ∑ a : A, Q.pmf (t, a)
+        calc
+          (∑ s : S, ∑ a : A, if s = φ a then Q.pmf (t, a) else 0)
+              = ∑ a : A, ∑ s : S, if s = φ a then Q.pmf (t, a) else 0 := by
+                rw [Finset.sum_comm]
+          _ = ∑ a : A, Q.pmf (t, a) := by
+                refine Finset.sum_congr rfl (fun a _ => ?_)
+                simp
       rw [h_eq]
 
     -- H_STA = H(Q)  (each (t,a) maps to exactly one (φ a, t, a))
@@ -235,10 +277,17 @@ by
       calc
         entropyOf P1.pmf = ∑ s : S, ∑ t : T, ∑ a : A,
             negMulLog2 (if s = φ a then Q.pmf (t, a) else 0) := by
-          simp [entropyOf, P1, Finset.sum_product]
+          rw [entropyOf_triple]
+        _ = ∑ t : T, ∑ a : A, ∑ s : S,
+              negMulLog2 (if s = φ a then Q.pmf (t, a) else 0) := by
+          rw [Finset.sum_comm]
+          congr with t
+          rw [Finset.sum_comm]
         _ = ∑ t : T, ∑ a : A, negMulLog2 (Q.pmf (t, a)) := by
-          simp [Finset.sum_comm, entropy_sum_inj]
-        _ = entropyOf Q.pmf := by simp [entropyOf, Finset.sum_product]
+          refine Finset.sum_congr rfl (fun t _ => ?_)
+          refine Finset.sum_congr rfl (fun a _ => ?_)
+          exact entropy_sum_inj (Q.pmf (t, a)) φ a
+        _ = entropyOf Q.pmf := by rw [entropyOf_pair]
 
     -- H_ST = H(Q) — uses injectivity via entropy_sum_image
     have h_H_ST : entropyOf (fun (st : S × T) => ∑ a : A, P1.pmf (st.1, st.2, a))
@@ -246,12 +295,13 @@ by
       calc
         entropyOf (fun (st : S × T) => ∑ a : A, P1.pmf (st.1, st.2, a))
             = ∑ s : S, ∑ t : T, negMulLog2 (∑ a : A, (if s = φ a then Q.pmf (t, a) else 0)) := by
-              simp [entropyOf, P1, Finset.sum_product]
+              rw [entropyOf_pair]
         _ = ∑ t : T, ∑ s : S, negMulLog2 (∑ a : A, (if s = φ a then Q.pmf (t, a) else 0)) := by
-              simp [Finset.sum_comm]
+              rw [Finset.sum_comm]
         _ = ∑ t : T, ∑ a : A, negMulLog2 (Q.pmf (t, a)) := by
-              simp [entropy_sum_image φ hφ_inj Q.pmf]
-        _ = entropyOf Q.pmf := by simp [entropyOf, Finset.sum_product]
+              refine Finset.sum_congr rfl (fun t _ => ?_)
+              exact entropy_sum_image φ hφ_inj Q.pmf t
+        _ = entropyOf Q.pmf := by rw [entropyOf_pair]
 
     -- I = H_ST + H_AT - H_T - H_STA
     --   = H(Q) + H(Q) - H(qT) - H(Q)
@@ -266,7 +316,8 @@ by
       _ = entropyOf Q.pmf - entropyOf qT := by ring
       _ = (entropyOf Q.pmf - entropyOf (marginalLeftMass Q)) := by
             have h_qT_left : qT = marginalLeftMass Q := by
-              ext t; simp [qT, hqT, marginalLeftMass, Finset.sum_comm]
+              rw [hqT]
+              rfl
             rw [h_qT_left]
       _ = H_A_cond_T Q := rfl
 

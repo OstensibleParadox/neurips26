@@ -1,0 +1,15 @@
+# Fdb version 4
+["pdflatex"] 1778304788.11896 "paper/main.tex" "main.pdf" "main" 1778304788.2133 2
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls" 1748806692 20144 b966087dda3b194755eb460d32e2ef75 ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/base/size10.clo" 1748806692 8448 686612a86f0e04f41ea577f5ec7e83d8 ""
+  "/usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf" 1770478701 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
+  "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1775926335 3636773 cb7ca911f1162835915f325d23d4f0c0 ""
+  "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
+  "main.aux" 1778304720.92309 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "neurips_2026.sty" 0 -1 0 ""
+  "paper/main.tex" 1778303193.59527 69782 2820dce3ab28f9d44866d60e043e9e84 ""
+  (generated)
+  "main.aux"
+  "main.log"
+  "main.pdf"
+  (rewritten before read)
