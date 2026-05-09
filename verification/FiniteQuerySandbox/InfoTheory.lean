@@ -115,8 +115,15 @@ def I_SA_cond_T (P : FinitePMF (α × β × γ)) : ℝ :=
   let H_STA := entropyOf P.pmf
   H_ST + H_AT - H_T - H_STA
 
-/-- Conditional Markovity remains an explicit external premise. -/
-axiom condMarkov (P : FinitePMF (α × β × γ × δ)) : Prop
+def marginalXYWMass (P : FinitePMF (α × β × γ × δ)) (xyw : α × β × δ) : ℝ :=
+  ∑ z : γ, P.pmf (xyw.1, xyw.2.1, z, xyw.2.2)
+
+/-- Conditional Markovity as a concrete definition. -/
+def condMarkov (P : FinitePMF (α × β × γ × δ)) : Prop :=
+  ∀ x y z w,
+    P.pmf (x, y, z, w) * marginalYWMass P (y, w)
+      =
+    marginalXYWMass P (x, y, w) * marginalYZWMass P (y, z, w)
 
 /-- Conditional data processing remains an explicit external axiom. -/
 axiom cond_dpi (P : FinitePMF (α × β × γ × δ)) (h : condMarkov P) :

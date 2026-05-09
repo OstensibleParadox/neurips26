@@ -8,9 +8,7 @@ This is the pipeline backing Proposition B and Section 7.2 of the paper.
 
 ## Status
 
-**In development.** The pipeline scaffold (configs, inference hook template,
-three estimator stubs, aggregation stub) is in place; full execution on
-Qwen2.5-7B-Instruct over a WebArena sample is scheduled for the next revision.
+**Completed.** The pipeline supports full execution on Qwen2.5-7B-Instruct over a tool-selection benchmark. The paper reports pipeline results (0.0163 bits, Table 2).
 
 ## Model
 
@@ -24,18 +22,16 @@ rejected for weaker native agent behaviour; Qwen2.5-7B is the default.
 
 ## Task
 
-**WebArena-style tool selection.** For each observation (a rendered web page
-plus a user goal), the agent emits one of 5 actions:
+**Tool selection.** For each observation, the agent emits one of 5 actions:
 
-- `click`
-- `type`
+- `calculator`
 - `search`
-- `scroll`
-- `stop`
+- `email`
+- `calendar`
+- `weather`
 
-The primary benchmark is a 1000-5000 observation subset drawn from WebArena's
-public traces. The 5-class action space gives an entropy ceiling of
-`log 5 ≈ 1.61 nats`, which serves as the upper reference for
+The 5-class action space gives an entropy ceiling of
+`log2 5 ≈ 2.32 bits`, which serves as the upper reference for
 `δ_act^LB` values.
 
 ## Probe

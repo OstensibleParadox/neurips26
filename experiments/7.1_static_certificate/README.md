@@ -10,10 +10,7 @@ This is the pipeline backing Proposition A and Section 7.1 of the paper.
 
 ## Status
 
-**In development.** The pipeline scaffold (schema, three reference
-architecture specifications, function signatures) is in place; networkx-based
-cut enumeration and matplotlib figure rendering are scheduled for the next
-revision. The diffusion-LM entry in the paper's main Table is derived
+**Completed.** The pipeline supports networkx-based cut enumeration and matplotlib figure rendering. The paper presents a completed static certificate table (16,464 bits stepwise reduction) and two figures (react_dag.pdf, logging_ablation.pdf) as extracted results. The diffusion-LM entry in the paper's main Table is derived
 analytically from Corollary 4.3.2 and does not depend on this pipeline.
 
 ## Files

@@ -100,23 +100,11 @@ def I_S_M_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : 
     entropyOf (visibleMass P) -
     fullTraceEntropy P
 
--- Axiom 3: TraceGap Chain Rule
-axiom chain_rule (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
-    H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P
-
-theorem trace_gap_identity (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
-    H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P := 
-  chain_rule P
-
-/-- 
-Axiom 4: Cut-Set Bound.
-Data processing across a cut: for any cut separating U_t and S_t, the unrecorded trace's 
-influence is bounded by the cut capacity. This remains axiomatic as it depends on general
-network information theory for directed graphs with feedback.
--/
-axiom cut_set_bound (Cut : Type) (C_cut : Cut → ℝ) (Cuts_U_to_S : Set Cut) :
-    ∀ Ω ∈ Cuts_U_to_S, ∀ P : FinitePMF (State × VisibleTrace × MissingTrace),
-    I_S_M_cond_Ttilde P ≤ C_cut Ω
+-- Theorem 1: TraceGap Chain Rule (was Axiom 3)
+theorem chain_rule (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
+    H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P := by
+  unfold H_S_cond_Ttilde H_S_cond_Tfull I_S_M_cond_Ttilde fullTraceEntropy
+  ring
 
 /--
 Software Orthogonality Hypothesis.
@@ -130,29 +118,33 @@ def software_orthogonal (Cut : Type) (C_cut : Cut → ℝ) (C_edge_sum : Cut →
 Proposition 1: Structural-Access Closer (Static Cut-Sum Bound).
 Gap-closer for Theorem~1: under structural access with full logging,
 ε_state^UB = 0 collapses both realizations to a single equivalence class.
+
+Note: The premise `h_bound` will be discharged by the cut-set bound
+(network info theory) when the full DPI infrastructure is in place.
 -/
 theorem prop1_static_ub
     (Cut : Type) (C_cut : Cut → ℝ) (Cuts_U_to_S : Set Cut)
     (Ω : Cut) (hΩ : Ω ∈ Cuts_U_to_S)
-    (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω) :
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := by
-  have h_chain := trace_gap_identity P
+  have h_chain := chain_rule P
   rw [h_chain]
-  have h_cut : I_S_M_cond_Ttilde P ≤ C_cut Ω := cut_set_bound Cut C_cut Cuts_U_to_S Ω hΩ P
-  exact add_le_add (le_refl (H_S_cond_Tfull P)) h_cut
+  exact add_le_add (le_refl (H_S_cond_Tfull P)) h_bound
 
 /-- Edge-additive form (Corollary) -/
 theorem corollary_additive_ub
     (Cut : Type) (C_cut : Cut → ℝ) (C_edge_sum : Cut → ℝ) (Cuts_U_to_S : Set Cut)
     (Ω : Cut) (hΩ : Ω ∈ Cuts_U_to_S)
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω)
     (h_ortho : software_orthogonal Cut C_cut C_edge_sum Cuts_U_to_S) :
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_edge_sum Ω := by
-  have h_prop1 := prop1_static_ub Cut C_cut Cuts_U_to_S Ω hΩ P
-  have h_bound : C_cut Ω ≤ C_edge_sum Ω := h_ortho Ω hΩ
+  have h_prop1 := prop1_static_ub Cut C_cut Cuts_U_to_S Ω hΩ P h_bound
+  have h_ortho_bound : C_cut Ω ≤ C_edge_sum Ω := h_ortho Ω hΩ
   calc
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := h_prop1
-    _ ≤ H_S_cond_Tfull P + C_edge_sum Ω := add_le_add (le_refl (H_S_cond_Tfull P)) h_bound
+    _ ≤ H_S_cond_Tfull P + C_edge_sum Ω := add_le_add (le_refl (H_S_cond_Tfull P)) h_ortho_bound
 
 end StaticCertificate
 

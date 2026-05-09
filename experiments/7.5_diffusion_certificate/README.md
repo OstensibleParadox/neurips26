@@ -14,9 +14,8 @@ $K$-step denoising trajectory.
 - $n{=}20$ trajectories per step, trajectory-block bootstrap with $1{,}000$
   resamples.
 
-The predicted pattern is an inverted-U: $\delta_\text{act}^\text{LB}$ near zero
-at step 2 (noise-dominated), peaks at steps 4--6 (semantic commitment), decays
-at step 10 (token refinement). Control layer shows lower, flatter profile.
+The observed pattern is "late-binding": $\delta_\text{act}^\text{LB}$ near zero
+at step 2 (noise-dominated), and peaks at step 10 (token refinement, 0.110 bits). Control layer shows lower, flatter profile.
 
 ## Run
 

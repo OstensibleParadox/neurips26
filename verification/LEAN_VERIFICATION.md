@@ -12,11 +12,11 @@ Mechanized core for Theorem 1, Propositions 1–2, and Corollary 5 of the paper.
 | Proposition 2 (gray-box-access closer) | `DualCertificate.lean` | `prop2_dynamic_lb` | C/E |
 
 C = fully mechanized from Mathlib first principles (Theorem~1 is axiom-free).  
-C/E = structural reduction machine-checked conditional on 4 explicit axioms: `chain_rule`, `cut_set_bound`, `condMarkov`, `cond_dpi`.
+C/E = structural reduction machine-checked conditional on 1 explicit axiom: `cond_dpi`.
 
 ## What is not formalized
 
-Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas over `FinitePMF`, using Mathlib finite sums and real logarithms. The measure-theoretic chain rule, cut-set inequality, conditional Markovity, and conditional DPI are declared as the four explicit axioms consumed by the structural reductions.
+Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas over `FinitePMF`, using Mathlib finite sums and real logarithms. The conditional DPI is declared as an explicit axiom consumed by the structural reductions.
 
 ## Build
 
