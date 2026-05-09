@@ -96,7 +96,6 @@ lemma entropy_sum_image (φ : A → S) (hφ_inj : Function.Injective φ)
 
 theorem identifiability_gap_extremes
     (Q : FinitePMF (T × A))
-    (hT : ∀ t, marginalLeftMass Q t > 0)
     (s0 : S)
     (h_card : Fintype.card A ≤ Fintype.card S) :
     ∃ (P0 P1 : FinitePMF (S × T × A)),
@@ -105,7 +104,6 @@ theorem identifiability_gap_extremes
       I_SA_cond_T P0 = 0 ∧
       I_SA_cond_T P1 = H_A_cond_T Q :=
 by
-  have _hT_pos : ∀ t, marginalLeftMass Q t > 0 := hT
   -- Construct injection φ : A → S
   let eA : A ≃ Fin (Fintype.card A) := Fintype.equivFin A
   let eS : S ≃ Fin (Fintype.card S) := Fintype.equivFin S

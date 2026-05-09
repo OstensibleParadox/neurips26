@@ -131,8 +131,8 @@ def I_S_M_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : 
     entropyOf (visibleMass P) -
     fullTraceEntropy P
 
-/-- Chain-rule identity for the static visible/full trace decomposition. -/
-theorem chain_rule (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
+/-- Static algebraic decomposition for the visible/full trace entropy gap. -/
+theorem static_decomposition (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
     H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P := by
   unfold H_S_cond_Ttilde H_S_cond_Tfull I_S_M_cond_Ttilde fullTraceEntropy
   ring
@@ -278,7 +278,7 @@ lemma H_M_le_log_card_M
 theorem prop1_static_ub_bounded
     (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + (Real.log (Fintype.card MissingTrace : ℝ) / Real.log 2) := by
-  have h_chain := chain_rule P
+  have h_chain := static_decomposition P
   rw [h_chain]
   have h_I_le_H := I_S_M_cond_Ttilde_le_H_M P
   have h_H_le_log := H_M_le_log_card_M P
@@ -307,7 +307,7 @@ theorem prop1_static_ub
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
     (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω) :
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := by
-  have h_chain := chain_rule P
+  have h_chain := static_decomposition P
   rw [h_chain]
   exact add_le_add (le_refl (H_S_cond_Tfull P)) h_bound
 

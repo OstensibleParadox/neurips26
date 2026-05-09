@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Data.Fin.Basic
+import Mathlib.Data.Real.Basic
+import Mathlib.Tactic.Linarith
 
 namespace FiniteQuerySandbox
 

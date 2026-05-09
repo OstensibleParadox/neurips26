@@ -52,6 +52,10 @@ section MeasureBounds
 
 variable [MeasurableSpace E]
 
+/-- A measurable region whose complement has measure at most `ε`. -/
+def HighProbRegion (μ : Measure E) (ε : ℝ≥0∞) (S : Set E) : Prop :=
+  MeasurableSet S ∧ μ Sᶜ ≤ ε
+
 theorem goodFCGSet_compl_mass_le
     {R : E → ℝ} {hB : E → H} {d_repr : H → H → ℝ}
     {Seen S : Set E} {L ρ : ℝ}

@@ -1,9 +1,5 @@
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Data.Real.Basic
-import Mathlib.MeasureTheory.Measure.ProbabilityMeasure
-import Mathlib.Topology.MetricSpace.Basic
-
-open MeasureTheory
-open scoped ENNReal
 
 namespace FiniteQuerySandbox
 
@@ -88,16 +84,6 @@ def GoodFCGSet
     (R : E → ℝ) (hB : E → H) (d_repr : H → H → ℝ)
     (Seen : Set E) (L ρ : ℝ) : Set E :=
   {e | ∃ e0 ∈ Seen, FCG R hB d_repr e e0 ≤ L * ρ}
-
-section MeasureRegions
-
-variable [MeasurableSpace E]
-
-/-- A measurable region whose complement has measure at most `ε`. -/
-def HighProbRegion (μ : Measure E) (ε : ℝ≥0∞) (S : Set E) : Prop :=
-  MeasurableSet S ∧ μ Sᶜ ≤ ε
-
-end MeasureRegions
 
 lemma reprSim_nonneg
     {hB : E → H} {d_repr : H → H → ℝ}
