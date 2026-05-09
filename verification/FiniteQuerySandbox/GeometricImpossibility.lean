@@ -1,4 +1,4 @@
-import FiniteQuerySandbox.Impossibility
+import FiniteQuerySandbox.Tools
 import FiniteQuerySandbox.GeometricTools
 import Mathlib.Data.Set.Finite.Basic
 import Mathlib.Topology.MetricSpace.Basic
@@ -7,18 +7,18 @@ namespace FiniteQuerySandbox
 
 variable {E H : Type*} [MetricSpace H]
 
-/-- 
-IsGammaSeparatedInjection eta hB gamma 
-states that the mapping hB after eta is gamma-separated.
+/-!
+Preferred reader-facing import:
+`FiniteQuerySandbox.SeparatedPackingImpossibility`.
 -/
+
+/-- The encoded sequence `hB ∘ eta` is `gamma`-separated. -/
 def IsGammaSeparatedInjection (eta : Nat → E) (hB : E → H) (gamma : ℝ) : Prop :=
   ∀ i j : Nat, i ≠ j → dist (hB (eta i)) (hB (eta j)) ≥ gamma
 
-/-- 
-Key Packing Lemma: In a gamma-separated set, any point e_star can be 'covered' 
-by at most one point from the set if the coverage radius rho is < gamma/2.
--/
-lemma packing_lemma {eta : Nat → E} {hB : E → H} {gamma rho : ℝ} 
+/-- A ball of radius `rho < gamma / 2` contains at most one point from a
+`gamma`-separated sequence. -/
+lemma packing_lemma {eta : Nat → E} {hB : E → H} {gamma rho : ℝ}
     (h_rho : rho < gamma / 2)
     (h_sep : IsGammaSeparatedInjection eta hB gamma)
     (n m₁ m₂ : Nat)
@@ -36,11 +36,8 @@ lemma packing_lemma {eta : Nat → E} {hB : E → H} {gamma rho : ℝ}
     linarith
   linarith
 
-/--
-Theorem: If the encoding space contains an infinite gamma-separated injection (η),
-then for any finite support (measured in indices), there remains an index n
-that is NOT rho-covered by any element in the support, provided rho < gamma/2.
--/
+/-- A finite set of indices cannot `rho`-cover an infinite `gamma`-separated
+sequence when `rho < gamma / 2`. -/
 theorem finite_patch_cannot_cover_separated
     {eta : Nat → E} {hB : E → H} (gamma rho : ℝ) (h_rho : rho < gamma / 2)
     (h_sep : IsGammaSeparatedInjection eta hB gamma)

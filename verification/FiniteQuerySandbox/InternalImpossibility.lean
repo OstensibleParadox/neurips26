@@ -6,6 +6,9 @@ namespace FiniteQuerySandbox
 /-!
 # Predictability-based Screenability (Internal Route)
 
+Preferred reader-facing import:
+`FiniteQuerySandbox.PredictabilityRouteImpossibility`.
+
 This module formalizes the internal route impossibility using predictability
 as an operational surrogate for information-theoretic entropy conditions.
 

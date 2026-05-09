@@ -1,67 +1,64 @@
-# FiniteQuerySandbox Lean Artifact
+# Lean Verification Artifact
 
-This directory is the reviewer-facing Lean 4 artifact for the formalized cores
-used in the paper's verification appendix.
+This directory is a standalone Lean 4 package for the finite formal components
+used in the paper.  The development centers on finite discrete probability,
+finite-query impossibility, screenability surrogates, certificate reductions,
+and covering/PAC algebraic cores.
 
-For a slightly more defensive build guide, including the case where the machine
-does not already have Lean installed, see `LEAN_VERIFICATION.md`.
-
-## Quick Build
+## Build
 
 From this directory:
 
 ```bash
-lake exe cache get   # optional on a clean machine; avoids a full cold mathlib build
+lake exe cache get   # optional; downloads cached Mathlib artifacts when available
 lake build
 ```
 
-This directory is now the actual Lake package root; there is no nested source
-tree to enter first.
+The package is pinned by `lean-toolchain` and `lake-manifest.json`.
 
-## Toolchain
+## Checked Components
 
-- Lean: `v4.30.0-rc1`
-- Dependency: `mathlib4` via `lake-manifest.json`
+- `FiniteQuerySandbox.InfoTheory`: finite PMFs, entropy, conditional entropy,
+  mutual information, conditional mutual information, finite KL nonnegativity,
+  and finite-discrete conditional DPI.
+- `FiniteQuerySandbox.IdentifiabilityGap`: axiom-free construction of two
+  behaviorally equivalent but audit-inequivalent finite PMFs.
+- `FiniteQuerySandbox.DualCertificate`: static and dynamic certificate
+  reductions, including the explicit cut-set premise form and the auxiliary
+  `log₂ |MissingTrace|` cardinality bound.
+- `FiniteQuerySandbox.TraceRecoverability` and `TraceRecoverabilityBridge`:
+  deterministic trace-recoverability core and compatibility theorem
+  (legacy modules: `Screenability`, `ScreenabilityBridge`).
+- `FiniteQuerySandbox.FiniteQueryDecisionImpossibility`,
+  `PredictabilityRouteImpossibility`, and `SeparatedPackingImpossibility`:
+  finite-query, predictability-route, and geometric non-covering impossibility
+  arguments (legacy modules: `Impossibility`, `InternalImpossibility`,
+  `GeometricImpossibility`).
+- `FiniteQuerySandbox.CoveringBound`, `GeometricTools`, and `PACBounds`:
+  covering-to-gap lemmas, finite representation-geometry utilities, and PAC
+  algebraic lower-bound core.
+- `FiniteQuerySandbox.QuotientFactorization`: reader-facing entry point for
+  semantic-closure quotient factorization (legacy module:
+  `SemanticClosureIff`).
 
-## Module Map
+## Naming Guide
 
-- `FiniteQuerySandbox.IdentifiabilityGap`
-  Theorem 1: Output-Trace Identifiability Gap — axiom-free construction of
-  two behaviorally-equivalent but audit-inequivalent PMFs.
-- `FiniteQuerySandbox.DualCertificate`
-  Structural reductions for the static cut-sum bound and dynamic DPI bounds,
-  built over finite-discrete entropy and conditional-MI definitions.
-- `FiniteQuerySandbox.Screenability`
-  Exact deterministic-screenability core for the internal route, including
-  `projection_determined`, `projection_same_trace_eq`,
-  `no_same_trace_projection_variation`, `no_same_trace_IA_witness`, and
-  `no_eis_autoregressive`.
-- `FiniteQuerySandbox.InternalImpossibility`
-  `ε > 0` wrapper-level surrogate using predictability rather than entropy.
-- `FiniteQuerySandbox.Impossibility`
-  Finite-query soundness/completeness impossibility core.
-- `FiniteQuerySandbox.SemanticClosureIff`
-  Semantic closure and encoding-insensitivity equivalence.
-- `FiniteQuerySandbox.CoveringBound`
-  Pointwise covering-to-CFSG bound and high-probability lift.
-- `FiniteQuerySandbox.PACBounds`
-  PAC algebraic core, conditional on explicit external Fano and missed-cell
-  premises.
-- `FiniteQuerySandbox.GeometricImpossibility`
-  Separated-packing non-covering lemma.
+- Migration aliases are provided so existing imports continue to work.
+- Old `Screenability` -> new `TraceRecoverability`.
+- Old `ScreenabilityBridge` -> new `TraceRecoverabilityBridge`.
+- Old `SemanticClosureIff` -> new `QuotientFactorization`.
+- Old `Impossibility` -> new `FiniteQueryDecisionImpossibility`.
+- Old `InternalImpossibility` -> new `PredictabilityRouteImpossibility`.
+- Old `GeometricImpossibility` -> new `SeparatedPackingImpossibility`.
+- `FiniteQuerySandbox` is the historical package namespace retained for
+  compatibility with existing imports and artifact references.
 
-## Scope Notes
+## Scope
 
-This artifact formalizes exact and surrogate cores, plus finite-discrete
-entropy and conditional mutual information formulas. It does not derive the
-measure-theoretic chain rule, cut-set inequality, conditional Markovity,
-conditional DPI, or the statistical Fano / Gaussian-KL derivations.
+The artifact mechanizes the finite discrete information-theory layer used by
+the certificate reductions.  It keeps the cut-set inequality, conditional
+Markovity as a modeling premise, and the statistical Fano/Gaussian-KL
+derivations as explicit external assumptions or paper arguments.
 
-## Layout
-
-- `lakefile.lean`, `lean-toolchain`, `lake-manifest.json`
-  Package entry point and pinned toolchain/dependency metadata.
-- `FiniteQuerySandbox/*.lean`
-  Source files for the formalization.
-- `FiniteQuerySandbox.lean`
-  Root import file for the library.
+Import `FiniteQuerySandbox` to check the full artifact. Import
+`FiniteQueryAudit` for an alternate root name.

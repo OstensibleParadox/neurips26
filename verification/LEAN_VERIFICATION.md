@@ -1,40 +1,56 @@
-# Lean 4 Artifact — Output-Trace Identifiability Gaps in LLM Agent Audit
+# Verification Status
 
-Mechanized core for Theorem 1, Propositions 1–2, and Corollary 5 of the paper.
+This package checks the Lean formalization supporting the paper's finite
+verification claims.
 
-## What is checked
+## Main Statements
 
-| Paper Item | Lean File | Theorem | Status |
+| Paper item | Lean module | Declaration | Status |
 |---|---|---|---|
-| Theorem 1 (Identifiability Gap) | `IdentifiabilityGap.lean` | `identifiability_gap_extremes` | C |
-| Corollary 5 (autoregressive zero-cut) | `Screenability.lean` | `no_eis_autoregressive` | C |
-| Proposition 1 (structural-access closer) | `DualCertificate.lean` | `prop1_static_ub` | C/E |
-| Proposition 2 (gray-box-access closer) | `DualCertificate.lean` | `prop2_dynamic_lb` | C |
+| Identifiability gap | `IdentifiabilityGap` | `identifiability_gap_extremes` | Fully mechanized |
+| Static certificate reduction | `DualCertificate` | `prop1_static_ub` | Mechanized from explicit cut-set premise |
+| Static cardinality corollary | `DualCertificate` | `prop1_static_ub_bounded` | Fully mechanized |
+| Dynamic certificate reduction | `DualCertificate` | `prop2_dynamic_lb` | Fully mechanized from finite DPI |
+| Deterministic trace recoverability | `TraceRecoverability` | `no_internal_witness_trace_recoverability` | Fully mechanized |
 
-C = fully mechanized from Mathlib first principles (Theorem~1 is axiom-free).  
-C/E = structural reduction machine-checked conditional on an explicit external premise.
+## Naming Notes
 
-## What is not formalized
+- New reader-facing modules:
+  `TraceRecoverability`, `TraceRecoverabilityBridge`,
+  `QuotientFactorization`, `FiniteQueryDecisionImpossibility`,
+  `PredictabilityRouteImpossibility`, and `SeparatedPackingImpossibility`.
+- Legacy modules remain supported:
+  `Screenability`, `ScreenabilityBridge`, `SemanticClosureIff`,
+  `Impossibility`, `InternalImpossibility`, and `GeometricImpossibility`.
+- `FiniteQueryAudit` is provided as an alias root module that re-exports
+  `FiniteQuerySandbox`.
 
-Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas over `FinitePMF`, using Mathlib finite sums and real logarithms. Conditional DPI is proved in `InfoTheory.lean` from finite KL nonnegativity and the concrete conditional Markov factorization.
+## Information-Theory Layer
 
-## Build
+`InfoTheory.lean` defines finite PMFs, Shannon entropy in bits, conditional
+entropy, mutual information, conditional mutual information, and finite KL
+terms over real-valued finite sums.  It proves the finite KL nonnegativity
+lemmas, entropy cardinality bound, conditional mutual information
+nonnegativity, and conditional DPI used by the certificate reductions.
 
-Requires Lean 4 (`leanprover/lean4:v4.30.0-rc1`) and Mathlib.
+## External Premises
+
+The artifact deliberately leaves the following as explicit assumptions or paper
+arguments:
+
+- the cut-set/information-flow inequality used as the premise of
+  `prop1_static_ub`;
+- conditional Markovity when used as a modeling assumption;
+- statistical Fano and Gaussian-KL derivations used by the PAC lower-bound
+  narrative.
+
+## Reproducibility
 
 ```bash
 cd verification
-lake exe cache get   # strongly recommended: avoids cold Mathlib build (~30 min)
-lake build           # expected: ~1–5 min with cache, 30–60 min without
+lake exe cache get
+lake build
 ```
 
-`lake exe cache get` downloads prebuilt Mathlib dependency artifacts. On a machine without `elan`, install it first; it reads the pinned toolchain from `lean-toolchain` automatically.
-
-## Module layout
-
-- `FiniteQuerySandbox.InfoTheory` — finite PMF, finite-discrete entropy/conditional-MI definitions, conditional Markovity, and conditional DPI
-- `FiniteQuerySandbox.IdentifiabilityGap` — Theorem 1 (Output-Trace Identifiability Gap), axiom-free
-- `FiniteQuerySandbox.Tools` — list/set utilities
-- `FiniteQuerySandbox.DualCertificate` — Propositions 1–2 structural reductions (gap-closers)
-- `FiniteQuerySandbox.Screenability` — Corollary 5 (autoregressive zero-cut, fully mechanized)
-- `FiniteQuerySandbox.ScreenabilityBridge` — legacy compatibility wrapper around the deterministic no-witness theorem
+The root module `FiniteQuerySandbox` imports all checked modules. You can also
+import `FiniteQueryAudit` as an alternate entry name.

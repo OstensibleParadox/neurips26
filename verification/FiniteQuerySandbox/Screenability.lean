@@ -1,9 +1,10 @@
-import FiniteQuerySandbox.Tools
-
 namespace FiniteQuerySandbox
 
 /-!
 # Deterministic Screenability (ε = 0)
+
+Preferred reader-facing import: `FiniteQuerySandbox.TraceRecoverability`.
+This module is retained as the canonical paper-term entry point.
 
 This module formalizes the autoregressive core case of the internal route:
 when the full endogenous operative state S_t is a deterministic function of
@@ -36,6 +37,9 @@ S_t = f(X_t) and T_t = X_t.
 structure DeterministicScreen (S : Type) (T : Type) where
   /-- Reconstruction: the audit trace determines the full operative state. -/
   recon : T → S
+
+/-- Compatibility alias: deterministic trace recoverability of the operative state. -/
+abbrev TraceRecoverability (S : Type) (T : Type) := DeterministicScreen S T
 
 /--
 Lemma 1 at ε = 0: if S is determined by T, then any projection χ(S)
@@ -110,6 +114,12 @@ structure ExactEISWitness {Ω State Trace Action IState : Type}
   /-- Decision relevance surrogate: same-trace covariation of I and A. -/
   decision_relevance : ∃ ω₁ ω₂ : Ω, T ω₁ = T ω₂ ∧ I ω₁ ≠ I ω₂ ∧ A ω₁ ≠ A ω₂
 
+/-- Compatibility alias for readers outside the paper's EIS terminology. -/
+abbrev ExactInternalWitness {Ω State Trace Action IState : Type}
+    (S : Ω → State) (T : Ω → Trace) (A : Ω → Action)
+    (I : Ω → IState) (chi : State → IState) : Prop :=
+  ExactEISWitness S T A I chi
+
 /--
 Corollary 1: Under a deterministic screen (autoregressive core),
 no admissible projection χ(S_t) can be an exact internal-state witness.
@@ -131,6 +141,15 @@ theorem no_eis_autoregressive {Ω State Trace Action IState : Type}
     apply hI
     rw [h.endogeneity ω₁, h.endogeneity ω₂]
     exact h_eq⟩
+
+/-- Compatibility alias for non-paper terminology. -/
+theorem no_internal_witness_under_trace_recoverability {Ω State Trace Action IState : Type}
+    (screen : TraceRecoverability State Trace)
+    (S : Ω → State) (T : Ω → Trace) (A : Ω → Action)
+    (h_screen : ∀ ω, S ω = screen.recon (T ω))
+    (chi : State → IState) (I : Ω → IState) :
+    ¬ ExactInternalWitness S T A I chi :=
+  no_eis_autoregressive screen S T A h_screen chi I
 
 /--
 Composition: if two deterministic screens compose (T determines S,
