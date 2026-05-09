@@ -1,5 +1,6 @@
 import FiniteQuerySandbox.Tools
 import FiniteQuerySandbox.InfoTheory
+import FiniteQuerySandbox.QuantizedBound
 import FiniteQuerySandbox.IdentifiabilityGap
 import FiniteQuerySandbox.Screenability
 import FiniteQuerySandbox.DualCertificate

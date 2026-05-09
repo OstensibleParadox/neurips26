@@ -8,9 +8,8 @@ namespace FiniteQuerySandbox
 This module formalizes the structural reductions of Proposition 1 (Structural-Access
 Closer) and Proposition 2 (Gray-Box-Access Closer). These correspond to the two
 gap-closers of Theorem~1 (Output-Trace Identifiability Gap). Entropy and conditional
-mutual information are the finite-discrete formulas from `InfoTheory.lean`; only
-the chain rule, cut-set bound, conditional Markovity, and conditional DPI remain
-external.
+mutual information are the finite-discrete formulas from `InfoTheory.lean`;
+conditional DPI is now discharged there from finite KL nonnegativity.
 -/
 
 noncomputable section
@@ -109,7 +108,7 @@ theorem chain_rule (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
 /--
 Software Orthogonality Hypothesis.
 Assumes cut capacity is bounded by the sum of edge capacities.
-Formulated as a predicate to avoid expanding the trusted axiom base.
+Formulated as a predicate to keep the trusted external premise explicit.
 -/
 def software_orthogonal (Cut : Type) (C_cut : Cut → ℝ) (C_edge_sum : Cut → ℝ) (Cuts_U_to_S : Set Cut) : Prop :=
     ∀ Ω ∈ Cuts_U_to_S, C_cut Ω ≤ C_edge_sum Ω

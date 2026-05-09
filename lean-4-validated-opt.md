@@ -300,14 +300,13 @@ The metric-covering extension (PR 7) is not on the axiom-removal critical path. 
 | 2 | Restructure `cut_set_bound` into explicit-premise theorem | 3 -> 3 (cleaner) | Low-Med | 2 days | -- | **Done** |
 | 3 | Define `condMarkov` as `def`, add `marginalXYWMass` | 3 -> 3 (cleaner) | Low-Med | 1 day | -- | **Done** |
 | 4a | Prove `entropy_nonneg`, `pmf_le_one`, marginal lemmas | 3 -> 3 | Low | 2 days | -- | **Done** |
-| 4b | Prove `kl_nonneg` and `entropy_le_log_card` | 3 -> 2 (or 3 -> 2 with 1 ax) | **High** | 3 weeks | 4a | Pending |
-| 5 | Prove `quantized_entropy_bound` | 2 -> 2 | Med | 2 days | 4b | Pending |
-| 6 | Prove `cond_dpi` as theorem | 2 -> 1 (or 3ax -> 2ax with 4b ax) | **High** | 2 weeks | 3, 4b | Pending |
+| 4b | Prove `kl_nonneg` and `entropy_le_log_card` | 3 -> 2 | **High** | 3 weeks | 4a | **Done** |
+| 5 | Prove `quantized_entropy_bound` | 2 -> 2 | Med | 2 days | 4b | **Done** |
+| 6 | Prove `cond_dpi` as theorem | 2 -> 1 | **High** | 2 weeks | 3, 4b | Pending |
 | 7 | Metric covering extension | Stretch | Med-High | -- | -- | Stretch |
 
-**Best case**: 4 axioms -> 1 (just `kl_nonneg` as a standard analytic axiom).
-**Contingency (PR 4b stalls)**: 4 axioms -> 2 (chain_rule + cut_set_bound removed, condMarkov defined; `kl_nonneg` + `cond_dpi` remain as axioms).
-This is still a meaningful reduction: from 4 domain-specific axioms to at most 2, with the remaining one being a standard textbook inequality.
+**Current state**: 4 axioms -> 2 (chain_rule + cut_set_bound removed, condMarkov defined; `kl_nonneg` proved; `cond_dpi` remains as the last axiom).
+**Target**: 4 axioms -> 1 (only `cond_dpi` remains, pending PR 6).
 
 ---
 
@@ -325,10 +324,15 @@ This is still a meaningful reduction: from 4 domain-specific axioms to at most 2
 - `marginalRightMass_le_one` — proved at `InfoTheory.lean:108`
 - **PR 4a: All lemmas proven and compiled. Full done.**
 
+**PR 4b status (verified in code):**
+- `Fintype.card_pos_of_finitePMF` — proved at `InfoTheory.lean:117`
+- `kl_nonneg` — proved at `InfoTheory.lean:132`
+- `entropy_le_log_card` — proved at `InfoTheory.lean:175`
+- **PR 4b: All lemmas proven and compiled. Full done.** Axiom count reduced from 3 to 2 (`cond_dpi` remains).
+
 **Next actions:**
-1. **Start PR 4b.** Prove `kl_nonneg` and `entropy_le_log_card`. This is the new bottleneck. Initial attempt written but contains build errors; needs fixing.
-2. **Decide on the PR 4b contingency** before investing significant time: if `kl_nonneg` is not proved within 2 weeks, axiomatize it with a TODO.
-3. **Do NOT start PR 7.** Remove from the critical path.
+1. **Start PR 6.** Prove `cond_dpi` as a theorem. Depends on PR 3 (`condMarkov` defn) and PR 4b (`kl_nonneg`). This removes the last axiom.
+2. **Do NOT start PR 7.** Remove from the critical path.
 
 ---
 

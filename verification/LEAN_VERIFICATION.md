@@ -9,14 +9,14 @@ Mechanized core for Theorem 1, Propositions 1–2, and Corollary 5 of the paper.
 | Theorem 1 (Identifiability Gap) | `IdentifiabilityGap.lean` | `identifiability_gap_extremes` | C |
 | Corollary 5 (autoregressive zero-cut) | `Screenability.lean` | `no_eis_autoregressive` | C |
 | Proposition 1 (structural-access closer) | `DualCertificate.lean` | `prop1_static_ub` | C/E |
-| Proposition 2 (gray-box-access closer) | `DualCertificate.lean` | `prop2_dynamic_lb` | C/E |
+| Proposition 2 (gray-box-access closer) | `DualCertificate.lean` | `prop2_dynamic_lb` | C |
 
 C = fully mechanized from Mathlib first principles (Theorem~1 is axiom-free).  
-C/E = structural reduction machine-checked conditional on 1 explicit axiom: `cond_dpi`.
+C/E = structural reduction machine-checked conditional on an explicit external premise.
 
 ## What is not formalized
 
-Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas over `FinitePMF`, using Mathlib finite sums and real logarithms. The conditional DPI is declared as an explicit axiom consumed by the structural reductions.
+Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas over `FinitePMF`, using Mathlib finite sums and real logarithms. Conditional DPI is proved in `InfoTheory.lean` from finite KL nonnegativity and the concrete conditional Markov factorization.
 
 ## Build
 
@@ -32,7 +32,7 @@ lake build           # expected: ~1–5 min with cache, 30–60 min without
 
 ## Module layout
 
-- `FiniteQuerySandbox.InfoTheory` — finite PMF, finite-discrete entropy/conditional-MI definitions, conditional Markov/DPI axioms
+- `FiniteQuerySandbox.InfoTheory` — finite PMF, finite-discrete entropy/conditional-MI definitions, conditional Markovity, and conditional DPI
 - `FiniteQuerySandbox.IdentifiabilityGap` — Theorem 1 (Output-Trace Identifiability Gap), axiom-free
 - `FiniteQuerySandbox.Tools` — list/set utilities
 - `FiniteQuerySandbox.DualCertificate` — Propositions 1–2 structural reductions (gap-closers)
