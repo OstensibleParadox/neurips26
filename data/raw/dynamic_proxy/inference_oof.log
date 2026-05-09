@@ -1,46 +1,0 @@
-`torch_dtype` is deprecated! Use `dtype` instead!
-config loaded: model=Qwen/Qwen2.5-7B, layer=24, n_samples=1000
-Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  15%|█▍        | 50/339 [00:00<00:00, 491.29it/s]Loading weights:  29%|██▉       | 100/339 [00:00<00:00, 330.57it/s]Loading weights:  40%|████      | 137/339 [00:00<00:01, 190.26it/s]Loading weights:  48%|████▊     | 162/339 [00:00<00:01, 170.92it/s]Loading weights:  54%|█████▍    | 184/339 [00:00<00:00, 158.47it/s]Loading weights:  60%|█████▉    | 202/339 [00:01<00:00, 151.23it/s]Loading weights:  65%|██████▍   | 220/339 [00:01<00:00, 134.27it/s]Loading weights:  69%|██████▉   | 235/339 [00:01<00:00, 131.53it/s]Loading weights:  73%|███████▎  | 249/339 [00:01<00:00, 129.80it/s]Loading weights:  79%|███████▉  | 268/339 [00:01<00:00, 127.18it/s]Loading weights:  83%|████████▎ | 281/339 [00:01<00:00, 122.48it/s]Loading weights:  87%|████████▋ | 294/339 [00:01<00:00, 116.28it/s]Loading weights:  90%|█████████ | 306/339 [00:02<00:00, 84.53it/s] Loading weights:  93%|█████████▎| 316/339 [00:02<00:00, 67.95it/s]Loading weights:  97%|█████████▋| 328/339 [00:02<00:00, 55.51it/s]Loading weights: 100%|██████████| 339/339 [00:02<00:00, 120.44it/s]
-Found 727 episodes in /Users/ostensible_paradox/Documents/anon/data/episodes
-Saved batch. Total processed: 50
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_ao.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_ap.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_at.txt
-Saved batch. Total processed: 100
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_cp.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_dd.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_dk.txt
-Saved batch. Total processed: 150
-Saved batch. Total processed: 200
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_ga.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_gc.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_hi.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_hm.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_hq.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_ia.txt
-Saved batch. Total processed: 250
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_io.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_iq.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_jw.txt
-Saved batch. Total processed: 300
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_lf.txt
-Saved batch. Total processed: 350
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_ms.txt
-Saved batch. Total processed: 400
-Saved batch. Total processed: 450
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_qa.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_rc.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_rg.txt
-Saved batch. Total processed: 500
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_ts.txt
-Saved batch. Total processed: 550
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_up.txt
-Saved batch. Total processed: 600
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_wk.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_xr.txt
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_xx.txt
-Saved batch. Total processed: 650
-Skipping empty input for /Users/ostensible_paradox/Documents/anon/data/episodes/part_zk.txt
-Saved batch. Total processed: 700
-Saved final batch. Total processed: 701
-Data saved to anon/data/raw/dynamic_proxy/pairs.pt

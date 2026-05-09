@@ -49,8 +49,8 @@ where:
   prompt (L = 24 for Qwen2.5-7B-Instruct, out of 28 layers).
 - `W_U` is the unembedding matrix (shape `[vocab, d_model]`, with
   `d_model = 3584` for Qwen2.5-7B-Instruct).
-- `T_vocab ⊆ vocab` is a curated tool-use token subset: `"click"`, `"type"`,
-  `"search"`, `"scroll"`, `"stop"`, `"{"`, `"call"`, `"tool"`, and model-
+- `T_vocab ⊆ vocab` is a curated tool-use token subset: `"calculator"`, `"search"`,
+  `"email"`, `"calendar"`, `"weather"`, `"{"`, `"call"`, `"tool"`, and model-
   specific special tool tokens (target size 50-200 tokens).
 - `Z_t` is a low-dimensional vector in the tool-use subspace, suitable for
   tractable MI estimation.
@@ -91,16 +91,16 @@ estimate_mi_ce_diff.py          — CE-difference MI lower bound
 estimate_mi_mine.py             — MINE fallback for broad probe
 compute_delta_act_lb.py         — aggregates into δ_act^LB + bootstrap CI
 configs/
-  qwen25_7b_webarena.yaml       — probe layer, T_vocab spec, sample count
+  qwen25_7b_tool_sel.yaml       — probe layer, T_vocab spec, sample count
   infonce_critic.yaml           — InfoNCE critic architecture
 __init__.py                     — empty, makes directory importable
 ```
 
-## Usage (target API once implementation lands)
+## Usage
 
 ```bash
 python run_inference.py \
-    --config configs/qwen25_7b_webarena.yaml \
+    --config configs/qwen25_7b_tool_sel.yaml \
     --out data/processed/qwen25_probe_pairs.pt
 
 python estimate_mi_infonce.py \
@@ -125,18 +125,18 @@ A JSON record of the form:
 ```json
 {
   "model": "Qwen2.5-7B-Instruct",
-  "task": "webarena_5class_tool_selection",
+  "task": "tool_selection_5class",
   "probe": {"layer": 24, "type": "narrow_tool_vocab"},
   "N": 3000,
   "estimators": {
-    "infonce":  {"delta_act_lb_nats": 0.XX, "ci_95": [0.XX, 0.XX]},
-    "ce_diff":  {"delta_act_lb_nats": 0.XX, "ci_95": [0.XX, 0.XX]},
-    "mine":     {"delta_act_lb_nats": 0.XX, "ci_95": [0.XX, 0.XX]}
+    "infonce":  {"delta_act_lb_bits": 0.XX, "ci_95": [0.XX, 0.XX]},
+    "ce_diff":  {"delta_act_lb_bits": 0.XX, "ci_95": [0.XX, 0.XX]},
+    "mine":     {"delta_act_lb_bits": 0.XX, "ci_95": [0.XX, 0.XX]}
   },
-  "delta_act_lb_nats": 0.XX,
+  "delta_act_lb_bits": 0.XX,
   "delta_act_lb_source": "infonce"
 }
 ```
 
-Expected magnitude: `0.5` to `1.5` nats on the 5-class task, with the
-`1.61` nat ceiling from `H(A_t) = log 5`.
+Paper-reported result: `0.0163` bits (InfoNCE), with the `2.32` bit ceiling
+from `H(A_t) = log₂ 5`.

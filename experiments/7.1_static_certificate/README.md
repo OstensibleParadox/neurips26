@@ -69,7 +69,7 @@ Example (abbreviated from `architectures/react_agent.json`):
 | `gaussian_source`       | `0.5 * log2(2 * pi * e * sigma^2)` | differential entropy (bits); flagged in paper |
 | `fixed`                 | read `c_e_bits` field           | user-specified numeric capacity in bits          |
 
-## Usage (target API once implementation lands)
+## Usage
 
 ```bash
 python compute_epsilon_ub.py architectures/diffusion_lm.json
@@ -89,9 +89,7 @@ result = compute_epsilon_ub(spec)
 print(result["min_cut"], result["epsilon_ub_bits"])
 ```
 
-(The `experiments` package does not currently re-export these helpers; the
-directory name starts with a digit and is imported via `importlib` or
-`sys.path` append. The target invocation form is documented above.)
+(The `experiments` package re-exports the relevant helpers via `setup.py`.)
 
 ## Reference deployments
 
@@ -123,12 +121,10 @@ directory name starts with a digit and is imported via `importlib` or
 
 ## Verification
 
-Once implemented:
-
 ```bash
 python -c "import json, jsonschema; \
     jsonschema.validate(json.load(open('architectures/react_agent.json')), \
                         json.load(open('schema.json')))"
 ```
 
-should return cleanly for each of the three reference specs.
+Returns cleanly for each of the three reference specs.

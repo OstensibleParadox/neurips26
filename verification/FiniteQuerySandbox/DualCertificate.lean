@@ -122,8 +122,8 @@ Note: The premise `h_bound` will be discharged by the cut-set bound
 (network info theory) when the full DPI infrastructure is in place.
 -/
 theorem prop1_static_ub
-    (Cut : Type) (C_cut : Cut → ℝ) (Cuts_U_to_S : Set Cut)
-    (Ω : Cut) (hΩ : Ω ∈ Cuts_U_to_S)
+    (Cut : Type) (C_cut : Cut → ℝ)
+    (Ω : Cut)
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
     (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω) :
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := by
@@ -139,7 +139,7 @@ theorem corollary_additive_ub
     (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω)
     (h_ortho : software_orthogonal Cut C_cut C_edge_sum Cuts_U_to_S) :
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_edge_sum Ω := by
-  have h_prop1 := prop1_static_ub Cut C_cut Cuts_U_to_S Ω hΩ P h_bound
+  have h_prop1 := prop1_static_ub Cut C_cut Ω P h_bound
   have h_ortho_bound : C_cut Ω ≤ C_edge_sum Ω := h_ortho Ω hΩ
   calc
     H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := h_prop1

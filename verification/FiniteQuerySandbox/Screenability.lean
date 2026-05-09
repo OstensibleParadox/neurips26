@@ -10,7 +10,7 @@ when the full endogenous operative state S_t is a deterministic function of
 the audit trace T_t, no admissible projection χ(S_t) retains residual
 autonomy.
 
-This corresponds to Corollary 1 of the paper. The ε > 0 (wrapper) case
+This corresponds to Corollary 2 of the paper. The ε > 0 (wrapper) case
 is handled in `InternalImpossibility.lean` using predictability.
 
 The formalization deliberately stops at exact same-trace surrogates rather
