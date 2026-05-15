@@ -1,369 +1,281 @@
 import Mathlib
+import FiniteQuerySandbox.InfoTheory
+import FiniteQuerySandbox.DualCertificate
+
+namespace FiniteQuerySandbox
 
 open Finset
 open scoped BigOperators Real
 
 noncomputable section
 
-/-
-# Cut-Set Bound — 独立抽取
-
-这个文件从 FiniteQuerySandbox 形式化中抽取了 cut-set bound 相关的定义和定理。
-目标受众：数学系同学，他们可能能给 `cut_set_bound` 一个优美的有限离散证明。
-
-## 背景
-
-我们有一个部署系统的 trace，它被分解为两部分：
-  T_full  = (T_tilde, M)      总 trace
-  T_tilde = 可见/记录的 trace 部分
-  M       = 缺失/未记录的 trace 部分（隐藏信道）
-
-S 是系统的隐藏状态。
-
-核心问题：给定 T_tilde，S 有多少残余不确定性？
-
-链式法则给出：
-  H(S | T_tilde) = H(S | T_full) + I(S; M | T_tilde)
-
-其中：
-  H(S | T_tilde)  = 给定可见 trace 后，状态 S 的残余熵
-  H(S | T_full)   = 给定完整 trace 后，状态 S 的残余熵（理论上应该很小/为零）
-  I(S; M | T_tilde) = S 和 M 在给定 T_tilde 下的条件互信息
-
-cut-set bound 应该证明：
-  I(S; M | T_tilde) ≤ C_cut(Ω)
-
-其中 C_cut(Ω) 是时间展开 DAG 上割 Ω 的割容量。
-
-## 当前状态
-
-以下所有定义、引理、定理都已在 Lean 4 中 machine-checked，除了一个：
-`cut_set_bound` 目前被声明为 `axiom`（或作为 hypothesis 传入）。这是需要你来证明的部分。
-
-## 需要证明的陈述
-
-给定：
-  - 时间展开的 DAG G_t = (V_t, E_t)，其中边 e ∈ E_t 携带信道 p_e(y | x)
-  - 一个割 Ω ⊆ V_t，将源节点与目标节点分离
-  - 割容量 C_cut(Ω) = sup_{联合输入分布} I(X_Ω → Y_{Ω^c} | T_tilde, X_{Ω^c})
-
-我们要证明：
-  I(S; M | T_tilde) ≤ C_cut(Ω)
-
-在有限离散情况下，量化到：
-  I(S; M | T_tilde) ≤ min_{cut Ω} sum_{edge e in cut} capacity(e)
-
-其中 capacity(e) 是信道 e 的容量（有限离散情况下 = log₂|X_e| 或更精细的界）。
--/
-
--- ============================================================
--- 第一部分：有限离散概率和信息量定义
--- ============================================================
-
-/-- 有限离散概率质量函数。 -/
-structure FinitePMF (α : Type) [Fintype α] [DecidableEq α] where
-  pmf : α → ℝ
-  pmf_nonneg : ∀ x, 0 ≤ pmf x
-  sum_one : ∑ x : α, pmf x = 1
-
-/-- Shannon 熵的单项 -p log₂ p。 -/
-def negMulLog2 (p : ℝ) : ℝ :=
-  -(p * (Real.log p / Real.log 2))
-
-/-- 质量函数的熵 H(mass) = -∑ mass(x) log₂ mass(x)。 -/
-def entropyOf {η : Type} [Fintype η] [DecidableEq η] (mass : η → ℝ) : ℝ :=
-  ∑ x : η, negMulLog2 (mass x)
-
-/-- PMF 的 Shannon 熵。 -/
-def entropy {α : Type} [Fintype α] [DecidableEq α] (P : FinitePMF α) : ℝ :=
-  entropyOf P.pmf
-
--- ============================================================
--- 第二部分：边缘分布
--- ============================================================
-
-section Marginals
-
-variable {State VisibleTrace MissingTrace : Type}
-variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
-variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
-
-/-- 联合分布 P(S, T_tilde, M) 的 (S, T_tilde)-边缘。 -/
-def stateVisibleMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (st : State × VisibleTrace) : ℝ :=
-  ∑ m : MissingTrace, P.pmf (st.1, st.2, m)
-
-/-- T_tilde 的边缘。 -/
-def visibleMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (t : VisibleTrace) : ℝ :=
-  ∑ s : State, ∑ m : MissingTrace, P.pmf (s, t, m)
-
-/-- (T_tilde, M) 的边缘。 -/
-def visibleMissingMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (tm : VisibleTrace × MissingTrace) : ℝ :=
-  ∑ s : State, P.pmf (s, tm.1, tm.2)
-
-/-- M 的边缘。 -/
-def missingMass (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (m : MissingTrace) : ℝ :=
-  ∑ s : State, ∑ t : VisibleTrace, P.pmf (s, t, m)
-
-end Marginals
-
--- ============================================================
--- 第三部分：条件熵和条件互信息的定义
--- ============================================================
-
-section InformationQuantities
-
-variable {State VisibleTrace MissingTrace : Type}
-variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
-variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
-
-/-- 完整 trace 的联合熵 H(S, T_tilde, M)。 -/
-def fullTraceEntropy (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
-  entropyOf (fun stm : State × VisibleTrace × MissingTrace => P.pmf stm)
-
-/-- H(S | T_tilde) = H(S, T_tilde) - H(T_tilde)。
-    给定可见 trace 后，状态 S 的残余条件熵。 -/
-def H_S_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
-  entropyOf (stateVisibleMass P) - entropyOf (visibleMass P)
-
-/-- H(S | T_full) = H(S, T_tilde, M) - H(T_tilde, M)。
-    给定完整 trace 后，状态 S 的残余条件熵。理论上应为 0 或接近 0。 -/
-def H_S_cond_Tfull (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
-  fullTraceEntropy P - entropyOf (visibleMissingMass P)
-
-/-- I(S; M | T_tilde) = H(S, T_tilde) + H(M, T_tilde) - H(T_tilde) - H(S, M, T_tilde)。
-    S 和 M 在给定 T_tilde 下的条件互信息。这是 cut-set bound 要上界的量。 -/
-def I_S_M_cond_Ttilde (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
-  entropyOf (stateVisibleMass P) +
-    entropyOf (visibleMissingMass P) -
-    entropyOf (visibleMass P) -
-    fullTraceEntropy P
-
-/-- H(M) = -∑ m P(m) log₂ P(m)。
-    缺失 trace 的熵。它的上界是 log₂|M|，但可以通过割容量得到更紧的界。 -/
-def H_M (P : FinitePMF (State × VisibleTrace × MissingTrace)) : ℝ :=
-  entropyOf (missingMass P)
-
-end InformationQuantities
-
--- ============================================================
--- 第四部分：链式法则（已证）
--- ============================================================
-
-section ChainRule
-
 variable {State VisibleTrace MissingTrace : Type}
 variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
 variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
 
 /--
-静态分解恒等式（条件熵的链式法则）：
-  H(S | T_tilde) = H(S | T_full) + I(S; M | T_tilde)
-
-证明：展开所有定义后，左右两边是纯代数恒等式（`ring`）。
+定义通用分布推向 (Pushforward)。
+给定 P : FinitePMF α 和函数 f : α → β，构造在 β 上的分布。
+质量守恒由 Finset.sum_comm 保证。
 -/
-theorem static_decomposition (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
-    H_S_cond_Ttilde P = H_S_cond_Tfull P + I_S_M_cond_Ttilde P := by
-  unfold H_S_cond_Ttilde H_S_cond_Tfull I_S_M_cond_Ttilde fullTraceEntropy
-  ring
-
-end ChainRule
-
--- ============================================================
--- 第五部分：辅助上界（已证）
--- ============================================================
-
-section AuxiliaryBounds
-
-variable {State VisibleTrace MissingTrace : Type}
-variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
-variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
-
-/-- 平凡上界：H(M) ≤ log₂|MissingTrace|。 -/
-lemma H_M_le_log_card_M
-    (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
-    H_M P ≤ Real.log (Fintype.card MissingTrace : ℝ) / Real.log 2 := by
-  -- 这个证明在 InfoTheory.lean 的 entropy_le_log_card 中，此处省略细节
-  sorry
-
-/-- I(S; M | T_tilde) ≤ H(M)。一个经典的信息论不等式。 -/
-lemma I_S_M_cond_Ttilde_le_H_M
-    (P : FinitePMF (State × VisibleTrace × MissingTrace)) :
-    I_S_M_cond_Ttilde P ≤ H_M P := by
-  -- 这个证明在 DualCertificate.lean 的 I_S_M_cond_Ttilde_le_H_M 中
-  sorry
-
-end AuxiliaryBounds
-
--- ============================================================
--- 第六部分：CUT-SET BOUND — 这是需要证明的核心！
--- ============================================================
-
-section CutSetBound
-
-/-
-## 数学陈述
-
-设：
-  G_t = (V_t, E_t)  时间展开的有向无环图
-  S                 源节点（隐藏状态）
-  M                 目标（未记录的 trace 片段）
-  T_tilde           已记录的 trace（条件变量）
-
-对于割 Ω ⊆ V_t（将源与目标分离的节点子集），定义割容量：
-  C_cut(Ω) = sup_{p: 联合输入分布} I(X_Ω → Y_{Ω^c} | T_tilde, X_{Ω^c})
-
-其中 X_Ω 是 Ω 中节点在割上的输出，Y_{Ω^c} 是 Ω^c 中节点的输入。
-
-网络信息论的割集上界定理（El Gamal-Kim 2011, Thm 6.1）说：
-  I(S; M | T_tilde) ≤ C_cut(Ω)
-
-在软件正交性假设下（各信道条件独立），C_cut(Ω) ≤ Σ_{e∈cut} capacity(e)，
-其中 capacity(e) = max_{p(x)} I(X_e; Y_e) 是单边信道容量。
-
-对于有限离散信道，capacity(e) ≤ log₂|X_e|（输入字母表大小的对数）。
-
-## 在下面的 Lean 代码中
-
-我们用一个简化的有限离散形式来陈述。因为当前形式化没有 DAG/信道的基础设施，
-我们用一个参数化的陈述来展示 cut-set bound 的作用。
-
-## 需要你做的
-
-1. 在有限离散情况下，给出 I(S; M | T_tilde) ≤ C_cut(Ω) 的严格证明
-2. 在软件正交性下，证明 C_cut(Ω) ≤ Σ_{e∈cut} log₂|X_e|
-3. 如果可能，给出比 log₂|X_e| 更紧的界（用信道容量的精确值）
-
-理想情况下，证明应该是"优美简洁"的——不需要概率测度论的全部 machinery，
-只需要有限离散求和和 log 不等式。
--/
-
-variable {State VisibleTrace MissingTrace : Type}
-variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
-variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
-
--- 占位：割容量类型。你可以替换为更精确的定义。
-variable (Cut : Type) (C_cut : Cut → ℝ)
+def FinitePMF.map
+    {α β : Type} [Fintype α] [DecidableEq α] [Fintype β] [DecidableEq β]
+    (P : FinitePMF α) (f : α → β) : FinitePMF β where
+  pmf y := ∑ x : α, if f x = y then P.pmf x else 0
+  pmf_nonneg y := by
+    apply Finset.sum_nonneg
+    intro x _
+    by_cases h : f x = y
+    · simp [h, P.pmf_nonneg x]
+    · simp [h]
+  sum_one := by
+    calc
+      ∑ y : β, ∑ x : α, (if f x = y then P.pmf x else 0)
+          = ∑ x : α, ∑ y : β, (if f x = y then P.pmf x else 0) := by
+            exact Finset.sum_comm
+      _ = ∑ x : α, P.pmf x := by
+        apply Finset.sum_congr rfl
+        intro x _
+        calc
+          ∑ y : β, (if f x = y then P.pmf x else 0)
+              = P.pmf x * ∑ y : β, (if f x = y then (1 : ℝ) else 0) := by
+                  rw [Finset.mul_sum]
+                  apply Finset.sum_congr rfl
+                  intro y _
+                  by_cases h : f x = y
+                  · simp [h]
+                  · simp [h]
+          _ = P.pmf x := by simp
+      _ = 1 := P.sum_one
 
 /--
-【需要证明】
-Cut-Set Bound（有限离散版本）。
-
-给定：
-  P     : 联合分布 P(S, T_tilde, M)
-  Ω     : 割（将 S-侧 与 M-侧 分离）
-  C_cut : 割容量函数
-
-证明：
-  I(S; M | T_tilde) ≤ C_cut(Ω)
-
-直观：从 S 流向 M 的互信息被割的容量所限制。
+具体化推向：从 (S, T, M) 映射到 (S, Cut, M, T)。
+变量对应关系：X=S, Y=Cut, Z=M, W=T。
 -/
-/--
-【定理】
-Cut-Set Bound（有限离散版本）。
-
-证明大纲：
-1. 建立马尔可夫链 S - (X_Ω, Y_Ωc, T_tilde) - M (基于图拓扑)。
-2. 使用互信息链式法则展开 I(S, X_Ω, Y_Ωc; M | T_tilde)。
-3. 应用数据处理不等式 (DPI) 证明 I(S; M | T_tilde) ≤ I(X_Ω, Y_Ωc; M | T_tilde)。
-4. 进一步放缩到割容量 C_cut。
--/
-theorem cut_set_bound
+def pmf_from_vars {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (Ω : Cut) :
-    I_S_M_cond_Ttilde P ≤ C_cut Ω := by
-  -- 1. 拓扑分离引理 (S 与 M 在给定割下条件独立)
-  -- have h_markov : IsMarkov S M (CutVariables Ω) T_tilde := sorry
-  
-  -- 2. 链式法则展开
-  -- I(S; M | T_tilde) ≤ I(S, CutVariables Ω; M | T_tilde) := sorry
-  
-  -- 3. 数据处理不等式 (DPI)
-  -- I(S, CutVariables Ω; M | T_tilde) = I(CutVariables Ω; M | T_tilde) + I(S; M | CutVariables Ω, T_tilde)
-  -- 由于 I(S; M | CutVariables Ω, T_tilde) = 0 (由马尔可夫链), 
-  -- 因此 I(S; M | T_tilde) ≤ I(CutVariables Ω; M | T_tilde)
-  
-  -- 4. 最终放缩到容量
-  -- I(CutVariables Ω; M | T_tilde) ≤ C_cut Ω := sorry
-  sorry
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars) :
+    FinitePMF (State × CutVars × MissingTrace × VisibleTrace) :=
+  FinitePMF.map P (fun stm => (stm.1, Ω_vars stm, stm.2.2, stm.2.1))
 
-end CutSetBound
-
--- ============================================================
--- 第七部分：Cut-set bound 的使用方式（已证，依赖上面的 axiom）
--- ============================================================
-
-section UsingCutSetBound
-
-variable {State VisibleTrace MissingTrace : Type}
-variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
-variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
-
-/--
-命题 1（静态证书上界）：
-  H(S | T_tilde) ≤ H(S | T_full) + C_cut(Ω)
-
-证明：链式法则 + cut-set bound，两步代数。
--/
-theorem prop1_static_ub
-    (Cut : Type) (C_cut : Cut → ℝ) (Ω : Cut)
+lemma pmf_from_vars_apply {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω) :
-    H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := by
-  have h_chain := static_decomposition P
-  rw [h_chain]
-  exact add_le_add (le_refl (H_S_cond_Tfull P)) h_bound
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars)
+    (s : State) (k : CutVars) (m : MissingTrace) (t : VisibleTrace) :
+    (pmf_from_vars P Ω_vars).pmf (s, k, m, t) =
+      if Ω_vars (s, t, m) = k then P.pmf (s, t, m) else 0 := by
+  change
+    (∑ x : State × VisibleTrace × MissingTrace,
+      if (x.1, Ω_vars x, x.2.2, x.2.1) = (s, k, m, t) then P.pmf x else 0)
+      =
+        if Ω_vars (s, t, m) = k then P.pmf (s, t, m) else 0
+  by_cases h : Ω_vars (s, t, m) = k
+  · rw [if_pos h]
+    rw [Finset.sum_eq_single (s, t, m)]
+    · simp [h]
+    · intro x _ hx
+      simp only [ite_eq_right_iff]
+      intro hcond
+      exfalso
+      apply hx
+      rcases Prod.ext_iff.mp hcond with ⟨hs, rest⟩
+      rcases Prod.ext_iff.mp rest with ⟨_, rest2⟩
+      rcases Prod.ext_iff.mp rest2 with ⟨hm, ht⟩
+      ext
+      · exact hs
+      · exact ht
+      · exact hm
+    · intro hmem
+      simp at hmem
+  · rw [if_neg h]
+    apply Finset.sum_eq_zero
+    intro x _
+    simp only [ite_eq_right_iff]
+    intro hcond
+    exfalso
+    apply h
+    rcases Prod.ext_iff.mp hcond with ⟨hs, rest⟩
+    rcases Prod.ext_iff.mp rest with ⟨hΩ, rest2⟩
+    rcases Prod.ext_iff.mp rest2 with ⟨hm, ht⟩
+    have hx : x = (s, t, m) := by
+      ext
+      · exact hs
+      · exact ht
+      · exact hm
+    simpa [hx] using hΩ
 
-/--
-软件正交性假设：每条软件信道独立运行，割容量不超过各边容量之和。
--/
-def software_orthogonal (Cut : Type) (C_cut : Cut → ℝ) (C_edge_sum : Cut → ℝ)
-    (Cuts_U_to_S : Set Cut) : Prop :=
-  ∀ Ω ∈ Cuts_U_to_S, C_cut Ω ≤ C_edge_sum Ω
+/-! ### 等价性层：证明边缘分布对应关系 -/
 
-/--
-推论（加性上界形式）：
-  在软件正交性下，H(S | T_tilde) ≤ H(S | T_full) + Σ_{e∈cut} capacity(e)
-
-这是实际部署中用来计算 ε_state^UB 的形式。
--/
-theorem corollary_additive_ub
-    (Cut : Type) (C_cut : Cut → ℝ) (C_edge_sum : Cut → ℝ) (Cuts_U_to_S : Set Cut)
-    (Ω : Cut) (hΩ : Ω ∈ Cuts_U_to_S)
+lemma marginalXWMass_eq_stateVisibleMass {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
-    (h_bound : I_S_M_cond_Ttilde P ≤ C_cut Ω)
-    (h_ortho : software_orthogonal Cut C_cut C_edge_sum Cuts_U_to_S) :
-    H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_edge_sum Ω := by
-  have h_prop1 := prop1_static_ub Cut C_cut Ω P h_bound
-  have h_ortho_bound : C_cut Ω ≤ C_edge_sum Ω := h_ortho Ω hΩ
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars) (st : State × VisibleTrace) :
+    marginalXWMass (pmf_from_vars P Ω_vars) (st.1, st.2) = stateVisibleMass P st := by
+  unfold marginalXWMass stateVisibleMass
   calc
-    H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut Ω := h_prop1
-    _ ≤ H_S_cond_Tfull P + C_edge_sum Ω :=
-      add_le_add (le_refl (H_S_cond_Tfull P)) h_ortho_bound
+    ∑ k : CutVars, ∑ m : MissingTrace, (pmf_from_vars P Ω_vars).pmf (st.1, k, m, st.2)
+        =
+      ∑ k : CutVars, ∑ m : MissingTrace,
+        if Ω_vars (st.1, st.2, m) = k then P.pmf (st.1, st.2, m) else 0 := by
+          simp [pmf_from_vars_apply]
+    _ =
+      ∑ m : MissingTrace, ∑ k : CutVars,
+        if Ω_vars (st.1, st.2, m) = k then P.pmf (st.1, st.2, m) else 0 := by
+          rw [Finset.sum_comm]
+    _ = ∑ m : MissingTrace, P.pmf (st.1, st.2, m) := by
+          simp
 
-end UsingCutSetBound
+lemma marginalWMass_eq_visibleMass {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars) (t : VisibleTrace) :
+    marginalWMass (pmf_from_vars P Ω_vars) t = visibleMass P t := by
+  unfold marginalWMass visibleMass
+  calc
+    ∑ s : State, ∑ k : CutVars, ∑ m : MissingTrace,
+        (pmf_from_vars P Ω_vars).pmf (s, k, m, t)
+        =
+      ∑ s : State, ∑ k : CutVars, ∑ m : MissingTrace,
+        if Ω_vars (s, t, m) = k then P.pmf (s, t, m) else 0 := by
+          simp [pmf_from_vars_apply]
+    _ =
+      ∑ s : State, ∑ m : MissingTrace, ∑ k : CutVars,
+        if Ω_vars (s, t, m) = k then P.pmf (s, t, m) else 0 := by
+          apply Finset.sum_congr rfl
+          intro s _
+          rw [Finset.sum_comm]
+    _ = ∑ s : State, ∑ m : MissingTrace, P.pmf (s, t, m) := by
+          simp
 
-/-
-## 总结
+lemma marginalZWMass_eq_visibleMissingMass_swap {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars) (mt : MissingTrace × VisibleTrace) :
+    marginalZWMass (pmf_from_vars P Ω_vars) mt = visibleMissingMass P (mt.2, mt.1) := by
+  unfold marginalZWMass visibleMissingMass
+  change
+    (∑ s : State, ∑ k : CutVars, (pmf_from_vars P Ω_vars).pmf (s, k, mt.1, mt.2))
+      =
+        ∑ s : State, P.pmf (s, mt.2, mt.1)
+  calc
+    ∑ s : State, ∑ k : CutVars, (pmf_from_vars P Ω_vars).pmf (s, k, mt.1, mt.2)
+        =
+      ∑ s : State, ∑ k : CutVars,
+        if Ω_vars (s, mt.2, mt.1) = k then P.pmf (s, mt.2, mt.1) else 0 := by
+          apply Finset.sum_congr rfl
+          intro s _
+          apply Finset.sum_congr rfl
+          intro k _
+          simpa using pmf_from_vars_apply P Ω_vars s k mt.1 mt.2
+    _ = ∑ s : State, P.pmf (s, mt.2, mt.1) := by
+          simp
 
-这个文件的核心未解决问题是 `cut_set_bound`（第 181 行附近的 `axiom`）。
+lemma marginalXZWMass_eq_P_swap {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars) (smt : State × MissingTrace × VisibleTrace) :
+    marginalXZWMass (pmf_from_vars P Ω_vars) smt = P.pmf (smt.1, smt.2.2, smt.2.1) := by
+  unfold marginalXZWMass
+  change
+    (∑ k : CutVars, (pmf_from_vars P Ω_vars).pmf (smt.1, k, smt.2.1, smt.2.2))
+      =
+        P.pmf (smt.1, smt.2.2, smt.2.1)
+  calc
+    ∑ k : CutVars, (pmf_from_vars P Ω_vars).pmf (smt.1, k, smt.2.1, smt.2.2)
+        =
+      ∑ k : CutVars,
+        if Ω_vars (smt.1, smt.2.2, smt.2.1) = k
+          then P.pmf (smt.1, smt.2.2, smt.2.1)
+          else 0 := by
+          apply Finset.sum_congr rfl
+          intro k _
+          simpa using pmf_from_vars_apply P Ω_vars smt.1 k smt.2.1 smt.2.2
+    _ = P.pmf (smt.1, smt.2.2, smt.2.1) := by
+          simp
 
-所有其他定理（`static_decomposition`、`prop1_static_ub`、`corollary_additive_ub`）
-都已在 Lean 4 中 machine-checked，它们只依赖 `cut_set_bound` 这一个外部假设。
-
-如果你能给 `cut_set_bound` 一个有限离散的 machine-checkable 证明，
-那么整个静态证书 pipeline 就完全形式化了。
-
-## 给数学系同学的方向提示
-
-1. **有限离散情况**：所有随机变量取值有限，所以不需要测度论。上确界变成有限 max。
-2. **DAG 展开**：时间展开图是有向无环的，可以用拓扑排序做归纳。
-3. **d-分离**：在因果图模型中，给定 T_tilde 后，S 和 M 被割 Ω d-分离。
-4. **信道容量**：对于有限离散无记忆信道，C = max_{p(x)} I(X; Y)，可以精确计算。
-5. **参考**：El Gamal & Kim (2011), "Network Information Theory", Theorem 6.1（割集上界）；
-   Cover & Thomas (2006), Chapter 15（网络信息论）。
+/-- 
+核心等价性：原始互信息等于推向后的四变量互信息。
+证明思路：将 CMI 拆解为四个熵项，分别利用边缘等价性和熵的置换不变性证明相等。
 -/
+lemma I_original_eq_I_XZ_W_pmf_from_vars {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars) :
+    I_S_M_cond_Ttilde P = I_XZ_W (pmf_from_vars P Ω_vars) := by
+  let P4 := pmf_from_vars P Ω_vars
+  
+  have hXW : entropyOf (marginalXWMass P4) = entropyOf (stateVisibleMass P) := by
+    unfold entropyOf
+    apply sum_congr rfl
+    intro xw _
+    rw [marginalXWMass_eq_stateVisibleMass]
+
+  have hZW : entropyOf (marginalZWMass P4) = entropyOf (visibleMissingMass P) := by
+    let e : (MissingTrace × VisibleTrace) ≃ (VisibleTrace × MissingTrace) := Equiv.prodComm MissingTrace VisibleTrace
+    exact entropyOf_equiv_eq e (fun mt => marginalZWMass P4 mt) (visibleMissingMass P)
+      (fun mt => by simpa using marginalZWMass_eq_visibleMissingMass_swap P Ω_vars mt)
+
+  have hW : entropyOf (marginalWMass P4) = entropyOf (visibleMass P) := by
+    unfold entropyOf
+    apply sum_congr rfl
+    intro w _
+    rw [marginalWMass_eq_visibleMass]
+
+  have hXZW : entropyOf (marginalXZWMass P4) = fullTraceEntropy P := by
+    let e : (State × MissingTrace × VisibleTrace) ≃ (State × VisibleTrace × MissingTrace) := 
+      (Equiv.refl State).prodCongr (Equiv.prodComm MissingTrace VisibleTrace)
+    unfold fullTraceEntropy
+    exact entropyOf_equiv_eq e (fun smt => marginalXZWMass P4 smt) P.pmf
+      (fun smt => by simpa using marginalXZWMass_eq_P_swap P Ω_vars smt)
+
+  unfold I_S_M_cond_Ttilde I_XZ_W
+  rw [hXW, hZW, hW, hXZW]
+
+/-! ### 推理层：分层证明 Cut-Set Bound -/
+
+/--
+DPI 瓶颈定理：由条件马尔可夫性推出的信息流限制。
+I(S; M | T_tilde) ≤ I(Cut; M | T_tilde)
+-/
+theorem cut_set_dpi_bound {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars)
+    (h_markov : condMarkov (pmf_from_vars P Ω_vars)) :
+    I_S_M_cond_Ttilde P ≤ I_YZ_W (pmf_from_vars P Ω_vars) := by
+  let P4 := pmf_from_vars P Ω_vars
+  have h_eq : I_S_M_cond_Ttilde P = I_XZ_W P4 := 
+    I_original_eq_I_XZ_W_pmf_from_vars P Ω_vars
+  have h_dpi : I_XZ_W P4 ≤ I_YZ_W P4 := 
+    cond_dpi P4 h_markov
+  calc
+    I_S_M_cond_Ttilde P = I_XZ_W P4 := h_eq
+    _ ≤ I_YZ_W P4 := h_dpi
+
+/--
+抽象 Cut-Set Bound 定理。
+连接拓扑瓶颈 (DPI) 与具体的容量上界 (h_cap)。
+-/
+theorem abstract_cut_set_bound
+    {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars)
+    (C_cut_Ω : ℝ)
+    (h_markov : condMarkov (pmf_from_vars P Ω_vars))
+    (h_cap : I_YZ_W (pmf_from_vars P Ω_vars) ≤ C_cut_Ω) :
+    I_S_M_cond_Ttilde P ≤ C_cut_Ω := by
+  exact le_trans (cut_set_dpi_bound P Ω_vars h_markov) h_cap
+
+/--
+从切集前提出发推导状态熵的上界。
+这是连接拓扑分析与最终安全结论的便捷入口。
+-/
+theorem prop1_static_ub_from_cut
+    {CutVars : Type} [Fintype CutVars] [DecidableEq CutVars]
+    (P : FinitePMF (State × VisibleTrace × MissingTrace))
+    (Ω_vars : (State × VisibleTrace × MissingTrace) → CutVars)
+    (C_cut_Ω : ℝ)
+    (h_markov : condMarkov (pmf_from_vars P Ω_vars))
+    (h_cap : I_YZ_W (pmf_from_vars P Ω_vars) ≤ C_cut_Ω) :
+    H_S_cond_Ttilde P ≤ H_S_cond_Tfull P + C_cut_Ω := by
+  -- 使用 DualCertificate.lean 中的 prop1_static_ub
+  apply prop1_static_ub Unit (fun _ => C_cut_Ω) () P
+  exact abstract_cut_set_bound P Ω_vars C_cut_Ω h_markov h_cap
+
+end
+
+end FiniteQuerySandbox
