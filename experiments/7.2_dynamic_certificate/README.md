@@ -81,6 +81,22 @@ max of the three is a valid `δ_act^LB`.
    - Variational donsker-varadhan bound with a neural critic.
    - Used only if the narrow probe is underpowered.
 
+## Methodology note (May 2026)
+
+The CE-difference estimator is sanity-hardened via `diagnose_v3.py`:
+- **StratifiedGroupKFold** outer CV (no task leakage across train/test splits)
+- **Group-aware inner CV** via GridSearchCV + GroupKFold (C selection clean)
+- **Independent RNG seeds** for label-shuffle vs Z-permutation controls
+- **Deterministic PCA** (`svd_solver="full"`) + subspace angle stability check
+- **Repeated null suite** (B=20–100 label shuffles) → null p95 → null-corrected gap
+- **Per-fold generalization diagnostics** (missing classes, uniform/prior CE baselines)
+
+Null gate: any null control with |gap| > 0.5 bits → pipeline invalid for that condition.
+Conservative certificate: `δ_act^LB = max(0, raw_gap − null_p95)`.
+
+At debug scale (N=200, 10 unique tasks), per-fold missing-class warnings are expected
+and resolve naturally at production scale (N≥3000, ≥300 unique tasks).
+
 ## Files
 
 ```
@@ -90,6 +106,13 @@ estimate_mi_infonce.py          — InfoNCE MI lower bound
 estimate_mi_ce_diff.py          — CE-difference MI lower bound
 estimate_mi_mine.py             — MINE fallback for broad probe
 compute_delta_act_lb.py         — aggregates into δ_act^LB + bootstrap CI
+diagnose_v3.py                  — sanity-hardened proxy CE-diff pipeline
+                                  (StratifiedGroupKFold, null suite, fold diagnostics)
+diagnose_v2.py                  — earlier version (kept for reference; use v3)
+diagnose_proxy_dim.py           — original proxy-dim sweep (v1, has PCA leakage)
+run_proxy_ablation.py           — proxy resolution ablation sweep
+run_proxy_dormant_active.py     — dormant (calculator) vs active (planning) split
+render_figure_proxy.py          — render proxy ablation figure
 configs/
   qwen25_7b_tool_sel.yaml       — probe layer, T_vocab spec, sample count
   infonce_critic.yaml           — InfoNCE critic architecture

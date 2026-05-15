@@ -387,14 +387,13 @@ the convex function φ(t) = t·log₂(t).
 -/
 lemma I_A_cond_B_C_nonneg (P : FinitePMF (α × β × γ)) :
     0 ≤ I_A_cond_B_C P := by
-  unfold I_A_cond_B_C
-  -- Need to show: H(A,C) + H(B,C) ≥ H(C) + H(A,B,C)
-  -- Equivalently: I(A, B; C) ≥ I(A; C)  (from the chain rule)
-  -- Or: I(A; B | C) ≥ 0.
-  -- This is a known theorem requiring the log-sum inequality or equivalent.
-  -- See Cover & Thomas, Theorem 2.6.3 (non-negativity of conditional mutual info).
-  -- The existing CutSetBoundExtract assumes I_S_M_cond_Ttilde ≥ 0 implicitly.
-  sorry
+  have h_eq : I_A_cond_B_C P = FiniteQuerySandbox.condMutualInfo P := by
+    unfold I_A_cond_B_C FiniteQuerySandbox.condMutualInfo
+    unfold marginalAC marginalBC marginalC
+    unfold FiniteQuerySandbox.marginalXZMass FiniteQuerySandbox.marginalYZMass FiniteQuerySandbox.marginalZMass
+    simp
+  rw [h_eq]
+  exact FiniteQuerySandbox.condMutualInfo_nonneg P
 
 /--
 Data Processing Inequality:

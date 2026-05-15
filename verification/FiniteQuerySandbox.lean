@@ -4,6 +4,8 @@ import FiniteQuerySandbox.QuantizedBound
 import FiniteQuerySandbox.IdentifiabilityGap
 import FiniteQuerySandbox.CMI_Nonneg
 import FiniteQuerySandbox.DualCertificate
+import FiniteQuerySandbox.ChannelCapacity
+import FiniteQuerySandbox.CaseStudy
 import CutSetBoundExtract
 import FiniteQuerySandbox.TraceRecoverability
 import FiniteQuerySandbox.TraceRecoverabilityBridge

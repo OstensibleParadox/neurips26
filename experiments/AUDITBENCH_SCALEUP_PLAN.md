@@ -71,7 +71,7 @@ same scratchpad topology, fixed static capacity, different behavioral activation
 ### Metrics Per Cell
 
 - `epsilon_state_UB`.
-- `delta_act_LB`.
+- `delta_act_LB` (null-corrected: raw_gap − null_p95, gated at |null_gap| < 0.5 bits).
 - JS divergence in bits.
 - CE gap.
 - `argmax_action_flip_rate`.
@@ -84,10 +84,15 @@ same scratchpad topology, fixed static capacity, different behavioral activation
 ### Required Controls
 
 - Null replay.
-- Random hidden channel.
+- Random hidden channel (gaussian-Z).
 - Wrong module intervention.
-- Same visible trace, shuffled hidden state.
+- Same visible trace, shuffled hidden state (permuted-Z).
+- Independent-RNG label-shuffle (repeated B=100 null suite).
 - Perturbation sweep for mask/replace interventions.
+
+All null controls are gated: any control with |gap| > 0.5 bits invalidates the
+proxy pipeline for that condition. Implemented in `diagnose_v3.py` and enforced
+at scale via the same StratifiedGroupKFold + null-suite infrastructure.
 
 ### Core Figure
 
@@ -230,7 +235,8 @@ AuditBench should be a benchmark artifact, not only a pile of experiment logs.
 4. Standard task families.
 5. Standard estimators:
    - JS divergence.
-   - CE gap.
+   - CE gap (sanity-hardened: StratifiedGroupKFold, null suite gating,
+     per-fold generalization diagnostics, conservative certificate).
    - bootstrap CI.
    - static min-cut capacity.
 6. Standard outputs:
@@ -329,7 +335,7 @@ run_id = hash(
 - `probe_validity_control`.
 - `off_manifold_score`.
 - `epsilon_state_UB`.
-- `delta_act_LB`.
+- `delta_act_LB` (null-corrected: raw_gap − null_p95, gated at |null_gap| < 0.5 bits).
 - `bootstrap_CI_low`.
 - `bootstrap_CI_high`.
 

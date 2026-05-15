@@ -78,6 +78,10 @@ python experiments/7.1_static_certificate/render_figure.py \
 
 **Purpose:** Estimate $\delta_\text{act}^\text{LB}$ via observational proxy + CE-diff.
 
+**Sanity check:** `diagnose_v3.py` validates the proxy pipeline at debug scale before
+cluster runs — StratifiedGroupKFold, null suite gating, per-fold generalization
+diagnostics. See `experiments/7.2_dynamic_certificate/README.md` for details.
+
 ### 2a. Run inference (mixed tool-selection, 3000 trajectories)
 
 ```bash
@@ -287,7 +291,8 @@ python experiments/7.1_static_certificate/run_logging_ablation.py \
     --spec architectures/react_agent_extracted.json \
     --out data/processed/logging_ablation_extracted.json
 
-# 2. Proxy certificate (mixed dataset)
+# 2. Proxy certificate (sanity check first, then production)
+python experiments/7.2_dynamic_certificate/diagnose_v3.py
 python experiments/7.2_dynamic_certificate/run_inference.py \
     --config experiments/7.2_dynamic_certificate/configs/production.yaml
 python experiments/7.2_dynamic_certificate/run_proxy_ablation.py \

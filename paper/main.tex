@@ -1,3 +1,7 @@
+% NeurIPS 2026 Submission Draft
+% Protocol-first rebuild: audit procedure is narrative center.
+% Prop A and Prop B are justifications of procedure steps.
+
 \documentclass{article}
 \usepackage{neurips_2026}
 \usepackage[utf8]{inputenc}
@@ -36,7 +40,7 @@
 \maketitle
 
 \begin{abstract}
-Auditing a deployed language-model agent requires two separable quantities: how much operative state escapes the recorded trace, and how much of that residual state drives behavior. We introduce a dual-certificate protocol. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual hidden-state entropy by a min-cut on untraced channels. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance through an admissible probe taxonomy---replay, intervention, proxy---under conditional data processing. The two axes are independent. In ReAct experiments, logging ablates the static bound from $16{,}464$ to $0$ bits; controlled replay separates dormant calculator from active planning tasks under the same topology as a soft policy shift ($0.0163$ bits, 95\% CI $[0.0124,0.0208]$) with argmax tool selections unchanged. Indexing $\delta_\text{act}^\text{LB}$ over hidden-channel coordinates produces an activation profile. On an LLaDA denoising trajectory, perturbations stay near the floor through early steps and rise at the final binding step ($0.110$ bits, 95\% CI $[0.052,0.234]$). On a multi-agent communication edge, swapping a worker's private report gives $0.901$ bits, 95\% CI $[0.873,0.928]$. A Lean 4 artifact mechanizes the autoregressive zero-cut case and reduces the certificate algebra to four explicit information-theoretic axioms.
+Auditing a deployed language-model agent requires two separable quantities: how much operative state escapes the recorded trace, and how much of that residual state drives behavior. We introduce a dual-certificate protocol. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual hidden-state entropy by a min-cut on untraced channels. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance through an admissible probe taxonomy---replay, intervention, proxy---under conditional data processing. The two axes are independent. In ReAct experiments, logging ablates the static bound from $16{,}464$ to $0$ bits; controlled replay separates dormant calculator from active planning tasks under the same topology as a soft policy shift ($0.0163$ bits, 95\% CI $[0.0124,0.0208]$) with argmax tool selections unchanged. Indexing $\delta_\text{act}^\text{LB}$ over hidden-channel coordinates produces an activation profile. On an LLaDA denoising trajectory, perturbations stay near the floor through early steps and rise at the final binding step ($0.110$ bits, 95\% CI $[0.052,0.234]$). On a multi-agent communication edge, swapping a worker's private report gives $0.901$ bits, 95\% CI $[0.873,0.928]$. A Lean 4 artifact mechanizes the autoregressive zero-cut case and proves the conditional-DPI and chain-rule reductions from Mathlib first principles, with only the cut-set capacity bound remaining as an external structural premise.
 \end{abstract}
 
 % ---------------------------------------------------------------------------
@@ -56,7 +60,7 @@ Conditioning on $\tilde T_t$ is part of the protection, not a nuisance term. If 
 
 \textbf{Contributions.} We define a dual-certificate framework $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$ for agent audit. Proposition~\ref{prop:static-ub} gives a topological upper bound on residual hidden-state entropy via a min-cut on untraced channels. Proposition~\ref{prop:dynamic-lb} is not a new information-theoretic inequality; it is the audit reduction that turns conditional DPI into three admissible lower-bound probes---replay, intervention, and proxy---for residual decision relevance.
 
-We evaluate the protocol on three residual-state geometries: a ReAct scratchpad module, a diffusion-LM denoising trajectory, and a multi-agent private-report edge. The same calculation is reused across these settings, but the index changes from module to time step to communication edge. Appendix calibrations cover read-only proxy estimation and a synthetic ground-truth setting where the static bound matches true hidden-state entropy. A Lean 4 artifact mechanizes Corollary~\ref{cor:auto-exact} from Mathlib first principles and reduces Propositions~\ref{prop:static-ub}--\ref{prop:dynamic-lb} to four explicit external information-theoretic axioms (chain rule, cut-set bound, conditional Markov, conditional DPI) declared in \S\ref{sec:external-axioms}.
+We evaluate the protocol on three residual-state geometries: a ReAct scratchpad module, a diffusion-LM denoising trajectory, and a multi-agent private-report edge. The same calculation is reused across these settings, but the index changes from module to time step to communication edge. Appendix calibrations cover read-only proxy estimation and a synthetic ground-truth setting where the static bound matches true hidden-state entropy. A Lean 4 artifact mechanizes Corollary~\ref{cor:auto-exact} from Mathlib first principles and proves the trace-gap chain rule and conditional DPI from finite-discrete definitions, with only the cut-set capacity bound remaining as an external structural premise for Proposition~\ref{prop:static-ub}. (See \S\ref{sec:external-axioms} for the precise boundary.)
 
 % ---------------------------------------------------------------------------
 \section{Related Work}
@@ -545,7 +549,7 @@ Increasing decoding temperature can raise $H(A_t \mid \tilde T_t)$, but independ
 
 The existing Lean 4 artifacts (\texttt{Screenability.lean}, \texttt{InternalImpossibility.lean}) are reinterpreted as machine-verified instances of the autoregressive zero-cut special case of Proposition~\ref{prop:static-ub} (Corollary~\ref{cor:auto-exact}). The file \texttt{DualCertificate.lean} formalizes structural reductions corresponding to the static-certificate cut-sum bound and the conditional-DPI dynamic certificate.
 
-The artifact uses an axiomatic interface for measure-theoretic information theory: the structural reductions are machine-checked, while the underlying chain-rule, cut-set, and DPI facts are imported as \texttt{axiom}s and listed in \S\ref{sec:external-axioms}.
+The artifact uses an axiomatic interface for measure-theoretic information theory: the structural reductions are machine-checked, while the cut-set capacity inequality is imported as an \texttt{axiom}. The remaining three facts listed in \S\ref{sec:external-axioms}---trace-gap chain rule, conditional Markov property, and conditional DPI---are proved from Mathlib first principles using finite-discrete entropy formulas over \texttt{FinitePMF}.
 
 \begin{table}[h]
 \centering
@@ -559,21 +563,20 @@ Prop~\ref{prop:static-ub} (General cut-sum) & DualCertificate & \texttt{prop1\_s
 Prop~\ref{prop:dynamic-lb} (Conditional DPI) & DualCertificate & \texttt{prop2\_dynamic\_lb} & C/E \\
 \bottomrule
 \end{tabular}
-\caption{C = machine-checked from Mathlib first principles. C/E = structural reduction is machine-checked conditional on the four axioms listed below. Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas using Mathlib finite sums and real logarithms; the four axioms in \S\ref{sec:external-axioms} remain external.}
+\caption{C = machine-checked from Mathlib first principles. C/E = structural reduction is machine-checked conditional on the cut-set capacity axiom listed below. Entropy, conditional entropy, and conditional mutual information are defined by finite-discrete formulas using Mathlib finite sums and real logarithms. The trace-gap chain rule, conditional Markov property, and conditional DPI are proved from these definitions; only the cut-set capacity inequality (\S\ref{sec:external-axioms}) remains external.}
 \label{tab:lean}
 \end{table}
 
 \subsection{External / Assumed Steps}
 \label{sec:external-axioms}
 
-The following are imported as explicit Lean \texttt{axiom}s and consumed by downstream machine-checked proofs:
+The following is imported as an explicit Lean \texttt{axiom} and consumed by the downstream machine-checked proof of Proposition~\ref{prop:static-ub}:
 
 \begin{itemize}
-  \item \textbf{For Prop 1:} \texttt{chain\_rule} (trace-gap chain rule of conditional entropy across the visible/full-trace decomposition); \texttt{cut\_set\_bound} (network-information-theoretic cut-set inequality on the time-unrolled DAG).
-  \item \textbf{For Prop 2:} \texttt{condMarkov} (conditional Markov property of probe variables); \texttt{cond\_dpi} (conditional Data Processing Inequality).
+  \item \textbf{For Prop 1:} \texttt{cut\_set\_bound} (network-information-theoretic cut-set inequality on the time-unrolled DAG).
 \end{itemize}
 
-The artifact verifies a structural reduction: that the main-text propositions follow from these axioms by elementary algebraic manipulation. It does not derive the axioms themselves from Lean's measure-theoretic foundations.
+The trace-gap chain rule (\texttt{chain\_rule}), the conditional Markov property (\texttt{condMarkov}), and the conditional Data Processing Inequality (\texttt{cond\_dpi}) are \emph{not} axioms: they are proved from Mathlib first principles using finite-discrete entropy formulas over \texttt{FinitePMF}. The artifact verifies that the main-text propositions follow from the cut-set premise by elementary algebraic manipulation. It does not derive the cut-set bound itself from Lean's measure-theoretic foundations.
 
 % ---------------------------------------------------------------------------
 \section{Synthetic Ground-Truth Validation}
