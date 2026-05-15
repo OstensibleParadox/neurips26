@@ -1,0 +1,47 @@
+{
+  "calculator_dormant": {
+    "delta_act_lb_nats": 0.0,
+    "delta_act_lb_bits": 0.0,
+    "ci_95_bits": [
+      0.0,
+      0.0
+    ],
+    "n": 200,
+    "n_classes": 1,
+    "note": "single class \u2014 no MI possible, trivially zero"
+  },
+  "planning_active": {
+    "delta_act_lb_nats": -0.06104281635484801,
+    "delta_act_lb_bits": -0.08806616843703494,
+    "n": 200,
+    "n_classes": 3,
+    "ci_95_bits": [
+      -0.11391803248971251,
+      -0.059546786200162044
+    ],
+    "ci_method": "sample",
+    "ci_95_task_block_bits": [
+      -0.11438204584558379,
+      -0.06058794076682175
+    ],
+    "ci_method_task_block": "task_block",
+    "n_tasks": 10
+  },
+  "planning_perturbed": {
+    "delta_act_lb_nats": 0.0012570083525037523,
+    "delta_act_lb_bits": 0.0018134797165131695,
+    "n": 200,
+    "n_classes": 3,
+    "ci_95_bits": [
+      -0.07806019678473289,
+      0.08357329011678422
+    ],
+    "ci_method": "sample",
+    "ci_95_task_block_bits": [
+      -0.07388431404873361,
+      0.08678510269366564
+    ],
+    "ci_method_task_block": "task_block",
+    "n_tasks": 10
+  }
+}
