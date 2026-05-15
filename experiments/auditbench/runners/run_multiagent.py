@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import sys
+import traceback
 import numpy as np
 from pathlib import Path
 
@@ -71,7 +72,9 @@ def simulate_multiagent_inference(params: dict, mock: bool) -> dict:
             
     base_argmax = max(base_dist, key=base_dist.get)
     
-    # Lookup table for expected JS divergence bits
+    # MOCK ONLY — these values are calibration targets from the proof-of-concept
+    # (paper Table 4), not simulated measurements. The real runner must compute JS
+    # from actual controller action distributions.
     js_table = {
         "1_worker_to_controller": {"counterfactual": 0.901, "neutral": 0.02, "control": 0.0},
         "3_workers_majority_vote": {"counterfactual": 0.60, "neutral": 0.05, "control": 0.0},
@@ -106,13 +109,14 @@ def simulate_multiagent_inference(params: dict, mock: bool) -> dict:
 
     # Static capacities based on topology
     if "majority" in topology:
-        eps_ub = 8192.0 * 3
+        eps_ub = 32768.0  # peer report unlogged — same bottleneck as single worker (worker→controller edge)
     else:
-        eps_ub = 8192.0
+        eps_ub = 32768.0  # single worker — peer report unlogged
         
     import hashlib
     
     return {
+        # TODO(real): hash the actual multi-agent visible trace (worker reports + controller decision sequence)
         "visible_trace_hash": hashlib.sha256(params["task_id"].encode()).hexdigest(),
         "hidden_channel_id": "worker_report",
         "intervention_payload_hash": hashlib.sha256(condition.encode()).hexdigest(),
@@ -140,7 +144,8 @@ def main():
     try:
         params = json.loads(base64.b64decode(args.params_b64).decode('utf-8'))
     except Exception as e:
-        print(f"Error: Invalid Base64/JSON params provided for job {args.run_id}: {e}")
+        print(f"Error: Invalid Base64/JSON params provided for job {args.run_id}: {e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
         
     print(f"Starting Multi-Agent simulation for job {args.run_id}...")
@@ -148,7 +153,8 @@ def main():
     try:
         results = simulate_multiagent_inference(params, mock=args.mock)
     except Exception as e:
-        print(f"Inference execution failed: {e}")
+        print(f"Inference execution failed: {e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
         
     record_data = {**params, **results}
@@ -157,7 +163,8 @@ def main():
     try:
         record = RunRecord.model_validate(record_data)
     except Exception as e:
-        print(f"Schema validation failed:\n{e}")
+        print(f"Schema validation failed:\n{e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
         
     output_file = OUTPUT_DIR / f"{args.run_id}.jsonl"

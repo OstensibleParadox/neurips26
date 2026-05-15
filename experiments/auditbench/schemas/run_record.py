@@ -33,6 +33,7 @@ class RunRecord(BaseModel):
     bootstrap_CI_high: float
     
     # Optional fields for specific runners (Diffusion, Multi-Agent)
+    sampling_temperature: Optional[float] = None
     decoding_policy: Optional[str] = None
     perturbation_sigma: Optional[float] = None
     denoising_steps: Optional[int] = None

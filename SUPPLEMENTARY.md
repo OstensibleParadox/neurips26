@@ -5,7 +5,7 @@ This archive contains code, data, precomputed results, and the Lean 4 formalizat
 ## Contents
 
 ```
-experiments/                     # Experiment pipelines (§5.1–§5.5)
+experiments/                     # Experiment pipelines (§6.1–§6.2, Appendix B, Appendix E)
   7.1_static_certificate/        # Static certificate (min-cut, logging ablation)
   7.2_dynamic_certificate/       # Dynamic certificate (proxy/infonce/mine)
   7.3_intervention/              # Intervention & replay certificates

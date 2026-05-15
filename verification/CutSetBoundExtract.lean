@@ -262,10 +262,34 @@ Cut-Set Bound（有限离散版本）。
 
 直观：从 S 流向 M 的互信息被割的容量所限制。
 -/
-axiom cut_set_bound
+/--
+【定理】
+Cut-Set Bound（有限离散版本）。
+
+证明大纲：
+1. 建立马尔可夫链 S - (X_Ω, Y_Ωc, T_tilde) - M (基于图拓扑)。
+2. 使用互信息链式法则展开 I(S, X_Ω, Y_Ωc; M | T_tilde)。
+3. 应用数据处理不等式 (DPI) 证明 I(S; M | T_tilde) ≤ I(X_Ω, Y_Ωc; M | T_tilde)。
+4. 进一步放缩到割容量 C_cut。
+-/
+theorem cut_set_bound
     (P : FinitePMF (State × VisibleTrace × MissingTrace))
     (Ω : Cut) :
-    I_S_M_cond_Ttilde P ≤ C_cut Ω
+    I_S_M_cond_Ttilde P ≤ C_cut Ω := by
+  -- 1. 拓扑分离引理 (S 与 M 在给定割下条件独立)
+  -- have h_markov : IsMarkov S M (CutVariables Ω) T_tilde := sorry
+  
+  -- 2. 链式法则展开
+  -- I(S; M | T_tilde) ≤ I(S, CutVariables Ω; M | T_tilde) := sorry
+  
+  -- 3. 数据处理不等式 (DPI)
+  -- I(S, CutVariables Ω; M | T_tilde) = I(CutVariables Ω; M | T_tilde) + I(S; M | CutVariables Ω, T_tilde)
+  -- 由于 I(S; M | CutVariables Ω, T_tilde) = 0 (由马尔可夫链), 
+  -- 因此 I(S; M | T_tilde) ≤ I(CutVariables Ω; M | T_tilde)
+  
+  -- 4. 最终放缩到容量
+  -- I(CutVariables Ω; M | T_tilde) ≤ C_cut Ω := sorry
+  sorry
 
 end CutSetBound
 

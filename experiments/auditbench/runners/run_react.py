@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import sys
+import traceback
 import numpy as np
 from pathlib import Path
 
@@ -207,6 +208,9 @@ def execute_inference(params: dict, mock: bool) -> dict:
         "trajectory_return": 1.0 if pert_success else 0.0,
         "probe_validity_control": True,
         "off_manifold_score": 0.0,
+        # Simplified logging regime → epsilon mapping is a proof-of-concept
+        # approximation. The real value should come from the static certificate
+        # pipeline (compute_epsilon_ub.py).
         "epsilon_state_UB": 16384.0 if params.get("logging_regime") in ["output_only", "router"] else 0.0,
         "delta_act_LB": float(js_div_bits),
         "bootstrap_CI_low": float(js_div_bits),
@@ -220,7 +224,8 @@ def main():
     try:
         params = json.loads(base64.b64decode(args.params_b64).decode('utf-8'))
     except Exception as e:
-        print(f"Error: Invalid Base64/JSON params provided for job {args.run_id}: {e}")
+        print(f"Error: Invalid Base64/JSON params provided for job {args.run_id}: {e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
         
     print(f"Starting ReAct inference for job {args.run_id}...")
@@ -229,7 +234,8 @@ def main():
     try:
         results = execute_inference(params, mock=args.mock)
     except Exception as e:
-        print(f"Inference execution failed for job {args.run_id}: {e}")
+        print(f"Inference execution failed for job {args.run_id}: {e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
     
     record_data = {**params, **results}
@@ -238,7 +244,8 @@ def main():
     try:
         record = RunRecord.model_validate(record_data)
     except Exception as e:
-        print(f"Schema validation failed for job {args.run_id}:\n{e}")
+        print(f"Schema validation failed for job {args.run_id}:\n{e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
         
     output_file = OUTPUT_DIR / f"{args.run_id}.jsonl"

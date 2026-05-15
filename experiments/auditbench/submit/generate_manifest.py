@@ -17,7 +17,10 @@ def generate_hash(params: dict) -> str:
     return hashlib.sha256(stable_str.encode("utf-8")).hexdigest()
 
 def mock_load_configs():
-    """Mocks the loading of YAML configs for the initial implementation."""
+    """Mocks the loading of YAML configs for the initial implementation.
+
+    This is a placeholder — real config loading from configs/*.yaml is deferred.
+    """
     # In a real implementation, this would use PyYAML to load from CONFIG_DIR
     return {
         "models": [
@@ -28,7 +31,7 @@ def mock_load_configs():
             {"name": "Qwen2.5-72B", "size": "70B"}
         ],
         "task_families": ["calculator", "calendar", "email", "search", "weather"],
-        "task_ids": [f"task_{i}" for i in range(10)], # Reduced for testing
+        "task_ids": [f"task_{i}" for i in range(100)],  # fraction of plan's 1,000–3,000; scale as needed
         "topologies": ["react_scratchpad"],
         "logging_regimes": ["output_only", "full_instrumentation"],
         "probe_types": ["replay", "mask", "proxy"],
@@ -80,6 +83,7 @@ def main():
                 "condition": condition,
                 "seed": seed,
                 "perturbation_sigma": sigma,
+                "sampling_temperature": 0.0,  # greedy decoding
                 "decoding_policy": decoding
             }
             

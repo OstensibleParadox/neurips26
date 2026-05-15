@@ -436,6 +436,8 @@ LLaDA 扩散模型单次前向约为同尺寸自回归模型的 2-3 倍慢（每
 Multi-agent controller calls: ~100 tokens output each, ~5s per call, k=16-32 per item.
 LLaDA diffusion: ~2-3× slower than same-size autoregressive (bidirectional denoising × K steps).
 
+<!-- TODO: reconcile compute spec arithmetic — ReAct totals do not sum to the stated 320k and diffusion cell count is ~2× the stated trajectory count -->
+
 ### 9.3 job 总数与 GPU 小时预算 / Job Count and GPU-Hour Budget
 
 #### ReAct 主矩阵 / ReAct Main Matrix（minimum: 100k episode）
@@ -548,14 +550,6 @@ Cluster ops recently flagged GPUburn-style scripts holding workers indefinitely,
 **No fragmentation.** All jobs are independent, short-lived, single-GPU (§9.2). No "one job holds 7 GPUs while actually using 1" scenario. Contiguous 16-GPU blocks stay available for tasks that need them.
 
 ### 团队自查条目 / Team Self-Check
-
-- [ ] 本分区不存在 GPUburn 或类似空转脚本
-- [ ] 本分区不存在交互式调试 session 长占 worker
-- [ ] 所有高占用 job 均为实际推理任务，有 JSONL 产出可查
-- [ ] 运行策略使用 rjob，不用 worker 直接跑
-- [ ] 本计划可在 30 天内跑完 minimum bar，不形成长期资源占用
-
-查条目 / Team Self-Check
 
 - [ ] 本分区不存在 GPUburn 或类似空转脚本
 - [ ] 本分区不存在交互式调试 session 长占 worker

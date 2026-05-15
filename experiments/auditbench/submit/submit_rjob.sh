@@ -23,14 +23,22 @@ while IFS= read -r line; do
     # Base64 encode the parameters to avoid shell quoting issues
     PARAMS_B64=$(printf "%s" "$line" | base64 | tr -d '\n')
     
-    # Determine runner script based on topology
-    if [[ "$TOPOLOGY" == *"react"* ]]; then
-        RUNNER_SCRIPT="experiments/auditbench/runners/run_react.py"
-    elif [[ "$TOPOLOGY" == *"diffusion"* ]]; then
-        RUNNER_SCRIPT="experiments/auditbench/runners/run_diffusion.py"
-    else
-        RUNNER_SCRIPT="experiments/auditbench/runners/run_multiagent.py"
-    fi
+    # Determine runner script based on topology (exact match)
+    case "$TOPOLOGY" in
+        react_scratchpad)
+            RUNNER_SCRIPT="experiments/auditbench/runners/run_react.py"
+            ;;
+        diffusion_temporal)
+            RUNNER_SCRIPT="experiments/auditbench/runners/run_diffusion.py"
+            ;;
+        1_worker_to_controller|3_workers_majority_vote|specialist_workers|adversarial_worker|memory_augmented_worker|debate_agents|hierarchical_controller)
+            RUNNER_SCRIPT="experiments/auditbench/runners/run_multiagent.py"
+            ;;
+        *)
+            echo "Error: unrecognized topology '$TOPOLOGY' — cannot determine runner" >&2
+            exit 1
+            ;;
+    esac
 
     # Determine GPU requirements based on model size (from plan Section 9.2)
     case "$MODEL_SIZE" in
