@@ -28,6 +28,7 @@ paper/*.log
 paper/*.out
 paper/*.pdf
 paper/*.synctex.gz
+/main.pdf
 paper/*.tex.bak
 
 # Lean build products

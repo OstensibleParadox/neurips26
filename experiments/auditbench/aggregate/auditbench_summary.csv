@@ -1,0 +1,3 @@
+model,model_size,topology,task_family,logging_regime,probe_type,condition,denoising_steps,probed_step,probed_layer,perturbation_sigma,n_samples,epsilon_state_UB,mean_delta_act_LB,ci_low_delta_act_LB,ci_high_delta_act_LB,action_flip_rate,task_success_rate
+Qwen2.5-7B,7B,react_scratchpad,calculator,output_only,replay,control,,,,0.1,1,16384.0,0.0,0.0,0.0,0.0,0.0
+Qwen2.5-7B,7B,react_scratchpad,calculator,output_only,replay,control,,,,,1,16384.0,0.0,0.0,0.0,0.0,0.0

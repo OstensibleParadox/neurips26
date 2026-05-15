@@ -413,3 +413,151 @@ The deciding evidence should be:
 - static capacity alone does not predict behavioral use;
 - topology and task family explain activation better than raw hidden capacity.
 
+## 9. 算力规格（供 infra 调度用） / Compute Specification
+
+### 9.1 job 定义 / Job Definition
+
+不可再分的最小执行单元。One independent unit of work:
+
+```
+job_id = hash(model, model_size, task_family, task_id, topology,
+              logging_regime, probe, condition, seed, sigma, temperature)
+```
+
+每个 job 产出一条 JSONL 记录。job 之间无共享状态。失败 job 按 hash 重放即可。
+Each job produces one JSONL record. Jobs share no state. Failed jobs are retried by re-running the hash.
+
+### 9.2 单 job 资源画像 / Per-Job Resource Profile
+
+| 模型档位 Model Class | GPU | 最低显存 VRAM Floor | token/episode | 秒/episode | 可并行性 |
+|---|---|---|---|---|---|
+| 7B/8B（Qwen2.5, LLaMA） | A100-40G / A10 | 16 GB | ~1,500 | ~20s | 同节点多卡 |
+| 14B（Qwen2.5-14B） | A100-40G | 28 GB | ~1,500 | ~35s | 同节点多卡 |
+| 32B（Qwen2.5-32B） | A100-80G | 40 GB | ~1,500 | ~70s | 单卡 1-2 个 |
+| 70B+（Qwen2.5-72B） | A100-80G | ≥70 GB | ~1,500 | ~120s | 单卡 1 个，可能需张量并行 |
+
+多 agent controller 调用极短：每次约 100 token 输出，~5s，每个 item 调 k=16-32 次。
+LLaDA 扩散模型单次前向约为同尺寸自回归模型的 2-3 倍慢（每步双向去噪 × K 步退火）。
+
+Multi-agent controller calls: ~100 tokens output each, ~5s per call, k=16-32 per item.
+LLaDA diffusion: ~2-3× slower than same-size autoregressive (bidirectional denoising × K steps).
+
+### 9.3 job 总数与 GPU 小时预算 / Job Count and GPU-Hour Budget
+
+#### ReAct 主矩阵 / ReAct Main Matrix（minimum: 100k episode）
+
+| 乘项 | 数量 |
+|---|---|
+| 模型 models | 6（2×7B, 1×14B, 1×32B, 1×70B, 1×备用） |
+| 任务族 task families | 6 |
+| seed | 5 |
+| logging regime | 4 |
+| 人均 probe 数 | ≈3.5 |
+| 每 (模型, 任务族, seed) prompt 数 | 150 |
+| **推理调用总数 total inference calls** | **≈320,000** |
+| **GPU 小时总计 total GPU-hours（A100-equiv）** | **≈3,000–3,500** |
+
+按模型规模拆分 / By model scale:
+
+| 规模 | 推理调用 | 秒/次 | GPU 小时 |
+|---|---|---|---|
+| 7B/8B × 2 | ≈110,000 | 20 | ≈600 |
+| 14B × 1 | ≈55,000 | 35 | ≈530 |
+| 32B × 1 | ≈35,000 | 70 | ≈680 |
+| 70B × 1 | ≈20,000 | 120 | ≈670 |
+
+#### 多 agent 拓扑套件 / Multi-Agent Topology（minimum: 50k unit）
+
+| 乘项 | 数量 |
+|---|---|
+| 拓扑 topologies | 5 |
+| 任务族（均衡） | 4 |
+| 每 (拓扑, 任务族) item 数 | 2,500 |
+| 每 item controller 调用 (k) | 16 |
+| 条件数（base + 3 probe） | 4 |
+| **推理调用总数** | **≈800,000** |
+| **GPU 小时总计** | **≈1,000–1,200** |
+
+controller 调用短且便宜（7B/14B 上 ~5s/次）。
+
+#### 扩散 / LLaDA 时间剖面 / Diffusion Temporal（minimum: 20k trajectory）
+
+| 乘项 | 数量 |
+|---|---|
+| 模型 | 2（LLaDA-8B + 1 个若有） |
+| 退火步数 K | 3（10, 32, 64） |
+| 每 schedule 探测步数 | 8 |
+| 探测层数 | 3（early, mid, late） |
+| sigma | 3 |
+| 每 cell trajectory | 500 |
+| **推理调用总数** | **≈110,000** |
+| 时长倍数（K 步 + 双向） | ≈自回归 3× |
+| **GPU 小时总计** | **≈1,500–1,800** |
+
+### 9.4 总计 / Total Budget
+
+| 模块 | GPU 小时 (minimum) | GPU 小时 (strong) |
+|---|---|---|
+| ReAct 矩阵 | 3,000–3,500 | 6,000–7,000 |
+| 多 agent 拓扑 | 1,000–1,200 | 2,000–2,500 |
+| 扩散时间剖面 | 1,500–1,800 | 3,500–4,500 |
+| **合计** | **≈5,500–6,500** | **≈12,000–14,000** |
+
+集群换算 / In cluster terms:
+- **Minimum:** 8×A100 节点约 **28–34 天**，或 4×A100 约 55–70 天。
+- **Strong:** 8×A100 节点约 **60–75 天**，或 16×A100 约 30–40 天。
+
+### 9.5 并行度 / Parallelism
+
+所有位于同一 (model, topology) 组内的 job 是完全并行无依赖的——无 job 间通信、无共享状态、无执行顺序约束。集群有 N 张 GPU 时可同时跑 N 个独立 job，上限仅受单 job 显存约束。唯一顺序依赖性：一个模块的全部 cell 跑完后，再做聚合（bootstrap CI、热力图）。聚合是离线 CPU 任务，不占 GPU。
+
+All jobs within a (model, topology) group are embarrassingly parallel — no inter-job communication, no shared state, no ordering constraints. N GPUs can run N independent jobs concurrently, limited only by VRAM per job. The only scheduling constraint: aggregation (bootstrap CIs, heatmap generation) runs after all cells for a module complete. This is a post-hoc CPU job, not on the GPU cluster.
+
+### 9.6 算力受限时的砍法 / Priority Triage
+
+1. **先砍扩散模组。** 风险最高、当前效应量最弱、可用模型最少。
+2. 多 agent 拓扑从 5 种砍到 3 种（保留 1-worker、3-worker majority、adversarial）。
+3. ReAct 模型从 6 个砍到 4 个（砍掉一个 7B，保留 7B / 14B / 32B / 70B 各一）。
+4. ReAct seed 从 5 个砍到 3 个。
+5. **绝对不砍：** 至少一个 70B 级模型、至少 6 个任务族、每个 probe 至少一个负对照、每个 cell 至少一个 outcome 指标。
+
+---
+
+## 10. 集群使用规范 / Cluster Ops Compliance
+
+### 背景 / Context
+
+近期集群运维发现存在 GPUburn 类脚本占用 worker 不关闭、交互式调试 session 长占不释放等问题，导致 16 卡任务完全无法排上，集群碎片化严重。部门将统一集群使用管理规范，带战略解码标签的重大任务有单独保障方案。各团队须自查高占用任务是否为真实计算任务。
+
+Cluster ops recently flagged GPUburn-style scripts holding workers indefinitely, interactive debug sessions not released, and scheduling fragmentation blocking 16-GPU jobs. Department-wide cluster usage policy is forthcoming. Major tasks tagged with strategic-decode labels will receive dedicated resource guarantees.
+
+### 本任务承诺 / AuditBench Commitments
+
+**1. 只用 rjob 提交。** 本计划全部推理调用通过 `rjob` 提交为独立 job（9.1 节的 hash key 粒度）。每个 job 跑完即退出，不持有 worker。不允许任何交互式调试 session 长时间占用 GPU。
+
+**All inference submitted via `rjob`.** Every job (hash-key granularity from §9.1) runs to completion and exits. No interactive debug sessions holding GPUs.
+
+**2. 无 GPUburn / 无虚假占用。** 不在集群上运行 GPUburn 或任何空转脚本"占坑"。本任务是真实计算任务：每个 job 产生一条带完整输出字段的 JSONL 记录（§5 节），有可验证的产出。高占用 = 高利用 = 高产出。
+
+**No GPUburn / no fake occupancy.** Every job produces a verifiable JSONL output record with all fields from §5. High occupancy means high utilization means high output.
+
+**3. 运行后即释放。** 每个 job 是独立进程，运行完毕自动退出。不保留常驻 worker，不持有长连接。9.5 节已明确：job 之间无依赖、无通信、无共享状态。单个 job walltime 最长约 120s（70B），不存在"跑了好几天才发现挂掉"的情况。
+
+**Release immediately after completion.** Each job is an independent process that exits on completion. No persistent workers, no long-held connections. No dependencies between jobs (§9.5). Max per-job walltime is ~120s (70B), so there is no "ran for days before anyone noticed it crashed" scenario.
+
+**4. 可中断可重放。** 任何 job 失败或被杀，按 hash key 重放即可，不丢进度。计划可以在集群负载高时主动降速（减并发），不需要抢资源。
+
+**Interruptible and replayable.** Failed/killed jobs are retried by re-running the hash. The run can be throttled during high cluster load — no need to fight for resources.
+
+**5. 不做碎片化。** 因为所有 job 是独立、短生命周期、单 GPU 的（9.2 节），不会出现"一个 job 占了 7 张卡而实际只用 1 张"的碎片化场景。16 卡连续资源留给需要的人。
+
+**No fragmentation.** All jobs are independent, short-lived, single-GPU (§9.2). No "one job holds 7 GPUs while actually using 1" scenario. Contiguous 16-GPU blocks stay available for tasks that need them.
+
+### 团队自查条目 / Team Self-Check
+
+- [ ] 本分区不存在 GPUburn 或类似空转脚本
+- [ ] 本分区不存在交互式调试 session 长占 worker
+- [ ] 所有高占用 job 均为实际推理任务，有 JSONL 产出可查
+- [ ] 运行策略使用 rjob，不用 worker 直接跑
+- [ ] 本计划可在 30 天内跑完 minimum bar，不形成长期资源占用
+
