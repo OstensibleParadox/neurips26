@@ -8,6 +8,7 @@ BASE_DIR = Path(__file__).parent.parent
 CONFIG_DIR = BASE_DIR / "configs"
 OUTPUT_DIR = BASE_DIR / "outputs"
 MANIFEST_FILE = BASE_DIR / "submit" / "manifest.jsonl"
+PENDING_FILE = BASE_DIR / "submit" / "pending_manifest.jsonl"
 
 def generate_hash(params: dict) -> str:
     """Generates a stable SHA-256 hash for a given set of parameters."""
@@ -26,7 +27,7 @@ def mock_load_configs():
             {"name": "Qwen2.5-32B", "size": "32B"},
             {"name": "Qwen2.5-72B", "size": "70B"}
         ],
-        "task_families": ["calculator", "simple_routing", "multi_hop_planning"],
+        "task_families": ["calculator", "calendar", "email", "search", "weather"],
         "task_ids": [f"task_{i}" for i in range(10)], # Reduced for testing
         "topologies": ["react_scratchpad"],
         "logging_regimes": ["output_only", "full_instrumentation"],
@@ -61,9 +62,10 @@ def main():
     )
     
     jobs_created = 0
-    jobs_skipped = 0
+    jobs_pending = 0
+    jobs_completed = 0
     
-    with open(MANIFEST_FILE, "w") as f:
+    with open(MANIFEST_FILE, "w") as f_all, open(PENDING_FILE, "w") as f_pending:
         for combo in combinations:
             model_info, task_family, task_id, topology, regime, probe, condition, seed, sigma, decoding = combo
             
@@ -84,18 +86,22 @@ def main():
             run_id = generate_hash(params)
             params["run_id"] = run_id
             
+            json_str = json.dumps(params)
+            f_all.write(json_str + "\n")
+            jobs_created += 1
+            
             # Check if output exists
             output_file = OUTPUT_DIR / f"{run_id}.jsonl"
             if output_file.exists():
-                jobs_skipped += 1
-                continue
+                jobs_completed += 1
+            else:
+                f_pending.write(json_str + "\n")
+                jobs_pending += 1
                 
-            f.write(json.dumps(params) + "\n")
-            jobs_created += 1
-            
     print(f"Manifest generation complete.")
-    print(f"Jobs written to manifest: {jobs_created}")
-    print(f"Jobs skipped (already exist): {jobs_skipped}")
+    print(f"Total jobs written to canonical manifest: {jobs_created}")
+    print(f"Jobs skipped (already complete): {jobs_completed}")
+    print(f"Jobs pending written to pending_manifest.jsonl: {jobs_pending}")
 
 if __name__ == "__main__":
     main()

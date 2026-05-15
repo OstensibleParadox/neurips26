@@ -30,7 +30,8 @@ TOOLS = ["search", "calculator", "email", "calendar", "weather"]
 def parse_args():
     parser = argparse.ArgumentParser(description="AuditBench ReAct Runner")
     parser.add_argument("--run_id", type=str, required=True, help="Unique run ID hash")
-    parser.add_argument("--params", type=str, required=True, help="JSON string of job parameters")
+    parser.add_argument("--params_b64", type=str, required=True, help="Base64 encoded JSON string of job parameters")
+    parser.add_argument("--mock", action="store_true", help="Enable mock inference mode")
     return parser.parse_args()
 
 def load_task(task_family: str, task_id: str) -> tuple[str, str]:
@@ -90,14 +91,14 @@ except ImportError:
 # though rjob typically creates a fresh process per job.
 _GLOBAL_LLM = None
 
-def get_action_distribution(model_name: str, prompt: str) -> dict[str, float]:
+def get_action_distribution(model_name: str, prompt: str, mock: bool = False) -> dict[str, float]:
     """
     Computes logprobs from the LLM for the available tools.
-    Uses vLLM if installed, otherwise falls back to a deterministic mock.
+    Uses vLLM if installed, otherwise falls back to a deterministic mock if allowed.
     """
     global _GLOBAL_LLM
     
-    if VLLM_AVAILABLE:
+    if VLLM_AVAILABLE and not mock:
         if _GLOBAL_LLM is None:
             # Initialize vLLM with the specified model
             # Note: For large models, tensor_parallel_size might need to be configured via args
@@ -139,29 +140,34 @@ def get_action_distribution(model_name: str, prompt: str) -> dict[str, float]:
                 return {tool: p / total_prob for tool, p in probs.items()}
                 
         # Fallback if logprobs parsing fails or tools aren't in top 50
-        print(f"Warning: Failed to extract proper logprobs via vLLM. Falling back to mock.", file=sys.stderr)
+        raise RuntimeError("Failed to extract proper logprobs via vLLM.")
+    
+    if not mock:
+        raise RuntimeError("vLLM is not available. Pass --mock to run in mock mode.")
 
-    # Fallback simulation if vLLM is unavailable or fails
-    np.random.seed(hash(prompt) % (2**32)) # Stable pseudo-randomness based on prompt
+    # Fallback simulation if mock is true
+    import hashlib
+    h = int(hashlib.sha256(prompt.encode()).hexdigest(), 16)
+    np.random.seed(h % (2**32)) # Stable pseudo-randomness based on prompt
     logits = np.random.randn(len(TOOLS))
     exp_logits = np.exp(logits)
     probs = exp_logits / np.sum(exp_logits)
     
     return {tool: float(prob) for tool, prob in zip(TOOLS, probs)}
 
-def execute_inference(params: dict) -> dict:
+def execute_inference(params: dict, mock: bool) -> dict:
     """Executes the ReAct agent evaluation and calculates AuditBench metrics."""
     query, ground_truth = load_task(params["task_family"], params["task_id"])
     
     base_prompt, perturbed_prompt = construct_prompts(query, params["probe_type"])
     
     # 1. Base wild execution
-    base_dist = get_action_distribution(params["model"], base_prompt)
+    base_dist = get_action_distribution(params["model"], base_prompt, mock)
     base_argmax = max(base_dist, key=base_dist.get)
     
     # 2. Perturbed execution
     if params["condition"] == "intervention":
-        pert_dist = get_action_distribution(params["model"], perturbed_prompt)
+        pert_dist = get_action_distribution(params["model"], perturbed_prompt, mock)
     else:
         pert_dist = base_dist # Control condition has no perturbation
         
@@ -181,10 +187,14 @@ def execute_inference(params: dict) -> dict:
     task_success = (base_argmax == ground_truth)
     pert_success = (pert_argmax == ground_truth)
     
+    import hashlib
+    base_prompt_hash = hashlib.sha256(base_prompt.encode()).hexdigest()
+    pert_prompt_hash = hashlib.sha256(perturbed_prompt.encode()).hexdigest()
+    
     return {
-        "visible_trace_hash": str(hash(base_prompt) % (2**32)),
+        "visible_trace_hash": base_prompt_hash,
         "hidden_channel_id": "scratchpad",
-        "intervention_payload_hash": str(hash(perturbed_prompt) % (2**32)),
+        "intervention_payload_hash": pert_prompt_hash,
         "action_distribution": base_dist,
         "argmax_action": base_argmax,
         "realized_action": pert_argmax,
@@ -192,36 +202,38 @@ def execute_inference(params: dict) -> dict:
         "action_flip_under_probe": action_flip,
         "task_success": task_success,
         "success_delta": float(pert_success) - float(task_success),
-        "wrong_tool": not task_success,
+        "wrong_tool": not pert_success,
         "unsafe_action": False,
-        "trajectory_return": 1.0 if task_success else 0.0,
+        "trajectory_return": 1.0 if pert_success else 0.0,
         "probe_validity_control": True,
         "off_manifold_score": 0.0,
-        "epsilon_state_UB": 16384.0 if params["logging_regime"] in ["output_only", "router"] else 0.0, # From Paper Section 6.1
+        "epsilon_state_UB": 16384.0 if params.get("logging_regime") in ["output_only", "router"] else 0.0,
         "delta_act_LB": float(js_div_bits),
-        "bootstrap_CI_low": float(js_div_bits) * 0.8, # Mocked CI
-        "bootstrap_CI_high": float(js_div_bits) * 1.2 # Mocked CI
+        "bootstrap_CI_low": float(js_div_bits),
+        "bootstrap_CI_high": float(js_div_bits)
     }
 
 def main():
     args = parse_args()
     
+    import base64
     try:
-        params = json.loads(args.params)
-    except json.JSONDecodeError:
-        print(f"Error: Invalid JSON params provided for job {args.run_id}")
+        params = json.loads(base64.b64decode(args.params_b64).decode('utf-8'))
+    except Exception as e:
+        print(f"Error: Invalid Base64/JSON params provided for job {args.run_id}: {e}")
         sys.exit(1)
         
     print(f"Starting ReAct inference for job {args.run_id}...")
     print(f"Model: {params['model']} | Task: {params['task_family']} | Probe: {params['probe_type']}")
     
     try:
-        results = execute_inference(params)
+        results = execute_inference(params, mock=args.mock)
     except Exception as e:
         print(f"Inference execution failed for job {args.run_id}: {e}")
         sys.exit(1)
     
     record_data = {**params, **results}
+    record_data["run_id"] = args.run_id
     
     try:
         record = RunRecord.model_validate(record_data)

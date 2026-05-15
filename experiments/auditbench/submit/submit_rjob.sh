@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-MANIFEST_FILE="experiments/auditbench/submit/manifest.jsonl"
+MANIFEST_FILE="experiments/auditbench/submit/pending_manifest.jsonl"
 IMAGE="auditbench:latest" # Placeholder image name
 
 # Check if manifest exists
@@ -15,14 +15,13 @@ echo "Starting job submission from $MANIFEST_FILE..."
 
 # Loop through each line in the manifest
 while IFS= read -r line; do
-    # Extract run_id and model_size using basic string manipulation 
-    # (assuming python/jq might not be available in the submission environment, 
-    # though jq is preferred if guaranteed).
-    # We use a simple python inline extraction for robustness.
+    # Extract run_id, model_size, topology using jq
+    RUN_ID=$(echo "$line" | jq -r '.run_id')
+    MODEL_SIZE=$(echo "$line" | jq -r '.model_size')
+    TOPOLOGY=$(echo "$line" | jq -r '.topology')
     
-    RUN_ID=$(python -c "import json; print(json.loads('$line')['run_id'])")
-    MODEL_SIZE=$(python -c "import json; print(json.loads('$line')['model_size'])")
-    TOPOLOGY=$(python -c "import json; print(json.loads('$line')['topology'])")
+    # Base64 encode the parameters to avoid shell quoting issues
+    PARAMS_B64=$(printf "%s" "$line" | base64 | tr -d '\n')
     
     # Determine runner script based on topology
     if [[ "$TOPOLOGY" == *"react"* ]]; then
@@ -57,7 +56,7 @@ while IFS= read -r line; do
         --image "$IMAGE" \
         --gpu "$GPUS" \
         --name "auditbench_${RUN_ID:0:8}" \
-        -- python "$RUNNER_SCRIPT" --run_id "$RUN_ID" --params "$line"
+        -- python "$RUNNER_SCRIPT" --run_id "$RUN_ID" --params_b64 "$PARAMS_B64"
 
     # Optional: Add a small sleep to prevent hammering the scheduler
     # sleep 0.1

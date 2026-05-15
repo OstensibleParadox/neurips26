@@ -8,21 +8,29 @@ OUTPUT_DIR = BASE_DIR / "outputs"
 AGGREGATE_DIR = BASE_DIR / "aggregate"
 SUMMARY_FILE = AGGREGATE_DIR / "auditbench_summary.csv"
 
-def bootstrap_mean_ci(data, n_bootstraps=1000, ci=95):
-    """Calculates bootstrap confidence intervals for the mean."""
-    if len(data) == 0:
+def task_block_bootstrap_ci(group_df, value_col='delta_act_LB', task_col='task_id', n_bootstraps=1000, ci=95, seed=42):
+    """Calculates task-block bootstrap confidence intervals for the mean."""
+    np.random.seed(seed)
+    
+    if task_col not in group_df.columns:
         return np.nan, np.nan
-    if len(data) == 1:
-        return data[0], data[0]
+        
+    task_means = group_df.groupby(task_col)[value_col].mean().dropna().values
+    n_tasks = len(task_means)
+    
+    if n_tasks == 0:
+        return np.nan, np.nan
+    if n_tasks == 1:
+        return float(task_means[0]), float(task_means[0])
         
     bootstrapped_means = []
     for _ in range(n_bootstraps):
-        sample = np.random.choice(data, size=len(data), replace=True)
+        sample = np.random.choice(task_means, size=n_tasks, replace=True)
         bootstrapped_means.append(np.mean(sample))
         
     lower = np.percentile(bootstrapped_means, (100 - ci) / 2)
     upper = np.percentile(bootstrapped_means, 100 - (100 - ci) / 2)
-    return lower, upper
+    return float(lower), float(upper)
 
 def main():
     print("Reading outputs from JSONL files...")
@@ -83,7 +91,7 @@ def main():
         eps_ub = group_df['epsilon_state_UB'].iloc[0] if 'epsilon_state_UB' in group_df else np.nan
         
         # Bootstrap CIs for delta_act_LB
-        ci_low, ci_high = bootstrap_mean_ci(group_df['delta_act_LB'].dropna().values)
+        ci_low, ci_high = task_block_bootstrap_ci(group_df, value_col='delta_act_LB', task_col='task_id')
         
         row = {
             **group_dict,

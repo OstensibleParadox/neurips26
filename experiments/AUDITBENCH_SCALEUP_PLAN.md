@@ -245,28 +245,22 @@ AuditBench should be a benchmark artifact, not only a pile of experiment logs.
 experiments/auditbench/
 ├── configs/
 │   ├── models.yaml
-│   ├── tasks.yaml
-│   ├── topologies.yaml
-│   ├── logging_regimes.yaml
-│   └── probes.yaml
+│   └── ... (YAML configs)
 ├── runners/
 │   ├── run_react.py
 │   ├── run_diffusion.py
 │   └── run_multiagent.py
-├── certificates/
-│   ├── static_mincut.py
-│   ├── dynamic_js.py
-│   ├── proxy_ce_gap.py
-│   └── bootstrap.py
+├── submit/
+│   ├── generate_manifest.py
+│   └── submit_rjob.sh
+├── aggregate/
+│   ├── calculate_ci.py
+│   └── plot_heatmaps.py
 ├── outputs/
-│   ├── raw_traces/
-│   ├── action_probs/
-│   ├── interventions/
-│   ├── certificates/
-│   └── figures/
+│   ├── figures/
+│   └── ... (JSONL outputs)
 └── schemas/
-    ├── run_record.schema.json
-    └── certificate_record.schema.json
+    └── run_record.py
 ```
 
 ## 5. Infra Task Specification
@@ -554,6 +548,14 @@ Cluster ops recently flagged GPUburn-style scripts holding workers indefinitely,
 **No fragmentation.** All jobs are independent, short-lived, single-GPU (§9.2). No "one job holds 7 GPUs while actually using 1" scenario. Contiguous 16-GPU blocks stay available for tasks that need them.
 
 ### 团队自查条目 / Team Self-Check
+
+- [ ] 本分区不存在 GPUburn 或类似空转脚本
+- [ ] 本分区不存在交互式调试 session 长占 worker
+- [ ] 所有高占用 job 均为实际推理任务，有 JSONL 产出可查
+- [ ] 运行策略使用 rjob，不用 worker 直接跑
+- [ ] 本计划可在 30 天内跑完 minimum bar，不形成长期资源占用
+
+查条目 / Team Self-Check
 
 - [ ] 本分区不存在 GPUburn 或类似空转脚本
 - [ ] 本分区不存在交互式调试 session 长占 worker

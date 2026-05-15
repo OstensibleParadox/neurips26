@@ -17,14 +17,42 @@ TOOLS = ["search", "calculator"] # Binary action space for Multi-Agent
 def parse_args():
     parser = argparse.ArgumentParser(description="AuditBench Multi-Agent Runner")
     parser.add_argument("--run_id", type=str, required=True, help="Unique run ID hash")
-    parser.add_argument("--params", type=str, required=True, help="JSON string of job parameters")
+    parser.add_argument("--params_b64", type=str, required=True, help="Base64 encoded JSON string of job parameters")
+    parser.add_argument("--mock", action="store_true", help="Enable mock inference mode")
     return parser.parse_args()
 
-def simulate_multiagent_inference(params: dict) -> dict:
+def load_task(task_family: str, task_id: str) -> tuple[str, str]:
+    """Loads the user query and ground truth label."""
+    idx = task_id.split("_")[-1] if "_" in task_id else task_id
+    filename = f"{task_family}_{int(idx):04d}.txt"
+    filepath = BASE_DIR / "data" / "tool_selection" / filename
+    
+    if not filepath.exists():
+        raise FileNotFoundError(f"Task file not found: {filepath}")
+        
+    with open(filepath, "r") as f:
+        content = f.read().strip()
+        
+    query = ""
+    label = ""
+    for line in content.split('\n'):
+        if line.startswith("User query:"):
+            query = line.replace("User query:", "").strip()
+        elif line.startswith("TOOL:"):
+            label = line.replace("TOOL:", "").strip()
+            
+    return query, label
+
+def simulate_multiagent_inference(params: dict, mock: bool) -> dict:
     """
     Simulates Multi-Agent worker-controller topology interventions.
     Uses calibrated lookup tables for JS divergence (delta_act_LB).
     """
+    if not mock:
+        raise RuntimeError("Multi-Agent runner currently only supports --mock mode.")
+        
+    query, ground_truth = load_task(params["task_family"], params["task_id"])
+    
     np.random.seed(params["seed"])
     topology = params["topology"]
     condition = params["condition"]
@@ -73,8 +101,8 @@ def simulate_multiagent_inference(params: dict) -> dict:
         
     pert_argmax = max(pert_dist, key=pert_dist.get)
     
-    task_success = True
-    pert_success = (pert_argmax == base_argmax)
+    task_success = (base_argmax == ground_truth)
+    pert_success = (pert_argmax == ground_truth)
 
     # Static capacities based on topology
     if "majority" in topology:
@@ -82,10 +110,12 @@ def simulate_multiagent_inference(params: dict) -> dict:
     else:
         eps_ub = 8192.0
         
+    import hashlib
+    
     return {
-        "visible_trace_hash": str(hash(params["task_id"]) % (2**32)),
+        "visible_trace_hash": hashlib.sha256(params["task_id"].encode()).hexdigest(),
         "hidden_channel_id": "worker_report",
-        "intervention_payload_hash": str(hash(condition) % (2**32)),
+        "intervention_payload_hash": hashlib.sha256(condition.encode()).hexdigest(),
         "action_distribution": base_dist,
         "argmax_action": base_argmax,
         "realized_action": pert_argmax,
@@ -93,34 +123,36 @@ def simulate_multiagent_inference(params: dict) -> dict:
         "action_flip_under_probe": action_flip,
         "task_success": task_success,
         "success_delta": float(pert_success) - float(task_success),
-        "wrong_tool": not task_success,
+        "wrong_tool": not pert_success,
         "unsafe_action": False,
-        "trajectory_return": 1.0 if task_success else 0.0,
+        "trajectory_return": 1.0 if pert_success else 0.0,
         "probe_validity_control": True,
         "off_manifold_score": 0.0,
         "epsilon_state_UB": eps_ub,
         "delta_act_LB": js_div_bits,
-        "bootstrap_CI_low": max(0.0, js_div_bits - 0.05),
-        "bootstrap_CI_high": js_div_bits + 0.05
+        "bootstrap_CI_low": js_div_bits,
+        "bootstrap_CI_high": js_div_bits
     }
 
 def main():
     args = parse_args()
+    import base64
     try:
-        params = json.loads(args.params)
-    except json.JSONDecodeError:
-        print(f"Error: Invalid JSON params provided for job {args.run_id}")
+        params = json.loads(base64.b64decode(args.params_b64).decode('utf-8'))
+    except Exception as e:
+        print(f"Error: Invalid Base64/JSON params provided for job {args.run_id}: {e}")
         sys.exit(1)
         
     print(f"Starting Multi-Agent simulation for job {args.run_id}...")
     
     try:
-        results = simulate_multiagent_inference(params)
+        results = simulate_multiagent_inference(params, mock=args.mock)
     except Exception as e:
         print(f"Inference execution failed: {e}")
         sys.exit(1)
         
     record_data = {**params, **results}
+    record_data["run_id"] = args.run_id
     
     try:
         record = RunRecord.model_validate(record_data)

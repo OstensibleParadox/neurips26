@@ -24,10 +24,14 @@ def setup_plot_style():
 
 def plot_react_heatmap(df):
     """Plots the ReAct matrix heatmap: (model_size) x (task_family)."""
-    # Filter for ReAct topology
-    react_df = df[df['topology'].str.contains('react', na=False, case=False)]
+    # Filter for ReAct topology, condition=intervention, probe_type=replay
+    react_df = df[
+        (df['topology'].str.contains('react', na=False, case=False)) &
+        (df['condition'] == 'intervention') &
+        (df['probe_type'] == 'replay')
+    ]
     if react_df.empty:
-        print("No ReAct data found for heatmap.")
+        print("No ReAct data found for heatmap with condition=intervention and probe_type=replay.")
         return
         
     # We might have multiple conditions/probes. Let's average or take the max for the main heatmap.
@@ -74,7 +78,7 @@ def plot_multiagent_topology(df):
     plt.figure(figsize=(8, 5))
     sns.barplot(data=topo_summary, x='topology', y='mean_delta_act_LB', color='steelblue')
     plt.title("Multi-Agent Active Hidden Capacity by Topology")
-    plt.ylabel("$\delta_{act}^{LB}$ (bits)")
+    plt.ylabel(r"$\delta_{act}^{LB}$ (bits)")
     plt.xlabel("Communication Topology")
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
@@ -115,7 +119,7 @@ def plot_diffusion_temporal(df):
         )
         
     plt.title("Diffusion Late-Binding Profile")
-    plt.ylabel("$\delta_{act}^{LB}$ (bits)")
+    plt.ylabel(r"$\delta_{act}^{LB}$ (bits)")
     plt.xlabel("Normalized Denoising Step ($t = step/K$)")
     plt.tight_layout()
     plt.savefig(FIGURES_DIR / "diffusion_temporal.pdf")
