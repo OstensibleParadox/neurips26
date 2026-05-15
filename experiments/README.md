@@ -2,6 +2,8 @@
 
 Reproducibility guide for all experiments in the NeurIPS 2026 submission.
 
+Scale-up execution plan: [AUDITBENCH_SCALEUP_PLAN.md](AUDITBENCH_SCALEUP_PLAN.md).
+
 ## Environment
 
 ```bash

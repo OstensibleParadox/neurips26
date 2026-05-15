@@ -1,7 +1,3 @@
-% NeurIPS 2026 Submission Draft
-% Protocol-first rebuild: audit procedure is narrative center.
-% Prop A and Prop B are justifications of procedure steps.
-
 \documentclass{article}
 \usepackage{neurips_2026}
 \usepackage[utf8]{inputenc}

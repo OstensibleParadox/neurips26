@@ -1,5 +1,3 @@
-% NeurIPS 2026 Submission Draft
-
 \documentclass{article}
 \usepackage{neurips_2026}
 \usepackage[utf8]{inputenc}

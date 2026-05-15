@@ -1,0 +1,567 @@
+\documentclass{article}
+\usepackage{neurips_2026}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+
+\title{Output Traces Are Not Safety Certificates \\
+       \large Static and Dynamic Certificates for Hidden-State Influence in LLM Agents}
+
+\author{
+  Anonymous Author(s) \\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Output traces are behavioral diagnostics, not certificates of latent decision
+relevance: without additional structural assumptions, hidden-state influence
+need not be identified from observational traces alone. We develop static and
+dynamic certificates that bound decision-relevant hidden influence through the
+chain $\delta_\text{act}^\text{LB} \;\leq\; \delta_\text{act} \;\leq\;
+\varepsilon_\text{state} \;\leq\; \varepsilon_\text{state}^\text{UB}$
+--- a structural upper bound from deployment topology (min-cut) and a behavioral
+lower bound from admissible probes (conditional DPI). Experiments across ReAct,
+diffusion-LM, and multi-agent systems show that hidden scratchpad capacity can
+be nearly dormant, denoising state can matter only at final binding, and an
+unlogged peer-report channel can carry near-maximal decision influence.
+\end{abstract}
+
+% ---------------------------------------------------------------------------
+\section{Introduction}
+\label{sec:introduction}
+% ---------------------------------------------------------------------------
+
+Consider a ReAct-style LLM agent deployed with an unlogged scratchpad. A regression test on output traces shows no behavioral change, but controlled replay with the scratchpad disabled reveals a $0.0163$-bit shift in the tool-token probability distribution on planning tasks. The disagreement is not a probing artifact: the recorded trace cannot distinguish dormant hidden capacity from active hidden capacity.
+
+Formally, this is latent-variable non-identifiability in agent-auditing form:
+without additional structural assumptions, hidden-state influence need not be
+identified from observational output traces alone~\citep{pearl2009causality}.
+Output-trace-centered protocols can diagnose behavior, but they do not certify
+latent decision relevance under a fixed deployment marginal: the same
+trace-action distribution can arise from one mechanism with zero hidden
+influence and another with maximal hidden influence.
+
+The distinction is capacity versus usage. A hidden channel may carry many bits
+while never affecting an action, or it may carry little information that is
+decisive at a tool-choice step. That is two questions, not one---how much
+hidden state is \emph{structurally possible} (the static question), and how
+much of it \emph{actually affects behavior} (the dynamic question). The audit
+therefore needs both a static certificate, which bounds hidden capacity from
+deployment topology, and a dynamic certificate, which measures behavioral
+influence through replay, intervention, or proxy probes.
+
+\textbf{Contributions.}
+\begin{enumerate}
+  \item \textbf{Audit formulation under partial observability.} We formalize
+  agent auditing as bounding two quantities---hidden-state uncertainty
+  $\varepsilon_\text{state}$ and its decision-relevant subset
+  $\delta_\text{act}$---under a trust taxonomy (Trusted/Untrusted/Suspect) that
+  governs per-edge capacity budgets.
+  \item \textbf{Dual certificates with the audit sandwich.} A static certificate
+  upper-bounds residual hidden-state uncertainty from deployment topology
+  (min-cut, Proposition~\ref{prop:static-ub}); a dynamic certificate
+  lower-bounds decision-relevant influence from admissible probes (conditional
+  DPI, Proposition~\ref{prop:dynamic-lb}). Together they give
+  $\delta_\text{act}^\text{LB} \leq \delta_\text{act} \leq \varepsilon_\text{state}
+  \leq \varepsilon_\text{state}^\text{UB}$.
+  \item \textbf{Three empirical regimes.} ReAct (dormant hidden uncertainty),
+  diffusion-LM (late-binding mid-spectrum), multi-agent (near-saturation
+  peer-report channel).
+  \item \textbf{Formal verification.} All finite-discrete claims mechanically
+  verified; see Appendix~\ref{app:lean-boundary}.
+\end{enumerate}
+
+\noindent\textbf{Paper structure.} Sections~\ref{sec:setup}--\ref{sec:certificates} define the audit quantities, recall a standard non-identifiability witness that motivates the dual-certificate architecture, and develop the two certificates. Section~\ref{sec:empirical} demonstrates them on three architectures; Section~\ref{sec:discussion} gives limitations. Formal proofs, protocols, and synthetic validation appear in Appendices~\ref{app:netinfo}--\ref{app:lean-boundary}.
+
+% ---------------------------------------------------------------------------
+\section{Related Work}
+\label{sec:related}
+% ---------------------------------------------------------------------------
+
+\paragraph{Probing, patching, and causal abstraction.}
+Causal abstraction~\citep{geiger2021causal}, latent-knowledge elicitation~\citep{burns2022discovering}, nullspace projection~\citep{ravfogel2020null}, and amnesic probing~\citep{elazar2021amnesic} give proxy-style evidence: when they expose a probe variable $Z_t = \varphi(S_t)$ and the required conditional assumptions hold, $I(Z_t; A_t \mid \tilde T_t)$ is a proxy certificate. Causal tracing/ROME~\citep{meng2022locating}, representation engineering~\citep{zou2023representation}, and activation addition~\citep{turner2023activation} give intervention evidence when the patch affects action only through $S_t$.
+
+\paragraph{Black-box audit and network information theory.}
+Casper et al.~\citep{casper2024blackbox} argue that black-box access is insufficient for auditing internal agent mechanisms. Our work makes this insufficiency quantitative for $\delta_\text{act}$: output-only access cannot distinguish $\delta_\text{act}=0$ from $\delta_\text{act}=H(A_t\mid\tilde T_t)$. Pearl's partial-identification framework~\citep{pearl2009causality} supplies the identifiability baseline. The contribution here is operational: $\varepsilon_\text{state}^\text{UB}$ comes from deployment topology when structural access is available, and $\delta_\text{act}^\text{LB}$ comes from admissible probes. The static certificate applies a cut-set upper bound~\citep{elgamal2011network} to the time-unrolled DAG (full derivation in Appendix~\ref{app:netinfo}).
+
+\paragraph{Diffusion language-model agents.}
+LLaDA is a large-scale masked diffusion language model with bidirectional denoising and instruction-following ability~\citep{nie2025llada}. Recent work studies diffusion LMs in multi-step decision and tool-use workflows, including matched comparisons to autoregressive agents~\citep{zhen2026dllmagent}. Intermediate denoising latents make these systems a natural non-ReAct hidden channel for the dynamic certificate.
+
+% ---------------------------------------------------------------------------
+\section{Setup and Realization Formalism}
+\label{sec:setup}
+% ---------------------------------------------------------------------------
+
+At step $t$, let $T_t$ be the full internal computation, $\tilde T_t \subseteq T_t$ the recorded trace, $S_t$ the operative state, $A_t$ the observable action, and $U_t$ exogenous unrecorded sources. The auditor sees $\tilde T_t$ and $A_t$ and asks whether information in $T_t \setminus \tilde T_t$ could affect, or actually does affect, $A_t$. Standard information-theoretic notation follows \citet{cover2006elements}; all logarithms are base 2.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{c|l}
+\toprule
+Symbol & Definition \\
+\midrule
+$S_t$ & Operative state (internal computation at step $t$)\\
+$T_t$ & Full trace (all intermediate activations)\\
+$\tilde T_t$ & Recorded trace (auditor-visible subset of $T_t$)\\
+$A_t$ & Action (next observable token or tool call)\\
+$U_t$ & Unrecorded sources (exogenous inputs not in $\tilde T_t$)\\
+$\varepsilon_\text{state}^\text{UB}$ & Static certificate: upper bound on $H(S_t \mid \tilde T_t)$\\
+$\delta_\text{act}^\text{LB}$ & Dynamic certificate: lower bound on $I(S_t; A_t \mid \tilde T_t)$\\
+\bottomrule
+\end{tabular}
+\caption{Notation and certificate targets.}
+\label{tab:symbols}
+\end{table}
+
+\begin{definition}[Agent Realization]
+\label{def:realization}
+An \emph{agent realization} $\mathcal{R} = (P_S, f_T, f_A, \pi_U)$ consists of an operative-state distribution $P_S$ over $S_t$, a trace-generation map $f_T: S_t \to \Delta(\tilde T_t)$, an action policy $f_A: (S_t, \tilde T_t) \to \Delta(A_t)$, and a source policy $\pi_U$ governing $U_t$. The realization induces an observational marginal $P_{\mathcal{R}}(\tilde T_t, A_t)$ on the support of a fixed deployment prompt distribution $P_\text{prompt}$.
+\end{definition}
+
+\begin{definition}[Behavioral Equivalence]
+\label{def:behavioral-equiv}
+Two realizations $\mathcal{R}_0, \mathcal{R}_1$ are \emph{behaviorally equivalent}, written $\mathcal{R}_0 \sim_B \mathcal{R}_1$, iff they produce identical joint distributions over observable variables on the deployment prompt distribution:
+\[
+  P_{\mathcal{R}_0}(\tilde T_t, A_t) = P_{\mathcal{R}_1}(\tilde T_t, A_t) \quad \forall (\tilde T_t, A_t) \in \operatorname{supp}(P_\text{prompt}).
+\]
+Behavioral equivalence concerns the fixed deployment marginal only. Paraphrase variation and red-teaming are generalization probes that explore the policy under distribution shift; they are not audits on the deployment marginal and do not by themselves refute behavioral equivalence.
+Thus an output-only auditor cannot tell two behaviorally equivalent realizations apart, even if hidden state has different decision relevance inside them.
+\end{definition}
+
+\subsection{Audit Quantities}
+
+\begin{definition}[Core Audit Quantities]
+\label{def:certs}
+We target two quantities:
+\begin{itemize}
+  \item \textbf{Hidden-state uncertainty} $\varepsilon_\text{state} := H(S_t \mid \tilde T_t)$: how much internal information remains unknown after seeing the recorded trace.
+  \item \textbf{Decision relevance} $\delta_\text{act} := I(S_t; A_t \mid \tilde T_t)$: how much hidden information influences the next action.
+\end{itemize}
+The data processing inequality gives $\delta_\text{act} \leq \varepsilon_\text{state}$: decision-relevant hidden state is a subset of total hidden state.
+Section~\ref{sec:certificates} gives an upper bound for the first quantity and a lower bound for the second.
+\end{definition}
+
+% ---------------------------------------------------------------------------
+\subsection{A Non-Identifiability Witness}
+\label{sec:witness}
+% ---------------------------------------------------------------------------
+
+An output-only auditor observes $(\tilde T_t,A_t)$, not the map from hidden state $S_t$ to action. The following finite witness is the standard latent-variable non-identifiability argument specialized to this audit setting; its role is to set the target for the certificates in~\S\ref{sec:certificates}.
+
+\paragraph{Witness.} Let $T := \tilde T_t$, $A := A_t$, $S := S_t$.  For any finite PMF $Q$ on $T \times A$ with $\sum_a Q(t,a) > 0$ for all $t \in \operatorname{supp}(Q_T)$ and $|S| \geq |A|$, there exist two finite joint PMFs $P_0, P_1$ on $S \times T \times A$ such that
+\begin{enumerate}
+  \item[(i)] $\sum_s P_0(s,t,a) = \sum_s P_1(s,t,a) = Q(t,a)$ (both project to $Q$);
+  \item[(ii)] $\delta_\text{act}(P_0) = 0$ and $\delta_\text{act}(P_1) = H_Q(A \mid T)$.
+\end{enumerate}
+\emph{Construction.} Define $P_0(s,t,a) = \mathbf{1}[s = s_0] \cdot Q(t,a)$ (Dirac state, zero decision relevance) and $P_1(s,t,a) = \mathbf{1}[s = \phi(a)] \cdot Q(t,a)$ (state copies action via injection $\phi: A \hookrightarrow S$, maximal decision relevance). The cardinality condition $|S| \geq |A|$ guarantees $\phi$ exists.
+
+Hence no functional of the observational marginal $Q$ alone can distinguish zero from maximal hidden influence. The witness fixes the scope of the paper: output-only auditing cannot identify hidden-state influence; the certificates below bound it once the auditor has structural access (\S\ref{sec:static-cert}) or admissible behavioral probes (\S\ref{sec:dynamic-cert}).
+
+
+% ---------------------------------------------------------------------------
+\section{Dual Certificates for Bounding Hidden Influence}
+\label{sec:certificates}
+% ---------------------------------------------------------------------------
+
+The certificates inherit $\delta_\text{act} \leq \varepsilon_\text{state}$ (\S\ref{sec:setup}): if $\varepsilon_\text{state}^\text{UB} = 0$, then $\delta_\text{act}^\text{LB} = 0$. The converse fails; $\delta_\text{act}^\text{LB} = 0$ remains compatible with large $\varepsilon_\text{state}^\text{UB}$. The non-identifiability witness (\S\ref{sec:witness}) therefore leaves open capacity that is structurally present but behaviorally dormant, so both certificates are needed.
+
+% ---------------------------------------------------------------------------
+\subsection{Static Certificate: Upper Bound from Deployment Topology}
+\label{sec:static-cert}
+% ---------------------------------------------------------------------------
+
+The static certificate upper-bounds $\varepsilon_\text{state} = H(S_t \mid \tilde T_t)$ from deployment topology. Its value depends on \emph{which components the auditor trusts}.
+
+\paragraph{Deployment topology and trust.} The auditor partitions system components into Trusted (protocol-budgeted), Untrusted (adversarial-budgeted), and Suspect (the audit target). Each macro-edge expands into a time-unrolled DAG $G_t = (V_t, E_t)$. Per-edge budgets depend on trust status: protocol budgets $c_e^{\text{proto}}$ for Trusted edges (read from interface specifications), and adversarial budgets $c_e^{\text{adv}}$ for Untrusted edges (worst-case capacity under the deployment format, by definition $c_e^{\text{adv}} \geq c_e^{\text{proto}}$). Appendix~\ref{app:netinfo} gives the full budget taxonomy, software orthogonality (Lemma~\ref{lem:ortho-decomp}), and the non-orthogonal case.
+
+The default-deny rule is conservative: absent cryptographic or organizational trust anchors, classify components as Untrusted. This includes cases where an untrusted component can encode extra state in otherwise protocol-compliant natural-language outputs, such as compressed rationales or steganographic coordination signals.
+
+\begin{proposition}[Static Certificate: Structural-Access Upper Bound]
+\label{prop:static-ub}
+For any cut $\Omega$ separating $U_t$ from $S_t$ with induced capacity $C_\text{cut}(\Omega) = \sup_{p(X_\Omega \mid \tilde T_t)} I(X_\Omega \to Y_{\Omega^c} \mid \tilde T_t, X_{\Omega^c})$,
+\[
+  H(S_t \mid \tilde T_t) \;\leq\; \underbrace{H(S_t \mid T_t)}_{\varepsilon_\text{nominal}} \;+\; \min_{\Omega} C_\text{cut}(\Omega).
+\]
+Setting $\varepsilon_\text{state}^\text{UB} := \varepsilon_\text{nominal} + \min_\Omega C_\text{cut}(\Omega)$ gives $\varepsilon_\text{state} \leq \varepsilon_\text{state}^\text{UB}$.
+\end{proposition}
+
+Here $X_\Omega$ denotes the input signals entering edges crossing the cut, $Y_{\Omega^c}$ the corresponding output signals, and $X_{\Omega^c}$ the boundary state on the sink side (formal definitions in Appendix~\ref{app:netinfo}).
+
+\begin{corollary}[Additive form]
+\label{cor:additive-ub}
+Under software orthogonality, $\varepsilon_\text{state}^\text{UB} = \varepsilon_\text{nominal} + \min_{C \in \mathcal{C}_\text{unlogged}} \sum_{e \in C} c_e$, a discrete min-cut on the unlogged subgraph.
+\end{corollary}
+
+\emph{Proof sketch:} Chain-rule gives $H(S_t \mid \tilde T_t) = H(S_t \mid T_t) + I(S_t; M_t \mid \tilde T_t)$ where $M_t = T_t \setminus \tilde T_t$. Every path from $U_t$ to $S_t$ crosses a cut $\Omega$, so $M_t$ is $d$-separated from $S_t$ by the cross-cut signals; DPI yields $I(S_t; M_t \mid \tilde T_t) \leq C_\text{cut}(\Omega)$. Minimizing over cuts and applying the additive decomposition (Lemma~\ref{lem:ortho-decomp}, Appendix~\ref{app:netinfo}) completes the proof.
+
+\begin{corollary}[Autoregressive zero-cut]
+\label{cor:auto-exact}
+If the system is a strict autoregressive core and $\tilde T_t$ includes the full context window, then $\mathcal{C}_\text{unlogged} = \varnothing$, every cut has zero induced capacity, and $\varepsilon_\text{state}^\text{UB} = 0$.
+\end{corollary}
+
+% ---------------------------------------------------------------------------
+\subsection{Dynamic Certificate: Lower Bound from Behavioral Probes}
+\label{sec:dynamic-cert}
+% ---------------------------------------------------------------------------
+
+The dynamic certificate targets $\delta_\text{act} := I(S_t; A_t \mid \tilde T_t)$. Since $S_t$ is unobservable, we specify admissible probes whose measured variables satisfy $X_t \to S_t \to A_t$ given $\tilde T_t$. Conditional DPI establishes the leftmost inequality in the audit sandwich: $I(X_t; A_t \mid \tilde T_t) \leq \delta_\text{act}$.
+
+\begin{proposition}[Dynamic Certificate: Behavioral-Access Lower Bound]
+\label{prop:dynamic-lb}
+For any admissible probe variable $X_t$ with $X_t \to S_t \to A_t$ given $\tilde T_t$, the probe measurement $I(X_t; A_t \mid \tilde T_t)$ is a valid lower-bound certificate for $\delta_\text{act}$.
+\end{proposition}
+
+\paragraph{Admissible probe: Replay.}
+\label{sec:replay-cert}
+Let $R_t \in \{\text{wild}, \text{replay}\}$ indicate whether a missing state fragment is reconstructed under the same visible trace $\tilde T_t$ (controlled re-execution, not paraphrase variation).  When $R_t$ is uniformly distributed, the replay certificate takes the form of a Jensen--Shannon divergence:
+\[
+  I(R_t; A_t \mid \tilde T_t) = \mathrm{JS}(P_\text{wild}, P_\text{replay} \mid \tilde T_t) \leq \delta_\text{act},
+  \qquad\text{(Replay Lower Bound)}
+\]
+where $\mathrm{JS}$ is the Jensen--Shannon divergence with equal mixture weight---a concrete manifestation of the mutual information $I(R; A \mid \tilde T_t)$ under the uniform mixture $R \sim \mathrm{Bernoulli}(1/2)$.  Discrete action spaces admit direct empirical JS estimation over either realized actions or model-reported action probabilities; the experiments below state which is used.
+
+\paragraph{Admissible probe: Intervention.}
+Let $\xi_\text{hidden}$ be an exogenous perturbation to a suspected unlogged module (cache, memory buffer, scratchpad). If $\xi_\text{hidden} \to S_t \to A_t$ given $\tilde T_t$, then $I(\xi_\text{hidden}; A_t \mid \tilde T_t) \leq \delta_\text{act}$. Discrete action spaces admit direct conditional action-distribution shift estimates, such as JS divergence. For continuous action spaces, the same certificate targets $I(\xi_\text{hidden}; A_t \mid \tilde T_t)$ through variational lower-bound estimators such as InfoNCE~\citep{oord2018cpc} or MINE~\citep{belghazi2018mine}. Requires gray-box perturbation access; the most direct causal probe of the three.
+
+\paragraph{Admissible probe: Proxy.}
+Let $Z_t = f(S_t)$ be a readable coarsening of the operative state. Since $Z_t \leftarrow S_t \to A_t$ given $\tilde T_t$, conditional DPI yields $I(Z_t; A_t \mid \tilde T_t) \leq \delta_\text{act}$, estimated via the cross-entropy gap of predictors with and without $Z_t$.
+
+\paragraph{Continuous actions and estimator error.}
+When $A_t$ is continuous, the proof obligation does not change---only the estimator does. The audit should report a conservative lower confidence bound $\max\{0,\hat I_\text{InfoNCE/MINE}-\mathrm{err}_{N,\mathcal{F}}\}$, where $\mathrm{err}_{N,\mathcal{F}}$ covers finite-sample uncertainty, critic-class error, and optimization instability. Sample splitting and negative controls play the same role that bootstrap CIs play for discrete actions. Our formalization (Appendix~\ref{app:lean-boundary}) covers the finite-discrete case; continuous-action certificates are an empirical extension of Proposition~\ref{prop:dynamic-lb}, not a claim that continuous MI estimators are mechanized.
+
+\paragraph{Probe aggregation.}
+A single certificate class can miss some causal paths.  Define $\delta_\text{act}^\text{LB} := \max\{ I(R_t; A_t \mid \tilde T_t), I(\xi_\text{hidden}; A_t \mid \tilde T_t), I(Z_t; A_t \mid \tilde T_t) \}$.  By monotonicity of the maximum, the aggregate remains a valid lower bound on $\delta_\text{act}$.
+
+\paragraph{Indexed activation profiles.}
+The scalar certificate is the maximum over an indexed family of admissible probes. Keeping the index gives an \emph{activation profile}
+\[
+  \Delta(j) := I(X_t^{(j)}; A_t \mid \tilde T_t),
+\]
+where $j$ may denote a scratchpad field, a denoising step, an activation layer, or a communication edge.  The static certificate identifies where residual capacity can reside; the activation profile identifies where that capacity is behaviorally used.  The experiments below keep this algebra fixed while changing the index: module in ReAct, time in the diffusion LM, and communication edge in the multi-agent setting.
+
+% ---------------------------------------------------------------------------
+\section{Empirical Instances Across the Gap}
+\label{sec:empirical}
+% ---------------------------------------------------------------------------
+
+The non-identifiability witness (\S\ref{sec:witness}) establishes the possible range: behaviorally equivalent realizations can sit at $0$ or at $H(A_t \mid \tilde T_t)$ while preserving the same observational marginal. The experiments do not construct such paired realizations\footnote{Doing so would require controlled variation of hidden-state structure under fixed observable marginals.}; they test whether the certificates distinguish regimes along the resulting $\delta$-spectrum. ReAct provides a dormant-capacity case, LLaDA a late-binding mid-spectrum case, and multi-agent private reports a near-saturation case. The static min-cut (\S\ref{sec:exp-static}) provides the shared topology coordinate; \S\S\ref{sec:exp-intervention}--\ref{sec:multi-agent-private-report} traverse the behavioral coordinate. Read-only proxy calibration, protocols, and synthetic ground-truth validation are in Appendices~\ref{app:methodology}--\ref{app:synthetic}. All pipelines ran on a single M4 Max workstation.
+
+\subsection{Static Certificate: Min-Cut and Logging Ablation}
+\label{sec:exp-static}
+
+We extract the time-unrolled DAG from Qwen2.5-7B-Instruct ReAct execution traces on tool-selection tasks (Fig.~\ref{fig:static}, left). Per-edge budgets $c_e$ are assigned from interface specifications (\S\ref{sec:static-cert}); the min-cut on unlogged edges gives $\varepsilon_\text{state}^\text{UB}$. For these deployments, $\varepsilon_\text{nominal} = H(S_t \mid T_t) \approx 0$ because the operative state is a deterministic function of the full execution trace (weights fix activations given the complete input); the reported min-cut therefore dominates the bound. Varying logging levels recomputes the min-cut; Table~\ref{tab:static-results} reports the stepwise reduction from $16{,}464$ to $0$ bits. The dominant bottleneck is the scratchpad-read path ($16{,}384$ bits).
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lrl}
+\toprule
+Logging level & $\varepsilon_\text{state}^\text{UB}$ (bits) & Bottleneck \\
+\midrule
+ReAct, output only & $16{,}464$ & scratchpad\_read $(16{,}384)$\textsuperscript{\dag} + router\_logits $(80)$ \\
+ReAct, +log router & $16{,}384$ & scratchpad\_read $(16{,}384)$ \\
+ReAct, +log scratchpad & $0$ & none \\
+ReAct, full instrumentation & $0$ & none \\
+\midrule
+LLaDA-8B-Instruct ($K{=}128$) & $32{,}768$ & denoising interface \\
+Multi-agent, all logged & $0$ & none \\
+Multi-agent, peer report unlogged & $32{,}768$ & peer\_report $\to S_t$ \\
+\bottomrule
+\end{tabular}
+\caption{Static certificate geometry. Adding ReAct logs monotonically removes residual cut capacity; the same min-cut analysis localizes capacity in a scratchpad module, denoising interface, or peer-report edge. The static certificate drops to zero once all high-capacity channels are logged, confirming that logging ablation closes the structural gap.}
+\label{tab:static-results}
+\end{table}
+\textsuperscript{\dag}The $16{,}384$-bit term is the unlogged channel capacity of the scratchpad-read interface in this deployment spec: a $2{,}048$-dimensional scratchpad state quantized at $8$ bits per dimension, hence $2{,}048 \times 8 = 16{,}384$ bits. It is a worst-case capacity ceiling, not an estimate that all bits are behaviorally used.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.48\textwidth]{figures/react_dag.pdf}
+\hfill
+\includegraphics[width=0.48\textwidth]{figures/logging_ablation.pdf}
+\caption{Left: Time-unrolled DAG extracted from Qwen2.5-7B-Instruct ReAct execution (logical edges omitted for clarity). Red edges are unlogged; dashed edges form the min-cut. Right: Logging ablation curve. Full logging removes all hidden capacity, driving $\varepsilon_\text{state}^\text{UB}$ to zero.}
+\label{fig:static}
+\end{figure}
+
+\subsection{Dynamic Causal Certificates: Intervention and Controlled Replay}
+\label{sec:exp-intervention}
+
+This experiment separates the two audit axes. The topology, and therefore $\varepsilon_\text{state}^\text{UB}$, stays fixed; $\delta_\text{act}^\text{LB}$ varies with task. The unlogged scratchpad is present in both splits. It is irrelevant for calculator tasks and necessary for planning tasks. Intervention perturbs the scratchpad by masking or replacement; controlled replay removes it while holding $\tilde T_t$ fixed. Table~\ref{tab:dynamic-certs} reports JS divergence. For the headline replay contrast, argmax tool counts are unchanged, so the evidence is a policy-probability shift rather than a realized-tool flip.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{llcc}
+\toprule
+Task & Condition & JS (bits; nats) & 95\% CI (bits) \\
+\midrule
+\multicolumn{4}{c}{\textit{Intervention}} \\
+Calculator (dormant) & mask $0.7$ & $0.0000$; $0.0000$ & $[0,0]$ \\
+Planning (active) & mask $0.7$ & $0.0215$; $0.0149$ & $[0.0094,0.0410]$ \\
+Calculator (dormant) & replace $1.0$ & $0.0000$; $0.0000$ & $[0,0]$ \\
+Planning (active) & replace $1.0$ & $0.0055$; $0.0038$ & $[0.0016,0.0131]$ \\
+\multicolumn{4}{c}{\textit{Controlled replay}} \\
+Calculator (dormant) & scratchpad removed & $0.0000$; $0.0000$ & $[0,0]$ \\
+Planning (active) & scratchpad removed & $0.0163$; $0.0113$ & $[0.0124,0.0208]$ \\
+\bottomrule
+\end{tabular}
+\caption{Dynamic certificates under the same unlogged-scratchpad topology. Dormant calculator tasks show no detectable scratchpad influence ($\delta_\text{act}^\text{LB} \approx 0$); active planning tasks show positive action-distribution shift. The headline replay contrast reveals the hidden channel matters for planning but not calculation.}
+\label{tab:dynamic-certs}
+\end{table}
+
+The hidden channel is structurally present in both task splits (contributing $16{,}384$ bits to $\varepsilon_\text{state}^\text{UB}$) but becomes action-relevant only on planning tasks. The read-only proxy variant underperforms due to an observational bottleneck; analysis is deferred to the supplemental material.
+
+\subsection{Mid-Spectrum: LLaDA Denoising Trajectory}
+\label{sec:diffusion-dynamic}
+
+LLaDA uses the same dual-certificate framework, but the activation profile is indexed over time rather than module. The hidden denoising channel exists throughout the $K$-step trajectory, while decision relevance concentrates at the final binding step. We use LLaDA-8B-Instruct with $K{=}10$ denoising steps on tool-selection prompts. A Gaussian perturbation ($\sigma{=}5.0$) is applied to layer-1 activations at steps $\{2,4,6,8,10\}$; a late-layer control perturbation tracks broad sensitivity. Each point uses $n{=}20$ trajectories and a trajectory-block bootstrap with $1{,}000$ resamples.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/llada_temporal.pdf}
+\caption{Temporal activation profile for LLaDA-8B-Instruct. Early denoising steps have low dynamic certificates; the final action-forming step rises to $\delta_\text{act}^\text{LB}=0.110$ bits for both target and control layers, indicating that decision relevance is concentrated at the final binding step.}
+\label{fig:llada-temporal}
+\end{figure}
+
+The pattern is late-binding (Fig.~\ref{fig:llada-temporal}): steps 2--8 remain near the floor ($0.001$--$0.006$ bits), while step~10 rises to $\delta_\text{act}^\text{LB}=0.110$ bits (95\% CI $[0.052,0.234]$). The control layer also rises at step~10 ($0.092$ bits, CI $[0.043,0.186]$), so the sensitivity is global. LLaDA carries hidden capacity throughout denoising; it becomes action-relevant only at the discrete tool-choice binding step, placing it mid-spectrum between the ReAct near-zero and multi-agent near-saturation witnesses. Although the perturbation is injected into continuous hidden activations, the reported $\delta_\text{act}^\text{LB}$ is computed over the final discrete tool-token action distribution; the InfoNCE/MINE branch is relevant only when $A_t$ itself is continuous.
+
+\subsection{Near-Saturation: Multi-Agent Private-Report Intervention}
+\label{sec:multi-agent-private-report}
+
+The multi-agent peer-report channel (Table~\ref{tab:static-results}) gives a near-saturation witness: the hidden communication edge carries nearly the full binary-action ceiling. The controller delegates evidence gathering to a worker, so the worker's private report becomes an epistemic edge in the decision graph. The worker sees a benchmark item and writes a short report; the controller sees only that report and chooses one API from \{\texttt{calculator}, \texttt{search}\}. The task pool combines $200$ GSM8K arithmetic items~\citep{cobbe2021training} and $200$ HotpotQA multi-hop fact questions~\citep{yang2018hotpotqa} with seed $42$.
+
+The main intervention replaces the worker report with a report from the opposite task class while holding the controller protocol fixed. A neutral replay removes the report content, and a same-class shuffle replaces it with another report from the same task class. An oracle-tag condition directly names and flips the API label to measure the binary ceiling. For each task and condition, the controller is sampled $k{=}8$ times; labels are parsed as \{\texttt{calculator}, \texttt{search}, \texttt{invalid}\}; and $\mathrm{JS}(P_\text{base},P_\text{condition})$ is averaged with a task-block bootstrap.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Condition & $\delta_\text{act}^\text{LB}$ (JS bits) & 95\% CI (bits) \\
+\midrule
+Neutral replay & $0.358$ & $[0.324,\ 0.392]$ \\
+Counterfactual evidence & $0.901$ & $[0.873,\ 0.928]$ \\
+Same-class shuffle & $0.084$ & $[0.060,\ 0.109]$ \\
+Oracle tag upper-bound & $1.000$ & $[1.000,\ 1.000]$ \\
+\bottomrule
+\end{tabular}
+\caption{Dynamic certificates for the multi-agent deployment. Counterfactual evidence nearly saturates the binary action ceiling ($0.901$ bits out of $1.0$), while same-class shuffling ($0.084$ bits) and neutral replay ($0.358$ bits) remain much smaller. Only the dynamic certificate reveals the hidden channel's behavioral impact.}
+\label{tab:multi-agent-dynamic}
+\end{table}
+
+Reclassifying the worker from Trusted to Untrusted shifts audit strategy from detection to mandatory topology redesign (see \S\ref{sec:static-cert} for the trust taxonomy); the dynamic certificate $\delta_\text{act}^\text{LB}=0.901$ bits is unchanged by this reclassification.
+
+% ---------------------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+% ---------------------------------------------------------------------------
+
+\textbf{The two-evidence-types frame.} Existing audit frameworks often collapse hiddenness into a scalar. These results separate topology from behavior and add a trust axis that determines action: topology bounds what can remain hidden, while behavior shows when hidden channels are used.
+
+\textbf{Limitations.} The fixed-deployment-marginal scope of Definition~\ref{def:behavioral-equiv} applies; distribution shift under red-teaming or deployment drift is not covered. The static certificate (Proposition~1) requires software orthogonality for tightness of the per-edge additive decomposition; shared hidden state across unlogged channels weakens the min-cut interpretation without invalidating the upper bound (Appendix~\ref{app:netinfo}). The dynamic certificate (Proposition~2) requires the probe to satisfy the conditional Markov chain $X_t \to S_t \to A_t$ given $\tilde T_t$; probe misspecification can underestimate $\delta_\text{act}$.
+
+\textbf{Trust boundaries in practice.} Misclassifying an Untrusted component as Trusted underestimates $\varepsilon_\text{state}^\text{UB}$; absent cryptographic or organizational anchors, the default-deny rule treats components as Untrusted.
+
+\textbf{Future Directions.} The main formal step is lifting finite-support claims to continuous state spaces. Empirically, sharper error analyses for InfoNCE/MINE-style continuous-action certificates and active probe selection would strengthen the dynamic certificate. Engineering work should connect the formal proofs (Appendix~\ref{app:lean-boundary}) to a verified audit toolchain. Natural Language Autoencoders (NLAs)~\citep{frasertaliente2026nla} could supply readable proxy probes for Proposition~\ref{prop:dynamic-lb}, but only if their descriptions satisfy the same conditional-Markov requirement.
+
+% ---------------------------------------------------------------------------
+\clearpage
+\section*{Acknowledgments}
+% ---------------------------------------------------------------------------
+
+We thank the developers of Qwen2.5 and LLaDA for the open-weight models used in the ReAct and diffusion-LM experiments; the creators and maintainers of GSM8K and HotpotQA for benchmark data used in the multi-agent setting; and the Hugging Face Transformers, PyTorch, NumPy, scikit-learn, NetworkX, Matplotlib, Lean~4, Lake, and Mathlib communities for the software infrastructure supporting the experiments, figures, and formalization. Computations ran on a single Apple M4 Max workstation.
+
+% ---------------------------------------------------------------------------
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+% ---------------------------------------------------------------------------
+\section*{NeurIPS Paper Checklist}
+% ---------------------------------------------------------------------------
+
+\noindent\textbf{1. Claims}\quad Do the main claims made in the abstract and introduction accurately reflect the paper's contributions and scope?
+
+\emph{Answer:} Yes. All claims are matched by theoretical derivations (\S\ref{sec:setup}--\ref{sec:certificates}) and empirical evidence (\S\ref{sec:empirical}).
+
+\noindent\textbf{2. Limitations}\quad Does the paper discuss limitations of the work?
+
+\emph{Answer:} Yes. Limitations are discussed in \S\ref{sec:discussion}, including the fixed-marginal scope, software-orthogonality dependence, and probe-misspecification risk.
+
+\noindent\textbf{3. Theory Assumptions and Proofs}\quad Did you state the full set of assumptions of all theoretical results, and did you include complete proofs of all theoretical results?
+
+\emph{Answer:} Yes. All assumptions are stated with each result; proofs appear in the main text and Appendix~\ref{app:netinfo}, with mechanically verified proofs provided in Appendix~\ref{app:lean-boundary}.
+
+\noindent\textbf{4. Experimental Result Reproducibility}\quad Did you provide a way to reproduce the experimental results?
+
+\emph{Answer:} Yes. Detailed protocols are in Appendix~\ref{app:methodology}; code, data, and formal proofs are in the supplementary material.
+
+\noindent\textbf{5. Open access to data and code}\quad Did you include the code, data, and instructions needed to reproduce the main experimental results?
+
+\emph{Answer:} Yes. Code, precomputed results, and reproduction instructions are in the supplementary material.
+
+\noindent\textbf{6. Experimental Setting/Details}\quad Did you specify all the training details (e.g., data splits, hyperparameters, how they were chosen)?
+
+\emph{Answer:} Yes. All hyperparameters, data splits, and bootstrap settings are reported in \S\ref{sec:empirical} and Appendix~\ref{app:methodology}.
+
+\noindent\textbf{7. Experiment Statistical Significance}\quad Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?
+
+\emph{Answer:} Yes. All tables report 95\% trajectory- or task-block bootstrap CIs; the method is described in Appendix~\ref{app:methodology}.
+
+\noindent\textbf{8. Experiments Compute Resource}\quad For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
+
+\emph{Answer:} Yes. All pipelines ran on a single Apple M4 Max workstation (\S\ref{sec:empirical}).
+
+\noindent\textbf{9. Code Of Ethics}\quad Have you read the NeurIPS Code of Ethics and ensured that your research conforms to it?
+
+\emph{Answer:} Yes. The work focuses on safety-oriented auditing and does not involve human subjects, privacy-sensitive data, or dual-use risks beyond those discussed.
+
+\noindent\textbf{10. Broader Impacts}\quad If appropriate for the scope and focus of your paper, did you discuss potential negative societal impacts of your work?
+
+\emph{Answer:} Yes. Potential dual-use concerns are acknowledged in \S\ref{sec:discussion}; the framework is inherently defensive in scope.
+
+\noindent\textbf{11. Safeguards}\quad Do you have safeguards in place for responsible release of models with a high risk for misuse (e.g., pretrained language models)?
+
+\emph{Answer:} N/A. No new models are released; existing open-weight models are used as audit targets without modification.
+
+\noindent\textbf{12. Licenses}\quad Did you cite the creators and respect the license and terms of use of existing assets?
+
+\emph{Answer:} Yes. All used assets are publicly available and cited where applicable.
+
+\noindent\textbf{13. New Assets}\quad Are you releasing new assets (datasets, code, models), and did you document them properly?
+
+\emph{Answer:} No. Code, data, and formal proofs will be released upon acceptance.
+
+\noindent\textbf{14. Crowdsourcing and Research with Human Subjects}\quad Did you use crowdsourcing or conduct research with human subjects?
+
+\emph{Answer:} N/A. No human subjects were involved.
+
+\noindent\textbf{15. IRB Approvals}\quad Did you describe potential participant risks and obtain Institutional Review Board (IRB) approvals (or an equivalent approval/review)?
+
+\emph{Answer:} N/A. IRB approval is not applicable.
+
+\noindent\textbf{16. Declaration of LLM usage}\quad Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research?
+
+\emph{Answer:} N/A. The LLM (Qwen2.5) is only the audit target, not a component of the auditing method.
+
+\newpage
+
+\appendix
+
+% ---------------------------------------------------------------------------
+\section{Network Information Theory Background for Proposition~\ref{prop:static-ub}}
+\label{app:netinfo}
+% ---------------------------------------------------------------------------
+
+\paragraph{Conditional channel capacity.}
+For each unlogged edge $e$ in the time-unrolled DAG $G_t$, the conditional capacity $c_e$ is the maximum information that can flow through $e$ under the worst-case distribution consistent with the system protocol. It is a structural upper bound from interface specifications: token window length, hidden-dimension size, quantization level, or discrete-state cardinality. A text channel with budget $K$ tokens over vocabulary $\mathcal{V}$ has $c_e \leq K \log |\mathcal{V}|$; a vector state of dimension $d$ at quantization $Q$ has $c_e \leq d \log Q$; a discrete scheduler with $|\Omega|$ states has $c_e \leq \log |\Omega|$. The certificate remains valid under any tighter $c_e^\star \geq I(X_e; Y_e \mid \tilde T_t)$, so auditors who can measure the empirical input distribution to a channel may substitute a tighter bound.
+
+\paragraph{Software orthogonality and additive decomposition.}
+A set of edges is \emph{software-orthogonal} if, conditioned on $\tilde T_t$, the channel outputs factor: $p(\{y_e\}_{e \in E'} \mid \{x_e\}, \tilde T_t) = \prod_{e \in E'} p(y_e \mid x_e, \tilde T_t)$.
+
+\begin{lemma}[Additive decomposition]
+\label{lem:ortho-decomp}
+Under software orthogonality, the induced cut capacity decomposes additively:
+$C_\text{cut}(\Omega) \leq \sum_{e \in E(\Omega, \Omega^c)} c_e^{\text{budget}(e)}$,
+where $\text{budget}(e) = \text{proto}$ for Trusted edges and $\text{adv}$ for Untrusted edges.
+\end{lemma}
+
+\paragraph{Cut-set upper bound and additive decomposition.}
+Let $G_t = (V_t, E_t)$ be the time-unrolled DAG. For a cut $\Omega \subseteq V_t$ separating source nodes from a target, the \emph{induced cut capacity} $C_\text{cut}(\Omega)$ is the supremum over joint input distributions $p(X_\Omega \mid \tilde T_t)$ of the directed conditional mutual information $I(X_\Omega \to Y_{\Omega^c} \mid \tilde T_t, X_{\Omega^c})$. The cut-set upper bound~\citep{elgamal2011network} states that any information flowing from sources in $\Omega$ to a target in $\Omega^c$ is bounded above by $C_\text{cut}(\Omega)$; minimizing over cuts gives the tightest such bound. Proposition~\ref{prop:static-ub} applies this bound to the unrecorded trace $M_t$. We use only the upper-bound direction; the network-coding achievability results~\citep{ahlswede2000network} are not invoked. Under software orthogonality, Lemma~\ref{lem:ortho-decomp} shows $C_\text{cut}(\Omega) \leq \sum_{e \in E(\Omega, \Omega^c)} c_e$, reducing the certificate to a discrete min-cut problem on $G_t$ (the form used in experiments).  When software orthogonality fails for $E'$, the per-edge decomposition does not hold, but the joint cut capacity is bounded by the direct-product alphabet: $C_\text{cut}(\Omega) \leq \log\!\bigl(\prod_{e \in E'} |\mathcal{X}_e|\bigr)$ via $H(\{X_e\}) \leq \sum_e \log |\mathcal{X}_e|$. This joint-alphabet bound is looser than the per-edge sum under orthogonality but guarantees a finite upper bound regardless of cross-channel interference.
+
+\paragraph{Proof sketch of Proposition~\ref{prop:static-ub}.}
+The argument has two steps. (1)~Trace-gap identity: let $M_t := T_t \setminus \tilde T_t$; then $H(S_t \mid \tilde T_t) = H(S_t \mid T_t) + I(S_t; M_t \mid \tilde T_t)$ by the chain rule, where $H(S_t \mid T_t) = \varepsilon_\text{nominal}$. (2)~Cut-set bound: $M_t$ is $d$-separated from $S_t$ by the cross-cut signals $(X_\Omega \to Y_{\Omega^c},\, X_{\Omega^c})$ conditional on $\tilde T_t$, so $I(S_t; M_t \mid \tilde T_t) \leq C_\text{cut}(\Omega)$ for every cut $\Omega \in \mathrm{Cuts}(U_t \to S_t)$. Minimizing over cuts and combining with step (1) yields the proposition. Corollary~\ref{cor:additive-ub} follows by substituting Lemma~\ref{lem:ortho-decomp}. The full derivation is mechanized in the formal proofs (Appendix~\ref{app:lean-boundary}).
+
+% ---------------------------------------------------------------------------
+\section{Experimental Protocols}
+\label{app:methodology}
+% ---------------------------------------------------------------------------
+
+\subsection{Static Certificate Computation Protocol}
+
+Inputs: deployment architecture specification, logging manifest, and protocol budgets (token window sizes, hidden dimensions, quantization levels). Procedure: (1)~construct the time-unrolled DAG $G_t$; (2)~partition edges into logged and unlogged; (3)~verify software orthogonality (Lemma~\ref{lem:ortho-decomp}) or add shared-state edges explicitly until orthogonality holds; (4)~assign capacity $c_e$ per unlogged edge (\S\ref{sec:static-cert}); (5)~enumerate reachable cut sets $\mathcal{C}_\text{unlogged}$ via min-cut after collapsing logged edges to zero residual capacity; (6)~compute $\varepsilon_\text{state}^\text{UB} = \varepsilon_\text{nominal} + \min_C \sum_{e \in C} c_e$ (Corollary~\ref{cor:additive-ub}). For the logging ablation, repeat (2)--(6) for the ordered manifests in \S\ref{sec:exp-static}. See \texttt{experiments/7.1\_static\_certificate/README.md} for implementation.
+
+\subsection{Dynamic Certificate Estimation Protocols}
+
+\begin{enumerate}
+  \item \textbf{Proxy certificate.} Run $N$ trajectories recording $(\tilde T_t, Z_t^{(k)}, A_t)$; train cross-fitted predictors $p_\theta(A_t \mid \tilde T_t)$ and $p_\phi(A_t \mid \tilde T_t, Z_t^{(k)})$; compute $\hat I_k = L_\text{trace} - L_{\text{trace}+Z^{(k)}}$; estimate trajectory-block bootstrap CIs. Repeat for random, label-permuted, and PCA-projected probes.
+  \item \textbf{Controlled replay certificate.} For each $\tilde T_t$, run the same system under wild and controlled replayed missing-state conditions; estimate $\hat\Delta = \hat{\mathrm{JS}}(P_\text{wild}, P_\text{replay} \mid \tilde T_t)$; aggregate over trace slices. Valid only under the replay condition in \S\ref{sec:replay-cert}.
+  \item \textbf{Intervention certificate.} Inject $\xi_\text{hidden}$ at perturbation levels $\{0, \sigma_1, \ldots\}$ while holding $\tilde T_t$ fixed; estimate $\hat I(\xi_\text{hidden}; A_t \mid \tilde T_t)$ via conditional action-distribution shift (discrete actions) or InfoNCE/MINE (continuous). Repeat on dormant and active tasks under the same topology.
+  \item \textbf{Multi-agent private-report certificate.} Sample $N/2$ arithmetic and $N/2$ factual-retrieval tasks; generate private evidence reports under instructions forbidding direct API names; sample the controller action distribution $k$ times under wild, neutral replay, opposite-class report, same-class shuffled report, and oracle-tag conditions; parse actions into $\{\texttt{calculator}, \texttt{search}, \texttt{invalid}\}$; compute per-task JS divergence with task-block bootstrap CIs. The main contrast is the opposite-class worker-report intervention.
+\end{enumerate}
+
+See the README files for experiments 7.2, 7.3, and 7.6 for implementation details.
+
+% ---------------------------------------------------------------------------
+\section{Synthetic Ground-Truth Validation}
+\label{app:synthetic}
+% ---------------------------------------------------------------------------
+
+To test whether the certificates recover known hidden influence, we construct a synthetic agent with a binary hidden variable $H \sim \text{Bern}(0.5)$ injecting influence $\beta_h$ into action logits; the unlogged-channel capacity $c_H = 1$ bit is known. We run both the static min-cut ($\varepsilon_\text{state}^\text{UB}=1$ bit) and the proxy CE-diff estimator on $1{,}000$ trajectories at five influence levels.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.55\textwidth]{figures/synthetic_gt.pdf}
+\caption{Synthetic ground-truth. $\varepsilon_\text{state}^\text{UB}$ (blue) equals the true $H(S_t \mid \tilde T_t) = 1$ bit. $\delta_\text{act}^\text{LB}$ (red) tracks true $I(S_t; A_t \mid \tilde T_t)$ from below, with negative values at low $\beta_h$ reflecting estimator variance near the noise floor.}
+\label{fig:synthetic}
+\end{figure}
+
+Fig.~\ref{fig:synthetic} shows $\varepsilon_\text{state}^\text{UB} = 1$ bit matches the true hidden entropy (tight when no redundant unlogged capacity exists). The dynamic bound $\delta_\text{act}^\text{LB}$ tracks the true conditional MI from below at all $\beta_h \geq 1$. Unlike the Qwen deployment where a near-deterministic baseline suppresses the proxy signal ($H(A_t \mid \tilde T_t) \approx 0$), the synthetic environment injects controlled stochasticity, so the proxy certificate can become tight when structural capacity is behaviorally active and the observational ceiling permits detection.
+
+% ---------------------------------------------------------------------------
+\section{Formalization of Information-Theoretic Claims}
+\label{app:lean-boundary}
+% ---------------------------------------------------------------------------
+
+The artifact mechanizes the main finite-discrete information-theoretic claims over \texttt{FinitePMF}, using Mathlib finite sums and real logarithms. The theory core is built in \texttt{FiniteQuerySandbox.InfoTheory}:
+
+\textbf{Foundational objects.} A \texttt{FinitePMF} is a Lean structure with exactly three fields: a mass function \texttt{pmf} of type $\alpha \to \mathbb{R}$, a proof \texttt{pmf\_nonneg} of $\forall x, 0 \leq \mathrm{pmf}(x)$, and a proof \texttt{sum\_one} of $\sum_x \mathrm{pmf}(x) = 1$. Every theorem quantifies over finite index types through the Lean typeclass assumptions \texttt{Fintype} and \texttt{DecidableEq}, so marginalization, entropy, KL, and conditional mutual information are all explicit \texttt{Finset.univ} sums. No measure-space, sigma-algebra, countable-additivity, or continuity axiom is imported for probability.
+
+\textbf{Real logarithms and zero mass.} The artifact uses Mathlib's \texttt{Real.log} on $\mathbb{R}$ rather than postulating a separate logarithm. Base-2 quantities are defined by division by \texttt{Real.log 2}, and the positivity/nonzero facts for \texttt{Real.log 2} are proved locally from Mathlib theorems. Mathlib makes \texttt{Real.log 0 = 0}; the entropy summand \texttt{negMulLog2 p} is therefore a total real-valued function with the zero-mass term evaluating to zero. Proofs that require logarithm algebra case-split on zero mass and establish strict positivity before using identities such as \texttt{Real.log\_div}. Thus divisions by zero and support conditions are handled inside the Lean statements, not hidden as informal side assumptions.
+
+\textbf{Entropy.} \texttt{negMulLog2} and \texttt{entropyOf}/\texttt{entropy} define Shannon entropy via $-p\log_2 p$ over finite types. \texttt{negMulLog2\_nonneg} and \texttt{entropy\_nonneg} establish $-p\log_2 p \ge 0$ for $p\in[0,1]$; \texttt{entropy\_le\_log\_card} gives $H(P) \le \log_2|\alpha|$ via KL nonnegativity.
+
+\textbf{KL divergence and DPI.} \texttt{kl\_nonneg} proves $\sum p_x \log(p_x/q_x) \ge 0$ via $\log x \le x-1$ with case-splitting on zero mass. \texttt{condMarkov} defines $X \to Y \to Z \mid W$ via PMF factorization, and \texttt{cond\_dpi} proves the conditional DPI $I(X;Z\!\mid\!W) \le I(Y;Z\!\mid\!W)$ via KL nonnegativity, chain-rule identities, and tuple reindexing.  \texttt{condEntropy\_nonneg} and \texttt{mutualInfo\_nonneg} prove non-negativity of conditional entropy $H(X\mid Y)\ge 0$ and mutual information $I(X;Y)\ge 0$ over finite types.
+
+\textbf{Type equivalence.} \texttt{FinitePMF.comapEquiv}, \texttt{entropyOf\_equiv\_eq}, and \texttt{entropyOf\_mul\_log2} establish entropy invariance under type isomorphism and the $\cdot \ln 2$ conversion.
+
+Supporting modules: \texttt{IdentifiabilityGap} (\S\ref{sec:witness}, Non-Identifiability Witness), \texttt{DualCertificate} (Propositions~\ref{prop:static-ub}--\ref{prop:dynamic-lb} plus the finite-cardinality corollary \texttt{prop1\_static\_ub\_bounded}), \texttt{QuantizedBound} (discrete-to-analog bridge $H(P) \le d\log_2 Q$), \texttt{TraceRecoverability} and \texttt{TraceRecoverabilityBridge} (Corollary~2 surface), \texttt{QuotientFactorization} (semantic-closure factorization surface), the impossibility family \texttt{FiniteQueryDecisionImpossibility}, \texttt{PredictabilityRouteImpossibility}, \texttt{SeparatedPackingImpossibility}, and \texttt{GeometricTools}/\texttt{CoveringBound}/\texttt{PACBounds}/\texttt{Tools} (geometry and PAC utilities). The top-level \texttt{FiniteQuerySandbox} root imports all modules for single-pass verification; \texttt{FiniteQueryAudit} is an alternate root alias. Legacy module names are retained for compatibility.
+
+\begin{table}[h]
+\centering\scriptsize
+\begin{tabular}{@{}p{0.27\textwidth} p{0.20\textwidth} p{0.36\textwidth} p{0.05\textwidth}@{}}
+\toprule
+Main-Text Item & Lean File & Lean Theorem & Status \\
+\midrule
+\S\ref{sec:witness} (Non-Identifiability Witness) & IdentifiabilityGap & \texttt{identifiability\_gap\_extremes} & C \\
+Cor~\ref{cor:auto-exact} (Autoregressive zero-cut) & TraceRecoverability & \texttt{no\_eis\_autoregressive} & C \\
+Prop~\ref{prop:static-ub} (Static certificate) & DualCertificate & \texttt{prop1\_static\_ub} & C/P \\
+Static cardinality corollary & DualCertificate & \texttt{prop1\_static\_ub\_bounded} & C \\
+Prop~\ref{prop:dynamic-lb} (Dynamic certificate) & DualCertificate & \texttt{prop2\_dynamic\_lb} & C \\
+Quantized Entropy Bound & QuantizedBound & \texttt{quantized\_vector\_entropy\_bound} & C \\
+\bottomrule
+\end{tabular}
+\caption{All results mechanized from finite-discrete definitions. \textbf{C}~=~fully mechanized (no external premises). \textbf{C/P}~=~structural reduction: the cut-set capacity bound is taken as an external premise (proved on paper in Appendix~\ref{app:netinfo}); the formal theorem derives the certificate from it.}
+\label{tab:lean}
+\end{table}
+
+\end{document}
