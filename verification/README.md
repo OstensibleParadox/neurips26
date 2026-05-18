@@ -42,6 +42,9 @@ lake build   # all 8310+ jobs pass, zero sorries
 | Active collider membership (`x ∈ Anc(X∪Y∪Z)` from ¬Disjoint) | `DAGParser` | `collider_mem_ancestralSubgraphNodes_of_active` | Fully mechanized |
 | MAGWalk ↔ dSeparationGraph reachability | `DAGParser` | `magWalk_iff_dSeparationGraph_reachable` | Fully mechanized |
 | MAGWalk jump for active collider u → x ← w | `DAGParser` | `MAGWalk.jump_of_active_collider` | Fully mechanized |
+| Active trail → Bayes-ball state path/reachability | `DAGParser` | `bayesBallPath_of_active_trail`, `bayesBallReachable_of_active_trail` | Fully mechanized; first-step openness is explicit |
+| Bayes-ball path scanner → MAGWalk | `DAGParser` | `BayesBallPath.compress`, `MAGWalk.single_of_bayesBallStep`, `MAGWalk.jump_of_bayesBall_collider` | Fully mechanized; membership obligations remain explicit |
+| DAG leaf deletion descent scaffold | `DAGParser` | `DAG.deleteLeaf`, `DAG.deleteLeaf_card_lt` | Fully mechanized |
 | Trail pred. ≠ moralized-ancestral pred. (counterexample) | `DAGParser` | `not_forall_dsep_iff`, `dsep_complete_endpoint_in_Z_counterexample` | Proved: the naive equivalence is false when an endpoint is conditioned on |
 
 ## Module Map
@@ -82,10 +85,18 @@ lake build   # all 8310+ jobs pass, zero sorries
   entropy decomposition, `H_S_cond_Ttilde` / `I_S_M_cond_Ttilde` definitions.
 
 - **`DAGParser.lean`** — `structure DAG`, `IsLeaf`, `exists_leaf_of_nonempty`,
+  `DAG.deleteLeaf`, `DAG.deleteLeaf_card_lt`,
   parent/child/ancestor/descendant queries, rank-based construction helper,
   `inductive Trail`, trail-blocking `dSeparates`, ancestral-subgraph/moralization
   criterion (`DAG.ancestralSubgraph`, `DAG.moralGraph`, `DAG.dSeparationGraph`,
   `DAG.dSeparated`), `inductive MAGWalk` (refl/single/jump/trans),
+  Bayes-ball state/path machinery (`TrailDir`, `BayesBallStep`,
+  `BayesBallReachable`, `BayesBallPath`, `BayesBallPath.RequiredState`),
+  active-trail-to-Bayes-ball path and reachability
+  (`bayesBallPath_of_active_trail`, `bayesBallReachable_of_active_trail`),
+  Bayes-ball-to-MAGWalk bridge pieces and scanner
+  (`MAGWalk.single_of_bayesBallStep`, `MAGWalk.jump_of_bayesBall_collider`,
+  `BayesBallPath.compress`, `magWalk_of_bayesBall`),
   `collider_mem_ancestralSubgraphNodes_of_active` (disjoint-repaired),
   `MAGWalk.jump_of_active_collider`, `magWalk_iff_dSeparationGraph_reachable`
   (MAGWalk ↔ `SimpleGraph.Reachable` in `dSeparationGraph`), and the
@@ -128,8 +139,9 @@ The verification pipeline has four layers, all implemented with zero sorries:
 
 ```
              ┌─────────────────────────────────────┐
-  DAG/Markov │ DAGParser + MarkovGenerator          │  ← complete
-  automation │ (d-separation, MAGWalk, moralization,│
+  DAG/Markov │ DAGParser + MarkovGenerator          │  ← mechanized bridge pieces
+  automation │ (d-separation, Bayes-ball, MAGWalk,  │
+             │  moralization, leaf deletion,        │
              │  FactorizesOverDAG, condMarkov bridge)│
              └─────────────────────────────────────┘
                          ↓ condMarkov_of_factorizes_dsep_fourVar
@@ -165,6 +177,18 @@ deleted, while the trail predicate still allows the one-edge trail `0→1` which
 has no internal triple to block.  The two predicates coexist for different
 proof purposes; the open goal is deriving `FactorizesOverDAG` from DAG
 structure alone rather than assuming it per caller.
+
+**Bayes-ball bridge status.** Active trails now compile into Bayes-ball state
+paths via `bayesBallPath_of_active_trail` and into reflexive-transitive
+reachability via `bayesBallReachable_of_active_trail`; the first edge is guarded
+by `Trail.StartOpen` because trail blocking only constrains internal triples.
+`BayesBallPath.compress` scans explicit paths with a two-step window: ordinary
+windows become `MAGWalk.single`, while active-collider windows
+`(a, _) → (b, into) → (c, outOf)` become one `MAGWalk.jump`, so the collider
+`b` need not survive deletion of `Z`.  The remaining bridge work is deriving
+the scanner's `BayesBallPath.RequiredState` membership obligations from the
+graph/trail hypotheses, then composing the result with
+`MAGWalk.to_dSeparationGraph_reachable`.
 
 ## External Premises
 
@@ -202,12 +226,13 @@ CMI nonnegativity) are proved from Mathlib first principles over finite-discrete
 
 ## Open Mathematical Goals
 
-All implementation steps are complete (zero sorries).  The remaining open
-goals are mathematical rather than implementation gaps:
+The current artifact remains zero-sorry and `lake build` green.  The remaining
+goals are mathematical or bridge-completion tasks rather than unchecked axioms:
 
 | Goal | Where it would live | Status |
 |---|---|---|
 | Verma-Pearl global Markov theorem — derive `FactorizesOverDAG` from DAG structure and a product-form factorization premise | `MarkovGenerator.lean` | Open; leaf-marginalization helpers (`marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf`) are in place |
+| Full active-trail → moralized-graph bridge | `DAGParser.lean` | Partially mechanized: active trail → `BayesBallPath`/`BayesBallReachable`, path compression → `MAGWalk`, and collider skipping are in place; automatic discharge of `RequiredState` membership obligations remains open |
 | Certified decision procedure for d-separation (BFS/DFS on `dSeparationGraph`) | `DAGParser.lean` | Open |
 | Blahut-Arimoto convergence and KKT concave sufficiency metatheorem | `ChannelCapacity.lean` | Open; the `KKT_Certificate` structure is in place for concrete instances |
 | Trail pred. ↔ moralized-ancestral pred. equivalence | `DAGParser.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; a restricted equivalence for non-endpoint-conditioned sets may be provable |

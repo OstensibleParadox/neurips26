@@ -351,6 +351,77 @@ def BayesBallReachable (G : DAG) (Z : Finset ℕ)
     (s t : ℕ × TrailDir) : Prop :=
   Relation.ReflTransGen (BayesBallStep G Z) s t
 
+/-- Explicit Bayes-ball paths, used when proofs need a two-step scan window. -/
+inductive BayesBallPath (G : DAG) (Z : Finset ℕ) :
+    ℕ × TrailDir → ℕ × TrailDir → Type where
+  | nil (s : ℕ × TrailDir) : BayesBallPath G Z s s
+  | cons {s t u : ℕ × TrailDir}
+      (step : BayesBallStep G Z s t)
+      (rest : BayesBallPath G Z t u) :
+      BayesBallPath G Z s u
+
+namespace BayesBallPath
+
+/-- Number of Bayes-ball steps in an explicit path. -/
+def length {G : DAG} {Z : Finset ℕ} :
+    {s t : ℕ × TrailDir} → BayesBallPath G Z s t → ℕ
+  | _, _, nil _ => 0
+  | _, _, cons _ rest => rest.length + 1
+
+/-- Forget an explicit Bayes-ball path to reflexive-transitive reachability. -/
+def toReachable {G : DAG} {Z : Finset ℕ} :
+    {s t : ℕ × TrailDir} → BayesBallPath G Z s t → BayesBallReachable G Z s t
+  | _, _, nil _ => Relation.ReflTransGen.refl
+  | _, _, cons step rest => (Relation.ReflTransGen.single step).trans rest.toReachable
+
+/-- Append a final Bayes-ball step to an explicit path. -/
+def snoc {G : DAG} {Z : Finset ℕ} {s t u : ℕ × TrailDir}
+    (p : BayesBallPath G Z s t) (step : BayesBallStep G Z t u) :
+    BayesBallPath G Z s u :=
+  match p with
+  | nil _ => cons step (nil u)
+  | cons head rest => cons head (rest.snoc step)
+
+/--
+States whose node-membership proof is required by the compressed path scanner.
+For a collider window `(a, _) → (b, into) → (c, outOf)`, the scanner jumps
+directly from `a` to `c`, so `b` is deliberately not required here.
+-/
+inductive RequiredState {G : DAG} {Z : Finset ℕ} :
+    {s t : ℕ × TrailDir} → BayesBallPath G Z s t → ℕ × TrailDir → Prop where
+  | one {s mid : ℕ × TrailDir} (step : BayesBallStep G Z s mid) :
+      RequiredState (BayesBallPath.cons step (BayesBallPath.nil mid)) mid
+  | colliderTarget {s mid next finish : ℕ × TrailDir}
+      {step₁ : BayesBallStep G Z s mid}
+      {step₂ : BayesBallStep G Z mid next}
+      {rest : BayesBallPath G Z next finish}
+      (hcoll : mid.2 = TrailDir.into ∧ next.2 = TrailDir.outOf) :
+      RequiredState (BayesBallPath.cons step₁ (BayesBallPath.cons step₂ rest)) next
+  | colliderRest {s mid next finish : ℕ × TrailDir}
+      {step₁ : BayesBallStep G Z s mid}
+      {step₂ : BayesBallStep G Z mid next}
+      {rest : BayesBallPath G Z next finish}
+      {q : ℕ × TrailDir}
+      (hcoll : mid.2 = TrailDir.into ∧ next.2 = TrailDir.outOf)
+      (hreq : RequiredState rest q) :
+      RequiredState (BayesBallPath.cons step₁ (BayesBallPath.cons step₂ rest)) q
+  | noncolliderTarget {s mid next finish : ℕ × TrailDir}
+      {step₁ : BayesBallStep G Z s mid}
+      {step₂ : BayesBallStep G Z mid next}
+      {rest : BayesBallPath G Z next finish}
+      (hnot : ¬ (mid.2 = TrailDir.into ∧ next.2 = TrailDir.outOf)) :
+      RequiredState (BayesBallPath.cons step₁ (BayesBallPath.cons step₂ rest)) mid
+  | noncolliderRest {s mid next finish : ℕ × TrailDir}
+      {step₁ : BayesBallStep G Z s mid}
+      {step₂ : BayesBallStep G Z mid next}
+      {rest : BayesBallPath G Z next finish}
+      {q : ℕ × TrailDir}
+      (hnot : ¬ (mid.2 = TrailDir.into ∧ next.2 = TrailDir.outOf))
+      (hreq : RequiredState (BayesBallPath.cons step₂ rest) q) :
+      RequiredState (BayesBallPath.cons step₁ (BayesBallPath.cons step₂ rest)) q
+
+end BayesBallPath
+
 lemma BayesBallStep.of_active_triple {G : DAG} {Z : Finset ℕ}
     {a b c : ℕ} {arrival departure : TrailDir}
     (hab : TrailDir.edgeIntoCurrent G a b arrival)
@@ -522,6 +593,44 @@ theorem bayesBallReachable_of_active_trail_from_prev {G : DAG} {Z : Finset ℕ}
         ⟨final_dir, htail⟩
       exact ⟨final_dir, (Relation.ReflTransGen.single hstep).trans htail⟩
 
+def bayesBallPath_of_active_trail_from_prev {G : DAG} {Z : Finset ℕ}
+    {prev u v : ℕ} {arrival : TrailDir}
+    (hprev : TrailDir.edgeIntoCurrent G prev u arrival)
+    (t : Trail G u v)
+    (h_active : ¬ TrailBlocked G Z (prev :: t.toList)) :
+    Σ final_dir, BayesBallPath G Z (u, arrival) (v, final_dir) := by
+  induction t generalizing prev arrival with
+  | nil v =>
+      exact ⟨arrival, BayesBallPath.nil (v, arrival)⟩
+  | forward h tail ih =>
+      rename_i u0 w0 v0
+      have hhead : ¬ TripleBlocked G Z prev u0 w0 :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail) h_active
+      have hstep :
+          BayesBallStep G Z (u0, arrival) (w0, TrailDir.into) := by
+        exact BayesBallStep.of_active_triple hprev
+          (by simpa [TrailDir.edgeIntoCurrent] using h) hhead
+      have htail_active : ¬ TrailBlocked G Z (u0 :: tail.toList) :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons h_active
+      rcases ih (prev := u0) (arrival := TrailDir.into)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, BayesBallPath.cons hstep htail⟩
+  | backward h tail ih =>
+      rename_i u0 w0 v0
+      have hhead : ¬ TripleBlocked G Z prev u0 w0 :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail) h_active
+      have hstep :
+          BayesBallStep G Z (u0, arrival) (w0, TrailDir.outOf) := by
+        exact BayesBallStep.of_active_triple hprev
+          (by simpa [TrailDir.edgeIntoCurrent] using h) hhead
+      have htail_active : ¬ TrailBlocked G Z (u0 :: tail.toList) :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons h_active
+      rcases ih (prev := u0) (arrival := TrailDir.outOf)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, BayesBallPath.cons hstep htail⟩
+
 theorem bayesBallReachable_of_active_trail {G : DAG} {Z : Finset ℕ} {u v : ℕ}
     (t : Trail G u v)
     (h_active : ¬ t.isBlocked Z)
@@ -560,6 +669,44 @@ theorem bayesBallReachable_of_active_trail {G : DAG} {Z : Finset ℕ} {u v : ℕ
         ⟨final_dir, htail⟩
       exact ⟨final_dir, (Relation.ReflTransGen.single hstep).trans htail⟩
 
+def bayesBallPath_of_active_trail {G : DAG} {Z : Finset ℕ} {u v : ℕ}
+    (t : Trail G u v)
+    (h_active : ¬ t.isBlocked Z)
+    (init_dir : TrailDir)
+    (h_start : t.StartOpen Z init_dir) :
+    Σ final_dir, BayesBallPath G Z (u, init_dir) (v, final_dir) := by
+  cases t with
+  | nil v =>
+      exact ⟨init_dir, BayesBallPath.nil (u, init_dir)⟩
+  | forward h tail =>
+      rename_i w0
+      have hstep :
+          BayesBallStep G Z (u, init_dir) (w0, TrailDir.into) :=
+        BayesBallStep.step (by simpa [TrailDir.edgeIntoCurrent] using h)
+          (by simpa [Trail.StartOpen] using h_start)
+      have htail_active : ¬ TrailBlocked G Z (u :: tail.toList) := by
+        simpa [Trail.isBlocked, Trail.toList] using h_active
+      rcases bayesBallPath_of_active_trail_from_prev
+          (G := G) (Z := Z) (prev := u) (u := w0) (v := v)
+          (arrival := TrailDir.into)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) tail htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, BayesBallPath.cons hstep htail⟩
+  | backward h tail =>
+      rename_i w0
+      have hstep :
+          BayesBallStep G Z (u, init_dir) (w0, TrailDir.outOf) :=
+        BayesBallStep.step (by simpa [TrailDir.edgeIntoCurrent] using h)
+          (by simpa [Trail.StartOpen] using h_start)
+      have htail_active : ¬ TrailBlocked G Z (u :: tail.toList) := by
+        simpa [Trail.isBlocked, Trail.toList] using h_active
+      rcases bayesBallPath_of_active_trail_from_prev
+          (G := G) (Z := Z) (prev := u) (u := w0) (v := v)
+          (arrival := TrailDir.outOf)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) tail htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, BayesBallPath.cons hstep htail⟩
+
 lemma Trail.startOpen_outOf_of_not_mem {G : DAG} {Z : Finset ℕ} {u v : ℕ}
     {t : Trail G u v} (huZ : u ∉ Z) :
     t.StartOpen Z TrailDir.outOf := by
@@ -571,6 +718,13 @@ theorem bayesBallReachable_of_active_trail_outOf {G : DAG} {Z : Finset ℕ}
     (h_active : ¬ t.isBlocked Z) (huZ : u ∉ Z) :
     ∃ final_dir, BayesBallReachable G Z (u, TrailDir.outOf) (v, final_dir) :=
   bayesBallReachable_of_active_trail t h_active TrailDir.outOf
+    (Trail.startOpen_outOf_of_not_mem huZ)
+
+def bayesBallPath_of_active_trail_outOf {G : DAG} {Z : Finset ℕ}
+    {u v : ℕ} (t : Trail G u v)
+    (h_active : ¬ t.isBlocked Z) (huZ : u ∉ Z) :
+    Σ final_dir, BayesBallPath G Z (u, TrailDir.outOf) (v, final_dir) :=
+  bayesBallPath_of_active_trail t h_active TrailDir.outOf
     (Trail.startOpen_outOf_of_not_mem huZ)
 
 lemma not_mem_Z_of_active_noncollider {G : DAG} {Z : Finset ℕ} {a b c : ℕ}
@@ -827,6 +981,104 @@ lemma MAGWalk.trans_jump_of_bayesBall_collider {G : DAG} {X Y Z : Finset ℕ}
     MAGWalk G X Y Z r c :=
   MAGWalk.trans hprefix
     (MAGWalk.jump_of_bayesBall_collider hInto hOut ha hc)
+
+namespace BayesBallPath
+
+/--
+Compress an explicit Bayes-ball path to a `MAGWalk`, scanning with a two-step
+window.  Non-collider windows consume one step as a `MAGWalk.single`; collider
+windows of the form `(a, _) → (b, into) → (c, outOf)` consume two steps as one
+`MAGWalk.jump`, so the skipped collider `b` need not be present in
+`dSeparationGraphNodes`.
+-/
+def compressWithFuel {G : DAG} {X Y Z : Finset ℕ} :
+    (fuel : ℕ) →
+    {s t : ℕ × TrailDir} →
+    (p : BayesBallPath G Z s t) →
+    p.length ≤ fuel →
+    s.1 ∈ G.dSeparationGraphNodes X Y Z →
+    t.1 ∈ G.dSeparationGraphNodes X Y Z →
+    (∀ {q : ℕ × TrailDir}, RequiredState p q →
+      q.1 ∈ G.dSeparationGraphNodes X Y Z) →
+    MAGWalk G X Y Z s.1 t.1
+  | 0, s, _, nil _, _, hs, _, _ =>
+      MAGWalk.refl s.1
+  | 0, _, _, cons step rest, hfuel, _, _, _ => by
+      simp [BayesBallPath.length] at hfuel
+  | _ + 1, s, _, nil _, _, hs, _, _ =>
+      MAGWalk.refl s.1
+  | _ + 1, _, _, cons step (nil _), _, hs, ht, _ =>
+      MAGWalk.single_of_bayesBallStep step hs ht
+  | fuel + 1, _, _, cons (s := start) (t := mid) step₁
+      (cons (s := _) (t := next) step₂ rest), hfuel, hs, ht, hreq => by
+      rcases start with ⟨a, arrA⟩
+      rcases mid with ⟨b, arrB⟩
+      rcases next with ⟨c, arrC⟩
+      by_cases hcoll : arrB = TrailDir.into ∧ arrC = TrailDir.outOf
+      · have hc : c ∈ G.dSeparationGraphNodes X Y Z :=
+          hreq (q := (c, arrC))
+            (RequiredState.colliderTarget
+              (G := G) (Z := Z) (s := (a, arrA)) (mid := (b, arrB))
+              (next := (c, arrC)) (step₁ := step₁) (step₂ := step₂)
+              (rest := rest) hcoll)
+        rcases hcoll with ⟨harrB, harrC⟩
+        subst arrB
+        subst arrC
+        have hreq_rest :
+            ∀ {q : ℕ × TrailDir}, RequiredState rest q →
+              q.1 ∈ G.dSeparationGraphNodes X Y Z := by
+          intro q hq
+          exact hreq (q := q)
+            (RequiredState.colliderRest
+              (G := G) (Z := Z) (s := (a, arrA))
+              (mid := (b, TrailDir.into)) (next := (c, TrailDir.outOf))
+              (step₁ := step₁) (step₂ := step₂) (rest := rest)
+              ⟨rfl, rfl⟩ hq)
+        have hfuel_rest : rest.length ≤ fuel := by
+          simp [BayesBallPath.length] at hfuel ⊢
+          omega
+        exact MAGWalk.trans
+          (MAGWalk.jump_of_bayesBall_collider
+            (G := G) (X := X) (Y := Y) (Z := Z)
+            (a := a) (b := b) (c := c) (arrival := arrA)
+            step₁ step₂ hs hc)
+          (compressWithFuel fuel rest hfuel_rest hc ht hreq_rest)
+      · have hb : b ∈ G.dSeparationGraphNodes X Y Z :=
+          hreq (q := (b, arrB))
+            (RequiredState.noncolliderTarget
+              (G := G) (Z := Z) (s := (a, arrA)) (mid := (b, arrB))
+              (next := (c, arrC)) (step₁ := step₁) (step₂ := step₂)
+              (rest := rest) hcoll)
+        have hreq_tail :
+            ∀ {q : ℕ × TrailDir}, RequiredState (cons step₂ rest) q →
+              q.1 ∈ G.dSeparationGraphNodes X Y Z := by
+          intro q hq
+          exact hreq (q := q)
+            (RequiredState.noncolliderRest
+              (G := G) (Z := Z) (s := (a, arrA)) (mid := (b, arrB))
+              (next := (c, arrC)) (step₁ := step₁) (step₂ := step₂)
+              (rest := rest) hcoll hq)
+        have hfuel_tail : (cons step₂ rest).length ≤ fuel := by
+          simp [BayesBallPath.length] at hfuel ⊢
+          omega
+        exact MAGWalk.trans
+          (MAGWalk.single_of_bayesBallStep
+            (G := G) (X := X) (Y := Y) (Z := Z)
+            (u := a) (v := b) (arrival := arrA) (departure := arrB)
+            step₁ hs hb)
+          (compressWithFuel fuel (cons step₂ rest) hfuel_tail hb ht hreq_tail)
+
+/-- Fuel-free wrapper for the compressed Bayes-ball path scanner. -/
+def compress {G : DAG} {X Y Z : Finset ℕ} {s t : ℕ × TrailDir}
+    (p : BayesBallPath G Z s t)
+    (hs : s.1 ∈ G.dSeparationGraphNodes X Y Z)
+    (ht : t.1 ∈ G.dSeparationGraphNodes X Y Z)
+    (hreq : ∀ {q : ℕ × TrailDir}, RequiredState p q →
+      q.1 ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z s.1 t.1 :=
+  compressWithFuel p.length p le_rfl hs ht hreq
+
+end BayesBallPath
 
 lemma magWalk_of_bayesBall_pair {G : DAG} {X Y Z : Finset ℕ}
     {s t : ℕ × TrailDir}
