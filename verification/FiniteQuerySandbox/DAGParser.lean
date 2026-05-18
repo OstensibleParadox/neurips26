@@ -227,6 +227,15 @@ def toList {G : DAG} : {u v : ℕ} → Trail G u v → List ℕ
   | u, _, forward (u := _) (w := _) (v := _) _ tail => u :: toList tail
   | u, _, backward (u := _) (w := _) (v := _) _ tail => u :: toList tail
 
+/-- Vertices visited by a trail as a finite set. -/
+def nodes {G : DAG} {u v : ℕ} (t : Trail G u v) : Finset ℕ :=
+  t.toList.toFinset
+
+@[simp]
+lemma mem_nodes {G : DAG} {u v a : ℕ} {t : Trail G u v} :
+    a ∈ t.nodes ↔ a ∈ t.toList := by
+  simp [nodes]
+
 end Trail
 
 /-- A middle vertex is a collider on the local triple `a-b-c`. -/
@@ -253,6 +262,277 @@ def Trail.isBlocked {G : DAG} {u v : ℕ} (Z : Finset ℕ) (t : Trail G u v) : P
 /-- `Z` d-separates node set `X` from node set `Y`. -/
 def dSeparates (G : DAG) (X Y Z : Finset ℕ) : Prop :=
   ∀ x, x ∈ X → ∀ y, y ∈ Y → ∀ t : Trail G x y, t.isBlocked Z
+
+namespace DAG
+
+lemma ne_of_hasEdge (G : DAG) {u v : ℕ} (h : G.HasEdge u v) : u ≠ v := by
+  intro huv
+  subst v
+  exact (G.acyclic.irrefl.irrefl u) (by simpa [DAG.HasEdge] using h)
+
+lemma not_hasEdge_reverse_of_hasEdge (G : DAG) {u v : ℕ} (h : G.HasEdge u v) :
+    ¬ G.HasEdge v u := by
+  intro hrev
+  have hcycle : Relation.TransGen (fun a b => G.HasEdge a b) u u :=
+    Relation.TransGen.head h (Relation.TransGen.single hrev)
+  exact (not_transGen_self_of_wellFounded G.acyclic u) hcycle
+
+lemma mem_ancestors_self (G : DAG) {v : ℕ} (hv : v ∈ G.nodes) :
+    v ∈ G.ancestors v := by
+  simp [DAG.ancestors, hv, Reachable, Relation.ReflTransGen.refl]
+
+lemma mem_ancestralSubgraphNodes_of_mem {G : DAG} {S : Finset ℕ} {v : ℕ}
+    (hvS : v ∈ S) (hvG : v ∈ G.nodes) :
+    v ∈ G.ancestralSubgraphNodes S := by
+  exact Finset.mem_biUnion.mpr ⟨v, hvS, G.mem_ancestors_self hvG⟩
+
+lemma mem_ancestors_of_hasEdge_of_mem_ancestors {G : DAG} {u v s : ℕ}
+    (huv : G.HasEdge u v) (hvs : v ∈ G.ancestors s) :
+    u ∈ G.ancestors s := by
+  classical
+  have huG : u ∈ G.nodes := (G.edges_subset huv).1
+  have hreach_v_s : Reachable G v s := (Finset.mem_filter.mp hvs).2
+  have hreach_u_s : Reachable G u s :=
+    (Relation.ReflTransGen.single huv).trans hreach_v_s
+  exact Finset.mem_filter.mpr ⟨huG, hreach_u_s⟩
+
+lemma mem_ancestralSubgraphNodes_of_hasEdge_left {G : DAG} {S : Finset ℕ} {u v : ℕ}
+    (huv : G.HasEdge u v) (hv : v ∈ G.ancestralSubgraphNodes S) :
+    u ∈ G.ancestralSubgraphNodes S := by
+  rcases Finset.mem_biUnion.mp hv with ⟨s, hsS, hvs⟩
+  exact Finset.mem_biUnion.mpr
+    ⟨s, hsS, mem_ancestors_of_hasEdge_of_mem_ancestors huv hvs⟩
+
+end DAG
+
+lemma HasTriple.cons {xs : List ℕ} {a b c x : ℕ}
+    (h : HasTriple xs a b c) :
+    HasTriple (x :: xs) a b c := by
+  rcases h with ⟨pre, post, hxs⟩
+  exact ⟨x :: pre, post, by simp [hxs, List.cons_append]⟩
+
+lemma TrailBlocked.cons {G : DAG} {Z : Finset ℕ} {xs : List ℕ} {x : ℕ}
+    (h : TrailBlocked G Z xs) :
+    TrailBlocked G Z (x :: xs) := by
+  rcases h with ⟨a, b, c, htriple, hblocked⟩
+  exact ⟨a, b, c, HasTriple.cons htriple, hblocked⟩
+
+lemma not_trailBlocked_tail_of_not_trailBlocked_cons {G : DAG} {Z : Finset ℕ}
+    {xs : List ℕ} {x : ℕ}
+    (h : ¬ TrailBlocked G Z (x :: xs)) :
+    ¬ TrailBlocked G Z xs := by
+  intro htail
+  exact h (TrailBlocked.cons htail)
+
+lemma trailBlocked_of_head_tripleBlocked {G : DAG} {Z : Finset ℕ}
+    {a b c : ℕ} {xs : List ℕ}
+    (h : TripleBlocked G Z a b c) :
+    TrailBlocked G Z (a :: b :: c :: xs) := by
+  exact ⟨a, b, c, ⟨[], xs, rfl⟩, h⟩
+
+lemma not_tripleBlocked_head_of_not_trailBlocked {G : DAG} {Z : Finset ℕ}
+    {a b c : ℕ} {xs : List ℕ}
+    (h : ¬ TrailBlocked G Z (a :: b :: c :: xs)) :
+    ¬ TripleBlocked G Z a b c := by
+  intro htriple
+  exact h (trailBlocked_of_head_tripleBlocked htriple)
+
+lemma not_mem_Z_of_active_noncollider {G : DAG} {Z : Finset ℕ} {a b c : ℕ}
+    (hactive : ¬ TripleBlocked G Z a b c)
+    (hncoll : ¬ TripleCollider G a b c) :
+    b ∉ Z := by
+  intro hbZ
+  exact hactive (Or.inl ⟨hncoll, hbZ⟩)
+
+lemma collider_mem_ancestralSubgraphNodes_of_active {G : DAG} {X Y Z : Finset ℕ}
+    {a b c : ℕ}
+    (hactive : ¬ TripleBlocked G Z a b c)
+    (hcoll : TripleCollider G a b c) :
+    b ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+  classical
+  have hnotDis :
+      ¬ Disjoint ({b} ∪ descendants G b) Z := by
+    intro hdis
+    exact hactive (Or.inr ⟨hcoll, hdis⟩)
+  rw [Finset.disjoint_left] at hnotDis
+  push Not at hnotDis
+  rcases hnotDis with ⟨z, hz_left, hzZ⟩
+  have hbG : b ∈ G.nodes := (G.edges_subset hcoll.1).2
+  have hreach : Reachable G b z := by
+    rcases Finset.mem_union.mp hz_left with hz_single | hz_desc
+    · simp at hz_single
+      subst z
+      exact Relation.ReflTransGen.refl
+    · exact (Finset.mem_filter.mp hz_desc).2.2
+  have hzS : z ∈ X ∪ Y ∪ Z := by
+    simp [hzZ]
+  exact Finset.mem_biUnion.mpr
+    ⟨z, hzS, by simp [DAG.ancestors, hbG, hreach]⟩
+
+/--
+Reachability in the moralized ancestral graph, packaged as explicit "large
+steps": either a direct underlying DAG edge survives deletion of `Z`, or two
+co-parents are connected by the moralization jump.
+-/
+inductive MAGWalk (G : DAG) (X Y Z : Finset ℕ) : ℕ → ℕ → Prop where
+  | refl (u : ℕ) : MAGWalk G X Y Z u u
+  | single {u v : ℕ}
+      (hEdge : G.HasEdge u v ∨ G.HasEdge v u)
+      (hu : u ∈ G.dSeparationGraphNodes X Y Z)
+      (hv : v ∈ G.dSeparationGraphNodes X Y Z) :
+      MAGWalk G X Y Z u v
+  | jump {u v w : ℕ}
+      (huw : G.HasEdge u w)
+      (hvw : G.HasEdge v w)
+      (hne : u ≠ v)
+      (hu : u ∈ G.dSeparationGraphNodes X Y Z)
+      (hv : v ∈ G.dSeparationGraphNodes X Y Z)
+      (hw : w ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z)) :
+      MAGWalk G X Y Z u v
+  | trans {u v w : ℕ}
+      (huv : MAGWalk G X Y Z u v)
+      (hvw : MAGWalk G X Y Z v w) :
+      MAGWalk G X Y Z u w
+
+lemma mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes
+    {G : DAG} {X Y Z : Finset ℕ} {v : ℕ}
+    (hv : v ∈ G.dSeparationGraphNodes X Y Z) :
+    v ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+  exact (Finset.mem_sdiff.mp (by simpa [DAG.dSeparationGraphNodes] using hv)).1
+
+lemma dSeparationGraph_adj_of_mag_single {G : DAG} {X Y Z : Finset ℕ} {u v : ℕ}
+    (hEdge : G.HasEdge u v ∨ G.HasEdge v u)
+    (hu : u ∈ G.dSeparationGraphNodes X Y Z)
+    (hv : v ∈ G.dSeparationGraphNodes X Y Z) :
+    (G.dSeparationGraph X Y Z).Adj u v := by
+  let S := X ∪ (Y ∪ Z)
+  have huA : u ∈ G.ancestralSubgraphNodes S := by
+    simpa [S] using mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes (G := G) (X := X)
+      (Y := Y) (Z := Z) hu
+  have hvA : v ∈ G.ancestralSubgraphNodes S := by
+    simpa [S] using mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes (G := G) (X := X)
+      (Y := Y) (Z := Z) hv
+  have hne : u ≠ v := by
+    rcases hEdge with huv | hvu
+    · exact G.ne_of_hasEdge huv
+    · exact Ne.symm (G.ne_of_hasEdge hvu)
+  have huA0 : u ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+    simpa [S, Finset.union_assoc] using huA
+  have hvA0 : v ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+    simpa [S, Finset.union_assoc] using hvA
+  refine ⟨hu, hv, ?_⟩
+  dsimp [DAG.moralGraph]
+  refine ⟨huA0, hvA0, hne, ?_⟩
+  rcases hEdge with huv | hvu
+  · left
+    exact Finset.mem_filter.mpr ⟨by simpa [DAG.HasEdge] using huv, huA0, hvA0⟩
+  · right
+    left
+    exact Finset.mem_filter.mpr ⟨by simpa [DAG.HasEdge] using hvu, hvA0, huA0⟩
+
+lemma dSeparationGraph_adj_of_mag_jump {G : DAG} {X Y Z : Finset ℕ} {u v w : ℕ}
+    (huw : G.HasEdge u w)
+    (hvw : G.HasEdge v w)
+    (hne : u ≠ v)
+    (hu : u ∈ G.dSeparationGraphNodes X Y Z)
+    (hv : v ∈ G.dSeparationGraphNodes X Y Z)
+    (hw : w ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z)) :
+    (G.dSeparationGraph X Y Z).Adj u v := by
+  let S := X ∪ (Y ∪ Z)
+  have huA : u ∈ G.ancestralSubgraphNodes S := by
+    simpa [S] using mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes (G := G) (X := X)
+      (Y := Y) (Z := Z) hu
+  have hvA : v ∈ G.ancestralSubgraphNodes S := by
+    simpa [S] using mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes (G := G) (X := X)
+      (Y := Y) (Z := Z) hv
+  have hwA : w ∈ G.ancestralSubgraphNodes S := by
+    simpa [S] using hw
+  have huA0 : u ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+    simpa [S, Finset.union_assoc] using huA
+  have hvA0 : v ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+    simpa [S, Finset.union_assoc] using hvA
+  have hwA0 : w ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+    simpa [S, Finset.union_assoc] using hwA
+  refine ⟨hu, hv, ?_⟩
+  dsimp [DAG.moralGraph]
+  refine ⟨huA0, hvA0, hne, Or.inr (Or.inr ?_)⟩
+  refine ⟨w, ?_, ?_, hne⟩
+  · exact Finset.mem_filter.mpr ⟨by simpa [DAG.HasEdge] using huw, huA0, hwA0⟩
+  · exact Finset.mem_filter.mpr ⟨by simpa [DAG.HasEdge] using hvw, hvA0, hwA0⟩
+
+theorem MAGWalk.to_dSeparationGraph_reachable {G : DAG} {X Y Z : Finset ℕ} {u v : ℕ}
+    (h : MAGWalk G X Y Z u v) :
+    (G.dSeparationGraph X Y Z).Reachable u v := by
+  induction h with
+  | refl u =>
+      exact SimpleGraph.Reachable.refl u
+  | single hEdge hu hv =>
+      exact SimpleGraph.Adj.reachable (dSeparationGraph_adj_of_mag_single hEdge hu hv)
+  | jump huw hvw hne hu hv hw =>
+      exact SimpleGraph.Adj.reachable (dSeparationGraph_adj_of_mag_jump huw hvw hne hu hv hw)
+  | trans _ _ ihuv ihvw =>
+      exact SimpleGraph.Reachable.trans ihuv ihvw
+
+lemma mag_single_or_jump_of_dSeparationGraph_adj {G : DAG} {X Y Z : Finset ℕ} {u v : ℕ}
+    (h : (G.dSeparationGraph X Y Z).Adj u v) :
+    MAGWalk G X Y Z u v := by
+  let S := X ∪ (Y ∪ Z)
+  rcases h with ⟨hu, hv, hmoral⟩
+  dsimp [DAG.moralGraph] at hmoral
+  rcases hmoral with ⟨_, _, hne, hdir | hrev | hcop⟩
+  · have hmem :
+        (u, v) ∈ G.edges.filter (fun e =>
+          e.1 ∈ G.ancestralSubgraphNodes S ∧ e.2 ∈ G.ancestralSubgraphNodes S) := by
+        simpa [DAG.ancestralSubgraph, DAG.HasEdge, S] using hdir
+    exact MAGWalk.single (G := G) (X := X) (Y := Y) (Z := Z)
+      (Or.inl (by simpa [DAG.HasEdge] using (Finset.mem_filter.mp hmem).1)) hu hv
+  · have hmem :
+        (v, u) ∈ G.edges.filter (fun e =>
+          e.1 ∈ G.ancestralSubgraphNodes S ∧ e.2 ∈ G.ancestralSubgraphNodes S) := by
+        simpa [DAG.ancestralSubgraph, DAG.HasEdge, S] using hrev
+    exact MAGWalk.single (G := G) (X := X) (Y := Y) (Z := Z)
+      (Or.inr (by simpa [DAG.HasEdge] using (Finset.mem_filter.mp hmem).1)) hu hv
+  · rcases hcop with ⟨w, huw', hvw', huw_ne_v⟩
+    have huw_mem :
+        (u, w) ∈ G.edges.filter (fun e =>
+          e.1 ∈ G.ancestralSubgraphNodes S ∧ e.2 ∈ G.ancestralSubgraphNodes S) := by
+        simpa [DAG.ancestralSubgraph, DAG.HasEdge, S] using huw'
+    have hvw_mem :
+        (v, w) ∈ G.edges.filter (fun e =>
+          e.1 ∈ G.ancestralSubgraphNodes S ∧ e.2 ∈ G.ancestralSubgraphNodes S) := by
+        simpa [DAG.ancestralSubgraph, DAG.HasEdge, S] using hvw'
+    exact MAGWalk.jump (G := G) (X := X) (Y := Y) (Z := Z)
+      (by simpa [DAG.HasEdge] using (Finset.mem_filter.mp huw_mem).1)
+      (by simpa [DAG.HasEdge] using (Finset.mem_filter.mp hvw_mem).1)
+      huw_ne_v hu hv (by
+        simpa [S] using (Finset.mem_filter.mp huw_mem).2.2)
+
+theorem MAGWalk.of_dSeparationGraph_reachable {G : DAG} {X Y Z : Finset ℕ} {u v : ℕ}
+    (h : (G.dSeparationGraph X Y Z).Reachable u v) :
+    MAGWalk G X Y Z u v := by
+  rcases h with ⟨p⟩
+  induction p with
+  | nil =>
+      exact MAGWalk.refl _
+  | cons hAdj _ ih =>
+      exact MAGWalk.trans (mag_single_or_jump_of_dSeparationGraph_adj hAdj) ih
+
+theorem magWalk_iff_dSeparationGraph_reachable {G : DAG} {X Y Z : Finset ℕ} {u v : ℕ} :
+    MAGWalk G X Y Z u v ↔ (G.dSeparationGraph X Y Z).Reachable u v :=
+  ⟨MAGWalk.to_dSeparationGraph_reachable, MAGWalk.of_dSeparationGraph_reachable⟩
+
+lemma MAGWalk.jump_of_active_collider {G : DAG} {X Y Z : Finset ℕ} {u x w : ℕ}
+    (hux : G.HasEdge u x)
+    (hwx : G.HasEdge w x)
+    (hactive : ¬ TripleBlocked G Z u x w)
+    (hu : u ∈ G.dSeparationGraphNodes X Y Z)
+    (hw : w ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z u w := by
+  by_cases huw : u = w
+  · subst w
+    exact MAGWalk.refl u
+  · exact MAGWalk.jump hux hwx huw hu hw
+      (collider_mem_ancestralSubgraphNodes_of_active hactive ⟨hux, hwx⟩)
 
 /-! ## Small checkable examples -/
 
