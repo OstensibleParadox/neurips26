@@ -145,6 +145,22 @@ def ancestralSubgraph (G : DAG) (S : Finset ℕ) : DAG where
   acyclic :=
     G.acyclic.mono fun _ _ h => (Finset.mem_filter.mp h).1
 
+/-- Delete a vertex and all incident directed edges. -/
+def deleteLeaf (G : DAG) (v : ℕ) : DAG where
+  nodes := G.nodes.erase v
+  edges := G.edges.filter fun e => e.1 ≠ v ∧ e.2 ≠ v
+  edges_subset := by
+    intro u w h
+    rcases Finset.mem_filter.mp h with ⟨hedge, hu_ne, hw_ne⟩
+    exact ⟨Finset.mem_erase.mpr ⟨hu_ne, (G.edges_subset hedge).1⟩,
+      Finset.mem_erase.mpr ⟨hw_ne, (G.edges_subset hedge).2⟩⟩
+  acyclic :=
+    G.acyclic.mono fun _ _ h => (Finset.mem_filter.mp h).1
+
+lemma deleteLeaf_card_lt {G : DAG} {v : ℕ} (hv : v ∈ G.nodes) :
+    (G.deleteLeaf v).nodes.card < G.nodes.card := by
+  simpa [DAG.deleteLeaf] using Finset.card_erase_lt_of_mem hv
+
 /-- Two distinct vertices with a common child in the directed graph. -/
 def coParents (G : DAG) (u v : ℕ) : Prop :=
   ∃ w : ℕ, G.HasEdge u w ∧ G.HasEdge v w ∧ u ≠ v
@@ -251,6 +267,100 @@ def TripleBlocked (G : DAG) (Z : Finset ℕ) (a b c : ℕ) : Prop :=
   (¬ TripleCollider G a b c ∧ b ∈ Z) ∨
     (TripleCollider G a b c ∧ Disjoint ({b} ∪ descendants G b) Z)
 
+/--
+Direction of an edge as seen from the vertex being entered.  `into` means the
+edge arrow points into the current vertex; `outOf` means the arrow points out of
+the current vertex toward the previous one.
+-/
+inductive TrailDir where
+  | into
+  | outOf
+  deriving DecidableEq
+
+namespace TrailDir
+
+/-- The directed edge orientation by which a trail enters `curr` from `prev`. -/
+def edgeIntoCurrent (G : DAG) (prev curr : ℕ) : TrailDir → Prop
+  | into => G.HasEdge prev curr
+  | outOf => G.HasEdge curr prev
+
+/--
+The local triple is a collider exactly when the trail enters the middle vertex
+along an incoming arrow and leaves along another arrow into the middle vertex.
+-/
+def colliderAtCurrent (arrival departure : TrailDir) : Prop :=
+  arrival = into ∧ departure = outOf
+
+end TrailDir
+
+/-- Direction-only version of `TripleBlocked`, used by the Bayes-ball scaffold. -/
+def DirectionalTripleBlocked (G : DAG) (Z : Finset ℕ) (b : ℕ)
+    (arrival departure : TrailDir) : Prop :=
+  (¬ TrailDir.colliderAtCurrent arrival departure ∧ b ∈ Z) ∨
+    (TrailDir.colliderAtCurrent arrival departure ∧
+      Disjoint ({b} ∪ descendants G b) Z)
+
+lemma directionalTripleBlocked_iff_tripleBlocked {G : DAG} {Z : Finset ℕ}
+    {a b c : ℕ} {arrival departure : TrailDir}
+    (hab : TrailDir.edgeIntoCurrent G a b arrival)
+    (hbc : TrailDir.edgeIntoCurrent G b c departure) :
+    DirectionalTripleBlocked G Z b arrival departure ↔ TripleBlocked G Z a b c := by
+  cases arrival <;> cases departure
+  · simp [TrailDir.edgeIntoCurrent] at hab hbc
+    have hnot_cb : ¬ G.HasEdge c b := by
+      intro hrev
+      have hcycle : Relation.TransGen (fun u v => G.HasEdge u v) b b :=
+        Relation.TransGen.head hbc (Relation.TransGen.single hrev)
+      exact (not_transGen_self_of_wellFounded G.acyclic b) hcycle
+    have hnot : ¬ TripleCollider G a b c := fun hcoll => hnot_cb hcoll.2
+    simp [DirectionalTripleBlocked, TrailDir.colliderAtCurrent, TripleBlocked, hnot]
+  · simp [TrailDir.edgeIntoCurrent] at hab hbc
+    have hcoll : TripleCollider G a b c := ⟨hab, hbc⟩
+    simp [DirectionalTripleBlocked, TrailDir.colliderAtCurrent, TripleBlocked, hcoll]
+  · simp [TrailDir.edgeIntoCurrent] at hab hbc
+    have hnot_ab : ¬ G.HasEdge a b := by
+      intro hrev
+      have hcycle : Relation.TransGen (fun u v => G.HasEdge u v) b b :=
+        Relation.TransGen.head hab (Relation.TransGen.single hrev)
+      exact (not_transGen_self_of_wellFounded G.acyclic b) hcycle
+    have hnot : ¬ TripleCollider G a b c := fun hcoll => hnot_ab hcoll.1
+    simp [DirectionalTripleBlocked, TrailDir.colliderAtCurrent, TripleBlocked, hnot]
+  · simp [TrailDir.edgeIntoCurrent] at hab hbc
+    have hnot_ab : ¬ G.HasEdge a b := by
+      intro hrev
+      have hcycle : Relation.TransGen (fun u v => G.HasEdge u v) b b :=
+        Relation.TransGen.head hab (Relation.TransGen.single hrev)
+      exact (not_transGen_self_of_wellFounded G.acyclic b) hcycle
+    have hnot : ¬ TripleCollider G a b c := fun hcoll => hnot_ab hcoll.1
+    simp [DirectionalTripleBlocked, TrailDir.colliderAtCurrent, TripleBlocked, hnot]
+
+/--
+Bayes-ball step relation over `(node, arrival-direction)` states.  A step is
+available when the edge to the next node has the recorded orientation and the
+local direction-only triple at the current node is not blocked by `Z`.
+-/
+inductive BayesBallStep (G : DAG) (Z : Finset ℕ) :
+    ℕ × TrailDir → ℕ × TrailDir → Prop where
+  | step {v w : ℕ} {arrival departure : TrailDir}
+      (hEdge : TrailDir.edgeIntoCurrent G v w departure)
+      (hopen : ¬ DirectionalTripleBlocked G Z v arrival departure) :
+      BayesBallStep G Z (v, arrival) (w, departure)
+
+/-- Reachability in the Bayes-ball state graph. -/
+def BayesBallReachable (G : DAG) (Z : Finset ℕ)
+    (s t : ℕ × TrailDir) : Prop :=
+  Relation.ReflTransGen (BayesBallStep G Z) s t
+
+lemma BayesBallStep.of_active_triple {G : DAG} {Z : Finset ℕ}
+    {a b c : ℕ} {arrival departure : TrailDir}
+    (hab : TrailDir.edgeIntoCurrent G a b arrival)
+    (hbc : TrailDir.edgeIntoCurrent G b c departure)
+    (hactive : ¬ TripleBlocked G Z a b c) :
+    BayesBallStep G Z (b, arrival) (c, departure) :=
+  BayesBallStep.step hbc
+    (by
+      rwa [directionalTripleBlocked_iff_tripleBlocked hab hbc])
+
 /-- A trail is blocked if at least one internal triple on it is blocked. -/
 def TrailBlocked (G : DAG) (Z : Finset ℕ) (xs : List ℕ) : Prop :=
   ∃ a b c : ℕ, HasTriple xs a b c ∧ TripleBlocked G Z a b c
@@ -258,6 +368,20 @@ def TrailBlocked (G : DAG) (Z : Finset ℕ) (xs : List ℕ) : Prop :=
 /-- A trail object is blocked by `Z`. -/
 def Trail.isBlocked {G : DAG} {u v : ℕ} (Z : Finset ℕ) (t : Trail G u v) : Prop :=
   TrailBlocked G Z t.toList
+
+/--
+Opening condition for the first step of a Bayes-ball run generated from a
+trail.  Trail blocking only looks at internal triples, so the first vertex must
+be handled separately.
+-/
+def Trail.StartOpen {G : DAG} {u v : ℕ} (Z : Finset ℕ) (init_dir : TrailDir)
+    (t : Trail G u v) : Prop :=
+  match t with
+  | Trail.nil _ => True
+  | Trail.forward (u := u) _ _ =>
+      ¬ DirectionalTripleBlocked G Z u init_dir TrailDir.into
+  | Trail.backward (u := u) _ _ =>
+      ¬ DirectionalTripleBlocked G Z u init_dir TrailDir.outOf
 
 /-- `Z` d-separates node set `X` from node set `Y`. -/
 def dSeparates (G : DAG) (X Y Z : Finset ℕ) : Prop :=
@@ -336,6 +460,118 @@ lemma not_tripleBlocked_head_of_not_trailBlocked {G : DAG} {Z : Finset ℕ}
     ¬ TripleBlocked G Z a b c := by
   intro htriple
   exact h (trailBlocked_of_head_tripleBlocked htriple)
+
+lemma HasTriple.head_of_trail {G : DAG} {a b c v : ℕ} (t : Trail G c v) :
+    HasTriple (a :: b :: t.toList) a b c := by
+  cases t with
+  | nil v =>
+      exact ⟨[], [], by simp [Trail.toList]⟩
+  | forward h tail =>
+      exact ⟨[], tail.toList, by simp [Trail.toList]⟩
+  | backward h tail =>
+      exact ⟨[], tail.toList, by simp [Trail.toList]⟩
+
+lemma trailBlocked_of_head_tripleBlocked_trail {G : DAG} {Z : Finset ℕ}
+    {a b c v : ℕ} (t : Trail G c v)
+    (h : TripleBlocked G Z a b c) :
+    TrailBlocked G Z (a :: b :: t.toList) :=
+  ⟨a, b, c, HasTriple.head_of_trail t, h⟩
+
+lemma not_tripleBlocked_head_of_not_trailBlocked_trail {G : DAG} {Z : Finset ℕ}
+    {a b c v : ℕ} {t : Trail G c v}
+    (h : ¬ TrailBlocked G Z (a :: b :: t.toList)) :
+    ¬ TripleBlocked G Z a b c := by
+  intro htriple
+  exact h (trailBlocked_of_head_tripleBlocked_trail t htriple)
+
+theorem bayesBallReachable_of_active_trail_from_prev {G : DAG} {Z : Finset ℕ}
+    {prev u v : ℕ} {arrival : TrailDir}
+    (hprev : TrailDir.edgeIntoCurrent G prev u arrival)
+    (t : Trail G u v)
+    (h_active : ¬ TrailBlocked G Z (prev :: t.toList)) :
+    ∃ final_dir, BayesBallReachable G Z (u, arrival) (v, final_dir) := by
+  induction t generalizing prev arrival with
+  | nil v =>
+      exact ⟨arrival, Relation.ReflTransGen.refl⟩
+  | forward h tail ih =>
+      rename_i u0 w0 v0
+      have hhead : ¬ TripleBlocked G Z prev u0 w0 :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail) h_active
+      have hstep :
+          BayesBallStep G Z (u0, arrival) (w0, TrailDir.into) := by
+        exact BayesBallStep.of_active_triple hprev
+          (by simpa [TrailDir.edgeIntoCurrent] using h) hhead
+      have htail_active : ¬ TrailBlocked G Z (u0 :: tail.toList) :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons h_active
+      rcases ih (prev := u0) (arrival := TrailDir.into)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, (Relation.ReflTransGen.single hstep).trans htail⟩
+  | backward h tail ih =>
+      rename_i u0 w0 v0
+      have hhead : ¬ TripleBlocked G Z prev u0 w0 :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail) h_active
+      have hstep :
+          BayesBallStep G Z (u0, arrival) (w0, TrailDir.outOf) := by
+        exact BayesBallStep.of_active_triple hprev
+          (by simpa [TrailDir.edgeIntoCurrent] using h) hhead
+      have htail_active : ¬ TrailBlocked G Z (u0 :: tail.toList) :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons h_active
+      rcases ih (prev := u0) (arrival := TrailDir.outOf)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, (Relation.ReflTransGen.single hstep).trans htail⟩
+
+theorem bayesBallReachable_of_active_trail {G : DAG} {Z : Finset ℕ} {u v : ℕ}
+    (t : Trail G u v)
+    (h_active : ¬ t.isBlocked Z)
+    (init_dir : TrailDir)
+    (h_start : t.StartOpen Z init_dir) :
+    ∃ final_dir, BayesBallReachable G Z (u, init_dir) (v, final_dir) := by
+  cases t with
+  | nil v =>
+      exact ⟨init_dir, Relation.ReflTransGen.refl⟩
+  | forward h tail =>
+      rename_i w0
+      have hstep :
+          BayesBallStep G Z (u, init_dir) (w0, TrailDir.into) :=
+        BayesBallStep.step (by simpa [TrailDir.edgeIntoCurrent] using h)
+          (by simpa [Trail.StartOpen] using h_start)
+      have htail_active : ¬ TrailBlocked G Z (u :: tail.toList) := by
+        simpa [Trail.isBlocked, Trail.toList] using h_active
+      rcases bayesBallReachable_of_active_trail_from_prev
+          (G := G) (Z := Z) (prev := u) (u := w0) (v := v)
+          (arrival := TrailDir.into)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) tail htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, (Relation.ReflTransGen.single hstep).trans htail⟩
+  | backward h tail =>
+      rename_i w0
+      have hstep :
+          BayesBallStep G Z (u, init_dir) (w0, TrailDir.outOf) :=
+        BayesBallStep.step (by simpa [TrailDir.edgeIntoCurrent] using h)
+          (by simpa [Trail.StartOpen] using h_start)
+      have htail_active : ¬ TrailBlocked G Z (u :: tail.toList) := by
+        simpa [Trail.isBlocked, Trail.toList] using h_active
+      rcases bayesBallReachable_of_active_trail_from_prev
+          (G := G) (Z := Z) (prev := u) (u := w0) (v := v)
+          (arrival := TrailDir.outOf)
+          (by simpa [TrailDir.edgeIntoCurrent] using h) tail htail_active with
+        ⟨final_dir, htail⟩
+      exact ⟨final_dir, (Relation.ReflTransGen.single hstep).trans htail⟩
+
+lemma Trail.startOpen_outOf_of_not_mem {G : DAG} {Z : Finset ℕ} {u v : ℕ}
+    {t : Trail G u v} (huZ : u ∉ Z) :
+    t.StartOpen Z TrailDir.outOf := by
+  cases t <;>
+    simp [Trail.StartOpen, DirectionalTripleBlocked, TrailDir.colliderAtCurrent, huZ]
+
+theorem bayesBallReachable_of_active_trail_outOf {G : DAG} {Z : Finset ℕ}
+    {u v : ℕ} (t : Trail G u v)
+    (h_active : ¬ t.isBlocked Z) (huZ : u ∉ Z) :
+    ∃ final_dir, BayesBallReachable G Z (u, TrailDir.outOf) (v, final_dir) :=
+  bayesBallReachable_of_active_trail t h_active TrailDir.outOf
+    (Trail.startOpen_outOf_of_not_mem huZ)
 
 lemma not_mem_Z_of_active_noncollider {G : DAG} {Z : Finset ℕ} {a b c : ℕ}
     (hactive : ¬ TripleBlocked G Z a b c)
@@ -534,6 +770,101 @@ lemma MAGWalk.jump_of_active_collider {G : DAG} {X Y Z : Finset ℕ} {u x w : �
   · exact MAGWalk.jump hux hwx huw hu hw
       (collider_mem_ancestralSubgraphNodes_of_active hactive ⟨hux, hwx⟩)
 
+lemma MAGWalk.single_of_bayesBallStep {G : DAG} {X Y Z : Finset ℕ}
+    {u v : ℕ} {arrival departure : TrailDir}
+    (hstep : BayesBallStep G Z (u, arrival) (v, departure))
+    (hu : u ∈ G.dSeparationGraphNodes X Y Z)
+    (hv : v ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z u v := by
+  cases hstep with
+  | step hEdge _ =>
+      cases departure
+      · exact MAGWalk.single
+          (Or.inl (by simpa [TrailDir.edgeIntoCurrent] using hEdge)) hu hv
+      · exact MAGWalk.single
+          (Or.inr (by simpa [TrailDir.edgeIntoCurrent] using hEdge)) hu hv
+
+lemma MAGWalk.jump_of_bayesBall_collider {G : DAG} {X Y Z : Finset ℕ}
+    {a b c : ℕ} {arrival : TrailDir}
+    (hInto : BayesBallStep G Z (a, arrival) (b, TrailDir.into))
+    (hOut : BayesBallStep G Z (b, TrailDir.into) (c, TrailDir.outOf))
+    (ha : a ∈ G.dSeparationGraphNodes X Y Z)
+    (hc : c ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z a c := by
+  cases hInto with
+  | step hIntoEdge _ =>
+      cases hOut with
+      | step hOutEdge hOutOpen =>
+          have hactive : ¬ TripleBlocked G Z a b c := by
+            intro hblocked
+            exact hOutOpen
+              ((directionalTripleBlocked_iff_tripleBlocked hIntoEdge hOutEdge).mpr hblocked)
+          have hcoll : TripleCollider G a b c := by
+            exact ⟨by simpa [TrailDir.edgeIntoCurrent] using hIntoEdge,
+              by simpa [TrailDir.edgeIntoCurrent] using hOutEdge⟩
+          have hb : b ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+            collider_mem_ancestralSubgraphNodes_of_active hactive hcoll
+          by_cases hac : a = c
+          · subst c
+            exact MAGWalk.refl a
+          · exact MAGWalk.jump
+              (by simpa [TrailDir.edgeIntoCurrent] using hIntoEdge)
+              (by simpa [TrailDir.edgeIntoCurrent] using hOutEdge)
+              hac ha hc hb
+
+/--
+Compressed Bayes-ball-to-MAG step for an active collider.  The middle collider
+`b` is not required to survive deletion of `Z`; its active-open premise supplies
+ancestral membership, and the MAG step jumps directly from `a` to `c`.
+-/
+lemma MAGWalk.trans_jump_of_bayesBall_collider {G : DAG} {X Y Z : Finset ℕ}
+    {r a b c : ℕ} {arrival : TrailDir}
+    (hprefix : MAGWalk G X Y Z r a)
+    (hInto : BayesBallStep G Z (a, arrival) (b, TrailDir.into))
+    (hOut : BayesBallStep G Z (b, TrailDir.into) (c, TrailDir.outOf))
+    (ha : a ∈ G.dSeparationGraphNodes X Y Z)
+    (hc : c ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z r c :=
+  MAGWalk.trans hprefix
+    (MAGWalk.jump_of_bayesBall_collider hInto hOut ha hc)
+
+lemma magWalk_of_bayesBall_pair {G : DAG} {X Y Z : Finset ℕ}
+    {s t : ℕ × TrailDir}
+    (h_bb : BayesBallReachable G Z s t)
+    (hmem : ∀ {n : ℕ} {d : TrailDir},
+      BayesBallReachable G Z s (n, d) →
+        n ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z s.1 t.1 := by
+  induction h_bb with
+  | refl =>
+      exact MAGWalk.refl s.1
+  | tail hreach hstep ih =>
+      rename_i current target
+      rcases current with ⟨n, arrival⟩
+      rcases target with ⟨w, departure⟩
+      cases hstep with
+      | step hEdge hopen =>
+          have hn : n ∈ G.dSeparationGraphNodes X Y Z := hmem hreach
+          have hnext :
+              BayesBallReachable G Z s (w, departure) :=
+            hreach.trans (Relation.ReflTransGen.single
+              (BayesBallStep.step (G := G) (Z := Z) hEdge hopen))
+          have hw : w ∈ G.dSeparationGraphNodes X Y Z := hmem hnext
+          exact MAGWalk.trans ih
+            (MAGWalk.single_of_bayesBallStep
+              (G := G) (X := X) (Y := Y) (Z := Z)
+              (u := n) (v := w) (arrival := arrival) (departure := departure)
+              (BayesBallStep.step hEdge hopen) hn hw)
+
+lemma magWalk_of_bayesBall {G : DAG} {X Y Z : Finset ℕ}
+    {u v : ℕ} {d₁ d₂ : TrailDir}
+    (h_bb : BayesBallReachable G Z (u, d₁) (v, d₂))
+    (hmem : ∀ {n : ℕ} {d : TrailDir},
+      BayesBallReachable G Z (u, d₁) (n, d) →
+        n ∈ G.dSeparationGraphNodes X Y Z) :
+    MAGWalk G X Y Z u v :=
+  magWalk_of_bayesBall_pair h_bb hmem
+
 /-! ## Small checkable examples -/
 
 namespace DAGExamples
@@ -581,6 +912,15 @@ example : parents chain3 1 = {0} := by
 
 example : children chain3 1 = {2} := by
   decide
+
+example : (chain3.deleteLeaf 2).nodes = ({0, 1} : Finset ℕ) := by
+  decide
+
+example : (chain3.deleteLeaf 2).edges = ({(0, 1)} : Finset (ℕ × ℕ)) := by
+  decide
+
+example : (chain3.deleteLeaf 2).nodes.card < chain3.nodes.card :=
+  DAG.deleteLeaf_card_lt (G := chain3) (v := 2) (by decide)
 
 def chainTrail02 : Trail chain3 0 2 :=
   Trail.forward (u := 0) (w := 1) (v := 2)

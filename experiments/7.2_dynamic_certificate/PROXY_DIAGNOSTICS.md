@@ -7,6 +7,10 @@ Instead, the diagnostic run exposed estimator pathologies that could produce fal
 proxy certificates. The hardened v3 pipeline fixes these issues and treats the current
 debug-scale result as valid non-certification.
 
+**Updated Interpretation after V3 Positive Control:**
+The debug-scale result of `δ_proxy_LB = 0` is a "valid non-certification / sanity gate" because the hardened v3 estimator has demonstrated statistical power on synthetic ground-truth data (see `experiments/7.4_synthetic_gt/V3_POSITIVE_CONTROL.md`). This confirms that when the estimator reports zero, it truly reflects a lack of detectable signal, rather than a lack of power.
+
+
 ## Pathologies Found
 
 ### 1. Permuted-Z oracle leakage

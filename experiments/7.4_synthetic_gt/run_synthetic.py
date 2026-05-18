@@ -18,6 +18,15 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+# Import v3 estimator
+try:
+    from .synthetic_v3_estimator import run_v3_estimation
+except ImportError:
+    # Handle relative import issue when running as script
+    import sys
+    sys.path.append(str(Path(__file__).parent))
+    from synthetic_v3_estimator import run_v3_estimation
+
 
 def generate_data(n=1000, d_tilde=8, n_classes=5, beta_h=0.0, seed=42):
     """Generate synthetic data with controlled hidden influence.
@@ -129,42 +138,101 @@ def ce_diff_estimate(T, H, A, n_classes, n_folds=5):
     return float(np.mean(ce_diffs)), float(np.std(ce_diffs) / np.sqrt(n_folds))
 
 
+def ce_diff_estimate_v3(T, H, A, seed=42):
+    """V3 CE-diff estimator using hardened pipeline from synthetic_v3_estimator.py."""
+    # Semantic mapping: T→Phi, H→Z, A→A_in
+    Phi_raw = T.astype(np.float32)
+    Z_raw = H.reshape(-1, 1).astype(np.float32)  # Make H a column vector
+    A_in = A.astype(int)
+
+    # For synthetic data with no task structure, use singleton groups
+    task_ids = np.arange(len(A))
+
+    # Run v3 estimation
+    result = run_v3_estimation(Phi_raw, Z_raw, A_in, task_ids, rng_seed=seed)
+
+    return result
+
+
 def main(n_trajectories: int = 1000,
          beta_levels: list[float] | None = None,
          out_dir: str = "data/processed/synthetic",
-         skip_plot: bool = False):
+         skip_plot: bool = False,
+         estimator: str = "legacy"):
     if beta_levels is None:
         beta_levels = [0.0, 0.5, 1.0, 2.0, 4.0]
     results = []
 
+    print(f"Running with {estimator} estimator...")
+
     for beta_h in beta_levels:
         T, H, A, probs, true_mi = generate_data(n=n_trajectories, beta_h=beta_h)
-        delta_nats, delta_se = ce_diff_estimate(T, H, A, 5)
-        delta_bits = delta_nats / np.log(2)
         true_mi_bits = true_mi / np.log(2)
 
-        results.append({
-            "beta_h": float(beta_h),
-            "true_mi_nats": float(true_mi),
-            "true_mi_bits": float(true_mi_bits),
-            "true_H_bits": 1.0,
-            "epsilon_ub_bits": 1.0,
-            "delta_lb_nats": float(delta_nats),
-            "delta_lb_bits": float(delta_bits),
-            "delta_se": float(delta_se),
-        })
-        bound_ok = "OK" if delta_bits <= true_mi_bits else "VIOLATION"
-        print(f"  beta={beta_h:.1f}: true_MI={true_mi_bits:.4f} bits, "
-              f"delta^LB={delta_bits:.4f} bits, eps^UB=1.0 bits [{bound_ok}]")
+        if estimator == "legacy":
+            delta_nats, delta_se = ce_diff_estimate(T, H, A, 5)
+            delta_bits = delta_nats / np.log(2)
 
-    out = Path(out_dir) / "synthetic_results.json"
+            results.append({
+                "beta_h": float(beta_h),
+                "true_mi_nats": float(true_mi),
+                "true_mi_bits": float(true_mi_bits),
+                "true_H_bits": 1.0,
+                "epsilon_ub_bits": 1.0,
+                "delta_lb_nats": float(delta_nats),
+                "delta_lb_bits": float(delta_bits),
+                "delta_se": float(delta_se),
+            })
+            bound_ok = "OK" if delta_bits <= true_mi_bits else "VIOLATION"
+            print(f"  beta={beta_h:.1f}: true_MI={true_mi_bits:.4f} bits, "
+                  f"delta^LB={delta_bits:.4f} bits, eps^UB=1.0 bits [{bound_ok}]")
+
+        elif estimator == "v3":
+            v3_result = ce_diff_estimate_v3(T, H, A)
+            raw_gap_bits = v3_result["raw_gap_bits"]
+            null_p95_bits = v3_result["null_p95_bits"]
+            null_corrected_gap_bits = v3_result["null_corrected_gap_bits"]
+            certified_delta_LB_bits = v3_result["certified_delta_LB_bits"]
+            null_pass = v3_result["null_pass"]
+
+            results.append({
+                "beta_h": float(beta_h),
+                "true_mi_nats": float(true_mi),
+                "true_mi_bits": float(true_mi_bits),
+                "raw_gap_bits": float(raw_gap_bits),
+                "null_p95_bits": float(null_p95_bits),
+                "null_corrected_gap_bits": float(null_corrected_gap_bits),
+                "certified_delta_LB_bits": float(certified_delta_LB_bits) if certified_delta_LB_bits is not None else None,
+                "null_pass": bool(null_pass),
+                "n": int(n_trajectories),
+                "n_null_repeats": int(v3_result["n_null_repeats"]),
+                "n_classes": int(5), # n_classes is always 5 for this synthetic data
+                "task_grouping": str(v3_result["task_grouping"])
+            })
+
+            status = "OK" if null_pass else "INVALID"
+            cert_str = f"{certified_delta_LB_bits:.4f}" if certified_delta_LB_bits is not None else "None"
+            print(f"  beta={beta_h:.1f}: true_MI={true_mi_bits:.4f} bits, "
+                  f"raw_gap={raw_gap_bits:.4f} bits, null_p95={null_p95_bits:.4f} bits, "
+                  f"cert_delta_LB={cert_str} bits [{status}]")
+
+        else:
+            raise ValueError(f"Unknown estimator: {estimator}")
+
+    # Choose output file based on estimator
+    if estimator == "legacy":
+        out_file = "synthetic_results.json"
+    else:
+        out_file = "synthetic_results_v3.json"
+
+    out = Path(out_dir) / out_file
     out.parent.mkdir(parents=True, exist_ok=True)
     with open(out, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nSaved to {out}")
 
-    # Generate figure
-    if not skip_plot:
+    # Generate figure (only for legacy for now)
+    if not skip_plot and estimator == "legacy":
         _plot(results, out_dir)
     return results
 
@@ -216,6 +284,8 @@ if __name__ == "__main__":
                         help="Output directory for results (default: data/processed/synthetic)")
     parser.add_argument("--no-plot", action="store_true",
                         help="Skip figure generation")
+    parser.add_argument("--estimator", choices=["legacy", "v3"], default="legacy",
+                        help="Estimator to use: legacy (original neural net) or v3 (hardened pipeline)")
     args = parser.parse_args()
     main(n_trajectories=args.n_trajectories, beta_levels=args.beta_levels,
-         out_dir=args.out_dir, skip_plot=args.no_plot)
+         out_dir=args.out_dir, skip_plot=args.no_plot, estimator=args.estimator)

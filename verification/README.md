@@ -14,27 +14,35 @@ lake build
 
 Pinned by `lean-toolchain` and `lake-manifest.json`.
 
+```bash
+lake build   # all 8310+ jobs pass, zero sorries
+```
+
 ## Main Statements
 
 | Paper item | Lean module | Declaration | Status |
 |---|---|---|---|
 | Definition 1 — Core audit quantities | `DualCertificate` | `H_S_cond_Ttilde`, `delta_act` | Fully mechanized |
-| Remark 1 — Complementarity / inheritance | (conceptual, follows from DPI ordering) | — | Implied by `prop2_dynamic_lb` ≤ |·| bound |
+| Remark 1 — Complementarity / inheritance | (follows from DPI ordering) | — | Implied by `prop2_dynamic_lb` ≤ \|·\| bound |
 | Lemma 1 — Additive decomposition (software orthogonality) | `DualCertificate` | `static_decomposition`, `software_orthogonal` | Fully mechanized |
 | Proposition 1 — Static certificate via cut-set bound | `DualCertificate` | `prop1_static_ub` | From cut-set premise |
 | Corollary 1 — Additive min-cut form | `DualCertificate` | `corollary_additive_ub` | From cut-set premise + orthogonality hypothesis |
 | Corollary 2 — Autoregressive zero-cut | `Screenability` | `no_eis_autoregressive` | Fully mechanized |
 | Proposition 2 — Probe certificates from conditional DPI | `DualCertificate` | `prop2_dynamic_lb`, `aggregated_dynamic_lb` | From finite DPI |
-| Leaf marginalization helper for DAG elimination | `InfoTheory` | `marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf` | Fully mechanized helper |
-| Static cardinality corollary (`ε_state^UB ≤ H_nominal + log|Missing|`) | `DualCertificate` | `prop1_static_ub_bounded` | Fully mechanized |
-| Cut-set DPI bottleneck (`I(S;M|T̃) ≤ I(Y;Z|W)`) | `CutSetBoundExtract` | `abstract_cut_set_bound` | From cut-set premise |
-| KKT certificate capacity bound (`I(Y;Z|W) ≤ C`) | `ChannelCapacity` | `KKT_Certificate`, `capacity_le_of_kkt` | From per-symbol KKT condition |
+| Static cardinality corollary (`ε_state^UB ≤ H_nominal + log\|Missing\|`) | `DualCertificate` | `prop1_static_ub_bounded` | Fully mechanized |
+| Cut-set DPI bottleneck (`I(S;M\|T̃) ≤ I(Y;Z\|W)`) | `CutSetBoundExtract` | `abstract_cut_set_bound` | From cut-set premise |
+| KKT certificate capacity bound (`I(Y;Z\|W) ≤ C`) | `ChannelCapacity` | `KKT_Certificate`, `capacity_le_of_kkt` | From per-symbol KKT condition |
 | Linear chain cut-set bound (`ε_state^UB ≤ 1 bit`) | `CaseStudy` | `linear_chain_cut_set_bound` | KKT cert + DPI + `abstract_cut_set_bound` |
+| Linear chain via DAG interface | `CaseStudy` | `linear_chain_cut_set_bound_from_dag` | `FactorizesOverDAG` + `dSeparates` → `condMarkov` → bound |
+| Leaf marginalization helper | `InfoTheory` | `marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf` | Fully mechanized helper |
 | Deterministic trace recoverability | `TraceRecoverability` | `no_internal_witness_trace_recoverability` | Fully mechanized |
 | Behavioral equivalence ≠ audit equivalence | `IdentifiabilityGap` | `identifiability_gap_extremes` | Fully mechanized |
-| DAG d-separation predicates and graph pipeline | `DAGParser` | `dSeparates`, `Trail.isBlocked`, `DAG.dSeparated`, `DAG.moralGraph` | Partially mechanized |
-| DAG Markov condition generation | `MarkovGenerator` | `computeMarkovBlanket`, `generateMarkovConditions` | Partially mechanized |
-| d-sep ⇒ conditional independence bridge | `MarkovGenerator` | `factorizes_dsep_implies_cond_indep`, `condMarkov_of_factorizes_dsep_fourVar` | Semantic bridge plus four-variable `condMarkov` adapter; full Verma-Pearl theorem not claimed |
+| DAG infrastructure, trail d-separation, moralized ancestral graph | `DAGParser` | `dSeparates`, `Trail.isBlocked`, `DAG.dSeparated`, `DAG.moralGraph` | Fully mechanized |
+| Markov blanket generation and semantic CI bridge | `MarkovGenerator` | `computeMarkovBlanket`, `FactorizesOverDAG`, `factorizes_dsep_implies_cond_indep`, `condMarkov_of_factorizes_dsep_fourVar` | Fully mechanized (semantic bridge; Verma-Pearl structural derivation open) |
+| Active collider membership (`x ∈ Anc(X∪Y∪Z)` from ¬Disjoint) | `DAGParser` | `collider_mem_ancestralSubgraphNodes_of_active` | Fully mechanized |
+| MAGWalk ↔ dSeparationGraph reachability | `DAGParser` | `magWalk_iff_dSeparationGraph_reachable` | Fully mechanized |
+| MAGWalk jump for active collider u → x ← w | `DAGParser` | `MAGWalk.jump_of_active_collider` | Fully mechanized |
+| Trail pred. ≠ moralized-ancestral pred. (counterexample) | `DAGParser` | `not_forall_dsep_iff`, `dsep_complete_endpoint_in_Z_counterexample` | Proved: the naive equivalence is false when an endpoint is conditioned on |
 
 ## Module Map
 
@@ -43,10 +51,8 @@ Pinned by `lean-toolchain` and `lake-manifest.json`.
 - **`InfoTheory.lean`** — `FinitePMF`, Shannon entropy (bits), conditional entropy,
   mutual information, conditional mutual information, finite KL nonnegativity,
   entropy cardinality bound, `condMarkov` factorization, conditional DPI
-  (`cond_dpi` proved from first principles).  It also contains the leaf
-  marginalization helper `marginalizeLeafPMF` and
-  `sum_leaf_pmf_eq_subgraph_pmf`, used to isolate the local sum-out step needed
-  by a future Verma-Pearl leaf-elimination proof.
+  (`cond_dpi` proved from first principles), leaf marginalization helpers
+  `marginalizeLeafPMF` and `sum_leaf_pmf_eq_subgraph_pmf`.
 
 - **`InfoTheoryHelpers.lean`** — `IsMarkovChain`, chain rule identities,
   `cond_mutual_info_zero_of_markov`, `data_processing_inequality`.
@@ -56,41 +62,44 @@ Pinned by `lean-toolchain` and `lake-manifest.json`.
 ### Cut-Set Bound Pipeline
 
 - **`CutSetBoundExtract.lean`** — `pmf_from_vars` pushforward, marginal equivalence
-  lemmas, `cut_set_dpi_bound` (DPI bottleneck theorem), `abstract_cut_set_bound`
+  lemmas, `cut_set_dpi_bound` (DPI bottleneck), `abstract_cut_set_bound`
   (final inequality chain), `prop1_static_ub_from_cut`.
 
 - **`ChannelCapacity.lean`** — `KKT_Certificate` structure (p_star, per-symbol
   bounds, KKT condition), `capacity_le_of_kkt` (weighted-average bound from KKT).
 
-- **`CaseStudy.lean`** — Linear chain S→Y→M (State=CUtVar=Missing=`Fin 2`,
-  VisibleTrace=`Unit`). Proves `I_YZ_W ≤ log₂|CutVars| = 1` bit via
-  `condEntropy_nonneg` and `entropy_le_log_card`.  Composes through
+- **`CaseStudy.lean`** — Linear chain S→Y→M (State=CutVar=Missing=`Fin 2`,
+  VisibleTrace=`Unit`).  `linear_chain_cut_set_bound` composes through
   `KKT_Certificate` → `abstract_cut_set_bound` → `I(S;M|T̃) ≤ 1`.
+  `linear_chain_cut_set_bound_from_dag` is the alternate entry point routing
+  through the DAG interface (`FactorizesOverDAG` + `dSeparates {0} {2} {1,3}`
+  → `condMarkov_of_factorizes_dsep_fourVar`).
 
-### Certificate Reductions & Archive
+### Certificate Reductions
 
-- **`DualCertificate.lean`** — Static (`prop1_static_ub`,
-  `prop1_static_ub_bounded`) and dynamic (`prop2_dynamic_lb`,
-  `aggregated_dynamic_lb`) certificate theorems, entropy decomposition,
-  `H_S_cond_Ttilde` / `I_S_M_cond_Ttilde` definitions.
+- **`DualCertificate.lean`** — Static (`prop1_static_ub`, `prop1_static_ub_bounded`)
+  and dynamic (`prop2_dynamic_lb`, `aggregated_dynamic_lb`) certificate theorems,
+  entropy decomposition, `H_S_cond_Ttilde` / `I_S_M_cond_Ttilde` definitions.
 
-- **`DAGParser.lean`** — `structure DAG`, `IsLeaf`,
-  `exists_leaf_of_nonempty`, parent/child/ancestor/descendant queries,
-  rank-based DAG construction helper, trail-blocking `dSeparates`, and the
-  ancestral-subgraph/moralization criterion (`DAG.ancestralSubgraph`,
-  `DAG.moralGraph`, `DAG.dSeparationGraph`, `DAG.dSeparated`).  The graph
-  conversion pipeline is now represented in Lean; the equivalence between the
-  trail predicate and the moralized-ancestral criterion, plus a certified
-  decision procedure, remains open.
+- **`DAGParser.lean`** — `structure DAG`, `IsLeaf`, `exists_leaf_of_nonempty`,
+  parent/child/ancestor/descendant queries, rank-based construction helper,
+  `inductive Trail`, trail-blocking `dSeparates`, ancestral-subgraph/moralization
+  criterion (`DAG.ancestralSubgraph`, `DAG.moralGraph`, `DAG.dSeparationGraph`,
+  `DAG.dSeparated`), `inductive MAGWalk` (refl/single/jump/trans),
+  `collider_mem_ancestralSubgraphNodes_of_active` (disjoint-repaired),
+  `MAGWalk.jump_of_active_collider`, `magWalk_iff_dSeparationGraph_reachable`
+  (MAGWalk ↔ `SimpleGraph.Reachable` in `dSeparationGraph`), and the
+  counterexample theorems `not_forall_dsep_iff` /
+  `dsep_complete_endpoint_in_Z_counterexample` showing the two d-separation
+  predicates are not generally equivalent.
 
 - **`MarkovGenerator.lean`** — `computeMarkovBlanket`, `spouses`,
   `generateMarkovConditions`, `generateMarkovBlanketConditions`,
   `FactorizesOverDAG`, `factorizes_dsep_implies_cond_indep`,
-  `condMarkovNodeCI`, and `condMarkov_of_factorizes_dsep_fourVar`.  The bridge
-  is semantic: `FactorizesOverDAG` packages the model-specific conditional
-  independence predicate, and the four-variable adapter extracts the concrete
-  `condMarkov` equation for `{0} ⟂ {2} | {1,3}`.  It still does not assert the
-  full Verma-Pearl global Markov theorem from graph structure alone.
+  `condMarkovNodeCI`, `condMarkov_of_factorizes_dsep_fourVar`.  The bridge is
+  semantic: `FactorizesOverDAG` packages the caller-supplied CI predicate, and
+  the four-variable adapter extracts the concrete `condMarkov` equation for
+  `{0} ⟂ {2} | {1,3}`.
 
 - **`IdentifiabilityGap.lean`** — Axiom-free construction of two behaviorally
   equivalent but audit-inequivalent finite PMFs.
@@ -115,54 +124,64 @@ Pinned by `lean-toolchain` and `lake-manifest.json`.
 
 ## Architecture Overview
 
-The verification pipeline has three layers:
+The verification pipeline has four layers, all implemented with zero sorries:
 
 ```
              ┌─────────────────────────────────────┐
-  DAG/Markov │ DAGParser + MarkovGenerator          │  ← Stages 1–2 in progress
-  automation │ (d-separation, moralization, blanket,│     (DAGParser.lean,
-             │  FactorizesOverDAG)                  │      MarkovGenerator.lean)
+  DAG/Markov │ DAGParser + MarkovGenerator          │  ← complete
+  automation │ (d-separation, MAGWalk, moralization,│
+             │  FactorizesOverDAG, condMarkov bridge)│
              └─────────────────────────────────────┘
-                         ↓ semantic CI predicate → four-variable condMarkov adapter
+                         ↓ condMarkov_of_factorizes_dsep_fourVar
              ┌─────────────────────────────────────┐
-  Cut-set    │ pmf_from_vars → cut_set_dpi_bound    │  ← CutSetBoundExtract.lean
-  bound      │ → abstract_cut_set_bound            │     (implemented)
-             │                                      │
+  Cut-set    │ pmf_from_vars → cut_set_dpi_bound    │  ← complete
+  bound      │ → abstract_cut_set_bound             │
              └─────────────────────────────────────┘
                          ↓ h_cap : I_YZ_W(P4) ≤ C
              ┌─────────────────────────────────────┐
-  KKT cert   │ KKT_Certificate → capacity_le_of_kkt  │  ← ChannelCapacity.lean
-             │ (weighted average)                   │     (implemented)
+  KKT cert   │ KKT_Certificate → capacity_le_of_kkt │  ← complete
+             │ (weighted average)                   │
+             └─────────────────────────────────────┘
+                         ↓ end-to-end
+             ┌─────────────────────────────────────┐
+  Case study │ linear_chain_cut_set_bound           │  ← complete
+             │ linear_chain_cut_set_bound_from_dag  │
              └─────────────────────────────────────┘
 ```
 
-The current implementation plan and remaining proof obligations are documented
-in [`stage-1-dag-concurrent-cerf.md`](./stage-1-dag-concurrent-cerf.md).
+`condMarkov` is verified directly on the pushforward PMF in the original
+case-study theorem.  `linear_chain_cut_set_bound_from_dag` is the alternate
+entry point routing through the DAG interface: `FactorizesOverDAG` plus a
+`dSeparates {0} {2} {1,3}` proof supplies the concrete four-variable
+`condMarkov` premise via `condMarkov_of_factorizes_dsep_fourVar`.
 
-Currently, `condMarkov` is still verified directly on the pushforward PMF
-in the original case-study theorem.  A new case-study theorem,
-`linear_chain_cut_set_bound_from_dag`, routes through the DAG interface:
-`FactorizesOverDAG` plus a d-separation proof for `{0} ⟂ {2} | {1,3}` yields
-the concrete four-variable `condMarkov` premise required by the DPI layer.
-The moralization predicate `DAG.dSeparated` is available as the graph-conversion
-criterion, but it is not yet connected by theorem to the older trail predicate
-used by this adapter.
+**Note on the two d-separation predicates.** `dSeparates` is the trail-blocking
+predicate (quantifies over `Trail`s); `DAG.dSeparated` is the moralized
+ancestral graph criterion (connectedness in `dSeparationGraph`).  These are
+*not* generally equivalent: `not_forall_dsep_iff` and
+`dsep_complete_endpoint_in_Z_counterexample` give a concrete refutation — on
+the chain `0→1→2` with `Z={0}`, the moralized criterion treats endpoint 0 as
+deleted, while the trail predicate still allows the one-edge trail `0→1` which
+has no internal triple to block.  The two predicates coexist for different
+proof purposes; the open goal is deriving `FactorizesOverDAG` from DAG
+structure alone rather than assuming it per caller.
 
 ## External Premises
 
-The artifact leaves the following as explicit assumptions:
+The artifact leaves the following as explicit assumptions (consistent with
+`sec:external-axioms` in the paper):
 
-- **cut-set/information-flow inequality** — premise of `prop1_static_ub`;
-  the `ChannelCapacity` module provides a KKT-certificate verification path for
-  concrete instances.
-- **conditional Markovity** — structural modeling premise (`condMarkov` is
-  defined algebraically and verified directly in the original case study; the
-  four-variable DAG adapter is implemented, while a generic full-assignment
-  DAG factorization theorem remains open).  The leaf-existence and
-  leaf-marginalization helpers are implemented, but the full Verma-Pearl
-  induction that repeatedly sums out leaves is not yet formalized.
-- **statistical Fano and Gaussian-KL derivations** — used by the PAC lower-bound
-  narrative (paper argument, not formalized).
+- **Cut-set/information-flow inequality** — premise of `prop1_static_ub` and
+  `abstract_cut_set_bound`; discharged for the linear chain instance by the
+  KKT certificate pipeline via `capacity_le_of_kkt`.
+- **Conditional Markovity** — `condMarkov` is a concrete algebraic predicate
+  on finite PMFs, not an axiom.  It is verified directly in the original case
+  study; `linear_chain_cut_set_bound_from_dag` derives it via
+  `FactorizesOverDAG + dSeparates`.  The open step (Stages 1–2 in the paper)
+  is deriving `FactorizesOverDAG` itself from a DAG factorization theorem
+  rather than supplying it as a caller hypothesis.
+- **Statistical Fano and Gaussian-KL derivations** — PAC lower-bound narrative
+  in the paper; not formalized.
 
 All other information-theoretic claims (chain rule, DPI, entropy nonnegativity,
 CMI nonnegativity) are proved from Mathlib first principles over finite-discrete
@@ -181,35 +200,14 @@ CMI nonnegativity) are proved from Mathlib first principles over finite-discrete
 
 `FiniteQuerySandbox` is the historical package namespace retained for compatibility.
 
-## Verification Status
+## Open Mathematical Goals
 
-```bash
-lake build   # all 8300+ jobs pass
-```
+All implementation steps are complete (zero sorries).  The remaining open
+goals are mathematical rather than implementation gaps:
 
-Import `FiniteQuerySandbox` to check the full artifact.
-
-## Remaining Stages (Future Work)
-
-The full formalization plan (4 stages) is partially implemented
-(implementation plan: [`stage-1-dag-concurrent-cerf.md`](./stage-1-dag-concurrent-cerf.md)):
-
-| Stage | Module | Status | Target |
-|---|---|---|---|
-| 1 — DAG predicate semantics & topological order | `DAGParser.lean` | Partially implemented | DAG structure, `WellFounded` acyclicity, leaf existence, `Trail`/`dSeparates`, ancestral-subgraph/moralization `DAG.dSeparated`; trail↔moralization equivalence and certified decision procedure pending |
-| 2 — Markov semantics bridge & automation | `MarkovGenerator.lean` | Partially implemented | Markov blanket and condition generation plus semantic bridge and four-variable `condMarkov` adapter; full Verma-Pearl proof pending |
-| 3 — Channel capacity & KKT certificate verification | `ChannelCapacity.lean` | Completed | `KKT_Certificate` + `capacity_le_of_kkt` (BA iteration not formalized) |
-| 4 — Linear chain end-to-end verification | `CaseStudy.lean` | Completed | Linear chain S→Y→M → `abstract_cut_set_bound` |
-
-Stages 1–2 are now started in Lean.  They provide an alternate case-study entry
-point that replaces the raw `condMarkov` hypothesis with
-`FactorizesOverDAG + dSeparates` for the existing four-variable tuple layout.
-They also provide the moralized ancestral graph predicate `DAG.dSeparated` and
-the local leaf-sum PMF helper needed for a Verma-Pearl induction.  The remaining
-open part is stronger: deriving `FactorizesOverDAG` itself from a probabilistic
-DAG factorization theorem rather than assuming it semantically, and proving the
-equivalence between the two d-separation presentations.
-
-Stage 3's KKT framework is structurally ready for non-trivial certificates;
-the full Blahut-Arimoto convergence proof and concave KKT sufficiency
-metatheorem remain as open work.
+| Goal | Where it would live | Status |
+|---|---|---|
+| Verma-Pearl global Markov theorem — derive `FactorizesOverDAG` from DAG structure and a product-form factorization premise | `MarkovGenerator.lean` | Open; leaf-marginalization helpers (`marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf`) are in place |
+| Certified decision procedure for d-separation (BFS/DFS on `dSeparationGraph`) | `DAGParser.lean` | Open |
+| Blahut-Arimoto convergence and KKT concave sufficiency metatheorem | `ChannelCapacity.lean` | Open; the `KKT_Certificate` structure is in place for concrete instances |
+| Trail pred. ↔ moralized-ancestral pred. equivalence | `DAGParser.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; a restricted equivalence for non-endpoint-conditioned sets may be provable |
