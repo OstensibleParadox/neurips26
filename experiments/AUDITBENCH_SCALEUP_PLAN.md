@@ -94,6 +94,22 @@ All null controls are gated: any control with |gap| > 0.5 bits invalidates the
 proxy pipeline for that condition. Implemented in `diagnose_v3.py` and enforced
 at scale via the same StratifiedGroupKFold + null-suite infrastructure.
 
+### Proxy CE-diff diagnostic status
+
+A debug-scale proxy diagnostic (`diagnose_v3.py`) exposed and fixed three estimator pathologies:
+(1) permutation-alignment leakage in the permuted-Z control,
+(2) PCA instability from nondeterministic/randomized SVD behavior,
+and (3) task-identity leakage under sample-level folds.
+
+The hardened proxy pipeline now uses independent RNGs for label shuffling and Z permutation,
+deterministic PCA (`svd_solver="full"`), task-grouped cross-validation,
+repeated null-suite gating, and per-fold generalization diagnostics.
+
+At debug scale (Qwen2.5-7B, M4 Max, n=200, 10 unique tasks), all proxy CE-diff certificates
+are valid non-certifications: raw gaps are near-zero or negative after null correction, and
+all certified lower bounds are clipped to zero. This result is not treated as an effect-size
+estimate; it is a sanity gate for the production AuditBench proxy pipeline.
+
 ### Core Figure
 
 Main heatmap:

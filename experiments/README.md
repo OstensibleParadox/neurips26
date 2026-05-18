@@ -122,11 +122,19 @@ python experiments/7.2_dynamic_certificate/run_proxy_dormant_active.py \
 
 Output: `data/processed/proxy_dormant_active.json`
 
-**Expected output:**
+**Debug-scale sanity result (`diagnose_v3.py`):**
 ```
-dormant (calculator):    0.0000 bits  (single class, trivially zero)
-active (planning):      ~0.04 bits    (positive but near observational floor)
+calculator / dormant: certified proxy dLB = 0
+planning / vanilla:   certified proxy dLB = 0
+planning / perturbed: certified proxy dLB = 0
+wrong-module control: certified proxy dLB = 0
 ```
+Interpretation: this is valid non-certification, not negative mutual information.
+After fixing permutation leakage, enforcing task-grouped CV, and applying repeated
+null-suite gating, the read-only proxy CE-diff probe does not provide a positive
+dynamic certificate at debug scale. Production-scale proxy runs require many more
+unique tasks and should report raw_gap_bits, null_corrected_gap_bits, and
+certified_delta_LB_bits separately.
 
 ### 2d. Render figure
 

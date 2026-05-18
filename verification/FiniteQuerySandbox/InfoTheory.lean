@@ -132,6 +132,30 @@ lemma marginalRightMass_sum_one (P : FinitePMF (α × β)) :
   rw [← Fintype.sum_prod_type]
   exact P.sum_one
 
+/--
+Marginalize a leaf coordinate from a product-state PMF.  In the DAG proof this
+is the PMF on the remaining subgraph after summing out a leaf variable.
+-/
+def marginalizeLeafPMF (P : FinitePMF (α × β)) : FinitePMF α where
+  pmf x := ∑ leaf : β, P.pmf (x, leaf)
+  pmf_nonneg x := by
+    exact Finset.sum_nonneg fun leaf _ => P.pmf_nonneg (x, leaf)
+  sum_one := by
+    calc
+      ∑ x : α, ∑ leaf : β, P.pmf (x, leaf)
+          = ∑ p : α × β, P.pmf p := by
+            rw [← Fintype.sum_prod_type]
+      _ = 1 := P.sum_one
+
+/--
+Helper lemma for the leaf-marginalization step in the DAG Markov proof:
+the subgraph PMF at a remaining assignment is exactly the sum of the original
+joint PMF over the leaf coordinate.
+-/
+lemma sum_leaf_pmf_eq_subgraph_pmf (P : FinitePMF (α × β)) (x : α) :
+    (∑ leaf : β, P.pmf (x, leaf)) = (marginalizeLeafPMF P).pmf x := by
+  rfl
+
 lemma marginalLeftMass_le_one (P : FinitePMF (α × β)) (x : α) :
     marginalLeftMass P x ≤ 1 := by
   have h_nonneg : ∀ x, 0 ≤ marginalLeftMass P x := marginalLeftMass_nonneg P

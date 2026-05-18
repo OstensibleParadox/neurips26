@@ -141,25 +141,26 @@ python compute_delta_act_lb.py \
     --out data/processed/delta_act_lb.json
 ```
 
-## Expected output
+## Expected output (debug scale)
 
-A JSON record of the form:
+When running `run_proxy_dormant_active.py` at debug scale ($N=200$, 10 unique tasks):
 
 ```json
 {
-  "model": "Qwen2.5-7B-Instruct",
-  "task": "tool_selection_5class",
-  "probe": {"layer": 24, "type": "narrow_tool_vocab"},
-  "N": 3000,
-  "estimators": {
-    "infonce":  {"delta_act_lb_bits": 0.XX, "ci_95": [0.XX, 0.XX]},
-    "ce_diff":  {"delta_act_lb_bits": 0.XX, "ci_95": [0.XX, 0.XX]},
-    "mine":     {"delta_act_lb_bits": 0.XX, "ci_95": [0.XX, 0.XX]}
-  },
-  "delta_act_lb_bits": 0.XX,
-  "delta_act_lb_source": "infonce"
+  "calculator_dormant": {"delta_act_lb_bits": 0.0, "ci_95": [0.0, 0.0]},
+  "planning_active":    {"delta_act_lb_bits": 0.0, "ci_95": [-0.11, -0.06]},
+  "planning_perturbed": {"delta_act_lb_bits": 0.0, "ci_95": [-0.07, 0.13]}
 }
 ```
 
-Paper-reported result: `0.0163` bits (InfoNCE), with the `2.32` bit ceiling
-from `H(A_t) = log₂ 5`.
+**Interpretation:**
+- All certified lower bounds are clipped to zero (**valid non-certification**).
+- Negative raw gaps (e.g., `-0.09` bits for `planning_active`) are estimator
+  variance/bias artifacts, not negative information.
+- The `~0.04` bits point estimate for `planning_perturbed` is not certified
+  because its 95% CI straddles zero.
+
+Paper-reported result: `0.0163` bits (InfoNCE on production scale $N=3000$),
+with the `2.32` bit ceiling from $H(A_t) = \log_2 5$. Debug-scale results
+using the hardened `diagnose_v3.py` pipeline serve as a sanity gate, not an
+effect-size measurement.

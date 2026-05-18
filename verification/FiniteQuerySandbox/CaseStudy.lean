@@ -1,6 +1,7 @@
 import Mathlib
 import FiniteQuerySandbox.InfoTheory
 import FiniteQuerySandbox.ChannelCapacity
+import FiniteQuerySandbox.MarkovGenerator
 import CutSetBoundExtract
 
 open Finset
@@ -322,6 +323,21 @@ theorem linear_chain_cut_set_bound
   let cert : KKT_Certificate P4 := KKT_Certificate.of_direct_bound P4 1 h_YZ_bound
   have h_cap : I_YZ_W P4 ≤ 1 := capacity_le_of_kkt P4 cert
   exact abstract_cut_set_bound P Ω_vars 1 h_markov h_cap
+
+/--
+End-to-end case-study bound using the DAG automation interface.  The remaining
+model-specific premises are: a semantic factorization package for the concrete
+four-variable PMF and a d-separation proof for `{0} ⟂ {2} | {1,3}`.
+-/
+theorem linear_chain_cut_set_bound_from_dag
+    (G : DAG)
+    (P : FinitePMF (State2 × Unit × Missing2))
+    (Ω_vars : (State2 × Unit × Missing2) → CutVar2)
+    (h_factor : FactorizesOverDAG G condMarkovNodeCI (pmf_from_vars P Ω_vars))
+    (h_dsep : dSeparates G ({0} : Finset ℕ) ({2} : Finset ℕ) ({1, 3} : Finset ℕ)) :
+    I_S_M_cond_Ttilde P ≤ 1 := by
+  exact linear_chain_cut_set_bound P Ω_vars
+    (condMarkov_of_factorizes_dsep_fourVar G (pmf_from_vars P Ω_vars) h_factor h_dsep)
 
 end EndToEnd
 

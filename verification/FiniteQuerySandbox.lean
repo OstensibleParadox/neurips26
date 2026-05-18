@@ -16,6 +16,8 @@ import FiniteQuerySandbox.PACBounds
 import FiniteQuerySandbox.FiniteQueryDecisionImpossibility
 import FiniteQuerySandbox.PredictabilityRouteImpossibility
 import FiniteQuerySandbox.SeparatedPackingImpossibility
+import FiniteQuerySandbox.DAGParser
+import FiniteQuerySandbox.MarkovGenerator
 
 /-!
 # FiniteQuerySandbox
