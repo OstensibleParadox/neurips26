@@ -54,13 +54,16 @@ lake build   # all 8310+ jobs pass, zero sorries
 
 ### Information-Theoretic Core
 
-- **`FiniteQuerySandbox/InfoTheory.lean`** — `FinitePMF`, Shannon entropy (bits), conditional entropy,
-  mutual information, conditional mutual information, finite KL nonnegativity,
-  entropy cardinality bound, `condMarkov` factorization, conditional DPI
-  (`cond_dpi` proved from first principles), leaf marginalization helpers
-  `marginalizeLeafPMF` and `sum_leaf_pmf_eq_subgraph_pmf`.
+- **`FiniteQuerySandbox/InfoTheory/`** — Modularized core library:
+  - `Basic.lean`: `FinitePMF` definition, Shannon summand.
+  - `Entropy.lean`: Shannon entropy (bits), cardinality bounds.
+  - `Marginal.lean`: Marginalization, leaf-marginalization helpers `marginalizeLeafPMF`.
+  - `MutualInfo.lean`: Mutual information and its properties.
+  - `Conditional.lean`: Conditional entropy, conditional mutual information, `condMarkov`.
+  - `DPI.lean`: Conditional DPI (`cond_dpi`) and data processing inequalities.
+  - `KL.lean`: Finite KL divergence and nonnegativity.
 
-- **`InfoTheoryHelpers.lean`** — `IsMarkovChain`, chain rule identities,
+- **`FiniteQuerySandbox/InfoTheoryHelpers.lean`** — `IsMarkovChain`, chain rule identities,
   `cond_mutual_info_zero_of_markov`, `data_processing_inequality`.
 
 - **`FiniteQuerySandbox/CMI_Nonneg.lean`** — Bridges `condMutualInfo_nonneg` for unconditional CMI.
@@ -87,26 +90,15 @@ lake build   # all 8310+ jobs pass, zero sorries
   and dynamic (`prop2_dynamic_lb`, `aggregated_dynamic_lb`) certificate theorems,
   entropy decomposition, `H_S_cond_Ttilde` / `I_S_M_cond_Ttilde` definitions.
 
-- **`FiniteQuerySandbox/DAGParser.lean`** — `structure DAG`, `IsLeaf`, `exists_leaf_of_nonempty`,
-  `DAG.deleteLeaf`, `DAG.deleteLeaf_card_lt`,
-  parent/child/ancestor/descendant queries, rank-based construction helper,
-  `inductive Trail`, trail-blocking `dSeparates`, ancestral-subgraph/moralization
-  criterion (`DAG.ancestralSubgraph`, `DAG.moralGraph`, `DAG.dSeparationGraph`,
-  `DAG.dSeparated`), `inductive MAGWalk` (refl/single/jump/trans),
-  Bayes-ball state/path machinery (`TrailDir`, `BayesBallStep`,
-  `BayesBallReachable`, `BayesBallPath`, `BayesBallPath.RequiredState`),
-  active-trail-to-Bayes-ball path and reachability
-  (`bayesBallPath_of_active_trail`, `bayesBallReachable_of_active_trail`),
-  Bayes-ball-to-MAGWalk bridge pieces and scanner
-  (`MAGWalk.single_of_bayesBallStep`, `MAGWalk.jump_of_bayesBall_collider`,
-  `BayesBallPath.compress`, `magWalk_of_bayesBall`),
-  `collider_mem_ancestralSubgraphNodes_of_active` (disjoint-repaired),
-  `MAGWalk.jump_of_active_collider`, `magWalk_iff_dSeparationGraph_reachable`
-  (MAGWalk ↔ `SimpleGraph.Reachable` in `dSeparationGraph`), and the
-  soundness theorem `dSeparated_of_dSeparated_disjoint` (explicit `DisjointSets`
-  hypothesis), and the counterexample theorems `not_forall_dsep_iff` /
-  `dsep_complete_endpoint_in_Z_counterexample` showing the two d-separation
-  predicates are not generally equivalent.
+- **`FiniteQuerySandbox/DAG/`** — Modularized DAG automation:
+  - `Basic.lean`: `structure DAG`, `HasEdge`, leaf nodes, topological rank.
+  - `Ancestry.lean`: `ancestors`, `descendants`, `ancestralSubgraph`.
+  - `Moralization.lean`: `moralGraph`, co-parent moralization edges.
+  - `Trail.lean`: `inductive Trail`, trail-blocking `TripleBlocked`, `isBlocked`.
+  - `BayesBall.lean`: `BayesBallStep`, `BayesBallPath`, `BayesBallReachable`.
+  - `DSeparation.lean`: `dSeparated` (moralization criterion), `dSeparates` (trail predicate), `MAGWalk` bridge, and the soundness theorem `dSeparated_of_dSeparated_disjoint`.
+
+- **`FiniteQuerySandbox/DAGParser.lean`** — Root import for the `DAG/` module suite.
 
 - **`FiniteQuerySandbox/MarkovGenerator.lean`** — `computeMarkovBlanket`, `spouses`,
   `generateMarkovConditions`, `generateMarkovBlanketConditions`,
@@ -144,7 +136,7 @@ The verification pipeline has four layers, all implemented with zero sorries:
 
 ```
              ┌─────────────────────────────────────┐
-  DAG/Markov │ DAGParser + MarkovGenerator          │  ← mechanized bridge pieces
+  DAG/Markov │ DAG/* + MarkovGenerator             │  ← mechanized bridge pieces
   automation │ (d-separation, Bayes-ball, MAGWalk,  │
              │  moralization, leaf deletion,        │
              │  FactorizesOverDAG, condMarkov bridge)│
@@ -229,7 +221,7 @@ The following modules have been renamed for clarity. For backward compatibility 
 | `InternalImpossibility` | `PredictabilityRouteImpossibility` |
 | `GeometricImpossibility` | `SeparatedPackingImpossibility` |
 
-The root package namespace `FiniteQuerySandbox` is retained.
+The root package namespace `FiniteQuerySandbox` is retained. `FiniteQueryAudit` is a compatibility root name.
 
 
 ## Open Mathematical Goals
@@ -240,7 +232,8 @@ goals are mathematical or bridge-completion tasks rather than unchecked axioms:
 | Goal | Where it would live | Status |
 |---|---|---|
 | Verma-Pearl global Markov theorem — derive `FactorizesOverDAG` from DAG structure and a product-form factorization premise | `MarkovGenerator.lean` | Open; leaf-marginalization helpers (`marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf`) are in place |
-| Full active-trail → moralized-graph bridge | `DAGParser.lean` | Mechanized for the endpoint-disjoint completeness direction via `dsep_complete_of_endpoint_disjoint`; top-level soundness theorem `dSeparated_of_dSeparated_disjoint` now takes `DisjointSets` explicitly |
-| Certified decision procedure for d-separation (BFS/DFS on `dSeparationGraph`) | `DAGParser.lean` | Open |
+| Full active-trail → moralized-graph bridge | `DAG/DSeparation.lean` | Mechanized for the endpoint-disjoint completeness direction via `dsep_complete_of_endpoint_disjoint`; top-level soundness theorem `dSeparated_of_dSeparated_disjoint` now takes `DisjointSets` explicitly |
+| Certified decision procedure for d-separation (BFS/DFS on `dSeparationGraph`) | `DAG/DSeparation.lean` | Open |
 | Blahut-Arimoto convergence and KKT concave sufficiency metatheorem | `ChannelCapacity.lean` | Open; the `KKT_Certificate` structure is in place for concrete instances |
-| Trail pred. ↔ moralized-ancestral pred. equivalence | `DAGParser.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; the endpoint-disjoint soundness direction (`dSeparated_of_dSeparated_disjoint` with `DisjointSets`) is mechanized, and the moral-path-to-active-trail direction remains the final bridge |
+| Trail pred. ↔ moralized-ancestral pred. equivalence | `DAG/DSeparation.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; the endpoint-disjoint soundness direction (`dSeparated_of_dSeparated_disjoint` with `DisjointSets`) is mechanized, and the moral-path-to-active-trail direction remains the final bridge |
+
