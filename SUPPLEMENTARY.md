@@ -58,11 +58,11 @@ The `verification/` directory mechanizes the paper's theoretical claims:
 | Paper Item | Lean File | Theorem | Status |
 |---|---|---|---|
 | Corollary 5 (autoregressive zero-cut) | `Screenability.lean` | `no_eis_autoregressive` | C — fully mechanized |
-| Proposition 1 (static cut-sum) | `DualCertificate.lean` | `prop1_static_ub` | C/E — 2 axioms |
-| Proposition 2 (conditional DPI) | `DualCertificate.lean` | `prop2_dynamic_lb` | C/E — 2 axioms |
+| Proposition 1 (static cut-sum) | `DualCertificate.lean` | `prop1_static_ub` | C† |
+| Proposition 2 (conditional DPI) | `DualCertificate.lean` | `prop2_dynamic_lb` | C† |
 | Bridge (EIS → zero-cut) | `ScreenabilityBridge.lean` | `no_eis_implies_zero_cut` | C/E — 1 axiom |
 
-C = machine-checked from Mathlib first principles. C/E = structural reduction machine-checked conditional on 4 explicit axioms: `condMarkov`, `cond_dpi`, `chain_rule`, `cut_set_bound`.
+C = machine-checked from Mathlib first principles. C† = proof complete (zero sorries) but takes structural premises as explicit hypotheses. C/E = structural reduction machine-checked conditional on axioms not yet in Mathlib.
 
 Build: `lake exe cache get && lake build` (requires Lean 4 `v4.30.0-rc1` + Mathlib). With cache: ~1–5 min; without: 30–60 min.
 

@@ -20,38 +20,41 @@ lake build   # all 8310+ jobs pass, zero sorries
 
 ## Main Statements
 
-| Paper item | Lean module | Declaration | Status |
-|---|---|---|---|
-| Definition 1 — Core audit quantities | `DualCertificate` | `H_S_cond_Ttilde`, `delta_act` | Fully mechanized |
-| Remark 1 — Complementarity / inheritance | (follows from DPI ordering) | — | Implied by `prop2_dynamic_lb` ≤ \|·\| bound |
-| Lemma 1 — Additive decomposition (software orthogonality) | `DualCertificate` | `static_decomposition`, `software_orthogonal` | Fully mechanized |
-| Proposition 1 — Static certificate via cut-set bound | `DualCertificate` | `prop1_static_ub` | From cut-set premise |
-| Corollary 1 — Additive min-cut form | `DualCertificate` | `corollary_additive_ub` | From cut-set premise + orthogonality hypothesis |
-| Corollary 2 — Autoregressive zero-cut | `Screenability` | `no_eis_autoregressive` | Fully mechanized |
-| Proposition 2 — Probe certificates from conditional DPI | `DualCertificate` | `prop2_dynamic_lb`, `aggregated_dynamic_lb` | From finite DPI |
-| Static cardinality corollary (`ε_state^UB ≤ H_nominal + log\|Missing\|`) | `DualCertificate` | `prop1_static_ub_bounded` | Fully mechanized |
-| Cut-set DPI bottleneck (`I(S;M\|T̃) ≤ I(Y;Z\|W)`) | `CutSetBoundExtract` | `abstract_cut_set_bound` | From cut-set premise |
-| KKT certificate capacity bound (`I(Y;Z\|W) ≤ C`) | `ChannelCapacity` | `KKT_Certificate`, `capacity_le_of_kkt` | From per-symbol KKT condition |
-| Linear chain cut-set bound (`ε_state^UB ≤ 1 bit`) | `CaseStudy` | `linear_chain_cut_set_bound` | KKT cert + DPI + `abstract_cut_set_bound` |
-| Linear chain via DAG interface | `CaseStudy` | `linear_chain_cut_set_bound_from_dag` | `FactorizesOverDAG` + `dSeparates` → `condMarkov` → bound |
-| Leaf marginalization helper | `InfoTheory` | `marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf` | Fully mechanized helper |
-| Deterministic trace recoverability | `TraceRecoverability` | `no_internal_witness_trace_recoverability` | Fully mechanized |
-| Behavioral equivalence ≠ audit equivalence | `IdentifiabilityGap` | `identifiability_gap_extremes` | Fully mechanized |
-| DAG infrastructure, trail d-separation, moralized ancestral graph | `DAGParser` | `dSeparates`, `Trail.isBlocked`, `DAG.dSeparated`, `DAG.moralGraph` | Fully mechanized |
-| Markov blanket generation and semantic CI bridge | `MarkovGenerator` | `computeMarkovBlanket`, `FactorizesOverDAG`, `factorizes_dsep_implies_cond_indep`, `condMarkov_of_factorizes_dsep_fourVar` | Fully mechanized (semantic bridge; Verma-Pearl structural derivation open) |
-| Active collider membership (`x ∈ Anc(X∪Y∪Z)` from ¬Disjoint) | `DAGParser` | `collider_mem_ancestralSubgraphNodes_of_active` | Fully mechanized |
-| MAGWalk ↔ dSeparationGraph reachability | `DAGParser` | `magWalk_iff_dSeparationGraph_reachable` | Fully mechanized |
-| MAGWalk jump for active collider u → x ← w | `DAGParser` | `MAGWalk.jump_of_active_collider` | Fully mechanized |
-| Active trail → Bayes-ball state path/reachability | `DAGParser` | `bayesBallPath_of_active_trail`, `bayesBallReachable_of_active_trail` | Fully mechanized; first-step openness is explicit |
-| Bayes-ball path scanner → MAGWalk | `DAGParser` | `BayesBallPath.compress`, `MAGWalk.single_of_bayesBallStep`, `MAGWalk.jump_of_bayesBall_collider` | Fully mechanized; membership obligations remain explicit |
-| DAG leaf deletion descent scaffold | `DAGParser` | `DAG.deleteLeaf`, `DAG.deleteLeaf_card_lt` | Fully mechanized |
-| Trail pred. ≠ moralized-ancestral pred. (counterexample) | `DAGParser` | `not_forall_dsep_iff`, `dsep_complete_endpoint_in_Z_counterexample` | Proved: the naive equivalence is false when an endpoint is conditioned on |
+| Paper item                                                               | Lean module                 | Declaration                                                                                                                            | Status                                                                                                       |
+| ------------------------------------------------------------------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Definition 1 — Core audit quantities                                     | `DualCertificate`           | `H_S_cond_Ttilde`, `delta_act`                                                                                                         | Fully mechanized                                                                                             |
+| Remark 1 — Complementarity / inheritance                                 | (follows from DPI ordering) | —                                                                                                                                      | Implied by `prop2_dynamic_lb` ≤ \|·\| bound                                                                  |
+| Lemma 1 — Additive decomposition (software orthogonality)                | `DualCertificate`           | `static_decomposition`, `software_orthogonal`                                                                                          | Fully mechanized                                                                                             |
+| Proposition 1 — Static certificate via cut-set bound                     | `DualCertificate`           | `prop1_static_ub`                                                                                                                      | Fully mechanized (explicit hypotheses)                                                                       |
+| Corollary 1 — Additive min-cut form                                      | `DualCertificate`           | `corollary_additive_ub`                                                                                                                | Fully mechanized (explicit hypotheses)                                                                       |
+| Corollary 2 — Autoregressive zero-cut                                    | `TraceRecoverability`       | `no_eis_autoregressive`                                                                                                                | Fully mechanized                                                                                             |
+| Proposition 2 — Probe certificates from conditional DPI                  | `DualCertificate`           | `prop2_dynamic_lb`, `aggregated_dynamic_lb`                                                                                            | Fully mechanized (explicit hypotheses)                                                                       |
+| Static cardinality corollary (`ε_state^UB ≤ H_nominal + log\|Missing\|`) | `DualCertificate`           | `prop1_static_ub_bounded`                                                                                                              | Fully mechanized                                                                                             |
+| Cut-set DPI bottleneck (`I(S;M\|T̃) ≤ I(Y;Z\|W)`)                        | `CutSetBoundExtract`        | `abstract_cut_set_bound`                                                                                                               | Fully mechanized (explicit hypotheses)                                                                       |
+| KKT certificate capacity bound (`I(Y;Z\|W) ≤ C`)                         | `ChannelCapacity`           | `KKT_Certificate`, `capacity_le_of_kkt`                                                                                                | Fully mechanized (explicit hypotheses)                                                                       |
+| Linear chain cut-set bound (`ε_state^UB ≤ 1 bit`)                        | `CaseStudy`                 | `linear_chain_cut_set_bound`                                                                                                           | Fully mechanized (explicit hypotheses)                                                                       |
+| Linear chain via DAG interface                                           | `CaseStudy`                 | `linear_chain_cut_set_bound_from_dag`                                                                                                  | `FactorizesOverDAG` + `dSeparates` → `condMarkov` → bound                                                    |
+| Leaf marginalization helper                                              | `InfoTheory`                | `marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf`                                                                                   | Fully mechanized helper                                                                                      |
+| Deterministic trace recoverability                                       | `TraceRecoverability`       | `no_internal_witness_trace_recoverability`                                                                                             | Fully mechanized                                                                                             |
+| Behavioral equivalence ≠ audit equivalence                               | `IdentifiabilityGap`        | `identifiability_gap_extremes`                                                                                                         | Fully mechanized                                                                                             |
+| DAG infrastructure, trail d-separation, moralized ancestral graph        | `DAGParser`                 | `dSeparates`, `Trail.isBlocked`, `DAG.dSeparated`, `DAG.moralGraph`                                                                    | Fully mechanized                                                                                             |
+| Standard d-separation query domain                                       | `DAGParser`                 | `DSeparationQuery`, `DisjointSets`, `dsep_complete_of_query`, `dSeparated_of_dSeparated_disjoint`                                      | Pairwise-disjoint `X`, `Y`, `Z`; endpoint caveat handled; soundness direction uses `DisjointSets` explicitly |
+| Markov blanket generation and semantic CI bridge                         | `MarkovGenerator`           | `computeMarkovBlanket`, `FactorizesOverDAG`, `factorizes_dsep_implies_cond_indep`, `condMarkov_of_factorizes_dsep_fourVar`             | Fully mechanized (semantic bridge; Verma-Pearl structural derivation open)                                   |
+| Active collider membership (`x ∈ Anc(X∪Y∪Z)` from ¬Disjoint)             | `DAGParser`                 | `collider_mem_ancestralSubgraphNodes_of_active`                                                                                        | Fully mechanized                                                                                             |
+| MAGWalk ↔ dSeparationGraph reachability                                  | `DAGParser`                 | `magWalk_iff_dSeparationGraph_reachable`                                                                                               | Fully mechanized                                                                                             |
+| MAGWalk jump for active collider u → x ← w                               | `DAGParser`                 | `MAGWalk.jump_of_active_collider`                                                                                                      | Fully mechanized                                                                                             |
+| Active trail → Bayes-ball state path/reachability                        | `DAGParser`                 | `bayesBallPath_of_active_trail`, `bayesBallReachable_of_active_trail`                                                                  | Fully mechanized; first-step openness is explicit                                                            |
+| Active trail → moralized-graph reachability                              | `DAGParser`                 | `bayesBallPathCert_of_active_trail_outOf`, `dSeparationGraph_reachable_of_active_trail_disjoint`, `dsep_complete_of_endpoint_disjoint` | Fully mechanized under `Disjoint X Z` and `Disjoint Y Z`                                                     |
+| Bayes-ball path scanner → MAGWalk                                        | `DAGParser`                 | `BayesBallPath.compress`, `MAGWalk.single_of_bayesBallStep`, `MAGWalk.jump_of_bayesBall_collider`                                      | Fully mechanized                                                                                             |
+| DAG leaf deletion descent scaffold                                       | `DAGParser`                 | `DAG.deleteLeaf`, `DAG.deleteLeaf_card_lt`                                                                                             | Fully mechanized                                                                                             |
+| Trail pred. ≠ moralized-ancestral pred. (counterexample)                 | `DAGParser`                 | `not_forall_dsep_iff`, `dsep_complete_endpoint_in_Z_counterexample`                                                                    | Proved: the naive equivalence is false when an endpoint is conditioned on                                    |
+
 
 ## Module Map
 
 ### Information-Theoretic Core
 
-- **`InfoTheory.lean`** — `FinitePMF`, Shannon entropy (bits), conditional entropy,
+- **`FiniteQuerySandbox/InfoTheory.lean`** — `FinitePMF`, Shannon entropy (bits), conditional entropy,
   mutual information, conditional mutual information, finite KL nonnegativity,
   entropy cardinality bound, `condMarkov` factorization, conditional DPI
   (`cond_dpi` proved from first principles), leaf marginalization helpers
@@ -60,7 +63,7 @@ lake build   # all 8310+ jobs pass, zero sorries
 - **`InfoTheoryHelpers.lean`** — `IsMarkovChain`, chain rule identities,
   `cond_mutual_info_zero_of_markov`, `data_processing_inequality`.
 
-- **`CMI_Nonneg.lean`** — Bridges `condMutualInfo_nonneg` for unconditional CMI.
+- **`FiniteQuerySandbox/CMI_Nonneg.lean`** — Bridges `condMutualInfo_nonneg` for unconditional CMI.
 
 ### Cut-Set Bound Pipeline
 
@@ -68,10 +71,10 @@ lake build   # all 8310+ jobs pass, zero sorries
   lemmas, `cut_set_dpi_bound` (DPI bottleneck), `abstract_cut_set_bound`
   (final inequality chain), `prop1_static_ub_from_cut`.
 
-- **`ChannelCapacity.lean`** — `KKT_Certificate` structure (p_star, per-symbol
+- **`FiniteQuerySandbox/ChannelCapacity.lean`** — `KKT_Certificate` structure (p_star, per-symbol
   bounds, KKT condition), `capacity_le_of_kkt` (weighted-average bound from KKT).
 
-- **`CaseStudy.lean`** — Linear chain S→Y→M (State=CutVar=Missing=`Fin 2`,
+- **`FiniteQuerySandbox/CaseStudy.lean`** — Linear chain S→Y→M (State=CutVar=Missing=`Fin 2`,
   VisibleTrace=`Unit`).  `linear_chain_cut_set_bound` composes through
   `KKT_Certificate` → `abstract_cut_set_bound` → `I(S;M|T̃) ≤ 1`.
   `linear_chain_cut_set_bound_from_dag` is the alternate entry point routing
@@ -80,11 +83,11 @@ lake build   # all 8310+ jobs pass, zero sorries
 
 ### Certificate Reductions
 
-- **`DualCertificate.lean`** — Static (`prop1_static_ub`, `prop1_static_ub_bounded`)
+- **`FiniteQuerySandbox/DualCertificate.lean`** — Static (`prop1_static_ub`, `prop1_static_ub_bounded`)
   and dynamic (`prop2_dynamic_lb`, `aggregated_dynamic_lb`) certificate theorems,
   entropy decomposition, `H_S_cond_Ttilde` / `I_S_M_cond_Ttilde` definitions.
 
-- **`DAGParser.lean`** — `structure DAG`, `IsLeaf`, `exists_leaf_of_nonempty`,
+- **`FiniteQuerySandbox/DAGParser.lean`** — `structure DAG`, `IsLeaf`, `exists_leaf_of_nonempty`,
   `DAG.deleteLeaf`, `DAG.deleteLeaf_card_lt`,
   parent/child/ancestor/descendant queries, rank-based construction helper,
   `inductive Trail`, trail-blocking `dSeparates`, ancestral-subgraph/moralization
@@ -100,38 +103,40 @@ lake build   # all 8310+ jobs pass, zero sorries
   `collider_mem_ancestralSubgraphNodes_of_active` (disjoint-repaired),
   `MAGWalk.jump_of_active_collider`, `magWalk_iff_dSeparationGraph_reachable`
   (MAGWalk ↔ `SimpleGraph.Reachable` in `dSeparationGraph`), and the
-  counterexample theorems `not_forall_dsep_iff` /
+  soundness theorem `dSeparated_of_dSeparated_disjoint` (explicit `DisjointSets`
+  hypothesis), and the counterexample theorems `not_forall_dsep_iff` /
   `dsep_complete_endpoint_in_Z_counterexample` showing the two d-separation
   predicates are not generally equivalent.
 
-- **`MarkovGenerator.lean`** — `computeMarkovBlanket`, `spouses`,
+- **`FiniteQuerySandbox/MarkovGenerator.lean`** — `computeMarkovBlanket`, `spouses`,
   `generateMarkovConditions`, `generateMarkovBlanketConditions`,
   `FactorizesOverDAG`, `factorizes_dsep_implies_cond_indep`,
-  `condMarkovNodeCI`, `condMarkov_of_factorizes_dsep_fourVar`.  The bridge is
-  semantic: `FactorizesOverDAG` packages the caller-supplied CI predicate, and
-  the four-variable adapter extracts the concrete `condMarkov` equation for
-  `{0} ⟂ {2} | {1,3}`.
+  `condMarkovNodeCI`, `condMarkov_of_factorizes_dsep_fourVar`.
 
-- **`IdentifiabilityGap.lean`** — Axiom-free construction of two behaviorally
+- **`FiniteQuerySandbox/DSepCMIBridge.lean`** — Bridge module between d-separation
+  and conditional mutual information (CMI) for 3-variable tuple layouts.
+
+- **`FiniteQuerySandbox/IdentifiabilityGap.lean`** — Axiom-free construction of two behaviorally
   equivalent but audit-inequivalent finite PMFs.
 
-- **`TraceRecoverability.lean`**, **`TraceRecoverabilityBridge.lean`** —
+- **`FiniteQuerySandbox/TraceRecoverability.lean`**, **`FiniteQuerySandbox/TraceRecoverabilityBridge.lean`** —
   Deterministic trace-recoverability core and compatibility theorem.
 
 ### Impossibility Cores (Archive)
 
-- **`FiniteQueryDecisionImpossibility.lean`**, **`PredictabilityRouteImpossibility.lean`**,
-  **`SeparatedPackingImpossibility.lean`** — Finite-query, predictability-route,
+- **`FiniteQuerySandbox/FiniteQueryDecisionImpossibility.lean`**, **`FiniteQuerySandbox/PredictabilityRouteImpossibility.lean`**,
+  **`FiniteQuerySandbox/SeparatedPackingImpossibility.lean`** — Finite-query, predictability-route,
   and geometric non-covering impossibility arguments.
 
 ### Auxiliary
 
-- **`CoveringBound.lean`**, **`GeometricTools.lean`**, **`PACBounds.lean`** —
+- **`FiniteQuerySandbox/CoveringBound.lean`**, **`FiniteQuerySandbox/GeometricTools.lean`**, **`FiniteQuerySandbox/PACBounds.lean`** —
   Covering-to-gap lemmas, representation geometry, PAC algebraic core.
 
-- **`QuotientFactorization.lean`** — Semantic-closure quotient factorization.
+- **`FiniteQuerySandbox/QuotientFactorization.lean`** — Semantic-closure quotient factorization.
 
-- **`Tools.lean`**, **`QuantizedBound.lean`** — Shared utilities.
+- **`FiniteQuerySandbox/Tools.lean`**, **`FiniteQuerySandbox/QuantizedBound.lean`** — Shared utilities.
+
 
 ## Architecture Overview
 
@@ -185,9 +190,9 @@ by `Trail.StartOpen` because trail blocking only constrains internal triples.
 `BayesBallPath.compress` scans explicit paths with a two-step window: ordinary
 windows become `MAGWalk.single`, while active-collider windows
 `(a, _) → (b, into) → (c, outOf)` become one `MAGWalk.jump`, so the collider
-`b` need not survive deletion of `Z`.  The remaining bridge work is deriving
-the scanner's `BayesBallPath.RequiredState` membership obligations from the
-graph/trail hypotheses, then composing the result with
+`b` need not survive deletion of `Z`.  The bridge now derives the scanner's
+`BayesBallPath.RequiredState` membership obligations from active-trail and
+endpoint-disjointness hypotheses, then composes the result with
 `MAGWalk.to_dSeparationGraph_reachable`.
 
 ## External Premises
@@ -213,6 +218,8 @@ CMI nonnegativity) are proved from Mathlib first principles over finite-discrete
 
 ## Naming Guide
 
+The following modules have been renamed for clarity. For backward compatibility with the paper's terminology, the legacy names are retained as alias modules that import the new names.
+
 | Legacy name | Current name |
 |---|---|
 | `Screenability` | `TraceRecoverability` |
@@ -222,7 +229,8 @@ CMI nonnegativity) are proved from Mathlib first principles over finite-discrete
 | `InternalImpossibility` | `PredictabilityRouteImpossibility` |
 | `GeometricImpossibility` | `SeparatedPackingImpossibility` |
 
-`FiniteQuerySandbox` is the historical package namespace retained for compatibility.
+The root package namespace `FiniteQuerySandbox` is retained.
+
 
 ## Open Mathematical Goals
 
@@ -232,7 +240,7 @@ goals are mathematical or bridge-completion tasks rather than unchecked axioms:
 | Goal | Where it would live | Status |
 |---|---|---|
 | Verma-Pearl global Markov theorem — derive `FactorizesOverDAG` from DAG structure and a product-form factorization premise | `MarkovGenerator.lean` | Open; leaf-marginalization helpers (`marginalizeLeafPMF`, `sum_leaf_pmf_eq_subgraph_pmf`) are in place |
-| Full active-trail → moralized-graph bridge | `DAGParser.lean` | Partially mechanized: active trail → `BayesBallPath`/`BayesBallReachable`, path compression → `MAGWalk`, and collider skipping are in place; automatic discharge of `RequiredState` membership obligations remains open |
+| Full active-trail → moralized-graph bridge | `DAGParser.lean` | Mechanized for the endpoint-disjoint completeness direction via `dsep_complete_of_endpoint_disjoint`; top-level soundness theorem `dSeparated_of_dSeparated_disjoint` now takes `DisjointSets` explicitly |
 | Certified decision procedure for d-separation (BFS/DFS on `dSeparationGraph`) | `DAGParser.lean` | Open |
 | Blahut-Arimoto convergence and KKT concave sufficiency metatheorem | `ChannelCapacity.lean` | Open; the `KKT_Certificate` structure is in place for concrete instances |
-| Trail pred. ↔ moralized-ancestral pred. equivalence | `DAGParser.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; a restricted equivalence for non-endpoint-conditioned sets may be provable |
+| Trail pred. ↔ moralized-ancestral pred. equivalence | `DAGParser.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; the endpoint-disjoint soundness direction (`dSeparated_of_dSeparated_disjoint` with `DisjointSets`) is mechanized, and the moral-path-to-active-trail direction remains the final bridge |

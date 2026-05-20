@@ -193,8 +193,8 @@ minimum-cut problem on $G_t$ with edge capacities c e . This is the form used th
 Following the design of the original PAC bound, the artifact uses an axiomatic interface for measure-theoretic information theory; structural reductions are machine-checked, while the underlying chain-rule, cut-set, DPI, and Fano facts are imported as `axiom`s and listed in §F.3. | Main-text item | Lean file | Lean name | Status |
 |---|---|---|---|
 | Cor 2 (Autoregressive zero-cut) | Screenability | `no_eis_autoregressive` | C |
-| Prop 1 (Static cut-set, structural reduction) | DualCertificate | `prop1_static_ub` | C/E |
-| Prop 2 (Dynamic DPI, structural reduction) | DualCertificate | `prop2_dynamic_lb` | C/E |
+| Prop 1 (Static cut-set, structural reduction) | DualCertificate | `prop1_static_ub` | C† |
+| Prop 2 (Dynamic DPI, structural reduction) | DualCertificate | `prop2_dynamic_lb` | C† |
 | Thm 1 (Closure ↔ factors through q) | SemanticClosureIff | `semantic_closure_iff` | C |
 | Thm 2 (Finite-query impossibility) | Impossibility | `finite_query_impossibility` | C |
 | Thm 3 (PAC algebraic core) | PACBounds | `theorem3_pac_lower_bound` | C/E |

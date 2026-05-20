@@ -2,7 +2,7 @@ import Mathlib
 import FiniteQuerySandbox.InfoTheory
 import FiniteQuerySandbox.ChannelCapacity
 import FiniteQuerySandbox.MarkovGenerator
-import CutSetBoundExtract
+import FiniteQuerySandbox.CutSetBoundExtract
 
 open Finset
 open scoped BigOperators Real

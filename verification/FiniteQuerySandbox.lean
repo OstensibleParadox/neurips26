@@ -6,7 +6,7 @@ import FiniteQuerySandbox.CMI_Nonneg
 import FiniteQuerySandbox.DualCertificate
 import FiniteQuerySandbox.ChannelCapacity
 import FiniteQuerySandbox.CaseStudy
-import CutSetBoundExtract
+import FiniteQuerySandbox.CutSetBoundExtract
 import FiniteQuerySandbox.TraceRecoverability
 import FiniteQuerySandbox.TraceRecoverabilityBridge
 import FiniteQuerySandbox.QuotientFactorization
@@ -18,6 +18,7 @@ import FiniteQuerySandbox.PredictabilityRouteImpossibility
 import FiniteQuerySandbox.SeparatedPackingImpossibility
 import FiniteQuerySandbox.DAGParser
 import FiniteQuerySandbox.MarkovGenerator
+import FiniteQuerySandbox.DSepCMIBridge
 
 /-!
 # FiniteQuerySandbox

@@ -252,6 +252,18 @@ lemma mem_nodes {G : DAG} {u v a : ℕ} {t : Trail G u v} :
     a ∈ t.nodes ↔ a ∈ t.toList := by
   simp [nodes]
 
+/-- If the start of a trail is a graph node, then so is its endpoint. -/
+lemma target_mem_graph_nodes_of_source_mem {G : DAG} {u v : ℕ}
+    (t : Trail G u v) (hu : u ∈ G.nodes) :
+    v ∈ G.nodes := by
+  induction t with
+  | nil _ =>
+      exact hu
+  | forward h tail ih =>
+      exact ih (G.edges_subset h).2
+  | backward h tail ih =>
+      exact ih (G.edges_subset h).1
+
 end Trail
 
 /-- A middle vertex is a collider on the local triple `a-b-c`. -/
@@ -420,6 +432,40 @@ inductive RequiredState {G : DAG} {Z : Finset ℕ} :
       (hreq : RequiredState (BayesBallPath.cons step₂ rest) q) :
       RequiredState (BayesBallPath.cons step₁ (BayesBallPath.cons step₂ rest)) q
 
+/-- A first target reached with `outOf` arrival is never a collider target. -/
+lemma required_first_target_of_outOf {G : DAG} {Z : Finset ℕ}
+    {s mid finish : ℕ × TrailDir}
+    (step : BayesBallStep G Z s mid)
+    (rest : BayesBallPath G Z mid finish)
+    (hmid : mid.2 = TrailDir.outOf) :
+    RequiredState (BayesBallPath.cons step rest) mid := by
+  cases rest with
+  | nil _ =>
+      exact RequiredState.one step
+  | cons step₂ rest₂ =>
+      exact RequiredState.noncolliderTarget (by
+        intro hcoll
+        rw [hmid] at hcoll
+        cases hcoll.1)
+
+/-- Required states of a suffix remain required after an `outOf` first target. -/
+lemma required_rest_of_outOf {G : DAG} {Z : Finset ℕ}
+    {s mid finish : ℕ × TrailDir}
+    (step : BayesBallStep G Z s mid)
+    (rest : BayesBallPath G Z mid finish)
+    (hmid : mid.2 = TrailDir.outOf)
+    {q : ℕ × TrailDir}
+    (hreq : RequiredState rest q) :
+    RequiredState (BayesBallPath.cons step rest) q := by
+  cases rest with
+  | nil _ =>
+      cases hreq
+  | cons step₂ rest₂ =>
+      exact RequiredState.noncolliderRest (by
+        intro hcoll
+        rw [hmid] at hcoll
+        cases hcoll.1) hreq
+
 end BayesBallPath
 
 lemma BayesBallStep.of_active_triple {G : DAG} {Z : Finset ℕ}
@@ -457,6 +503,21 @@ def Trail.StartOpen {G : DAG} {u v : ℕ} (Z : Finset ℕ) (init_dir : TrailDir)
 /-- `Z` d-separates node set `X` from node set `Y`. -/
 def dSeparates (G : DAG) (X Y Z : Finset ℕ) : Prop :=
   ∀ x, x ∈ X → ∀ y, y ∈ Y → ∀ t : Trail G x y, t.isBlocked Z
+
+/-- Standard domain for a d-separation query: `X`, `Y`, and `Z` are pairwise disjoint. -/
+def DSeparationQuery (X Y Z : Finset ℕ) : Prop :=
+  Disjoint X Y ∧ Disjoint X Z ∧ Disjoint Y Z
+
+/-- `X`, `Y`, and `Z` are pairwise disjoint.
+    This is the standard domain for a d-separation query
+    (Oxford Graphical Models §8.3, Theorem 8.1). -/
+def DisjointSets (X Y Z : Finset ℕ) : Prop :=
+  Disjoint X Y ∧ Disjoint X Z ∧ Disjoint Y Z
+
+/-- `DSeparationQuery` and `DisjointSets` are definitionally equivalent. -/
+theorem DSeparationQuery_iff_DisjointSets (X Y Z : Finset ℕ) :
+    DSeparationQuery X Y Z ↔ DisjointSets X Y Z :=
+  Iff.rfl
 
 namespace DAG
 
@@ -497,6 +558,39 @@ lemma mem_ancestralSubgraphNodes_of_hasEdge_left {G : DAG} {S : Finset ℕ} {u v
   rcases Finset.mem_biUnion.mp hv with ⟨s, hsS, hvs⟩
   exact Finset.mem_biUnion.mpr
     ⟨s, hsS, mem_ancestors_of_hasEdge_of_mem_ancestors huv hvs⟩
+
+lemma mem_dSeparationGraphNodes_of_ancestor_not_mem
+    {G : DAG} {X Y Z : Finset ℕ} {v : ℕ}
+    (hvA : v ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z))
+    (hvZ : v ∉ Z) :
+    v ∈ G.dSeparationGraphNodes X Y Z := by
+  exact Finset.mem_sdiff.mpr ⟨hvA, hvZ⟩
+
+lemma mem_dSeparationGraphNodes_of_mem_left
+    {G : DAG} {X Y Z : Finset ℕ} {v : ℕ}
+    (hvX : v ∈ X) (hvG : v ∈ G.nodes) (hvZ : v ∉ Z) :
+    v ∈ G.dSeparationGraphNodes X Y Z := by
+  exact mem_dSeparationGraphNodes_of_ancestor_not_mem
+    (G := G) (X := X) (Y := Y) (Z := Z)
+    (DAG.mem_ancestralSubgraphNodes_of_mem
+      (G := G) (S := X ∪ Y ∪ Z) (v := v) (by simp [hvX]) hvG)
+    hvZ
+
+lemma mem_dSeparationGraphNodes_of_mem_right
+    {G : DAG} {X Y Z : Finset ℕ} {v : ℕ}
+    (hvY : v ∈ Y) (hvG : v ∈ G.nodes) (hvZ : v ∉ Z) :
+    v ∈ G.dSeparationGraphNodes X Y Z := by
+  exact mem_dSeparationGraphNodes_of_ancestor_not_mem
+    (G := G) (X := X) (Y := Y) (Z := Z)
+    (DAG.mem_ancestralSubgraphNodes_of_mem
+      (G := G) (S := X ∪ Y ∪ Z) (v := v) (by simp [hvY]) hvG)
+    hvZ
+
+lemma not_mem_right_of_disjoint_left {X Z : Finset ℕ} {v : ℕ}
+    (hXZ : Disjoint X Z) (hvX : v ∈ X) :
+    v ∉ Z := by
+  intro hvZ
+  exact (Finset.disjoint_left.mp hXZ) hvX hvZ
 
 end DAG
 
@@ -734,6 +828,14 @@ lemma not_mem_Z_of_active_noncollider {G : DAG} {Z : Finset ℕ} {a b c : ℕ}
   intro hbZ
   exact hactive (Or.inl ⟨hncoll, hbZ⟩)
 
+lemma not_mem_Z_of_active_directional_noncollider {G : DAG} {Z : Finset ℕ}
+    {b : ℕ} {arrival departure : TrailDir}
+    (hopen : ¬ DirectionalTripleBlocked G Z b arrival departure)
+    (hnot : ¬ (arrival = TrailDir.into ∧ departure = TrailDir.outOf)) :
+    b ∉ Z := by
+  intro hbZ
+  exact hopen (Or.inl ⟨by simpa [TrailDir.colliderAtCurrent] using hnot, hbZ⟩)
+
 lemma collider_mem_ancestralSubgraphNodes_of_active {G : DAG} {X Y Z : Finset ℕ}
     {a b c : ℕ}
     (hactive : ¬ TripleBlocked G Z a b c)
@@ -758,6 +860,237 @@ lemma collider_mem_ancestralSubgraphNodes_of_active {G : DAG} {X Y Z : Finset �
     simp [hzZ]
   exact Finset.mem_biUnion.mpr
     ⟨z, hzS, by simp [DAG.ancestors, hbG, hreach]⟩
+
+/--
+If a trail segment starts with a forward edge `u → w` and remains active, then
+the first target `w` is ancestral to `X ∪ Y ∪ Z`, provided the trail endpoint is.
+Forward chains inherit ancestry from the right; a first reversal is an active
+collider and is ancestral through `Z`.
+-/
+lemma first_forward_target_mem_ancestral_of_active
+    {G : DAG} {X Y Z : Finset ℕ} {u w v : ℕ}
+    (h : G.HasEdge u w) (tail : Trail G w v)
+    (h_active : ¬ TrailBlocked G Z (u :: tail.toList))
+    (hvA : v ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z)) :
+    w ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) := by
+  induction tail generalizing u with
+  | nil w =>
+      simpa [Trail.toList] using hvA
+  | forward h₂ tail₂ ih =>
+      have htail_active :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons
+          (by simpa [Trail.toList] using h_active)
+      have hcA := ih h₂ htail_active hvA
+      exact DAG.mem_ancestralSubgraphNodes_of_hasEdge_left h₂ hcA
+  | backward h₂ tail₂ =>
+      have hhead :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail₂)
+          (by simpa [Trail.toList] using h_active)
+      exact collider_mem_ancestralSubgraphNodes_of_active
+        (G := G) (X := X) (Y := Y) (Z := Z) hhead ⟨h, h₂⟩
+
+def bayesBallPathCert_of_active_trail_from_prev
+    {G : DAG} {X Y Z : Finset ℕ}
+    {prev u v : ℕ} {arrival : TrailDir}
+    (hprev : TrailDir.edgeIntoCurrent G prev u arrival)
+    (t : Trail G u v)
+    (h_active : ¬ TrailBlocked G Z (prev :: t.toList))
+    (huA : u ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z))
+    (hvD : v ∈ G.dSeparationGraphNodes X Y Z) :
+    Σ final_dir, {p : BayesBallPath G Z (u, arrival) (v, final_dir) //
+      ∀ {q : ℕ × TrailDir}, BayesBallPath.RequiredState p q →
+        q.1 ∈ G.dSeparationGraphNodes X Y Z} := by
+  induction t generalizing prev arrival with
+  | nil v =>
+      refine ⟨arrival, ⟨BayesBallPath.nil (v, arrival), ?_⟩⟩
+      intro q hreq
+      cases hreq
+  | forward h tail ih =>
+      rename_i u₀ w₀ v₀
+      have hhead : ¬ TripleBlocked G Z prev u₀ w₀ :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail) h_active
+      have hstep :
+          BayesBallStep G Z (u₀, arrival) (w₀, TrailDir.into) := by
+        exact BayesBallStep.of_active_triple hprev
+          (by simpa [TrailDir.edgeIntoCurrent] using h) hhead
+      have htail_active : ¬ TrailBlocked G Z (u₀ :: tail.toList) :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons h_active
+      have hvA : v₀ ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        (Finset.mem_sdiff.mp (by
+          simpa [DAG.dSeparationGraphNodes] using hvD)).1
+      have hwA : w₀ ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        first_forward_target_mem_ancestral_of_active
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          h tail htail_active hvA
+      rcases ih (prev := u₀) (arrival := TrailDir.into)
+          (by simpa [TrailDir.edgeIntoCurrent] using h)
+          htail_active hwA hvD with
+        ⟨final_dir, ⟨ptail, hreq_tail⟩⟩
+      refine ⟨final_dir, ⟨BayesBallPath.cons hstep ptail, ?_⟩⟩
+      intro q hreq
+      cases ptail with
+      | nil s =>
+          cases hreq with
+          | one _ =>
+              simpa using hvD
+      | cons step₂ rest =>
+          cases hreq with
+          | colliderTarget hcoll =>
+              exact hreq_tail
+                (BayesBallPath.required_first_target_of_outOf step₂ rest hcoll.2)
+          | colliderRest hcoll hrest =>
+              exact hreq_tail
+                (BayesBallPath.required_rest_of_outOf step₂ rest hcoll.2 hrest)
+          | noncolliderTarget hnot =>
+              cases step₂ with
+              | step hEdge hopen =>
+                  have hwZ : w₀ ∉ Z :=
+                    not_mem_Z_of_active_directional_noncollider hopen hnot
+                  exact DAG.mem_dSeparationGraphNodes_of_ancestor_not_mem hwA hwZ
+          | noncolliderRest _ htailReq =>
+              exact hreq_tail htailReq
+  | backward h tail ih =>
+      rename_i u₀ w₀ v₀
+      have hhead : ¬ TripleBlocked G Z prev u₀ w₀ :=
+        not_tripleBlocked_head_of_not_trailBlocked_trail (t := tail) h_active
+      have hstep :
+          BayesBallStep G Z (u₀, arrival) (w₀, TrailDir.outOf) := by
+        exact BayesBallStep.of_active_triple hprev
+          (by simpa [TrailDir.edgeIntoCurrent] using h) hhead
+      have htail_active : ¬ TrailBlocked G Z (u₀ :: tail.toList) :=
+        not_trailBlocked_tail_of_not_trailBlocked_cons h_active
+      have hwA : w₀ ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        DAG.mem_ancestralSubgraphNodes_of_hasEdge_left h huA
+      rcases ih (prev := u₀) (arrival := TrailDir.outOf)
+          (by simpa [TrailDir.edgeIntoCurrent] using h)
+          htail_active hwA hvD with
+        ⟨final_dir, ⟨ptail, hreq_tail⟩⟩
+      refine ⟨final_dir, ⟨BayesBallPath.cons hstep ptail, ?_⟩⟩
+      intro q hreq
+      cases ptail with
+      | nil s =>
+          cases hreq with
+          | one _ =>
+              simpa using hvD
+      | cons step₂ rest =>
+          cases hreq with
+          | colliderTarget hcoll =>
+              cases hcoll.1
+          | colliderRest hcoll _ =>
+              cases hcoll.1
+          | noncolliderTarget hnot =>
+              cases step₂ with
+              | step hEdge hopen =>
+                  have hwZ : w₀ ∉ Z :=
+                    not_mem_Z_of_active_directional_noncollider hopen hnot
+                  exact DAG.mem_dSeparationGraphNodes_of_ancestor_not_mem hwA hwZ
+          | noncolliderRest _ htailReq =>
+              exact hreq_tail htailReq
+
+def bayesBallPathCert_of_active_trail_outOf
+    {G : DAG} {X Y Z : Finset ℕ} {u v : ℕ}
+    (t : Trail G u v)
+    (h_active : ¬ t.isBlocked Z)
+    (huZ : u ∉ Z)
+    (huA : u ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z))
+    (hvD : v ∈ G.dSeparationGraphNodes X Y Z) :
+    Σ final_dir, {p : BayesBallPath G Z (u, TrailDir.outOf) (v, final_dir) //
+      ∀ {q : ℕ × TrailDir}, BayesBallPath.RequiredState p q →
+        q.1 ∈ G.dSeparationGraphNodes X Y Z} := by
+  cases t with
+  | nil v =>
+      refine ⟨TrailDir.outOf, ⟨BayesBallPath.nil (u, TrailDir.outOf), ?_⟩⟩
+      intro q hreq
+      cases hreq
+  | forward h tail =>
+      rename_i w₀
+      have hstep :
+          BayesBallStep G Z (u, TrailDir.outOf) (w₀, TrailDir.into) :=
+        BayesBallStep.step (by simpa [TrailDir.edgeIntoCurrent] using h)
+          (by
+            simpa [Trail.StartOpen] using
+              (Trail.startOpen_outOf_of_not_mem (G := G) (Z := Z)
+                (u := u) (v := v)
+                (t := Trail.forward h tail) huZ))
+      have htail_active : ¬ TrailBlocked G Z (u :: tail.toList) := by
+        simpa [Trail.isBlocked, Trail.toList] using h_active
+      have hvA : v ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        (Finset.mem_sdiff.mp (by
+          simpa [DAG.dSeparationGraphNodes] using hvD)).1
+      have hwA : w₀ ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        first_forward_target_mem_ancestral_of_active
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          h tail htail_active hvA
+      rcases bayesBallPathCert_of_active_trail_from_prev
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          (prev := u) (u := w₀) (v := v) (arrival := TrailDir.into)
+          (by simpa [TrailDir.edgeIntoCurrent] using h)
+          tail htail_active hwA hvD with
+        ⟨final_dir, ⟨ptail, hreq_tail⟩⟩
+      refine ⟨final_dir, ⟨BayesBallPath.cons hstep ptail, ?_⟩⟩
+      intro q hreq
+      cases ptail with
+      | nil s =>
+          cases hreq with
+          | one _ =>
+              simpa using hvD
+      | cons step₂ rest =>
+          cases hreq with
+          | colliderTarget hcoll =>
+              exact hreq_tail
+                (BayesBallPath.required_first_target_of_outOf step₂ rest hcoll.2)
+          | colliderRest hcoll hrest =>
+              exact hreq_tail
+                (BayesBallPath.required_rest_of_outOf step₂ rest hcoll.2 hrest)
+          | noncolliderTarget hnot =>
+              cases step₂ with
+              | step hEdge hopen =>
+                  have hwZ : w₀ ∉ Z :=
+                    not_mem_Z_of_active_directional_noncollider hopen hnot
+                  exact DAG.mem_dSeparationGraphNodes_of_ancestor_not_mem hwA hwZ
+          | noncolliderRest _ htailReq =>
+              exact hreq_tail htailReq
+  | backward h tail =>
+      rename_i w₀
+      have hstep :
+          BayesBallStep G Z (u, TrailDir.outOf) (w₀, TrailDir.outOf) :=
+        BayesBallStep.step (by simpa [TrailDir.edgeIntoCurrent] using h)
+          (by
+            simpa [Trail.StartOpen] using
+              (Trail.startOpen_outOf_of_not_mem (G := G) (Z := Z)
+                (u := u) (v := v)
+                (t := Trail.backward h tail) huZ))
+      have htail_active : ¬ TrailBlocked G Z (u :: tail.toList) := by
+        simpa [Trail.isBlocked, Trail.toList] using h_active
+      have hwA : w₀ ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        DAG.mem_ancestralSubgraphNodes_of_hasEdge_left h huA
+      rcases bayesBallPathCert_of_active_trail_from_prev
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          (prev := u) (u := w₀) (v := v) (arrival := TrailDir.outOf)
+          (by simpa [TrailDir.edgeIntoCurrent] using h)
+          tail htail_active hwA hvD with
+        ⟨final_dir, ⟨ptail, hreq_tail⟩⟩
+      refine ⟨final_dir, ⟨BayesBallPath.cons hstep ptail, ?_⟩⟩
+      intro q hreq
+      cases ptail with
+      | nil s =>
+          cases hreq with
+          | one _ =>
+              simpa using hvD
+      | cons step₂ rest =>
+          cases hreq with
+          | colliderTarget hcoll =>
+              cases hcoll.1
+          | colliderRest hcoll _ =>
+              cases hcoll.1
+          | noncolliderTarget hnot =>
+              cases step₂ with
+              | step hEdge hopen =>
+                  have hwZ : w₀ ∉ Z :=
+                    not_mem_Z_of_active_directional_noncollider hopen hnot
+                  exact DAG.mem_dSeparationGraphNodes_of_ancestor_not_mem hwA hwZ
+          | noncolliderRest _ htailReq =>
+              exact hreq_tail htailReq
 
 /--
 Reachability in the moralized ancestral graph, packaged as explicit "large
@@ -1116,6 +1449,106 @@ lemma magWalk_of_bayesBall {G : DAG} {X Y Z : Finset ℕ}
         n ∈ G.dSeparationGraphNodes X Y Z) :
     MAGWalk G X Y Z u v :=
   magWalk_of_bayesBall_pair h_bb hmem
+
+theorem dSeparationGraph_reachable_of_active_trail_disjoint
+    {G : DAG} {X Y Z : Finset ℕ} {x y : ℕ}
+    (hXZ : Disjoint X Z) (hYZ : Disjoint Y Z)
+    (hxX : x ∈ X) (hyY : y ∈ Y)
+    (t : Trail G x y) (h_active : ¬ t.isBlocked Z) :
+    (G.dSeparationGraph X Y Z).Reachable x y := by
+  have hxZ : x ∉ Z := DAG.not_mem_right_of_disjoint_left hXZ hxX
+  have hyZ : y ∉ Z := DAG.not_mem_right_of_disjoint_left hYZ hyY
+  cases t with
+  | nil x =>
+      exact SimpleGraph.Reachable.refl x
+  | forward h tail =>
+      rename_i w
+      have hxG : x ∈ G.nodes := (G.edges_subset h).1
+      have hyG : y ∈ G.nodes :=
+        Trail.target_mem_graph_nodes_of_source_mem
+          (Trail.forward (G := G) (u := x) (w := w) (v := y) h tail) hxG
+      have hxD : x ∈ G.dSeparationGraphNodes X Y Z :=
+        DAG.mem_dSeparationGraphNodes_of_mem_left hxX hxG hxZ
+      have hyD : y ∈ G.dSeparationGraphNodes X Y Z :=
+        DAG.mem_dSeparationGraphNodes_of_mem_right hyY hyG hyZ
+      have hxA : x ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes hxD
+      rcases bayesBallPathCert_of_active_trail_outOf
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          (u := x) (v := y)
+          (Trail.forward (G := G) (u := x) (w := w) (v := y) h tail)
+          h_active hxZ hxA hyD with
+        ⟨final_dir, ⟨p, hreq⟩⟩
+      exact MAGWalk.to_dSeparationGraph_reachable
+        (BayesBallPath.compress
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          (s := (x, TrailDir.outOf)) (t := (y, final_dir))
+          p hxD hyD hreq)
+  | backward h tail =>
+      rename_i w
+      have hxG : x ∈ G.nodes := (G.edges_subset h).2
+      have hyG : y ∈ G.nodes :=
+        Trail.target_mem_graph_nodes_of_source_mem
+          (Trail.backward (G := G) (u := x) (w := w) (v := y) h tail) hxG
+      have hxD : x ∈ G.dSeparationGraphNodes X Y Z :=
+        DAG.mem_dSeparationGraphNodes_of_mem_left hxX hxG hxZ
+      have hyD : y ∈ G.dSeparationGraphNodes X Y Z :=
+        DAG.mem_dSeparationGraphNodes_of_mem_right hyY hyG hyZ
+      have hxA : x ∈ G.ancestralSubgraphNodes (X ∪ Y ∪ Z) :=
+        mem_ancestralSubgraphNodes_of_mem_dSeparationGraphNodes hxD
+      rcases bayesBallPathCert_of_active_trail_outOf
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          (u := x) (v := y)
+          (Trail.backward (G := G) (u := x) (w := w) (v := y) h tail)
+          h_active hxZ hxA hyD with
+        ⟨final_dir, ⟨p, hreq⟩⟩
+      exact MAGWalk.to_dSeparationGraph_reachable
+        (BayesBallPath.compress
+          (G := G) (X := X) (Y := Y) (Z := Z)
+          (s := (x, TrailDir.outOf)) (t := (y, final_dir))
+          p hxD hyD hreq)
+
+theorem dsep_complete_of_endpoint_disjoint
+    {G : DAG} {X Y Z : Finset ℕ}
+    (hXZ : Disjoint X Z) (hYZ : Disjoint Y Z) :
+    DAG.dSeparated G X Y Z → dSeparates G X Y Z := by
+  intro hdsep x hxX y hyY t
+  by_contra h_active
+  exact hdsep x hxX y hyY
+    (dSeparationGraph_reachable_of_active_trail_disjoint
+      (G := G) (X := X) (Y := Y) (Z := Z)
+      hXZ hYZ hxX hyY t h_active)
+
+theorem dsep_complete_of_query
+    {G : DAG} {X Y Z : Finset ℕ}
+    (hquery : DSeparationQuery X Y Z) :
+    DAG.dSeparated G X Y Z → dSeparates G X Y Z :=
+  dsep_complete_of_endpoint_disjoint hquery.2.1 hquery.2.2
+
+/-- **Soundness of d-separation under pairwise-disjoint domain.**
+    If `X`, `Y`, `Z` are pairwise disjoint (`DisjointSets X Y Z`) and the
+    moralized ancestral graph separates `X` from `Y` after deleting `Z`
+    (`DAG.dSeparated G X Y Z`), then every trail from `X` to `Y` is blocked
+    by `Z` (`dSeparates G X Y Z`).
+
+    This is the reliability (completeness) direction: moral-graph separation
+    implies trail blocking.  The proof follows the three-stage pipeline:
+    1. `bayesBallPath_of_active_trail_outOf` lifts an active trail to a
+       Bayes-ball path (possible because endpoint-disjointness keeps the
+       start node out of `Z`).
+    2. `bayesBallPathCert_of_active_trail_outOf` certifies that every
+       `RequiredState` node survives deletion of `Z`.
+    3. `BayesBallPath.compress` turns the path into a `MAGWalk`, and
+       `MAGWalk.to_dSeparationGraph_reachable` yields reachability in the
+       moralized graph, contradicting `DAG.dSeparated`.
+
+    The unrestricted converse is false: see
+    `dsep_complete_endpoint_in_Z_counterexample`. -/
+theorem dSeparated_of_dSeparated_disjoint
+    {G : DAG} {X Y Z : Finset ℕ}
+    (hXYZ : DisjointSets X Y Z)
+    (hsep : DAG.dSeparated G X Y Z) : dSeparates G X Y Z := by
+  exact dsep_complete_of_endpoint_disjoint hXYZ.2.1 hXYZ.2.2 hsep
 
 /-! ## Small checkable examples -/
 

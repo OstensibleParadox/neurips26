@@ -1,5 +1,5 @@
 import Mathlib
-import .CutSetBoundExtract
+import FiniteQuerySandbox.CutSetBoundExtract
 
 open Finset
 open scoped BigOperators Real
