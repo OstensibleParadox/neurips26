@@ -189,13 +189,13 @@ lemma condEntropy_M_cond_Ttilde_le_H_M (P : FinitePMF (State × VisibleTrace × 
         _ = 1 := h
   }
   have hmi := mutualInfo_nonneg Q
-  have hleft : entropyOf (marginalLeftMass Q) = H_M P := by
-    unfold H_M marginalLeftMass missingMass Q visibleMissingMass
+  have hleft : entropyOf (marginalPairFst Q) = H_M P := by
+    unfold H_M marginalPairFst missingMass Q visibleMissingMass
     apply congrArg entropyOf
     funext m
     rw [Finset.sum_comm]
-  have hright : entropyOf (marginalRightMass Q) = entropyOf (visibleMass P) := by
-    unfold marginalRightMass visibleMass Q visibleMissingMass
+  have hright : entropyOf (marginalPairSnd Q) = entropyOf (visibleMass P) := by
+    unfold marginalPairSnd visibleMass Q visibleMissingMass
     apply congrArg entropyOf
     funext t
     rw [Finset.sum_comm]
@@ -249,8 +249,8 @@ lemma I_S_M_cond_Ttilde_le_condEntropy_M_cond_Ttilde
       (fun stm : State × VisibleTrace × MissingTrace => P.pmf stm) ?_
     intro mst
     rfl
-  have hmarg : entropyOf (marginalRightMass Q) = entropyOf (stateVisibleMass P) := by
-    unfold marginalRightMass stateVisibleMass Q
+  have hmarg : entropyOf (marginalPairSnd Q) = entropyOf (stateVisibleMass P) := by
+    unfold marginalPairSnd stateVisibleMass Q
     rfl
   unfold condEntropy at hcond
   rw [hfull, hmarg] at hcond

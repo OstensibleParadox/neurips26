@@ -22,8 +22,8 @@ theorem I_A_cond_B_C_nonneg (P : FinitePMF (α × β × γ)) :
          entropyOf (fun bc : β × γ => ∑ a : α, P.pmf (a, bc.1, bc.2)) -
          entropyOf (fun c : γ => ∑ a : α, ∑ b : β, P.pmf (a, b, c)) -
          entropyOf (fun abc : α × β × γ => P.pmf abc)) := by
-  simpa [FiniteQuerySandbox.condMutualInfo, FiniteQuerySandbox.marginalXZMass,
-    FiniteQuerySandbox.marginalYZMass, FiniteQuerySandbox.marginalZMass] using
+  simpa [FiniteQuerySandbox.condMutualInfo, FiniteQuerySandbox.marginalTripleFstThd,
+    FiniteQuerySandbox.marginalTripleSndThd, FiniteQuerySandbox.marginalTripleThd] using
       (FiniteQuerySandbox.condMutualInfo_nonneg (P := P))
 
 end InfoTheory

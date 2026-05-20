@@ -23,11 +23,11 @@ theorem no_exact_witness_under_screen {Ω State Trace Action IState : Type}
 
 /-- Bridge-level compatibility alias with non-paper terminology. -/
 theorem no_internal_witness_under_trace_recoverability_bridge {Ω State Trace Action IState : Type}
-    (screen : TraceRecoverability State Trace)
+    (screen : DeterministicScreen State Trace)
     (S : Ω → State) (T : Ω → Trace) (A : Ω → Action)
     (h_screen : ∀ ω, S ω = screen.recon (T ω))
     (chi : State → IState) (I : Ω → IState) :
-    ¬ ExactInternalWitness S T A I chi :=
+    ¬ ExactEISWitness S T A I chi :=
   no_internal_witness_under_trace_recoverability screen S T A h_screen chi I
 
 end FiniteQuerySandbox

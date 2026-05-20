@@ -312,8 +312,8 @@ by
           = (entropyOf Q.pmf + entropyOf Q.pmf - entropyOf qT - entropyOf Q.pmf) := by
             rw [h_H_ST, h_H_AT, h_H_T, h_H_STA]
       _ = entropyOf Q.pmf - entropyOf qT := by ring
-      _ = (entropyOf Q.pmf - entropyOf (marginalLeftMass Q)) := by
-            have h_qT_left : qT = marginalLeftMass Q := by
+      _ = (entropyOf Q.pmf - entropyOf (marginalPairFst Q)) := by
+            have h_qT_left : qT = marginalPairFst Q := by
               rw [hqT]
               rfl
             rw [h_qT_left]

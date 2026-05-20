@@ -7,8 +7,11 @@ namespace FiniteQuerySandbox
 
 noncomputable section
 
-variable {α β γ δ : Type} [Fintype α] [Fintype β] [Fintype γ] [Fintype δ]
-variable [DecidableEq α] [DecidableEq β] [DecidableEq γ] [DecidableEq δ]
+variable {α β γ : Type} [Fintype α] [Fintype β] [Fintype γ]
+variable [DecidableEq α] [DecidableEq β] [DecidableEq γ]
+
+def negMulLog2 (p : ℝ) : ℝ :=
+  -(p * (Real.log p / Real.log 2))
 
 /-- Entropy of an arbitrary finite mass function, used for marginals. -/
 def entropyOf {η : Type} [Fintype η] [DecidableEq η] (mass : η → ℝ) : ℝ :=
@@ -69,8 +72,7 @@ lemma entropyOf_mul_log2 {η : Type} [Fintype η] [DecidableEq η] (mass : η �
         = ∑ x : η, -(mass x * Real.log (mass x)) := by
           refine Finset.sum_congr rfl (fun x _ => ?_)
           field_simp [hlog2_ne_zero]
-    _ = -∑ x : η, mass x * Real.log (mass x) := by
-          rw [← Finset.sum_neg_distrib]
+    _ = -∑ x : η, mass x * Real.log (mass x) := by rw [Finset.sum_neg_distrib]
 
 lemma Fintype.card_pos_of_finitePMF (P : FinitePMF α) :
     0 < Fintype.card α := by

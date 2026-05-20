@@ -14,41 +14,6 @@ variable [Fintype State] [Fintype VisibleTrace] [Fintype MissingTrace]
 variable [DecidableEq State] [DecidableEq VisibleTrace] [DecidableEq MissingTrace]
 
 /--
-定义通用分布推向 (Pushforward)。
-给定 P : FinitePMF α 和函数 f : α → β，构造在 β 上的分布。
-质量守恒由 Finset.sum_comm 保证。
--/
-def FinitePMF.map
-    {α β : Type} [Fintype α] [DecidableEq α] [Fintype β] [DecidableEq β]
-    (P : FinitePMF α) (f : α → β) : FinitePMF β where
-  pmf y := ∑ x : α, if f x = y then P.pmf x else 0
-  pmf_nonneg y := by
-    apply Finset.sum_nonneg
-    intro x _
-    by_cases h : f x = y
-    · simp [h, P.pmf_nonneg x]
-    · simp [h]
-  sum_one := by
-    calc
-      ∑ y : β, ∑ x : α, (if f x = y then P.pmf x else 0)
-          = ∑ x : α, ∑ y : β, (if f x = y then P.pmf x else 0) := by
-            exact Finset.sum_comm
-      _ = ∑ x : α, P.pmf x := by
-        apply Finset.sum_congr rfl
-        intro x _
-        calc
-          ∑ y : β, (if f x = y then P.pmf x else 0)
-              = P.pmf x * ∑ y : β, (if f x = y then (1 : ℝ) else 0) := by
-                  rw [Finset.mul_sum]
-                  apply Finset.sum_congr rfl
-                  intro y _
-                  by_cases h : f x = y
-                  · simp [h]
-                  · simp [h]
-          _ = P.pmf x := by simp
-      _ = 1 := P.sum_one
-
-/--
 具体化推向：从 (S, T, M) 映射到 (S, Cut, M, T)。
 变量对应关系：X=S, Y=Cut, Z=M, W=T。
 -/

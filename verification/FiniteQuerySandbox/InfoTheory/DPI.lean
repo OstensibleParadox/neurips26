@@ -48,7 +48,7 @@ def I_YZ_W (P : FinitePMF (α × β × γ × δ)) : ℝ :=
 
 /-- `H(A | T)` for a PMF on `T × A`. -/
 def H_A_cond_T (Q : FinitePMF (β × γ)) : ℝ :=
-  entropyOf Q.pmf - entropyOf (marginalLeftMass Q)
+  entropyOf Q.pmf - entropyOf (marginalPairFst Q)
 
 /-- `I(S; A | T)` for a PMF on `S × T × A`. -/
 def I_SA_cond_T (P : FinitePMF (α × β × γ)) : ℝ :=
@@ -138,23 +138,23 @@ lemma condMutualInfo_pmfYZXW (P : FinitePMF (α × β × γ × δ)) :
     left_inv := by intro t; rcases t with ⟨x, z, w⟩; rfl
     right_inv := by intro t; rcases t with ⟨z, x, w⟩; rfl
   }
-  have hXYW : entropyOf (marginalXZMass (pmfYZXW P)) =
+  have hXYW : entropyOf (marginalTripleFstThd (pmfYZXW P)) =
       entropyOf (marginalXYWMass P) := by
     symm
     refine entropyOf_equiv_eq eXYW (marginalXYWMass P)
-      (marginalXZMass (pmfYZXW P)) ?_
+      (marginalTripleFstThd (pmfYZXW P)) ?_
     intro xyw
     rcases xyw with ⟨x, y, w⟩
     rfl
-  have hXZW : entropyOf (marginalYZMass (pmfYZXW P)) =
+  have hXZW : entropyOf (marginalTripleSndThd (pmfYZXW P)) =
       entropyOf (marginalXZWMass P) := by
     symm
     refine entropyOf_equiv_eq eXZW (marginalXZWMass P)
-      (marginalYZMass (pmfYZXW P)) ?_
+      (marginalTripleSndThd (pmfYZXW P)) ?_
     intro xzw
     rcases xzw with ⟨x, z, w⟩
     rfl
-  have hXW : entropyOf (marginalZMass (pmfYZXW P)) =
+  have hXW : entropyOf (marginalTripleThd (pmfYZXW P)) =
       entropyOf (marginalXWMass P) := by
     apply congrArg entropyOf
     funext xw
@@ -169,7 +169,7 @@ lemma condMutualInfo_pmfYZXW (P : FinitePMF (α × β × γ × δ)) :
     intro xyzw
     rcases xyzw with ⟨x, y, z, w⟩
     rfl
-  unfold condMutualInfo I_YZ_XW
+  unfold condMutualInfo I_YZ_XW entropy
   rw [hXYW, hXZW, hXW, hFull]
 
 lemma condMutualInfo_pmfXZYW (P : FinitePMF (α × β × γ × δ)) :
@@ -186,23 +186,23 @@ lemma condMutualInfo_pmfXZYW (P : FinitePMF (α × β × γ × δ)) :
     left_inv := by intro t; rcases t with ⟨y, z, w⟩; rfl
     right_inv := by intro t; rcases t with ⟨z, y, w⟩; rfl
   }
-  have hXYW : entropyOf (marginalXZMass (pmfXZYW P)) =
+  have hXYW : entropyOf (marginalTripleFstThd (pmfXZYW P)) =
       entropyOf (marginalXYWMass P) := by
     symm
     refine entropyOf_equiv_eq eXYW (marginalXYWMass P)
-      (marginalXZMass (pmfXZYW P)) ?_
+      (marginalTripleFstThd (pmfXZYW P)) ?_
     intro xyw
     rcases xyw with ⟨x, y, w⟩
     rfl
-  have hYZW : entropyOf (marginalYZMass (pmfXZYW P)) =
+  have hYZW : entropyOf (marginalTripleSndThd (pmfXZYW P)) =
       entropyOf (marginalYZWMass P) := by
     symm
     refine entropyOf_equiv_eq eYZW (marginalYZWMass P)
-      (marginalYZMass (pmfXZYW P)) ?_
+      (marginalTripleSndThd (pmfXZYW P)) ?_
     intro yzw
     rcases yzw with ⟨y, z, w⟩
     rfl
-  have hYW : entropyOf (marginalZMass (pmfXZYW P)) =
+  have hYW : entropyOf (marginalTripleThd (pmfXZYW P)) =
       entropyOf (marginalYWMass P) := by
     apply congrArg entropyOf
     funext yw
@@ -217,7 +217,7 @@ lemma condMutualInfo_pmfXZYW (P : FinitePMF (α × β × γ × δ)) :
     intro xyzw
     rcases xyzw with ⟨x, y, z, w⟩
     rfl
-  unfold condMutualInfo I_XZ_YW
+  unfold condMutualInfo I_XZ_YW entropy
   rw [hXYW, hYZW, hYW, hFull]
 
 /-- Conditional Markovity as a concrete definition. -/
@@ -239,8 +239,8 @@ lemma I_XZ_YW_eq_zero_of_condMarkov
   · rwa [condMutualInfo_pmfXZYW P] at hzero
   · intro x z yw
     rcases yw with ⟨y, w⟩
-    simpa [pmfXZYW, FinitePMF.comapEquiv, equivXZYW, marginalZMass,
-      marginalXZMass, marginalYZMass, marginalYWMass, marginalXYWMass,
+    simpa [pmfXZYW, FinitePMF.comapEquiv, equivXZYW, marginalTripleThd,
+      marginalTripleFstThd, marginalTripleSndThd, marginalYWMass, marginalXYWMass,
       marginalYZWMass] using h x y z w
 
 /-- Conditional data processing for finite PMFs. -/

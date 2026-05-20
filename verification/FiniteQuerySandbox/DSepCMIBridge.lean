@@ -80,7 +80,7 @@ theorem cond_mutual_info_zero_of_markov {α β γ : Type}
   refine condMutualInfo_eq_zero_of_condIndep (pmfACB P) ?_
   intro a c b
   simpa [pmfACB, FinitePMF.comapEquiv, equivACB, marginalB, marginalAB, marginalBC,
-    marginalZMass, marginalXZMass, marginalYZMass] using hMC a b c
+    marginalTripleThd, marginalTripleFstThd, marginalTripleSndThd] using hMC a b c
 
 end InfoTheory
 

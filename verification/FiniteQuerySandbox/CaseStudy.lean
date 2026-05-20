@@ -187,9 +187,9 @@ lemma I_YZ_W_unit_le_entropyOf_marginalYMass (P4 : FinitePMF (α × β × γ × 
   let Q := marginalYZPMF_of_unit P4
   have h_cond_nonneg : 0 ≤ condEntropy Q := condEntropy_nonneg Q
   unfold condEntropy at h_cond_nonneg
-  have h_margRight : marginalRightMass Q = marginalZMass_unit P4 := by
+  have h_margRight : marginalPairSnd Q = marginalZMass_unit P4 := by
     funext z
-    unfold marginalRightMass Q marginalYZPMF_of_unit marginalZMass_unit
+    unfold marginalPairSnd Q marginalYZPMF_of_unit marginalZMass_unit
     rw [Finset.sum_comm]
   rw [h_margRight] at h_cond_nonneg
   linarith

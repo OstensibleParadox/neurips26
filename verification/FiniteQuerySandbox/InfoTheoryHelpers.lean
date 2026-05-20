@@ -390,7 +390,7 @@ lemma I_A_cond_B_C_nonneg (P : FinitePMF (α × β × γ)) :
   have h_eq : I_A_cond_B_C P = FiniteQuerySandbox.condMutualInfo P := by
     unfold I_A_cond_B_C FiniteQuerySandbox.condMutualInfo
     unfold marginalAC marginalBC marginalC
-    unfold FiniteQuerySandbox.marginalXZMass FiniteQuerySandbox.marginalYZMass FiniteQuerySandbox.marginalZMass
+    unfold FiniteQuerySandbox.marginalTripleFstThd FiniteQuerySandbox.marginalTripleSndThd FiniteQuerySandbox.marginalTripleThd
     simp
   rw [h_eq]
   exact FiniteQuerySandbox.condMutualInfo_nonneg P
