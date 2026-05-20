@@ -1,0 +1,9 @@
+{"plugins": [],
+ "package": "finiteQuerySandbox",
+ "options": {"autoImplicit": false},
+ "name": "FiniteQuerySandbox.Impossibility",
+ "isModule": false,
+ "importArts":
+ {"FiniteQuerySandbox.Tools":
+  ["/Users/ostensible_paradox/Documents/neurips26/verification/.lake/build/lib/lean/FiniteQuerySandbox/Tools.olean"]},
+ "dynlibs": []}

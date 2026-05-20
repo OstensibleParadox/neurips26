@@ -1,0 +1,11 @@
+{"plugins": [],
+ "package": "finiteQuerySandbox",
+ "options": {"autoImplicit": false},
+ "name": "FiniteQuerySandbox.TraceRecoverabilityBridge",
+ "isModule": false,
+ "importArts":
+ {"FiniteQuerySandbox.ScreenabilityBridge":
+  ["/Users/ostensible_paradox/Documents/neurips26/verification/.lake/build/lib/lean/FiniteQuerySandbox/ScreenabilityBridge.olean"],
+  "FiniteQuerySandbox.Screenability":
+  ["/Users/ostensible_paradox/Documents/neurips26/verification/.lake/build/lib/lean/FiniteQuerySandbox/Screenability.olean"]},
+ "dynlibs": []}

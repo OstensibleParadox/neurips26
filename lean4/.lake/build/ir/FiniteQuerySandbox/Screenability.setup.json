@@ -1,0 +1,7 @@
+{"plugins": [],
+ "package": "finiteQuerySandbox",
+ "options": {"autoImplicit": false},
+ "name": "FiniteQuerySandbox.Screenability",
+ "isModule": false,
+ "importArts": {},
+ "dynlibs": []}
