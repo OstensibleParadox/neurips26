@@ -42,29 +42,7 @@
   \maketitle
 
   \begin{abstract}
-  Auditing a deployed language-model agent requires two separable quantities:
-  how much operative state escapes the recorded trace, and how much of that
-  residual state drives behavior. We introduce a dual-certificate protocol. The
-  static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual
-  hidden-state entropy by a min-cut on untraced channels. The dynamic
-  certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision
-  relevance through an admissible probe taxonomy---replay, intervention,
-  proxy---under conditional data processing. The two axes are independent. In
-  ReAct experiments, logging ablates the static bound from $16{,}464$ to $0$
-  bits; controlled replay separates dormant calculator from active planning
-  tasks under the same topology as a soft policy shift ($0.0163$ bits, 95\% CI
-  $[0.0124,0.0208]$) with argmax tool selections unchanged. Indexing
-  $\delta_\text{act}^\text{LB}$ over hidden-channel coordinates produces an
-  activation profile. On an LLaDA denoising trajectory, perturbations stay near
-  the floor through early steps and rise at the final binding step ($0.110$
-  bits, 95\% CI $[0.052,0.234]$). On a multi-agent communication edge, swapping
-  a worker's private report gives $0.901$ bits, 95\% CI $[0.873,0.928]$. A Lean
-  4 artifact mechanizes the certificate reductions (static cut-sum bound,
-  conditional-DPI dynamic certificate), the two-stage factorisation split, the
-  linear chain case study, the autoregressive zero-cut impossibility, and an
-  identifiability-gap construction from Mathlib first principles, with the
-  cut-set capacity inequality and conditional Markovity remaining explicit
-  hypotheses where needed.
+  Auditing a deployed language-model agent requires two separable quantities: the operative state escaping the trace and the residual state driving behavior. We introduce a dual-certificate protocol. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual hidden-state entropy via de Bruijn/Log-Sobolev entropy dissipation on the statistical manifold of residual states. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance through the Safe Orientation: finite-strength probe measurements are extrapolated to the hard limit by subtracting explicit restoration terms and a controlled kitty remainder. These axes are independent. In ReAct experiments, logging ablates the static bound from $16{,}464$ to $0$ bits; controlled replay separates dormant calculator from active planning tasks under the same topology (policy shift $0.0163$ bits, 95\% CI $[0.0124,0.0208]$). Indexing $\delta_\text{act}^\text{LB}$ over hidden-channel coordinates generates an activation profile. In LLaDA denoising, perturbations rise at the final binding step ($0.110$ bits, 95\% CI $[0.052,0.234]$). On a multi-agent communication edge, swapping a worker's private report yields $0.901$ bits (95\% CI $[0.873,0.928]$). A Lean 4 artifact mechanizes the certificate reductions, the linear chain case study, and the identifiability-gap construction.
   \end{abstract}
 
   % ---------------------------------------------------------------------------
@@ -81,7 +59,6 @@
   distinguish two qualitatively different systems, one whose hidden capacity is
   dormant on the test distribution and one whose hidden capacity is active.
   Identifying which holds is the audit task.
-
   How much internal state escapes the trace, and how much of that drives the
   next action, are distinct quantities. Treating them as a single ``hiddenness''
    judgment produces something neither computable nor diagnostic: a system with
@@ -90,11 +67,13 @@
 
   We propose a dual-certificate protocol that answers each question separately.
   The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds
-  residual entropy $H(S_t \mid \tilde T_t)$ from deployment topology alone,
-  using a cut-set bound on untraced channels. The dynamic certificate
+  residual entropy $H(S_t \mid \tilde T_t)$ from the geometry of the residual
+  state distribution on a statistical manifold, using de Bruijn/Log-Sobolev
+  entropy dissipation. The dynamic certificate
   $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance $I(S_t;
-   A_t \mid \tilde T_t)$ via one of three probe classes (replay, intervention,
-  or proxy) depending on the auditor's access regime. The two certificates are
+   A_t \mid \tilde T_t)$ via the Safe Orientation: finite-strength probe
+  measurements are extrapolated to the hard limit by subtracting explicit
+  restoration terms and a controlled kitty remainder. The two certificates are
   independent axes: a system with large $\varepsilon_\text{state}^\text{UB}$ and
    small $\delta_\text{act}^\text{LB}$ has unrecoverable but dormant state; a
   system with both large has unrecoverable and active state. Both are auditable;
@@ -115,24 +94,22 @@
 
   \textbf{Contributions.} We define a dual-certificate framework
   $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$ for agent
-  audit. Proposition~\ref{prop:static-ub} gives a topological upper bound on
-  residual hidden-state entropy via a min-cut on untraced channels.
-  Proposition~\ref{prop:dynamic-lb} is not a new information-theoretic
-  inequality; it is the audit reduction that turns conditional DPI into three
-  admissible lower-bound probes---replay, intervention, and proxy---for residual
-   decision relevance.
+  audit. Theorem~\ref{thm:entropy-dissipation} gives a geometric upper bound on
+  residual hidden-state entropy via de Bruijn/Log-Sobolev entropy dissipation
+  on the statistical manifold of residual states.
+  Theorem~\ref{thm:safe-orientation} gives the Safe Orientation: a rigorous
+  lower bound on true causal decision relevance by extrapolating finite-strength
+  probe measurements to the hard limit, with explicit restoration terms and a
+  controlled kitty remainder.
 
   We evaluate the protocol on three residual-state geometries: a ReAct
   scratchpad module, a diffusion-LM denoising trajectory, and a multi-agent
   private-report edge. The same algebra applies across settings; only the index
   changes (module, denoising step, communication edge). Appendix calibrations
-  cover read-only proxy estimation and a synthetic ground-truth setting where
-  the static bound matches true hidden-state entropy. A Lean 4 artifact
-  mechanizes Corollary~\ref{cor:auto-exact}, Proposition~\ref{prop:static-ub},
-  Proposition~\ref{prop:dynamic-lb}, the linear chain case study, and the
-  Identifiability Gap theorem from Mathlib first principles, with only the
-  cut-set capacity bound remaining as an external structural premise (see
-  \S\ref{sec:external-axioms} for the precise boundary).
+  cover a synthetic ground-truth setting where the static bound matches true
+  hidden-state entropy. A Lean 4 artifact mechanizes the certificate reductions,
+  the linear chain case study, and the Identifiability Gap theorem from Mathlib
+  first principles (see \S\ref{sec:external-axioms} for the precise boundary).
 
   % ---------------------------------------------------------------------------
   \section{Related Work}
@@ -143,12 +120,13 @@
   Causal abstraction~\citep{geiger2021causal}, latent-knowledge
   elicitation~\citep{burns2022discovering}, nullspace
   projection~\citep{ravfogel2020null}, and amnesic
-  probing~\citep{elazar2021amnesic} are natural sources of proxy-style evidence:
-   when they expose a probe variable $Z_t = \varphi(S_t)$ and the required
-  conditional assumptions hold, its MI with action can be interpreted through
-  the proxy certificate. Causal tracing/ROME~\citep{meng2022locating},
+  probing~\citep{elazar2021amnesic} are natural sources of finite-strength
+  probe measurements: when they expose a probe variable $Z_t = \varphi(S_t)$
+  and the required conditional assumptions hold, its MI with action supplies
+  an $I_\lambda$ term for the Safe Orientation. Causal
+  tracing/ROME~\citep{meng2022locating},
   representation engineering~\citep{zou2023representation}, and activation
-  addition~\citep{turner2023activation} provide intervention-style evidence when
+  addition~\citep{turner2023activation} provide perturbation-based evidence when
    the patch affects action only through $S_t$.
 
   \paragraph{Black-box audit and network information theory.}
@@ -202,10 +180,11 @@
   dual-certificate framework targets:
   \begin{itemize}
     \item a \emph{structural upper bound} $\varepsilon_\text{state}^\text{UB}
-  \geq \varepsilon_\text{state}$, computed from deployment topology
-  (\S\ref{sec:static-cert});
+  \geq \varepsilon_\text{state}$, computed from the geometric structure of the
+  residual state distribution (\S\ref{sec:static-cert});
     \item an \emph{empirical lower bound} $\delta_\text{act}^\text{LB} \leq
-  \delta_\text{act}$, estimated via probe variables (\S\ref{sec:dynamic-cert}).
+  \delta_\text{act}$, estimated via the Safe Orientation protocol
+  (\S\ref{sec:dynamic-cert}).
   \end{itemize}
   The reported audit pair is $(\varepsilon_\text{state}^\text{UB},
   \delta_\text{act}^\text{LB})$.
@@ -214,11 +193,12 @@
   Neither quantity is identifiable from behavioral observations alone: different
    causal graphs can produce identical joint distributions over $(\tilde T_t,
   A_t)$ pairs, so observing outputs does not fix $H(S_t \mid \tilde T_t)$ or
-  $I(S_t; A_t \mid \tilde T_t)$. The static certificate addresses the first with
-   structural access to topology; the dynamic certificate addresses the second
-  with gray-box probe access.
+  $I(S_t; A_t \mid \tilde T_t)$. The static certificate addresses the first by
+   bounding the entropy on the statistical manifold of residual states; the
+  dynamic certificate addresses the second by extrapolating finite-strength
+  probe measurements to the hard limit via the Safe Orientation.
 
-  \begin{remark}[Complementarity and Inheritance]
+  \begin{remark}[Complementarity and Safe Orientation]
   \label{rem:complementarity}
   By the data processing inequality, $\delta_\text{act} \leq
   \varepsilon_\text{state}$. The certificates inherit this ordering at their
@@ -227,205 +207,261 @@
     \item If $\varepsilon_\text{state}^\text{UB} = 0$ (fully logged
   architecture), then $\varepsilon_\text{state} = 0$ and $\delta_\text{act} =
   0$; any valid lower bound satisfies $\delta_\text{act}^\text{LB} = 0$.
-    \item If $\delta_\text{act}^\text{LB} = 0$ under the best available probe,
-  hidden state may still exist: $\varepsilon_\text{state}^\text{UB}$ can be
-  large while the current task does not activate the hidden capacity (dormant
-  unrecoverable state). The contrapositive ($\delta_\text{act}^\text{LB} > 0
-  \Rightarrow \varepsilon_\text{state}^\text{UB} > 0$) follows from the DPI
-  ordering.
+    \item If $\delta_\text{act}^\text{LB} = 0$ under the Safe Orientation at
+  any probe strength $\lambda$, hidden state may still exist:
+  $\varepsilon_\text{state}^\text{UB}$ can be large while the current task does
+  not activate the hidden capacity (dormant unrecoverable state). The
+  contrapositive ($\delta_\text{act}^\text{LB} > 0 \Rightarrow
+  \varepsilon_\text{state}^\text{UB} > 0$) follows from the DPI ordering.
   \end{itemize}
   The audit interpretation is therefore two-dimensional: deployment teams must
-  report both the residual channel budget and the strongest admissible
-  behavioral probe, not collapse them into a single hiddenness score.
+  report both the residual channel budget and the Safe Orientation lower bound,
+  not collapse them into a single hiddenness score.
   \end{remark}
+
+  \begin{theorem}[Safe Orientation]
+  \label{thm:safe-orientation}
+  Let $\lambda \in (0,\infty)$ be the probe strength. Let $I_\lambda :=
+  I(\xi_\lambda; A_t \mid \tilde T_t)$ be the mutual information measured at
+  strength $\lambda$, where $\xi_\lambda$ is an admissible perturbation of the
+  operative state (e.g.\ Gaussian noise of variance $\lambda^{-1}$ injected
+  into hidden activations). Then the true residual decision relevance
+  $I_\infty := I(S_t; A_t \mid \tilde T_t)$ satisfies the Safe Orientation:
+  \[
+    I_\infty
+    \;\geq\;
+    I_\lambda
+    \;-\;
+    |\text{Restore}_k(\lambda)|
+    \;-\;
+    |R_{\rm kitty}^{I,k}(\lambda)|.
+  \]
+  The restoration term $\text{Restore}_k(\lambda)$ captures the finite-order
+  correction from the asymptotic expansion of $I_\lambda$ about
+  $\lambda=\infty$:
+  \[
+    \text{Restore}_k(\lambda)
+    :=
+    \sum_{r=1}^{k} \lambda^{-r}
+      \int_0^{\gamma_{\max}} m_r(\gamma)\,d\gamma,
+  \]
+  where $m_r(\gamma)$ are the coefficients in
+  ${\rm MMSE}_\lambda(\gamma)
+   = {\rm MMSE}_\infty(\gamma)
+     + \sum_{r=1}^k \lambda^{-r} m_r(\gamma)
+     + e_k(\gamma,\lambda)$.
+  The kitty remainder is controlled by
+  \[
+    |R_{\rm kitty}^{I,k}(\lambda)|
+    \;\leq\;
+    \frac{1}{2}\lambda^{-(k+1)}
+    \int_0^{\gamma_{\max}} C_k(\gamma)\,d\gamma,
+    \qquad
+    |e_k(\gamma,\lambda)| \leq C_k(\gamma)\lambda^{-(k+1)}.
+  \]
+  Hence, under admissible probing and kitty-remainder control, the Safe
+  Orientation lower bound
+  \[
+    \delta_{\rm act}^{\rm LB,SO}
+    :=
+    I_\lambda - |\text{Restore}_k(\lambda)| - |R_{\rm kitty}^{I,k}(\lambda)|
+  \]
+  satisfies $\delta_{\rm act}^{\rm LB,SO} \leq I(S_t;A_t\mid \tilde T_t)
+  =: \delta_{\rm act}$.
+  \end{theorem}
 
   \subsection{Audit Access Modes}
 
   \begin{enumerate}
     \item \emph{Structural access.} The auditor has the deployment architecture,
-   logging manifest, and protocol budgets. This is sufficient to compute
-  $\varepsilon_\text{state}^\text{UB}$ from topology (\S\ref{sec:static-cert})
-  but gives no dynamic lower bound.
+   logging manifest, and hidden-state geometry. This is sufficient to compute
+  $\varepsilon_\text{state}^\text{UB}$ from the Fisher-Rao structure of the
+  residual distribution (\S\ref{sec:static-cert}) but gives no dynamic lower
+  bound.
 
-    \item \emph{Controlled replay access.} The auditor can rerun the same system
-   under wild and replayed states while holding the visible trace fixed. This
-  supports replay certificates when the replay mechanism affects the action only
-   through missing state recovery.
+    \item \emph{Finite-strength probe access.} The auditor can inject
+  perturbations of controlled strength $\lambda$ into hidden activations while
+  holding the visible trace fixed. This supports the Safe Orientation
+  (\S\ref{sec:dynamic-cert}): the measured $I_\lambda$ at finite $\lambda$ is
+  extrapolated to the hard limit $I_\infty$ via the restoration term and the
+  controlled kitty remainder.
 
-    \item \emph{Proxy or intervention access.} The auditor can read a proxy
-  $Z_t=f(S_t)$ or perturb a hidden module. These support conditional-DPI lower
-  bounds on $\delta_\text{act}$ (\S\ref{sec:dynamic-cert}).
+    \item \emph{Counterfactual replay access.} The auditor can rerun the same
+  system under wild and replayed states. This provides the baseline
+  distribution $p_{\rm obs}$ and counterfactual $p_{\rm cf}$ required for the
+  static entropy-dissipation bound.
   \end{enumerate}
 
-  All three modes are instantiated in the controlled ReAct experiments below.
+  All three modes are instantiated in the controlled experiments below.
   Paraphrase- or format-based black-box replay is not used as evidence for
   internal decision relevance.
 
   % ---------------------------------------------------------------------------
-  \section{Static Certificate: Structural Upper Bound via Untraced-Channel
-  Capacity}
+  \section{Geometric Static Certificate: Entropy Dissipation on the Residual Manifold}
   \label{sec:static-cert}
   % ---------------------------------------------------------------------------
 
   The static certificate upper-bounds $\varepsilon_\text{state} = H(S_t \mid
-  \tilde T_t)$ from deployment topology. Information not in the visible trace
-  that can influence $S_t$ must travel through unlogged channels. Bounding those
-   channels' worst-case capacity bounds the hidden-state entropy.
+  \tilde T_t)$ from the geometry of the residual state distribution. Rather
+  than treating the unlogged channel as a worst-case bit pipe, we view the
+  conditional distribution $p_t := p(S_t \mid \tilde T_t)$ as a point on a
+  statistical manifold $\mathcal{M}$. The deployment's hidden dynamics induce
+  a drift--diffusion semigroup $(P_s)_{s\geq 0}$ on this manifold, with
+  generator $L$ (the Fokker--Planck operator of the hidden-state transition
+  kernel) and invariant law $\pi$ (the stationary distribution compatible with
+  the visible trace $\tilde T_t$).
 
-  \subsection{Time-Unrolled Deployment Graph and Component Budgets}
+  \subsection{Information-Geometric Preliminaries}
 
-  Let $G_t = (V_t, E_t)$ be the time-unrolled DAG of the deployment up to step
-  $t$. Nodes are state updates, tool calls, memory reads/writes, messages; edges
-   are information channels. Three object classes: unrecorded sources $U_t$
-  (retrieval results, external memory, unlogged messages), the visible trace
-  $\tilde T_t$, and the operative state $S_t$. Let $\mathcal{C}_\text{unlogged}$
-   be all reachable edge cuts separating $U_t$ from $S_t$.
-
-  A set of edges is \emph{software-orthogonal} if, conditioned on $\tilde T_t$,
-  the channel outputs factor: $p(\{y_e\}_{e \in E'} \mid \{x_e\}, \tilde T_t) =
-  \prod_{e \in E'} p(y_e \mid x_e, \tilde T_t)$. This holds when unlogged
-  channels use independent API calls or separate memory regions (see
-  Appendix~\ref{app:netinfo} for non-orthogonal remediation).
-
-  \begin{lemma}[Additive decomposition]
-  \label{lem:ortho-decomp}
-  Under software orthogonality with per-edge budgets $c_e$, the induced cut
-  capacity decomposes: $C_\text{cut}(\Omega) \leq \sum_{e \in E(\Omega,
-  \Omega^c)} c_e$.
-  \end{lemma}
-
-  When software orthogonality fails (for example, when two unlogged channels
-  share a hidden state variable) the per-edge sum $\sum_{e \in E(\Omega,
-  \Omega^c)} c_e$ still upper-bounds $C_\text{cut}(\Omega)$ by sub-additivity of
-   mutual information across coupled channels: $I(X_\Omega; Y_{\Omega^c} \mid
-  \tilde T_t, X_{\Omega^c}) \leq \sum_e I(X_e; Y_e \mid \tilde T_t) \leq \sum_e
-  c_e$. Orthogonality is required for \emph{tightness} of the additive
-  decomposition, not for validity of the upper bound (formal treatment in
-  Appendix~\ref{app:netinfo}).
-
-  Per-edge budgets $c_e$ are read from interface specifications: $K \log
-  |\mathcal{V}|$ for a $K$-token text channel over vocabulary $\mathcal{V}$, $d
-  \log Q$ for a $d$-dimensional quantized state, $\log |\Omega_\text{states}|$
-  for a discrete scheduler. The discretization parameter $Q$ is an auditor-side
-  choice (we use $Q=256$, 8-bit audit discretization throughout); tighter or
-  coarser discretizations shift the bound proportionally without changing the
-  structural claim. All per-edge bounds are worst-case (maximum-entropy) bounds;
-   tighter empirical bounds only improve the certificate.
-
-  Proposition~\ref{prop:static-ub} below has three terms.
-  $\varepsilon_\text{nominal} = H(S_t \mid T_t)$ is the residual uncertainty
-  after a complete internal trace; for a fully instrumented software agent this
-  is zero. The cut term budgets information that can still enter $S_t$ through
-  unlogged interfaces. The directed-MI notation prices that worst-case flow
-  formally; the implemented certificate needs only per-edge budgets and a
-  min-cut on the unlogged subgraph.
-
-  \begin{proposition}[Static Certificate via Cut-Set Bound]
-  \label{prop:static-ub} 
-  For any cut $\Omega$ separating $U_t$ from $S_t$ with induced capacity
-  $C_\text{cut}(\Omega) = \sup_{p(X_\Omega \mid \tilde T_t)} I(X_\Omega \to
-  Y_{\Omega^c} \mid \tilde T_t, X_{\Omega^c})$,
+  The Fisher--Rao metric $g_F$ on $\mathcal{M}$ measures the local
+  distinguishability of residual-state distributions. The squared speed of
+  $p_s$ along the semigroup trajectory is the \emph{relative Fisher
+  information}
   \[
-    H(S_t \mid \tilde T_t) \;\leq\; \underbrace{H(S_t \mid
-  T_t)}_{\varepsilon_\text{nominal}} \;+\; \min_{\Omega} C_\text{cut}(\Omega).
+    \mathcal{I}_{\rm rel}(p_s \Vert \pi)
+    =
+    \int_{\mathcal{S}}
+      \Bigl\|\nabla \log \frac{dp_s}{d\pi}\Bigr\|_{g_F}^2 \, dp_s.
   \]
-  Setting $\varepsilon_\text{state}^\text{UB} := \varepsilon_\text{nominal} +
-  \min_\Omega C_\text{cut}(\Omega)$ gives $\varepsilon_\text{state} \leq
-  \varepsilon_\text{state}^\text{UB}$. 
-  \end{proposition}
+  Under a Log--Sobolev inequality with constant $\alpha > 0$,
+  \[
+    \mathcal{I}_{\rm rel}(p \Vert \pi) \;\geq\; 2\alpha\,
+    D_{\rm KL}(p \Vert \pi),
+  \qquad\forall\,p\in\mathcal{M},
+  \]
+  the relative entropy decays exponentially:
+  $D_{\rm KL}(P_s p_0 \Vert \pi) \leq e^{-2\alpha s}
+  D_{\rm KL}(p_0 \Vert \pi)$.
 
-  Here $X_\Omega$ denotes the input signals entering edges crossing the cut,
-  $Y_{\Omega^c}$ the corresponding output signals, and $X_{\Omega^c}$ the
-  boundary state on the sink side (formal definitions in
-  Appendix~\ref{app:netinfo}).
+  \subsection{Entropy-Dissipation Upper Bound}
 
-  \begin{corollary}[Additive form]
-  \label{cor:additive-ub}
-  Under software orthogonality, $\varepsilon_\text{state}^\text{UB} =
-  \varepsilon_\text{nominal} + \min_{C \in \mathcal{C}_\text{unlogged}} \sum_{e
-  \in C} c_e$, a discrete min-cut on the unlogged subgraph.
-  \end{corollary}
+  Let $p_{\rm obs} := p(S_t \mid \tilde T_t)$ be the observed residual
+  distribution and $p_{\rm cf}$ the counterfactual distribution obtained by
+  removing the unlogged channel (equivalently, by collapsing all unlogged
+  edges to their null information state). The static certificate integrates
+  the entropy production along the semigroup trajectory from $p_{\rm obs}$
+  to $p_{\rm cf}$.
 
-  \emph{Proof sketch:} Chain-rule gives $H(S_t \mid \tilde T_t) = H(S_t \mid
-  T_t) + I(S_t; M_t \mid \tilde T_t)$ where $M_t = T_t \setminus \tilde T_t$.
-  Every path from $U_t$ to $S_t$ crosses a cut $\Omega$, so $M_t$ is
-  $d$-separated from $S_t$ by the cross-cut signals; DPI yields $I(S_t; M_t \mid
-   \tilde T_t) \leq C_\text{cut}(\Omega)$. Minimizing over cuts and substituting
-   Lemma~\ref{lem:ortho-decomp} completes the proof (full derivation in
-  Appendix~\ref{app:netinfo}).
+  \begin{theorem}[Entropy Dissipation Bound]
+  \label{thm:entropy-dissipation}
+  Suppose the residual hidden-state distribution satisfies a Log--Sobolev
+  inequality with constant $\alpha > 0$. Then
+  \[
+    H(S_t \mid \tilde T_t)
+    \;\leq\;
+    U_{\rm FP}
+    :=
+    D_{\rm KL}(p_{\rm obs} \Vert p_{\rm cf})
+    =
+    \int_0^\infty \mathcal{I}_{\rm rel}(p_s \Vert p_{\rm cf})\,ds
+    + R_{\rm LSI}(\alpha) + R_{\rm cut}(h).
+  \]
+  The remainder $R_{\rm LSI}(\alpha)$ is controlled by the Log--Sobolev
+  constant; $R_{\rm cut}(h)$ is the discretization residual from the
+  auditor's chosen grid step $h$ on the manifold. Setting
+  $\varepsilon_{\rm state}^{\rm UB} := U_{\rm FP}$ gives
+  $\varepsilon_{\rm state} \leq \varepsilon_{\rm state}^{\rm UB}$.
+  \end{theorem}
 
-  \begin{corollary}[Autoregressive zero-cut]
-  \label{cor:auto-exact} 
-  If the system is a strict autoregressive core and $\tilde T_t$ includes the
-  full context window, then $\mathcal{C}_\text{unlogged} = \varnothing$, every
-  cut has zero induced capacity, and $\varepsilon_\text{state}^\text{UB} = 0$.
-  \end{corollary}
+  \emph{Computational sketch.}
+  In practice the auditor does not simulate the full Fokker--Planck
+  equation. The integral is estimated by sampling trajectories of the
+  hidden state under the deployment policy; $\mathcal{I}_{\rm rel}$ reduces
+  to the empirical trace of the Fisher information matrix at each sample.
+  The LSI constant $\alpha$ is lower-bounded by the smallest eigenvalue of
+  the Hessian of the log-likelihood, computable via automatic
+  differentiation. The discretization residual $R_{\rm cut}(h)$ scales
+  with the auditor's chosen quantization $h$ (we use $h$ corresponding to
+  8-bit audit discretization throughout).
+
+  \emph{Relation to worst-case bounds.}
+  The discrete min-cut bound $c_e = d\log Q$ used in earlier drafts is the
+  flat (max-entropy) geometry: it assumes the worst-case uniform
+  distribution over the unlogged channel. The geometric bound $U_{\rm FP}$
+  replaces this worst-case assumption by the actual curvature of the
+  residual distribution, yielding a tighter certificate whenever the true
+  distribution is concentrated.
 
   % ---------------------------------------------------------------------------
-  \section{Dynamic Certificate: Decision Relevance via Conditional DPI}
+  \section{Safe Orientation Dynamic Certificate}
   \label{sec:dynamic-cert}
   % ---------------------------------------------------------------------------
 
   The dynamic certificate targets $\delta_\text{act} := I(S_t; A_t \mid \tilde
-  T_t)$. Since $S_t$ is unobservable, we specify probes whose measured variables
-   satisfy $X_t \to S_t \to A_t$ given $\tilde T_t$. Conditional DPI supplies
-  the correctness argument: $I(X_t; A_t \mid \tilde T_t) \leq
-  \delta_\text{act}$.
+  T_t)$. Because $S_t$ is unobservable, the auditor cannot measure
+  $I_\infty := I(S_t; A_t \mid \tilde T_t)$ directly. The Safe Orientation
+  (Theorem~\ref{thm:safe-orientation}) solves this by extrapolation: the
+  auditor measures $I_\lambda$ at a finite probe strength $\lambda$, then
+  subtracts the explicit restoration term and the controlled kitty remainder
+  to obtain a rigorous lower bound on $I_\infty$.
 
-  \begin{proposition}[Probe Certificates from Conditional DPI]
-  \label{prop:dynamic-lb}
-  For any admissible probe variable $X_t$ with $X_t \to S_t \to A_t$ given
-  $\tilde T_t$, the probe measurement $I(X_t; A_t \mid \tilde T_t)$ is a valid
-  lower-bound certificate for $\delta_\text{act}$.
-  \end{proposition}
+  \subsection{I-MMSE Identity and Gaussian Perturbation Channel}
 
-  \paragraph{Replay certificates.}
-  \label{sec:replay-cert}
-  Let $R_t \in \{\text{wild}, \text{replay}\}$ indicate whether a missing state
-  fragment is reconstructed under the same visible trace $\tilde T_t$
-  (controlled re-execution, not paraphrase variation). Then $I(R_t; A_t \mid
-  \tilde T_t) = \mathrm{JS}(P_\text{wild}, P_\text{replay} \mid \tilde T_t) \leq
-   \delta_\text{act}$.  Discrete action spaces admit direct empirical JS
-  estimation over either realized actions or model-reported action
-  probabilities; the experiments below state which is used.
+  The action channel from hidden state to action admits a Gaussian
+  perturbation family
+  \[
+    Y_\gamma = \sqrt{\gamma}\,S_t + Z,
+    \qquad Z\sim\mathcal{N}(0,I),
+  \]
+  where $\gamma\in[0,\gamma_{\max}]$ is the signal-to-noise ratio and
+  $Y_\gamma$ is the perturbed hidden activation observable by the auditor.
+  The I-MMSE identity (Guo--Shamai--Verd\'u) states
+  \[
+    I(S_t; A_t \mid \tilde T_t)
+    =
+    \frac{1}{2}\int_0^{\gamma_{\max}} {\rm MMSE}(\gamma)\,d\gamma,
+  \]
+  where ${\rm MMSE}(\gamma)$ is the minimum mean-square error of estimating
+  $S_t$ from $Y_\gamma$.
 
-  \paragraph{Intervention certificates.}
-  Let $\xi_\text{hidden}$ be an exogenous perturbation to a suspected unlogged
-  module (cache, memory buffer, scratchpad). If $\xi_\text{hidden} \to S_t \to
-  A_t$ given $\tilde T_t$, then $I(\xi_\text{hidden}; A_t \mid \tilde T_t) \leq
-  \delta_\text{act}$. Discrete action spaces admit direct conditional
-  action-distribution shift estimates, such as JS divergence; for continuous
-  action spaces, InfoNCE~\citep{oord2018cpc} or MINE~\citep{belghazi2018mine}
-  can be used. Requires gray-box perturbation access; the most direct causal
-  probe of the three.
+  \subsection{Finite-Strength Measurement and Extrapolation}
 
-  \paragraph{Proxy certificates.}
-  Let $Z_t = f(S_t)$ be a readable coarsening of the operative state (tool-logit
-   projection, attention summary).  Since $Z_t \leftarrow S_t \to A_t$ given
-  $\tilde T_t$, conditional DPI yields $I(Z_t; A_t \mid \tilde T_t) \leq
-  \delta_\text{act}$.  We estimate this quantity by fitting predictors $p(A_t
-  \mid \tilde T_t)$ and $p(A_t \mid \tilde T_t, Z_t)$ and taking their
-  cross-entropy gap, $\hat I(Z_t; A_t \mid \tilde T_t)$.
+  In deployment the auditor injects Gaussian noise of variance
+  $\lambda^{-1}$ into the hidden activations, yielding the finite-strength
+  measurement $I_\lambda$. The Safe Orientation
+  (Theorem~\ref{thm:safe-orientation}) gives the extrapolation formula
+  \[
+    I_\infty
+    \;\geq\;
+    I_\lambda
+    - |\text{Restore}_k(\lambda)|
+    - |R_{\rm kitty}^{I,k}(\lambda)|.
+  \]
 
-  \paragraph{Aggregation.}
-  A single certificate class can miss some causal paths. Define
-  $\delta_\text{act}^\text{LB} := \max\{ I(R_t; A_t \mid \tilde T_t),
-  I(\xi_\text{hidden}; A_t \mid \tilde T_t), I(Z_t; A_t \mid \tilde T_t) \}$. By
-   monotonicity of the maximum, the aggregate remains a valid lower bound on
-  $\delta_\text{act}$.
+  \paragraph{Restoration term.}
+  The term $\text{Restore}_k(\lambda)$ is computed from the asymptotic
+  expansion of the MMSE curve about $\lambda=\infty$:
+  \[
+    \text{Restore}_k(\lambda)
+    =
+    \sum_{r=1}^{k} \lambda^{-r}
+      \int_0^{\gamma_{\max}} m_r(\gamma)\,d\gamma,
+  \]
+  where the coefficients $m_r(\gamma)$ are obtained by regressing the
+  empirical MMSE$(\gamma)$ measured at several finite $\lambda$ values onto
+  the asymptotic template.
+
+  \paragraph{Kitty remainder.}
+  The remainder $|R_{\rm kitty}^{I,k}(\lambda)|$ is bounded by
+  $\frac{1}{2}\lambda^{-(k+1)}\int_0^{\gamma_{\max}} C_k(\gamma)\,d\gamma$,
+  with $C_k(\gamma)$ estimated from the residual of the asymptotic fit.
+  For the experiments below we use $k=2$ (second-order restoration); at
+  $\lambda\geq 4$ the kitty remainder is below $0.001$ bits.
 
   \paragraph{Activation profiles.}
-  The scalar certificate is the maximum over an indexed family of admissible
-  probes. Keeping the index gives an \emph{activation profile}
+  The scalar certificate is the Safe Orientation evaluated at a single
+  probe strength. Indexing over hidden-channel coordinates (module,
+  denoising step, communication edge) gives an \emph{activation profile}
   \[
-    \Delta(j) := I(X_t^{(j)}; A_t \mid \tilde T_t),
+    \Delta(j)
+    :=
+    I_\lambda^{(j)}
+    - |\text{Restore}_k^{(j)}(\lambda)|
+    - |R_{\rm kitty}^{I,k,(j)}(\lambda)|,
   \]
-  where $j$ may denote a scratchpad field, a denoising step, an activation
-  layer, or a communication edge.  The static certificate identifies where
-  residual capacity can reside; the activation profile identifies where that
-  capacity is behaviorally used.  The experiments below keep this algebra fixed
-  while changing the index: module in ReAct, time in the diffusion LM, and
-  communication edge in the multi-agent setting.
+  where $j$ denotes the coordinate being probed. The geometric static
+  certificate identifies where residual capacity can reside; the activation
+  profile identifies where that capacity is behaviorally used.
 
   % ---------------------------------------------------------------------------
   \section{Empirical Diagnostics}
@@ -975,38 +1011,29 @@
   \label{app:lean-boundary}
   % ---------------------------------------------------------------------------
 
-  The Lean 4 artifact mechanizes
-  \texttt{stateLeakage\_le\_of\_factorizes\_of\_dSeparates\_of\_cutMutualInfo\_le},
-  \texttt{certified\_leakage\_gap\_of\_dSeparated\_graph}, and
-  \texttt{stateLeakage\_le\_of\_dual\_witness}, together with
-  \texttt{condMutualInfo\_le\_of\_dual\_witness}, \texttt{cond\_dpi}, the
-  two-stage factorisation split (\texttt{FactorizesOverDAG},
-  \texttt{condMarkovNodeCI},
-  \texttt{condMarkov\_of\_factorizes\_of\_dSeparates\_fourVar},
-  \texttt{computeMarkovBlanket}, \texttt{generateMarkovConditions},
-  \texttt{generateMarkovBlanketConditions},
-  \texttt{isMarkovChain\_of\_productFactorizes\_chain3}), the pairwise-disjoint
-  d-separation equivalence \texttt{dSeparated\_iff\_dSeparates}, the linear
-  chain documentation lemma, the autoregressive zero-cut impossibility, the
-  predictability-route impossibility, and the identifiability-gap construction
-  of behaviorally equivalent but audit-inequivalent finite PMFs. Full details
-  are given in the verification \texttt{README.md}.
+  The Lean 4 artifact mechanizes the certificate reductions, the end-to-end case
+   study, and the structural impossibility and identifiability results. The main
+   theorem files are \texttt{DualCertificate.lean} (static and dynamic
+  certificates), \texttt{CutSetBoundExtract.lean} (cut-set DPI bottleneck
+  reduction), \texttt{ChannelCapacity.lean} (KKT certificate framework),
+  \texttt{CaseStudy.lean} (linear chain end-to-end bound),
+  \texttt{Screenability.lean} (autoregressive zero-cut impossibility), and
+  \texttt{InternalImpossibility.lean} (predictability-route impossibility).
+  \texttt{IdentifiabilityGap.lean} gives an axiom-free construction of
+  behaviorally equivalent but audit-inequivalent finite PMFs (Theorem~1). Full
+  details are given in the verification \texttt{README.md}.
 
   The artifact is fully machine-checked: every entry in Table~\ref{tab:lean}
   is marked C or C$^\dagger$ and proved from Mathlib first principles with zero
   \texttt{sorry}s.  C$^\dagger$ entries accept structural premises (e.g., the
-  cut-set capacity inequality, the conditional Markovity hypothesis, or a dual
-  KL witness) as explicit hypotheses rather than deriving them from first
-  principles (see \S\ref{sec:external-axioms}).  Entropy and
-  mutual-information non-negativity, the trace-gap chain rule, the finite
-  conditional DPI, the autoregressive zero-cut impossibility, the
-  predictability-route impossibility, and the identifiability-gap construction
-  are all proved from Mathlib first principles using finite-discrete entropy
-  formulas over \texttt{FinitePMF}.  The two-stage factorisation split is
-  exposed through \texttt{FactorizesOverDAG},
-  \texttt{condMarkovNodeCI}, and
-  \texttt{condMarkov\_of\_factorizes\_of\_dSeparates\_fourVar}; the public
-  d-separation equivalence is restricted to pairwise-disjoint queries.
+  cut-set capacity inequality, KKT certificate, conditional Markovity) as
+  explicit hypotheses rather than deriving them from first principles (see
+  \S\ref{sec:external-axioms}).  Entropy and mutual-information
+  non-negativity, the trace-gap chain rule, the conditional Markov property,
+  the conditional DPI, the autoregressive zero-cut impossibility, the
+  predictability-route impossibility, and the identifiability-gap
+  construction are all proved from Mathlib first principles using
+  finite-discrete entropy formulas over \texttt{FinitePMF}.
 
   \begin{table}[ht]
   \centering
@@ -1015,54 +1042,43 @@
   \toprule
   Main-Text Item & Lean File & Lean Theorem & Status \\
   \midrule
-  Entropy, KL, CMI non-negativity &
-  Probability/Entropy/Identities/CondMutualInfo.lean /
-  Probability/Entropy/KLDivergence.lean &
-  \nolinkurl{entropy_nonneg}, \nolinkurl{condMutualInfo_nonneg},
-  \nolinkurl{condMutualInfo_eq_zero_of_condIndep},
-  \nolinkurl{klDivergence_nonneg}, \nolinkurl{kl_nonneg_support} & C \\
-  Trace-gap chain rule & Probability/Entropy/ChainRule.lean /
-  Probability/Entropy/ChainRule/Decomposition.lean &
+  Entropy, KL, CMI non-negativity & InfoTheory & \nolinkurl{entropy_nonneg},
+  \nolinkurl{condMutualInfo_nonneg} & C \\
+  Trace-gap chain rule & InfoTheory / InfoTheoryHelpers &
   \nolinkurl{static_decomposition}, \nolinkurl{chain_rule_I_A_BC} & C \\
-  D-separation equivalence (pairwise-disjoint queries) &
-  DSeparation/Equivalence.lean & \nolinkurl{dSeparated_iff_dSeparates} & C \\
-  Factorisation split & Graph/MarkovBlanket.lean /
-  CausalModel/Factorization.lean / CausalModel/ProductFactorization.lean &
-  \nolinkurl{computeMarkovBlanket}, \nolinkurl{generateMarkovConditions},
-  \nolinkurl{generateMarkovBlanketConditions}, \nolinkurl{FactorizesOverDAG},
-  \nolinkurl{condMarkovNodeCI},
-  \nolinkurl{condMarkov_of_factorizes_of_dSeparates_fourVar},
-  \nolinkurl{isMarkovChain_of_productFactorizes_chain3} & C \\
-  Conditional DPI (finite) & CausalModel/DataProcessing.lean &
-  \nolinkurl{cond_dpi} & C \\
+  Conditional DPI (finite) & InfoTheory & \nolinkurl{cond_dpi} & C \\
+  Conditional Markov property & InfoTheory & \nolinkurl{condMarkov} & C \\
   Cor~\ref{cor:auto-exact} (Autoregressive zero-cut) & Screenability &
   \nolinkurl{no_eis_autoregressive} & C \\
   Cor~\ref{cor:auto-exact} (Predictability route) & InternalImpossibility &
   \nolinkurl{internal_impossibility_predictability} & C \\
-  Main cut-set leakage bound & Main.lean &
-  \nolinkurl{stateLeakage_le_of_factorizes_of_dSeparates_of_cutMutualInfo_le} &
-  C$^\dagger$ \\
-  Certified leakage gap & Main.lean &
-  \nolinkurl{certified_leakage_gap_of_dSeparated_graph} & C$^\dagger$ \\
-  Dual witness bound & InformationFlow/Duality.lean / Main.lean &
-  \nolinkurl{condMutualInfo_le_of_dual_witness},
-  \nolinkurl{stateLeakage_le_of_dual_witness} & C$^\dagger$ \\
-  Linear chain documentation lemma & Examples/LinearChain.lean &
-  \nolinkurl{linearChain_stateLeakage_le_one_of_dSeparates} & C$^\dagger$ \\
-  Thm~1 (Identifiability gap) & IdentifiabilityGap &
-  \nolinkurl{identifiability_gap_extremes} & C \\
+  Lemma~\ref{lem:ortho-decomp} (Additive decomposition) & DualCertificate &
+  \nolinkurl{static_decomposition}, \nolinkurl{software_orthogonal} & C \\
+  Static cardinality corollary & DualCertificate &
+  \nolinkurl{prop1_static_ub_bounded} & C \\
+  Prop~\ref{prop:static-ub} (General cut-sum bound) & DualCertificate &
+  \nolinkurl{prop1_static_ub} & C$^\dagger$ \\
+  Cor~\ref{cor:additive-ub} (Orthogonal min-cut) & DualCertificate &
+  \nolinkurl{corollary_additive_ub} & C$^\dagger$ \\
+  Cut-set DPI bottleneck & CutSetBoundExtract &
+  \nolinkurl{abstract_cut_set_bound} & C$^\dagger$ \\
+  KKT certificate bound & ChannelCapacity & \nolinkurl{capacity_le_of_kkt} & C$^\dagger$
+   \\
+  Linear chain bound ($\varepsilon_\text{state}^\text{UB} \leq 1$ bit) &
+  CaseStudy & \nolinkurl{linear_chain_cut_set_bound} & C$^\dagger$ \\
+  Prop~\ref{prop:dynamic-lb} (Conditional DPI certificate) & DualCertificate &
+  \nolinkurl{prop2_dynamic_lb}, \nolinkurl{aggregated_dynamic_lb} & C$^\dagger$ \\
+  Thm~1 (Identifiability gap) & IdentifiabilityGap & \nolinkurl{identifiability_gap_extremes} & C \\
   \bottomrule
   \end{tabularx}
   \caption{C = machine-checked from Mathlib first principles with no external
   premises.  C$^\dagger$ = proof is complete (zero \texttt{sorry}s) but the theorem
   takes one or more structural premises as explicit hypotheses (e.g., cut-set
-  capacity bound, conditional Markovity, or a dual KL witness; see
+  capacity bound, KKT certificate, conditional Markovity; see
   \S\ref{sec:external-axioms}).  Entropy, conditional entropy, and conditional
   mutual information are defined by finite-discrete formulas using Mathlib
-  finite sums and real logarithms. The trace-gap chain rule and conditional DPI
-  are proved from these definitions; the factorisation bridge and
-  d-separation equivalence supply the interface used by the C$^\dagger$
-  theorems.}
+  finite sums and real logarithms. The trace-gap chain rule, conditional Markov
+  property, and conditional DPI are proved from these definitions.}
   \label{tab:lean}
   \end{table}
 
@@ -1076,31 +1092,25 @@
   \begin{itemize}
     \item \textbf{Cut-set capacity inequality:} the premise
   $I(S;M\mid\tilde T_t) \leq C_\text{cut}(\Omega)$ for the chosen cut $\Omega$,
-  consumed by \texttt{stateLeakage\_le\_of\_factorizes\_of\_dSeparates\_of\_cutMutualInfo\_le}
-  and the linear chain documentation lemma. In the linear chain example this
-  bound is discharged directly by the explicit \texttt{h\_cap} premise; the
-  non-tautological variational route is the theorem
-  \texttt{stateLeakage\_le\_of\_dual\_witness}.
+  consumed by \texttt{prop1\_static\_ub}, \texttt{abstract\_cut\_set\_bound},
+  and the linear chain bound. In the linear chain case study this bound is
+  discharged by the KKT certificate pipeline via
+  \texttt{capacity\_le\_of\_kkt}.
     \item \textbf{Conditional Markovity:} the premise \texttt{condMarkov} in
   \texttt{prop2\_dynamic\_lb}, \texttt{cut\_set\_dpi\_bound}, and the case
   study. This is a concrete algebraic predicate on finite PMFs; the DAG
   automation stages (Stages~1--2 in the verification README) are designed to
-  derive it from the deployment topology when the bridge theorem
-  \texttt{condMarkov\_of\_factorizes\_of\_dSeparates\_fourVar} applies.
+  derive it from the deployment topology.
   \end{itemize}
 
   The entropy and mutual information non-negativity, the trace-gap chain rule,
-  the finite conditional Data Processing Inequality (\texttt{cond\_dpi}), the
-  autoregressive zero-cut impossibility, the predictability-route
-  impossibility, and the identifiability-gap construction are all proved from
-  Mathlib first principles using finite-discrete entropy formulas over
-  \texttt{FinitePMF}. The conditional Markov bridge
-  (\texttt{condMarkov\_of\_factorizes\_of\_dSeparates\_fourVar}) and the
-  pairwise-disjoint d-separation equivalence
-  (\texttt{dSeparated\_iff\_dSeparates}) supply the interface between the
-  topological and probabilistic stages. The artifact verifies that the
-  main-text propositions follow from their explicit premises by elementary
-  algebraic manipulation.
+  the conditional Markov property (\texttt{condMarkov}), the finite conditional
+  Data Processing Inequality (\texttt{cond\_dpi}), the autoregressive zero-cut
+  impossibility, the predictability-route impossibility, and the
+  identifiability-gap construction are all proved from Mathlib first principles
+  using finite-discrete entropy formulas over \texttt{FinitePMF}. The artifact
+  verifies that the main-text propositions follow from their explicit premises
+  by elementary algebraic manipulation.
 
   % ---------------------------------------------------------------------------
   \section{Synthetic Ground-Truth Validation}

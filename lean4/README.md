@@ -1,5 +1,15 @@
 # Lean Verification Artifact
 
+<!--
+LEAN ARTIFACT README.
+
+For the POPL27 probability-sheaf theory, see
+`../popl27_magwalk_sheaf_bridge.md`. This README documents the current Lean
+artifact. In this artifact, `MAGWalk` is graph-level; any enriched
+probability/sheaf version should be introduced as a separate structure such as
+`SheafMAGWalk` and projected down to the current checked `MAGWalk`.
+-->
+
 This directory is a standalone Lean 4 package for the finite formal components
 used in the paper.  The development centers on finite discrete probability,
 information-theoretic certificate reductions, and the cut-set bound verification
@@ -187,6 +197,12 @@ windows become `MAGWalk.single`, while active-collider windows
 endpoint-disjointness hypotheses, then composes the result with
 `MAGWalk.to_dSeparationGraph_reachable`.
 
+This `MAGWalk` is currently a graph-level certificate object: it records the
+large-step walk in the moralized ancestral graph.  The POPL27 sheaf story should
+treat any probability/sheaf-carrying version as a separate enriched structure
+(for example `SheafMAGWalk`) that projects down to this checked graph-level
+`MAGWalk`.
+
 ## External Premises
 
 The artifact leaves the following as explicit assumptions (consistent with
@@ -236,4 +252,3 @@ goals are mathematical or bridge-completion tasks rather than unchecked axioms:
 | Certified decision procedure for d-separation (BFS/DFS on `dSeparationGraph`) | `DAG/DSeparation.lean` | Open |
 | Blahut-Arimoto convergence and KKT concave sufficiency metatheorem | `ChannelCapacity.lean` | Open; the `KKT_Certificate` structure is in place for concrete instances |
 | Trail pred. ↔ moralized-ancestral pred. equivalence | `DAG/DSeparation.lean` | **Refuted as stated** — `not_forall_dsep_iff` gives a counterexample; the endpoint-disjoint soundness direction (`dSeparated_of_dSeparated_disjoint` with `DisjointSets`) is mechanized, and the moral-path-to-active-trail direction remains the final bridge |
-
