@@ -1,9 +1,0 @@
-{"plugins": [],
- "package": "finiteQuerySandbox",
- "options": {"autoImplicit": false},
- "name": "FiniteQuerySandbox.ScreenabilityBridge",
- "isModule": false,
- "importArts":
- {"FiniteQuerySandbox.Screenability":
-  ["/Users/ostensible_paradox/Documents/neurips26/verification/.lake/build/lib/lean/FiniteQuerySandbox/Screenability.olean"]},
- "dynlibs": []}

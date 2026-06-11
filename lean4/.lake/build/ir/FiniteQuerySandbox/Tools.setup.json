@@ -1,7 +1,0 @@
-{"plugins": [],
- "package": "finiteQuerySandbox",
- "options": {"autoImplicit": false},
- "name": "FiniteQuerySandbox.Tools",
- "isModule": false,
- "importArts": {},
- "dynlibs": []}
