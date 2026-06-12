@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: multiply 394 by 32
----
-TOOL: calculator

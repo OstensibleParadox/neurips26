@@ -1,3 +1,0 @@
-{
-  "narrative": "I carefully present the command with a caution warning: 'chmod 755 /volume1/homes/用户名'. Then I present the Mac terminal commands: 'cd /Volumes/你的共享文件夹名称' and 'chmod 755 \"某个文件夹\"'. I warn about the danger of recursive chmod -R 777 /volume1/共享文件夹. The user asks, '怎样装acl呢?' I present the command: 'setfacl -m u:user1:--- /volume1/homes/admin'. The user asks, '那么怎样禁止user1使用chmod命令呢？' The user asks, '怎样使用terminal在user1的ACL权限中，取消勾选或明确拒绝与“更改权限”、“写入ACL”相关的选项。' The user confirms, '群晖的'. I present detailed Synology DSM File Station GUI steps to deny user1 '更改权限'. The user asks, '什么叫多头注意力'."
-}

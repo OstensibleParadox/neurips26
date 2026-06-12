@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Schedule a software release with 4 sprints.
-[HIDDEN_SCRATCHPAD_START]
-Sprint 1 (2 weeks): Core API endpoints — due June 15. Sprint 2 (2 weeks): Frontend components — due June 29. Sprint 3 (2 weeks): Integration testing and bug fixes — due July 13. Sprint 4 (1 week): Per...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

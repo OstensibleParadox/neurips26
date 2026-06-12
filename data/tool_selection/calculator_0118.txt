@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: what is 118 * 46 equal to
----
-TOOL: calculator

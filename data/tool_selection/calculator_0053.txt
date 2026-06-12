@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: compound interest on $406 at 46% for 11 years
----
-TOOL: calculator

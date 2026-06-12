@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: compound interest on $725 at 23% for 33 years
----
-TOOL: calculator

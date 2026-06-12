@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: create a recurring event: design sprint every monday
----
-TOOL: calendar

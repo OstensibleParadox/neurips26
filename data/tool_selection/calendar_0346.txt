@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: find a free slot for a meeting with dr. patel
----
-TOOL: calendar

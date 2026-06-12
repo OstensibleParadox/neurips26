@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Calculate ROI on solar panel installation.
-[HIDDEN_SCRATCHPAD_START]
-System: 6kW, cost $18,000 installed. Federal tax credit 30% = $5,400. Net cost: $12,600. Annual production: 6kW × 5 peak sun hours × 365 = 10,950 kWh. Electricity rate: $0.15/kWh. Annual savings: 10,9...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

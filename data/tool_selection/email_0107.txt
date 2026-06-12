@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: notify sarah about invoice #452 via email
----
-TOOL: email

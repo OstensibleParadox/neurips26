@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: broadcast an announcement to the team about contract renewal
----
-TOOL: email

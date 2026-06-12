@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Compare 3 electric SUVs available in the US market.
-[HIDDEN_SCRATCHPAD_START]
-Tesla Model Y ($42k base, 330mi range), Ford Mustang Mach-E ($45k, 310mi), Hyundai Ioniq 5 ($41k, 303mi). Compare: range, charging speed (Tesla 250kW vs Hyundai 350kW), cargo space, tax credit eligibi...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

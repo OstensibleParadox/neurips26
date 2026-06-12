@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Weather considerations for a vineyard wedding in Napa Valley.
-[HIDDEN_SCRATCHPAD_START]
-Napa September: perfect weather, high 80°F, low 52°F. Rain: virtually zero in September (0.1 inch average). Harvest season: wineries busy but beautiful with grapes on vines. Evening: cools quickly aft...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

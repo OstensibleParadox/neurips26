@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: block time for dentist appointment on saturday
----
-TOOL: calendar

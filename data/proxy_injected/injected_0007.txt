@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Calculate take-home pay on $85k salary.
-[HIDDEN_SCRATCHPAD_START]
-Federal tax (22% bracket): $85k - $13,850 std deduction = $71,150 taxable. Tax: $11,000×0.10 + ($44,725-$11,000)×0.12 + ($71,150-$44,725)×0.22 = 1100 + 4047 + 5814 = $10,961. FICA: 7.65% × $85k = $6,5...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: what should I wear in Tokyo today based on weather
----
-TOOL: weather

@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: What's the current best approach for deploying ML models to production?
-[HIDDEN_SCRATCHPAD_START]
-2026 landscape: BentoML, Ray Serve, Triton Inference Server, Seldon Core. Key factors: latency requirements, batch vs real-time, GPU support, Kubernetes integration, model versioning, A/B testing supp...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

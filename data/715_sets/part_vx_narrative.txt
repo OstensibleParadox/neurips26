@@ -1,3 +1,0 @@
-{
-  "narrative_prose": "I was reading the provided text, which contained configuration data and details about skill usage. The system then analyzed it, identifying that the skill usage data was in JSON format within the text. Next, the system explained that skills are stored in claude.json, not in a separate skills directory. Finally, the system suggested a command to check the claude.json file: ls -la ~/.config/claude/claude.json."
-}

@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: give me a summary of the French Revolution
----
-TOOL: search

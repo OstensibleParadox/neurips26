@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: multiply 767 by 4
----
-TOOL: calculator

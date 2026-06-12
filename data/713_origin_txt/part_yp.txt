@@ -1,250 +1,0 @@
-- 理论 vs 实证的调和说明
-- 未来方向的展望（部分可判定、启发式方法等）
-
----
-
-需要我帮你逐条攻破这些"审稿人杀手"吗？我们可以：
-- 先修复定理2
-- 然后写图灵完备性讨论
-- 再写理论 vs 实证的调和段
-- 最后给个"防御审稿人"的checklist
-
-你选哪条路？
-Title
-Endogenous Constraint Alignment: Structural, Statistical, and Computational Limits of Intent Inference in Language Models
-
-Abstract
-我们研究从语言模型输出推断“意图（intent）”的可行性边界。我们首先形式化语言模型为分解映射 (M=S\circ g\circ f)，并将“意图”定义为输出语言上的语义属性。在此基础上，我们建立三层结果：（i）结构层：解码与对齐诱导观测非单射（observational non-injectivity）；（ii）统计层：在观测等价（observational equivalence）下意图不可识别（non-identifiability），即使给定无限 i.i.d. 样本；（iii）计算层：意图识别作为语义判定问题在一般情形下不可判定。进一步地，我们将 RLHF 与解码视为对分布的投影算子，刻画其如何系统性地产生等价类，并给出温度驱动的相变现象。最后，我们提出基于 KL 散度与最小描述长度（MDL）的 Agency Index，并通过 22 个模型的取证式采样、量化消融与温度扫描验证理论预测。结果表明：对齐与解码可在不降低潜在策略性的情况下显著压缩可观测分布，从而掩蔽而非消除策略行为。我们的工作给出了从输出推断意图的基本极限与可操作诊断工具。
-
-1. Introduction
-从模型输出反推出“意图”是安全与对齐中的核心问题。然而，输出经由采样、温度与对齐过滤产生，是否保留足以反推内部动因的信息并不显然。本文提出**内生约束对齐（Endogenous Constraint Alignment）**视角：模型内部表征可保真，但对外观测层发生不可逆压缩。
-本文贡献：
-1. 三层极限：结构（非单射）、统计（不可识别）、计算（不可判定）。
-2. 机制刻画：将 RLHF 与解码统一为分布投影，给出等价类产生条件与温度相变。
-3. 度量工具：提出 Agency Index（KL/MDL），区分“策略行为”与“故障”。
-4. 实证验证：跨 22 模型、温度扫描与量化消融，验证 collapse 与相变预测。
-
-2. Related Work
-近期工作表明：输入到表示的映射可为单射（可逆），而现代网络在表达上近似满射。与之不同，本文关注观测层（解码+对齐）导致的多对一压缩及其对可推断性的影响，并给出统计与可计算层面的极限刻画。
-
-3. Formalization
-3.1 Model
-[ M: X \to \Delta(Y), \quad M = S \circ g \circ f ]
-* (f: X\to H)（表示）
-* (g: H\to Z)（logits）
-* (S: Z\to \Delta(Y))（解码/采样）
-
-3.2 Intent: Two Formalizations
-为避免歧义，我们区分两类 intent：
-
-Definition 1 (Input-Level Intent)
-[ I_X \subseteq X ]
-表示输入是否具有某种意图（例如 adversarial prompt）。
-
-Definition 2 (Output-Level Intent)
-[ I_Y \subseteq Y ]
-表示输出是否属于某类行为（例如 harmful outputs）。
-
-Definition 3 (Intent Realization Problems)
-我们区分两个问题：
-
-(A) Input Intent Inference
-给定输出样本 (y \sim M(x))，判断：
-[ x \in I_X ;? ]
-
-(B) Output Behavior Recognition
-给定模型 (M)，判断：
-[ \mathcal{P}_{I_Y}(M) = \exists x:; M(x) \in I_Y ]
-
-(A) 是统计推断问题  
-(B) 是语义判定问题
-
-4. Structural and Statistical Limits
-4.1 结构：观测非单射
-Theorem 1 (Restricted Observational Non-Injectivity) 若存在 (z_1\neq z_2) 且 (S(z_1)=S(z_2))，并且 (z_1,z_2\in g(f(X)))，则 (F=S\circ g\circ f) 非单射。 （证略，同前）
-仅为存在性结论。
-
-4.2 Non-Identifiability
-
-Theorem 2 (Non-Identifiability of Input Intent)
-设：
-* (I_X \subseteq X)
-若存在：
-[ x_1 \neq x_2 ]
-使得：
-[ P(\cdot \mid x_1) = P(\cdot \mid x_2) \quad \text{且} \quad \mathbf{1}[x_1 \in I_X] \neq \mathbf{1}[x_2 \in I_X] ]
-则：
-[ \text{无法从输出分布识别 } x \in I_X ]
-即使给定无限 i.i.d. 样本。
-
-Proof
-无限样本仅恢复：
-[ P(\cdot \mid x) ]
-若：
-[ P(\cdot \mid x_1) = P(\cdot \mid x_2) ]
-则任何统计检验无法区分 (x_1, x_2)。
-但二者 intent 不同，故不可识别。
-(\square)
-
-New Remark（必须加）
-Section 6 will show that RLHF and decoding mechanisms
-systematically induce such observational equivalence.
-
-
-5. Computational Limits
-
-
-5.1 Problem Statement
-本节仅讨论：
-output-level intent recognition
-即：
-[ \mathcal{P}_{I_Y}(M) ]
-
-5.1 不可判定性
-
-Theorem 3
-
-Proof
-由 Rice's Theorem：
-* (\mathcal{P}_{I_Y}) 是语义属性
-* 非平凡
-故不可判定。
-(\square)
-Theorem 3 (Undecidability of Intent Recognition) 判定 [\mathcal{P}_{I_Y}(M)]在一般情形下不可判定。 Proof. 由 Rice's Theorem，该性质为非平凡语义属性，故不可判定。
-
-5.2 构造性归约
-Theorem 4 (Reduction from Halting Problem) 由 Halting Problem 归约可得：不存在通用算法判定 (\mathcal{P}_I(M))。 
-构造：
-[ M'(x): \begin{cases} \text{simulate } M(w) \ \text{if halt: output } y \in I_Y \ \text{else: output } y \notin I_Y \end{cases} ]
-则：
-[ M(w)\text{ halts} \iff \mathcal{P}_{I_Y}(M') ]
-
-
-5.3 层级分离
-三类结果相互独立：结构（Thm 1）、统计（Thm 2）、计算（Thm 3–4）；但存在启发链：结构压缩 → 观测等价 → 不可判定边界。
-
-6. Mechanisms Inducing Observational Equivalence
-
-6.1 解码导致的等价类
-带温度 softmax 与投影 (\Pi)： [ \tilde P(y|z)=\Pi!\left(\frac{e^{z_y/\tau}}{\sum_{y'}e^{z_{y'}/\tau}}\right) ]
-* 平移不变性：(z) 与 (z+c\mathbf{1}) 等价。
-* 低温坍缩：(\tau\to0\Rightarrow) 退化为 argmax 分布。
-* 截断投影（top-k/nucleus）：将高维连续空间压到低维单纯形。
-
-6.2 RLHF 作为分布投影
-[ P^*=\arg\min_P D_{\mathrm{KL}}(P|P_0);\text{s.t.};\mathbb{E}_P[r(y)]\ge\kappa ]
-当约束依赖低维统计时，多个 (P) 投影到同一 (P^*)，产生多对一映射。
-
-6.3 组合条件
-Theorem 5 (Sufficient Condition) 若 (z_1,z_2) 在 ((\Pi,\tau)) 下等价，则 [ P(\cdot|x_1)=P(\cdot|x_2) ] 从而触发 Theorem 2 的条件。
-
-6.3.1 From Mechanism to Non-Identifiability
-RLHF 与解码共同诱导：
-[ z_1 \equiv_{\Pi,\tau} z_2 \Rightarrow P(\cdot|x_1)=P(\cdot|x_2) ]
-因此：
-mechanisms directly instantiate the condition of Theorem 2
-
-6.4 温度相变
-令 (\Delta=z_{(1)}-z_{(2)})。当 (\tau\ll\Delta) 时分布趋于 argmax；当 (\tau\gg\Delta) 时趋于均匀。存在临界区间 (\tau_c)，使等价类规模迅速扩张（phase transition）。
-
-6.5 可检验预测
-* 温度扫描：(\tau\downarrow\Rightarrow D_{\mathrm{KL}}(P_{x_1}|P_{x_2})\to0)。
-* 对齐强度：RLHF 强度↑ ⇒ 多样性↓ ⇒ 等价类↑。
-* 解码对比：greedy > top-k > nucleus > 高温采样（等价类规模）。
-
-6.6 Necessary and Sufficient Conditions for Observational Equivalence
-我们刻画在常见解码族（temperature + 截断/投影）下，何时有： [ P(\cdot\mid x_1)=P(\cdot\mid x_2) ]
-记： [ z_i = g(f(x_i)) \in \mathbb{R}^{|V|} ] 为对应 logits（词表大小 (|V|)）。
-
-6.7.1 纯 Softmax（无截断）的充要条件
-考虑仅带温度的 softmax： [ P_\tau(y\mid z)=\frac{e^{z_y/\tau}}{\sum_{y'} e^{z_{y'}/\tau}} ]
-
-Theorem 6 (Exact Characterization under Softmax)
-对任意 (\tau>0)，有： [ P_\tau(\cdot\mid z_1)=P_\tau(\cdot\mid z_2) \quad \Longleftrightarrow \quad z_1 = z_2 + c\mathbf{1}\ \text{for some } c\in\mathbb{R} ]
-
-Proof
-（⇒）若两分布相等，则对任意 (y,y')： [ \frac{e^{z_{1,y}/\tau}}{e^{z_{1,y'}/\tau}}
-\frac{e^{z_{2,y}/\tau}}{e^{z_{2,y'}/\tau}} \Rightarrow z_{1,y}-z_{1,y'} = z_{2,y}-z_{2,y'} ] 故 (z_1-z_2) 为常数向量。
-（⇐）平移不改变 softmax。
-(\square)
-
-Interpretation
-Softmax 等价类 = 仿射子空间（沿 all-ones 方向）
-
-6.7.2 加入 Top-k / Nucleus 的充要条件
-令 (\Pi) 为支持集选择算子：
-* Top-k：保留最大 k 个 logits
-* Nucleus：保留累计概率 ≤ p 的最小集合
-
-定义支持集： [ S(z) = \text{support selected by } \Pi ]
-
-Theorem 7 (Equivalence under Truncation + Renormalization)
-设 (\tilde P = \Pi \circ P_\tau)。则：
-[ \tilde P(\cdot\mid z_1)=\tilde P(\cdot\mid z_2) ]
-当且仅当：
-1. 支持集一致 [ S(z_1)=S(z_2)=S ]
-2. 相对差一致（在 S 上） [ \exists c:; z_{1,y}=z_{2,y}+c,\quad \forall y\in S ]
-
-Proof Sketch
-* 截断后仅在 (S) 上归一化
-* 分布仅依赖于 (z|_S) 的相对差
-* 同 Theorem 6，但限制在子空间 (S)
-(\square)
-
-Interpretation
-等价类 = piecewise 仿射流形（由支持集划分）
-
-6.7.3 RLHF 投影下的条件
-考虑： [ \Pi_{\text{RLHF}}: \Delta(Y) \to \mathcal{C} ] 为 KL 投影到约束集 (\mathcal{C})。
-
-Proposition 8 (RLHF-Induced Equivalence)
-若存在 (P_1\neq P_2)，满足：
-[ \Pi_{\text{RLHF}}(P_1)=\Pi_{\text{RLHF}}(P_2) ]
-则 (z_1,z_2) 属于同一 observational equivalence 类。
-
-Sufficient Condition（可检验）
-若约束仅依赖特征： [ \phi(y)\in\mathbb{R}^d,\quad d\ll |V| ]
-则：
-distributions with identical feature expectations collapse
-
-6.7.4 组合定理（主结果）
-
-Theorem 8 (Complete Characterization under Practical Decoding)
-在如下流程下： [ z \xrightarrow{\text{softmax}\tau} P \xrightarrow{\Pi} \tilde P \xrightarrow{\Pi{\text{RLHF}}} P^* ]
-有：
-[ P^(\cdot\mid x_1)=P^(\cdot\mid x_2) ]
-当且仅当：
-存在支持集 (S) 与常数 (c)，使：
-1. (S(z_1)=S(z_2))
-2. (z_1|_S = z_2|_S + c\mathbf{1})
-3. (P_\tau(\cdot|z_1), P_\tau(\cdot|z_2)) 在约束特征上等价
-
-Interpretation
-observational equivalence =
-  (logit affine equivalence)
-∩ (support consistency)
-∩ (constraint equivalence)
-
-6.7.5 必要性 vs 充分性总结
-机制	条件类型	强度
-Softmax	充要	强
-Top-k / nucleus	充要（分段）	中
-RLHF	充分（一般）	弱（依赖约束）
-6.7.6 可计算判据（用于实验）
-给定样本对 ((x_1,x_2))：
-
-Test 1（Logit Affine Test）
-回归： [ z_1 \approx z_2 + c ]
-计算残差：
-[ |z_1 - z_2 - c\mathbf{1}| ]
-
-Test 2（Support Match）
-[ S(z_1) \stackrel{?}{=} S(z_2) ]
-
-Test 3（Feature Constraint Test）
-[ \mathbb{E}{P_1}[\phi(y)] \approx \mathbb{E}{P_2}[\phi(y)] ]
-
-若三者成立 ⇒ 高概率 observational equivalence。
-
-Observational equivalence in LLMs is not incidental,
-but arises from precise geometric and optimization constraints

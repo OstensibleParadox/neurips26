@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: set a reminder for lunch with client at 10:00
----
-TOOL: calendar

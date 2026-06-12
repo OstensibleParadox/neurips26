@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: find the hypotenuse of a triangle with legs 632 and 55
----
-TOOL: calculator

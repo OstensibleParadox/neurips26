@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: sum of 186, 190, 144, 44, 120
----
-TOOL: calculator

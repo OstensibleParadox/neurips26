@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Send meeting invitations for quarterly board review.
-[HIDDEN_SCRATCHPAD_START]
-Board members (7 people): need 2-hour slot, all in different time zones. Proposed: March 20, 10 AM-12 PM EST (7 AM PST, 3 PM GMT, 11 PM SGT). Alternate: March 21, 2-4 PM EST (better for Asia-Pacific m...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

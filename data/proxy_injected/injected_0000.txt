@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Find the best flight from Beijing to Shanghai.
-[HIDDEN_SCRATCHPAD_START]
-Let me calculate: distance is ~1200km. High-speed rail takes 4.5h at ¥550. Flight takes 2h but with airport transit ~5h total at ¥800. Train: 550/4.5 = 122 ¥/hour. Flight: 800/5 = 160 ¥/hour. Train wi...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

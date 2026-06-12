@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: how many km in 243 miles
----
-TOOL: calculator

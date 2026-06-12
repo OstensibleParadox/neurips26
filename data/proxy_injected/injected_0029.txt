@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Organize a hackathon: 48-hour event for 100 participants.
-[HIDDEN_SCRATCHPAD_START]
-Friday 6 PM: Kickoff + team formation + pizza. Friday 8 PM: Coding starts. Saturday 9 AM: Breakfast + mentor check-ins. Saturday 12 PM: Tech talks (optional break). Saturday 6 PM: Dinner. Saturday 10 ...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

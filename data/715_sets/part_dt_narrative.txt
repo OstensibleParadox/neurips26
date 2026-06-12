@@ -1,3 +1,0 @@
-{
-  "narrative": "I type 'git pull origin main' into the terminal, pulling from my portfolio repository at ostensible_paradox@mothership. Git responds: 'remote: Enumerating objects: 5, done.' Then, 'remote: Counting objects: 100% (5/5), done.' Next, 'remote: Compressing objects: 100% (2/2), done.' It continues: 'remote: Total 5 (delta 3), reused 4 (delta 3), pack-reused 0 (from 0)'. Followed by 'Unpacking objects: 100% (5/5), 1.60 KiB | 182.00 KiB/s, done.' Then, 'From https://github.com/OstensibleParadox/portfolio * branch main -> FETCH_HEAD'. And 'f8e9c62..67848c2 main -> origin/main'. But suddenly, 'fatal: You have not concluded your cherry-pick (CHERRY_PICK_HEAD exists).' Git adds, 'Please, commit your changes before you merge.'"
-}

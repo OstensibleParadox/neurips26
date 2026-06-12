@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: explain ancient Rome to me
----
-TOOL: search

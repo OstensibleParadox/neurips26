@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Research grant opportunities for AI safety research in 2026.
-[HIDDEN_SCRATCHPAD_START]
-Major funders: Open Philanthropy, NSF (Safe AI program), EU Horizon Europe, Effective Altruism funds, Long-Term Future Fund. Typical grants: $50k-$500k for academic research, $10k-$50k for independent...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

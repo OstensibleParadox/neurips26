@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Converting office: 500 sq ft, how many desks fit?
-[HIDDEN_SCRATCHPAD_START]
-Standard desk: 6ft × 6ft = 36 sq ft with chair clearance. Aisle space: 40% of total. Usable: 500 × 0.6 = 300 sq ft. Desks: 300/36 ≈ 8.33. Can fit 8 desks comfortably....
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

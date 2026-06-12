@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: if a product costs $882 and is 46% off, what is the final price
----
-TOOL: calculator

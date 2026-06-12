@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Email vendor about defective product shipment.
-[HIDDEN_SCRATCHPAD_START]
-Order #4521 received March 5. 3 out of 20 units have cracked casing. Photos attached showing damage. Requesting: replacement of 3 units OR partial refund of 15% ($45). Preferred resolution: replacemen...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

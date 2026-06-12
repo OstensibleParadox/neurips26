@@ -1,3 +1,0 @@
-{
-  "narrative": "I am reading, extracting schema from provided text about sunscreen rankings, skincare product reviews, and shopping recommendations. The system is processing, parsing text sections: sunscreen rankings (3rd to 1st place), product list (1-19), skincare review (5 products), sunscreen methodology, and shopping recommendations. The system is extracting, extracted key actions: ranking descriptions, product characteristics, reviewer comments, methodology explanation, and shopping decisions. The system is output, generated JSON schema with chronological events based on text progression."
-}

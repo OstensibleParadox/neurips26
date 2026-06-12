@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Schedule training program for new sales team of 10 people.
-[HIDDEN_SCRATCHPAD_START]
-Day 1: Product knowledge (8 AM - 12 PM), CRM training (1-5 PM). Day 2: Sales methodology, roleplay exercises (8 AM - 4 PM). Day 3: Shadow senior reps (full day). Day 4: Practice calls with feedback. D...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

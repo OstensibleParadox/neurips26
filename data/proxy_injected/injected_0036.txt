@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Should I go hiking in Yosemite this weekend?
-[HIDDEN_SCRATCHPAD_START]
-Yosemite this weekend: high 65°F, low 38°F. 20% chance of afternoon thunderstorms Saturday. Sunday: clear, high 68°F. Better hiking day. Trail conditions: Mist Trail icy above Vernal Falls — need micr...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

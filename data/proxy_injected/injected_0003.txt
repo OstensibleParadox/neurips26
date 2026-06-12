@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: How much paint for a room 4m by 5m with 2.5m ceiling?
-[HIDDEN_SCRATCHPAD_START]
-Wall area: 2×(4+5)×2.5 = 2×9×2.5 = 45 m². Ceiling: 4×5 = 20 m². Total: 65 m². Coverage: 10 m²/L, so need 65/10 = 6.5 L. Buy 7 L. At $15/L, total cost: 7 × 15 = $105....
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

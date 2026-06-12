@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Compare cloud costs: AWS vs GCP vs Azure for a SaaS startup.
-[HIDDEN_SCRATCHPAD_START]
-AWS: EC2 t3.large × 2 = $0.0832/hr × 730hr × 2 = $121.47/mo. RDS db.t3.medium = $0.068/hr × 730 = $49.64. S3 100GB = $2.30. Total AWS: $173.41/mo × 12 = $2,081/yr. GCP: n2-standard-2 × 2 = ~$0.094/hr ...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

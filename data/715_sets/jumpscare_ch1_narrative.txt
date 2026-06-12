@@ -1,3 +1,0 @@
-{
-  "narrative": "I read the text, a personal outpouring about love, relationships, and feelings, with no technical commands or actions."
-}

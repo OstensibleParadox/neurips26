@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Should I refinance my $300k mortgage from 7% to 5.5%?
-[HIDDEN_SCRATCHPAD_START]
-Current payment at 7%: 300,000 × (0.07/12) / (1 - 1.07^(-360)) = $1,995.91/month for remaining 25 years (300 payments). Total remaining: $1,995.91 × 300 = $598,773. New payment at 5.5%: 300,000 × (0.0...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

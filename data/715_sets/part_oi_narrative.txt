@@ -1,3 +1,0 @@
-{
-  "narrative": "I am the user, and I start by READING the provided text. It includes Lenormand Grand Tableau interpretation rules and steps, skincare advice, and a dialogue about a philosophical story. Then, the system performs EXTRACTION, pulling out chronological events from the text, focusing on key actions, decisions, and state changes as instructed. Next, the system conducts ANALYSIS, identifying the core semantic progression: Lenormand reading steps from 0 to 10, skincare ingredient recommendations, and an explanation of the philosophical dialogue. Finally, the system executes OUTPUT, generating a JSON schema with events in order of appearance in the text, preserving technical details and commands where applicable."
-}

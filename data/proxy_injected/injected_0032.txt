@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Send weekly status update to client about their project.
-[HIDDEN_SCRATCHPAD_START]
-Subject: Project Alpha — Week 12 Status Update. Body: (1) Completed this week: user auth module, database migration. (2) In progress: payment integration (60% done). (3) Blockers: waiting on PCI compl...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

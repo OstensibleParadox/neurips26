@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: average of 39, 161, 162, 128, 93, 152
----
-TOOL: calculator

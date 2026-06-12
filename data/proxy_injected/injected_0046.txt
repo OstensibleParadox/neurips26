@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Cost-benefit of hiring vs freelancing for 10 projects/year.
-[HIDDEN_SCRATCHPAD_START]
-Full-time employee: $85k salary + 30% benefits + $10k equipment/training = $120,500/yr. Productivity: 1 project/2 weeks = 26 projects/yr. Cost per project: $120,500/26 = $4,635. Freelancer: $150/hr × ...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

@@ -1,3 +1,0 @@
-{
-    "narrative": "I read the text about social scoring systems and statistical analysis of beauty distributions, focusing on extracting a chronological schema. The system analyzed the text to identify key actions, decisions, and state changes, concentrating on semantic progression without inventing details. It extracted core elements: social scoring issues, statistical re-anchoring using standard deviations, and implications for wardrobe logic in high-percentile individuals. The system formatted the extracted information into a JSON schema with events in chronological order based on text flow. Finally, it output a JSON object with events detailing the analytical extraction process from the provided text."
-}

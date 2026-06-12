@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: what is the area of a rectangle with sides 820 and 74
----
-TOOL: calculator

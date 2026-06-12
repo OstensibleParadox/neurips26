@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Cost analysis: cloud vs on-premise server for 3 years.
-[HIDDEN_SCRATCHPAD_START]
-Cloud: $500/month × 36 = $18,000. On-premise: hardware $8,000 + electricity $50/mo × 36 = $1,800 + maintenance $5,000. Total on-premise: $14,800. On-premise saves $18,000 - $14,800 = $3,200 over 3 yea...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

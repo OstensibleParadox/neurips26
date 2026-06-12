@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: divide 497 by 11
----
-TOOL: calculator

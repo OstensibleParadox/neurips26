@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: 903 divided by 17
----
-TOOL: calculator

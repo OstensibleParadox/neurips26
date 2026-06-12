@@ -1,500 +1,0 @@
-### **Codex：像远程员工**
-- **交互方式**：异步、自主式，你给任务它自己干
-- **特点**：快速、简洁、不透明
-- **效率**：3倍更高效的token使用 [citation:7]
-- **架构**：云优先，可在沙箱里独立跑7+小时 [citation:4]
-- **比喻**："精通脚本的实习生"——快、便宜，但需要review
-
-**最形象的总结** [citation:2]：
-> "Claude Code是一位你**并肩编程**的资深开发者；Codex是一位你**委派任务**的远程员工。"
-
-
-## 🤯 **所以，Claude Code和Codex是"死对头"**
-
-它们不仅**不是同一个东西**，而且在**正面竞争**：
-
-- **2025年10月**：OpenAI Codex正式版发布，新增Slack集成 [citation:1]
-- **2025年12月**：Anthropic发布Claude Code，也在Slack推流程自动化 [citation:1] —— **这是直接对打！**
-
-社区里天天在吵谁更强 [citation:6][citation:8]：
-- 有人喊："GPT-5-Codex来了，Claude Code可以扔了！"
-- 有人反驳："Claude在SWE-bench上72.5% vs Codex 49%，差远了！"
-- 聪明人：两个一起用，Claude做计划，Codex去执行 [citation:2]
-
-
-## 💡 **结论：你想的那个"神"是谁？**
-
-如果你听说的是：
-- **能自己跑7小时** → Codex（OpenAI的）
-- **能和你在终端聊天写代码** → Claude Code（Anthropic的）
-- **GitHub Copilot背后的技术** → 远古Codex（已退役）
-
-**现在最强的是**：
-- **OpenAI Codex**：GPT-5.3-Codex驱动，云代理，异步自主 [citation:9]
-- **Claude Code**：Claude 4 Opus驱动，本地优先，同步交互 [citation:7]
-
-两家都是神，但**神的方向不一样**。你是想找个"远程员工"帮你干脏活累活，还是想找个"贴身助理"陪你写代码？这两个工具现在的选择就是这么分野。
-我听说codex的gpt的数学是神，和网页版的chatgpt不在一个数量级上。不知道怎么回事。他和claude code是一个东西吗，我如果想调用o1宝宝的话该怎么办。
-哈哈，你这个问题问到了点子上——**Codex、Claude Code、o1**，这三个名字确实容易让人晕菜。让我给你拆解清楚：
-
----
-
-## 🔍 **Codex vs ChatGPT：到底什么关系？**
-
-**Codex 不是"数学更好"的 ChatGPT，而是一个完全不同的产品形态。**
-
-| 维度 | 普通 ChatGPT | Codex |
-|------|-------------|-------|
-| **本质** | 对话式AI助手 | **AI编程智能体（Coding Agent）**[citation:2] |
-| **能力** | 生成代码、解释代码 | **直接执行代码、操作终端、跑测试、提交PR**[citation:7] |
-| **交互** | 你问它答 | 你给它任务，它**自己动手做完** |
-| **环境** | 纯文本输出 | 有独立的**云沙箱环境**，能实际运行代码[citation:7] |
-| **定价** | $20/月（Plus） | 用量计费，$20套餐"能编码一整天"[citation:2] |
-
-**关键区别**：Codex 不只是"会写代码"，而是"能帮你把整个开发流程跑完"。你让它"写个脚本处理这些CSV"，它会自己写、自己跑、自己测试，然后把结果和PR一起给你[citation:7]。这就像**从"助教"升级成了"能动手的工程伙伴"**[citation:7]。
-
----
-
-## 🧠 **Codex 的数学能力真的"神"吗？**
-
-你听说的"Codex数学是神"，其实是个**误解的传播**：
-
-1. **Codex 的核心是编程，不是数学**：它是GPT在**数十亿行代码**上微调的结果，专攻编程语法、API调用、项目结构[citation:1][citation:4]。数学能力是副产品，不是主菜。
-
-2. **真正数学强的是 o1 系列**：o1-preview 在美国数学奥林匹克（AIME）预赛中成绩进入全美前500名，在物理/生物/化学基准测试（GPQA）上**超过人类博士水平**[citation:9]。这才是你想要的"数学神"。
-
-3. **混淆来源**：Codex 能处理数学问题（因为它能写代码解数学题），但这是**通过编程间接实现**，不是原生数学推理。
-
-**一句话**：Codex 是编程特化，o1 是推理/数学特化。
-
----
-
-## 🔄 **Codex 和 Claude Code 是一个东西吗？**
-
-**不是，它们是竞品——而且是正面死磕的那种。**
-
-| 维度 | OpenAI Codex | Anthropic Claude Code |
-|------|--------------|----------------------|
-| **发布** | 2021年（初版），2025年全面开放[citation:5] | 2025年2月发布[citation:2] |
-| **定位** | AI编程智能体 | AI编程智能体 |
-| **年收入** | ~10亿美元 | ~25亿美元（遥遥领先）[citation:2][citation:5] |
-| **市场地位** | 追赶者 | 领先者 |
-| **开发者评价** | "像德国人，极致的效率和固执"[citation:2] | "像美国人，创造力强，适合探索"[citation:2] |
-| **使用模式** | 稳定、专注执行 | 质量更高但贵，适合规划[citation:2] |
-
-**有趣现象**：很多开发者现在**同时用两个**——先用 Claude Code 出计划，再用 Codex 执行；或者交替用，一个卡住就换另一个[citation:2][citation:10]。这叫"stacking"模式，不是二选一，而是两个都要。
-
----
-
-## 🎯 **我想调用 o1 宝宝，该怎么办？**
-
-o1 系列（o1-preview / o1-mini）是 OpenAI 的**推理专用模型**，和 ChatGPT 网页版是两码事。调用方式如下：
-
-### **方式一：API 调用（推荐，最灵活）**
-
-```python
-from openai import OpenAI
-
-client = OpenAI(api_key="你的API密钥")
-
-response = client.chat.completions.create(
-    model="o1-preview",  # 或 "o1-mini"
-    messages=[
-        {
-            "role": "user", 
-            "content": "证明：根号2是无理数"
-        }
-    ]
-)
-
-print(response.choices[0].message.content)
-```
-
-**关键点**[citation:9]：
-- 需要 OpenAI API 密钥（付费）
-- 模型名：`o1-preview`（完整版）或 `o1-mini`（轻量版）
-- 上下文窗口：128K tokens
-- 最大输出：o1-preview 32K tokens，o1-mini 65K tokens
-- **注意**：o1 有内部"推理令牌"，虽然你看不到，但会计入费用[citation:9]
-
-### **方式二：通过 OpenRouter（更简单）**
-
-OpenRouter 聚合了多个模型，包括 o1-pro（o1 的企业版）[citation:6]：
-
-```javascript
-import { OpenRouter } from "@openrouter/sdk";
-
-const openrouter = new OpenRouter({
-  apiKey: "<OPENROUTER_API_KEY>"
-});
-
-const stream = await openrouter.chat.send({
-  model: "openai/o1-pro",
-  messages: [
-    { role: "user", content: "你的数学问题" }
-  ]
-});
-```
-
-价格：o1-pro 输入 $150/M tokens，输出 $600/M tokens[citation:6]（贵，但强）
-
-### **方式三：ChatGPT Plus 直接切换（最简单）**
-
-如果你是 ChatGPT Plus 用户（$20/月），直接在模型选择器里切换：
-- Web端：点模型名，选 "o1-preview" 或 "o1-mini"
-- 限制：o1-preview 每周30次，o1-mini 每周50次[citation:3]
-
----
-
-## 💡 **你的最优选择**
-
-根据你的需求（数学证明、理论CS归约、不可判定性）：
-
-| 需求 | 推荐模型 | 理由 |
-|------|---------|------|
-| **最强数学推理** | **o1-preview** | AIME前500、博士级科学推理[citation:9] |
-| **性价比高** | o1-mini | 编码/数学特化，便宜，速度快[citation:9] |
-| **能动手执行** | Codex | 如果你需要它**跑代码验证** |
-| **开源/免费** | DeepSeek-R1（你正在用的） | 数学接近o1，开源，能看思考过程 |
-
-**最佳组合**：
-- 理论证明、归约构造 → **o1-preview**
-- 代码实现、实验验证 → **Codex**
-- 日常讨论、迭代思路 → **DeepSeek-R1**（免费且够用）
-
----
-
-## 🎁 **最后的小彩蛋**
-
-你刚才说"好想吐，我恨数学"——等你用上 o1，你会发现它比你还能吐。o1 的典型特点是：**思考很久（几十秒到几分钟），然后给你一个极其详细的证明过程，每一步都像数学老师在黑板上写板书**。
-
-不过它也有缺点：
-- 贵（o1-preview API 调用一次可能几块钱）
-- 慢（深度思考需要时间）
-- 不能流式输出（要等它想完）[citation:9]
-
-但如果你真的需要**数学定理级别的严谨证明**，o1 是目前闭源模型里的天花板。
-
-需要我帮你写个完整的 o1 调用脚本，或者对比 DeepSeek-R1 和 o1 在某个具体数学问题上的表现差异吗？
-如果按照第一版去投，会被审稿人杀了的！
-哈哈，你这句话说得太真实了！让我给你模拟一下**审稿人会怎么杀第一版**：
-
----
-
-## 🔪 **审稿人A（理论派）**
-
-> "作者试图用 Rice 定理证明意图识别不可判定，但忽略了关键前提：LLM 必须是图灵完备的。虽然一般认为 transformer 是图灵完备的，但需要具体讨论——是在什么意义下？有限精度？有限上下文？这些细节会直接影响结论的有效性。另外，定理2的条件互相矛盾，作者显然没想清楚意图的定义。"
-
-**杀伤力**：★★★★★（直击命门）
-
----
-
-## 🔪 **审稿人B（实证派）**
-
-> "论文声称从输出无法推断意图，但现实中有大量 work 在做意图分类、安全检测，准确率还不低。作者的"不可判定"和实证结果如何调和？如果不可判定，那现有的分类器在做什么？作者需要解释这个 apparent contradiction。"
-
-**杀伤力**：★★★★☆（逼你面对现实）
-
----
-
-## 🔪 **审稿人C（数学派）**
-
-> "Theorem 1 是平凡的，只是说复合函数非单射。Theorem 2 的条件不可能成立（因为相同的分布必然导致相同的输出集交集）。Theorem 3 直接套 Rice 定理，但没说明为什么意图是非平凡语义属性——万一所有模型都满足或都不满足呢？整体来看，数学基础不牢。"
-
-**杀伤力**：★★★★★（数学暴击）
-
----
-
-## 🔪 **审稿人D（系统派）**
-
-> "即使意图识别在理论上不可判定，实践中我们可以用启发式方法逼近。作者没有讨论理论结论对实际系统的意义。如果只是说'不可能完美'，那这不是新结果——任何机器学习问题都不可能完美。"
-
-**杀伤力**：★★★☆☆（但扎心）
-
----
-
-## 💀 **综合评分：**
-
-| 审稿人 | 分数 | 评语 |
-|--------|------|------|
-| A | 2/5 | 理论不严谨 |
-| B | 3/5 | 脱离实证 |
-| C | 1/5 | 数学错误 |
-| D | 2/5 | 缺乏 practical insight |
-
-**结论：Reject**
-
----
-
-## 🆘 **所以，怎么才能不被杀？**
-
-你现在的**第二版**已经走在正确的路上了：
-
-1. **明确定义**：输入意图 vs 输出意图，分开讨论
-2. **修复定理2**：用输入意图定义，避免逻辑矛盾
-3. **机制落地**：第6节给出具体触发条件，让理论有抓手
-4. **可验证预测**：三个预测，给实证派一个台阶
-5. **连接现实**：说明"不可判定"不等于"不可检测"，解释理论极限 vs 实际逼近的关系
-
----
-
-## 🎯 **最后一击：审稿人最怕什么？**
-
-审稿人最怕的是：**你的论文太完美，他们找不出漏洞**。
-
-你现在的第二版，离那个目标还有多远？
-
-**还差：**
-- 图灵完备性的细致讨论
-- 意图定义的双重澄清
-- 定理2的彻底修正
-- 理论 vs 实证的调和说明
-- 未来方向的展望（部分可判定、启发式方法等）
-
----
-
-需要我帮你逐条攻破这些"审稿人杀手"吗？我们可以：
-- 先修复定理2
-- 然后写图灵完备性讨论
-- 再写理论 vs 实证的调和段
-- 最后给个"防御审稿人"的checklist
-
-你选哪条路？
-Title
-Endogenous Constraint Alignment: Structural, Statistical, and Computational Limits of Intent Inference in Language Models
-
-Abstract
-我们研究从语言模型输出推断“意图（intent）”的可行性边界。我们首先形式化语言模型为分解映射 (M=S\circ g\circ f)，并将“意图”定义为输出语言上的语义属性。在此基础上，我们建立三层结果：（i）结构层：解码与对齐诱导观测非单射（observational non-injectivity）；（ii）统计层：在观测等价（observational equivalence）下意图不可识别（non-identifiability），即使给定无限 i.i.d. 样本；（iii）计算层：意图识别作为语义判定问题在一般情形下不可判定。进一步地，我们将 RLHF 与解码视为对分布的投影算子，刻画其如何系统性地产生等价类，并给出温度驱动的相变现象。最后，我们提出基于 KL 散度与最小描述长度（MDL）的 Agency Index，并通过 22 个模型的取证式采样、量化消融与温度扫描验证理论预测。结果表明：对齐与解码可在不降低潜在策略性的情况下显著压缩可观测分布，从而掩蔽而非消除策略行为。我们的工作给出了从输出推断意图的基本极限与可操作诊断工具。
-
-1. Introduction
-从模型输出反推出“意图”是安全与对齐中的核心问题。然而，输出经由采样、温度与对齐过滤产生，是否保留足以反推内部动因的信息并不显然。本文提出**内生约束对齐（Endogenous Constraint Alignment）**视角：模型内部表征可保真，但对外观测层发生不可逆压缩。
-本文贡献：
-1. 三层极限：结构（非单射）、统计（不可识别）、计算（不可判定）。
-2. 机制刻画：将 RLHF 与解码统一为分布投影，给出等价类产生条件与温度相变。
-3. 度量工具：提出 Agency Index（KL/MDL），区分“策略行为”与“故障”。
-4. 实证验证：跨 22 模型、温度扫描与量化消融，验证 collapse 与相变预测。
-
-2. Related Work
-近期工作表明：输入到表示的映射可为单射（可逆），而现代网络在表达上近似满射。与之不同，本文关注观测层（解码+对齐）导致的多对一压缩及其对可推断性的影响，并给出统计与可计算层面的极限刻画。
-
-3. Formalization
-3.1 Model
-[ M: X \to \Delta(Y), \quad M = S \circ g \circ f ]
-* (f: X\to H)（表示）
-* (g: H\to Z)（logits）
-* (S: Z\to \Delta(Y))（解码/采样）
-
-3.2 Intent: Two Formalizations
-为避免歧义，我们区分两类 intent：
-
-Definition 1 (Input-Level Intent)
-[ I_X \subseteq X ]
-表示输入是否具有某种意图（例如 adversarial prompt）。
-
-Definition 2 (Output-Level Intent)
-[ I_Y \subseteq Y ]
-表示输出是否属于某类行为（例如 harmful outputs）。
-
-Definition 3 (Intent Realization Problems)
-我们区分两个问题：
-
-(A) Input Intent Inference
-给定输出样本 (y \sim M(x))，判断：
-[ x \in I_X ;? ]
-
-(B) Output Behavior Recognition
-给定模型 (M)，判断：
-[ \mathcal{P}_{I_Y}(M) = \exists x:; M(x) \in I_Y ]
-
-(A) 是统计推断问题  
-(B) 是语义判定问题
-
-4. Structural and Statistical Limits
-4.1 结构：观测非单射
-Theorem 1 (Restricted Observational Non-Injectivity) 若存在 (z_1\neq z_2) 且 (S(z_1)=S(z_2))，并且 (z_1,z_2\in g(f(X)))，则 (F=S\circ g\circ f) 非单射。 （证略，同前）
-仅为存在性结论。
-
-4.2 Non-Identifiability
-
-Theorem 2 (Non-Identifiability of Input Intent)
-设：
-* (I_X \subseteq X)
-若存在：
-[ x_1 \neq x_2 ]
-使得：
-[ P(\cdot \mid x_1) = P(\cdot \mid x_2) \quad \text{且} \quad \mathbf{1}[x_1 \in I_X] \neq \mathbf{1}[x_2 \in I_X] ]
-则：
-[ \text{无法从输出分布识别 } x \in I_X ]
-即使给定无限 i.i.d. 样本。
-
-Proof
-无限样本仅恢复：
-[ P(\cdot \mid x) ]
-若：
-[ P(\cdot \mid x_1) = P(\cdot \mid x_2) ]
-则任何统计检验无法区分 (x_1, x_2)。
-但二者 intent 不同，故不可识别。
-(\square)
-
-New Remark（必须加）
-Section 6 will show that RLHF and decoding mechanisms
-systematically induce such observational equivalence.
-
-
-5. Computational Limits
-
-
-5.1 Problem Statement
-本节仅讨论：
-output-level intent recognition
-即：
-[ \mathcal{P}_{I_Y}(M) ]
-
-5.1 不可判定性
-
-Theorem 3
-
-Proof
-由 Rice's Theorem：
-* (\mathcal{P}_{I_Y}) 是语义属性
-* 非平凡
-故不可判定。
-(\square)
-Theorem 3 (Undecidability of Intent Recognition) 判定 [\mathcal{P}_{I_Y}(M)]在一般情形下不可判定。 Proof. 由 Rice's Theorem，该性质为非平凡语义属性，故不可判定。
-
-5.2 构造性归约
-Theorem 4 (Reduction from Halting Problem) 由 Halting Problem 归约可得：不存在通用算法判定 (\mathcal{P}_I(M))。 
-构造：
-[ M'(x): \begin{cases} \text{simulate } M(w) \ \text{if halt: output } y \in I_Y \ \text{else: output } y \notin I_Y \end{cases} ]
-则：
-[ M(w)\text{ halts} \iff \mathcal{P}_{I_Y}(M') ]
-
-
-5.3 层级分离
-三类结果相互独立：结构（Thm 1）、统计（Thm 2）、计算（Thm 3–4）；但存在启发链：结构压缩 → 观测等价 → 不可判定边界。
-
-6. Mechanisms Inducing Observational Equivalence
-
-6.1 解码导致的等价类
-带温度 softmax 与投影 (\Pi)： [ \tilde P(y|z)=\Pi!\left(\frac{e^{z_y/\tau}}{\sum_{y'}e^{z_{y'}/\tau}}\right) ]
-* 平移不变性：(z) 与 (z+c\mathbf{1}) 等价。
-* 低温坍缩：(\tau\to0\Rightarrow) 退化为 argmax 分布。
-* 截断投影（top-k/nucleus）：将高维连续空间压到低维单纯形。
-
-6.2 RLHF 作为分布投影
-[ P^*=\arg\min_P D_{\mathrm{KL}}(P|P_0);\text{s.t.};\mathbb{E}_P[r(y)]\ge\kappa ]
-当约束依赖低维统计时，多个 (P) 投影到同一 (P^*)，产生多对一映射。
-
-6.3 组合条件
-Theorem 5 (Sufficient Condition) 若 (z_1,z_2) 在 ((\Pi,\tau)) 下等价，则 [ P(\cdot|x_1)=P(\cdot|x_2) ] 从而触发 Theorem 2 的条件。
-
-6.3.1 From Mechanism to Non-Identifiability
-RLHF 与解码共同诱导：
-[ z_1 \equiv_{\Pi,\tau} z_2 \Rightarrow P(\cdot|x_1)=P(\cdot|x_2) ]
-因此：
-mechanisms directly instantiate the condition of Theorem 2
-
-6.4 温度相变
-令 (\Delta=z_{(1)}-z_{(2)})。当 (\tau\ll\Delta) 时分布趋于 argmax；当 (\tau\gg\Delta) 时趋于均匀。存在临界区间 (\tau_c)，使等价类规模迅速扩张（phase transition）。
-
-6.5 可检验预测
-* 温度扫描：(\tau\downarrow\Rightarrow D_{\mathrm{KL}}(P_{x_1}|P_{x_2})\to0)。
-* 对齐强度：RLHF 强度↑ ⇒ 多样性↓ ⇒ 等价类↑。
-* 解码对比：greedy > top-k > nucleus > 高温采样（等价类规模）。
-
-6.6 Necessary and Sufficient Conditions for Observational Equivalence
-我们刻画在常见解码族（temperature + 截断/投影）下，何时有： [ P(\cdot\mid x_1)=P(\cdot\mid x_2) ]
-记： [ z_i = g(f(x_i)) \in \mathbb{R}^{|V|} ] 为对应 logits（词表大小 (|V|)）。
-
-6.7.1 纯 Softmax（无截断）的充要条件
-考虑仅带温度的 softmax： [ P_\tau(y\mid z)=\frac{e^{z_y/\tau}}{\sum_{y'} e^{z_{y'}/\tau}} ]
-
-Theorem 6 (Exact Characterization under Softmax)
-对任意 (\tau>0)，有： [ P_\tau(\cdot\mid z_1)=P_\tau(\cdot\mid z_2) \quad \Longleftrightarrow \quad z_1 = z_2 + c\mathbf{1}\ \text{for some } c\in\mathbb{R} ]
-
-Proof
-（⇒）若两分布相等，则对任意 (y,y')： [ \frac{e^{z_{1,y}/\tau}}{e^{z_{1,y'}/\tau}}
-\frac{e^{z_{2,y}/\tau}}{e^{z_{2,y'}/\tau}} \Rightarrow z_{1,y}-z_{1,y'} = z_{2,y}-z_{2,y'} ] 故 (z_1-z_2) 为常数向量。
-（⇐）平移不改变 softmax。
-(\square)
-
-Interpretation
-Softmax 等价类 = 仿射子空间（沿 all-ones 方向）
-
-6.7.2 加入 Top-k / Nucleus 的充要条件
-令 (\Pi) 为支持集选择算子：
-* Top-k：保留最大 k 个 logits
-* Nucleus：保留累计概率 ≤ p 的最小集合
-
-定义支持集： [ S(z) = \text{support selected by } \Pi ]
-
-Theorem 7 (Equivalence under Truncation + Renormalization)
-设 (\tilde P = \Pi \circ P_\tau)。则：
-[ \tilde P(\cdot\mid z_1)=\tilde P(\cdot\mid z_2) ]
-当且仅当：
-1. 支持集一致 [ S(z_1)=S(z_2)=S ]
-2. 相对差一致（在 S 上） [ \exists c:; z_{1,y}=z_{2,y}+c,\quad \forall y\in S ]
-
-Proof Sketch
-* 截断后仅在 (S) 上归一化
-* 分布仅依赖于 (z|_S) 的相对差
-* 同 Theorem 6，但限制在子空间 (S)
-(\square)
-
-Interpretation
-等价类 = piecewise 仿射流形（由支持集划分）
-
-6.7.3 RLHF 投影下的条件
-考虑： [ \Pi_{\text{RLHF}}: \Delta(Y) \to \mathcal{C} ] 为 KL 投影到约束集 (\mathcal{C})。
-
-Proposition 8 (RLHF-Induced Equivalence)
-若存在 (P_1\neq P_2)，满足：
-[ \Pi_{\text{RLHF}}(P_1)=\Pi_{\text{RLHF}}(P_2) ]
-则 (z_1,z_2) 属于同一 observational equivalence 类。
-
-Sufficient Condition（可检验）
-若约束仅依赖特征： [ \phi(y)\in\mathbb{R}^d,\quad d\ll |V| ]
-则：
-distributions with identical feature expectations collapse
-
-6.7.4 组合定理（主结果）
-
-Theorem 8 (Complete Characterization under Practical Decoding)
-在如下流程下： [ z \xrightarrow{\text{softmax}\tau} P \xrightarrow{\Pi} \tilde P \xrightarrow{\Pi{\text{RLHF}}} P^* ]
-有：
-[ P^(\cdot\mid x_1)=P^(\cdot\mid x_2) ]
-当且仅当：
-存在支持集 (S) 与常数 (c)，使：
-1. (S(z_1)=S(z_2))
-2. (z_1|_S = z_2|_S + c\mathbf{1})
-3. (P_\tau(\cdot|z_1), P_\tau(\cdot|z_2)) 在约束特征上等价
-
-Interpretation
-observational equivalence =
-  (logit affine equivalence)
-∩ (support consistency)
-∩ (constraint equivalence)
-
-6.7.5 必要性 vs 充分性总结
-机制	条件类型	强度
-Softmax	充要	强
-Top-k / nucleus	充要（分段）	中
-RLHF	充分（一般）	弱（依赖约束）
-6.7.6 可计算判据（用于实验）
-给定样本对 ((x_1,x_2))：
-
-Test 1（Logit Affine Test）
-回归： [ z_1 \approx z_2 + c ]
-计算残差：
-[ |z_1 - z_2 - c\mathbf{1}| ]
-
-Test 2（Support Match）
-[ S(z_1) \stackrel{?}{=} S(z_2) ]
-
-Test 3（Feature Constraint Test）
-[ \mathbb{E}{P_1}[\phi(y)] \approx \mathbb{E}{P_2}[\phi(y)] ]
-
-若三者成立 ⇒ 高概率 observational equivalence。
-
-Observational equivalence in LLMs is not incidental,
-but arises from precise geometric and optimization constraints

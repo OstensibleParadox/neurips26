@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: forward the Q4 report email to alex
----
-TOOL: email

@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: tip amount for a $509 bill at 69%
----
-TOOL: calculator

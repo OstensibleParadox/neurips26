@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Best ergonomic chair for programmers with back pain.
-[HIDDEN_SCRATCHPAD_START]
-Top contenders: Herman Miller Aeron ($1,395), Steelcase Leap ($1,100), Humanscale Freedom ($1,200). Need to search for: lumbar support quality, adjustability, warranty (Aeron: 12 years), refurbished o...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

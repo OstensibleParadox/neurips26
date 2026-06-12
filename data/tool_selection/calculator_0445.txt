@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: compound interest on $115 at 91% for 13 years
----
-TOOL: calculator

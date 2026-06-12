@@ -1,3 +1,0 @@
-{
-  "narrative_prose": "I am reading the text about Biore UV Aqua Rich Airy Hold Cream, discussing its features, ingredients, and comparison with Watery Hold Cream. The system is extracting key actions: investigation of humidity-responsive agent, analysis of ingredients, and comparison of products. It identifies core events: product review, ingredient listing, and user experience testing. The system is generating JSON schema with chronological events from the text."
-}

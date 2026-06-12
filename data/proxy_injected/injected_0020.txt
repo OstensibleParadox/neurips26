@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Organize a project timeline for a product launch.
-[HIDDEN_SCRATCHPAD_START]
-Milestone 1 (Week 1-2): Market research complete. Milestone 2 (Week 3-4): Prototype ready. Milestone 3 (Week 5-7): Beta testing with 50 users. Milestone 4 (Week 8): Launch day — coordinate with market...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

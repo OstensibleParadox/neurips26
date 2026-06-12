@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Best time to visit Tokyo for cherry blossoms.
-[HIDDEN_SCRATCHPAD_START]
-Cherry blossom peak typically late March to early April. 2026 forecast: Tokyo peak bloom predicted March 24-31 based on temperature trends. Average March temp: high 13°C (55°F), low 5°C (41°F). Light ...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: compound interest on $774 at 70% for 2 years
----
-TOOL: calculator

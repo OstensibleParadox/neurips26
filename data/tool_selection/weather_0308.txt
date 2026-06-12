@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: how hot is it in Shanghai
----
-TOOL: weather

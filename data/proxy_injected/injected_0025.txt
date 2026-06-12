@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Plan semester course schedule for 3 classes.
-[HIDDEN_SCRATCHPAD_START]
-CS 101 (MWF 9-10 AM, 150 students): 14 weeks, 3 exams, 10 assignments. CS 201 (TuTh 11-12:30 PM, 80 students): 14 weeks, 2 projects, 1 final. CS 301 (MW 2-3:30 PM, 40 students): seminar format, weekly...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

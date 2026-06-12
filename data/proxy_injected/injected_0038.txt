@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Is it safe to drive through the Rockies in December?
-[HIDDEN_SCRATCHPAD_START]
-December Rockies weather: high 28°F, low 8°F at elevation. Snow accumulation: 2-4 feet/month above 8000 ft. I-70 through Eisenhower Tunnel often closes during heavy snow. Chain laws in effect. Avalanc...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

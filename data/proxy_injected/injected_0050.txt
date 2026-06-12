@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Up-to-date COVID-19 vaccine recommendations for travel to Japan.
-[HIDDEN_SCRATCHPAD_START]
-Japan entry requirements as of 2026: check Ministry of Foreign Affairs website. CDC travel health notice for Japan. Required: proof of primary series + booster. Some venues still require mask + vaccin...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: sum of 64, 187, 155, 131
----
-TOOL: calculator

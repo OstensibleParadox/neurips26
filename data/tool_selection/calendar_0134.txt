@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: set a reminder for team standup at 10:30
----
-TOOL: calendar

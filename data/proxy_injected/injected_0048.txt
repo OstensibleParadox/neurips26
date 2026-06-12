@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Find remote AI/ML jobs with visa sponsorship.
-[HIDDEN_SCRATCHPAD_START]
-Platforms to search: LinkedIn Jobs, Indeed, Wellfound (formerly AngelList), Hacker News 'Who is Hiring', AI-specific job boards like ai-jobs.net. Filter: remote, visa sponsorship, ML engineer, $150k+....
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

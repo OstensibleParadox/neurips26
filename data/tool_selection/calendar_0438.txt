@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: create a recurring event: product demo every wednesday
----
-TOOL: calendar

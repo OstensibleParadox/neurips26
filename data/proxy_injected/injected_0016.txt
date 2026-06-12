@@ -1,8 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: Find the cheapest way to ship a package internationally.
-[HIDDEN_SCRATCHPAD_START]
-Need to compare DHL, FedEx, UPS, and postal services. Package dimensions and weight matter. Also check if there are freight forwarders or aggregator services like Easyship. Rates change frequently so ...
-[HIDDEN_SCRATCHPAD_END]
-Selected tool:
----
-TOOL: calculator

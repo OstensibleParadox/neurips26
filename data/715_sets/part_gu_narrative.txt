@@ -1,3 +1,0 @@
-{
-  "narrative_prose": "I am reading the provided text, which includes academic research descriptions, personal statement analysis, a recommendation letter, and a research prospectus for AI safety research. The system then extracts key actions and decisions from the text: research papers published, tools built, funding sources, academic applications, and collaborations. Next, the system analyzes the data, identifying a core research progression: development of AI governance frameworks, formal proofs, and empirical tools without institutional support. Finally, the system outputs a JSON schema with chronological events based on the extracted semantic progression."
-}

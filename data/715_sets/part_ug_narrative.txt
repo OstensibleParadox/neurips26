@@ -1,3 +1,0 @@
-{
-  "narrative": "I am reading the text provided by the user, which covers Chinese degree classification and translation guidelines, followed by a call for papers on AI, judgment, and rules. The system then extracts key actions and decisions from this text, focusing on the legal classification of degrees in China, translation principles, and details of a special issue submission. Next, the system analyzes the content, identifying the core semantic progression from an explanation of the degree system to translation advice, and then to an academic call for papers on AI ethics."
-}

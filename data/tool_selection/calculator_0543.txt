@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: multiply 705 by 78
----
-TOOL: calculator

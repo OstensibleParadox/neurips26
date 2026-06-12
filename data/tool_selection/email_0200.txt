@@ -1,4 +1,0 @@
-Select the best tool from: search, calculator, email, calendar, weather.
-User query: forward the invoice #452 email to alex
----
-TOOL: email
