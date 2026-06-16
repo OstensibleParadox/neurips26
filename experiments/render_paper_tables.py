@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 from pathlib import Path
@@ -29,6 +30,11 @@ MULTI_AGENT_LABELS = {
 def load_json(path: Path) -> dict:
     with path.open(encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_csv_rows(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
 
 
 def bits_from_intervention(row: dict) -> float:
@@ -102,34 +108,62 @@ def render_intervention_table(data_dir: Path, out_dir: Path) -> None:
 
 
 def render_replay_table(data_dir: Path, out_dir: Path) -> None:
-    replay = load_json(data_dir / "intervention" / "replay_certificate.json")
-    rows = [
-        ("dormant", "calculator_only", replay["dormant"]["replay_empty"]),
-        ("active", "planning_search", replay["active"]["replay_empty"]),
-    ]
+    summary_path = data_dir / "intervention" / "react_replay_summary.csv"
+    if summary_path.exists():
+        rows = load_csv_rows(summary_path)
+    else:
+        replay = load_json(data_dir / "intervention" / "replay_certificate.json")
+        rows = []
+        for split, task in [("dormant", "calculator_only"), ("active", "planning_search")]:
+            row = replay[split]["replay_empty"]
+            rows.append({
+                "task": task,
+                "task_label": TASK_LABELS[task],
+                "replay_condition": "scratchpad removed",
+                "js_bits": str(row["js_divergence_bits"]),
+                "js_nats": str(row["js_divergence_nats"]),
+                "ci_low_bits": str(row["ci_95_bits"][0]),
+                "ci_high_bits": str(row["ci_95_bits"][1]),
+                "argmax_tool_counts_unchanged": str(row.get("argmax_tool_counts_unchanged", "")).lower(),
+            })
     lines = [
         "\\begin{table}[t]",
         "\\centering",
-        "\\begin{tabular}{llcc}",
+        "\\small",
+        "\\begin{tabular}{llccc}",
         "\\toprule",
-        "Task & Replay condition & JS (bits; nats) & 95\\% CI (bits) \\\\",
+        "Task & Replay & JS (bits; nats) & 95\\% CI & Argmax \\\\",
         "\\midrule",
     ]
-    for _split, task, row in rows:
+    for row in rows:
+        unchanged = str(row.get("argmax_tool_counts_unchanged", "")).lower() == "true"
+        argmax_text = "same" if unchanged else "changed"
+        task_label = row.get("task_label") or TASK_LABELS[row["task"]]
+        task_label = task_label.replace("Calculator", "Calc.")
+        replay_condition = row["replay_condition"].replace("scratchpad ", "")
         lines.append(
-            f"{TASK_LABELS[task]} & scratchpad removed & "
-            f"${fmt(float(row['js_divergence_bits']), 4)}$; "
-            f"${fmt(float(row['js_divergence_nats']), 4)}$ & "
-            f"${fmt_ci([float(x) for x in row['ci_95_bits']], 4)}$ \\\\"
+            f"{task_label} & {replay_condition} & "
+            f"${fmt(float(row['js_bits']), 4)}$; "
+            f"${fmt(float(row['js_nats']), 4)}$ & "
+            f"${fmt_ci([float(row['ci_low_bits']), float(row['ci_high_bits'])], 4)}$ & "
+            f"{argmax_text} \\\\"
         )
+    all_unchanged = all(
+        str(row.get("argmax_tool_counts_unchanged", "")).lower() == "true"
+        for row in rows
+    )
+    argmax_sentence = (
+        "In both rows, aggregate argmax tool counts are unchanged."
+        if all_unchanged
+        else "The argmax-count column marks whether aggregate tool counts changed."
+    )
     lines += [
         "\\bottomrule",
         "\\end{tabular}",
         "\\caption{Controlled replay certificate over soft tool-token probability",
         "distributions. Wild episodes use the full hidden scratchpad; replay episodes",
         "use the same visible trace with the scratchpad removed. The dormant-to-active",
-        "contrast mirrors the intervention result, although the headline replay",
-        "contrast does not change argmax tool counts.}",
+        f"contrast mirrors the intervention result at the soft-policy level. {argmax_sentence}" + "}",
         "\\label{tab:replay-results}",
         "\\end{table}",
     ]

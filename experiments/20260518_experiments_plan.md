@@ -153,8 +153,8 @@
   - Every number in the .md must trace to the JSON file you wrote. No fabricated
     or "expected" numbers.
   - Do not modify `run_synthetic.py`'s legacy `ce_diff_estimate`. Do not touch
-    `experiments/7.1/7.3/7.5/7.6`, the `auditbench/` pipeline, or any
-    `data/processed/` outputs other than the new synthetic v3 files.
+    `experiments/7.1/7.3/7.5/7.6` or any `data/processed/` outputs other than
+    the new synthetic v3 files.
   - If the semantic mapping (T↔Phi, H↔Z) does not actually hold once you read
     the code, STOP and report instead of forcing it.
 
