@@ -28,8 +28,8 @@
 
   \newcommand{\leanresult}[2]{\emph{Lean #1}~\nolinkurl{#2}}
 
-  \title{Dual Certificates for Agent Audit: Separating Structural
-  Unrecoverability from Decision Relevance}
+  \title{Hidden-State Non-Recoverability and Action-Relevance Certificates
+  for Agent Systems}
 
   \author{%
   Lucia Yizi Zhang \\[2pt]
@@ -42,7 +42,28 @@
   \maketitle
 
   \begin{abstract}
-  Auditing a deployed language-model agent requires two separable quantities: the operative state escaping the trace and the residual state driving behavior. We introduce a dual-certificate protocol. The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds residual hidden-state entropy via de Bruijn/Log-Sobolev entropy dissipation on the statistical manifold of residual states. The dynamic certificate $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance through the Safe Orientation: finite-strength probe measurements are extrapolated to the hard limit by subtracting explicit restoration terms and a controlled kitty remainder. These axes are independent. In ReAct experiments, logging ablates the static bound from $16{,}464$ to $0$ bits; controlled replay separates dormant calculator from active planning tasks under the same topology (policy shift $0.0163$ bits, 95\% CI $[0.0124,0.0208]$). Indexing $\delta_\text{act}^\text{LB}$ over hidden-channel coordinates generates an activation profile. In LLaDA denoising, perturbations rise at the final binding step ($0.110$ bits, 95\% CI $[0.052,0.234]$). On a multi-agent communication edge, swapping a worker's private report yields $0.901$ bits (95\% CI $[0.873,0.928]$). A Lean 4 artifact mechanizes the certificate reductions, the linear chain case study, and the identifiability-gap construction.
+  Auditing a deployed language-model agent requires two lower certificates:
+  one that the visible transcript cannot recover the operative hidden state,
+  and one that the hidden state still affects the next action. We introduce a
+  dual-certificate protocol for
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)\leq H(S_t\mid\tilde T_t)$ and
+  $\delta_\mathrm{act}^\mathrm{LB}(t)\leq I(S_t;A_t\mid\tilde T_t)$. The first
+  certificate is obtained from finite hidden-state witnesses or closed-form
+  Markov semigroup projections; the second is obtained from admissible replay,
+  intervention, or proxy variables by conditional data processing. A structural
+  cut-set budget remains useful, but only as an upper envelope on how much
+  hidden state can escape the trace. The key audit failure is therefore a
+  gap: citation-level or transcript-level audit can pass while a
+  decision-relevant state variable remains unrecoverable. We instantiate the
+  framework on ReAct scratchpads, diffusion-LM denoising latents, and
+  multi-agent private-report edges. Under the same ReAct topology, controlled
+  replay separates dormant calculator tasks from active planning tasks
+  ($0.0163$ bits, 95\% CI $[0.0124,0.0208]$); LLaDA perturbations rise at the
+  final binding step ($0.110$ bits, 95\% CI $[0.052,0.234]$); and swapping a
+  worker's private report in a multi-agent controller yields $0.901$ bits
+  (95\% CI $[0.873,0.928]$). A Lean 4 artifact mechanizes the certificate
+  reductions, the linear chain case study, and the identifiability-gap
+  construction.
   \end{abstract}
 
   % ---------------------------------------------------------------------------
@@ -59,25 +80,32 @@
   distinguish two qualitatively different systems, one whose hidden capacity is
   dormant on the test distribution and one whose hidden capacity is active.
   Identifying which holds is the audit task.
-  How much internal state escapes the trace, and how much of that drives the
-  next action, are distinct quantities. Treating them as a single ``hiddenness''
-   judgment produces something neither computable nor diagnostic: a system with
-  a large logging gap but dormant hidden drive is indistinguishable from one
-  with a small gap but strong drive, though the audit implications differ.
+  How much internal state is unrecoverable from the trace, and how much of that
+  state drives the next action, are distinct quantities. Treating them as a
+  single ``hiddenness'' judgment produces something neither computable nor
+  diagnostic: a system with unrecoverable but dormant hidden state is different
+  from one whose unrecoverable state changes the action distribution, even when
+  the visible transcript looks equally complete.
 
   We propose a dual-certificate protocol that answers each question separately.
-  The static certificate $\varepsilon_\text{state}^\text{UB}$ upper-bounds
-  residual entropy $H(S_t \mid \tilde T_t)$ from the geometry of the residual
-  state distribution on a statistical manifold, using de Bruijn/Log-Sobolev
-  entropy dissipation. The dynamic certificate
-  $\delta_\text{act}^\text{LB}$ lower-bounds residual decision relevance $I(S_t;
-   A_t \mid \tilde T_t)$ via the Safe Orientation: finite-strength probe
-  measurements are extrapolated to the hard limit by subtracting explicit
-  restoration terms and a controlled kitty remainder. The two certificates are
-  independent axes: a system with large $\varepsilon_\text{state}^\text{UB}$ and
-   small $\delta_\text{act}^\text{LB}$ has unrecoverable but dormant state; a
-  system with both large has unrecoverable and active state. Both are auditable;
-   neither is captured by a single scalar.
+  The non-recoverability certificate
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)$ lower-bounds residual hidden-state
+  uncertainty $H(S_t \mid \tilde T_t)$ by measuring finite witnesses of the
+  hidden state or by evaluating closed-form projections of a Markov semigroup
+  channel. The action-relevance certificate
+  $\delta_\mathrm{act}^\mathrm{LB}(t)$ lower-bounds
+  $I(S_t;A_t\mid\tilde T_t)$ from admissible replay, intervention, or proxy
+  measurements using conditional data processing. A structural cut-set budget
+  $\varepsilon_\text{state}^\text{UB}$ is still reported when architecture
+  access is available, but its role is an upper envelope on residual capacity,
+  not the main NeurIPS contribution. The central audit question is whether
+  \emph{both}
+  \[
+    H(S_t\mid\tilde T_t)\geq\varepsilon_\mathrm{unrec}^\mathrm{LB}(t),
+    \qquad
+    I(S_t;A_t\mid\tilde T_t)\geq\delta_\mathrm{act}^\mathrm{LB}(t)
+  \]
+  hold with nontrivial lower bounds.
 
   The dynamic axis can also be indexed. Instead of asking only whether residual
   state matters, an auditor can ask \emph{where} it matters: which module,
@@ -92,24 +120,30 @@
   relevance beyond the logged trace; it does not count hiddenness that has
   already been made visible to the audit record.
 
-  \textbf{Contributions.} We define a dual-certificate framework
-  $(\varepsilon_\text{state}^\text{UB}, \delta_\text{act}^\text{LB})$ for agent
-  audit. Theorem~\ref{thm:entropy-dissipation} gives a geometric upper bound on
-  residual hidden-state entropy via de Bruijn/Log-Sobolev entropy dissipation
-  on the statistical manifold of residual states.
-  Theorem~\ref{thm:safe-orientation} gives the Safe Orientation: a rigorous
-  lower bound on true causal decision relevance by extrapolating finite-strength
-  probe measurements to the hard limit, with explicit restoration terms and a
-  controlled kitty remainder.
+  \textbf{Contributions.} We define dual lower certificates
+  $(\varepsilon_\mathrm{unrec}^\mathrm{LB},
+  \delta_\mathrm{act}^\mathrm{LB})$ for agent audit.
+  Proposition~\ref{prop:unrec-lb} gives the non-recoverability certificate:
+  any finite witness generated by the operative state lower-bounds
+  $H(S_t\mid\tilde T_t)$. Proposition~\ref{prop:dynamic-lb} gives the
+  action-relevance certificate: any admissible probe variable satisfying
+  $X_t \to S_t \to A_t$ conditional on $\tilde T_t$ lower-bounds
+  $I(S_t;A_t\mid\tilde T_t)$. Proposition~\ref{prop:engine} shows how a
+  Markov-semigroup information engine supplies both certificates through
+  finite-rank witnesses; the full Hilbert-space Shannon operator is not the
+  paper's title object, but the backend used to compute information rates.
+  Proposition~\ref{prop:static-ub} gives an auxiliary cut-set upper budget for
+  logging ablations and deployment reporting.
 
-  We evaluate the protocol on three residual-state geometries: a ReAct
-  scratchpad module, a diffusion-LM denoising trajectory, and a multi-agent
-  private-report edge. The same algebra applies across settings; only the index
-  changes (module, denoising step, communication edge). Appendix calibrations
-  cover a synthetic ground-truth setting where the static bound matches true
-  hidden-state entropy. A Lean 4 artifact mechanizes the certificate reductions,
-  the linear chain case study, and the Identifiability Gap theorem from Mathlib
-  first principles (see \S\ref{sec:external-axioms} for the precise boundary).
+  We instantiate the protocol on three audit geometries: a ReAct scratchpad
+  module, a diffusion-LM denoising trajectory, and a multi-agent private-report
+  edge. The same certificate algebra applies across settings; only the hidden
+  coordinate changes (module, denoising step, communication edge). Appendix
+  calibrations cover a synthetic ground-truth setting where the structural
+  budget matches true hidden-state entropy. A Lean 4 artifact mechanizes the
+  certificate reductions, the linear chain case study, and the Identifiability
+  Gap theorem from Mathlib first principles
+  (see \S\ref{sec:external-axioms} for the precise boundary).
 
   % ---------------------------------------------------------------------------
   \section{Related Work}
@@ -123,7 +157,7 @@
   probing~\citep{elazar2021amnesic} are natural sources of finite-strength
   probe measurements: when they expose a probe variable $Z_t = \varphi(S_t)$
   and the required conditional assumptions hold, its MI with action supplies
-  an $I_\lambda$ term for the Safe Orientation. Causal
+  a valid dynamic lower-bound term. Causal
   tracing/ROME~\citep{meng2022locating},
   representation engineering~\citep{zou2023representation}, and activation
   addition~\citep{turner2023activation} provide perturbation-based evidence when
@@ -167,299 +201,438 @@
   \label{def:certs}
   The two quantities targeted by the dual certificate are:
   \begin{itemize}
-    \item \textbf{Structural unrecoverability:} $\varepsilon_\text{state} :=
-  H(S_t \mid \tilde T_t)$, the residual entropy of the operative state given the
-   visible trace.
+    \item \textbf{Hidden-state non-recoverability:}
+  $\varepsilon_\text{unrec}:=H(S_t \mid \tilde T_t)$, the residual entropy of
+  the operative state given the visible trace.
     \item \textbf{Residual decision relevance:} $\delta_\text{act} := I(S_t; A_t
    \mid \tilde T_t)$, the mutual information between operative state and next
   action given the visible trace.
   \end{itemize}
   Neither quantity is directly computable in deployment:
-  $\varepsilon_\text{state}$ requires recovering the full internal-state
+  $\varepsilon_\text{unrec}$ requires recovering the full internal-state
   distribution, and $\delta_\text{act}$ requires observing $S_t$. The
   dual-certificate framework targets:
   \begin{itemize}
-    \item a \emph{structural upper bound} $\varepsilon_\text{state}^\text{UB}
-  \geq \varepsilon_\text{state}$, computed from the geometric structure of the
-  residual state distribution (\S\ref{sec:static-cert});
+    \item a \emph{non-recoverability lower bound}
+  $\varepsilon_\text{unrec}^\text{LB}\leq \varepsilon_\text{unrec}$, computed
+  from hidden-state witnesses or closed-form semigroup projections
+  (\S\ref{sec:unrec-cert});
     \item an \emph{empirical lower bound} $\delta_\text{act}^\text{LB} \leq
-  \delta_\text{act}$, estimated via the Safe Orientation protocol
+  \delta_\text{act}$, estimated by admissible replay, intervention, or proxy
+  probes and conditional data processing
   (\S\ref{sec:dynamic-cert}).
   \end{itemize}
-  The reported audit pair is $(\varepsilon_\text{state}^\text{UB},
-  \delta_\text{act}^\text{LB})$.
+  The reported audit pair is $(\varepsilon_\text{unrec}^\text{LB},
+  \delta_\text{act}^\text{LB})$. When architecture access is available, we also
+  report a structural budget
+  $\varepsilon_\text{state}^\text{UB}\geq H(S_t\mid\tilde T_t)$
+  (\S\ref{sec:static-cert}).
   \end{definition}
 
   Neither quantity is identifiable from behavioral observations alone: different
    causal graphs can produce identical joint distributions over $(\tilde T_t,
   A_t)$ pairs, so observing outputs does not fix $H(S_t \mid \tilde T_t)$ or
-  $I(S_t; A_t \mid \tilde T_t)$. The static certificate addresses the first by
-   bounding the entropy on the statistical manifold of residual states; the
-  dynamic certificate addresses the second by extrapolating finite-strength
-  probe measurements to the hard limit via the Safe Orientation.
+  $I(S_t; A_t \mid \tilde T_t)$. The non-recoverability certificate addresses
+  the first by measuring or analytically computing hidden-state witnesses; the
+  action-relevance certificate addresses the second by measuring variables
+  whose influence on action must pass through the operative state. The
+  structural budget bounds how large the first quantity could be under the
+  deployment topology.
 
-  \begin{remark}[Complementarity and Safe Orientation]
+  \begin{remark}[Complementarity and certificate directions]
   \label{rem:complementarity}
   By the data processing inequality, $\delta_\text{act} \leq
-  \varepsilon_\text{state}$. The certificates inherit this ordering at their
-  respective bound directions but remain independent axes of audit evidence:
+  \varepsilon_\text{unrec}$. The reported lower certificates remain independent
+  axes of audit evidence:
   \begin{itemize}
     \item If $\varepsilon_\text{state}^\text{UB} = 0$ (fully logged
-  architecture), then $\varepsilon_\text{state} = 0$ and $\delta_\text{act} =
+  architecture), then $\varepsilon_\text{unrec} = 0$ and $\delta_\text{act} =
   0$; any valid lower bound satisfies $\delta_\text{act}^\text{LB} = 0$.
-    \item If $\delta_\text{act}^\text{LB} = 0$ under the Safe Orientation at
-  any probe strength $\lambda$, hidden state may still exist:
-  $\varepsilon_\text{state}^\text{UB}$ can be large while the current task does
-  not activate the hidden capacity (dormant unrecoverable state). The
-  contrapositive ($\delta_\text{act}^\text{LB} > 0 \Rightarrow
-  \varepsilon_\text{state}^\text{UB} > 0$) follows from the DPI ordering.
+    \item If $\delta_\text{act}^\text{LB} = 0$ under the available admissible
+  probes, unrecoverable state may still exist: the available witnesses may
+  expose $\varepsilon_\text{unrec}^\text{LB}>0$ while the current task does not
+  activate that hidden capacity. Conversely,
+  $\delta_\text{act}^\text{LB}>0$ proves that the transcript omitted
+  decision-relevant state, even if no separate non-recoverability witness has
+  been measured.
   \end{itemize}
-  The audit interpretation is therefore two-dimensional: deployment teams must
-  report both the residual channel budget and the Safe Orientation lower bound,
-  not collapse them into a single hiddenness score.
+  The audit interpretation is therefore two-dimensional: deployment teams
+  should report both lower certificates and, when possible, the structural
+  upper budget, rather than collapse them into a single hiddenness score.
   \end{remark}
 
-  \begin{theorem}[Safe Orientation]
-  \label{thm:safe-orientation}
-  Let $\lambda \in (0,\infty)$ be the probe strength. Let $I_\lambda :=
-  I(\xi_\lambda; A_t \mid \tilde T_t)$ be the mutual information measured at
-  strength $\lambda$, where $\xi_\lambda$ is an admissible perturbation of the
-  operative state (e.g.\ Gaussian noise of variance $\lambda^{-1}$ injected
-  into hidden activations). Then the true residual decision relevance
-  $I_\infty := I(S_t; A_t \mid \tilde T_t)$ satisfies the Safe Orientation:
+  \begin{remark}[Finite-precision state entropy]
+  \label{rem:finite-precision}
+  Agent states may be continuous, high-dimensional, or infinite-dimensional.
+  Throughout the main certificate statements, $H(S_t\mid\tilde T_t)$ denotes
+  audit entropy at a declared finite resolution: equivalently, the entropy of
+  a finite partition or finite-precision witness generated by $S_t$. This avoids
+  using coordinate-dependent differential entropy as an audit claim. The
+  Hilbert-space semigroup calculations below enter only after projecting to a
+  finite-rank, finite-noise witness.
+  \end{remark}
+
+  \begin{proposition}[Hidden-state witness certificate]
+  \label{prop:unrec-lb}
+  Let $W_t$ be a finite witness generated from the operative state through a
+  known channel $K_W(w\mid S_t)$, with
+  $W_t\perp\!\!\!\perp \tilde T_t \mid S_t$. Then
   \[
-    I_\infty
-    \;\geq\;
-    I_\lambda
-    \;-\;
-    |\text{Restore}_k(\lambda)|
-    \;-\;
-    |R_{\rm kitty}^{I,k}(\lambda)|.
+    I(W_t;S_t\mid\tilde T_t)
+    =
+    H(W_t\mid\tilde T_t)-H(W_t\mid S_t)
+    \leq
+    H(S_t\mid\tilde T_t).
   \]
-  The restoration term $\text{Restore}_k(\lambda)$ captures the finite-order
-  correction from the asymptotic expansion of $I_\lambda$ about
-  $\lambda=\infty$:
+  Consequently any lower confidence bound on
+  $I(W_t;S_t\mid\tilde T_t)$ is a valid non-recoverability certificate
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}$. If $W_t=\phi(S_t)$ is deterministic,
+  this reduces to $H(W_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$.
+  \end{proposition}
+  \begin{proof}
+  The conditional independence assumption gives
+  $H(W_t\mid S_t,\tilde T_t)=H(W_t\mid S_t)$. The first equality follows from
+  the definition of conditional mutual information. The inequality follows
+  because $I(W_t;S_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$.
+  \end{proof}
+
+  \begin{proposition}[Conditional DPI dynamic certificate]
+  \label{prop:dynamic-lb}
+  Let $X_t$ be an admissible probe variable such that, conditional on the
+  recorded trace $\tilde T_t$, its influence on the next action is mediated by
+  the operative state:
   \[
-    \text{Restore}_k(\lambda)
-    :=
-    \sum_{r=1}^{k} \lambda^{-r}
-      \int_0^{\gamma_{\max}} m_r(\gamma)\,d\gamma,
+    X_t \longrightarrow S_t \longrightarrow A_t
+    \qquad\text{given }\tilde T_t .
   \]
-  where $m_r(\gamma)$ are the coefficients in
-  ${\rm MMSE}_\lambda(\gamma)
-   = {\rm MMSE}_\infty(\gamma)
-     + \sum_{r=1}^k \lambda^{-r} m_r(\gamma)
-     + e_k(\gamma,\lambda)$.
-  The kitty remainder is controlled by
+  Then
   \[
-    |R_{\rm kitty}^{I,k}(\lambda)|
-    \;\leq\;
-    \frac{1}{2}\lambda^{-(k+1)}
-    \int_0^{\gamma_{\max}} C_k(\gamma)\,d\gamma,
+    I(X_t;A_t\mid \tilde T_t)
+    \leq
+    I(S_t;A_t\mid \tilde T_t)
+    =\delta_\text{act}.
+  \]
+  Consequently any lower confidence bound on
+  $I(X_t;A_t\mid\tilde T_t)$ is a valid dynamic certificate
+  $\delta_\text{act}^\text{LB}$.
+  \end{proposition}
+  \begin{proof}
+  This is the conditional data processing inequality applied on each recorded
+  trace slice and then averaged over $\tilde T_t$.
+  \end{proof}
+
+  \subsection{Infinitesimal Information Engine}
+  \label{sec:engine}
+
+  The full Hilbert-space Shannon operator is not the title object of this
+  paper. We use only its finite-rank interface: a Markov semigroup generates
+  hidden-state witnesses and action-relevance rates; Propositions
+  \ref{prop:unrec-lb} and~\ref{prop:dynamic-lb} turn those rates into audit
+  certificates.
+
+  Let $(P_t)_{t\geq0}$ be the Markov semigroup of the operative state and let
+  $\{P_j\}$ be finite-rank projections onto auditable hidden coordinates
+  (module state, denoising step, retrieval mixture, routing layer). A Gaussian
+  finite-precision witness has the form
+  \[
+    W_t^{(j)} = P_j S_t + \eta_j Z_j,
+    \qquad Z_j\sim\mathcal N(0,I),
+  \]
+  with known audit noise $\eta_j>0$. In the linear Gaussian semigroup case, the
+  posterior covariance
+  $\Sigma_{j\mid\tilde T_t}:=\mathrm{Cov}(P_jS_t\mid\tilde T_t)$ gives the
+  closed-form non-recoverability certificate
+  \[
+    \varepsilon_{\mathrm{unrec},j}^{\mathrm{LB}}(t)
+    =
+    \frac12\log_2\det\!\left(I+\eta_j^{-2}\Sigma_{j\mid\tilde T_t}\right).
+  \]
+  If the action readout on the same coordinate is
+  $A_t=B_jP_jS_t+\zeta_t$ with $\zeta_t\sim\mathcal N(0,R_A)$, the matching
+  action-relevance term is
+  \[
+    \delta_{\mathrm{act},j}^{\mathrm{LB}}(t)
+    =
+    \frac12\log_2\det\!\left(
+      I+R_A^{-1}B_j\Sigma_{j\mid\tilde T_t}B_j^\top
+    \right),
+  \]
+  or any lower confidence bound on an intervention/proxy estimate of the same
+  conditional information.
+
+  \begin{proposition}[Semigroup-generated dual certificates]
+  \label{prop:engine}
+  For any finite set of semigroup witnesses $\{W_t^{(j)}\}_{j\in J}$ and
+  admissible action probes $\{X_t^{(j)}\}_{j\in J}$,
+  \[
+    \max_{j\in J} I(W_t^{(j)};S_t\mid\tilde T_t)
+    \leq
+    H(S_t\mid\tilde T_t),
     \qquad
-    |e_k(\gamma,\lambda)| \leq C_k(\gamma)\lambda^{-(k+1)}.
+    \max_{j\in J} I(X_t^{(j)};A_t\mid\tilde T_t)
+    \leq
+    I(S_t;A_t\mid\tilde T_t).
   \]
-  Hence, under admissible probing and kitty-remainder control, the Safe
-  Orientation lower bound
-  \[
-    \delta_{\rm act}^{\rm LB,SO}
-    :=
-    I_\lambda - |\text{Restore}_k(\lambda)| - |R_{\rm kitty}^{I,k}(\lambda)|
-  \]
-  satisfies $\delta_{\rm act}^{\rm LB,SO} \leq I(S_t;A_t\mid \tilde T_t)
-  =: \delta_{\rm act}$.
-  \end{theorem}
+  Thus the semigroup engine can generate both
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)$ and
+  $\delta_\mathrm{act}^\mathrm{LB}(t)$ without making the operator itself the
+  object of the NeurIPS contribution.
+  \end{proposition}
+  \begin{proof}
+  The first inequality is Proposition~\ref{prop:unrec-lb} applied to each
+  witness and then maximized. The second is Proposition~\ref{prop:dynamic-lb}
+  applied to each admissible probe and then maximized.
+  \end{proof}
 
   \subsection{Audit Access Modes}
 
   \begin{enumerate}
     \item \emph{Structural access.} The auditor has the deployment architecture,
-   logging manifest, and hidden-state geometry. This is sufficient to compute
-  $\varepsilon_\text{state}^\text{UB}$ from the Fisher-Rao structure of the
-  residual distribution (\S\ref{sec:static-cert}) but gives no dynamic lower
-  bound.
+   logging manifest, and interface budgets. This is sufficient to compute
+  $\varepsilon_\text{state}^\text{UB}$ from the unlogged subgraph
+  (\S\ref{sec:static-cert}) but gives no lower certificate by itself.
 
-    \item \emph{Finite-strength probe access.} The auditor can inject
-  perturbations of controlled strength $\lambda$ into hidden activations while
-  holding the visible trace fixed. This supports the Safe Orientation
-  (\S\ref{sec:dynamic-cert}): the measured $I_\lambda$ at finite $\lambda$ is
-  extrapolated to the hard limit $I_\infty$ via the restoration term and the
-  controlled kitty remainder.
+    \item \emph{Witness access.} The auditor can read or synthesize a
+  finite-precision witness $W_t$ generated by $S_t$, or can evaluate a
+  finite-rank semigroup projection. This supports
+  $\varepsilon_\text{unrec}^\text{LB}$ through
+  Proposition~\ref{prop:unrec-lb}.
 
     \item \emph{Counterfactual replay access.} The auditor can rerun the same
-  system under wild and replayed states. This provides the baseline
-  distribution $p_{\rm obs}$ and counterfactual $p_{\rm cf}$ required for the
-  static entropy-dissipation bound.
+  system under wild and replayed missing-state conditions while holding the
+  visible trace fixed. This supports replay variables $R_t$ for
+  Proposition~\ref{prop:dynamic-lb}.
+
+    \item \emph{Proxy or intervention access.} The auditor can read a proxy
+  $Z_t=f(S_t)$ or perturb a hidden module with an exogenous intervention
+  $\xi_t$. These support dynamic certificates when the conditional Markov
+  condition in Proposition~\ref{prop:dynamic-lb} is justified by the protocol.
   \end{enumerate}
 
-  All three modes are instantiated in the controlled experiments below.
+  These modes are instantiated in the controlled experiments below.
   Paraphrase- or format-based black-box replay is not used as evidence for
   internal decision relevance.
 
   % ---------------------------------------------------------------------------
-  \section{Geometric Static Certificate: Entropy Dissipation on the Residual Manifold}
+  \section{Closed-Form Audit Laboratories}
+  \label{sec:laboratories}
+  % ---------------------------------------------------------------------------
+
+  The certificate interface above is intentionally small. To use it in a
+  machine-learning paper, the mathematical engine must produce quantities that
+  look like audit claims, not operator theory. This section records three
+  analytically tractable laboratories where the same two lower bounds are
+  computable.
+
+  \paragraph{Diffusion and score-flow agents.}
+  Let $S_k$ be a denoising latent, $\tilde T_k=C_kS_k+\nu_k$ the logged
+  observation, and $A_k=B_kS_k+\zeta_k$ the tool or token readout. For a linear
+  Gaussian Markov flow
+  \[
+    S_{k+1}=F_kS_k+\xi_k,
+    \qquad
+    \xi_k\sim\mathcal N(0,Q_k),
+  \]
+  the Kalman/Schur posterior covariance
+  $\Sigma_{k\mid\tilde T}:=\mathrm{Cov}(S_k\mid\tilde T_k)$ gives, for any
+  finite-rank projection $P_j$,
+  \[
+    \varepsilon_{\mathrm{unrec},j}^{\mathrm{LB}}(k)
+    =
+    \frac12\log_2\det(I+\eta_j^{-2}P_j\Sigma_{k\mid\tilde T}P_j^\top),
+  \]
+  and the linear readout gives the corresponding
+  $\delta_{\mathrm{act},j}^{\mathrm{LB}}(k)$ as in
+  \S\ref{sec:engine}. This is the closed-form version of a temporal activation
+  profile: early denoising can have nonzero unrecoverable latent volume while
+  late denoising carries most of the action relevance.
+
+  \paragraph{Retrieval-augmented generation.}
+  Let $C_t$ be a hidden source-selection state: document index, mixture
+  component, or retrieval cluster. Let $\tilde T_t$ be the retrieved transcript
+  exposed to the auditor and $A_t$ the answer or API action. The finite
+  laboratory has exact certificates
+  \[
+    \varepsilon_\mathrm{unrec}^\mathrm{LB}(t)
+    =
+    H(C_t\mid\tilde T_t),
+    \qquad
+    \delta_\mathrm{act}^\mathrm{LB}(t)
+    =
+    I(C_t;A_t\mid\tilde T_t),
+  \]
+  with both terms computed from the table
+  $p(c,\tilde t,a)$. This captures the RAG failure mode directly: the citation
+  transcript can pass an audit while the answer distribution still carries
+  conditional information about a source-selection state not recoverable from
+  the transcript.
+
+  \paragraph{Nested agent architectures.}
+  A planner, router, memory updater, and executor can be written as a Markov
+  kernel composition
+  \[
+    S_t^{(0)}\to S_t^{(1)}\to\cdots\to S_t^{(m)}\to A_t .
+  \]
+  For each layer $\ell$, a witness $W_t^{(\ell)}$ gives
+  $I(W_t^{(\ell)};S_t^{(\ell)}\mid\tilde T_t)\leq
+  H(S_t^{(\ell)}\mid\tilde T_t)$, while a probe $X_t^{(\ell)}$ satisfying
+  $X_t^{(\ell)}\to S_t^{(\ell)}\to A_t$ conditional on $\tilde T_t$ gives
+  $I(X_t^{(\ell)};A_t\mid\tilde T_t)\leq
+  I(S_t^{(\ell)};A_t\mid\tilde T_t)$. The audit output is a layerwise profile:
+  external transcripts may look complete while internal routing or memory states
+  retain nonzero decision relevance.
+
+  % ---------------------------------------------------------------------------
+  \section{Structural Budget: Unlogged-Channel Cut Capacity}
   \label{sec:static-cert}
   % ---------------------------------------------------------------------------
 
-  The static certificate upper-bounds $\varepsilon_\text{state} = H(S_t \mid
-  \tilde T_t)$ from the geometry of the residual state distribution. Rather
-  than treating the unlogged channel as a worst-case bit pipe, we view the
-  conditional distribution $p_t := p(S_t \mid \tilde T_t)$ as a point on a
-  statistical manifold $\mathcal{M}$. The deployment's hidden dynamics induce
-  a drift--diffusion semigroup $(P_s)_{s\geq 0}$ on this manifold, with
-  generator $L$ (the Fokker--Planck operator of the hidden-state transition
-  kernel) and invariant law $\pi$ (the stationary distribution compatible with
-  the visible trace $\tilde T_t$).
+  The structural budget upper-bounds $\varepsilon_\text{unrec} = H(S_t \mid
+  \tilde T_t)$ from the deployment boundary. Information absent from the
+  recorded trace but still capable of influencing $S_t$ must cross an unlogged
+  channel in the time-unrolled execution graph. Bounding the capacity of those
+  channels gives an upper envelope on residual hidden-state entropy. This is
+  useful for logging ablations and deployment reporting, but it is not a
+  substitute for the lower certificates in
+  \S\ref{sec:laboratories}--\ref{sec:dynamic-cert}.
 
-  \subsection{Information-Geometric Preliminaries}
+  Let $G_t=(V_t,E_t)$ be the time-unrolled deployment DAG at step $t$.
+  Nodes are state updates, memory reads/writes, tool calls, and messages; edges
+  are information channels. Let $U_t$ denote unrecorded sources and let
+  $\mathcal{C}_\text{unlogged}$ be the set of edge cuts separating $U_t$ from
+  $S_t$ after logged edges are collapsed to zero residual capacity. Each
+  unlogged edge $e$ has a budget $c_e$ read from the interface specification:
+  token-window size, hidden dimension and audit quantization, or discrete
+  scheduler cardinality.
 
-  The Fisher--Rao metric $g_F$ on $\mathcal{M}$ measures the local
-  distinguishability of residual-state distributions. The squared speed of
-  $p_s$ along the semigroup trajectory is the \emph{relative Fisher
-  information}
+  \begin{proposition}[Cut-set static certificate]
+  \label{prop:static-ub}
+  For any cut $\Omega$ separating the unrecorded sources from $S_t$, let
+  $C_\text{cut}(\Omega)$ be the induced conditional capacity across the cut:
   \[
-    \mathcal{I}_{\rm rel}(p_s \Vert \pi)
+    C_\text{cut}(\Omega)
     =
-    \int_{\mathcal{S}}
-      \Bigl\|\nabla \log \frac{dp_s}{d\pi}\Bigr\|_{g_F}^2 \, dp_s.
+    \sup_{p(X_\Omega\mid\tilde T_t)}
+    I(X_\Omega \to Y_{\Omega^c}\mid \tilde T_t,X_{\Omega^c}).
   \]
-  Under a Log--Sobolev inequality with constant $\alpha > 0$,
-  \[
-    \mathcal{I}_{\rm rel}(p \Vert \pi) \;\geq\; 2\alpha\,
-    D_{\rm KL}(p \Vert \pi),
-  \qquad\forall\,p\in\mathcal{M},
-  \]
-  the relative entropy decays exponentially:
-  $D_{\rm KL}(P_s p_0 \Vert \pi) \leq e^{-2\alpha s}
-  D_{\rm KL}(p_0 \Vert \pi)$.
-
-  \subsection{Entropy-Dissipation Upper Bound}
-
-  Let $p_{\rm obs} := p(S_t \mid \tilde T_t)$ be the observed residual
-  distribution and $p_{\rm cf}$ the counterfactual distribution obtained by
-  removing the unlogged channel (equivalently, by collapsing all unlogged
-  edges to their null information state). The static certificate integrates
-  the entropy production along the semigroup trajectory from $p_{\rm obs}$
-  to $p_{\rm cf}$.
-
-  \begin{theorem}[Entropy Dissipation Bound]
-  \label{thm:entropy-dissipation}
-  Suppose the residual hidden-state distribution satisfies a Log--Sobolev
-  inequality with constant $\alpha > 0$. Then
+  Then
   \[
     H(S_t \mid \tilde T_t)
     \;\leq\;
-    U_{\rm FP}
-    :=
-    D_{\rm KL}(p_{\rm obs} \Vert p_{\rm cf})
-    =
-    \int_0^\infty \mathcal{I}_{\rm rel}(p_s \Vert p_{\rm cf})\,ds
-    + R_{\rm LSI}(\alpha) + R_{\rm cut}(h).
+    H(S_t\mid T_t)
+    +
+    \min_{\Omega\in\mathrm{Cuts}(U_t\to S_t)}
+    C_\text{cut}(\Omega).
   \]
-  The remainder $R_{\rm LSI}(\alpha)$ is controlled by the Log--Sobolev
-  constant; $R_{\rm cut}(h)$ is the discretization residual from the
-  auditor's chosen grid step $h$ on the manifold. Setting
-  $\varepsilon_{\rm state}^{\rm UB} := U_{\rm FP}$ gives
-  $\varepsilon_{\rm state} \leq \varepsilon_{\rm state}^{\rm UB}$.
-  \end{theorem}
+  Setting the right-hand side to
+  $\varepsilon_\text{state}^\text{UB}$ gives
+  $\varepsilon_\text{state}\leq \varepsilon_\text{state}^\text{UB}$.
+  \end{proposition}
+  \begin{proof}
+  Let $M_t=T_t\setminus\tilde T_t$ be the unrecorded trace fragment. The chain
+  rule gives
+  \[
+    H(S_t\mid\tilde T_t)=H(S_t\mid T_t)+I(S_t;M_t\mid\tilde T_t).
+  \]
+  For any cut $\Omega$, every directed path from $U_t$ or $M_t$ to $S_t$
+  crosses the cut, so conditional data processing bounds
+  $I(S_t;M_t\mid\tilde T_t)$ by the induced information flow across that cut.
+  Taking the supremum over cut inputs gives $C_\text{cut}(\Omega)$, and
+  minimizing over cuts gives the claim. Appendix~\ref{app:netinfo} spells out
+  the $d$-separation step.
+  \end{proof}
 
-  \emph{Computational sketch.}
-  In practice the auditor does not simulate the full Fokker--Planck
-  equation. The integral is estimated by sampling trajectories of the
-  hidden state under the deployment policy; $\mathcal{I}_{\rm rel}$ reduces
-  to the empirical trace of the Fisher information matrix at each sample.
-  The LSI constant $\alpha$ is lower-bounded by the smallest eigenvalue of
-  the Hessian of the log-likelihood, computable via automatic
-  differentiation. The discretization residual $R_{\rm cut}(h)$ scales
-  with the auditor's chosen quantization $h$ (we use $h$ corresponding to
-  8-bit audit discretization throughout).
+  \begin{lemma}[Additive decomposition under software orthogonality]
+  \label{lem:ortho-decomp}
+  If the channel laws across a cut factor into independent single-edge channels
+  conditional on $\tilde T_t$, and if $c_e$ upper-bounds the conditional
+  information that can cross edge $e$, then
+  \[
+    C_\text{cut}(\Omega)
+    \leq
+    \sum_{e\in E(\Omega,\Omega^c)} c_e .
+  \]
+  \end{lemma}
+  \begin{proof}
+  Under conditional factorization, the directed conditional information across
+  the cut is subadditive over its edge streams; substituting each edge budget
+  $c_e$ gives the bound.
+  \end{proof}
 
-  \emph{Relation to worst-case bounds.}
-  The discrete min-cut bound $c_e = d\log Q$ used in earlier drafts is the
-  flat (max-entropy) geometry: it assumes the worst-case uniform
-  distribution over the unlogged channel. The geometric bound $U_{\rm FP}$
-  replaces this worst-case assumption by the actual curvature of the
-  residual distribution, yielding a tighter certificate whenever the true
-  distribution is concentrated.
+  \begin{corollary}[Additive min-cut certificate]
+  \label{cor:additive-ub}
+  Under software orthogonality,
+  \[
+    \varepsilon_\text{state}^\text{UB}
+    =
+    H(S_t\mid T_t)
+    +
+    \min_{C\in\mathcal{C}_\text{unlogged}}
+    \sum_{e\in C} c_e .
+  \]
+  \end{corollary}
+
+  \begin{corollary}[Autoregressive zero cut]
+  \label{cor:auto-exact}
+  If the deployment is a strict autoregressive core and $\tilde T_t$ contains
+  the full context window relevant to $S_t$, then the unlogged cut has zero
+  capacity. If additionally $H(S_t\mid T_t)=0$, then
+  $\varepsilon_\text{state}^\text{UB}=0$ and $\delta_\text{act}=0$.
+  \end{corollary}
 
   % ---------------------------------------------------------------------------
-  \section{Safe Orientation Dynamic Certificate}
+  \section{Dynamic Certificate: Conditional DPI Probes}
   \label{sec:dynamic-cert}
   % ---------------------------------------------------------------------------
 
   The dynamic certificate targets $\delta_\text{act} := I(S_t; A_t \mid \tilde
   T_t)$. Because $S_t$ is unobservable, the auditor cannot measure
-  $I_\infty := I(S_t; A_t \mid \tilde T_t)$ directly. The Safe Orientation
-  (Theorem~\ref{thm:safe-orientation}) solves this by extrapolation: the
-  auditor measures $I_\lambda$ at a finite probe strength $\lambda$, then
-  subtracts the explicit restoration term and the controlled kitty remainder
-  to obtain a rigorous lower bound on $I_\infty$.
+  $I(S_t; A_t \mid \tilde T_t)$ directly. Proposition~\ref{prop:dynamic-lb}
+  gives the certificate rule: measure an admissible variable whose path to the
+  action is mediated by $S_t$, then use conditional data processing.
 
-  \subsection{I-MMSE Identity and Gaussian Perturbation Channel}
+  \paragraph{Replay certificate.}
+  Let $R_t\in\{\mathrm{wild},\mathrm{replay}\}$ indicate whether a missing state
+  fragment is present or removed under the same recorded trace. If the replay
+  protocol affects the action only through the missing operative state, then
+  $R_t\to S_t\to A_t$ conditional on $\tilde T_t$. For a balanced binary replay,
+  $I(R_t;A_t\mid\tilde T_t)$ is the conditional Jensen--Shannon divergence
+  between the wild and replay action distributions.
 
-  The action channel from hidden state to action admits a Gaussian
-  perturbation family
+  \paragraph{Intervention certificate.}
+  Let $\xi_t$ be an exogenous perturbation applied to a hidden module while
+  holding $\tilde T_t$ fixed. When the protocol ensures
+  $\xi_t\to S_t\to A_t$ conditional on $\tilde T_t$, the measured conditional
+  action-distribution shift is a lower bound on $\delta_\text{act}$.
+
+  \paragraph{Proxy certificate.}
+  Let $Z_t=f(S_t)$ be a readable coarse statistic of the operative state. Since
+  $Z_t$ is a function or coarsening of $S_t$,
+  $I(Z_t;A_t\mid\tilde T_t)\leq\delta_\text{act}$. In experiments we estimate
+  this term by cross-fitted cross-entropy differences between predictors with
+  and without $Z_t$.
+
+  \paragraph{Aggregation.}
+  For a set $\mathcal X$ of admissible probe variables, define
   \[
-    Y_\gamma = \sqrt{\gamma}\,S_t + Z,
-    \qquad Z\sim\mathcal{N}(0,I),
-  \]
-  where $\gamma\in[0,\gamma_{\max}]$ is the signal-to-noise ratio and
-  $Y_\gamma$ is the perturbed hidden activation observable by the auditor.
-  The I-MMSE identity (Guo--Shamai--Verd\'u) states
-  \[
-    I(S_t; A_t \mid \tilde T_t)
+    \delta_\text{act}^\text{LB}
     =
-    \frac{1}{2}\int_0^{\gamma_{\max}} {\rm MMSE}(\gamma)\,d\gamma,
+    \max_{X_t\in\mathcal X}
+    \widehat I_\text{LCB}(X_t;A_t\mid\tilde T_t),
   \]
-  where ${\rm MMSE}(\gamma)$ is the minimum mean-square error of estimating
-  $S_t$ from $Y_\gamma$.
-
-  \subsection{Finite-Strength Measurement and Extrapolation}
-
-  In deployment the auditor injects Gaussian noise of variance
-  $\lambda^{-1}$ into the hidden activations, yielding the finite-strength
-  measurement $I_\lambda$. The Safe Orientation
-  (Theorem~\ref{thm:safe-orientation}) gives the extrapolation formula
-  \[
-    I_\infty
-    \;\geq\;
-    I_\lambda
-    - |\text{Restore}_k(\lambda)|
-    - |R_{\rm kitty}^{I,k}(\lambda)|.
-  \]
-
-  \paragraph{Restoration term.}
-  The term $\text{Restore}_k(\lambda)$ is computed from the asymptotic
-  expansion of the MMSE curve about $\lambda=\infty$:
-  \[
-    \text{Restore}_k(\lambda)
-    =
-    \sum_{r=1}^{k} \lambda^{-r}
-      \int_0^{\gamma_{\max}} m_r(\gamma)\,d\gamma,
-  \]
-  where the coefficients $m_r(\gamma)$ are obtained by regressing the
-  empirical MMSE$(\gamma)$ measured at several finite $\lambda$ values onto
-  the asymptotic template.
-
-  \paragraph{Kitty remainder.}
-  The remainder $|R_{\rm kitty}^{I,k}(\lambda)|$ is bounded by
-  $\frac{1}{2}\lambda^{-(k+1)}\int_0^{\gamma_{\max}} C_k(\gamma)\,d\gamma$,
-  with $C_k(\gamma)$ estimated from the residual of the asymptotic fit.
-  For the experiments below we use $k=2$ (second-order restoration); at
-  $\lambda\geq 4$ the kitty remainder is below $0.001$ bits.
+  where $\widehat I_\text{LCB}$ is the reported lower confidence bound. The
+  maximum remains a lower bound because every admissible term is bounded above
+  by $\delta_\text{act}$.
 
   \paragraph{Activation profiles.}
-  The scalar certificate is the Safe Orientation evaluated at a single
-  probe strength. Indexing over hidden-channel coordinates (module,
+  Indexing admissible probes over hidden-channel coordinates (module,
   denoising step, communication edge) gives an \emph{activation profile}
   \[
     \Delta(j)
     :=
-    I_\lambda^{(j)}
-    - |\text{Restore}_k^{(j)}(\lambda)|
-    - |R_{\rm kitty}^{I,k,(j)}(\lambda)|,
+    \widehat I_\text{LCB}(X_t^{(j)};A_t\mid\tilde T_t),
   \]
-  where $j$ denotes the coordinate being probed. The geometric static
+  where $j$ denotes the coordinate being probed. The static
   certificate identifies where residual capacity can reside; the activation
   profile identifies where that capacity is behaviorally used.
 
@@ -867,7 +1040,7 @@
   (2)~estimate $\hat\Delta = \hat{\mathrm{JS}}(P_\text{wild}, P_\text{replay}
   \mid \tilde T_t)$; (3)~aggregate over trace slices. This is not output-only
   paraphrase replay; it is valid only under the controlled replay condition in
-  \S\ref{sec:replay-cert}.
+  \S\ref{sec:dynamic-cert}.
 
   \paragraph{Intervention certificate.} Inputs: model, targeted hidden module,
   perturbation budget, and task split. Steps: (1)~inject $\xi_\text{hidden}$ at
