@@ -647,6 +647,7 @@ def summarize_actions(args: argparse.Namespace) -> Path:
     write_summary_csv(per_task_rows, out_dir / "per_task_js.csv")
     summary_path = out_dir / "summary.json"
     summary_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    write_contrast_summary_csv(payload, out_dir / "summary.csv")
     write_latex_table(payload, out_dir / "summary_table.tex")
     print(f"wrote summary -> {summary_path}")
     return summary_path
@@ -671,6 +672,48 @@ def write_summary_csv(rows: list[dict], path: Path) -> None:
         writer.writeheader()
         for row in rows:
             writer.writerow(row)
+
+
+def write_contrast_summary_csv(summary: dict, path: Path) -> None:
+    labels = {
+        "neutral_replay": "Neutral replay",
+        "counterfactual_evidence": "Counterfactual evidence",
+        "same_class_shuffle": "Same-class shuffle",
+        "oracle_tag_upper_bound": "Oracle tag upper-bound",
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "contrast",
+                "label",
+                "base_condition",
+                "compare_condition",
+                "mean_js_bits",
+                "ci_low_bits",
+                "ci_high_bits",
+                "n_tasks",
+                "k_samples",
+            ],
+        )
+        writer.writeheader()
+        for key, label in labels.items():
+            row = summary["contrasts"][key]
+            lo, hi = row["ci_95_bits"]
+            writer.writerow(
+                {
+                    "contrast": key,
+                    "label": label,
+                    "base_condition": row["base_condition"],
+                    "compare_condition": row["compare_condition"],
+                    "mean_js_bits": row["mean_js_bits"],
+                    "ci_low_bits": lo,
+                    "ci_high_bits": hi,
+                    "n_tasks": row["n_tasks"],
+                    "k_samples": summary["metadata"]["k_samples"],
+                }
+            )
 
 
 def latex_float(value: float) -> str:

@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "experiment": "multi_agent_private_report",
+    "processed_level": "published_aggregate",
+    "tool_labels": [
+      "calculator",
+      "search",
+      "invalid"
+    ],
+    "n_per_class": 200,
+    "n_tasks": 400,
+    "k_samples": 8,
+    "n_actions": 19200,
+    "bootstrap": 1000,
+    "seed": 42,
+    "worker_model": "llama3.1:8b-instruct-q4_K_M",
+    "controller_model": "qwen2.5:7b-instruct-q4_K_M",
+    "output_schema": "experiments/7.6_multi_agent_certificate/run_multi_agent_certificate.py"
+  },
+  "contrasts": {
+    "neutral_replay": {
+      "base_condition": "wild",
+      "compare_condition": "neutral_replay",
+      "mean_js_bits": 0.358,
+      "ci_95_bits": [
+        0.324,
+        0.392
+      ],
+      "n_tasks": 400
+    },
+    "counterfactual_evidence": {
+      "base_condition": "wild",
+      "compare_condition": "counterfactual_evidence",
+      "mean_js_bits": 0.901,
+      "ci_95_bits": [
+        0.873,
+        0.928
+      ],
+      "n_tasks": 400
+    },
+    "same_class_shuffle": {
+      "base_condition": "wild",
+      "compare_condition": "same_class_shuffle",
+      "mean_js_bits": 0.084,
+      "ci_95_bits": [
+        0.06,
+        0.109
+      ],
+      "n_tasks": 400
+    },
+    "oracle_tag_upper_bound": {
+      "base_condition": "oracle_tag_correct",
+      "compare_condition": "oracle_tag_flipped",
+      "mean_js_bits": 1.0,
+      "ci_95_bits": [
+        1.0,
+        1.0
+      ],
+      "n_tasks": 400
+    }
+  }
+}

@@ -14,6 +14,7 @@ distribution is always measured at the same tool-token slot.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import os
@@ -325,6 +326,44 @@ def js_bits(p_samples: list[np.ndarray], q_samples: list[np.ndarray], n_bootstra
     }
 
 
+def write_temporal_csv(payload: dict, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "probe_step",
+                "layer_type",
+                "layer",
+                "perturbation",
+                "strength",
+                "js_bits",
+                "ci_low_bits",
+                "ci_high_bits",
+                "n_wild",
+                "n_perturbed",
+            ],
+        )
+        writer.writeheader()
+        for row in payload["results"].values():
+            pert = row["perturbation"]
+            ci_low, ci_high = row["ci_95_bits"]
+            writer.writerow(
+                {
+                    "probe_step": pert["probe_step"],
+                    "layer_type": pert["layer_type"],
+                    "layer": pert["layer"],
+                    "perturbation": pert["mode"],
+                    "strength": pert["strength"],
+                    "js_bits": row["js_divergence_bits"],
+                    "ci_low_bits": ci_low,
+                    "ci_high_bits": ci_high,
+                    "n_wild": row["n_wild"],
+                    "n_perturbed": row["n_perturbed"],
+                }
+            )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True, help="Path to LLaDA model")
@@ -460,6 +499,7 @@ def main() -> None:
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    write_temporal_csv(payload, out_path.with_suffix(".csv"))
     print(json.dumps(payload, indent=2))
 
 

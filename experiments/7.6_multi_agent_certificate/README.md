@@ -81,4 +81,7 @@ python experiments/7.6_multi_agent_certificate/run_multi_agent_certificate.py \
 - `actions.jsonl`: raw controller samples and parsed labels.
 - `per_task_js.jsonl` / `.csv`: JS values by task and contrast.
 - `summary.json`: bootstrap summary and parse-failure rate.
-- `summary_table.tex`: LaTeX table consumed by the paper when present.
+- `summary.csv`: compact contrast-level summary.
+- `summary_table.tex`: generated LaTeX table for local inspection; the paper
+  source uses `experiments/render_paper_tables.py` to render
+  `paper/tables/multi_agent_dynamic.tex` from `summary.json`.

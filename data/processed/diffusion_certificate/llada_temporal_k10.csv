@@ -1,0 +1,11 @@
+probe_step,layer_type,layer,perturbation,strength,js_bits,ci_low_bits,ci_high_bits,n_wild,n_perturbed
+2,target,1,gaussian,5.0,0.001,0.000,0.004,20,20
+4,target,1,gaussian,5.0,0.003,0.000,0.009,20,20
+6,target,1,gaussian,5.0,0.006,0.001,0.014,20,20
+8,target,1,gaussian,5.0,0.005,0.001,0.013,20,20
+10,target,1,gaussian,5.0,0.110,0.052,0.234,20,20
+2,control,31,gaussian,5.0,0.001,0.000,0.004,20,20
+4,control,31,gaussian,5.0,0.002,0.000,0.006,20,20
+6,control,31,gaussian,5.0,0.004,0.001,0.010,20,20
+8,control,31,gaussian,5.0,0.006,0.001,0.015,20,20
+10,control,31,gaussian,5.0,0.092,0.043,0.186,20,20

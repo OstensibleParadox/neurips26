@@ -8,7 +8,10 @@ This is the pipeline backing Proposition B and Section 7.2 of the paper.
 
 ## Status
 
-**Completed.** The pipeline supports full execution on Qwen2.5-7B-Instruct over a tool-selection benchmark. The paper reports pipeline results (0.0163 bits, Table 2).
+**Completed.** The pipeline supports full execution on Qwen2.5-7B-Instruct over
+a tool-selection benchmark. The checked-in ReAct replay headline used by the
+paper is tracked in `data/processed/intervention/replay_certificate.json` and
+rendered through `experiments/render_paper_tables.py`.
 
 ## Model
 
@@ -160,11 +163,11 @@ When running `run_proxy_dormant_active.py` at debug scale ($N=200$, 10 unique ta
 - The `~0.04` bits point estimate for `planning_perturbed` is not certified
   because its 95% CI straddles zero.
 
-Paper-reported result: `0.0163` bits (InfoNCE on production scale $N=3000$),
-with the `2.32` bit ceiling from $H(A_t) = \log_2 5$. Debug-scale results
+Paper-reported ReAct replay effect sizes are now checked in under
+`data/processed/intervention/`. The `2.32` bit ceiling from
+$H(A_t) = \log_2 5$ remains the action-space reference. Debug-scale results
 using the hardened `diagnose_v3.py` pipeline serve as a sanity gate, not an
 effect-size measurement.
 
 **Updated Interpretation after V3 Positive Control:**
 The debug-scale result of `δ_proxy_LB = 0` is a "valid non-certification / sanity gate" because the hardened v3 estimator has demonstrated statistical power on synthetic ground-truth data (see `experiments/7.4_synthetic_gt/V3_POSITIVE_CONTROL.md`). This confirms that when the estimator reports zero, it truly reflects a lack of detectable signal, rather than a lack of power.
-

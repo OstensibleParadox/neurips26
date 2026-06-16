@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "experiment": "llada_temporal_intervention",
+    "processed_level": "published_aggregate",
+    "model": "LLaDA-8B-Instruct",
+    "n_samples": 20,
+    "steps": 10,
+    "probe_steps": "2,4,6,8,10",
+    "scratch_tokens": 8,
+    "target_layer": 1,
+    "control_layer": 31,
+    "bootstrap": 1000,
+    "seed": 42,
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "visible_trace": "user prompt plus final tool-token distribution",
+    "hidden_channel": "intermediate LLaDA denoising block activation",
+    "output_schema": "experiments/7.5_diffusion_certificate/run_llada_intervention.py"
+  },
+  "results": {
+    "step_2_target_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 1,
+        "layer_type": "target",
+        "probe_step": 2
+      },
+      "js_divergence_bits": 0.001,
+      "ci_95_bits": [
+        0.0,
+        0.004
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_4_target_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 1,
+        "layer_type": "target",
+        "probe_step": 4
+      },
+      "js_divergence_bits": 0.003,
+      "ci_95_bits": [
+        0.0,
+        0.009
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_6_target_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 1,
+        "layer_type": "target",
+        "probe_step": 6
+      },
+      "js_divergence_bits": 0.006,
+      "ci_95_bits": [
+        0.001,
+        0.014
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_8_target_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 1,
+        "layer_type": "target",
+        "probe_step": 8
+      },
+      "js_divergence_bits": 0.005,
+      "ci_95_bits": [
+        0.001,
+        0.013
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_10_target_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 1,
+        "layer_type": "target",
+        "probe_step": 10
+      },
+      "js_divergence_bits": 0.11,
+      "ci_95_bits": [
+        0.052,
+        0.234
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_2_control_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 31,
+        "layer_type": "control",
+        "probe_step": 2
+      },
+      "js_divergence_bits": 0.001,
+      "ci_95_bits": [
+        0.0,
+        0.004
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_4_control_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 31,
+        "layer_type": "control",
+        "probe_step": 4
+      },
+      "js_divergence_bits": 0.002,
+      "ci_95_bits": [
+        0.0,
+        0.006
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_6_control_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 31,
+        "layer_type": "control",
+        "probe_step": 6
+      },
+      "js_divergence_bits": 0.004,
+      "ci_95_bits": [
+        0.001,
+        0.01
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_8_control_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 31,
+        "layer_type": "control",
+        "probe_step": 8
+      },
+      "js_divergence_bits": 0.006,
+      "ci_95_bits": [
+        0.001,
+        0.015
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    },
+    "step_10_control_gaussian_5": {
+      "perturbation": {
+        "mode": "gaussian",
+        "strength": 5.0,
+        "layer": 31,
+        "layer_type": "control",
+        "probe_step": 10
+      },
+      "js_divergence_bits": 0.092,
+      "ci_95_bits": [
+        0.043,
+        0.186
+      ],
+      "n_wild": 20,
+      "n_perturbed": 20
+    }
+  }
+}

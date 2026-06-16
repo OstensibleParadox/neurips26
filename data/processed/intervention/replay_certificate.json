@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "experiment": "react_scratchpad_replay",
+    "processed_level": "published_aggregate",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "n_samples_per_split": 200,
+    "seed": 42,
+    "output_schema": "experiments/7.3_intervention/run_replay.py",
+    "estimator": "js_divergence_mean_distributions",
+    "visible_trace": "user query",
+    "hidden_channel": "scratchpad",
+    "units": {
+      "js_divergence_bits": "bits",
+      "js_divergence_nats": "nats",
+      "ci_95_bits": "bits",
+      "ci_95_nats": "nats"
+    }
+  },
+  "dormant": {
+    "replay_empty": {
+      "task": "calculator_only",
+      "fidelity": "empty",
+      "estimator": "js_divergence_mean_distributions",
+      "js_divergence_bits": 0.0,
+      "js_divergence_nats": 0.0,
+      "ci_95_bits": [
+        0.0,
+        0.0
+      ],
+      "ci_95_nats": [
+        0.0,
+        0.0
+      ],
+      "argmax_tool_counts_unchanged": true,
+      "n_wild": 200,
+      "n_replay": 200
+    }
+  },
+  "active": {
+    "replay_empty": {
+      "task": "planning_search",
+      "fidelity": "empty",
+      "estimator": "js_divergence_mean_distributions",
+      "js_divergence_bits": 0.0163,
+      "js_divergence_nats": 0.011298299042,
+      "ci_95_bits": [
+        0.0124,
+        0.0208
+      ],
+      "ci_95_nats": [
+        0.008595025039,
+        0.014417461355647
+      ],
+      "argmax_tool_counts_unchanged": true,
+      "n_wild": 200,
+      "n_replay": 200
+    }
+  }
+}

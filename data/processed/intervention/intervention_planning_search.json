@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "experiment": "react_scratchpad_intervention",
+    "processed_level": "published_aggregate",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "task": "planning_search",
+    "n_samples": 200,
+    "seed": 42,
+    "output_schema": "experiments/7.3_intervention/run_intervention.py",
+    "units": {
+      "js_divergence": "nats",
+      "js_ci_95": "nats",
+      "js_divergence_bits": "bits",
+      "js_ci_95_bits": "bits"
+    }
+  },
+  "planning_search/scratchpad/mask/0.7": {
+    "task": "planning_search",
+    "target": "scratchpad",
+    "mode": "mask",
+    "strength": 0.7,
+    "js_divergence": 0.014902664381239,
+    "js_ci_95": [
+      0.006515583497263,
+      0.028419034402958
+    ],
+    "js_divergence_bits": 0.0215,
+    "js_ci_95_bits": [
+      0.0094,
+      0.041
+    ],
+    "loglik_shift": null,
+    "ll_ci_95": null,
+    "n_wild": 200,
+    "n_perturbed": 200
+  },
+  "planning_search/scratchpad/replace/1.0": {
+    "task": "planning_search",
+    "target": "scratchpad",
+    "mode": "replace",
+    "strength": 1.0,
+    "js_divergence": 0.00381230949308,
+    "js_ci_95": [
+      0.001109035488896,
+      0.009080228065335
+    ],
+    "js_divergence_bits": 0.0055,
+    "js_ci_95_bits": [
+      0.0016,
+      0.0131
+    ],
+    "loglik_shift": null,
+    "ll_ci_95": null,
+    "n_wild": 200,
+    "n_perturbed": 200
+  }
+}

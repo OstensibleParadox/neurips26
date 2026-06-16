@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Condition & $\delta_\text{act}^\text{LB}$ (JS bits) & 95\% CI (bits) \\
+\midrule
+Neutral replay & $0.358$ & $[0.324,\ 0.392]$ \\
+Counterfactual evidence & $0.901$ & $[0.873,\ 0.928]$ \\
+Same-class shuffle & $0.084$ & $[0.060,\ 0.109]$ \\
+Oracle tag upper-bound & $1.000$ & $[1.000,\ 1.000]$ \\
+\bottomrule
+\end{tabular}
+\caption{Topological activation profile for the multi-agent deployment.
+Counterfactual evidence nearly saturates the binary action ceiling, while
+same-class shuffling remains much smaller. Hidden communication is therefore
+behaviorally active when the controller has delegated evidence gathering to
+the worker.}
+\label{tab:multi-agent-dynamic}
+\end{table}
