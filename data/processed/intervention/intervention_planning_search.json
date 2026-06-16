@@ -7,6 +7,14 @@
     "n_samples": 200,
     "seed": 42,
     "output_schema": "experiments/7.3_intervention/run_intervention.py",
+    "raw_samples": {
+      "status": "regenerate_required",
+      "path": "data/processed/intervention/raw/intervention_planning_search_samples.jsonl",
+      "schema_version": 1,
+      "producer": "experiments/7.3_intervention/run_intervention.py",
+      "recompute_script": "experiments/7.3_intervention/recompute_intervention_summary.py",
+      "note": "This published aggregate cannot uniquely recover true per-sample model distributions; rerun the producer to emit raw rows."
+    },
     "units": {
       "js_divergence": "nats",
       "js_ci_95": "nats",
@@ -32,7 +40,10 @@
     "loglik_shift": null,
     "ll_ci_95": null,
     "n_wild": 200,
-    "n_perturbed": 200
+    "n_perturbed": 200,
+    "raw_samples_path": "data/processed/intervention/raw/intervention_planning_search_samples.jsonl",
+    "raw_samples_status": "regenerate_required",
+    "raw_schema_version": 1
   },
   "planning_search/scratchpad/replace/1.0": {
     "task": "planning_search",
@@ -52,6 +63,9 @@
     "loglik_shift": null,
     "ll_ci_95": null,
     "n_wild": 200,
-    "n_perturbed": 200
+    "n_perturbed": 200,
+    "raw_samples_path": "data/processed/intervention/raw/intervention_planning_search_samples.jsonl",
+    "raw_samples_status": "regenerate_required",
+    "raw_schema_version": 1
   }
 }

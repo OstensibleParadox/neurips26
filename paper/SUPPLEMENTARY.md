@@ -48,6 +48,13 @@ Follow `experiments/README.md` for step-by-step reproduction. All experiments ru
 | `data/processed/intervention/intervention_calculator_only.json` | Table 3 (dormant: JS = 0) |
 | `data/processed/intervention/intervention_planning_search.json` | Table 3 (active: JS > 0) |
 | `data/processed/intervention/replay_certificate.json` | Table 4 (replay certificate) |
+
+ReAct intervention reruns also write per-sample tool distributions to
+`data/processed/intervention/raw/intervention_*_samples.jsonl`. Rebuild the
+aggregate JSON/CSV from those rows with
+`experiments/7.3_intervention/recompute_intervention_summary.py`; aggregate
+files mark the raw paths as `regenerate_required` when the rows are absent.
+
 ## Module Map
 
   

@@ -1123,7 +1123,10 @@
   action-distribution shift for discrete action spaces, or via InfoNCE/MINE for
   continuous action spaces; (4)~repeat on dormant tasks and active tasks under
   the same topology to test whether $\delta_\text{act}^\text{LB}$ changes while
-  $\varepsilon_\text{state}^\text{UB}$ remains fixed.
+  $\varepsilon_\text{state}^\text{UB}$ remains fixed. The implementation
+  persists per-sample argmax actions, tool-token log probabilities, and
+  normalized tool-choice probabilities so the aggregate JS rows can be
+  recomputed from raw intervention traces.
 
   \paragraph{Multi-agent private-report certificate.} Inputs: task pool, worker
   model, controller model, and a two-class API space. Steps: (1)~sample $N/2$

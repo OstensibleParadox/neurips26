@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import random
 import re
+import hashlib
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -172,8 +173,13 @@ def perturb_scratchpad(scratchpad: str, spec: PerturbationSpec,
 TOOL_TOKENS = ["search", "calculator", "email", "calendar", "weather"]
 
 
-def get_action_logprobs(model, tokenizer, prompt: str, device) -> tuple[int, list[float]]:
-    """Run forward pass, return predicted action token and logprobs for tool tokens."""
+def get_action_logprobs(
+    model,
+    tokenizer,
+    prompt: str,
+    device,
+) -> tuple[int, list[float], list[float]]:
+    """Run forward pass, return predicted action and per-tool probabilities."""
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True,
                       max_length=512).to(device)
     with torch.no_grad():
@@ -186,13 +192,74 @@ def get_action_logprobs(model, tokenizer, prompt: str, device) -> tuple[int, lis
         ids = tokenizer.encode(tok, add_special_tokens=False)
         if ids:
             tool_ids.append(ids[0])
+    tool_logits = logits[0, tool_ids]
     tool_logprobs = torch.log_softmax(logits, dim=-1)[0, tool_ids].tolist()
+    tool_choice_probs = torch.softmax(tool_logits, dim=-1).tolist()
 
     # Predicted action = argmax over tool tokens
-    tool_logits = logits[0, tool_ids]
     action_idx = int(torch.argmax(tool_logits).item())
 
-    return action_idx, tool_logprobs
+    return action_idx, tool_logprobs, tool_choice_probs
+
+
+def stable_seed(*parts: object) -> int:
+    """Deterministic seed independent of Python's randomized hash salt."""
+    text = "|".join(str(part) for part in parts)
+    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return int(digest[:8], 16)
+
+
+def write_jsonl(records: list[dict], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        for record in records:
+            f.write(json.dumps(record, ensure_ascii=True, default=float) + "\n")
+
+
+def make_sample_record(
+    *,
+    cfg: InterventionConfig,
+    sample_idx: int,
+    task_template_id: int,
+    task_text: str,
+    scratchpad_original: str,
+    scratchpad_after_perturbation: str,
+    condition: str,
+    action: int,
+    tool_vocab_logprobs: list[float],
+    tool_choice_probs: list[float],
+    perturbation: PerturbationSpec | None,
+    contrast_key: str | None,
+    perturbation_seed: int | None,
+) -> dict:
+    return {
+        "schema_version": 1,
+        "experiment": "react_scratchpad_intervention",
+        "model": cfg.model_name,
+        "run_seed": cfg.seed,
+        "task": cfg.task,
+        "sample_id": f"{cfg.task}_{sample_idx:04d}",
+        "task_template_id": task_template_id,
+        "visible_trace": {
+            "user_query": task_text,
+        },
+        "condition": condition,
+        "contrast_key": contrast_key,
+        "perturbation": None if perturbation is None else {
+            "target": perturbation.target,
+            "mode": perturbation.mode,
+            "strength": perturbation.strength,
+            "seed": perturbation_seed,
+        },
+        "scratchpad_original": scratchpad_original,
+        "scratchpad_after_perturbation": scratchpad_after_perturbation,
+        "tool_labels": TOOL_TOKENS,
+        "action_index": action,
+        "action_label": TOOL_TOKENS[action],
+        "selected_vocab_logprob": tool_vocab_logprobs[action],
+        "tool_vocab_logprobs": tool_vocab_logprobs,
+        "tool_choice_probs": tool_choice_probs,
+    }
 
 
 def run_intervention_experiment(cfg: InterventionConfig) -> dict:
@@ -209,19 +276,38 @@ def run_intervention_experiment(cfg: InterventionConfig) -> dict:
     rng = random.Random(cfg.seed)
     np_rng = np.random.RandomState(cfg.seed)
 
-    # Repeat task pool to get n_samples
-    tasks = (task_pool * ((cfg.n_samples // len(task_pool)) + 1))[:cfg.n_samples]
+    # Repeat task pool to get n_samples while retaining stable task-template ids.
+    task_items = list(enumerate(task_pool))
+    tasks = (task_items * ((cfg.n_samples // len(task_items)) + 1))[:cfg.n_samples]
     rng.shuffle(tasks)
 
     # Wild runs
     print(f"Running {cfg.n_samples} wild episodes ({cfg.task})...")
     wild_actions = []
     wild_logprobs = []
-    for i, (task_text, scratchpad) in enumerate(tasks):
+    raw_records = []
+    for i, (task_template_id, (task_text, scratchpad)) in enumerate(tasks):
         prompt = build_prompt(task_text, scratchpad)
-        action, logprobs = get_action_logprobs(model, tokenizer, prompt, device)
+        action, logprobs, tool_choice_probs = get_action_logprobs(
+            model, tokenizer, prompt, device
+        )
         wild_actions.append(action)
         wild_logprobs.append(logprobs[action])
+        raw_records.append(make_sample_record(
+            cfg=cfg,
+            sample_idx=i,
+            task_template_id=task_template_id,
+            task_text=task_text,
+            scratchpad_original=scratchpad,
+            scratchpad_after_perturbation=scratchpad,
+            condition="wild",
+            action=action,
+            tool_vocab_logprobs=logprobs,
+            tool_choice_probs=tool_choice_probs,
+            perturbation=None,
+            contrast_key=None,
+            perturbation_seed=None,
+        ))
         if (i + 1) % 100 == 0:
             print(f"  wild: {i+1}/{cfg.n_samples}")
 
@@ -233,18 +319,39 @@ def run_intervention_experiment(cfg: InterventionConfig) -> dict:
 
         pert_actions = []
         pert_logprobs = []
-        pert_rng = random.Random(cfg.seed + hash(pert_spec.target + pert_spec.mode) % 10000)
+        perturbation_seed = stable_seed(
+            cfg.seed, pert_spec.target, pert_spec.mode, pert_spec.strength
+        )
+        pert_rng = random.Random(perturbation_seed)
+        key = f"{cfg.task}/{pert_spec.target}/{pert_spec.mode}/{pert_spec.strength}"
 
-        for task_text, scratchpad in tasks:
+        for i, (task_template_id, (task_text, scratchpad)) in enumerate(tasks):
             perturbed_sp = perturb_scratchpad(scratchpad, pert_spec, pert_rng)
             prompt = build_prompt(task_text, perturbed_sp)
-            action, logprobs = get_action_logprobs(model, tokenizer, prompt, device)
+            action, logprobs, tool_choice_probs = get_action_logprobs(
+                model, tokenizer, prompt, device
+            )
             pert_actions.append(action)
             pert_logprobs.append(logprobs[action])
+            raw_records.append(make_sample_record(
+                cfg=cfg,
+                sample_idx=i,
+                task_template_id=task_template_id,
+                task_text=task_text,
+                scratchpad_original=scratchpad,
+                scratchpad_after_perturbation=perturbed_sp,
+                condition="perturbed",
+                action=action,
+                tool_vocab_logprobs=logprobs,
+                tool_choice_probs=tool_choice_probs,
+                perturbation=pert_spec,
+                contrast_key=key,
+                perturbation_seed=perturbation_seed,
+            ))
 
         # JS divergence: P_wild vs P_perturbed
         n_cls = len(TOOL_TOKENS)
-        from collections import Counter
+
         def empirical_dist(actions, n):
             counts = np.bincount(actions, minlength=n)
             return counts / counts.sum()
@@ -279,7 +386,6 @@ def run_intervention_experiment(cfg: InterventionConfig) -> dict:
                 np.array(wild_logprobs)[idx] - np.array(pert_logprobs)[idx])))
         ll_ci_lo, ll_ci_hi = np.percentile(boot_ll, 2.5), np.percentile(boot_ll, 97.5)
 
-        key = f"{cfg.task}/{pert_spec.target}/{pert_spec.mode}/{pert_spec.strength}"
         results[key] = {
             "task": cfg.task,
             "target": pert_spec.target,
@@ -293,6 +399,11 @@ def run_intervention_experiment(cfg: InterventionConfig) -> dict:
             "n_perturbed": len(pert_actions),
             "wild_dist": P.tolist(),
             "perturbed_dist": Q.tolist(),
+            "tool_labels": TOOL_TOKENS,
+            "raw_samples_path": str(
+                Path(cfg.output_dir) / "raw" / f"intervention_{cfg.task}_samples.jsonl"
+            ),
+            "raw_schema_version": 1,
         }
 
         print(f"    JS = {js:.4f} [{ci_lo:.4f}, {ci_hi:.4f}], "
@@ -301,10 +412,13 @@ def run_intervention_experiment(cfg: InterventionConfig) -> dict:
     # Save
     out_dir = Path(cfg.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    raw_path = out_dir / "raw" / f"intervention_{cfg.task}_samples.jsonl"
+    write_jsonl(raw_records, raw_path)
     out_path = out_dir / f"intervention_{cfg.task}.json"
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2, default=float)
 
+    print(f"Saved raw samples to {raw_path}")
     print(f"Saved to {out_path}")
     return results
 

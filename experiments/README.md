@@ -220,6 +220,12 @@ python experiments/7.3_intervention/render_figure_intervention.py
 - `data/processed/intervention/intervention_planning_search.json` — JS > 0 (active)
 - `data/processed/intervention/replay_certificate.json` — dormant/active contrast
 
+`run_dormant_active.py` also emits raw per-sample tool distributions under
+`data/processed/intervention/raw/intervention_*_samples.jsonl`; rerun
+`recompute_intervention_summary.py` to rebuild the aggregate JSON/CSV from
+those rows. Existing aggregate files mark these raw paths as
+`regenerate_required` when the raw rows are not present.
+
 ---
 
 ## Experiment 4: Synthetic Ground-Truth Validation (Appendix E)
@@ -345,6 +351,8 @@ python experiments/7.2_dynamic_certificate/run_proxy_ablation.py \
 # 3. Intervention certificate
 python experiments/7.3_intervention/run_dormant_active.py \
     --config experiments/7.3_intervention/configs/production.yaml
+python experiments/7.3_intervention/recompute_intervention_summary.py \
+    --out-dir data/processed/intervention
 
 # 4. Synthetic validation
 python experiments/7.4_synthetic_gt/run_synthetic.py \
@@ -381,6 +389,7 @@ Files marked **included** ship in this archive. Files marked **generated** are p
 | `data/processed/proxy_dormant_active.json` | included | Dormant/active proxy split | Table 2 |
 | `data/processed/intervention/*.json` | included | Intervention & replay results | Tables 3–4 |
 | `data/processed/intervention/*_summary.csv` | included | ReAct intervention/replay summary tables | Tables 3–4 |
+| `data/processed/intervention/raw/intervention_*_samples.jsonl` | generated | Per-sample ReAct intervention tool distributions | Table 3 audit |
 | `data/processed/diffusion_certificate/llada_temporal_k10.json` | included | LLaDA temporal certificate profile (per-step JS divergence) | §6.3 |
 | `data/processed/diffusion_certificate/llada_temporal_k10.csv` | included | LLaDA temporal summary table | §6.3 |
 | `data/processed/multi_agent_certificate/summary.json` | included | Multi-agent private-report JS summary | §6.4 |
