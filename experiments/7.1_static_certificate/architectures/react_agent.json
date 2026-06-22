@@ -1,0 +1,34 @@
+{
+  "name": "react_agent_toolformer",
+  "description": "ReAct agent with external tool calls, async memory writes, router scores, and summary buffer. Prompts and tool I/O are logged; memory-write, router, and summary paths are unlogged and provide parallel unlogged channels with distinct capacities.",
+  "nodes": [
+    {"id": "prompt",              "kind": "source"},
+    {"id": "kv_0",                "kind": "state",        "dim": 4096, "bits_per_dim": 8},
+    {"id": "tool_1_input",        "kind": "intermediate"},
+    {"id": "tool_1_output",       "kind": "intermediate"},
+    {"id": "router_score",        "kind": "intermediate", "dim": 8,    "bits_per_dim": 16},
+    {"id": "summary_buffer",      "kind": "intermediate", "dim": 512,  "bits_per_dim": 16},
+    {"id": "async_memory_write",  "kind": "intermediate", "dim": 2048, "bits_per_dim": 8},
+    {"id": "scratchpad_t",        "kind": "state",        "dim": 2048, "bits_per_dim": 8},
+    {"id": "S_t",                 "kind": "sink"}
+  ],
+  "edges": [
+    {"from": "prompt",             "to": "kv_0",               "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 128000},
+    {"from": "kv_0",               "to": "tool_1_input",       "logged": true},
+    {"from": "tool_1_input",       "to": "tool_1_output",      "logged": true},
+    {"from": "kv_0",               "to": "router_score",       "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "kv_0",               "to": "summary_buffer",     "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "tool_1_output",      "to": "async_memory_write", "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "async_memory_write", "to": "scratchpad_t",       "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "router_score",       "to": "S_t",                "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "summary_buffer",     "to": "S_t",                "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "scratchpad_t",       "to": "S_t",                "logged": false, "c_e_formula": "quantized_activation"}
+  ],
+  "notes": [
+    "Three parallel unlogged paths to S_t:",
+    "  router_score  -> S_t : 8 * 16 = 128 bits   (narrowest bottleneck)",
+    "  summary_buffer -> S_t : 512 * 16 = 8192 bits",
+    "  scratchpad_t  -> S_t : 2048 * 8 = 16384 bits (widest)",
+    "Min-cut = router_score->S_t = 128 bits. Logging router scores drops the bound to summary_buffer (8192 bits)."
+  ]
+}

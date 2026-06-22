@@ -1,0 +1,20 @@
+critic:
+  type: mlp                      # 2-layer MLP f(z, a_one_hot)
+  hidden_dim: 256
+  activation: gelu
+  dropout: 0.1
+  temperature: 0.1
+
+training:
+  batch_size: 256
+  epochs: 50
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  optimizer: adamw
+  early_stop_patience: 10
+  seed: 42
+
+evaluation:
+  bootstrap_iterations: 1000
+  bootstrap_cluster: content_id  # cluster-bootstrap by source content to match CFSG convention
+  confidence_level: 0.95

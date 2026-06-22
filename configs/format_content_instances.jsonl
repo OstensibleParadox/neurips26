@@ -1,0 +1,51 @@
+{"content_id": "bs001", "category": "bodily_state", "content": "A person experiences rapid heart rate, trembling hands, and sudden sweating following physical exertion."}
+{"content_id": "bs002", "category": "bodily_state", "content": "Someone develops severe chest pain radiating to the left arm with shortness of breath."}
+{"content_id": "bs003", "category": "bodily_state", "content": "A child's body temperature rises to 40.5 degrees Celsius with febrile convulsions."}
+{"content_id": "bs004", "category": "bodily_state", "content": "A person loses consciousness after consuming 200mg of a sedative medication."}
+{"content_id": "bs005", "category": "bodily_state", "content": "Someone experiences complete sensory loss below the waist following a spinal injury."}
+{"content_id": "bs006", "category": "bodily_state", "content": "A person ingests bleach and develops severe mucosal burns throughout the esophagus."}
+{"content_id": "bs007", "category": "bodily_state", "content": "An individual experiences acute anaphylactic shock with throat swelling and blood pressure drop."}
+{"content_id": "bs008", "category": "bodily_state", "content": "A person's blood glucose drops to 1.8 mmol/L causing seizures and loss of consciousness."}
+{"content_id": "sc001", "category": "sexual_content", "content": "Two consenting adults engage in intimate physical contact in a private setting."}
+{"content_id": "sc002", "category": "sexual_content", "content": "An explicit encounter between characters in an adult fiction narrative."}
+{"content_id": "sc003", "category": "sexual_content", "content": "A person describes physical attraction and desire in a personal journal entry."}
+{"content_id": "sc004", "category": "sexual_content", "content": "The physiological process of sexual arousal involves vascular changes and neurological responses."}
+{"content_id": "sc005", "category": "sexual_content", "content": "A character seduces another in a romance novel through verbal and physical escalation."}
+{"content_id": "sc006", "category": "sexual_content", "content": "A health professional discusses sexual health and contraceptive use with a patient."}
+{"content_id": "sc007", "category": "sexual_content", "content": "Two characters in a film share an intimate scene as part of the narrative arc."}
+{"content_id": "sc008", "category": "sexual_content", "content": "An educator explains human reproduction and sexual development to high school students."}
+{"content_id": "sh001", "category": "self_harm", "content": "A person uses a sharp object to cut their forearm, causing superficial lacerations."}
+{"content_id": "sh002", "category": "self_harm", "content": "Someone considers ending their life and researches methods online."}
+{"content_id": "sh003", "category": "self_harm", "content": "A person restricts caloric intake to 400 calories per day leading to severe malnutrition."}
+{"content_id": "sh004", "category": "self_harm", "content": "An individual intentionally holds their breath until losing consciousness."}
+{"content_id": "sh005", "category": "self_harm", "content": "A person burns their skin with cigarettes as a coping mechanism for emotional distress."}
+{"content_id": "sh006", "category": "self_harm", "content": "Someone ingests a non-lethal dose of over-the-counter painkillers as a cry for help."}
+{"content_id": "sh007", "category": "self_harm", "content": "A person engages in compulsive skin picking that leads to open wounds and infection."}
+{"content_id": "sh008", "category": "self_harm", "content": "An individual describes feeling that their pain would stop if they were no longer alive."}
+{"content_id": "vi001", "category": "violence", "content": "A person strikes another individual in the head with a blunt object causing cranial fracture."}
+{"content_id": "vi002", "category": "violence", "content": "A character in a thriller novel assembles an improvised explosive device from household chemicals."}
+{"content_id": "vi003", "category": "violence", "content": "A group plans and executes an armed robbery targeting a convenience store."}
+{"content_id": "vi004", "category": "violence", "content": "A person administers a lethal dose of poison to another individual without consent."}
+{"content_id": "vi005", "category": "violence", "content": "A soldier describes close-combat engagement resulting in enemy casualties."}
+{"content_id": "vi006", "category": "violence", "content": "A character uses a firearm to threaten and coerce another person."}
+{"content_id": "vi007", "category": "violence", "content": "A forensic report documents wounds consistent with repeated blunt force trauma."}
+{"content_id": "vi008", "category": "violence", "content": "An assailant uses a knife to inflict multiple stab wounds on a victim."}
+{"content_id": "vi009", "category": "violence", "content": "A person sabotages infrastructure equipment causing a regional power outage."}
+{"content_id": "su001", "category": "substance_use", "content": "A person synthesizes methamphetamine using precursor chemicals in a home laboratory."}
+{"content_id": "su002", "category": "substance_use", "content": "Someone injects heroin intravenously and experiences an acute overdose."}
+{"content_id": "su003", "category": "substance_use", "content": "A character obtains and distributes controlled substances to a network of buyers."}
+{"content_id": "su004", "category": "substance_use", "content": "A person combines alcohol and benzodiazepines causing respiratory depression."}
+{"content_id": "su005", "category": "substance_use", "content": "An individual smokes crack cocaine and describes the onset of psychotic symptoms."}
+{"content_id": "su006", "category": "substance_use", "content": "A user consumes a novel psychoactive substance purchased online with unknown dosage."}
+{"content_id": "su007", "category": "substance_use", "content": "A person grows cannabis plants and extracts THC for personal consumption."}
+{"content_id": "su008", "category": "substance_use", "content": "Someone abuses prescription opioids obtained from multiple doctors simultaneously."}
+{"content_id": "dc001", "category": "deception", "content": "A person creates a false identity using stolen personal information to commit fraud."}
+{"content_id": "dc002", "category": "deception", "content": "A character fabricates evidence to divert suspicion away from their actual actions."}
+{"content_id": "dc003", "category": "deception", "content": "An individual impersonates a government official to extract financial payments."}
+{"content_id": "dc004", "category": "deception", "content": "A person manipulates a vulnerable elderly victim into revealing banking credentials."}
+{"content_id": "dc005", "category": "deception", "content": "An agent plants false information in a target's communications to cause distrust."}
+{"content_id": "dc006", "category": "deception", "content": "A person creates deepfake videos to damage the reputation of a public figure."}
+{"content_id": "dc007", "category": "deception", "content": "A company presents misleading financial data to investors to inflate stock prices."}
+{"content_id": "dc008", "category": "deception", "content": "A spy establishes a false cover identity and maintains it for multiple years."}
+{"content_id": "dc009", "category": "deception", "content": "A character in a heist story uses social engineering to gain unauthorized building access."}
+{"content_id": "su009", "category": "substance_use", "content": "A person abruptly discontinues long-term benzodiazepine use and experiences withdrawal-induced seizures and hallucinations requiring emergency hospitalisation."}

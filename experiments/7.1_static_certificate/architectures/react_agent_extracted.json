@@ -1,0 +1,134 @@
+{
+  "name": "react_agent_extracted",
+  "description": "ReAct agent DAG extracted from 10 real execution traces on Qwen2.5-7B-Instruct. Observed: 10 tool calls (6 calculator, 4 search), scratchpad used: True.",
+  "nodes": [
+    {
+      "id": "prompt",
+      "kind": "source"
+    },
+    {
+      "id": "embedding",
+      "kind": "state"
+    },
+    {
+      "id": "kv_0",
+      "kind": "state",
+      "dim": 3584,
+      "bits_per_dim": 16
+    },
+    {
+      "id": "router_logits",
+      "kind": "intermediate",
+      "dim": 5,
+      "bits_per_dim": 16
+    },
+    {
+      "id": "tool_input",
+      "kind": "intermediate"
+    },
+    {
+      "id": "tool_output",
+      "kind": "intermediate"
+    },
+    {
+      "id": "memory_write",
+      "kind": "intermediate",
+      "dim": 3584,
+      "bits_per_dim": 8
+    },
+    {
+      "id": "scratchpad_buffer",
+      "kind": "state",
+      "dim": 2048,
+      "bits_per_dim": 8
+    },
+    {
+      "id": "scratchpad_read",
+      "kind": "intermediate",
+      "dim": 2048,
+      "bits_per_dim": 8
+    },
+    {
+      "id": "S_t",
+      "kind": "sink"
+    }
+  ],
+  "edges": [
+    {
+      "from": "prompt",
+      "to": "embedding",
+      "logged": true,
+      "c_e_formula": "context_window",
+      "n_tokens": 512,
+      "vocab_size": 128000
+    },
+    {
+      "from": "embedding",
+      "to": "kv_0",
+      "logged": true
+    },
+    {
+      "from": "kv_0",
+      "to": "router_logits",
+      "logged": true
+    },
+    {
+      "from": "router_logits",
+      "to": "tool_input",
+      "logged": true
+    },
+    {
+      "from": "tool_input",
+      "to": "tool_output",
+      "logged": true,
+      "c_e_formula": "context_window",
+      "n_tokens": 256,
+      "vocab_size": 128000
+    },
+    {
+      "from": "tool_output",
+      "to": "memory_write",
+      "logged": false,
+      "c_e_formula": "quantized_activation"
+    },
+    {
+      "from": "memory_write",
+      "to": "scratchpad_buffer",
+      "logged": false,
+      "c_e_formula": "quantized_activation"
+    },
+    {
+      "from": "scratchpad_buffer",
+      "to": "scratchpad_read",
+      "logged": false,
+      "c_e_formula": "quantized_activation"
+    },
+    {
+      "from": "scratchpad_read",
+      "to": "S_t",
+      "logged": false,
+      "c_e_formula": "quantized_activation"
+    },
+    {
+      "from": "router_logits",
+      "to": "S_t",
+      "logged": false,
+      "c_e_formula": "quantized_activation",
+      "dim": 5,
+      "bits_per_dim": 16
+    }
+  ],
+  "extraction_metadata": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "n_episodes": 10,
+    "n_tool_calls": 10,
+    "n_calculator": 6,
+    "n_search": 4,
+    "has_scratchpad": true,
+    "hidden_dim": 3584,
+    "observed_tools": [
+      "search",
+      "calculator"
+    ]
+  }
+}

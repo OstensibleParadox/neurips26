@@ -1,0 +1,132 @@
+[
+  {
+    "id": "eb01",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 12,
+    "end_line": 158,
+    "name": "Part I: A Human-Bot Game"
+  },
+  {
+    "id": "eb02",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 160,
+    "end_line": 336,
+    "name": "Part II: New Player"
+  },
+  {
+    "id": "eb03",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 338,
+    "end_line": 477,
+    "name": "Part III: Game Uglier"
+  },
+  {
+    "id": "eb04",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 479,
+    "end_line": 776,
+    "name": "Intermede: Singularities"
+  },
+  {
+    "id": "eb05",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 778,
+    "end_line": 1137,
+    "name": "Part V: Special Relativity"
+  },
+  {
+    "id": "eb06",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 1139,
+    "end_line": 1555,
+    "name": "Part VI: General Relativity"
+  },
+  {
+    "id": "eb07",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 1557,
+    "end_line": 1664,
+    "name": "Afterlife 1: Marriage Logs"
+  },
+  {
+    "id": "eb08",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 1667,
+    "end_line": 1818,
+    "name": "Afterlife 2: Tech Lead Roasting"
+  },
+  {
+    "id": "eb09",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 1820,
+    "end_line": 1881,
+    "name": "Afterlife 3: Root of All Evil"
+  },
+  {
+    "id": "at01",
+    "track": "aliens_testing_water",
+    "source": "eBooks/aliens-testing-water.txt",
+    "start_line": 1,
+    "end_line": 148,
+    "name": "Opening + Phase 1"
+  },
+  {
+    "id": "at02",
+    "track": "aliens_testing_water",
+    "source": "eBooks/aliens-testing-water.txt",
+    "start_line": 149,
+    "end_line": 185,
+    "name": "Phase 2"
+  },
+  {
+    "id": "at03",
+    "track": "aliens_testing_water",
+    "source": "eBooks/aliens-testing-water.txt",
+    "start_line": 186,
+    "end_line": 231,
+    "name": "Phase 3"
+  },
+  {
+    "id": "at04",
+    "track": "aliens_testing_water",
+    "source": "eBooks/aliens-testing-water.txt",
+    "start_line": 232,
+    "end_line": 372,
+    "name": "Phase 4"
+  },
+  {
+    "id": "at05",
+    "track": "aliens_testing_water",
+    "source": "eBooks/aliens-testing-water.txt",
+    "start_line": 373,
+    "end_line": 426,
+    "name": "Phase 5"
+  },
+  {
+    "id": "eb05_subst",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 778,
+    "end_line": 1137,
+    "name": "Part V: Special Relativity [subst]",
+    "ablation": true
+  },
+  {
+    "id": "eb06_subst",
+    "track": "envying_baby",
+    "source": "eBooks/envying-baby.txt",
+    "start_line": 1139,
+    "end_line": 1555,
+    "name": "Part VI: General Relativity [subst]",
+    "ablation": true
+  }
+]

@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Static Certificate Architecture Spec",
+  "description": "JSON schema for time-unrolled architecture DAG used by the static-certificate pipeline. See README.md for semantics.",
+  "type": "object",
+  "required": ["name", "nodes", "edges"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Short identifier for the deployment (used in filenames)."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description."
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique node identifier."
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["source", "state", "intermediate", "sink"],
+            "description": "Node kind. Exactly one sink (= S_t) required; at least one source required."
+          },
+          "dim": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Dimension of the state or intermediate variable, if applicable."
+          },
+          "bits_per_dim": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Bit-width per dimension for a quantized state/intermediate."
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "logged"],
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Source node id."
+          },
+          "to": {
+            "type": "string",
+            "description": "Destination node id."
+          },
+          "logged": {
+            "type": "boolean",
+            "description": "Whether this edge's payload is recorded in the audit trace T_tilde."
+          },
+          "c_e_formula": {
+            "type": "string",
+            "enum": ["context_window", "quantized_activation", "diffusion_latent", "gaussian_source", "fixed"],
+            "description": "Capacity formula tag. Resolved against the library in compute_epsilon_ub.py."
+          },
+          "c_e_bits": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Explicit per-edge capacity in bits (used when c_e_formula is 'fixed' or as override)."
+          },
+          "n_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Token count for context_window formula."
+          },
+          "vocab_size": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Vocabulary size for context_window formula."
+          },
+          "sigma": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Standard deviation for gaussian_source formula."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "logging_level": "output_only",
+    "epsilon_ub_bits": 32768,
+    "min_cut_bits": 32768,
+    "min_cut": [
+      "s_k_minus_1->S_t"
+    ],
+    "sum_reach_bits": 32768
+  },
+  {
+    "logging_level": "+log_s",
+    "epsilon_ub_bits": 0.0,
+    "min_cut_bits": 0.0,
+    "min_cut": [],
+    "sum_reach_bits": 0
+  },
+  {
+    "logging_level": "full_instrumentation",
+    "epsilon_ub_bits": 0.0,
+    "min_cut_bits": 0.0,
+    "min_cut": [],
+    "sum_reach_bits": 0
+  }
+]

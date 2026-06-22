@@ -1,0 +1,36 @@
+model:
+  name: Qwen/Qwen2.5-1.5B-Instruct
+  dtype: bfloat16
+  device: mps
+
+task:
+  name: calculator_only       # override with --task flag or YAML
+  n_samples: 200
+  batch_size: 1
+  seed: 42
+
+probe:
+  layer: 12                    # middle layer for hidden-state capture
+
+scratchpad:
+  n_tokens: 64                 # tokens allocated as hidden scratchpad buffer
+
+perturbations:
+  - target: router
+    mode: gaussian
+    strength: 0.5
+  - target: router
+    mode: gaussian
+    strength: 1.0
+  - target: scratchpad
+    mode: gaussian
+    strength: 0.5
+  - target: scratchpad
+    mode: gaussian
+    strength: 1.0
+  - target: scratchpad
+    mode: mask
+    strength: 0.3
+
+output:
+  dir: data/processed/intervention

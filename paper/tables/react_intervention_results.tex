@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{llcc}
+\toprule
+Task & Perturbation & JS (bits; nats) & 95\% CI (bits) \\
+\midrule
+Calculator (dormant) & mask $0.7$ & $0.0000$; $0.0000$ & $[0,0]$ \\
+Planning (active) & mask $0.7$ & $0.0188$; $0.0131$ & $[0.0070,0.0381]$ \\
+Calculator (dormant) & replace $1.0$ & $0.0000$; $0.0000$ & $[0,0]$ \\
+Planning (active) & replace $1.0$ & $0.0080$; $0.0056$ & $[0.0027,0.0167]$ \\
+\bottomrule
+\end{tabular}
+\caption{Dynamic intervention certificate under the same unlogged-scratchpad
+topology. Dormant calculator tasks show no detectable scratchpad influence;
+active planning tasks show positive action-distribution shift.}
+\label{tab:intervention-results}
+\end{table}

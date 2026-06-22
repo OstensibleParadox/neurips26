@@ -1,0 +1,25 @@
+model:
+  name: Qwen/Qwen2.5-7B-Instruct
+  dtype: bfloat16
+  device: mps
+
+task:
+  seed: 42
+  batch_size: 1
+
+boundary:
+  candidate_mode: generated
+  candidates_jsonl:
+  max_candidates: 5000
+  margin_threshold: 0.5
+  top_k_boundary: 500
+  max_length: 512
+  conditions:
+    - remove
+    - neutral
+    - counterfactual
+  n_bootstrap: 1000
+  use_space_variants: true
+
+output:
+  dir: data/processed/intervention_boundary

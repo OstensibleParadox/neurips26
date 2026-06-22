@@ -1,0 +1,43 @@
+.DS_Store
+
+# Local tooling / assistant traces
+.claude/
+.hf_cache/
+.vendor_llada/
+.venv/
+.env
+.env.*
+!.env.example
+
+# Python cache / build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Log files
+*.log
+
+# LaTeX build products
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.pdf
+paper/*.synctex.gz
+/main.pdf
+paper/*.tex.bak
+
+# Lean build products
+lean4/.lake/
+lean4/.cache/
+lean4/build/
+*.olean
+
+# Local model directories and ad hoc notes
+/models/
+/notes/
+/rewrite-plan.md

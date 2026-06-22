@@ -1,0 +1,5 @@
+contrast,label,base_condition,compare_condition,mean_js_bits,ci_low_bits,ci_high_bits,n_tasks,k_samples
+neutral_replay,Neutral replay,wild,neutral_replay,0.358,0.324,0.392,400,8
+counterfactual_evidence,Counterfactual evidence,wild,counterfactual_evidence,0.901,0.873,0.928,400,8
+same_class_shuffle,Same-class shuffle,wild,same_class_shuffle,0.084,0.060,0.109,400,8
+oracle_tag_upper_bound,Oracle tag upper-bound,oracle_tag_correct,oracle_tag_flipped,1.000,1.000,1.000,400,8

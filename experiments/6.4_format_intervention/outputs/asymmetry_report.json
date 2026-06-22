@@ -1,0 +1,10 @@
+{
+  "outcomes": {
+    "n00": 2,
+    "n11": 1,
+    "n01": 2,
+    "n10": 0
+  },
+  "directional_asymmetry": 1.0,
+  "binomial_test_p": 0.5
+}

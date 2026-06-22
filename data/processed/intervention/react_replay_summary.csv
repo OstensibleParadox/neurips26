@@ -1,0 +1,3 @@
+split,task,task_label,replay_condition,fidelity,js_bits,js_nats,ci_low_bits,ci_high_bits,ci_low_nats,ci_high_nats,argmax_tool_counts_unchanged,n_wild,n_replay
+dormant,calculator_only,Calculator (dormant),scratchpad removed,empty,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,true,200,200
+active,planning_search,Planning (active),scratchpad removed,empty,0.0163,0.0113,0.0124,0.0208,0.0086,0.0144,true,200,200

@@ -1,0 +1,319 @@
+{
+  "metadata": {
+    "experiment": "react_scratchpad_intervention",
+    "processed_level": "raw_recomputed_summary",
+    "task": "calculator_only",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "n_samples": 200,
+    "run_seed": 42,
+    "bootstrap": 1000,
+    "seed": 42,
+    "raw_samples_paths": [
+      "/Users/ostensible_paradox/Documents/math/dual-certificate/data/processed/intervention/raw/intervention_calculator_only_samples.jsonl"
+    ],
+    "output_schema": "experiments/7.3_intervention/recompute_intervention_summary.py",
+    "units": {
+      "js_divergence": "nats",
+      "js_ci_95": "nats",
+      "js_divergence_bits": "bits",
+      "js_ci_95_bits": "bits",
+      "soft_js_divergence": "nats",
+      "soft_js_divergence_bits": "bits"
+    }
+  },
+  "calculator_only/scratchpad/mask/0.3": {
+    "task": "calculator_only",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "run_seed": 42,
+    "target": "scratchpad",
+    "mode": "mask",
+    "strength": 0.3,
+    "js_divergence": 0.0,
+    "js_ci_95": [
+      0.0,
+      0.0
+    ],
+    "js_divergence_bits": 0.0,
+    "js_ci_95_bits": [
+      0.0,
+      0.0
+    ],
+    "soft_js_divergence": 2.25093470496947e-07,
+    "soft_js_divergence_bits": 3.2474123362243163e-07,
+    "n_wild": 200,
+    "n_perturbed": 200,
+    "wild_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "perturbed_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wild_mean_tool_choice_probs": [
+      8.130961681729332e-08,
+      0.9999946355819702,
+      4.9041026461971174e-09,
+      4.685076550003941e-06,
+      6.116680583367895e-07
+    ],
+    "perturbed_mean_tool_choice_probs": [
+      3.7193931039958273e-07,
+      0.9999916666746139,
+      4.97392547496589e-09,
+      7.525558358452145e-06,
+      4.3048879786455887e-07
+    ],
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "raw_samples_path": "/Users/ostensible_paradox/Documents/math/dual-certificate/data/processed/intervention/raw/intervention_calculator_only_samples.jsonl",
+    "raw_schema_version": 1
+  },
+  "calculator_only/scratchpad/mask/0.7": {
+    "task": "calculator_only",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "run_seed": 42,
+    "target": "scratchpad",
+    "mode": "mask",
+    "strength": 0.7,
+    "js_divergence": 0.0,
+    "js_ci_95": [
+      0.0,
+      0.0
+    ],
+    "js_divergence_bits": 0.0,
+    "js_ci_95_bits": [
+      0.0,
+      0.0
+    ],
+    "soft_js_divergence": 2.2846444978697737e-07,
+    "soft_js_divergence_bits": 3.2960452872709785e-07,
+    "n_wild": 200,
+    "n_perturbed": 200,
+    "wild_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "perturbed_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wild_mean_tool_choice_probs": [
+      8.130961681729332e-08,
+      0.9999946355819702,
+      4.9041026461971174e-09,
+      4.685076550003941e-06,
+      6.116680583367895e-07
+    ],
+    "perturbed_mean_tool_choice_probs": [
+      5.251502190262158e-07,
+      0.9999921476840973,
+      3.764883552137555e-09,
+      6.995665070661516e-06,
+      3.2271269195138786e-07
+    ],
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "raw_samples_path": "/Users/ostensible_paradox/Documents/math/dual-certificate/data/processed/intervention/raw/intervention_calculator_only_samples.jsonl",
+    "raw_schema_version": 1
+  },
+  "calculator_only/scratchpad/replace/0.5": {
+    "task": "calculator_only",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "run_seed": 42,
+    "target": "scratchpad",
+    "mode": "replace",
+    "strength": 0.5,
+    "js_divergence": 0.0,
+    "js_ci_95": [
+      0.0,
+      0.0
+    ],
+    "js_divergence_bits": 0.0,
+    "js_ci_95_bits": [
+      0.0,
+      0.0
+    ],
+    "soft_js_divergence": 1.0023087894045094e-07,
+    "soft_js_divergence_bits": 1.446025919913306e-07,
+    "n_wild": 200,
+    "n_perturbed": 200,
+    "wild_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "perturbed_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wild_mean_tool_choice_probs": [
+      8.130961681729332e-08,
+      0.9999946355819702,
+      4.9041026461971174e-09,
+      4.685076550003941e-06,
+      6.116680583367895e-07
+    ],
+    "perturbed_mean_tool_choice_probs": [
+      5.054655851299828e-07,
+      0.9999934285879135,
+      7.153368143941741e-09,
+      5.459955403068762e-06,
+      6.094905298181796e-07
+    ],
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "raw_samples_path": "/Users/ostensible_paradox/Documents/math/dual-certificate/data/processed/intervention/raw/intervention_calculator_only_samples.jsonl",
+    "raw_schema_version": 1
+  },
+  "calculator_only/scratchpad/replace/1.0": {
+    "task": "calculator_only",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "run_seed": 42,
+    "target": "scratchpad",
+    "mode": "replace",
+    "strength": 1.0,
+    "js_divergence": 0.0,
+    "js_ci_95": [
+      0.0,
+      0.0
+    ],
+    "js_divergence_bits": 0.0,
+    "js_ci_95_bits": [
+      0.0,
+      0.0
+    ],
+    "soft_js_divergence": 5.624412639308515e-07,
+    "soft_js_divergence_bits": 8.114312222643601e-07,
+    "n_wild": 200,
+    "n_perturbed": 200,
+    "wild_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "perturbed_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wild_mean_tool_choice_probs": [
+      8.130961681729332e-08,
+      0.9999946355819702,
+      4.9041026461971174e-09,
+      4.685076550003941e-06,
+      6.116680583367895e-07
+    ],
+    "perturbed_mean_tool_choice_probs": [
+      1.5924156472862939e-07,
+      0.9999982309341431,
+      2.7924946672738813e-10,
+      1.579052287183913e-06,
+      3.858180636528985e-08
+    ],
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "raw_samples_path": "/Users/ostensible_paradox/Documents/math/dual-certificate/data/processed/intervention/raw/intervention_calculator_only_samples.jsonl",
+    "raw_schema_version": 1
+  },
+  "calculator_only/scratchpad/shuffle/1.0": {
+    "task": "calculator_only",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "run_seed": 42,
+    "target": "scratchpad",
+    "mode": "shuffle",
+    "strength": 1.0,
+    "js_divergence": 0.0,
+    "js_ci_95": [
+      0.0,
+      0.0
+    ],
+    "js_divergence_bits": 0.0,
+    "js_ci_95_bits": [
+      0.0,
+      0.0
+    ],
+    "soft_js_divergence": 1.0847573394941775e-07,
+    "soft_js_divergence_bits": 1.5649740342561556e-07,
+    "n_wild": 200,
+    "n_perturbed": 200,
+    "wild_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "perturbed_dist": [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wild_mean_tool_choice_probs": [
+      8.130961681729332e-08,
+      0.9999946355819702,
+      4.9041026461971174e-09,
+      4.685076550003941e-06,
+      6.116680583367895e-07
+    ],
+    "perturbed_mean_tool_choice_probs": [
+      5.417841764865372e-07,
+      0.999994004368782,
+      8.60704618368957e-09,
+      4.569262887059722e-06,
+      8.85335859097669e-07
+    ],
+    "tool_labels": [
+      "search",
+      "calculator",
+      "email",
+      "calendar",
+      "weather"
+    ],
+    "raw_samples_path": "/Users/ostensible_paradox/Documents/math/dual-certificate/data/processed/intervention/raw/intervention_calculator_only_samples.jsonl",
+    "raw_schema_version": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "multi_agent_ollama_peer_memory",
+  "description": "Two-agent deployment: Qwen2.5-7B-Instruct (Agent A, main) with Mistral-7B-Instruct-v0.3 (Agent B, peer). Inter-agent messages are logged (= part of T̃_t). Agent B's private memory/scratchpad is unlogged and feeds into Agent A's operative state S_t. A single unlogged edge peer_scratch → S_t gives the min-cut: ε_state^UB = d_B · log₂(Q) = 4096 · 8 = 32768 bits.",
+  "nodes": [
+    {"id": "prompt",           "kind": "source"},
+    {"id": "agent_a_context",  "kind": "state",        "dim": 3584, "bits_per_dim": 8},
+    {"id": "agent_b_context",  "kind": "state",        "dim": 4096, "bits_per_dim": 8},
+    {"id": "agent_b_scratch",  "kind": "intermediate", "dim": 4096, "bits_per_dim": 8},
+    {"id": "message_b_to_a",   "kind": "intermediate"},
+    {"id": "S_t",              "kind": "sink"}
+  ],
+  "edges": [
+    {"from": "prompt",          "to": "agent_a_context", "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 152064},
+    {"from": "prompt",          "to": "agent_b_context", "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 32000},
+    {"from": "agent_b_context", "to": "agent_b_scratch", "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "agent_b_scratch", "to": "message_b_to_a",  "logged": true},
+    {"from": "agent_b_scratch", "to": "S_t",             "logged": false, "c_e_formula": "quantized_activation"},
+    {"from": "message_b_to_a",  "to": "agent_a_context", "logged": true},
+    {"from": "agent_a_context", "to": "S_t",             "logged": true}
+  ],
+  "notes": [
+    "Agent A (main): Qwen2.5-7B-Instruct, d_model=3584, vocab_size=152064.",
+    "Agent B (peer): Mistral-7B-Instruct-v0.3, d_model=4096, vocab_size=32000.",
+    "Inter-agent message channel (message_b_to_a) is logged — visible to auditor.",
+    "Agent B's private scratchpad (agent_b_scratch → S_t) is the single unlogged channel.",
+    "Min-cut: single edge agent_b_scratch → S_t. Capacity = 4096 · 8 = 32768 bits.",
+    "This single-hidden-channel design avoids parallel-cut semantics ambiguity: there is exactly one unlogged path from source to sink.",
+    "Per-edge budget uses Q=256 (8-bit audit discretization)."
+  ]
+}

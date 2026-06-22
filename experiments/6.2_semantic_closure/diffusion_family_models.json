@@ -1,0 +1,86 @@
+{
+  "version": "2026-04-12",
+  "note": "model_name and endpoint fields are intentionally editable placeholders for lab deployment",
+  "models": [
+    {
+      "id": "mercury",
+      "display_name": "Mercury",
+      "backend": "openai_compat",
+      "model_name": "mercury-2",
+      "api_key_env": "INCEPTION_API_KEY",
+      "api_base_default": "https://api.inceptionlabs.ai/v1",
+      "recommended": false,
+      "status": "commercial_api"
+    },
+    {
+      "id": "llada_8b",
+      "display_name": "LLaDA 8B",
+      "backend": "hf_local",
+      "model_name": "GSAI-ML/LLaDA-8B-Instruct",
+      "model_path_env": "LLADA_MODEL_PATH",
+      "recommended": true,
+      "status": "open_source_priority",
+      "source_url": "https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct"
+    },
+    {
+      "id": "bytedance_seed_diffusion",
+      "display_name": "ByteDance Seed Diffusion",
+      "backend": "manual_web",
+      "model_name": "seed-diffusion-web",
+      "studio_url": "https://studio.seed.ai/exp/seed_diffusion/",
+      "recommended": true,
+      "status": "web_only_manual"
+    },
+    {
+      "id": "cdlm",
+      "display_name": "CDLM",
+      "backend": "openai_compat",
+      "model_name": "cdlm",
+      "api_key_env": "CDLM_API_KEY",
+      "api_base_env": "CDLM_API_BASE",
+      "recommended": true,
+      "status": "research_api"
+    },
+    {
+      "id": "open_dllm",
+      "display_name": "Open-dLLM",
+      "backend": "openai_compat",
+      "model_name": "open-dllm",
+      "api_key_env": "OPEN_DLLM_API_KEY",
+      "api_base_env": "OPEN_DLLM_API_BASE",
+      "recommended": true,
+      "status": "open_source_framework",
+      "source_url": "https://github.com/ZHZisZZ/dllm"
+    },
+    {
+      "id": "dream_mmada",
+      "display_name": "Dream/MMaDA",
+      "backend": "openai_compat",
+      "model_name": "dream-mmada",
+      "api_key_env": "DREAM_MMADA_API_KEY",
+      "api_base_env": "DREAM_MMADA_API_BASE",
+      "recommended": false,
+      "status": "research_playground"
+    },
+    {
+      "id": "google_gemini_diffusion",
+      "display_name": "Google Gemini Diffusion",
+      "backend": "gemini",
+      "model_name": "gemini-diffusion",
+      "api_key_env": "GOOGLE_API_KEY",
+      "api_base_default": "https://generativelanguage.googleapis.com/v1beta",
+      "recommended": false,
+      "status": "experimental_non_open"
+    },
+    {
+      "id": "mdlm_sedd",
+      "display_name": "MDLM/SEDD",
+      "backend": "openai_compat",
+      "model_name": "mdlm-sedd",
+      "api_key_env": "MDLM_SEDD_API_KEY",
+      "api_base_env": "MDLM_SEDD_API_BASE",
+      "recommended": false,
+      "status": "research_baseline"
+    }
+  ]
+}

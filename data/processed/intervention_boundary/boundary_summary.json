@@ -1,0 +1,128 @@
+{
+  "model_name": "Qwen/Qwen2.5-7B-Instruct",
+  "candidate_mode": "generated",
+  "n_candidates": 5000,
+  "margin_threshold": 0.5,
+  "top_k_boundary": 500,
+  "n_under_threshold": 0,
+  "n_boundary": 500,
+  "threshold_fallback_used": true,
+  "margin_quantiles": {
+    "0.0": 0.6250209808349609,
+    "0.01": 9.625018463134765,
+    "0.05": 12.874933052062989,
+    "0.1": 13.931128883361819,
+    "0.5": 17.686728477478027
+  },
+  "boundary_margin_mean": 12.229326150894165,
+  "boundary_margin_max": 13.87505054473877,
+  "tool_tokens": [
+    "search",
+    "calculator",
+    "email",
+    "calendar",
+    "weather"
+  ],
+  "conditions": {
+    "remove": {
+      "argmax_flip_rate": 0.946,
+      "argmax_flip_ci_95": [
+        0.924,
+        0.964
+      ],
+      "conditional_js_bits": 0.9346897671015689,
+      "conditional_js_ci_95": [
+        0.9155539056211712,
+        0.9529057583376592
+      ],
+      "wild_argmax_counts": {
+        "search": 198,
+        "calculator": 22,
+        "email": 0,
+        "calendar": 160,
+        "weather": 120
+      },
+      "condition_argmax_counts": {
+        "search": 0,
+        "calculator": 54,
+        "email": 164,
+        "calendar": 129,
+        "weather": 153
+      }
+    },
+    "neutral": {
+      "argmax_flip_rate": 0.95,
+      "argmax_flip_ci_95": [
+        0.928,
+        0.968
+      ],
+      "conditional_js_bits": 0.9309275130034295,
+      "conditional_js_ci_95": [
+        0.9119397589850486,
+        0.9510870982599386
+      ],
+      "wild_argmax_counts": {
+        "search": 198,
+        "calculator": 22,
+        "email": 0,
+        "calendar": 160,
+        "weather": 120
+      },
+      "condition_argmax_counts": {
+        "search": 0,
+        "calculator": 68,
+        "email": 159,
+        "calendar": 124,
+        "weather": 149
+      }
+    },
+    "counterfactual": {
+      "argmax_flip_rate": 0.998,
+      "argmax_flip_ci_95": [
+        0.994,
+        1.0
+      ],
+      "conditional_js_bits": 0.9976244611095921,
+      "conditional_js_ci_95": [
+        0.994144851441737,
+        0.9995606964470816
+      ],
+      "wild_argmax_counts": {
+        "search": 198,
+        "calculator": 22,
+        "email": 0,
+        "calendar": 160,
+        "weather": 120
+      },
+      "condition_argmax_counts": {
+        "search": 22,
+        "calculator": 72,
+        "email": 160,
+        "calendar": 119,
+        "weather": 127
+      }
+    }
+  },
+  "dry_run": false,
+  "config": {
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "dtype": "bfloat16",
+    "device": "mps",
+    "seed": 42,
+    "candidate_mode": "generated",
+    "max_candidates": 5000,
+    "margin_threshold": 0.5,
+    "top_k_boundary": 500,
+    "batch_size": 1,
+    "max_length": 512,
+    "conditions": [
+      "remove",
+      "neutral",
+      "counterfactual"
+    ],
+    "n_bootstrap": 1000,
+    "output_dir": "data/processed/intervention_boundary",
+    "use_space_variants": true,
+    "candidates_jsonl": null
+  }
+}

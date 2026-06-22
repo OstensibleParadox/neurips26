@@ -1,0 +1,52 @@
+[
+  {
+    "beta_h": 0.0,
+    "true_mi_nats": 0.0,
+    "true_mi_bits": 0.0,
+    "true_H_bits": 1.0,
+    "epsilon_ub_bits": 1.0,
+    "delta_lb_nats": -0.032628965377807614,
+    "delta_lb_bits": -0.04707364653990073,
+    "delta_se": 0.031929002488073135
+  },
+  {
+    "beta_h": 0.5,
+    "true_mi_nats": 0.006327750626951456,
+    "true_mi_bits": 0.009129014449484895,
+    "true_H_bits": 1.0,
+    "epsilon_ub_bits": 1.0,
+    "delta_lb_nats": 0.009946537017822266,
+    "delta_lb_bits": 0.014349819629630682,
+    "delta_se": 0.023191600121465386
+  },
+  {
+    "beta_h": 1.0,
+    "true_mi_nats": 0.021608956158161163,
+    "true_mi_bits": 0.03117513388816614,
+    "true_H_bits": 1.0,
+    "epsilon_ub_bits": 1.0,
+    "delta_lb_nats": -0.018995046615600586,
+    "delta_lb_bits": -0.027404059553781654,
+    "delta_se": 0.029902723551653104
+  },
+  {
+    "beta_h": 2.0,
+    "true_mi_nats": 0.08743350952863693,
+    "true_mi_bits": 0.12613989060448244,
+    "true_H_bits": 1.0,
+    "epsilon_ub_bits": 1.0,
+    "delta_lb_nats": 0.06585793495178223,
+    "delta_lb_bits": 0.09501291615812416,
+    "delta_se": 0.014950270448844833
+  },
+  {
+    "beta_h": 4.0,
+    "true_mi_nats": 0.2608647644519806,
+    "true_mi_bits": 0.37634830201753994,
+    "true_H_bits": 1.0,
+    "epsilon_ub_bits": 1.0,
+    "delta_lb_nats": 0.23955196142196655,
+    "delta_lb_bits": 0.34560042677869546,
+    "delta_se": 0.03266579796969093
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "name": "diffusion_lm_mercury_K20",
+  "description": "Mercury-class diffusion language model with K=20 denoising iterations, d_model=4096, activations quantized to 8 bits. Only the final denoised output is logged; all K-1 intermediate denoising states are unlogged. The min cut is the single first unlogged denoising edge and gives epsilon_state^UB = 32768 bits independent of K.",
+  "nodes": [
+    {"id": "prompt",      "kind": "source"},
+    {"id": "s_0",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_1",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_2",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_3",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_4",         "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "s_19",        "kind": "state", "dim": 4096, "bits_per_dim": 8},
+    {"id": "S_t",         "kind": "sink"}
+  ],
+  "edges": [
+    {"from": "prompt", "to": "s_0",   "logged": true,  "c_e_formula": "context_window", "n_tokens": 4096, "vocab_size": 128000},
+    {"from": "s_0",    "to": "s_1",   "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_1",    "to": "s_2",   "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_2",    "to": "s_3",   "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_3",    "to": "s_4",   "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_4",    "to": "s_19",  "logged": false, "c_e_formula": "diffusion_latent"},
+    {"from": "s_19",   "to": "S_t",   "logged": false, "c_e_formula": "diffusion_latent"}
+  ],
+  "notes": [
+    "Intermediate steps 5..18 are elided for brevity; a full spec enumerates all K-1 edges.",
+    "The min cut is any single edge s_{k-1} -> s_k, giving epsilon_state^UB <= b * d = 8 * 4096 = 32768 bits.",
+    "The full chain sum is Sigma c_e = K * b * d = 20 * 32768 = 655360 bits (a loose upper bound; the min-cut corollary is tighter)."
+  ]
+}
