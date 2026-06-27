@@ -300,14 +300,6 @@
   Thus the certified state is unrecoverable from the transcript, yet still
   action-relevant whenever both lower bounds are nonzero.
   \end{theorem}
-  \begin{proof}
-  The first inequality follows from the witness certificate
-  (Proposition~\ref{prop:unrec-lb}) applied to each $W_t^{(j)}$ and then
-  maximized over $j$. The second follows from conditional data processing
-  (Proposition~\ref{prop:dynamic-lb}) applied to each admissible probe and then
-  maximized over $j$. Replacing population quantities by valid lower confidence
-  bounds preserves both inequalities.
-  \end{proof}
 
   \begin{remark}[Complementarity and certificate directions]
   \label{rem:complementarity}
@@ -362,12 +354,6 @@
   $\varepsilon_\mathrm{unrec}^\mathrm{LB}$. If $W_t=\phi(S_t)$ is deterministic,
   this reduces to $H(W_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$.
   \end{proposition}
-  \begin{proof}
-  The conditional independence assumption gives
-  $H(W_t\mid S_t,\tilde T_t)=H(W_t\mid S_t)$. The first equality follows from
-  the definition of conditional mutual information. The inequality follows
-  because $I(W_t;S_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$.
-  \end{proof}
 
   \begin{proposition}[Conditional DPI dynamic certificate]
   \label{prop:dynamic-lb}
@@ -389,10 +375,6 @@
   $I(X_t;A_t\mid\tilde T_t)$ is a valid dynamic certificate
   $\delta_\text{act}^\text{LB}$.
   \end{proposition}
-  \begin{proof}
-  This is the conditional data processing inequality applied on each recorded
-  trace slice and then averaged over $\tilde T_t$.
-  \end{proof}
 
   \begin{corollary}[Action-mediated non-recoverability]
   \label{cor:action-mediated-unrec}
@@ -414,10 +396,6 @@
   state. This certificate is action-mediated; it should not be confused with an
   independent state-only witness certificate from Proposition~\ref{prop:unrec-lb}.
   \end{corollary}
-  \begin{proof}
-  The first inequality is Proposition~\ref{prop:dynamic-lb}. The second is the
-  standard bound $I(S_t;A_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$.
-  \end{proof}
 
   \subsection{Closed-Form Witness Models}
   \label{sec:engine}
@@ -477,11 +455,6 @@
   $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)$ and
   $\delta_\mathrm{act}^\mathrm{LB}(t)$ as coordinate-wise lower certificates.
   \end{proposition}
-  \begin{proof}
-  The first inequality is Proposition~\ref{prop:unrec-lb} applied to each
-  witness and then maximized. The second is Proposition~\ref{prop:dynamic-lb}
-  applied to each admissible probe and then maximized.
-  \end{proof}
 
   \subsection{Audit Access Modes}
 
@@ -627,19 +600,6 @@
   $\varepsilon_\text{state}^\text{UB}$ gives
   $\varepsilon_\text{unrec}\leq \varepsilon_\text{state}^\text{UB}$.
   \end{proposition}
-  \begin{proof}
-  Let $M_t=T_t\setminus\tilde T_t$ be the unrecorded trace fragment. The chain
-  rule gives
-  \[
-    H(S_t\mid\tilde T_t)=H(S_t\mid T_t)+I(S_t;M_t\mid\tilde T_t).
-  \]
-  For any cut $\Omega$, every directed path from $U_t$ or $M_t$ to $S_t$
-  crosses the cut, so conditional data processing bounds
-  $I(S_t;M_t\mid\tilde T_t)$ by the induced information flow across that cut.
-  Taking the supremum over cut inputs gives $C_\text{cut}(\Omega)$, and
-  minimizing over cuts gives the claim. Appendix~\ref{app:netinfo} spells out
-  the $d$-separation step.
-  \end{proof}
 
   \begin{lemma}[Additive decomposition under software orthogonality]
   \label{lem:ortho-decomp}
@@ -652,11 +612,6 @@
     \sum_{e\in E(\Omega,\Omega^c)} c_e .
   \]
   \end{lemma}
-  \begin{proof}
-  Under conditional factorization, the directed conditional information across
-  the cut is subadditive over its edge streams; substituting each edge budget
-  $c_e$ gives the bound.
-  \end{proof}
 
   \begin{corollary}[Additive min-cut structural budget]
   \label{cor:additive-ub}

@@ -1,32 +1,21 @@
-# neurips26 Working Notes
+# Dual Certificates Benchmark Paper
 
-<!--
-FILE-ROLE INDEX.
+This repository is now scoped to the benchmark and empirical paper for hidden
+state audit certificates in agent systems.
 
-The canonical POPL27 theory source is `popl27_magwalk_sheaf_bridge.md`.
-`epistemic_cut_hierarchy.md` is a roadmap from existing artifacts to future
-proof obligations. The former `information_sheaf_pearl.md` note has been
-merged into the canonical note and removed to avoid parallel, conflicting
-theory sources.
--->
+## Main Artifacts
 
-## Theory Notes
+- `paper/main.tex` is the current paper source.
+- `experiments/` contains the certificate pipelines and reproduction scripts.
+- `data/processed/` contains the included processed result artifacts used by the
+  paper tables and figures.
+- `paper/figures/` and `paper/tables/` contain rendered paper assets.
 
-- [popl27_magwalk_sheaf_bridge.md](popl27_magwalk_sheaf_bridge.md) is the
-  canonical theory note. It states the corrected thesis: Pearl causality
-  supplies causal syntax; enriched `MAGWalk` / `SheafMAGWalk` supplies the
-  probability-sheaf bridge.
-- [epistemic_cut_hierarchy.md](epistemic_cut_hierarchy.md) is a roadmap. It
-  connects the existing NeurIPS/Lean finite certificate artifacts to the POPL27
-  bridge and maps later continuous proof obligations.
-- `information_sheaf_pearl.md` has been removed. Its useful material was merged
-  into the canonical MAGWalk note; its old framing was superseded because Pearl
-  causality alone does not carry stalks, restriction maps, pushforwards,
-  collider gluing, or capacity certificates.
+## Proof Assets
 
-## Lean Artifact
+The standalone proof and theory assets were moved to:
 
-The current Lean `MAGWalk` is a graph-level certificate for large-step walks in
-the moralized ancestral graph. Any probability/sheaf-carrying version should be
-introduced separately, for example as `SheafMAGWalk`, and should project down to
-the checked graph-level `MAGWalk`.
+`/Users/ostensible_paradox/Documents/infinitesimal-shannon/dual-certificates-proof-assets/`
+
+That archive contains the former Lean artifact, theory notes, proof-module
+registry, and a snapshot of the proof-bearing paper source.
