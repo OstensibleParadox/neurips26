@@ -25,12 +25,15 @@ should be a security paper about **latent causal channels** in neural agents:
 > remains unrecoverable. Security auditing therefore needs certificates for both
 > latent-state non-recoverability and residual action relevance.
 
-Pearl-style intervention notation is a foil, not the main target. The paper's
-claim is:
+Pearl's structural causal models and do-calculus provide the intervention
+semantics. The paper's target is narrower: treating an observed or
+trace-compatible graph/circuit as an audit certificate for a deployed neural
+mechanism without proving that the logged trace exposes the operative latent
+channel.
 
-> Drawing an intervention in an observed causal graph does not certify that the
-> deployed neural mechanism has exposed the information needed for a security
-> audit.
+> A trace-compatible DAG or circuit is a localization hypothesis, not an audit
+> certificate; intervention claims become checkable only when the logged trace
+> exposes the operative latent channel at the deployment boundary.
 
 The title direction is:
 
@@ -63,9 +66,9 @@ will look out of scope for S&P.
 
 The central punchline for the introduction:
 
-> Pearl's `do` edits an observed causal graph; security auditing of neural
-> agents requires certifying whether hidden, action-relevant causal channels are
-> recoverable at all.
+> Pearl's `do`-operator is valid once the structural model is fixed; AI audit
+> asks whether the logged trace exposes the operative latent channel needed to
+> make such intervention claims checkable.
 
 Operational form:
 
