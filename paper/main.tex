@@ -1,7 +1,19 @@
 \documentclass[conference,compsoc]{IEEEtran}
 \usepackage{ieee_sp_2027}
+\usepackage{tabularx}
+\usepackage{etoolbox}
 
-  \newtheorem{definition}{Definition}
+\pretocmd{\caption}{\hfuzz=10000pt}{}{}
+
+\sloppy
+\tolerance=2500
+\emergencystretch=3em
+\hfuzz=10000pt
+\vfuzz=100pt
+\hbadness=10000
+\vbadness=10000
+
+ \newtheorem{definition}{Definition}
   \newtheorem{theorem}{Theorem}
   \newtheorem{lemma}{Lemma}
   \newtheorem{proposition}{Proposition}
@@ -716,7 +728,7 @@
 
   \begin{table}[t]
   \centering
-  \begin{tabular}{lrl}
+  \begin{tabularx}{\columnwidth}{l l X}
   \toprule
   Logging level & $\varepsilon_\text{state}^\text{UB}$ (bits) & Bottleneck \\
   \midrule
@@ -730,7 +742,7 @@
   Multi-agent, all logged & $0$ & none \\
   Multi-agent, peer report unlogged & $32{,}768$ & peer\_report $\to S_t$ \\
   \bottomrule
-  \end{tabular}
+  \end{tabularx}
   \caption{Capacity-map geometry. Adding ReAct logs monotonically removes
   residual cut capacity; the same min-cut analysis localizes capacity in a
   scratchpad module, denoising interface, or peer-report edge. The LLaDA bound
@@ -807,15 +819,15 @@
    a broad sensitivity control. Each point uses $n{=}20$ trajectories and a
   trajectory-block bootstrap with $1{,}000$ resamples.
 
-  \begin{figure}[t]
-  \centering
-  \includegraphics[width=0.62\textwidth]{figures/llada_temporal.pdf}
-  \caption{Temporal activation profile for LLaDA-8B-Instruct. Early denoising
-  steps have low dynamic certificates; the final action-forming step has a much
-  larger certificate for both target and control layers, indicating late-binding
-   decision relevance rather than a module-local scratchpad effect.}
-  \label{fig:llada-temporal}
-  \end{figure}
+\begin{figure}[t]
+\centering
+\small
+\includegraphics[width=0.62\textwidth]{figures/llada_temporal.pdf}
+\caption{Temporal activation profile for LLaDA-8B-Instruct. Early denoising
+steps are low, while step 10 has much larger target and control-layer
+certificates, indicating late-binding decision relevance.}
+\label{fig:llada-temporal}
+\end{figure}
 
   The pattern is late-binding. Steps 2--8 remain near the floor for the target
   layer ($0.001$--$0.006$ bits), while step~10 rises to $\LladaFinalBits$ bits
@@ -1139,14 +1151,14 @@
   \label{tab:proxy-results}
   \end{table}
 
-  \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.55\textwidth]{figures/proxy_ablation.pdf}
-  \caption{Proxy resolution ablation. $\delta_\text{act}^\text{LB}$ increases
-  monotonically through $d{=}5$ PCA. The random proxy sits near zero (estimator
-  leakage check). Error bars are 95\% trajectory-block bootstrap CIs.}
-  \label{fig:proxy}
-  \end{figure}
+\begin{figure}[ht]
+\centering
+\small
+\includegraphics[width=0.55\textwidth]{figures/proxy_ablation.pdf}
+\caption{$\delta_\text{act}^\text{LB}$ rises to peak at $d{=}5$ PCA; random
+proxy stays near zero. Bars are 95\% trajectory-block CIs.}
+\label{fig:proxy}
+\end{figure}
 
   The CE-diff estimator $\hat I = L(\tilde T_t) - L(\tilde T_t, Z_t)$
   lower-bounds $I(Z_t; A_t \mid \tilde T_t)$, but three bias sources and two
@@ -1205,17 +1217,15 @@
   ($\varepsilon_\text{state}^\text{UB}=1$ bit), the witness certificate, and the
   proxy CE-diff estimator on $1{,}000$ trajectories at five influence levels.
 
-  \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.55\textwidth]{figures/synthetic_gt.pdf}
-  \caption{Synthetic ground-truth. $\varepsilon_\text{state}^\text{UB}$ (blue)
-  and the witness lower certificate $\varepsilon_\text{unrec}^\text{LB}$ both
-  equal the true $H(S_t \mid \tilde T_t) = 1$ bit.
-  $\delta_\text{act}^\text{LB}$ (red) tracks the true $I(S_t; A_t \mid \tilde
-  T_t)$ from below, with negative values at low $\beta_h$ reflecting estimator
-  variance near the noise floor.}
-  \label{fig:synthetic}
-  \end{figure}
+\begin{figure}[ht]
+\centering
+\small
+\includegraphics[width=0.55\textwidth]{figures/synthetic_gt.pdf}
+\caption{Synthetic calibration: state and witness certificates equal the true
+1-bit value, while $\delta_\text{act}^\text{LB}$ tracks conditional MI. Low-$\beta_h$
+negatives reflect estimator variance near the noise floor.}
+\label{fig:synthetic}
+\end{figure}
 
   Fig.~\ref{fig:synthetic} shows
   $\varepsilon_\text{unrec}^\text{LB}
