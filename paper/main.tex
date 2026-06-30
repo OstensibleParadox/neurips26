@@ -51,8 +51,9 @@
   certificate is obtained from finite hidden-state witnesses or closed-form
   finite-dimensional witness models; the second is obtained from admissible
   replay, intervention, or proxy variables by conditional data processing. A
-  structural capacity map remains useful, but only as an upper envelope and
-  localization map for hidden state that can escape the trace. The key audit
+  capacity map with min-cut value $\varepsilon_\text{state}^\text{UB}$
+  remains useful, but only as an upper envelope and localization map for hidden
+  state that can escape the trace. The key audit
   failure is therefore a
   gap: citation-level or transcript-level audit can pass while a
   decision-relevant state variable remains unrecoverable. We instantiate the
@@ -103,8 +104,8 @@
   The action-relevance certificate
   $\delta_\mathrm{act}^\mathrm{LB}(t)$ lower-bounds
   $I(S_t;A_t\mid\tilde T_t)$ from admissible replay, intervention, or proxy
-  measurements using conditional data processing. A structural capacity map with
-  min-cut value $\varepsilon_\text{state}^\text{UB}$ is still reported when
+  measurements using conditional data processing. A capacity map with min-cut
+  value $\varepsilon_\text{state}^\text{UB}$ is still reported when
   architecture access is available, but its role is an upper envelope on
   residual capacity, not the main NeurIPS contribution. The central audit
   question is whether
@@ -146,16 +147,20 @@
   probes lower-bound $I(S_t;A_t\mid\tilde T_t)$. Fourth, we give closed-form or
   computable audit instances for diffusion trajectories, retrieval-style hidden
   source selection, and nested agent architectures. An auxiliary deployment
-  capacity map identifies where hidden capacity can reside and supports logging
-  ablations, but it is not a lower certificate.
+  capacity map with min-cut value $\varepsilon_\text{state}^\text{UB}$
+  identifies where hidden capacity can reside and supports logging ablations,
+  but it is not a lower certificate.
 
   We instantiate the protocol on three audit geometries: a ReAct scratchpad
   module, a diffusion-LM denoising trajectory, and a multi-agent private-report
-  edge. These real-system diagnostics pair the capacity map with
-  action-mediated lower certificates. Appendix calibrations cover a synthetic
-  ground-truth setting where an independent hidden-state witness makes
-  $\varepsilon_\mathrm{unrec}^\mathrm{LB}$ explicit and the structural upper
-  budget matches true hidden-state entropy.
+  edge. These real-system diagnostics report action-mediated lower certificates
+  alongside the capacity map with min-cut value
+  $\varepsilon_\text{state}^\text{UB}$.
+  Appendix calibrations cover a synthetic ground-truth setting where an
+  independent hidden-state witness makes
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}$ explicit and the capacity-map
+  min-cut value $\varepsilon_\text{state}^\text{UB}$ matches true hidden-state
+  entropy.
 
   % ---------------------------------------------------------------------------
   \section{Related Work}
@@ -238,8 +243,8 @@
   \end{itemize}
   The reported audit pair is $(\varepsilon_\text{unrec}^\text{LB},
   \delta_\text{act}^\text{LB})$. When architecture access is available, we also
-  report a deployment capacity map whose min-cut value gives a structural upper
-  budget $\varepsilon_\text{state}^\text{UB}\geq H(S_t\mid\tilde T_t)$
+  report a capacity map with min-cut value
+  $\varepsilon_\text{state}^\text{UB}\geq H(S_t\mid\tilde T_t)$
   (\S\ref{sec:static-cert}).
   \end{definition}
 
@@ -315,8 +320,9 @@
   been measured.
   \end{itemize}
   The audit interpretation is therefore two-dimensional: deployment teams
-  should report both lower certificates and, when possible, the structural
-  upper budget, rather than collapse them into a single hiddenness score.
+  should report both lower certificates and, when possible, the capacity map
+  with min-cut value $\varepsilon_\text{state}^\text{UB}$, rather than collapse
+  them into a single hiddenness score.
   \end{remark}
 
   \subsection{Non-Recoverability Certificate}
@@ -551,12 +557,13 @@
   retain nonzero decision relevance.
 
   % ---------------------------------------------------------------------------
-  \section{Structural Capacity Map: Unlogged-Channel Min-Cut}
+  \section{Capacity Map: Unlogged-Channel Min-Cut}
   \label{sec:static-cert}
   % ---------------------------------------------------------------------------
 
-  The structural capacity map upper-bounds
-  $\varepsilon_\text{unrec}=H(S_t\mid\tilde T_t)$ from the deployment boundary.
+  The capacity map with min-cut value $\varepsilon_\text{state}^\text{UB}$
+  upper-bounds $\varepsilon_\text{unrec}=H(S_t\mid\tilde T_t)$ from the
+  deployment boundary.
   Information absent from the recorded trace but still capable of influencing
   $S_t$ must cross an unlogged channel in the time-unrolled execution graph.
   Bounding those channels gives an upper envelope on residual hidden-state
@@ -577,10 +584,11 @@
 
   \begin{assumption}[Capacity-map admissibility]
   \label{assump:capacity-map-admissibility}
-  When a structural capacity map is reported, the deployment abstraction provides
-  a time-unrolled graph whose unlogged cuts separate unrecorded sources from
-  $S_t$, together with per-edge capacity budgets that upper-bound the conditional
-  information crossing each unlogged channel.
+  When a capacity map with min-cut value
+  $\varepsilon_\text{state}^\text{UB}$ is reported, the deployment abstraction
+  provides a time-unrolled graph whose unlogged cuts separate unrecorded sources
+  from $S_t$, together with per-edge capacity budgets that upper-bound the
+  conditional information crossing each unlogged channel.
   \end{assumption}
 
   \begin{proposition}[Capacity-map upper bound]
@@ -692,9 +700,10 @@
     :=
     \widehat I_\text{LCB}(X_t^{(j)};A_t\mid\tilde T_t),
   \]
-  where $j$ denotes the coordinate being probed. The structural capacity map
-  identifies where residual capacity can reside; the activation profile
-  identifies where that capacity is behaviorally used.
+  where $j$ denotes the coordinate being probed. The capacity map with min-cut
+  value $\varepsilon_\text{state}^\text{UB}$ identifies where residual capacity
+  can reside; the activation profile identifies where that capacity is
+  behaviorally used.
 
   % ---------------------------------------------------------------------------
   \section{Empirical Diagnostics}
@@ -943,9 +952,10 @@
   For each unlogged edge $e$ in the time-unrolled DAG $G_t$, the conditional
   capacity $c_e$ is the maximum information that can flow through $e$ under the
   worst-case distribution consistent with the system protocol. It is not an
-  empirical average mutual information. It is a structural upper bound read from
-   interface specifications: token window length, hidden-dimension size,
-  quantization level, and discrete-state cardinality. Concretely, a text channel
+  empirical average mutual information. It contributes to the capacity map with
+  min-cut value $\varepsilon_\text{state}^\text{UB}$ and is read from interface
+  specifications: token window length, hidden-dimension size, quantization
+  level, and discrete-state cardinality. Concretely, a text channel
    with budget $K$ tokens over vocabulary $\mathcal{V}$ has $c_e \leq K \log
   |\mathcal{V}|$; a vector state of dimension $d$ at quantization $Q$ has $c_e
   \leq d \log Q$; a discrete scheduler with $|\Omega|$ states has $c_e \leq \log
@@ -1038,7 +1048,7 @@
   \label{app:methodology}
   % ---------------------------------------------------------------------------
 
-  \subsection{Structural Capacity Map Computation Protocol}
+  \subsection{Capacity Map Computation Protocol}
 
   Inputs: deployment architecture specification, logging manifest, and protocol
   budgets (token window sizes, hidden dimensions, quantization levels).
@@ -1262,7 +1272,7 @@
   observational ceiling permits detection.
 
   % ---------------------------------------------------------------------------
-  \section{Tightening the Structural Capacity Map}
+  \section{Tightening the Capacity Map}
   \label{app:static-tightening}
   % ---------------------------------------------------------------------------
 
@@ -1291,9 +1301,9 @@
 
   \paragraph{Reporting policy.}
   For review and deployment, report a ladder of capacity maps: worst-case
-  structural, empirical-marginal, and empirical-conditional. The first is the
-  conservative proof-backed baseline. The latter two are optional tightening
-  modes and should be reported only when the underlying measurements are
-  defensible.
+  topology-derived, empirical-marginal, and empirical-conditional. The first is
+  the conservative proof-backed baseline. The latter two are optional
+  tightening modes and should be reported only when the underlying measurements
+  are defensible.
 
   \end{document}

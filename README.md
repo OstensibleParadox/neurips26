@@ -11,11 +11,11 @@ state audit certificates in agent systems.
   paper tables and figures.
 - `paper/figures/` and `paper/tables/` contain rendered paper assets.
 
-## Proof Assets
+## Repository Boundary
 
-The standalone proof and theory assets were moved to:
+This repository should not carry the formal proof archive or operator-theory
+program.
 
-`/Users/ostensible_paradox/Documents/infinitesimal-shannon/dual-certificates-proof-assets/`
-
-That archive contains the former Lean artifact, theory notes, proof-module
-registry, and a snapshot of the proof-bearing paper source.
+- Finite typed Lean artifact: `/Users/ostensible_paradox/Documents/CausalQIF`
+- Infinitesimal Shannon operator manuscript:
+  `/Users/ostensible_paradox/Documents/infinitesimal-shannon`
