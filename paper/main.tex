@@ -155,18 +155,55 @@
   \label{sec:related}
   % ---------------------------------------------------------------------------
 
-  \paragraph{Probing, patching, and causal abstraction.}
-  Causal abstraction~\citep{geiger2021causal}, latent-knowledge
-  elicitation~\citep{burns2022discovering}, nullspace
-  projection~\citep{ravfogel2020null}, and amnesic
-  probing~\citep{elazar2021amnesic} are natural sources of finite-strength
-  probe measurements: when they expose a probe variable $Z_t = \varphi(S_t)$
-  and the required conditional assumptions hold, its MI with action supplies
-  a valid dynamic lower-bound term. Causal
-  tracing/ROME~\citep{meng2022locating},
-  representation engineering~\citep{zou2023representation}, and activation
-  addition~\citep{turner2023activation} provide perturbation-based evidence when
-   the patch affects action only through $S_t$.
+  \paragraph{Causal semantics and observational equivalence.}
+  Pearl's structural causal models and do-calculus give the semantics of
+  intervention once the variables and structural graph are fixed
+  \citep{pearl2009causality}. The audit problem here is earlier: a graph or
+  feature circuit compatible with the visible trace need not certify the
+  deployed mechanism. Classical causal-discovery results identify graphs only up
+  to observational equivalence without additional assumptions
+  \citep{verma1990equivalence,spirtes2000causation}. We therefore use causal
+  notation as a target semantics, not as evidence that the transcript contains
+  the operative latent state.
+
+  \paragraph{Causal abstraction and circuit tracing.}
+  Causal abstraction aligns low-level neural computations with higher-level
+  variables and tests the alignment by interventions
+  \citep{geiger2021causal,geiger2025causal}. Circuit-level methods such as
+  causal tracing/ROME~\citep{meng2022locating}, attribution-graph circuit
+  tracing~\citep{lindsey2025biology}, representation
+  engineering~\citep{zou2023representation}, and activation
+  addition~\citep{turner2023activation} provide perturbation-based evidence
+  about internal mechanisms. In our framework, these methods become dynamic
+  certificate sources only when the perturbation or probe is admissible: its path
+  to the action must be mediated by the declared operative state after
+  conditioning on the transcript.
+
+  \paragraph{Representation hypotheses.}
+  A second reason interpretability appears feasible is the empirical hypothesis
+  that high-level variables are represented in low-dimensional, often linear or
+  sparse, coordinates. Examples include latent-knowledge directions
+  \citep{burns2022discovering}, truth directions~\citep{marks2024geometry},
+  linear representation theory~\citep{park2024linear}, and superposed sparse
+  features~\citep{elhage2022toy}. Nullspace projection and amnesic probing
+  similarly ask whether readable coordinates carry behaviorally relevant
+  information~\citep{ravfogel2020null,elazar2021amnesic}. These works motivate
+  finite witness and proxy variables, but they do not by themselves show that a
+  logged transcript recovers the state that the deployment uses.
+
+  \paragraph{Non-identifiability and invertibility limits.}
+  The missing step is not causal notation, but recovery. Disentangled factors
+  cannot be identified from unsupervised observations without inductive
+  biases~\citep{locatello2019challenging}, and unrestricted nonlinear alignment
+  maps can make causal abstraction vacuous~\citep{sutter2025nonlinear}. Neural
+  maps are generally many-to-one unless injectivity is imposed by architecture
+  and analysis. Even for neural operators, global injectivity and bijectivity
+  require explicit Fredholm or fixed-point conditions; Volterra integral
+  operators give special injective cases, and inverse constructions are built
+  locally on compact image sets before being patched
+  together~\citep{furuya2023globally}. We therefore treat an interpreted
+  representation or trace-compatible graph as a localization hypothesis, not as
+  evidence that the transcript recovers the operative state.
 
   \paragraph{Black-box audit and network information theory.}
   Property testing~\citep{goldreich1998property} and black-box safety
