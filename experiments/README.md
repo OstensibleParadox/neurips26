@@ -1,6 +1,6 @@
 # Experiment Pipeline — Dual Certificates for Agent Audit
 
-Reproducibility guide for all experiments in the NeurIPS 2026 submission.
+Reproducibility guide for the Dual Certificates security-paper experiments.
 
 ## Environment
 

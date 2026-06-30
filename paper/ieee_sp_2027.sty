@@ -1,0 +1,25 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ieee_sp_2027}[2026/06/30 IEEE S&P 2027 submission helpers]
+
+% IEEE S&P 2027 uses the IEEEtran class with options conference,compsoc.
+% This package only centralizes dependencies; it must not alter margins,
+% spacing, fonts, or other template geometry.
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[numbers,sort&compress]{natbib}
+\RequirePackage{url}
+\RequirePackage{booktabs}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{nicefrac}
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{multirow}
+\RequirePackage[hidelinks]{hyperref}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}

@@ -1,23 +1,5 @@
-
-  \documentclass{article}
-  \usepackage[preprint]{neurips_2026}
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage[hidelinks]{hyperref}
-  \usepackage{url}
-  \usepackage{booktabs}
-  \usepackage{amsfonts}
-  \usepackage{amsmath}
-  \usepackage{amssymb}
-  \usepackage{amsthm}
-  \usepackage{nicefrac}
-  \usepackage{microtype}
-  \usepackage{xcolor}
-  \usepackage{graphicx}
-  \usepackage{tabularx}
-  \newcolumntype{L}{>{\raggedright\arraybackslash}X}
-  \usepackage{multirow}
-  \usepackage{subcaption}
+\documentclass[conference,compsoc]{IEEEtran}
+\usepackage{ieee_sp_2027}
 
   \newtheorem{definition}{Definition}
   \newtheorem{theorem}{Theorem}
@@ -28,15 +10,9 @@
   \newtheorem{assumption}{Assumption}
   \input{tables/dynamic_headline_macros}
 
-  \title{Hidden-State Non-Recoverability and Action-Relevance Certificates
-  for Agent Systems}
+  \title{Dual Certificates for Latent Causal Channels in Neural Agents}
 
-  \author{%
-  Lucia Yizi Zhang \\[2pt]
-  Shanghai Lixin University of Accounting and Finance \\[2pt]
-  \href{mailto:lucia.zhang.research@outlook.com}{\texttt{lucia.zhang.research@outlook.com}} \\[2pt]
-  {\small ORCID:\,\href{https://orcid.org/0009-0005-3528-7747}{\texttt{0009-0005-3528-7747}}}
-}
+  \author{}
 
   \begin{document}
   \maketitle
@@ -107,7 +83,7 @@
   measurements using conditional data processing. A capacity map with min-cut
   value $\varepsilon_\text{state}^\text{UB}$ is still reported when
   architecture access is available, but its role is an upper envelope on
-  residual capacity, not the main NeurIPS contribution. The central audit
+  residual latent-channel capacity, not the main security claim. The central audit
   question is whether
   \emph{both}
   \[
@@ -923,24 +899,12 @@
   black-box real-system diagnostics.
 
   % ---------------------------------------------------------------------------
-  \section*{Acknowledgments}
-  % ---------------------------------------------------------------------------
-
-  We thank the developers of Qwen2.5 and LLaDA for the open-weight models used
-  in the ReAct and diffusion-LM experiments; the creators and maintainers of
-  GSM8K and HotpotQA for benchmark data used in the multi-agent setting; and the
-   Hugging Face Transformers, PyTorch, NumPy, scikit-learn, NetworkX,
-  Matplotlib, and NetworkX communities for the software infrastructure
-  supporting the experiments and figures.
-  Computations ran on a single Apple M4 Max workstation.
-
-  % ---------------------------------------------------------------------------
-  \bibliographystyle{plainnat}
+  \bibliographystyle{IEEEtranN}
   \bibliography{references}
 
   \newpage
 
-  \appendix
+  \appendices
 
   % ---------------------------------------------------------------------------
   \section{Network Information Theory Background for
