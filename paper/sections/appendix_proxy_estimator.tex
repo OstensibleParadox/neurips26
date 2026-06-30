@@ -1,0 +1,110 @@
+  % ---------------------------------------------------------------------------
+  \section{Proxy Estimator: Bias and Variance}
+  \label{app:proxy-bias}
+  % ---------------------------------------------------------------------------
+
+  The read-only proxy experiment is a calibration of observational access, not a
+   main activation result. On $3{,}000$ tool-selection trajectories (mixed
+  calculator/search/email/calendar/weather), we record $\tilde T_t$
+  (embedding-layer representation), $Z_t$ (layer-24 tool-logit projection), and
+  $A_t$. The CE-diff $\hat I = \mathcal{L}(A_t\mid\tilde T_t) -
+  \mathcal{L}(A_t\mid\tilde T_t,Z_t)$ is estimated via 5-fold cross-fitted
+  logistic regression with trajectory-block bootstrap.
+  Table~\ref{tab:proxy-results} reports the resolution ablation: random,
+  1/3/5-dim PCA, and full 10-dim proxy.
+
+  The $d{=}5$ PCA proxy recovers $0.0317$ bits ($1.4\%$ of the $\log_2 5 = 2.32$
+   bit ceiling) with CI excluding zero on the mixed-task distribution. The
+  magnitude reflects an \emph{observational bottleneck}: when the baseline
+  predictor achieves near-perfect accuracy, the ceiling $H(A_t \mid \tilde T_t)
+  \approx 0$ caps any read-only proxy. Intervention and replay avoid this
+  bottleneck by changing the missing-state condition while holding the visible
+  transcript fixed.
+
+  The dormant/active proxy split should be read as an estimator-noise
+  diagnostic. On calculator tasks (dormant scratchpad), $H(A_t \mid \tilde T_t)
+  = 0$ empirically, yielding $\delta_\text{act}^\text{LB} = 0$ trivially. On
+  planning tasks (active scratchpad), the proxy row is positive in point
+  estimate but has a wide CI that straddles zero. We therefore do not use the
+  read-only proxy as the main body evidence for active scratchpad use; the
+  causal intervention and controlled replay in \S\ref{sec:exp-intervention}
+  supply that evidence.
+
+  \begin{table}[ht]
+  \centering
+  \begin{tabular}{lcc}
+  \toprule
+  Proxy & CE-diff (bits; nats) & 95\% CI (bits) \\
+  \midrule
+  \multicolumn{3}{c}{\textit{Resolution ablation (mixed task)}} \\
+  random & $-0.0007$; $-0.0005$ & $[-0.0012,-0.0003]$ \\
+  $d=1$ PCA & $+0.0065$; $+0.0045$ & $[+0.0053,+0.0078]$ \\
+  $d=3$ PCA & $+0.0250$; $+0.0173$ & $[+0.0225,+0.0273]$ \\
+  $d=5$ PCA & $+0.0317$; $+0.0220$ & $[+0.0273,+0.0358]$ \\
+  full $(10\text{-dim})$ & $+0.0183$; $+0.0127$ & $[+0.0134,+0.0229]$ \\
+  \midrule
+  \multicolumn{3}{c}{\textit{Dormant/active split (d=64 PCA, L2-regularized)}}
+  \\
+  calculator (dormant) & $0.0000$; $0.0000$ & $[0,0]$ \\
+  planning (active) & $+0.0412$; $+0.0286$ & $[-0.0725,+0.1386]$ \\
+  \bottomrule
+  \end{tabular}
+  \caption{Read-only proxy calibration. Top: resolution ablation on the mixed
+  tool-selection dataset. Bottom: dormant/active split. The active-task row is
+  reported honestly as an estimator-noise diagnostic because its confidence
+  interval straddles zero; causal replay/intervention supplies the body evidence
+   for active scratchpad use. Negative random-control CE-diff is a finite-sample
+   artifact near the noise floor and is clipped to zero when interpreted as a
+  lower-bound certificate.}
+  \label{tab:proxy-results}
+  \end{table}
+
+\begin{figure}[ht]
+\centering
+\small
+\includegraphics[width=0.55\textwidth]{figures/proxy_ablation.pdf}
+\caption{$\delta_\text{act}^\text{LB}$ rises to peak at $d{=}5$ PCA; random
+proxy stays near zero. Bars are 95\% trajectory-block CIs.}
+\label{fig:proxy}
+\end{figure}
+
+  The CE-diff estimator $\hat I = L(\tilde T_t) - L(\tilde T_t, Z_t)$
+  lower-bounds $I(Z_t; A_t \mid \tilde T_t)$, but three bias sources and two
+  variance sources matter in practice.
+
+  \paragraph{Bias sources.}
+  (1)~\emph{Proxy coarsening:} $Z_t = f(S_t)$ discards information in $S_t$ not
+  captured by $f$, so $I(Z_t; A_t \mid \tilde T_t) \leq I(S_t; A_t \mid \tilde
+  T_t)$. The gap is the coarsening loss.
+  (2)~\emph{Restricted predictor class:} Logistic regression or shallow MLPs may
+   not reach the Bayes-optimal predictor, so the CE-diff underestimates the true
+   conditional MI.
+  (3)~\emph{Finite-sample bias:} With finite $N$, the cross-entropy on held-out
+  folds is an upward-biased estimate of the population CE, and the difference of
+   two such estimates carries residual bias. Cross-fitting mitigates but does
+  not eliminate this.
+
+  \paragraph{Variance sources.}
+  (1)~\emph{Trajectory sampling:} The $N$ observed trajectories are a finite
+  sample from the deployment distribution. Block bootstrap over trajectories
+  estimates the resulting CI.
+  (2)~\emph{Proxy dimension:} Higher-dimensional proxies carry more information
+  but increase predictor variance. The PCA ablation in
+  Table~\ref{tab:proxy-results} shows this trade-off: $d{=}5$ outperforms both
+  $d{=}3$ and the full 10-dimensional proxy.
+
+  \paragraph{Mean squared error.}
+  Decomposing $\text{MSE} = (\text{bias})^2 + \text{variance}$, the proxy
+  certificate is a conservative lower bound: positive bias (underestimation) is
+  safe for the audit (it never overstates $\delta_\text{act}$), while variance
+  widens the CI but does not shift the point estimate.
+
+  \paragraph{Sampling noise and temperature.}
+  Increasing decoding temperature can raise $H(A_t \mid \tilde T_t)$, but
+  independent sampler noise is not a certificate amplifier. It changes the
+  audited policy and can reduce $I(Z_t; A_t \mid \tilde T_t)$ when the added
+  action variation is unrelated to the hidden state proxy. A temperature sweep
+  is therefore a calibration of a randomized deployment policy, not a substitute
+   for proxy quality or causal access. We do not use temperature injection for
+  the main proxy certificate; the synthetic experiment instead injects
+  hidden-state stochasticity with known ground truth.

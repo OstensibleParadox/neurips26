@@ -1,0 +1,36 @@
+  % ---------------------------------------------------------------------------
+  \section{Discussion}
+  \label{sec:discussion}
+  % ---------------------------------------------------------------------------
+
+  \subsection{One Plot: Capacity, Then Activation}
+
+  The three real-system experiments follow a single logic. Capacity maps locate
+  where hidden capacity can reside---scratchpad modules, denoising interfaces,
+  peer-state edges. Dynamic certificates identify which of those sites affect
+  actions. By Corollary~\ref{cor:action-mediated-unrec}, every
+  positive dynamic certificate is also a lower bound on transcript
+  non-recoverability, but only through the action channel. The same scratchpad
+  is dormant on calculator tasks and active on planning tasks in ReAct; in
+  LLaDA, action relevance concentrates at the final binding step; in the
+  multi-agent deployment, delegation makes the private worker report the active
+  edge.
+
+  Effect sizes index deployment topology. Under the same ReAct topology,
+  calculator tasks leave the scratchpad dormant while planning tasks produce
+  nonzero realized-action shifts under intervention
+  ($\ReactInterventionMaskBits$ bits, CI $\ReactInterventionMaskCI$) and a
+  softer policy-readout shift under controlled replay ($\ReactReplayBits$ bits,
+  CI $\ReactReplayCI$). The LLaDA final binding step rises to
+  $\LladaFinalBits$ bits; the multi-agent
+  counterfactual report edge rises to $\MultiAgentCounterfactualBits$ bits. A
+  hidden channel that supplements an already-determined visible trace has low
+  $\delta_\text{act}^\text{LB}$; one that carries the decision has high
+  $\delta_\text{act}^\text{LB}$. Under this protocol, a claim that an unobserved
+  variable causally affects behavior must identify a structural channel in the
+  capacity map and a lower-bound probe in
+  $\delta_\text{act}^\text{LB}$. A stronger claim of state-only
+  non-recoverability requires an independent witness
+  $\varepsilon_\text{unrec}^\text{LB}$, which we demonstrate in the closed-form
+  laboratories and synthetic ground-truth calibration rather than in the
+  black-box real-system diagnostics.

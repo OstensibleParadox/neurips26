@@ -1,0 +1,34 @@
+  % ---------------------------------------------------------------------------
+  \section{Tightening the Capacity Map}
+  \label{app:static-tightening}
+  % ---------------------------------------------------------------------------
+
+  The reported capacity map is intentionally conservative. Its role is to
+  upper-bound the residual hidden-state entropy from deployment topology alone,
+  so the default budgets in \S\ref{sec:static-cert} are worst-case interface
+  capacities rather than empirical information estimates.
+
+  \paragraph{Empirical and conditional budgets.}
+  A tighter deployment-specific capacity map can replace the worst-case budget
+  $c_e$ on each unlogged edge by an empirically justified budget $c_e^\star$.
+  For a text channel, one option is a high-confidence upper bound on $H(X_e \mid
+   \tilde T_t)$; when the visible history strongly constrains the missing input,
+   a conditional form such as $H(X_e \mid \tilde T_t, \mathcal H_t)$ can be
+  smaller still. For quantized vector states, the analogous replacement is an
+  empirical entropy or rate-distortion budget at the same audit discretization.
+  These substitutions do not alter the min-cut proof: they only change the edge
+  weights used by Corollary~\ref{cor:additive-ub}.
+
+  \paragraph{Graph refinement.}
+  If two apparent channels share latent state, naive edge-wise additivity can
+  double-count the same information. The remedy is to refine the time-unrolled
+  DAG so that the shared state appears as an explicit node or edge family, then
+  recompute the min-cut on the refined graph. This usually tightens the map more
+  reliably than trying to compensate with ad hoc weight corrections.
+
+  \paragraph{Reporting policy.}
+  For review and deployment, report a ladder of capacity maps: worst-case
+  topology-derived, empirical-marginal, and empirical-conditional. The first is
+  the conservative proof-backed baseline. The latter two are optional
+  tightening modes and should be reported only when the underlying measurements
+  are defensible.

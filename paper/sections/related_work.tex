@@ -1,0 +1,77 @@
+  % ---------------------------------------------------------------------------
+  \section{From Interpretability to Audit Certificates}
+  \label{sec:related}
+  % ---------------------------------------------------------------------------
+
+  \paragraph{Structural causal semantics.}
+  Pearl's structural causal models and do-calculus are the standard semantics
+  for interventions once the variables and structural graph have been fixed
+  \citep{pearl2009causality}. They are not the target of our critique. The
+  obstacle is not Pearl's intervention calculus, but the missing certificate
+  between a deployed neural mechanism and the variables used to interpret it.
+  Classical causal-discovery results already show that observational data
+  identify graphs only up to equivalence classes without additional assumptions
+  \citep{verma1990equivalence,spirtes2000causation}. Our use of causal notation
+  therefore treats interventions as the right semantics for an audit
+  abstraction, not as evidence that the visible transcript contains the
+  operative latent state.
+
+  \paragraph{Causal abstraction and mechanistic interpretability.}
+  Modern interpretability assumes that useful high-level variables can be
+  aligned with internal representations and tested by interventions. Causal
+  abstraction makes this alignment explicit by mapping low-level neural
+  computations to higher-level variables and checking the map under
+  counterfactual interchange or related interventions
+  \citep{geiger2021causal,geiger2025causal}. Mechanistic-interpretability
+  methods pursue the same program at circuit scale: causal tracing and
+  ROME~\citep{meng2022locating}, attribution-graph circuit
+  tracing~\citep{lindsey2025biology}, representation
+  engineering~\citep{zou2023representation}, and activation
+  addition~\citep{turner2023activation} all provide perturbation-based evidence
+  about internal mechanisms. These methods can be valuable evidence for
+  localization; by themselves they do not certify transcript recoverability.
+
+  \paragraph{Representation assumptions.}
+  The alignment program is plausible because many empirical results suggest that
+  behaviorally meaningful variables have readable internal coordinates: latent
+  knowledge directions~\citep{burns2022discovering}, truth
+  directions~\citep{marks2024geometry}, the linear representation
+  hypothesis~\citep{park2024linear}, sparse or superposed features
+  \citep{elhage2022toy}, and sparse-feature circuit descriptions
+  \citep{lindsey2025biology}. Probing and erasure methods similarly test whether
+  readable coordinates carry behaviorally relevant information
+  \citep{ravfogel2020null,elazar2021amnesic}. These representation assumptions
+  explain why finite witnesses, probes, sparse features, and replacement models
+  are useful audit instruments. They do not remove the need to certify that the
+  declared variables recover the operative state of the deployed computation.
+
+  \paragraph{Non-bijective failure.}
+  That assumption is nontrivial: neural computations are many-to-one,
+  superposed, and often only locally approximated by interpreted replacement
+  models. Disentangled factors are not identifiable from unsupervised
+  observations without inductive bias~\citep{locatello2019challenging}, and
+  unrestricted nonlinear alignment maps can make causal abstraction
+  vacuous~\citep{sutter2025nonlinear}. Neural maps are not invertible unless
+  injectivity is imposed by architecture and analysis; even neural-operator
+  bijectivity requires explicit Fredholm or fixed-point conditions, with inverse
+  constructions built locally before being patched
+  together~\citep{furuya2023globally}. A trace-compatible graph or circuit is
+  therefore a localization hypothesis, not an audit certificate.
+
+  \paragraph{Audit certificates.}
+  Our move is to turn an interpretability claim into an audit certificate. A
+  capacity map with min-cut value $\varepsilon_\text{state}^\text{UB}$ localizes
+  how much hidden-state information can escape the recorded trace, using the
+  classical cut-set upper bound as an audit-graph tool
+  \citep{elgamal2011network}. It is paired with lower certificates:
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}$ for transcript unrecoverability and
+  $\delta_\mathrm{act}^\mathrm{LB}$ for residual action relevance. This separates
+  our claim from black-box property testing and safety audits, which can expose
+  output behavior but cannot by themselves lower-bound the hidden channel that
+  drives an action~\citep{goldreich1998property,casper2024blackbox,su2024mission}.
+  The same interface applies to the deployment geometries we study below,
+  including diffusion-LM denoising latents in LLaDA-style agents
+  \citep{nie2025llada,zhen2026dllmagent} and multi-agent private-report edges:
+  the certificate is not that an interpreted variable looks meaningful, but that
+  omitted state remains unrecoverable from the transcript and still changes the
+  declared action readout.

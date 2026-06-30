@@ -1,0 +1,287 @@
+  % ---------------------------------------------------------------------------
+  \section{Setup and Audit Regime}
+  \label{sec:setup}
+  % ---------------------------------------------------------------------------
+
+  Standard information-theoretic notation follows \citet{cover2006elements}. All
+   logarithms are base 2; entropy and mutual information are reported in bits.
+
+  At step $t$: \emph{full trace} $T_t$ (all intermediate activations),
+  \emph{recorded trace} $\tilde T_t \subseteq T_t$ (auditor-visible),
+  \emph{operative state} $S_t$ (internal computation), \emph{action readout}
+  $A_t$ (the declared audit target: realized action, next token, or pre-sampling
+  policy distribution), \emph{unrecorded sources} $U_t$ (exogenous inputs not in
+  $\tilde T_t$).
+
+  \subsection{Two Core Audit Quantities}
+
+  \begin{definition}[Core Audit Quantities]
+  \label{def:certs}
+  The two quantities targeted by the dual certificate are:
+  \begin{itemize}
+    \item \textbf{Hidden-state non-recoverability:}
+  $\varepsilon_\text{unrec}:=H(S_t \mid \tilde T_t)$, the residual entropy of
+  the operative state given the visible trace.
+    \item \textbf{Residual decision relevance:} $\delta_\text{act} := I(S_t; A_t
+   \mid \tilde T_t)$, the mutual information between operative state and the
+  declared action readout given the visible trace.
+  \end{itemize}
+  Neither quantity is directly computable in deployment:
+  $\varepsilon_\text{unrec}$ requires recovering the full internal-state
+  distribution, and $\delta_\text{act}$ requires observing $S_t$. The
+  dual-certificate framework targets:
+  \begin{itemize}
+    \item a \emph{non-recoverability lower bound}
+  $\varepsilon_\text{unrec}^\text{LB}\leq \varepsilon_\text{unrec}$, computed
+  from hidden-state witnesses or closed-form finite-dimensional models
+  (\S\ref{sec:unrec-cert});
+    \item an \emph{empirical lower bound} $\delta_\text{act}^\text{LB} \leq
+  \delta_\text{act}$, estimated by admissible replay, intervention, or proxy
+  probes and conditional data processing
+  (\S\ref{sec:dynamic-cert}).
+  \end{itemize}
+  The reported audit pair is $(\varepsilon_\text{unrec}^\text{LB},
+  \delta_\text{act}^\text{LB})$. When architecture access is available, we also
+  report a capacity map with min-cut value
+  $\varepsilon_\text{state}^\text{UB}\geq H(S_t\mid\tilde T_t)$
+  (\S\ref{sec:static-cert}).
+  \end{definition}
+
+  Neither quantity is identifiable from behavioral observations alone: different
+   causal graphs can produce identical joint distributions over $(\tilde T_t,
+  A_t)$ pairs, so observing outputs does not fix $H(S_t \mid \tilde T_t)$ or
+  $I(S_t; A_t \mid \tilde T_t)$. The non-recoverability certificate addresses
+  the first by measuring or analytically computing hidden-state witnesses; the
+  action-relevance certificate addresses the second by measuring variables
+  whose influence on action must pass through the operative state. The capacity
+  map bounds how large the first quantity could be under the deployment
+  topology and localizes where that capacity can sit.
+
+  \subsection{Audit Abstraction Assumptions}
+  \label{sec:audit-assumptions}
+
+  The certificates are claims about an audit abstraction, not about arbitrary
+  deployment internals. The abstraction declares the variables the auditor will
+  treat as state, transcript, action, witnesses, and probes. Capacity-map
+  channels are declared separately when structural access is reported.
+
+  \begin{assumption}[Deployment abstraction]
+  \label{assump:deployment-abstraction}
+  For the audited step $t$, the deployment induces a joint distribution over
+  $(S_t,\tilde T_t,A_t)$ at a declared finite audit resolution. Any continuous
+  internal variable used in a certificate is first mapped to a finite-noise,
+  finite-dimensional witness or probe.
+  \end{assumption}
+
+  \begin{assumption}[Witness and probe admissibility]
+  \label{assump:probe-admissibility}
+  Each non-recoverability witness $W_t^{(j)}$ is generated from $S_t$ by a known
+  channel with $W_t^{(j)}\perp\!\!\!\perp \tilde T_t\mid S_t$. Each
+  action-relevance probe $X_t^{(j)}$ affects the next action only through the
+  operative state after conditioning on the transcript:
+  $X_t^{(j)}\to S_t\to A_t$ given $\tilde T_t$.
+  \end{assumption}
+
+  \begin{theorem}[Dual certificate validity]
+  \label{thm:dual-certificate-validity}
+  Under Assumptions~\ref{assump:deployment-abstraction}--
+  \ref{assump:probe-admissibility}, let
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)$ be any lower confidence bound on
+  $\max_j I(W_t^{(j)};S_t\mid\tilde T_t)$, and let
+  $\delta_\mathrm{act}^\mathrm{LB}(t)$ be any lower confidence bound on
+  $\max_j I(X_t^{(j)};A_t\mid\tilde T_t)$. Then
+  \[
+    H(S_t\mid \tilde T_t)\geq
+    \varepsilon_\mathrm{unrec}^\mathrm{LB}(t),
+    \qquad
+    I(S_t;A_t\mid \tilde T_t)\geq
+    \delta_\mathrm{act}^\mathrm{LB}(t).
+  \]
+  Thus the certified state is unrecoverable from the transcript, yet still
+  action-relevant whenever both lower bounds are nonzero.
+  \end{theorem}
+
+  \begin{remark}[Complementarity and certificate directions]
+  \label{rem:complementarity}
+  By the data processing inequality, $\delta_\text{act} \leq
+  \varepsilon_\text{unrec}$. The reported lower certificates remain independent
+  axes of audit evidence:
+  \begin{itemize}
+    \item If $\varepsilon_\text{state}^\text{UB} = 0$ (fully logged
+  architecture), then $\varepsilon_\text{unrec} = 0$ and $\delta_\text{act} =
+  0$; any valid lower bound satisfies $\delta_\text{act}^\text{LB} = 0$.
+    \item If $\delta_\text{act}^\text{LB} = 0$ under the available admissible
+  probes, unrecoverable state may still exist: the available witnesses may
+  expose $\varepsilon_\text{unrec}^\text{LB}>0$ while the current task does not
+  activate that hidden capacity. Conversely,
+  $\delta_\text{act}^\text{LB}>0$ proves that the transcript omitted
+  decision-relevant state, even if no separate non-recoverability witness has
+  been measured.
+  \end{itemize}
+  The audit interpretation is therefore two-dimensional: deployment teams
+  should report both lower certificates and, when possible, the capacity map
+  with min-cut value $\varepsilon_\text{state}^\text{UB}$, rather than collapse
+  them into a single hiddenness score.
+  \end{remark}
+
+  \subsection{Non-Recoverability Certificate}
+  \label{sec:unrec-cert}
+
+  \begin{remark}[Finite-precision state entropy]
+  \label{rem:finite-precision}
+  Agent states may be continuous, high-dimensional, or infinite-dimensional.
+  Throughout the main certificate statements, $H(S_t\mid\tilde T_t)$ denotes
+  audit entropy at a declared finite resolution: equivalently, the entropy of
+  a finite partition or finite-precision witness generated by $S_t$. This avoids
+  using coordinate-dependent differential entropy as an audit claim. Any
+  continuous-state calculation below enters only after projecting to a
+  finite-dimensional, finite-noise witness.
+  \end{remark}
+
+  \begin{proposition}[Hidden-state witness certificate]
+  \label{prop:unrec-lb}
+  Let $W_t$ be a finite witness generated from the operative state through a
+  known channel $K_W(w\mid S_t)$, with
+  $W_t\perp\!\!\!\perp \tilde T_t \mid S_t$. Then
+  \[
+    I(W_t;S_t\mid\tilde T_t)
+    =
+    H(W_t\mid\tilde T_t)-H(W_t\mid S_t)
+    \leq
+    H(S_t\mid\tilde T_t).
+  \]
+  Consequently any lower confidence bound on
+  $I(W_t;S_t\mid\tilde T_t)$ is a valid non-recoverability certificate
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}$. If $W_t=\phi(S_t)$ is deterministic,
+  this reduces to $H(W_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$.
+  \end{proposition}
+
+  \begin{proposition}[Conditional DPI dynamic certificate]
+  \label{prop:dynamic-lb}
+  Let $X_t$ be an admissible probe variable such that, conditional on the
+  recorded trace $\tilde T_t$, its influence on the next action is mediated by
+  the operative state:
+  \[
+    X_t \longrightarrow S_t \longrightarrow A_t
+    \qquad\text{given }\tilde T_t .
+  \]
+  Then
+  \[
+    I(X_t;A_t\mid \tilde T_t)
+    \leq
+    I(S_t;A_t\mid \tilde T_t)
+    =\delta_\text{act}.
+  \]
+  Consequently any lower confidence bound on
+  $I(X_t;A_t\mid\tilde T_t)$ is a valid dynamic certificate
+  $\delta_\text{act}^\text{LB}$.
+  \end{proposition}
+
+  \begin{corollary}[Action-mediated non-recoverability]
+  \label{cor:action-mediated-unrec}
+  Any valid action-relevance certificate is also a valid lower bound on
+  transcript non-recoverability:
+  \[
+    \delta_\text{act}^\text{LB}
+    \leq
+    I(S_t;A_t\mid\tilde T_t)
+    \leq
+    H(S_t\mid\tilde T_t).
+  \]
+  Equivalently,
+  $\varepsilon_{\mathrm{unrec,act}}^\mathrm{LB}:=
+  \delta_\text{act}^\text{LB}$ is a conservative non-recoverability lower
+  bound mediated by the action channel.
+  Thus a positive replay, intervention, or proxy certificate proves that the
+  visible transcript omits at least that many bits of action-relevant hidden
+  state. This certificate is action-mediated; it should not be confused with an
+  independent state-only witness certificate from Proposition~\ref{prop:unrec-lb}.
+  \end{corollary}
+
+  \subsection{Closed-Form Witness Models}
+  \label{sec:engine}
+
+  The audit interface only needs finite variables: witnesses of hidden state and
+  probes of action relevance. Closed-form models are useful when they generate
+  those variables with declared noise and resolution; Propositions
+  \ref{prop:unrec-lb} and~\ref{prop:dynamic-lb} then turn the resulting
+  information rates into audit certificates.
+
+  Let $\{P_j\}$ be finite-dimensional projections onto auditable hidden coordinates
+  (module state, denoising step, retrieval mixture, routing layer). A Gaussian
+  finite-precision witness has the form
+  \[
+    W_t^{(j)} = P_j S_t + \eta_j Z_j,
+    \qquad Z_j\sim\mathcal N(0,I),
+  \]
+  with known audit noise $\eta_j>0$. The displayed Gaussian quantity is the
+  finite-noise information in the projected hidden state beyond the trace; any
+  subsequent finite-bin quantization can only decrease information, so lower
+  confidence bounds remain valid finite-resolution audit certificates. In a
+  linear Gaussian state-space model, the posterior covariance
+  $\Sigma_{j\mid\tilde T_t}:=\mathrm{Cov}(P_jS_t\mid\tilde T_t)$ gives the
+  closed-form non-recoverability certificate
+  \[
+    \varepsilon_{\mathrm{unrec},j}^{\mathrm{LB}}(t)
+    =
+    \frac12\log_2\det\!\left(I+\eta_j^{-2}\Sigma_{j\mid\tilde T_t}\right).
+  \]
+  If the action readout on the same coordinate is
+  $A_t=B_jP_jS_t+\zeta_t$ with $\zeta_t\sim\mathcal N(0,R_A)$, the matching
+  action-relevance term is
+  \[
+    \delta_{\mathrm{act},j}^{\mathrm{LB}}(t)
+    =
+    \frac12\log_2\det\!\left(
+      I+R_A^{-1}B_j\Sigma_{j\mid\tilde T_t}B_j^\top
+    \right),
+  \]
+  or any lower confidence bound on an intervention/proxy estimate of the same
+  conditional information.
+
+  \begin{proposition}[Finite-witness aggregation certificates]
+  \label{prop:engine}
+  For any finite set of witnesses $\{W_t^{(j)}\}_{j\in J}$ and
+  admissible action probes $\{X_t^{(j)}\}_{j\in J}$,
+  \[
+    \max_{j\in J} I(W_t^{(j)};S_t\mid\tilde T_t)
+    \leq
+    H(S_t\mid\tilde T_t),
+    \qquad
+    \max_{j\in J} I(X_t^{(j)};A_t\mid\tilde T_t)
+    \leq
+    I(S_t;A_t\mid\tilde T_t).
+  \]
+  Thus any finite witness family can generate both
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)$ and
+  $\delta_\mathrm{act}^\mathrm{LB}(t)$ as coordinate-wise lower certificates.
+  \end{proposition}
+
+  \subsection{Audit Access Modes}
+
+  \begin{enumerate}
+    \item \emph{Structural access.} The auditor has the deployment architecture,
+   logging manifest, and interface budgets. This is sufficient to compute
+  $\varepsilon_\text{state}^\text{UB}$ from the unlogged subgraph
+  (\S\ref{sec:static-cert}) but gives no lower certificate by itself.
+
+    \item \emph{Witness access.} The auditor can read or synthesize a
+  finite-precision witness $W_t$ generated by $S_t$, or can evaluate a
+  finite-dimensional witness model. This supports
+  $\varepsilon_\text{unrec}^\text{LB}$ through
+  Proposition~\ref{prop:unrec-lb}.
+
+    \item \emph{Counterfactual replay access.} The auditor can rerun the same
+  system under wild and replayed missing-state conditions while holding the
+  visible trace fixed. This supports replay variables $R_t$ for
+  Proposition~\ref{prop:dynamic-lb}.
+
+    \item \emph{Proxy or intervention access.} The auditor can read a proxy
+  $Z_t=f(S_t)$ or perturb a hidden module with an exogenous intervention
+  $\xi_t$. These support dynamic certificates when the conditional Markov
+  condition in Proposition~\ref{prop:dynamic-lb} is justified by the protocol.
+  \end{enumerate}
+
+  These modes are instantiated in the controlled experiments below.
+  Paraphrase- or format-based black-box replay is not used as evidence for
+  internal decision relevance.

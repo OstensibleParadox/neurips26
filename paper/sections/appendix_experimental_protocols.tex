@@ -1,0 +1,70 @@
+  % ---------------------------------------------------------------------------
+  \section{Experimental Protocols}
+  \label{app:methodology}
+  % ---------------------------------------------------------------------------
+
+  \subsection{Capacity Map Computation Protocol}
+
+  Inputs: deployment architecture specification, logging manifest, and protocol
+  budgets (token window sizes, hidden dimensions, quantization levels).
+  Procedure: (1)~construct the time-unrolled DAG $G_t$; (2)~partition edges into
+   logged and unlogged; (3)~verify software orthogonality
+  (Lemma~\ref{lem:ortho-decomp}) or add shared-state edges explicitly to $G_t$
+  until orthogonality holds; (4)~assign capacity $c_e$ per unlogged edge using
+  the forms in \S\ref{sec:static-cert}; (5)~enumerate reachable cut sets
+  $\mathcal{C}_\text{unlogged}$ with a min-cut algorithm after logged edges are
+  collapsed to zero residual capacity; (6)~compute
+  $\varepsilon_\text{state}^\text{UB} = \varepsilon_\text{nominal} + \min_C
+  \sum_{e \in C} c_e$ via Corollary~\ref{cor:additive-ub}.
+
+  For the logging ablation, repeat steps (2)--(6) for the ordered manifests used
+   in \S\ref{sec:exp-static}: output-only trace, tool-call trace, router-logit
+  trace, summary-buffer trace, and full scratchpad trace. Report the upper-bound
+   value and active minimum-cut edges at each level. See
+  \texttt{experiments/7.1\_static\_certificate/README.md} for implementation.
+
+  \subsection{Dynamic Certificate Estimation Protocol}
+
+  \paragraph{Proxy certificate.} Inputs: model, task environment, and probe
+  family $Z_t^{(k)} = f_k(S_t)$. Steps: (1)~run inference on $N$ trajectories
+  and record $(\tilde T_t, Z_t^{(k)}, A_t)$; (2)~train cross-fitted predictors
+  $p_\theta(A_t \mid \tilde T_t)$ and $p_\phi(A_t \mid \tilde T_t, Z_t^{(k)})$;
+  (3)~compute the cross-entropy difference $\hat I_k = L_\text{trace} -
+  L_{\text{trace}+Z^{(k)}}$; (4)~estimate trajectory-block bootstrap intervals;
+  (5)~repeat for random, label-permuted, 1-dimensional, 3-dimensional,
+  5-dimensional, and full-slice proxies.
+
+  \paragraph{Optional controlled replay certificate.} Inputs: model and two
+  controlled execution regimes (wild and replay). Steps: (1)~for each $\tilde
+  T_t$, run the same system under wild and replayed missing-state conditions;
+  (2)~estimate $\hat\Delta = \hat{\mathrm{JS}}(P_\text{wild}, P_\text{replay}
+  \mid \tilde T_t)$; (3)~aggregate over trace slices. This is not output-only
+  paraphrase replay; it is valid only under the controlled replay condition in
+  \S\ref{sec:dynamic-cert}.
+
+  \paragraph{Intervention certificate.} Inputs: model, targeted hidden module,
+  perturbation budget, and task split. Steps: (1)~inject $\xi_\text{hidden}$ at
+  levels $\{0, \sigma_1, \sigma_2, \ldots\}$ while holding $\tilde T_t$ fixed;
+  (2)~record $(\xi_\text{hidden}, A_t \mid \tilde T_t)$ pairs; (3)~estimate
+  $\hat I(\xi_\text{hidden}; A_t \mid \tilde T_t)$ via conditional
+  action-distribution shift for discrete action spaces, or via InfoNCE/MINE for
+  continuous action spaces; (4)~repeat on dormant tasks and active tasks under
+  the same topology to test whether $\delta_\text{act}^\text{LB}$ changes while
+  $\varepsilon_\text{state}^\text{UB}$ remains fixed. The implementation
+  persists per-sample argmax actions, tool-token log probabilities, and
+  normalized tool-choice probabilities so the aggregate JS rows can be
+  recomputed from raw intervention traces.
+
+  \paragraph{Multi-agent private-report certificate.} Inputs: task pool, worker
+  model, controller model, and a two-class API space. Steps: (1)~sample $N/2$
+  arithmetic tasks and $N/2$ factual-retrieval tasks; (2)~have the worker
+  generate a private evidence report under a prompt that forbids direct API
+  names and audit each report for leakage; (3)~sample the controller action
+  distribution $k$ times under wild, neutral replay, opposite-class report,
+  same-class shuffled report, and oracle-tag conditions; (4)~parse actions into
+  \{\texttt{calculator}, \texttt{search}, \texttt{invalid}\}; (5)~compute
+  per-task JS divergence in bits and task-block bootstrap intervals. The
+  oracle-tag contrast is reported only as an upper bound; the main contrast is
+  the opposite-class worker-report intervention.
+
+  See the README files for experiments 7.2, 7.3, and 7.6 for implementation.

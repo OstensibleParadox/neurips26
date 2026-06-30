@@ -1,0 +1,100 @@
+  % ---------------------------------------------------------------------------
+  \section{Network Information Theory Background for
+  Proposition~\ref{prop:static-ub}}
+  \label{app:netinfo}
+  % ---------------------------------------------------------------------------
+
+  \paragraph{Conditional channel capacity.}
+  For each unlogged edge $e$ in the time-unrolled DAG $G_t$, the conditional
+  capacity $c_e$ is the maximum information that can flow through $e$ under the
+  worst-case distribution consistent with the system protocol. It is not an
+  empirical average mutual information. It contributes to the capacity map with
+  min-cut value $\varepsilon_\text{state}^\text{UB}$ and is read from interface
+  specifications: token window length, hidden-dimension size, quantization
+  level, and discrete-state cardinality. Concretely, a text channel
+   with budget $K$ tokens over vocabulary $\mathcal{V}$ has $c_e \leq K \log
+  |\mathcal{V}|$; a vector state of dimension $d$ at quantization $Q$ has $c_e
+  \leq d \log Q$; a discrete scheduler with $|\Omega|$ states has $c_e \leq \log
+   |\Omega|$. The $K \log |\mathcal{V}|$ form is the maximum-entropy bound
+  (uniform over $K$-token sequences); any other distribution gives strictly
+  lower entropy. Auditors who can measure the empirical input distribution to a
+  particular channel may substitute a tighter bound, which only improves the
+  capacity map.
+
+  \paragraph{What tightening means.}
+  The capacity map remains valid under any replacement $c_e^\star \geq
+  I(X_e; Y_e \mid \tilde T_t)$, so tightening is a matter of choosing smaller
+  but still defensible per-edge budgets. In practice, this means replacing the
+  worst-case $K \log |\mathcal{V}|$ or $d \log Q$ budget with an empirical or
+  conditional estimate at the same audit discretization, rather than changing
+  the capacity-map argument.
+
+  \paragraph{Cut-set upper bound and additive decomposition.}
+  Let $G_t = (V_t, E_t)$ be the time-unrolled DAG. For a cut $\Omega \subseteq
+  V_t$ separating source nodes from a target node, the \emph{induced cut
+  capacity} $C_\text{cut}(\Omega)$ is the supremum, over joint input
+  distributions $p(X_\Omega \mid \tilde T_t)$, of the directed conditional
+  mutual information $I(X_\Omega \to Y_{\Omega^c} \mid \tilde T_t,
+  X_{\Omega^c})$. The network-information-theoretic cut-set upper
+  bound~\citep{elgamal2011network} states that any information flowing from
+  sources in $\Omega$ to a target in $\Omega^c$ is bounded above by
+  $C_\text{cut}(\Omega)$, and minimizing over cuts gives the tightest such
+  bound. Proposition~\ref{prop:static-ub} applies this bound to the unrecorded
+  trace fragment $M_t$. We use the cut-set \emph{upper bound} direction only;
+  the network-coding achievability results~\citep{ahlswede2000network}, which
+  concern lower bounds on capacity under cooperative coding across the cut, are
+  not invoked. The induced capacity $C_\text{cut}(\Omega)$ is in general a
+  supremum over joint input distributions and cannot be read directly from
+  interface specifications. Lemma~\ref{lem:ortho-decomp} shows that under
+  software orthogonality, when the channel laws across the cut factor into
+  independent single-edge channels conditional on $\tilde T_t$, the induced
+  capacity is bounded above by the sum of per-edge capacities:
+  \[
+    C_\text{cut}(\Omega) \;\leq\; \sum_{e \in E(\Omega, \Omega^c)} c_e.
+  \]
+  Corollary~\ref{cor:additive-ub} combines this with
+  Proposition~\ref{prop:static-ub} to reduce the capacity-map computation to a
+  discrete minimum-cut problem on $G_t$ with edge capacities $c_e$. This is the
+  form used in the capacity-map experiment and in the protocol in
+  \S\ref{app:methodology}.
+
+  \paragraph{Formal derivation of Proposition~\ref{prop:static-ub}.}
+  The proof in \S\ref{sec:static-cert} has two steps: a trace-gap identity and a
+   cut-set bound via $d$-separation. We restate the argument here with the
+  $d$-separation step explicit.
+
+  \emph{Step 1: Trace-gap identity.} Let $M_t := T_t \setminus \tilde T_t$. The
+  chain rule of conditional entropy gives 
+  \[
+    H(S_t \mid \tilde T_t) = H(S_t \mid T_t) + I(S_t; M_t \mid \tilde T_t).
+  \]
+  The first term is $\varepsilon_\text{nominal} = H(S_t \mid T_t)$.
+
+  \emph{Step 2: Cut-set bound via $d$-separation.} Fix a cut $\Omega \in
+  \mathrm{Cuts}(U_t \to S_t)$. By the definition of a cut in the time-unrolled
+  DAG $G_t$, every directed path from a node in $\Omega$ to $S_t \in \Omega^c$
+  must cross at least one edge in $E(\Omega, \Omega^c)$. The causal influence of
+   $M_t$ on $S_t$ must be mediated by the cross-cut message stream $(X_\Omega
+  \to Y_{\Omega^c})$ together with the boundary state $X_{\Omega^c}$. Formally,
+  $M_t$ is $d$-separated from $S_t$ by $(X_\Omega \to Y_{\Omega^c},\,
+  X_{\Omega^c})$ conditional on $\tilde T_t$, which yields
+  \[
+    I(S_t; M_t \mid \tilde T_t) \;\leq\; I\!\left(X_\Omega \to Y_{\Omega^c}
+  \;\Big|\; \tilde T_t,\, X_{\Omega^c}\right).
+  \]
+  By the definition of $C_\text{cut}(\Omega)$ as the supremum of the right-hand
+  side over admissible joint input distributions on $X_\Omega$,
+  \[
+    I(S_t; M_t \mid \tilde T_t) \;\leq\; C_\text{cut}(\Omega).
+  \]
+  Since this holds for every cut, it holds for the minimum,
+  \[
+    I(S_t; M_t \mid \tilde T_t) \;\leq\; \min_{\Omega \in \mathrm{Cuts}(U_t \to
+  S_t)} C_\text{cut}(\Omega).
+  \]
+  Combining with Step 1 completes the proof of Proposition~\ref{prop:static-ub}.
+   Corollary~\ref{cor:additive-ub} follows immediately by substituting
+  Lemma~\ref{lem:ortho-decomp} into each software-orthogonal cut: under
+  orthogonality, $C_\text{cut}(\Omega) \leq \sum_{e \in E(\Omega, \Omega^c)}
+  c_e$, and the minimum over cuts becomes a discrete min-cut problem on the
+  unlogged subgraph with edge capacities $c_e$.

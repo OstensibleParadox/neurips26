@@ -1,0 +1,91 @@
+  % ---------------------------------------------------------------------------
+  \section{Capacity Map: Unlogged-Channel Min-Cut}
+  \label{sec:static-cert}
+  % ---------------------------------------------------------------------------
+
+  The capacity map with min-cut value $\varepsilon_\text{state}^\text{UB}$
+  upper-bounds $\varepsilon_\text{unrec}=H(S_t\mid\tilde T_t)$ from the
+  deployment boundary.
+  Information absent from the recorded trace but still capable of influencing
+  $S_t$ must cross an unlogged channel in the time-unrolled execution graph.
+  Bounding those channels gives an upper envelope on residual hidden-state
+  entropy and localizes where hidden capacity can reside. The dynamic
+  certificates and activation profiles then test which of those locations
+  actually affect actions. The map is useful for logging ablations and
+  deployment reporting, but it is not a substitute for the lower certificates in
+  \S\ref{sec:laboratories}--\ref{sec:dynamic-cert}.
+
+  Let $G_t=(V_t,E_t)$ be the time-unrolled execution graph at step $t$.
+  Nodes are state updates, memory reads/writes, tool calls, and messages; edges
+  are information channels. Let $U_t$ denote unrecorded sources and let
+  $\mathcal{C}_\text{unlogged}$ be the set of edge cuts separating $U_t$ from
+  $S_t$ after logged edges are collapsed to zero residual capacity. Each
+  unlogged edge $e$ has a budget $c_e$ read from the interface specification:
+  token-window size, hidden dimension and audit quantization, or discrete
+  scheduler cardinality.
+
+  \begin{assumption}[Capacity-map admissibility]
+  \label{assump:capacity-map-admissibility}
+  When a capacity map with min-cut value
+  $\varepsilon_\text{state}^\text{UB}$ is reported, the deployment abstraction
+  provides a time-unrolled graph whose unlogged cuts separate unrecorded sources
+  from $S_t$, together with per-edge capacity budgets that upper-bound the
+  conditional information crossing each unlogged channel.
+  \end{assumption}
+
+  \begin{proposition}[Capacity-map upper bound]
+  \label{prop:static-ub}
+  For any cut $\Omega$ separating the unrecorded sources from $S_t$, let
+  $C_\text{cut}(\Omega)$ be the induced conditional capacity across the cut:
+  \[
+    C_\text{cut}(\Omega)
+    =
+    \sup_{p(X_\Omega\mid\tilde T_t)}
+    I(X_\Omega \to Y_{\Omega^c}\mid \tilde T_t,X_{\Omega^c}).
+  \]
+  Then
+  \[
+    H(S_t \mid \tilde T_t)
+    \;\leq\;
+    H(S_t\mid T_t)
+    +
+    \min_{\Omega\in\mathrm{Cuts}(U_t\to S_t)}
+    C_\text{cut}(\Omega).
+  \]
+  Setting the right-hand side to
+  $\varepsilon_\text{state}^\text{UB}$ gives
+  $\varepsilon_\text{unrec}\leq \varepsilon_\text{state}^\text{UB}$.
+  \end{proposition}
+
+  \begin{lemma}[Additive decomposition under software orthogonality]
+  \label{lem:ortho-decomp}
+  If the channel laws across a cut factor into independent single-edge channels
+  conditional on $\tilde T_t$, and if $c_e$ upper-bounds the conditional
+  information that can cross edge $e$, then
+  \[
+    C_\text{cut}(\Omega)
+    \leq
+    \sum_{e\in E(\Omega,\Omega^c)} c_e .
+  \]
+  \end{lemma}
+
+  \begin{corollary}[Additive min-cut capacity map]
+  \label{cor:additive-ub}
+  Under software orthogonality,
+  \[
+    \varepsilon_\text{state}^\text{UB}
+    =
+    H(S_t\mid T_t)
+    +
+    \min_{C\in\mathcal{C}_\text{unlogged}}
+    \sum_{e\in C} c_e .
+  \]
+  \end{corollary}
+
+  \begin{corollary}[Autoregressive zero cut]
+  \label{cor:auto-exact}
+  If the deployment is a strict autoregressive core and $\tilde T_t$ contains
+  the full context window relevant to $S_t$, then the unlogged cut has zero
+  capacity. If additionally $H(S_t\mid T_t)=0$, then
+  $\varepsilon_\text{state}^\text{UB}=0$ and $\delta_\text{act}=0$.
+  \end{corollary}

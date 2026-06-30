@@ -1,0 +1,89 @@
+  % ---------------------------------------------------------------------------
+  \section{Introduction}
+  \label{sec:introduction}
+  % ---------------------------------------------------------------------------
+
+  Consider a controller agent that receives a worker's private report and then
+  chooses between a calculator and a search API. The report can pass a
+  transcript-level audit---it need not leak the API label verbatim---while a
+  counterfactual swap of the worker report changes the controller's realized
+  action distribution by $\MultiAgentCounterfactualBits$ bits. This is the
+  audit failure mode: the visible transcript can look adequate while an
+  unobserved routing or evidence state remains both unrecoverable and
+  decision-relevant. A weaker version appears in ReAct scratchpads: controlled
+  replay changes the soft tool-token distribution without changing argmax tool
+  counts. That is useful as a policy-readout diagnostic, but it is not the
+  headline behavioral result. Identifying which hidden channels are merely
+  present, and which ones actually drive decisions, is the audit task.
+  How much internal state is unrecoverable from the trace, and how much of that
+  state drives the next action, are distinct quantities. Treating them as a
+  single ``hiddenness'' judgment produces something neither computable nor
+  diagnostic: a system with unrecoverable but dormant hidden state is different
+  from one whose unrecoverable state changes the action distribution, even when
+  the visible transcript looks equally complete.
+
+  We propose a dual-certificate protocol that answers each question separately.
+  The non-recoverability certificate
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}(t)$ lower-bounds residual hidden-state
+  uncertainty $H(S_t \mid \tilde T_t)$ by measuring finite witnesses of the
+  hidden state or by evaluating closed-form finite-dimensional witness models.
+  The action-relevance certificate
+  $\delta_\mathrm{act}^\mathrm{LB}(t)$ lower-bounds
+  $I(S_t;A_t\mid\tilde T_t)$ from admissible replay, intervention, or proxy
+  measurements using conditional data processing. A capacity map with min-cut
+  value $\varepsilon_\text{state}^\text{UB}$ is still reported when
+  architecture access is available, but its role is an upper envelope on
+  residual latent-channel capacity, not the main security claim. The central audit
+  question is whether
+  \emph{both}
+  \[
+    H(S_t\mid\tilde T_t)\geq\varepsilon_\mathrm{unrec}^\mathrm{LB}(t),
+    \qquad
+    I(S_t;A_t\mid\tilde T_t)\geq\delta_\mathrm{act}^\mathrm{LB}(t)
+  \]
+  hold with nontrivial lower bounds.
+  In real systems where no direct finite witness of $S_t$ is exposed, a
+  nonzero $\delta_\mathrm{act}^\mathrm{LB}$ still certifies
+  non-recoverability through the elementary bound
+  $I(S_t;A_t\mid\tilde T_t)\leq H(S_t\mid\tilde T_t)$. We call this an
+  \emph{action-mediated} non-recoverability certificate. It is weaker than an
+  independent state-only witness, but it is exactly the gap an audit cares
+  about: hidden state omitted from the transcript changes the action.
+
+  The dynamic axis can also be indexed. Instead of asking only whether residual
+  state matters, an auditor can ask \emph{where} it matters: which module,
+  denoising step, or communication edge carries decision relevance. This turns
+  the certificate from a scalar diagnostic into an activation profile over the
+  hidden-state geometry of the deployment.
+
+  Conditioning on $\tilde T_t$ is part of the protection, not a nuisance term.
+  If a model writes a steganographic or compressed rationale into the recorded
+  trace, that information is in $\tilde T_t$ and is conditioned away by $I(S_t;
+  A_t \mid \tilde T_t)$. The dynamic certificate measures residual decision
+  relevance beyond the logged trace; it does not count hiddenness that has
+  already been made visible to the audit record.
+
+  \textbf{Contributions.} First, we separate transcript recoverability from
+  residual action relevance as two distinct audit questions. Second, we give
+  dual lower certificates
+  $(\varepsilon_\mathrm{unrec}^\mathrm{LB},
+  \delta_\mathrm{act}^\mathrm{LB})$ for those questions. Third, under explicit
+  audit-abstraction assumptions, we prove certificate validity: finite
+  hidden-state witnesses lower-bound $H(S_t\mid\tilde T_t)$, and admissible
+  probes lower-bound $I(S_t;A_t\mid\tilde T_t)$. Fourth, we give closed-form or
+  computable audit instances for diffusion trajectories, retrieval-style hidden
+  source selection, and nested agent architectures. An auxiliary deployment
+  capacity map with min-cut value $\varepsilon_\text{state}^\text{UB}$
+  identifies where hidden capacity can reside and supports logging ablations,
+  but it is not a lower certificate.
+
+  We instantiate the protocol on three audit geometries: a ReAct scratchpad
+  module, a diffusion-LM denoising trajectory, and a multi-agent private-report
+  edge. These real-system diagnostics report action-mediated lower certificates
+  alongside the capacity map with min-cut value
+  $\varepsilon_\text{state}^\text{UB}$.
+  Appendix calibrations cover a synthetic ground-truth setting where an
+  independent hidden-state witness makes
+  $\varepsilon_\mathrm{unrec}^\mathrm{LB}$ explicit and the capacity-map
+  min-cut value $\varepsilon_\text{state}^\text{UB}$ matches true hidden-state
+  entropy.

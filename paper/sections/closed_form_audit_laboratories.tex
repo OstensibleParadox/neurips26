@@ -1,0 +1,68 @@
+  % ---------------------------------------------------------------------------
+  \section{Closed-Form Audit Laboratories}
+  \label{sec:laboratories}
+  % ---------------------------------------------------------------------------
+
+  The certificate interface above is intentionally small. To use it in a
+  machine-learning paper, the mathematical backend must produce quantities that
+  look like audit claims. This section records three
+  analytically tractable laboratories where the same two lower bounds are
+  computable.
+
+  \paragraph{Diffusion and score-flow agents.}
+  Let $S_k$ be a denoising latent, $\tilde T_k=C_kS_k+\nu_k$ the logged
+  observation, and $A_k=B_kS_k+\zeta_k$ the tool or token readout. For a linear
+  Gaussian Markov flow
+  \[
+    S_{k+1}=F_kS_k+\xi_k,
+    \qquad
+    \xi_k\sim\mathcal N(0,Q_k),
+  \]
+  the Kalman/Schur posterior covariance
+  $\Sigma_{k\mid\tilde T}:=\mathrm{Cov}(S_k\mid\tilde T_k)$ gives, for any
+  finite-rank projection $P_j$,
+  \[
+    \varepsilon_{\mathrm{unrec},j}^{\mathrm{LB}}(k)
+    =
+    \frac12\log_2\det(I+\eta_j^{-2}P_j\Sigma_{k\mid\tilde T}P_j^\top),
+  \]
+  and the linear readout gives the corresponding
+  $\delta_{\mathrm{act},j}^{\mathrm{LB}}(k)$ as in
+  \S\ref{sec:engine}. This is the closed-form version of a temporal activation
+  profile: early denoising can have nonzero unrecoverable latent volume while
+  late denoising carries most of the action relevance.
+
+  \paragraph{Retrieval-augmented generation.}
+  Let $C_t$ be a hidden source-selection state: document index, mixture
+  component, or retrieval cluster. Let $\tilde T_t$ be the retrieved transcript
+  exposed to the auditor and $A_t$ the answer or API action. The finite
+  laboratory has exact certificates
+  \[
+    \varepsilon_\mathrm{unrec}^\mathrm{LB}(t)
+    =
+    H(C_t\mid\tilde T_t),
+    \qquad
+    \delta_\mathrm{act}^\mathrm{LB}(t)
+    =
+    I(C_t;A_t\mid\tilde T_t),
+  \]
+  with both terms computed from the table
+  $p(c,\tilde t,a)$. This captures the RAG failure mode directly: the citation
+  transcript can pass an audit while the answer distribution still carries
+  conditional information about a source-selection state not recoverable from
+  the transcript.
+
+  \paragraph{Nested agent architectures.}
+  A planner, router, memory updater, and executor can be written as a Markov
+  kernel composition
+  \[
+    S_t^{(0)}\to S_t^{(1)}\to\cdots\to S_t^{(m)}\to A_t .
+  \]
+  For each layer $\ell$, a witness $W_t^{(\ell)}$ gives
+  $I(W_t^{(\ell)};S_t^{(\ell)}\mid\tilde T_t)\leq
+  H(S_t^{(\ell)}\mid\tilde T_t)$, while a probe $X_t^{(\ell)}$ satisfying
+  $X_t^{(\ell)}\to S_t^{(\ell)}\to A_t$ conditional on $\tilde T_t$ gives
+  $I(X_t^{(\ell)};A_t\mid\tilde T_t)\leq
+  I(S_t^{(\ell)};A_t\mid\tilde T_t)$. The audit output is a layerwise profile:
+  external transcripts may look complete while internal routing or memory states
+  retain nonzero decision relevance.

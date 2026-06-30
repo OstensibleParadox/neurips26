@@ -1,0 +1,56 @@
+  % ---------------------------------------------------------------------------
+  \section{Dynamic Certificate: Conditional DPI Probes}
+  \label{sec:dynamic-cert}
+  % ---------------------------------------------------------------------------
+
+  The dynamic certificate targets $\delta_\text{act} := I(S_t; A_t \mid \tilde
+  T_t)$. Because $S_t$ is unobservable, the auditor cannot measure
+  $I(S_t; A_t \mid \tilde T_t)$ directly. Proposition~\ref{prop:dynamic-lb}
+  gives the certificate rule: measure an admissible variable whose path to the
+  action is mediated by $S_t$, then use conditional data processing.
+
+  \paragraph{Replay certificate.}
+  Let $R_t\in\{\mathrm{wild},\mathrm{replay}\}$ indicate whether a missing state
+  fragment is present or removed under the same recorded trace. If the replay
+  protocol affects the action only through the missing operative state, then
+  $R_t\to S_t\to A_t$ conditional on $\tilde T_t$. For a balanced binary replay,
+  $I(R_t;A_t\mid\tilde T_t)$ is the conditional JS divergence
+  between the wild and replay action distributions.
+
+  \paragraph{Intervention certificate.}
+  Let $\xi_t$ be an exogenous perturbation applied to a hidden module while
+  holding $\tilde T_t$ fixed. When the protocol ensures
+  $\xi_t\to S_t\to A_t$ conditional on $\tilde T_t$, the measured conditional
+  action-distribution shift is a lower bound on $\delta_\text{act}$.
+
+  \paragraph{Proxy certificate.}
+  Let $Z_t=f(S_t)$ be a readable coarse statistic of the operative state. Since
+  $Z_t$ is a function or coarsening of $S_t$,
+  $I(Z_t;A_t\mid\tilde T_t)\leq\delta_\text{act}$. In experiments we estimate
+  this term by cross-fitted cross-entropy differences between predictors with
+  and without $Z_t$.
+
+  \paragraph{Aggregation.}
+  For a set $\mathcal X$ of admissible probe variables, define
+  \[
+    \delta_\text{act}^\text{LB}
+    =
+    \max_{X_t\in\mathcal X}
+    \widehat I_\text{LCB}(X_t;A_t\mid\tilde T_t),
+  \]
+  where $\widehat I_\text{LCB}$ is the reported lower confidence bound. The
+  maximum remains a lower bound because every admissible term is bounded above
+  by $\delta_\text{act}$.
+
+  \paragraph{Activation profiles.}
+  Indexing admissible probes over hidden-channel coordinates (module,
+  denoising step, communication edge) gives an \emph{activation profile}
+  \[
+    \Delta(j)
+    :=
+    \widehat I_\text{LCB}(X_t^{(j)};A_t\mid\tilde T_t),
+  \]
+  where $j$ denotes the coordinate being probed. The capacity map with min-cut
+  value $\varepsilon_\text{state}^\text{UB}$ identifies where residual capacity
+  can reside; the activation profile identifies where that capacity is
+  behaviorally used.
