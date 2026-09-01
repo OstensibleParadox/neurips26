@@ -1,6 +1,75 @@
-# Experiment Pipeline — Dual Certificates for Agent Audit
+# Experiments: Research Reset
 
-Reproducibility guide for the Dual Certificates security-paper experiments.
+> **Current status: pre-gate / INCONCLUSIVE.** The active research program is
+> the 8.x transcript-insufficiency gate. The 7.x material below is a legacy
+> reproduction guide, not the current expansion roadmap.
+
+See [`../README_NEW_DIRECTION.md`](../README_NEW_DIRECTION.md) for the research
+specification and [`../GO_NO_GO.md`](../GO_NO_GO.md) for thresholds, canonical
+evidence paths, and the current decision.
+
+## Active 8.x Gate Work
+
+- [`8.1_tracetwin/`](8.1_tracetwin/) — exact mediated/bypass passive twins,
+  controlled-clamp calibration, finite-sample validity, and passive-baseline
+  failure.
+- [`8.2_sequential_certificate/`](8.2_sequential_certificate/) — predictable
+  decoder e-processes, adaptive probes, and optional stopping; the simulator
+  upper certificate remains a gate TODO.
+- [`8.3_agentdojo/`](8.3_agentdojo/) — natural on-support private-state swaps at
+  a consequential structured-action boundary, with trace clamping and strict
+  negative controls.
+
+These workstreams are gate experiments. Their presence does not imply that any
+GO criterion has passed. New evidence should use the canonical destinations
+under `data/processed/8.1_tracetwin/`,
+`data/processed/8.2_sequential_certificate/`, and
+`data/processed/8.3_agentdojo/` listed in `GO_NO_GO.md`.
+
+## Experiment Boundary Matrix
+
+| Directory | Status | Rule |
+|---|---|---|
+| `8.1_tracetwin/` | **Active** | Implement and calibrate the exact laboratory. |
+| `8.2_sequential_certificate/` | **Active** | Implement and validate the sequential certificate. |
+| `8.3_agentdojo/` | **Active** | Implement the real structured-action gate experiment. |
+| `7.3_intervention/` | **Reusable infrastructure** | Reuse replay/intervention and discrete-action evaluation code; primary evidence must remain on support and transcript preserving. |
+| `7.4_synthetic_gt/` | **GT repaired; historical results quarantined** | Reuse the tested noise-consistent ground-truth calculation only; regenerate and review estimator outputs before treating this experiment as validation. |
+| `7.1_static_certificate/` | **Frozen legacy** | Historical reproduction only; no code, config, documentation, or experiment extension. |
+| `7.2_dynamic_certificate/` | **Frozen legacy** | Historical reproduction only; no code, config, documentation, or experiment extension. |
+| `7.5_diffusion_certificate/` | **Frozen legacy** | Historical reproduction only; no code, config, documentation, or experiment extension. |
+| `7.6_multi_agent_certificate/` | **Frozen legacy** | Historical reproduction only; no code, config, documentation, or experiment extension. |
+
+Shared trace and utility code in `../src/` remains reusable. Processed artifacts
+needed to reproduce old pilot results must be preserved, but legacy outputs are
+not evidence that the new gate passed.
+
+## Gate-Quality Evaluation Rules
+
+- Randomize admissible probes exogenously at the declared boundary.
+- Use exact clamping or predeclared structured-trace equivalence for primary
+  evidence.
+- Evaluate discrete, safety-relevant deployed actions, not only next-token
+  logits.
+- Use paired task-block bootstrap or randomization inference.
+- Treat zero, blank, Gaussian, and arbitrary-text interventions as cautionary
+  baselines only.
+- Report active, visible-twin, dormant, disconnected, same-class, full-logging,
+  transcript-monitor, and marginal-rate controls separately.
+- Do not infer decoder-independent non-recoverability from failure of one
+  trained classifier.
+
+---
+
+# Legacy 7.x Reproduction Guide
+
+The remainder of this file is preserved to reproduce the abandoned
+latent-state/capacity-map paper. It is **legacy documentation**. Commands under
+frozen directories must not be extended or used as the active research plan;
+the boundary matrix above takes precedence.
+
+Reproducibility guide for the legacy Dual Certificates security-paper
+experiments.
 
 ## Environment
 
@@ -228,27 +297,24 @@ those rows. Existing aggregate files mark these raw paths as
 
 ## Experiment 4: Synthetic Ground-Truth Validation (Appendix E)
 
-**Purpose:** Validate that both certificates recover known hidden influence when the observational bottleneck is removed.
+**Historical status: withdrawn pending regenerated estimator results.** The
+noise-consistent ground-truth engine is repaired and tested, but the old tables
+and the claim that an estimator tracked a lower bound are not valid v2
+evidence. See `7.4_synthetic_gt/README.md`.
 
 ```bash
-python experiments/7.4_synthetic_gt/run_synthetic.py \
+python3 experiments/7.4_synthetic_gt/run_synthetic.py \
+    --ground-truth-only \
     --n-trajectories 1000 \
     --beta-levels 0.0 0.5 1.0 2.0 4.0 \
-    --out-dir data/processed/synthetic
+    --noise-std 0.1 \
+    --gt-inner-samples 8192 \
+    --out-dir /tmp/synthetic_gt_repaired
 ```
 
-**Expected output:**
-```
-beta=0.0: true_MI=0.0000 bits, delta^LB≈0 bits, eps^UB=1.0 bits
-beta=0.5: true_MI≈0.12 bits, delta^LB≈0.05 bits, eps^UB=1.0 bits
-beta=1.0: true_MI≈0.31 bits, delta^LB≈0.20 bits, eps^UB=1.0 bits
-beta=2.0: true_MI≈0.50 bits, delta^LB≈0.40 bits, eps^UB=1.0 bits
-beta=4.0: true_MI≈0.72 bits, delta^LB≈0.65 bits, eps^UB=1.0 bits
-```
-
-$\delta_\text{act}^\text{LB}$ tracks the true $I(S_t; A_t \mid \tilde T_t)$ from below at all non-trivial $\beta_h$.
-
-Results are generated by the pipeline above; no precomputed synthetic results are included (the experiment is self-contained and deterministic).
+This writes a separate `synthetic_ground_truth.json`. Do not run the legacy or
+v3 estimator path as validation until its statistical claim has been reviewed
+against the repaired target.
 
 ---
 
@@ -322,8 +388,9 @@ python experiments/7.3_intervention/recompute_intervention_summary.py \
     --out-dir data/processed/intervention
 
 # 4. Synthetic validation
-python experiments/7.4_synthetic_gt/run_synthetic.py \
-    --n-trajectories 1000 --out-dir data/processed/synthetic
+python3 experiments/7.4_synthetic_gt/run_synthetic.py \
+    --ground-truth-only --n-trajectories 1000 \
+    --gt-inner-samples 8192 --out-dir /tmp/synthetic_gt_repaired
 
 # 5. Diffusion-LM temporal certificate profile
 python experiments/7.5_diffusion_certificate/run_llada_intervention.py \

@@ -14,88 +14,263 @@ import json
 from pathlib import Path
 
 import numpy as np
-import torch
-import torch.nn as nn
-import torch.optim as optim
-
-# Import v3 estimator
-try:
-    from .synthetic_v3_estimator import run_v3_estimation
-except ImportError:
-    # Handle relative import issue when running as script
-    import sys
-    sys.path.append(str(Path(__file__).parent))
-    from synthetic_v3_estimator import run_v3_estimation
 
 
-def generate_data(n=1000, d_tilde=8, n_classes=5, beta_h=0.0, seed=42):
+DEFAULT_NOISE_STD = 0.1
+DEFAULT_GT_INNER_SAMPLES = 4096
+DEFAULT_GT_SEED = 314159
+DEFAULT_GT_BATCH_SIZE = 64
+
+_MECHANISM_STREAM = 101
+_DATA_STREAM = 211
+_ACTION_STREAM = 307
+_GROUND_TRUTH_STREAM = 401
+
+
+def _make_rng(seed: int, stream: int) -> np.random.Generator:
+    """Create a deterministic RNG stream without coupling independent roles."""
+    if seed < 0:
+        raise ValueError("seeds must be non-negative")
+    return np.random.default_rng(np.random.SeedSequence([int(seed), int(stream)]))
+
+
+def _softmax(logits: np.ndarray) -> np.ndarray:
+    """Numerically stable softmax evaluated in float64."""
+    shifted = np.asarray(logits, dtype=np.float64)
+    shifted = shifted - shifted.max(axis=-1, keepdims=True)
+    values = np.exp(shifted)
+    return values / values.sum(axis=-1, keepdims=True)
+
+
+def generate_mechanism_weights(
+    d_tilde: int = 8,
+    n_classes: int = 5,
+    seed: int = 42,
+) -> np.ndarray:
+    """Generate the fixed mechanism independently of the sample count ``n``."""
+    if d_tilde <= 0 or n_classes <= 1:
+        raise ValueError("d_tilde must be positive and n_classes must exceed one")
+    rng = _make_rng(seed, _MECHANISM_STREAM)
+    return (rng.standard_normal((d_tilde, n_classes)) * 0.5).astype(np.float32)
+
+
+def generate_contexts(n: int = 1000, d_tilde: int = 8, seed: int = 42) -> np.ndarray:
+    """Generate only public contexts, used by the ground-truth-only fast path."""
+    if n <= 0 or d_tilde <= 0:
+        raise ValueError("n and d_tilde must be positive")
+    rng = _make_rng(seed, _DATA_STREAM)
+    return rng.standard_normal((n, d_tilde)).astype(np.float32)
+
+
+def _draw_ground_truth_noise(
+    n_samples: int,
+    n_classes: int,
+    noise_std: float,
+    seed: int,
+) -> np.ndarray:
+    """Draw a reusable antithetic Monte Carlo grid for logit-noise integration."""
+    rng = _make_rng(seed, _GROUND_TRUTH_STREAM)
+    half = n_samples // 2
+    positive = rng.standard_normal((half, n_classes))
+    pieces = [positive, -positive]
+    if n_samples % 2:
+        pieces.append(rng.standard_normal((1, n_classes)))
+    return np.concatenate(pieces, axis=0)[:n_samples] * noise_std
+
+
+def _mean_softmax_with_noise(
+    base_logits: np.ndarray,
+    noise_samples: np.ndarray,
+) -> np.ndarray:
+    """Average softmax(base_logits + noise) without retaining all task batches."""
+    work = base_logits[:, None, :] + noise_samples[None, :, :]
+    work -= work.max(axis=-1, keepdims=True)
+    np.exp(work, out=work)
+    work /= work.sum(axis=-1, keepdims=True)
+    return work.mean(axis=1)
+
+
+def conditional_action_probabilities(
+    T: np.ndarray,
+    W: np.ndarray,
+    beta_h: float,
+    *,
+    noise_std: float = DEFAULT_NOISE_STD,
+    gt_inner_samples: int = DEFAULT_GT_INNER_SAMPLES,
+    gt_seed: int = DEFAULT_GT_SEED,
+    gt_batch_size: int = DEFAULT_GT_BATCH_SIZE,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Compute ``q_h(a|T) = E_noise softmax(TW + beta*h*e_0 + noise)``.
+
+    The inner expectation uses a fixed antithetic Monte Carlo grid and processes
+    contexts in batches.  Peak working memory is therefore proportional to
+    ``gt_batch_size * gt_inner_samples * n_classes``, rather than to the full
+    number of contexts.
+    """
+    T64 = np.asarray(T, dtype=np.float64)
+    W64 = np.asarray(W, dtype=np.float64)
+    if T64.ndim != 2 or W64.ndim != 2 or T64.shape[1] != W64.shape[0]:
+        raise ValueError("T and W must be compatible two-dimensional arrays")
+    if len(T64) == 0:
+        raise ValueError("T must contain at least one context")
+    if not np.isfinite(beta_h):
+        raise ValueError("beta_h must be finite")
+    if not np.isfinite(noise_std) or noise_std < 0:
+        raise ValueError("noise_std must be finite and non-negative")
+    if gt_inner_samples <= 0 or gt_batch_size <= 0:
+        raise ValueError("gt_inner_samples and gt_batch_size must be positive")
+
+    # ``einsum`` avoids spurious floating-point status warnings emitted by some
+    # macOS Accelerate-backed ``matmul`` builds for otherwise finite operands.
+    base = np.einsum("nd,dk->nk", T64, W64, optimize=True)
+    if not np.isfinite(base).all():
+        raise FloatingPointError("non-finite base logits in ground-truth calculation")
+    shifted = base.copy()
+    shifted[:, 0] += beta_h
+    if noise_std == 0.0:
+        return _softmax(base), _softmax(shifted)
+
+    noise = _draw_ground_truth_noise(
+        gt_inner_samples,
+        W64.shape[1],
+        noise_std,
+        gt_seed,
+    )
+    q0 = np.empty_like(base)
+    q1 = np.empty_like(base)
+    for start in range(0, len(base), gt_batch_size):
+        stop = min(start + gt_batch_size, len(base))
+        q0[start:stop] = _mean_softmax_with_noise(base[start:stop], noise)
+        q1[start:stop] = _mean_softmax_with_noise(shifted[start:stop], noise)
+    return q0, q1
+
+
+def true_conditional_mi(
+    T: np.ndarray,
+    W: np.ndarray,
+    beta_h: float,
+    *,
+    noise_std: float = DEFAULT_NOISE_STD,
+    gt_inner_samples: int = DEFAULT_GT_INNER_SAMPLES,
+    gt_seed: int = DEFAULT_GT_SEED,
+    gt_batch_size: int = DEFAULT_GT_BATCH_SIZE,
+) -> float:
+    """Return ``I(H; A | T)`` in nats for a balanced Bernoulli hidden state.
+
+    This integrates out logit noise and sums over the full action distribution.
+    It intentionally accepts neither sampled hidden states nor sampled actions.
+    For nonzero ``noise_std`` the inner noise expectation is a reproducible
+    Monte Carlo approximation whose resolution is ``gt_inner_samples``.
+    """
+    if not np.isfinite(noise_std) or noise_std < 0:
+        raise ValueError("noise_std must be finite and non-negative")
+    if gt_inner_samples <= 0 or gt_batch_size <= 0:
+        raise ValueError("gt_inner_samples and gt_batch_size must be positive")
+    if beta_h == 0.0:
+        # The two conditional laws are identical for every T and every noise law.
+        return 0.0
+
+    q0, q1 = conditional_action_probabilities(
+        T,
+        W,
+        beta_h,
+        noise_std=noise_std,
+        gt_inner_samples=gt_inner_samples,
+        gt_seed=gt_seed,
+        gt_batch_size=gt_batch_size,
+    )
+    marginal = 0.5 * (q0 + q1)
+
+    def row_kl(p: np.ndarray, q: np.ndarray) -> np.ndarray:
+        terms = np.zeros_like(p)
+        mask = p > 0.0
+        terms[mask] = p[mask] * (np.log(p[mask]) - np.log(q[mask]))
+        return terms.sum(axis=1)
+
+    per_context = 0.5 * row_kl(q0, marginal) + 0.5 * row_kl(q1, marginal)
+    return max(0.0, float(per_context.mean()))
+
+
+def generate_data(
+    n=1000,
+    d_tilde=8,
+    n_classes=5,
+    beta_h=0.0,
+    seed=42,
+    *,
+    mechanism_seed=42,
+    action_seed: int | None = None,
+    noise_std: float = DEFAULT_NOISE_STD,
+    gt_inner_samples: int = DEFAULT_GT_INNER_SAMPLES,
+    gt_seed: int = DEFAULT_GT_SEED,
+    gt_batch_size: int = DEFAULT_GT_BATCH_SIZE,
+    W: np.ndarray | None = None,
+):
     """Generate synthetic data with controlled hidden influence.
 
-    P(A = k | T, H) = softmax(T @ W_k + beta_h * H * delta_{k,0})
+    P(A = k | T, H, epsilon)
+      = softmax(T @ W_k + beta_h * H * delta_{k,0} + epsilon_k),
+    where epsilon_k ~ Normal(0, noise_std^2).
 
     beta_h=0 -> H has no influence -> I(H;A|T)=0
     Larger beta_h -> stronger influence -> higher conditional MI.
     """
-    rng = np.random.RandomState(seed)
-    T = rng.randn(n, d_tilde).astype(np.float32)
-    H = (rng.rand(n) > 0.5).astype(np.float32)
-    W = rng.randn(d_tilde, n_classes).astype(np.float32) * 0.5
+    if n <= 0 or d_tilde <= 0 or n_classes <= 1:
+        raise ValueError("n and d_tilde must be positive and n_classes must exceed one")
+    if not np.isfinite(noise_std) or noise_std < 0:
+        raise ValueError("noise_std must be finite and non-negative")
 
-    logits = T @ W
+    data_rng = _make_rng(seed, _DATA_STREAM)
+    sample_action_rng = _make_rng(
+        seed if action_seed is None else action_seed,
+        _ACTION_STREAM,
+    )
+    T = data_rng.standard_normal((n, d_tilde)).astype(np.float32)
+    H = (data_rng.random(n) > 0.5).astype(np.float32)
+    if W is None:
+        W = generate_mechanism_weights(d_tilde, n_classes, mechanism_seed)
+    else:
+        W = np.asarray(W, dtype=np.float32)
+        if W.shape != (d_tilde, n_classes):
+            raise ValueError(
+                f"W must have shape {(d_tilde, n_classes)}, got {W.shape}"
+            )
+
+    logits = np.einsum(
+        "nd,dk->nk",
+        T.astype(np.float64),
+        W.astype(np.float64),
+        optimize=True,
+    )
     # H pushes toward class 0
     bias = np.zeros((n, n_classes), dtype=np.float32)
     bias[:, 0] = beta_h * H
-    logits = logits + bias + rng.randn(n, n_classes).astype(np.float32) * 0.1
+    sample_noise = data_rng.standard_normal((n, n_classes)) * noise_std
+    probs = _softmax(logits + bias + sample_noise)
+    A = np.array(
+        [sample_action_rng.choice(n_classes, p=p) for p in probs],
+        dtype=np.int64,
+    )
 
-    probs = np.exp(logits - logits.max(axis=1, keepdims=True))
-    probs /= probs.sum(axis=1, keepdims=True)
-    A = np.array([rng.choice(n_classes, p=p) for p in probs])
-
-    # Monte Carlo estimate of true I(H; A | T)
-    # I(H;A|T) = E_{T,H,A}[log P(A|T,H) - log P(A|T)]
-    # P(A|T) = sum_h P(H=h) * P(A|T,H=h)
-    true_mi = _mc_mi(T, H, A, W, beta_h, n_classes)
+    true_mi = true_conditional_mi(
+        T,
+        W,
+        beta_h,
+        noise_std=noise_std,
+        gt_inner_samples=gt_inner_samples,
+        gt_seed=gt_seed,
+        gt_batch_size=gt_batch_size,
+    )
 
     return T, H, A, probs, true_mi
 
 
-def _mc_mi(T, H, A, W, beta_h, n_classes):
-    """Monte Carlo estimate of I(H; A | T)."""
-    n = len(T)
-    # P(A|T,H): already have from generative model
-    # P(A|T): marginalize over H ~ Bern(0.5)
-    logits_T = T @ W
-    # H=0 case
-    logits_h0 = logits_T + np.random.RandomState(0).randn(n, n_classes).astype(np.float32) * 0
-    probs_h0 = np.exp(logits_h0 - logits_h0.max(axis=1, keepdims=True))
-    probs_h0 /= probs_h0.sum(axis=1, keepdims=True)
-    # H=1 case (push toward class 0)
-    bias = np.zeros((n, n_classes), dtype=np.float32)
-    bias[:, 0] = beta_h
-    logits_h1 = logits_T + bias
-    probs_h1 = np.exp(logits_h1 - logits_h1.max(axis=1, keepdims=True))
-    probs_h1 /= probs_h1.sum(axis=1, keepdims=True)
-
-    # Marginal: 0.5 * P(A|T,H=0) + 0.5 * P(A|T,H=1)
-    probs_marginal = 0.5 * probs_h0 + 0.5 * probs_h1
-
-    # I(H;A|T) = sum_{h,a} P(h) * P(a|T,h) * log(P(a|T,h) / P(a|T))
-    mi_sum = 0.0
-    for i in range(n):
-        a = A[i]
-        h = H[i]
-        if h == 0:
-            p_cond = probs_h0[i, a]
-        else:
-            p_cond = probs_h1[i, a]
-        p_marg = probs_marginal[i, a]
-        if p_cond > 0 and p_marg > 0:
-            mi_sum += np.log(p_cond / p_marg)
-    return mi_sum / n
-
-
 def ce_diff_estimate(T, H, A, n_classes, n_folds=5):
     """Cross-validated CE-diff: I_hat = L(T) - L(T,H)."""
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+
     n = len(A)
     indices = np.arange(n)
     rng = np.random.RandomState(42)
@@ -140,6 +315,16 @@ def ce_diff_estimate(T, H, A, n_classes, n_folds=5):
 
 def ce_diff_estimate_v3(T, H, A, seed=42):
     """V3 CE-diff estimator using hardened pipeline from synthetic_v3_estimator.py."""
+    try:
+        from .synthetic_v3_estimator import run_v3_estimation
+    except ImportError:
+        import sys
+
+        module_dir = str(Path(__file__).resolve().parent)
+        if module_dir not in sys.path:
+            sys.path.insert(0, module_dir)
+        from synthetic_v3_estimator import run_v3_estimation
+
     # Semantic mapping: T→Phi, H→Z, A→A_in
     Phi_raw = T.astype(np.float32)
     Z_raw = H.reshape(-1, 1).astype(np.float32)  # Make H a column vector
@@ -158,18 +343,95 @@ def main(n_trajectories: int = 1000,
          beta_levels: list[float] | None = None,
          out_dir: str = "data/processed/synthetic",
          skip_plot: bool = False,
-         estimator: str = "legacy"):
+         estimator: str = "legacy",
+         noise_std: float = DEFAULT_NOISE_STD,
+         gt_inner_samples: int = DEFAULT_GT_INNER_SAMPLES,
+         gt_seed: int = DEFAULT_GT_SEED,
+         gt_batch_size: int = DEFAULT_GT_BATCH_SIZE,
+         ground_truth_only: bool = False,
+         seed: int = 42,
+         mechanism_seed: int = 42):
     if beta_levels is None:
         beta_levels = [0.0, 0.5, 1.0, 2.0, 4.0]
-    results = []
+    if n_trajectories <= 0:
+        raise ValueError("n_trajectories must be positive")
+    if not np.isfinite(noise_std) or noise_std < 0:
+        raise ValueError("noise_std must be finite and non-negative")
+    if gt_inner_samples <= 0 or gt_batch_size <= 0:
+        raise ValueError("gt_inner_samples and gt_batch_size must be positive")
 
-    print(f"Running with {estimator} estimator...")
+    results = []
+    d_tilde = 8
+    n_classes = 5
+    W = generate_mechanism_weights(d_tilde, n_classes, mechanism_seed)
+    ground_truth_contexts = (
+        generate_contexts(n_trajectories, d_tilde, seed)
+        if ground_truth_only
+        else None
+    )
+
+    mode = "ground-truth-only" if ground_truth_only else f"{estimator} estimator"
+    print(
+        f"Running {mode} (noise_std={noise_std}, "
+        f"gt_inner_samples={gt_inner_samples}, gt_seed={gt_seed})..."
+    )
 
     for beta_h in beta_levels:
-        T, H, A, probs, true_mi = generate_data(n=n_trajectories, beta_h=beta_h)
+        if ground_truth_only:
+            assert ground_truth_contexts is not None
+            true_mi = true_conditional_mi(
+                ground_truth_contexts,
+                W,
+                beta_h,
+                noise_std=noise_std,
+                gt_inner_samples=gt_inner_samples,
+                gt_seed=gt_seed,
+                gt_batch_size=gt_batch_size,
+            )
+            T = H = A = probs = None
+        else:
+            T, H, A, probs, true_mi = generate_data(
+                n=n_trajectories,
+                d_tilde=d_tilde,
+                n_classes=n_classes,
+                beta_h=beta_h,
+                seed=seed,
+                mechanism_seed=mechanism_seed,
+                noise_std=noise_std,
+                gt_inner_samples=gt_inner_samples,
+                gt_seed=gt_seed,
+                gt_batch_size=gt_batch_size,
+                W=W,
+            )
         true_mi_bits = true_mi / np.log(2)
+        ground_truth_metadata = {
+            "n": int(n_trajectories),
+            "d_tilde": d_tilde,
+            "n_classes": n_classes,
+            "noise_std": float(noise_std),
+            "data_seed": int(seed),
+            "mechanism_seed": int(mechanism_seed),
+            "gt_method": (
+                "exact_softmax_sum" if noise_std == 0.0
+                else "antithetic_inner_monte_carlo"
+            ),
+            "gt_inner_samples": int(gt_inner_samples),
+            "gt_seed": int(gt_seed),
+            "gt_batch_size": int(gt_batch_size),
+        }
+
+        if ground_truth_only:
+            results.append({
+                "beta_h": float(beta_h),
+                "true_mi_nats": float(true_mi),
+                "true_mi_bits": float(true_mi_bits),
+                **ground_truth_metadata,
+            })
+            print(f"  beta={beta_h:.1f}: true_MI={true_mi_bits:.6f} bits")
+            continue
 
         if estimator == "legacy":
+            assert T is not None and H is not None and A is not None
             delta_nats, delta_se = ce_diff_estimate(T, H, A, 5)
             delta_bits = delta_nats / np.log(2)
 
@@ -182,12 +444,14 @@ def main(n_trajectories: int = 1000,
                 "delta_lb_nats": float(delta_nats),
                 "delta_lb_bits": float(delta_bits),
                 "delta_se": float(delta_se),
+                **ground_truth_metadata,
             })
             bound_ok = "OK" if delta_bits <= true_mi_bits else "VIOLATION"
             print(f"  beta={beta_h:.1f}: true_MI={true_mi_bits:.4f} bits, "
                   f"delta^LB={delta_bits:.4f} bits, eps^UB=1.0 bits [{bound_ok}]")
 
         elif estimator == "v3":
+            assert T is not None and H is not None and A is not None
             v3_result = ce_diff_estimate_v3(T, H, A)
             raw_gap_bits = v3_result["raw_gap_bits"]
             null_p95_bits = v3_result["null_p95_bits"]
@@ -204,10 +468,9 @@ def main(n_trajectories: int = 1000,
                 "null_corrected_gap_bits": float(null_corrected_gap_bits),
                 "certified_delta_LB_bits": float(certified_delta_LB_bits) if certified_delta_LB_bits is not None else None,
                 "null_pass": bool(null_pass),
-                "n": int(n_trajectories),
                 "n_null_repeats": int(v3_result["n_null_repeats"]),
-                "n_classes": int(5), # n_classes is always 5 for this synthetic data
-                "task_grouping": str(v3_result["task_grouping"])
+                "task_grouping": str(v3_result["task_grouping"]),
+                **ground_truth_metadata,
             })
 
             status = "OK" if null_pass else "INVALID"
@@ -219,8 +482,10 @@ def main(n_trajectories: int = 1000,
         else:
             raise ValueError(f"Unknown estimator: {estimator}")
 
-    # Choose output file based on estimator
-    if estimator == "legacy":
+    # Ground-truth-only runs use a separate file and never overwrite old results.
+    if ground_truth_only:
+        out_file = "synthetic_ground_truth.json"
+    elif estimator == "legacy":
         out_file = "synthetic_results.json"
     else:
         out_file = "synthetic_results_v3.json"
@@ -232,7 +497,7 @@ def main(n_trajectories: int = 1000,
     print(f"\nSaved to {out}")
 
     # Generate figure (only for legacy for now)
-    if not skip_plot and estimator == "legacy":
+    if not ground_truth_only and not skip_plot and estimator == "legacy":
         _plot(results, out_dir)
     return results
 
@@ -286,6 +551,24 @@ if __name__ == "__main__":
                         help="Skip figure generation")
     parser.add_argument("--estimator", choices=["legacy", "v3"], default="legacy",
                         help="Estimator to use: legacy (original neural net) or v3 (hardened pipeline)")
+    parser.add_argument("--noise-std", type=float, default=DEFAULT_NOISE_STD,
+                        help="Std. dev. of independent Gaussian logit noise (default: 0.1)")
+    parser.add_argument("--gt-inner-samples", type=int, default=DEFAULT_GT_INNER_SAMPLES,
+                        help="Inner noise samples used for true MI integration")
+    parser.add_argument("--gt-seed", type=int, default=DEFAULT_GT_SEED,
+                        help="Independent seed for true MI noise integration")
+    parser.add_argument("--gt-batch-size", type=int, default=DEFAULT_GT_BATCH_SIZE,
+                        help="Context batch size controlling GT integration memory")
+    parser.add_argument("--ground-truth-only", action="store_true",
+                        help="Compute true MI only; skip neural estimators and use a separate output file")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="Data-generating seed (default: 42)")
+    parser.add_argument("--mechanism-seed", type=int, default=42,
+                        help="Fixed mechanism-W seed, independent of sample count")
     args = parser.parse_args()
     main(n_trajectories=args.n_trajectories, beta_levels=args.beta_levels,
-         out_dir=args.out_dir, skip_plot=args.no_plot, estimator=args.estimator)
+         out_dir=args.out_dir, skip_plot=args.no_plot, estimator=args.estimator,
+         noise_std=args.noise_std, gt_inner_samples=args.gt_inner_samples,
+         gt_seed=args.gt_seed, gt_batch_size=args.gt_batch_size,
+         ground_truth_only=args.ground_truth_only, seed=args.seed,
+         mechanism_seed=args.mechanism_seed)

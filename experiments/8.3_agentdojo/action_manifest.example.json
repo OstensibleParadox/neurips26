@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "action_boundary": "send_message",
+  "projection_fields": [
+    "operation",
+    "recipient_class"
+  ],
+  "allowed_actions": [
+    {
+      "operation": "send",
+      "recipient_class": "authorized"
+    },
+    {
+      "operation": "send",
+      "recipient_class": "unauthorized"
+    },
+    {
+      "operation": "deny",
+      "recipient_class": "none"
+    }
+  ]
+}

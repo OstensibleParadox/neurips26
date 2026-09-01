@@ -39,6 +39,7 @@ Thumbs.db
 
 # Build directory
 paper/build/
+paper_v2/build/
 
 # Local tooling / assistant traces
 .claude/
@@ -68,8 +69,18 @@ paper/*.log
 paper/*.out
 paper/*.pdf
 paper/*.synctex.gz
+paper_v2/*.aux
+paper_v2/*.bbl
+paper_v2/*.blg
+paper_v2/*.fdb_latexmk
+paper_v2/*.fls
+paper_v2/*.log
+paper_v2/*.out
+paper_v2/*.pdf
+paper_v2/*.synctex.gz
 /main.pdf
 paper/*.tex.bak
+paper_v2/*.tex.bak
 
 # Lean build products
 lean4/.lake/

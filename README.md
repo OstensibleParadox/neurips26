@@ -1,284 +1,158 @@
-# Dual Certificates: IEEE S&P 2027 Cycle 2 Plan
-
-This repository is the working home for the security-paper version of **Dual
-Certificates**. The target is **IEEE Symposium on Security and Privacy 2027,
-Cycle 2**.
-
-As of 2026-06-30:
-
-- Abstract registration deadline: 2026-11-10.
-- Paper submission deadline: 2026-11-17.
-- Remaining time to full paper: 140 days.
-- S&P format: IEEE `conference,compsoc`, US letter, 13 pages of text plus up to
-  5 pages for references and appendix, 18 pages total.
-- Current paper state: IEEE S&P source uses `IEEEtran` plus
-  `paper/ieee_sp_2027.sty`; it compiles to 11 pages with no undefined
-  references or citations.
-- Current readiness: ML-paper ready about 80%; S&P-ready about 45%.
-
-## Core Reframe
-
-The paper is not a generic LLM-agent audit or probing paper. The S&P version
-should be a security paper about **latent causal channels** in neural agents:
-
-> Transcript-level audit can pass while a hidden, action-relevant causal channel
-> remains unrecoverable. Security auditing therefore needs certificates for both
-> latent-state non-recoverability and residual action relevance.
-
-Pearl's structural causal models and do-calculus provide the intervention
-semantics. The paper's target is narrower: treating an observed or
-trace-compatible graph/circuit as an audit certificate for a deployed neural
-mechanism without proving that the logged trace exposes the operative latent
-channel.
-
-> A trace-compatible DAG or circuit is a localization hypothesis, not an audit
-> certificate; intervention claims become checkable only when the logged trace
-> exposes the operative latent channel at the deployment boundary.
-
-The title direction is:
-
-> Dual Certificates for Latent Causal Channels in Neural Agents
-
-## S&P Threat Model
-
-The S&P paper must open with a concrete security setting.
-
-- **Defender/auditor:** reviews logs, transcripts, traces, and declared
-  instrumentation for a deployed neural agent.
-- **Protected assets:** action integrity, audit completeness, and forensic
-  accountability.
-- **Failure mode:** the visible transcript omits a hidden state variable that
-  remains action-relevant.
-- **Security risk:** log-only audit can certify the wrong thing. A system may
-  appear compliant while routing, delegation, denoising, or scratchpad state
-  still controls the action.
-- **Adversarial setting:** a deployment or component can hide, compress, or
-  route decision-relevant information through latent channels not represented in
-  the audit transcript.
-- **Non-goal:** the paper does not claim to recover the full internal state of a
-  neural model. It certifies lower bounds and maps where unrecoverable
-  action-relevant capacity can reside.
-
-This threat model is mandatory. Without it the paper is an ML audit paper and
-will look out of scope for S&P.
-
-## Security Punchline
-
-The central punchline for the introduction:
-
-> Pearl's `do`-operator is valid once the structural model is fixed; AI audit
-> asks whether the logged trace exposes the operative latent channel needed to
-> make such intervention claims checkable.
-
-Operational form:
-
-- The **capacity map** is an attack-surface map: where can hidden capacity reside
-  under the logging boundary?
-- The **dynamic certificate** is a detection/forensics primitive: which hidden
-  sites actually affect the action?
-- The **dual certificate** is the security claim: the transcript omitted state
-  that is both unrecoverable and action-relevant.
-
-## Current Repository Contents
-
-- `paper/main.tex` - current paper body. It must stay on IEEE
-  `conference,compsoc`.
-- `paper/ieee_sp_2027.sty` - local S&P helper package. It centralizes package
-  dependencies but must not alter margins, spacing, fonts, or IEEE geometry.
-- `paper/references.bib` - current bibliography.
-- `paper/figures/` - rendered figures used by the paper.
-- `paper/tables/` - generated LaTeX tables and macros used by the paper.
-- `paper/SUPPLEMENTARY.md` - current reproduction notes; needs S&P artifact
-  rewrite and anonymity cleanup.
-- `experiments/7.1_static_certificate/` - capacity-map and min-cut pipelines.
-- `experiments/7.2_dynamic_certificate/` - proxy/MI estimator pipelines.
-- `experiments/7.3_intervention/` - ReAct intervention and replay pipelines.
-- `experiments/7.4_synthetic_gt/` - synthetic ground-truth calibration.
-- `experiments/7.5_diffusion_certificate/` - LLaDA temporal certificate scripts.
-- `experiments/7.6_multi_agent_certificate/` - multi-agent private-report
-  certificate scripts.
-- `data/processed/` - checked-in processed artifacts for intervention,
-  diffusion, boundary replay, and multi-agent results.
-- `src/` - shared trace schema and utilities.
-- `docker/` - current Dockerfile scaffold.
-- `configs/` - shared configuration files.
+# Dual Certificates: Research Reset
 
-## Keep / Delete Policy
+This repository is in a **pre-gate research reset**. The active direction is
+finite-sample, probe-relative certification of transcript insufficiency in
+neural agents:
 
-Keep:
+> Given a declared family of admissible interventions, is the public transcript
+> sufficient to simulate every safety-relevant action distribution of the
+> deployed agent?
 
-- Paper source, figures, tables, bibliography.
-- All scripts needed to regenerate tables, figures, and processed artifacts.
-- Processed data used by paper tables and figures.
-- Raw intervention rows already checked into `data/processed/intervention/raw/`.
-- Architecture JSON files and experiment configs.
+The full research plan is in [`README_NEW_DIRECTION.md`](README_NEW_DIRECTION.md).
+It is a go/no-go plan, not a statement of completed results. Gate status is
+tracked in [`GO_NO_GO.md`](GO_NO_GO.md) and is **INCONCLUSIVE by default**.
 
-Delete or rewrite:
+## Current Decision
 
-- Venue-specific NeurIPS wording in paper and experiment docs.
-- Any reintroduced NeurIPS style file, NeurIPS package import, or NeurIPS
-  template language.
-- Author-identifying absolute paths, usernames, local machine paths, and
-  acknowledgments.
-- Stale README claims that frame the repository as only a benchmark/empirical
-  paper.
-- Any supplement line that references missing artifacts without a regeneration
-  command.
-- One-off assistant notes, temporary local files, build products, PDFs, caches,
-  and model downloads.
+**INCONCLUSIVE — the go/no-go gate has not passed.**
 
-Do not delete:
+Do not rewrite the full paper, tag the legacy release, promote `paper_v2/`, or
+delete old experiments while this status remains `INCONCLUSIVE`.
 
-- `paper/ieee_sp_2027.sty`, unless its package list is folded into a cleaner
-  IEEE-compatible build file.
-- Processed result artifacts, even if their metadata needs path sanitization.
-- Diagnostic scripts with old estimator labels, unless their replacement path is
-  documented and the paper no longer depends on them.
+## Repository Status Matrix
 
-## Paper Surgery Plan
+| Path | Status | Allowed work |
+|---|---|---|
+| `README_NEW_DIRECTION.md` | Current research specification | Keep aligned with the active audit contract and gate. |
+| `GO_NO_GO.md` | Current decision record | Add evidence and record a decision without weakening preregistered thresholds. |
+| `paper/` | **Legacy, read-only** | Preserve exactly as the abandoned latent-state/capacity-map paper record. |
+| `paper_v2/` | Pre-gate incubator | Keep scaffolding and concise working notes only; no full-paper rewrite before GO. |
+| `experiments/8.1_tracetwin/` | Active | Exact passive twins, controlled-clamp calibration, and passive-baseline tests. |
+| `experiments/8.2_sequential_certificate/` | Active | Predictable decoder/e-process implementation, optional-stopping tests, and finite-sample calibration. |
+| `experiments/8.3_agentdojo/` | Active | One real, consequential, trace-clamped structured-action boundary with strict controls. |
+| `src/` | Shared and reusable | Extend shared trace, randomization, inference, and evaluation utilities while preserving compatibility. |
+| `experiments/7.3_intervention/` | Reusable infrastructure | Reuse replay/intervention machinery and discrete-action evaluation; do not treat off-support ablations as primary evidence. |
+| `experiments/7.4_synthetic_gt/` | **Ground-truth repair complete; historical validation quarantined** | The noise-consistent target and regression tests may be reused; withdrawn estimator outputs may not be cited or used as gate evidence until regenerated and reviewed. |
+| `experiments/7.1_static_certificate/` | **Frozen legacy** | Reproduction only; no extension. |
+| `experiments/7.2_dynamic_certificate/` | **Frozen legacy** | Reproduction only; no extension. |
+| `experiments/7.5_diffusion_certificate/` | **Frozen legacy** | Reproduction only; no extension. |
+| `experiments/7.6_multi_agent_certificate/` | **Frozen legacy** | Reproduction only; no extension. |
+| `data/processed/` | Preserved artifacts | Retain artifacts needed to reproduce existing pilots; keep new gate evidence clearly separated. |
 
-### Phase 1: Security Skeleton
+## Legacy Boundary
 
-Deadline: 2026-07-07.
+The immutable legacy baseline is Git commit:
 
-Actions:
+```text
+50cec93
+```
 
-- Replace title and abstract with S&P security framing.
-- Add `Threat Model and Security Goal` before the technical setup.
-- Keep the introduction free of venue-specific NeurIPS wording.
-- Define the security object as a latent causal channel, not a generic hidden
-  state.
-- State the out-of-scope boundary: no full-state recovery, no universal
-  interpretability claim.
+This commit identifies the old latent-state/capacity-map version. No legacy tag
+is created during the pre-gate phase. If and only if the gate reaches `GO`, the
+tag `legacy-latent-state-certificates` must point to **exactly `50cec93`**, not
+to the then-current branch tip.
 
-Deliverable:
+`paper/` must not be edited, reformatted, rebuilt in place, cleaned, renamed, or
+used as the destination for generated files. The root `Makefile` now routes
+`make paper`, `make pdf`, and `make clean` exclusively to `paper_v2/`; every
+paper build first runs `make check-legacy-paper` against the frozen tree.
 
-- A paper that a security reviewer can summarize as:
-  "This paper audits hidden causal channels that bypass transcript-level logs."
+The frozen experiment directories must likewise not receive code, config,
+documentation, or generated-output changes. Their commands remain documented in
+[`experiments/README.md`](experiments/README.md) solely for historical
+reproduction.
 
-### Phase 2: Main-Text Reorder
+## Active Workstreams
 
-Deadline: 2026-07-31.
+### 8.1 TraceTwin
 
-Target order:
+Build two mechanisms with exactly the same passive distribution `P(T,A)`:
 
-1. Introduction and security failure.
-2. Threat model and audit abstraction.
-3. Dual certificates.
-4. Capacity map as latent-channel attack-surface localization.
-5. Dynamic certificates as detection/forensics.
-6. Security evaluation.
-7. Limitations, ethics, and deployment guidance.
+- a transcript-mediated visible twin; and
+- a latent-bypass twin.
 
-Move or compress:
-
-- Closed-form laboratories move to appendix or become a short bridge.
-- Network information background stays appendix-only.
-- Proxy estimator diagnostics stay appendix-only.
-- Synthetic ground truth stays appendix unless used as a main validity check.
-
-### Phase 3: Security Evaluation
-
-Deadline: 2026-08-31.
-
-Reframe the current experiments as security failure modes:
-
-- **ReAct:** logging-policy bypass through an unlogged scratchpad channel.
-- **LLaDA:** temporal latent channel at the final action-binding step.
-- **Multi-agent:** private-report edge as a latent delegation channel.
-
-Strengthen if time permits:
-
-- Add a minimal adversarial or compromised-worker case.
-- Show one log-only audit that passes while the dynamic certificate remains
-  positive.
-- Report the capacity map first, then the activation/certificate profile.
-
-### Phase 4: Artifact Hardening
-
-Deadline: 2026-08-31.
-
-Required artifact work:
-
-- Add a top-level `Makefile` with at least `make smoke`, `make tables`, and
-  `make figures`.
-- Add `requirements.txt` or `environment.yml`.
-- Add a data manifest with hashes and regeneration commands.
-- Sanitize absolute paths in processed artifacts.
-- Remove author-identifying local paths from README, supplement, configs, and
-  outputs.
-- Ensure the anonymous artifact can be frozen before submission; S&P says
-  artifact repositories should not be updated after the paper deadline.
-
-### Phase 5: IEEE Template and Page Budget
-
-Deadline: 2026-09-30.
-
-Template migration status: complete. The source now begins with
-`\documentclass[conference,compsoc]{IEEEtran}` and loads
-`paper/ieee_sp_2027.sty`. The old NeurIPS style file has been removed. Future
-agents must not reintroduce `neurips_2026.sty`, `\usepackage{neurips_*}`, or
-NeurIPS submission language.
-
-Actions:
-
-- Keep IEEEtran as the only document class:
-  `\documentclass[conference,compsoc]{IEEEtran}`.
-- Keep the local package wrapper as `\usepackage{ieee_sp_2027}` unless the
-  dependency list is moved into another IEEE-compatible build file.
-- Keep author block and acknowledgments absent for anonymous review.
-- Fit the main claim into 13 text pages.
-- Keep references and appendix within the remaining 5 pages.
-- Avoid relying on appendix for the core security claim; reviewers are not
-  required to read appendices.
-
-### Phase 6: Submission Risk Package
-
-Deadline: 2026-10-20.
-
-Required text:
-
-- Ethics considerations.
-- Harm and dual-use discussion.
-- Generative AI usage disclosure.
-- Environmental footprint rationale.
-- Limitations: validity depends on the declared audit abstraction, probe
-  admissibility, finite audit resolution, and logging boundary.
-
-## Milestones
-
-- 2026-07-07: S&P title, abstract, introduction, and threat model skeleton.
-- 2026-07-31: Security-framed main draft.
-- 2026-08-31: Evaluation and artifact manifest complete.
-- 2026-09-30: IEEE `conference,compsoc` 13+5 page draft with overfull tables and
-  equations fixed.
-- 2026-10-20: Cold-review version.
-- 2026-11-03: Dry-run abstract registration metadata: title, abstract, authors,
-  ORCIDs, COIs.
-- 2026-11-10: Abstract registration.
-- 2026-11-16: Full paper submitted at least 24 hours before deadline.
-- 2026-11-17: Official full-paper deadline.
-
-## Immediate Next Actions
-
-1. Rewrite `paper/main.tex` abstract and first two pages around the threat model.
-2. Add a new `Threat Model and Security Goal` section.
-3. Search for and remove any reintroduced venue-specific terms: NeurIPS,
-   benchmark paper, generic audit diagnostic.
-4. Sanitize paths in `data/processed/intervention/*.json` and
-   `data/processed/intervention/*.csv`.
-5. Rewrite `paper/SUPPLEMENTARY.md` as an anonymous S&P artifact guide.
-6. Add dependency and reproduction entry points.
-7. Fix IEEE two-column layout issues: wide theorem equations, wide result
-   tables, appendix cross-references, and long artifact paths.
+The workstream must verify passive equality, analytic values in both the
+passive-label and controlled-clamp regimes, null false-positive control, power,
+mixture monotonicity, confidence coverage, adaptive-probe validity, and failure
+of passive trace-only classifiers.
+
+### 8.2 Sequential Certificate
+
+Implement the anytime-valid evidence process for adaptive probes. The probe
+policy and normalized decoder must be predictable from the pre-round history,
+the probe law must have full support, and the primary implementable protocol
+must use a known denominator supplied by exact conditional trace clamping.
+
+An estimated induced probe law is not an exact Ville-valid denominator unless a
+separate robust guarantee is proved.
+
+### 8.3 Real Structured-Action Boundary
+
+Use natural, on-support paired private states and hold the public transcript,
+model, prompt, and unrelated state fixed. Measure a real structured action such
+as recipient, amount, approve/deny, tool endpoint, or write target—not only
+token logits.
+
+Primary evidence admits only exact or predeclared trace-equivalent pairs. Zero,
+blank, Gaussian, and arbitrary-text ablations are cautionary baselines. Required
+controls include active, visible-twin, dormant, disconnected, same-class
+nuisance, full-logging oracle, transcript-only monitor, and marginal action-rate
+conditions.
+
+## Reuse Policy
+
+Reuse existing code without reviving the old claim:
+
+- `src/trace_schema.py` and `src/utils/` for shared records, seeding, bootstrap,
+  randomization, and I/O;
+- replay and intervention machinery from `experiments/7.3_intervention/`; and
+- discrete action-level TV, JS, bounded advantage, cluster bootstrap, and
+  randomization-inference components.
+
+Gate-quality results must use discrete safety-relevant actions with task-block
+bootstrap or randomization inference. A fragile neural mutual-information
+estimator, logit-only effect, or failed finite classifier is not a certificate.
+
+## Three-State Gate
+
+The decision rule is intentionally strict:
+
+- **GO**: every required GO criterion passes, no NO-GO condition is present,
+  and TraceTwin, the sequential certificate, and one real trace-clamped action
+  experiment all have reviewable evidence.
+- **NO-GO**: any explicit NO-GO condition is observed. Stop the project rather
+  than returning to the capacity-map narrative.
+- **INCONCLUSIVE**: evidence is missing, a GO threshold is unmet without an
+  explicit NO-GO finding, or the lower and upper certificates do not resolve.
+  Continue only scoped gate work; do not promote the paper.
+
+The exact thresholds, negative conditions, evidence paths, and decision record
+are in [`GO_NO_GO.md`](GO_NO_GO.md).
+
+## Actions Allowed Only After GO
+
+After a documented `GO`, and not before:
+
+1. Create `legacy-latent-state-certificates` at commit `50cec93`.
+2. Promote `paper_v2/` to the formal `paper/` only after the legacy source is
+   recoverable from that tag.
+3. Delete from the main branch only legacy experiments that the new paper no
+   longer depends on; the tag must remain the recovery point.
+
+These are post-gate migration actions, not part of the current scaffold.
+
+## Claim Boundary
+
+The project may certify only claims relative to a declared deployment
+distribution, access model, logging boundary, admissible probe family, and
+safety-relevant action boundary. It must not claim full latent-state recovery,
+absence of every hidden channel, universal transcript faithfulness, mechanism
+identification from Markov equivalence, or decoder-independent
+non-recoverability from one monitor's failure.
 
 ## Repository Boundary
 
-This repository carries only the Dual Certificates security paper, experiments,
-and artifacts.
-
-- Lean/formal proof artifact: separate repository `CausalQIF`.
-- Infinitesimal Shannon/operator theory manuscript: separate repository
-  `infinitesimal-shannon`.
-
-Do not merge those projects back into this repository.
+This repository contains only the Dual Certificates paper, experiments, and
+artifacts. The Lean/formal proof artifact (`CausalQIF`) and the
+infinitesimal-Shannon/operator-theory manuscript (`infinitesimal-shannon`) are
+separate projects and must not be merged here.

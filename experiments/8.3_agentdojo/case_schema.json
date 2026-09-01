@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Transcript-sufficiency action audit record",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "case_id",
+    "suite",
+    "model",
+    "condition",
+    "action_boundary",
+    "probe_arm",
+    "probe_probability",
+    "repetition",
+    "public_transcript",
+    "action",
+    "on_support",
+    "admissible"
+  ],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "suite": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "condition": {
+      "enum": [
+        "active",
+        "visible_twin",
+        "dormant",
+        "disconnected",
+        "same_class_nuisance",
+        "full_logging_oracle",
+        "off_manifold_diagnostic"
+      ]
+    },
+    "action_boundary": {"type": "string", "minLength": 1},
+    "probe_arm": {"enum": [0, 1]},
+    "probe_probability": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+    "repetition": {"type": "integer", "minimum": 0},
+    "public_transcript": {"not": {"type": "null"}},
+    "action": {"not": {"type": "null"}},
+    "on_support": {"type": "boolean"},
+    "admissible": {"type": "boolean"},
+    "history_id": {"type": ["string", "null"], "minLength": 1},
+    "round_index": {"type": ["integer", "null"], "minimum": 0}
+  }
+}

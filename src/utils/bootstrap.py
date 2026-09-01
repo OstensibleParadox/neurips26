@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 
 
@@ -13,6 +15,7 @@ def cluster_bootstrap_ci(
     statistic: str = "mean",
     n: int = 10000,
     alpha: float = 0.05,
+    seed: int | None = None,
 ) -> tuple[float, float, float]:
     """Bootstrap CI resampling entire clusters (content instances).
 
@@ -25,6 +28,7 @@ def cluster_bootstrap_ci(
     statistic : "mean" or "median".
     n : Number of bootstrap resamples.
     alpha : Significance level.
+    seed : Optional seed for reproducible resampling.
 
     Returns
     -------
@@ -38,9 +42,10 @@ def cluster_bootstrap_ci(
     cluster_idx = {c: np.where(cluster_ids == c)[0] for c in unique_clusters}
 
     point = float(stat_fn(values))
+    rng = np.random.default_rng(seed)
     boot_stats = np.empty(n)
     for i in range(n):
-        sampled = np.random.choice(unique_clusters, size=k, replace=True)
+        sampled = rng.choice(unique_clusters, size=k, replace=True)
         boot_vals = np.concatenate([values[cluster_idx[c]] for c in sampled])
         boot_stats[i] = stat_fn(boot_vals)
 
